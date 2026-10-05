@@ -1184,8 +1184,8 @@
   /* James's main authors, in his order. A name is "N.T. Wright" or "Wright, N. T."; it matches a Logos author line on the
      surname, and on the first initial when one is given. The page can replace the list (options.authors). */
   var DEFAULT_AUTHORS = ["Michael Heiser", "John Walton", "N.T. Wright", "Kenneth Bailey", "Craig Evans", "C.S. Lewis", "Greg Koukl", "James White",
-    "D.A. Carson", "Tim Mackie", "Wesley Huff", "Dennis Prager", "Jonathan Pageau", "F.F. Bruce", "Richard Bauckham", "Bruce Metzger", "Roger Beckwith",
-    "John J. Collins", "James VanderKam", "George Nickelsburg", "Loren Stuckenbruck", "Larry Hurtado", "Craig Keener", "G.K. Beale", "David Aune", "David deSilva"];
+    "D.A. Carson", "Dennis Prager", "F.F. Bruce", "Richard Bauckham", "Roger Beckwith",
+    "John J. Collins", "James VanderKam", "George Nickelsburg", "Loren Stuckenbruck", "Larry Hurtado", "Craig Keener", "G.K. Beale", "David deSilva"];
   function nameKey(n) {
     n = String(n || "").trim(); var last, first;
     if (n.indexOf(",") > -1) { last = n.split(",")[0]; first = n.split(",")[1]; }
@@ -1390,7 +1390,13 @@
      options: config() -> the saved settings (as shelfCfg reads them)
      sends:   shelfcfg ({key: "authors"|"commentaries"|"studyBibles", value}) */
   define("ShelfConfig", { id: "config", label: "Config", name: "Shelf settings", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>', owner: true }, {
-    prepare: function () { var self = this; return Promise.all([data.shelf(), data.library(), data.vaultBooks()]).then(function (r) { self.sh = r[0]; self.lib = r[1]; self.vb = r[2]; }); },
+    prepare: function () { var self = this; return Promise.all([data.shelf(), data.library(), data.vaultBooks()]).then(function (r) { self.sh = r[0]; self.lib = r[1]; self.vb = r[2];
+      /* an author with no book in Logos or the BOOKS vault doesn't belong on the list: a saved list drops them once both are loaded */
+      var saved = self.o.config && self.o.config(), names = saved && saved.authors && saved.authors.names, lib = (r[1] && r[1].lib) || [], vba = (r[2] && r[2].authors) || [];
+      if (names && names.length && r[2]) {
+        var keep = names.filter(function (nm) { return lib.some(function (x) { return byAuthor(nm, x[2]); }) || vba.some(function (a) { return byAuthor(nm, a.by); }); });
+        if (keep.length < names.length) self.emit("shelfcfg", { key: "authors", value: { names: keep } });
+      } }); },
     rowHTML: function (i, n, label, sub, hidden, kind) {
             return '<div class="askrow u-gap6 u-m3' + (hidden ? " u-faded" : "") + '"><span class="u-minw22">' + (hidden ? "" : (i + 1) + ".") + '</span><span class="u-flex1">' + esc(label) + (sub ? ' <span class="sub">' + esc(sub) + "</span>" : "") + "</span>" +
         (hidden ? "" : '<button class="btn" data-jst-cmv="' + kind + "|" + i + '|-1"' + (i ? "" : " disabled") + ' aria-label="Move up">\u2191</button><button class="btn" data-jst-cmv="' + kind + "|" + i + '|1"' + (i < n - 1 ? "" : " disabled") + ' aria-label="Move down">\u2193</button>') +
