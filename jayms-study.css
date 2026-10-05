@@ -222,6 +222,9 @@ mark.hit.now{background:var(--gold);color:var(--paper-deep)}
 
 /* reader */
 .reader{min-width:0;padding:26px clamp(16px,4vw,56px) 60px;display:flex;flex-direction:column;gap:22px}
+@media (min-width:701px){   /* the reader scrolls in its own column, so its scroll bar sits right beside the text */
+  .reader{position:sticky;top:var(--toph);height:calc(100vh - var(--toph));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--muted) transparent}
+}
 .rtabs{display:flex;gap:8px;flex-wrap:wrap}
 .rtab{border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:15px;display:flex;gap:8px;align-items:center}
 .rtab .ok{width:8px;height:8px;border-radius:50%;background:var(--line)}

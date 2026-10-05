@@ -415,14 +415,20 @@ function renderReader(){
   if(PENDING_SCROLL && r.rows){
     if(PENDING_SCROLL.id===r.id){ const y=PENDING_SCROLL.y; PENDING_SCROLL=null;
       /* opening a passage scrolls to the top straight after rendering, so set the position after that, and once more as late text settles */
-      [60,400].forEach(ms=>setTimeout(()=>{ if(!USER_MOVED && Math.abs(window.scrollY-y)>40) window.scrollTo(0,y) },ms)) }
+      [60,400].forEach(ms=>setTimeout(()=>{ if(!USER_MOVED && Math.abs(readerY()-y)>40) readerTo(y) },ms)) }
     else if(RESTORED) PENDING_SCROLL=null }   // once the last place is restored, a different reading (a new day) starts at the top
 }
+/* on a wide screen the reader scrolls inside its own column (its scroll bar sits beside the text, not past the dock); on a phone the page scrolls */
+function readerScroller(){ const r=document.getElementById("reader"); return r && getComputedStyle(r).overflowY==="auto" ? r : null }
+function readerY(){ const r=readerScroller(); return r ? r.scrollTop : window.scrollY }
+function readerTo(y){ const r=readerScroller(); r ? r.scrollTo(0,y) : window.scrollTo(0,y) }
+function readerTop(){ readerTo(0) }
 var PENDING_SCROLL = store.get("scroll", null);   // var: renderReader may run before this line does
 var USER_MOVED = false;   // once you scroll or type yourself, the restore never moves the page
 ["wheel","touchstart","keydown","mousedown"].forEach(ev=>window.addEventListener(ev,()=>{ USER_MOVED=true },{once:true,passive:true}));
-{ let t=null; const save=()=>{ const r=cur(); if(r && !PENDING_SCROLL) store.set("scroll",{id:r.id, y:Math.round(window.scrollY)}) };
-  window.addEventListener("scroll",()=>{ clearTimeout(t); t=setTimeout(save,300) },{passive:true});
+{ let t=null; const save=()=>{ const r=cur(); if(r && !PENDING_SCROLL) store.set("scroll",{id:r.id, y:Math.round(readerY())}) };
+  const later=()=>{ clearTimeout(t); t=setTimeout(save,300) };
+  window.addEventListener("scroll",later,{passive:true}); $("reader").addEventListener("scroll",later,{passive:true});
   window.addEventListener("pagehide",save);   // a refresh right after scrolling still keeps the spot
 }
 
@@ -496,7 +502,7 @@ function openPassage(ref){
     S.adhoc = o; initNote(id); loadPanel(o.ref);
     JST.data.text(o.ref).then(rows=>{ o.rows=rows; if(S.adhoc===o) renderReader() });
   }
-  rememberOpen(); renderReader(); renderPanel(); renderDock(); window.scrollTo({top:0});
+  rememberOpen(); renderReader(); renderPanel(); renderDock(); readerTop();
   return "";
 }
 function closeAdhoc(){ S.adhoc=null; S.vsel=null; rememberOpen(); renderReader(); renderPanel(); renderDock() }
@@ -642,8 +648,8 @@ document.addEventListener("click",e=>{
   const v=e.target.closest("[data-v]"); if(v){e.preventDefault(); const [b,c,n]=v.dataset.v.split("|"); S.vsel={book:b,c:+c,v:+n}; S.tool="verse"; renderReader(); renderDock(); renderPanel(); return}
   const t=e.target.closest("[data-t]"); if(t){openTool(t.dataset.t); return}
   if(e.target.closest("[data-close-adhoc]")){ e.stopPropagation(); closeAdhoc(); return }
-  const dy=e.target.closest("[data-day]"); if(dy){ S.adhoc=null; S.vsel=null; S.word=null;S.day=+dy.dataset.day; S.reading=0; buildDay(); rememberOpen(); render(); $("rail").classList.remove("open"); window.scrollTo({top:0}); return}
-  const r=e.target.closest("[data-r]"); if(r){ S.adhoc=null; S.vsel=null; S.word=null;S.reading=+r.dataset.r; rememberOpen(); renderReader(); renderPanel(); window.scrollTo({top:0}); return}
+  const dy=e.target.closest("[data-day]"); if(dy){ S.adhoc=null; S.vsel=null; S.word=null;S.day=+dy.dataset.day; S.reading=0; buildDay(); rememberOpen(); render(); $("rail").classList.remove("open"); readerTop(); return}
+  const r=e.target.closest("[data-r]"); if(r){ S.adhoc=null; S.vsel=null; S.word=null;S.reading=+r.dataset.r; rememberOpen(); renderReader(); renderPanel(); readerTop(); return}
 });
 document.addEventListener("keydown",e=>{
   if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".w, .jst-mapimg")){e.preventDefault();e.target.click()}
@@ -692,7 +698,7 @@ $("goform").onsubmit=e=>{ e.preventDefault(); const v=$("goref").value.trim(); i
   const err=openPassage(v); $("gomsg").textContent=err; if(!err){ $("goref").value=""; $("goref").blur(); } };
 $("goref").oninput=()=>{ $("gomsg").textContent="" };
 $("markdone").onclick=()=>{const id=dk(cur()); if(isDone(id)) ST.c("done").remove(id); else ST.c("done").save(id,{done:true, at:Date.now()}); renderPlan(); renderReader()};
-$("nextread").onclick=()=>{if(S.reading<READINGS.length-1){S.reading++; rememberOpen(); S.vsel=null; renderReader(); renderPanel(); window.scrollTo({top:0})}};
+$("nextread").onclick=()=>{if(S.reading<READINGS.length-1){S.reading++; rememberOpen(); S.vsel=null; renderReader(); renderPanel(); readerTop()}};
 /* Notes save when you press Save (or Cmd/Ctrl+S). Until then the change is held as a draft and marked "Not saved yet". */
 const DIRTY = {};
 function markDirty(){ const rid=cur().id; DIRTY[rid]=true; ST.c("drafts").save(rid,{text:NOTES[rid].text,pub:NOTES[rid].pub}); renderReader() }
