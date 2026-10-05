@@ -425,6 +425,8 @@
     },
     maps: function () { return getJSON("maps.json").then(function (m) { MAPIDX = m || []; MAPIDX.forEach(function (x) { MAPBY[x.id] = x; }); return MAPIDX; }); },
     library: function () { return getJSON("shelf.json").then(function (d) { return { lib: (d && d.lib) || [], studyBibles: (d && d.studyBibles) || [], atlases: (d && d.atlases) || [] }; }); },
+    /* James's Obsidian BOOKS vault, by author (scripts/build-vault-books.py); desk only, so the site gets null */
+    vaultBooks: function () { return global.JAYMS_PUBLIC ? Promise.resolve(null) : getJSON("vault-books.json").catch(function () { return null; }); },
     shelf: function () { return getJSON("shelf.json").then(function (d) { return (SHELF = (d && d.books) || {}); }); },
     /* everything the panels show for a passage, by reference: "Psalm 82", "Daniel 10:13, 20-21" */
     passage: function (ref) {
@@ -1248,7 +1250,31 @@
   /* The shelf. For James: his Logos commentaries, his study Bibles (Logos plus the open Tyndale and Biblica notes), maps, and the rest
      (DDD, his authors' books), one tab at a time. For readers: the open study notes and the maps. Order and hiding come from Config. */
   define("Shelf", { id: "shelf", label: "Shelf", name: "Study notes and my Logos shelf", icon: '<svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15 20l2-13 3 .5-2 12.5"/></svg>' }, {
-    prepare: function () { var self = this, own = this.o.owner; return Promise.all([data.notes(this.o.ref), own ? data.shelf() : null, own ? data.library() : null, data.maps()]).then(function (r) { self.notes = r[0]; self.sh = r[1]; self.lib = r[2]; }); },
+    prepare: function () { var self = this, own = this.o.owner; return Promise.all([data.notes(this.o.ref), own ? data.shelf() : null, own ? data.library() : null, data.maps(), own ? data.vaultBooks() : null]).then(function (r) { self.notes = r[0]; self.sh = r[1]; self.lib = r[2]; self.vb = r[4]; }); },
+    /* the Books tab: books in his Obsidian BOOKS vault, for the authors Logos doesn't cover. Books about this Bible book first, then his authors in order */
+    vaultHTML: function () {
+      var vb = this.vb, segs = data.segs(this.o.ref), q = segs[0], bk = q && q.book, names = this.cfg().authors, lib = (this.lib && this.lib.lib) || [];
+      if (!vb || !vb.authors) return none("Your BOOKS vault list isn't built yet.");
+      var open = function (b) { return '<p class="u-m5">' + outlink("obsidian://open?vault=" + encodeURIComponent(vb.vault) + "&file=" + encodeURIComponent(b.f.replace(/\.md$/, "")), esc(b.t)) + "</p>"; };
+      var h = "", on = [];
+      vb.authors.forEach(function (a) { a.books.forEach(function (b) { if (!bk || !b.bk || b.bk.indexOf(bk) < 0) return;
+        /* a file about one chapter ("Psalm 23", "Romans 1-7") shows only beside a passage in that chapter */
+        if (b.ch && !b.ch.some(function (c) { return segs.some(function (sg) { return sg.book === bk && c >= sg.c1 && c <= sg.c2; }); })) return;
+        on.push({ a: a, b: b }); }); });
+      if (on.length) h += '<div class="lbl">On ' + esc(bookLabel(bk)) + " (" + on.length + ")</div>" + box("witness", "", '<div class="item">' + on.map(function (x) { return open(x.b).replace("</p>", ' <span class="sub">' + esc(x.a.by) + "</span></p>"); }).join("") + "</div>");
+      var used = {}, any = false;
+      h += '<div class="lbl u-mt14">My authors</div>';
+      names.forEach(function (nm) {
+        var a = vb.authors.filter(function (x) { return !used[x.by] && byAuthor(nm, x.by); }); if (!a.length) return;
+        a.forEach(function (x) { used[x.by] = 1; });
+        var books = [].concat.apply([], a.map(function (x) { return x.books; })), inLogos = lib.filter(function (x) { return byAuthor(nm, x[2]); }).length;
+        any = true;
+        h += '<div class="box v-' + (inLogos ? "apparatus" : "witness") + '"><div class="item"><span class="tt u-fs18">' + esc(nm) + '</span><span class="sub">' + books.length + " in your vault \u00B7 " + (inLogos ? inLogos + " in Logos" : "none in Logos") + "</span>" +
+          (inLogos ? '<details class="jst-past"><summary class="lbl">Their books (' + books.length + ")</summary>" + books.map(open).join("") + "</details>" : books.map(open).join("")) + "</div></div>";
+      });
+      if (!any) h += none("None of your authors has a book in your BOOKS vault.");
+      return h + '<p class="ctx u-fs13">Opens in Obsidian (BOOKS vault). Refreshed with the Logos shelf each morning.</p>';
+    },
     cfg: function () { return shelfCfg(this.o); },
     dddHTML: function () {
       return '<div class="lbl">Dictionary of Deities and Demons</div>' + outlink(R.logos("13.0.23"), "Open in Logos");
@@ -1328,11 +1354,12 @@
     },
     view: function () {
       var sh = this.sh || {}, segs = shelfBooks(this.o.ref), h = "", own = this.o.owner;
-      var TABS = own ? [["com", "Commentaries"], ["sb", "Study Bibles"], ["maps", "Maps"], ["other", "Others"]] : [["sb", "Study notes"], ["maps", "Maps"]];
+      var TABS = own ? [["com", "Commentaries"], ["sb", "Study Bibles"], ["vault", "Books"], ["maps", "Maps"], ["other", "Others"]] : [["sb", "Study notes"], ["maps", "Maps"]];
       var tab = TABS.some(function (t) { return t[0] === SHELF_TAB; }) ? SHELF_TAB : TABS[0][0];
       var tabs = '<div class="chips u-mb10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t[0] ? " on" : "") + '" data-jst-stab="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
       var kick = (own ? "My shelf" : "Shelf") + (segs.length ? " \u00B7 " + segs.map(function (s) { return bookLabel(s.book); }).join(", ") : "");
       if (tab === "sb") return { kick: kick, title: own ? "Study Bibles" : "Study notes", body: tabs + (own ? this.studyBiblesHTML() : "") + this.notesHTML() };
+      if (tab === "vault") return { kick: kick, title: "Books in my vault", body: tabs + this.vaultHTML() };
       if (tab === "maps") return { kick: kick, title: "Maps", body: tabs + this.mapsHTML() };
       if (tab === "other") return { kick: kick, title: "Others", body: tabs + this.dddHTML() + this.coursesHTML() + this.authorsHTML() };
       if (!segs.length) return { kick: kick, title: "Commentaries", body: tabs };
@@ -1363,7 +1390,7 @@
      options: config() -> the saved settings (as shelfCfg reads them)
      sends:   shelfcfg ({key: "authors"|"commentaries"|"studyBibles", value}) */
   define("ShelfConfig", { id: "config", label: "Config", name: "Shelf settings", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>', owner: true }, {
-    prepare: function () { var self = this; return Promise.all([data.shelf(), data.library()]).then(function (r) { self.sh = r[0]; self.lib = r[1]; }); },
+    prepare: function () { var self = this; return Promise.all([data.shelf(), data.library(), data.vaultBooks()]).then(function (r) { self.sh = r[0]; self.lib = r[1]; self.vb = r[2]; }); },
     rowHTML: function (i, n, label, sub, hidden, kind) {
             return '<div class="askrow u-gap6 u-m3' + (hidden ? " u-faded" : "") + '"><span class="u-minw22">' + (hidden ? "" : (i + 1) + ".") + '</span><span class="u-flex1">' + esc(label) + (sub ? ' <span class="sub">' + esc(sub) + "</span>" : "") + "</span>" +
         (hidden ? "" : '<button class="btn" data-jst-cmv="' + kind + "|" + i + '|-1"' + (i ? "" : " disabled") + ' aria-label="Move up">\u2191</button><button class="btn" data-jst-cmv="' + kind + "|" + i + '|1"' + (i < n - 1 ? "" : " disabled") + ' aria-label="Move down">\u2193</button>') +
@@ -1385,9 +1412,12 @@
       var tabs = '<div class="chips u-mb10">' + [["authors", "Authors"], ["com", "Commentaries"], ["sb", "Study Bibles"]].map(function (t) { return '<button class="chip' + (sec === t[0] ? " on" : "") + '" data-jst-csec="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
       var h = tabs;
       if (sec === "authors") {
-        var names = L2.c.authors, count = function (nm) { return lib.filter(function (x) { return byAuthor(nm, x[2]); }).length; };
+        var vba = (this.vb && this.vb.authors) || [];
+        var names = L2.c.authors, count = function (nm) { return lib.filter(function (x) { return byAuthor(nm, x[2]); }).length; },
+            vcount = function (nm) { return vba.filter(function (a) { return byAuthor(nm, a.by); }).reduce(function (n, a) { return n + a.books.length; }, 0); },
+            label = function (nm) { var n = count(nm), v = vcount(nm); return (n ? n + " in Logos" : "none in Logos") + (v ? " \u00B7 " + v + " in your vault" : ""); };
         h += '<p class="ctx">Your authors, in order. Higher shows first on the shelf and lifts their commentaries and study Bibles.</p>';
-        h += names.map(function (nm, i) { var n = count(nm); return self.rowHTML(i, names.length, nm, n ? n + " book" + (n > 1 ? "s" : "") : "none in your library", false, "authors"); }).join("");
+        h += names.map(function (nm, i) { var n = count(nm); return self.rowHTML(i, names.length, nm, label(nm), false, "authors"); }).join("");
         h += '<div class="ask"><label class="lbl">Add an author</label><input class="jst-in" data-jst-anew placeholder="Michael Heiser, or Heiser, Michael"><div class="askrow"><button class="btn" data-jst-aadd>Add</button><span class="jst-msg">' + esc(st.msg || "") + "</span></div></div>";
       } else {
         var part = sec === "com" ? L2.com : L2.sb;
