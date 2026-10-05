@@ -60,6 +60,9 @@
               siteData: "https://jayms.com/wp-json/wp/v2/",
               /* the public site's per-book files come in ten-chapter pieces (see bookFile) */
               chunks: !!global.JAYMS_PUBLIC,
+              /* maps show in the panel where outside images are allowed (the site, its GitHub copy, James's Mac);
+                 elsewhere (claude.ai's sandbox) a map title opens it in a new tab */
+              onlineMaps: /(^|\.)jayms\.com$|\.github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname),
               /* the podcast relay (Podcast Index needs a secret and refuses browsers): the site's snippet 254, or the local server */
               podcastAPI: global.JAYMS_PUBLIC ? location.origin + "/wp-json/jayms-bsa/v1/podcasts"
                         : /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.origin + "/api/podcasts" : null };
@@ -813,7 +816,7 @@
     return list.length ? list.map(function (x) { return box("apparatus", "", '<div class="session"><span class="when u-label u-fs13 u-gold">' + esc(x.date) + '</span><span class="tt u-display u-fs20 u-w600 u-bright">' + esc(x.t) + '</span><p class="u-m4-6 u-fs15">' + esc(x.tldr) + "</p>" + outlink(x.url, "Reopen the chat") + "</div>"); }).join("")
       : none("No Claude chat in your synced summaries cites this passage yet.");
   }
-  define("Chats", { id: "chats", label: "Chats", name: "My Claude chats", icon: ICON.chats, owner: true }, {
+  define("Chats", { id: "chats", label: "Claude", name: "My Claude chats", icon: ICON.claude, owner: true }, {
     view: function () { return { kick: "Claude chats", title: "Past chats on " + this.o.ref, body: chatsHTML(L(this, "chats")) }; }
   }, {}, function (d) { return d ? (d.chats || []).length : null; });
 
@@ -1030,7 +1033,9 @@
       var h = '<p class="ctx">' + esc(o.blurb || "Claude answers by your study rules and starts from your own material on " + o.ref + ".") + "</p>";
       h += '<div class="chips">' + (o.quick || []).map(function (q, i) { return '<button class="chip" data-jst-q="' + i + '">' + esc(q) + "</button>"; }).join("") + "</div>";
       h += '<div class="ask"><label class="lbl">Ask about ' + esc(o.ref) + '</label><textarea data-jst-askq placeholder="' + esc(o.placeholder || "Ask anything about this passage") + '">' + esc(st.q || "") + "</textarea>" +
-           '<div class="askrow"><button class="btn fill" data-jst-ask' + (st.busy ? " disabled" : "") + ">" + (st.busy ? "Thinking\u2026" : "Ask Claude") + "</button>" + (st.busy ? '<button class="btn" data-jst-stop>Stop</button>' : "") + '<button class="btn" data-jst-copy>Copy for Claude chat</button></div></div>';
+           '<div class="askrow">' + (o.ask ? '<button class="btn' + (o.project ? "" : " fill") + '" data-jst-ask' + (st.busy ? " disabled" : "") + ">" + (st.busy ? "Thinking\u2026" : "Ask Claude") + "</button>" + (st.busy ? '<button class="btn" data-jst-stop>Stop</button>' : "") : "") +
+           (o.project ? '<button class="btn fill" data-jst-project title="Copies your question with this passage\'s material and opens your study Project beside the app">Ask in my Project</button>' : '<button class="btn" data-jst-copy>Copy for Claude chat</button>') + "</div>" +
+           (st.projMsg ? '<p class="jst-msg u-mt6" role="status">' + esc(st.projMsg) + "</p>" : "") + "</div>";
       if (st.err) h += box("not", "", "<p>" + esc(st.err) + "</p>");
       if (st.a || st.busy) h += box("open", "Claude", '<div class="ans' + (!st.a ? " wait" : "") + '" data-jst-ans>' + esc(st.a || "Thinking\u2026") + "</div>" + (st.a && !st.busy ? this.actions(st.rec) : ""));
       var past = (o.history ? o.history() : []).filter(function (r) { return !st.rec || r.id !== st.rec.id; });
@@ -1082,7 +1087,9 @@
     },
     click: function (e) {
       var self = this, t = e.target, ta = this.el.querySelector("[data-jst-askq]");
-      if (t.closest("[data-jst-q]")) { e.stopPropagation(); return this.run(this.o.quick[+t.closest("[data-jst-q]").getAttribute("data-jst-q")]); }
+      if (t.closest("[data-jst-q]")) { e.stopPropagation(); var qq = this.o.quick[+t.closest("[data-jst-q]").getAttribute("data-jst-q")];
+        if (this.o.ask) return this.run(qq);
+        this.st.q = qq; this.st.projMsg = ""; this.paint(); return; }   // no Claude on this page: the question goes in the box for "Ask in my Project"
       if (t.closest("[data-jst-ask]")) { e.stopPropagation(); return this.run((ta && ta.value.trim()) || this.st.q); }
       if (t.closest("[data-jst-stop]")) { e.stopPropagation(); if (this.st.ctl) this.st.ctl.abort(); return; }
       var act = t.closest("[data-jst-act]");
@@ -1095,6 +1102,18 @@
         if (kind === "vocab" && rec) { var i = +act.getAttribute("data-i"), w = rec.parsed.vocab[i], k = w.strong ? w.strong.toLowerCase() : "";
           this.emit("vocab", { k: k, word: w.word, strong: w.strong, gloss: (k && WORDS[k] && WORDS[k].gloss) || "", ref: this.o.ref, answerId: rec.id }); st.done["v" + i] = 1; }
         this.paint(); return;
+      }
+      if (t.closest("[data-jst-project]")) {
+        e.stopPropagation();
+        /* your study Project answers by its own instructions and knowledge, so only the passage material and the question go */
+        var txt2 = (self.o.context ? self.o.context() : "") + "\n\n" + ((ta && ta.value.trim()) || "Let's study this passage together.");
+        var w = Math.min(620, Math.round(screen.availWidth * 0.4));
+        var win = window.open(self.o.project, "jayms-study-project", "popup=yes,width=" + w + ",height=" + screen.availHeight + ",left=" + ((screen.availLeft || 0) + screen.availWidth - w) + ",top=0");
+        if (win) try { win.focus(); } catch (er) {}
+        var done = function (m) { self.st.projMsg = m; self.st.q = ta ? ta.value : self.st.q; self.paint(); };
+        navigator.clipboard.writeText(txt2).then(function () { done(win ? "Copied. Paste into the Project window (\u2318V) and send." : "Copied. Your browser blocked the Project window: allow pop-ups for this page, or open the Project and paste."); })
+          .catch(function () { if (ta) { ta.value = txt2; ta.select(); } done("Selected. Copy it with \u2318C, then paste into the Project window."); });
+        return;
       }
       if (t.closest("[data-jst-copy]")) {
         e.stopPropagation(); var b = t.closest("[data-jst-copy]");
@@ -1195,21 +1214,13 @@
     return a.length > 2 ? a.slice(0, 2).join(", ") + " and others" : a.join(" and ");
   }
   var OPEN_SB = [["open:T", "Tyndale Open Study Notes"], ["open:B", "Biblica Study Notes"]];
-  var MAPIDX = null, MAPBY = {}, MAPURL = {}, BUNDLES = {};
+  var MAPIDX = null, MAPBY = {}, MAPURL = {};
   /* a map's picture as a blob URL: sliced out of its bundle file (the page's own file, so it loads anywhere), else the original */
+  function mapOnline(m) { return String(m.img).replace("https://raw.githubusercontent.com/BibleAquifer/BiblicaOpenBibleMaps/main/", "https://cdn.jsdelivr.net/gh/BibleAquifer/BiblicaOpenBibleMaps@main/"); }
+  /* a map's picture: the online original (no copies are kept; maps.json's bundle fields are history from when claude.ai held them) */
   function mapURL(m) {
     if (!m) return Promise.resolve("");
-    if (MAPURL[m.id]) return Promise.resolve(MAPURL[m.id]);
-    if (!m.b) return Promise.resolve((MAPURL[m.id] = m.img));
-    var cut = function (blob) { return (MAPURL[m.id] = URL.createObjectURL(blob.slice(m.o, m.o + m.n, "image/jpeg"))); };
-    if (BUNDLES[m.b]) return BUNDLES[m.b].then(cut).catch(function () { return (MAPURL[m.id] = m.img); });
-    /* ask for this map's bytes only (about 170 KB, not the 12 MB bundle); a server that ignores Range sends the whole bundle,
-       which is then kept and sliced for every other map in it */
-    return fetch(CFG.base + m.b, { headers: { Range: "bytes=" + m.o + "-" + (m.o + m.n - 1) } }).then(function (r) {
-      if (r.status === 206) return r.blob().then(function (b) { return (MAPURL[m.id] = URL.createObjectURL(new Blob([b], { type: "image/jpeg" }))); });
-      if (!r.ok) throw new Error(r.status);
-      BUNDLES[m.b] = r.blob(); return BUNDLES[m.b].then(cut);
-    }).catch(function () { return (MAPURL[m.id] = m.img); });
+    return Promise.resolve(MAPURL[m.id] || (MAPURL[m.id] = mapOnline(m)));
   }
   /* full screen: fit to the screen, tap to see it at full size and scroll around, x or Esc to close */
   function mapViewer(m) {
@@ -1293,6 +1304,8 @@
       var h = '<div class="lbl">Maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>";
       h += ms.length ? ms.map(function (m) {
         var open = st.mapOpen[m.id], url = MAPURL[m.id];
+        /* where outside images are blocked (claude.ai), a map opens in a new tab from the online map set instead */
+        if (!CFG.onlineMaps) return box("witness", "", '<div class="item">' + outlink(mapOnline(m), esc(m.t.replace(/^[^:]+:\s*/, ""))) + "</div>");
         return box("witness", "", '<div class="item"><button class="tt jst-xt" data-jst-map="' + esc(m.id) + '" aria-expanded="' + !!open + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button>" +
           (open ? (url ? '<img class="jst-mapimg" src="' + url + '" alt="' + esc(m.t) + '" data-jst-mapfull="' + esc(m.id) + '" title="Full screen" role="button" tabindex="0">' : '<p class="sub">Loading the map\u2026</p>') : "") + "</div>"); }).join("")
         : none("No map in the Biblica set is tied to " + esc(this.o.ref) + ".");

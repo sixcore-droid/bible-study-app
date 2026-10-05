@@ -140,6 +140,9 @@ const cur = ()=> S.adhoc || READINGS[S.reading];
 const pd = ()=>{ const r=cur(); return r ? JST.data.peek(r.ref) : null };
 const L = k => (pd()&&pd()[k]) || [];
 function loadPanel(ref){ Promise.all([JST.data.passage(ref), JST.data.xref(ref), JST.data.notes(ref), JST.data.live(), S.view==="public"?null:JST.data.shelf()]).then(()=>{ renderDock() }) }
+/* James's study Project on claude.ai: "Ask in my Project" copies the question with the passage material and opens it beside the app
+   (claude.ai can't be framed or driven from another page, so this is the route to the Project's own answers) */
+const STUDY_PROJECT = "https://claude.ai/project/019d9436-1dc6-7487-a80d-088b37cc8581";
 const QUICK = [
   "Walk me through this passage verse by verse",
   "What is the ANE background here?",
@@ -149,7 +152,7 @@ const QUICK = [
 
 /* The dock: an order, plus the one tool that belongs to this page alone (Notes). Everything else is a component's own meta. */
 const NOTES_ICON = '<svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>';
-const DOCK = ["verse","outline","word","|","council","gods","facts","posts","corpus","fathers","targum","xref","bp","x","claude","logos","shelf","vocab","ideas","vault","|","wrap","review","config","notes"];
+const DOCK = ["verse","outline","word","|","council","gods","facts","posts","corpus","fathers","targum","xref","bp","x","chats","logos","shelf","vocab","ideas","vault","|","wrap","review","config","notes"];
 function toolMeta(id){
   if(id==="notes") return {id, label:"Notes", name:"All my notes", icon:NOTES_ICON};
   const P = JST.panels[id]; return Object.assign({}, P.meta);
@@ -524,7 +527,7 @@ function panelOptions(id){
   if(id==="ideas")   Object.assign(o, { items:() => ST.c("ideas").all(), obsidian:{vault:"Jayms", path:"02-BIBLE/Study Workstation/Post ideas.md"} });
   o.inVocab = k => !!ST.c("vocab").peek(k);
   if(id==="posts")   o.alsoRefs = S.adhoc ? [] : READINGS.filter(x=>x!==r).map(x=>x.ref);   // a passage opened with Go stands alone
-  if(id==="claude")  Object.assign(o, { ask:SAMPLE, context:contextFor, quick:QUICK, instructions:"claude-instructions.md",
+  if(id==="claude")  Object.assign(o, { ask:SAMPLE, project:STUDY_PROJECT, context:contextFor, quick:QUICK, instructions:"claude-instructions.md",
                        blurb:`Claude answers by your study rules and starts from your own material: ${r.ref} in the ${S.ver}, your notes, the Divine Council entry, your posts, your Obsidian notes and your past Claude chats on it.`,
                        placeholder:"Why does verse 7 say they will die like men?",
                        history:()=>ST.c("answers").all().filter(x=>x.key===r.id).sort((a,b)=>b.at-a.at) });
@@ -586,6 +589,8 @@ function applyRailWidth(){ if(RW) document.documentElement.style.setProperty("--
 function render(){renderPlan();renderReader();renderDock();renderPanel()}
 
 /* ===== EVENTS ===== */
+/* the Bible Study Mac app (mac-app/) reads this for its "Send to Claude" button: the open passage's material, ready for a question */
+window.JaymsSend = () => { try { return contextFor() + "\n\nMy question: " } catch(e){ return "" } };
 function contextFor(){
   const r = cur();
   const ver = r.rows && r.rows.some(x=>x.texts[S.ver]) ? S.ver : "NET";
@@ -621,7 +626,9 @@ document.addEventListener("pointerdown",e=>{ const t=document.getElementById("te
 /* Help: the guide lives in help.html, loaded the first time it opens */
 (()=>{ const v=document.getElementById("helpview"), b=document.getElementById("helpbody"); let got=false;
   const close=()=>{ v.hidden=true; document.getElementById("helpbtn").focus() };
-  document.getElementById("helpbtn").onclick=()=>{ v.hidden=false; if(!got){ got=true; fetch("help.html").then(r=>r.ok?r.text():Promise.reject()).then(t=>b.innerHTML=t).catch(()=>{ got=false; b.textContent="The guide didn't load. Try again." }) } document.getElementById("helpclose").focus() };
+  document.getElementById("helpbtn").onclick=()=>{ v.hidden=false; if(!got){ got=true; fetch("help.html").then(r=>r.ok?r.text():Promise.reject()).then(t=>{ b.innerHTML=t;
+    /* which version this copy is (version.json, written by ws.sh snap): the desk, claude.ai and the site should all match */
+    fetch("version.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(v=>{ if(v) b.insertAdjacentHTML("beforeend",`<p class="ctx u-fs13">Version ${esc(v.version)} · ${esc(v.date)}</p>`) }).catch(()=>{}) }).catch(()=>{ got=false; b.textContent="The guide didn't load. Try again." }) } document.getElementById("helpclose").focus() };
   document.getElementById("helpclose").onclick=close;
   v.addEventListener("click",e=>{ if(e.target===v) close() });
   document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!v.hidden) close() });
