@@ -386,7 +386,9 @@ function renderReader(){
   document.querySelectorAll("#viewsw button").forEach(b=>{const on=b.dataset.view===S.view;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
   $("viewsw").hidden = !OWNER;
   $("banner").hidden = !pub;
-  $("banner").innerHTML = `<b>Reading along with James.</b> Today's plan, the same Bible and tools, and the notes he has made public. Pick any version you like; it only changes your screen.`;
+  $("banner").innerHTML = PUBLIC   /* the public site has no saved notes to show (they live on James's own copy) */
+    ? `<b>Reading along with James.</b> Today's plan with the same Bible and tools he uses. Pick any version you like; it only changes your screen.`
+    : `<b>Reading along with James.</b> Today's plan, the same Bible and tools, and the notes he has made public. Pick any version you like; it only changes your screen.`;
   $("mynotes").hidden = pub;
   $("markdone").hidden = pub || !!S.adhoc;
   $("pubnote").hidden = !pub;
