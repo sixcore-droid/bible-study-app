@@ -248,7 +248,7 @@ function initNote(id, force){
 const S = {view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:store.get("skipLists",false),
            size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read")};
 /* public build: Read along only; no My desk switch, no prototype badge */
-if(PUBLIC){ OWNER=false; S.view="public"; S.tool="council"; document.body.classList.add("public-app") }
+if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
 const $ = id=>document.getElementById(id);
 const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
