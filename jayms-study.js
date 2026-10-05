@@ -59,7 +59,10 @@
               /* jayms.com's own data (posts, glossary terms): same-origin once the workstation is on jayms.com */
               siteData: "https://jayms.com/wp-json/wp/v2/",
               /* the public site's per-book files come in ten-chapter pieces (see bookFile) */
-              chunks: !!global.JAYMS_PUBLIC };
+              chunks: !!global.JAYMS_PUBLIC,
+              /* the podcast relay (Podcast Index needs a secret and refuses browsers): the site's snippet 254, or the local server */
+              podcastAPI: global.JAYMS_PUBLIC ? location.origin + "/wp-json/jayms-bsa/v1/podcasts"
+                        : /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.origin + "/api/podcasts" : null };
   function config(o) { Object.assign(CFG, o || {}); return CFG; }
   /* Every link goes to the exact page, never a guess. Each pattern was checked against jayms.com:
      an entry has its own page at <tool>/<id>/; the Interleaved Bible opens a passage with #read=Book|Ref. */
@@ -248,7 +251,8 @@
   /* live data (jayms.com REST, the tool-data repo) is kept in the browser's Cache Storage for LIVE_TTL, so a visit doesn't
      re-download every post each time; an older copy is used if the network fails. No Cache Storage (some sandboxes): straight fetch. */
   var LIVE_TTL = (global.JAYMS_PUBLIC ? 6 * 3600 : 300) * 1000, LIVE_CACHE = "jst-live-1";   // the site: 6 hours; James's desk: 5 minutes, so his edits show
-  function getLive(url) {
+  function getLive(url, ttl) {
+    ttl = ttl || LIVE_TTL;
     var net = function () { return fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }); };
     var store = null;
     try { if (global.caches && global.isSecureContext) store = global.caches.open(LIVE_CACHE); } catch (e) {}
@@ -256,7 +260,7 @@
     return store.then(function (c) {
       return c.match(url).then(function (hit) {
         var age = hit ? Date.now() - Number(hit.headers.get("x-saved") || 0) : Infinity;
-        if (hit && age < LIVE_TTL) return hit.text();
+        if (hit && age < ttl) return hit.text();
         return net().then(function (t) { c.put(url, new Response(t, { headers: { "x-saved": String(Date.now()) } })).catch(function () {}); return t; })
           .catch(function (e) { if (hit) return hit.text(); throw e; });
       });
@@ -410,6 +414,12 @@
     dss: function () { return getJSON("dss.json"); },
     bibleproject: function () { return getJSON("bibleproject.json"); },
     lsbAudio: function () { return getJSON("lsb-audio.json"); },
+    /* a podcast's episodes through the relay, kept in the browser for 12 hours: {episodes:[{t, link, date, dur, audio, desc}]} */
+    podcast: function (feed) {
+      if (!CFG.podcastAPI) return Promise.resolve(null);
+      var k = "__pod" + feed;
+      return cache[k] || (cache[k] = getLive(CFG.podcastAPI + "?feed=" + feed, 12 * 3600 * 1000).catch(function () { cache[k] = null; return null; }));
+    },
     maps: function () { return getJSON("maps.json").then(function (m) { MAPIDX = m || []; MAPIDX.forEach(function (x) { MAPBY[x.id] = x; }); return MAPIDX; }); },
     library: function () { return getJSON("shelf.json").then(function (d) { return { lib: (d && d.lib) || [], studyBibles: (d && d.studyBibles) || [], atlases: (d && d.atlases) || [] }; }); },
     shelf: function () { return getJSON("shelf.json").then(function (d) { return (SHELF = (d && d.books) || {}); }); },
@@ -1731,9 +1741,21 @@
   /* BibleProject: the book's guide first, then its videos, articles and podcast episodes that deal with the chapter open in the reader.
      Built by scripts/build-bibleproject-index.py from bibleproject.com; every link opens on their site. */
   var BP_EMBED = /(^|\.)jayms\.com$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
+  var NBP_FEED = "446953";   // the Naked Bible Podcast's Podcast Index feed id
   var BP_KIND = { v: "Videos", a: "Articles", p: "Podcast episodes", g: "Guides" }, BP_TAB = "watch";
   define("BibleProject", { id: "bp", label: "BP", name: "BibleProject on this passage", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>' }, {
-    prepare: function () { var self = this; return Promise.all([data.bibleproject(), data.lsbAudio()]).then(function (r) { self.d = r[0]; self.au = r[1]; }); },
+    prepare: function () {
+      var self = this;
+      data.podcast(NBP_FEED).then(function (p) { self.nbp = p; if (self.alive && self.d) self.paint(); });   // arrives when it arrives
+      return Promise.all([data.bibleproject(), data.lsbAudio()]).then(function (r) { self.d = r[0]; self.au = r[1]; });
+    },
+    /* Naked Bible Podcast episodes on the passage: a passage named in the title counts most, then ones the description names */
+    nbpFor: function (segs) {
+      var eps = (this.nbp && this.nbp.episodes) || [], out = [];
+      var hit = function (text) { return R.refsIn(text).filter(function (x) { return segs.some(function (q) { return R.overlap(x.seg, q); }); }).length; };
+      eps.forEach(function (e) { var sc = 10 * hit(e.t) + hit(e.desc); if (sc) out.push({ e: e, sc: sc }); });
+      return out.sort(function (a, b) { return b.sc - a.sc || b.e.date - a.e.date; }).map(function (x) { return x.e; });
+    },
     /* the LSB audio reading of this chapter: one video per chapter from youtube.com/@lsbaudiobible (scripts/build-lsb-audio.py).
        It plays in the panel where the page may frame YouTube (Chrome/Safari from localhost:8940, or jayms.com); claude.ai blocks
        other sites' frames, so there it opens the chapter on YouTube */
@@ -1768,12 +1790,21 @@
       (d.book[name] || []).forEach(function (i) { score[i] = (score[i] || 0) + 100; });
       var ids = Object.keys(score).map(Number).filter(function (i) { return !seen[i]; }).sort(function (a, z) { return score[z] - score[a]; });
       /* podcasts get their own tab: there are far more of them than videos and articles */
-      var count = function (ks) { return ids.filter(function (i) { return ks.indexOf(I[i][0]) > -1; }).length; };
+      var nbp = this.nbpFor(data.segs(this.o.ref));
+      var count = function (ks) { return ids.filter(function (i) { return ks.indexOf(I[i][0]) > -1; }).length + (ks.indexOf("p") > -1 ? nbp.length : 0); };
       var TABS = [["watch", "Videos & articles", ["v", "a", "g"]], ["pod", "Podcasts", ["p"]]];
       /* a tab with nothing in it isn't the one to open on */
       var tab = BP_TAB === "pod" ? TABS[1] : TABS[0];
       if (!count(tab[2])) tab = tab === TABS[0] ? TABS[1] : TABS[0];
-      if (ids.length) h += '<div class="chips u-m10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t ? " on" : "") + '" data-jst-bptab="' + t[0] + '">' + t[1] + " (" + count(t[2]) + ")</button>"; }).join("") + "</div>";
+      if (ids.length || nbp.length) h += '<div class="chips u-m10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t ? " on" : "") + '" data-jst-bptab="' + t[0] + '">' + t[1] + " (" + count(t[2]) + ")</button>"; }).join("") + "</div>";
+      if (tab[1] === "Podcasts" && nbp.length) {
+        var nopen = st.allnbp, nshown = nopen ? nbp : nbp.slice(0, 6);
+        h += '<div class="lbl">Naked Bible Podcast (' + nbp.length + ")</div>" + box("witness", "", '<div class="item">' + nshown.map(function (e) {
+          return '<p class="u-m8">' + outlink(e.link, esc(e.t)) + '<br><span class="u-fs15">' + esc(new Date(e.date * 1000).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })) +
+            (e.desc ? " \u00B7 " + esc(e.desc.length > 170 ? e.desc.slice(0, 170).replace(/\s+\S*$/, "") + "\u2026" : e.desc) : "") + "</span></p>"; }).join("") + "</div>") +
+          (nbp.length > 6 ? '<div class="askrow"><button class="btn" data-jst-bpall="nbp">' + (nopen ? "Fewer" : "All " + nbp.length) + "</button></div>" : "");
+        if (count(["p"]) > nbp.length) h += '<div class="lbl">BibleProject podcast (' + (count(["p"]) - nbp.length) + ")</div>";
+      }
       tab[2].forEach(function (k) {
         var list = ids.filter(function (i) { return I[i][0] === k; }); if (!list.length) return;
         var open = st["all" + k], shown = open ? list : list.slice(0, 6);
@@ -1781,8 +1812,8 @@
           (list.length > 6 ? '<div class="askrow"><button class="btn" data-jst-bpall="' + k + '">' + (open ? "Fewer" : "All " + list.length) + "</button></div>" : "");
       });
       if (ids.length && !count(tab[2])) h += none("No " + tab[1].toLowerCase() + " for " + esc(this.o.ref) + ".");
-      if (!ids.length) h += none("BibleProject has nothing filed under " + esc(this.o.ref) + " beyond the guide.");
-      h += '<p class="ctx u-fs13">From <a href="https://bibleproject.com/" target="_blank" rel="noopener">bibleproject.com</a>, matched by the passages each page names. Strongest match first.</p>';
+      if (!ids.length && !nbp.length) h += none("BibleProject has nothing filed under " + esc(this.o.ref) + " beyond the guide.");
+      h += '<p class="ctx u-fs13">From <a href="https://bibleproject.com/" target="_blank" rel="noopener">bibleproject.com</a>' + (nbp.length ? ' and the <a href="https://nakedbiblepodcast.com/" target="_blank" rel="noopener">Naked Bible Podcast</a> (episode list via Podcast Index)' : "") + ', matched by the passages each one names. Strongest match first.</p>';
       return { kick: "BibleProject \u00B7 " + ids.length, title: name + " " + q.c1 + (q.c2 && q.c2 !== q.c1 ? "\u2013" + q.c2 : ""), body: h };
     },
     destroy: function () { if (this._csp) document.removeEventListener("securitypolicyviolation", this._csp); Panel.prototype.destroy.call(this); },
