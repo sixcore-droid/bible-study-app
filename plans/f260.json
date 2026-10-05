@@ -1,0 +1,3324 @@
+{
+ "id": "f260",
+ "name": "F260",
+ "description": "Foundations 260: the passages every disciple should know, in 260 days, five days a week (Robby Gallaty and Replicate Ministries).",
+ "start": "2026-10-05",
+ "weekdays": true,
+ "days": [
+  {
+   "day": 1,
+   "title": "Genesis 1-2",
+   "note": "Week 1, day 1",
+   "readings": [
+    {
+     "ref": "Genesis 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Genesis 3-4",
+   "note": "Week 1, day 2",
+   "readings": [
+    {
+     "ref": "Genesis 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "Genesis 6-7",
+   "note": "Week 1, day 3",
+   "readings": [
+    {
+     "ref": "Genesis 6-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "Genesis 8-9",
+   "note": "Week 1, day 4",
+   "readings": [
+    {
+     "ref": "Genesis 8-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Job 1-2",
+   "note": "Week 1, day 5",
+   "readings": [
+    {
+     "ref": "Job 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Job 38-39",
+   "note": "Week 2, day 1",
+   "readings": [
+    {
+     "ref": "Job 38-39",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Job 40-42",
+   "note": "Week 2, day 2",
+   "readings": [
+    {
+     "ref": "Job 40-42",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Genesis 11-12",
+   "note": "Week 2, day 3",
+   "readings": [
+    {
+     "ref": "Genesis 11-12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Genesis 15",
+   "note": "Week 2, day 4",
+   "readings": [
+    {
+     "ref": "Genesis 15",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Genesis 16-17",
+   "note": "Week 2, day 5",
+   "readings": [
+    {
+     "ref": "Genesis 16-17",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "Genesis 18-19",
+   "note": "Week 3, day 1",
+   "readings": [
+    {
+     "ref": "Genesis 18-19",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Genesis 20-21",
+   "note": "Week 3, day 2",
+   "readings": [
+    {
+     "ref": "Genesis 20-21",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Genesis 22",
+   "note": "Week 3, day 3",
+   "readings": [
+    {
+     "ref": "Genesis 22",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Genesis 24",
+   "note": "Week 3, day 4",
+   "readings": [
+    {
+     "ref": "Genesis 24",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "Genesis 25:19-34, 26",
+   "note": "Week 3, day 5",
+   "readings": [
+    {
+     "ref": "Genesis 25:19-34",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Genesis 26",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "Genesis 27-28",
+   "note": "Week 4, day 1",
+   "readings": [
+    {
+     "ref": "Genesis 27-28",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "Genesis 29-30:24",
+   "note": "Week 4, day 2",
+   "readings": [
+    {
+     "ref": "Genesis 29:1-30:24",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Genesis 31-32",
+   "note": "Week 4, day 3",
+   "readings": [
+    {
+     "ref": "Genesis 31-32",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Genesis 33, 35",
+   "note": "Week 4, day 4",
+   "readings": [
+    {
+     "ref": "Genesis 33",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Genesis 35",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Genesis 37",
+   "note": "Week 4, day 5",
+   "readings": [
+    {
+     "ref": "Genesis 37",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "Genesis 39-40",
+   "note": "Week 5, day 1",
+   "readings": [
+    {
+     "ref": "Genesis 39-40",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "Genesis 41",
+   "note": "Week 5, day 2",
+   "readings": [
+    {
+     "ref": "Genesis 41",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Genesis 42-43",
+   "note": "Week 5, day 3",
+   "readings": [
+    {
+     "ref": "Genesis 42-43",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Genesis 44-45",
+   "note": "Week 5, day 4",
+   "readings": [
+    {
+     "ref": "Genesis 44-45",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "Genesis 46-47",
+   "note": "Week 5, day 5",
+   "readings": [
+    {
+     "ref": "Genesis 46-47",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "title": "Genesis 48-49",
+   "note": "Week 6, day 1",
+   "readings": [
+    {
+     "ref": "Genesis 48-49",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "title": "Genesis 50-Exodus 1",
+   "note": "Week 6, day 2",
+   "readings": [
+    {
+     "ref": "Genesis 50",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Exodus 1",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "title": "Exodus 2-3",
+   "note": "Week 6, day 3",
+   "readings": [
+    {
+     "ref": "Exodus 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "title": "Exodus 4-5",
+   "note": "Week 6, day 4",
+   "readings": [
+    {
+     "ref": "Exodus 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "title": "Exodus 6-7",
+   "note": "Week 6, day 5",
+   "readings": [
+    {
+     "ref": "Exodus 6-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "title": "Exodus 8-9",
+   "note": "Week 7, day 1",
+   "readings": [
+    {
+     "ref": "Exodus 8-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "title": "Exodus 10-11",
+   "note": "Week 7, day 2",
+   "readings": [
+    {
+     "ref": "Exodus 10-11",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "title": "Exodus 12",
+   "note": "Week 7, day 3",
+   "readings": [
+    {
+     "ref": "Exodus 12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "title": "Exodus 13:17-14",
+   "note": "Week 7, day 4",
+   "readings": [
+    {
+     "ref": "Exodus 13:17-14:31",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "title": "Exodus 16-17",
+   "note": "Week 7, day 5",
+   "readings": [
+    {
+     "ref": "Exodus 16-17",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "title": "Exodus 19-20",
+   "note": "Week 8, day 1",
+   "readings": [
+    {
+     "ref": "Exodus 19-20",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "title": "Exodus 24-25",
+   "note": "Week 8, day 2",
+   "readings": [
+    {
+     "ref": "Exodus 24-25",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "title": "Exodus 26-27",
+   "note": "Week 8, day 3",
+   "readings": [
+    {
+     "ref": "Exodus 26-27",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "title": "Exodus 28-29",
+   "note": "Week 8, day 4",
+   "readings": [
+    {
+     "ref": "Exodus 28-29",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "title": "Exodus 30-31",
+   "note": "Week 8, day 5",
+   "readings": [
+    {
+     "ref": "Exodus 30-31",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "title": "Exodus 32-33",
+   "note": "Week 9, day 1",
+   "readings": [
+    {
+     "ref": "Exodus 32-33",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "title": "Exodus 34-36:1",
+   "note": "Week 9, day 2",
+   "readings": [
+    {
+     "ref": "Exodus 34:1-36:1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "title": "Exodus 40",
+   "note": "Week 9, day 3",
+   "readings": [
+    {
+     "ref": "Exodus 40",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "title": "Leviticus 8-9",
+   "note": "Week 9, day 4",
+   "readings": [
+    {
+     "ref": "Leviticus 8-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "title": "Leviticus 16-17",
+   "note": "Week 9, day 5",
+   "readings": [
+    {
+     "ref": "Leviticus 16-17",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "title": "Leviticus 23",
+   "note": "Week 10, day 1",
+   "readings": [
+    {
+     "ref": "Leviticus 23",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "title": "Leviticus 26",
+   "note": "Week 10, day 2",
+   "readings": [
+    {
+     "ref": "Leviticus 26",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "title": "Numbers 11-12",
+   "note": "Week 10, day 3",
+   "readings": [
+    {
+     "ref": "Numbers 11-12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "title": "Numbers 13-14",
+   "note": "Week 10, day 4",
+   "readings": [
+    {
+     "ref": "Numbers 13-14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "title": "Numbers 16-17",
+   "note": "Week 10, day 5",
+   "readings": [
+    {
+     "ref": "Numbers 16-17",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "title": "Numbers 20, 27:12-23",
+   "note": "Week 11, day 1",
+   "readings": [
+    {
+     "ref": "Numbers 20",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Numbers 27:12-23",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "title": "Numbers 34-35",
+   "note": "Week 11, day 2",
+   "readings": [
+    {
+     "ref": "Numbers 34-35",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "title": "Deuteronomy 1-2",
+   "note": "Week 11, day 3",
+   "readings": [
+    {
+     "ref": "Deuteronomy 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "title": "Deuteronomy 3-4",
+   "note": "Week 11, day 4",
+   "readings": [
+    {
+     "ref": "Deuteronomy 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "title": "Deuteronomy 6-7",
+   "note": "Week 11, day 5",
+   "readings": [
+    {
+     "ref": "Deuteronomy 6-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "title": "Deuteronomy 8-9",
+   "note": "Week 12, day 1",
+   "readings": [
+    {
+     "ref": "Deuteronomy 8-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "title": "Deuteronomy 30-31",
+   "note": "Week 12, day 2",
+   "readings": [
+    {
+     "ref": "Deuteronomy 30-31",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "title": "Deuteronomy 32:48-52, 34",
+   "note": "Week 12, day 3",
+   "readings": [
+    {
+     "ref": "Deuteronomy 32:48-52",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Deuteronomy 34",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "title": "Joshua 1-2",
+   "note": "Week 12, day 4",
+   "readings": [
+    {
+     "ref": "Joshua 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "title": "Joshua 3-4",
+   "note": "Week 12, day 5",
+   "readings": [
+    {
+     "ref": "Joshua 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 61,
+   "title": "Joshua 5:10-15, 6",
+   "note": "Week 13, day 1",
+   "readings": [
+    {
+     "ref": "Joshua 5:10-15",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Joshua 6",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "title": "Joshua 7-8",
+   "note": "Week 13, day 2",
+   "readings": [
+    {
+     "ref": "Joshua 7-8",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 63,
+   "title": "Joshua 23-24",
+   "note": "Week 13, day 3",
+   "readings": [
+    {
+     "ref": "Joshua 23-24",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 64,
+   "title": "Judges 2-3",
+   "note": "Week 13, day 4",
+   "readings": [
+    {
+     "ref": "Judges 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 65,
+   "title": "Judges 4",
+   "note": "Week 13, day 5",
+   "readings": [
+    {
+     "ref": "Judges 4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 66,
+   "title": "Judges 6-7",
+   "note": "Week 14, day 1",
+   "readings": [
+    {
+     "ref": "Judges 6-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 67,
+   "title": "Judges 13-14",
+   "note": "Week 14, day 2",
+   "readings": [
+    {
+     "ref": "Judges 13-14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 68,
+   "title": "Judges 15-16",
+   "note": "Week 14, day 3",
+   "readings": [
+    {
+     "ref": "Judges 15-16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 69,
+   "title": "Ruth 1-2",
+   "note": "Week 14, day 4",
+   "readings": [
+    {
+     "ref": "Ruth 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "title": "Ruth 3-4",
+   "note": "Week 14, day 5",
+   "readings": [
+    {
+     "ref": "Ruth 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 71,
+   "title": "1 Samuel 1-2",
+   "note": "Week 15, day 1",
+   "readings": [
+    {
+     "ref": "1 Samuel 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 72,
+   "title": "1 Samuel 3, 8",
+   "note": "Week 15, day 2",
+   "readings": [
+    {
+     "ref": "1 Samuel 3",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "1 Samuel 8",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 73,
+   "title": "1 Samuel 9-10",
+   "note": "Week 15, day 3",
+   "readings": [
+    {
+     "ref": "1 Samuel 9-10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 74,
+   "title": "1 Samuel 13-14",
+   "note": "Week 15, day 4",
+   "readings": [
+    {
+     "ref": "1 Samuel 13-14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 75,
+   "title": "1 Samuel 15-16",
+   "note": "Week 15, day 5",
+   "readings": [
+    {
+     "ref": "1 Samuel 15-16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 76,
+   "title": "1 Samuel 17-18",
+   "note": "Week 16, day 1",
+   "readings": [
+    {
+     "ref": "1 Samuel 17-18",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 77,
+   "title": "1 Samuel 19-20",
+   "note": "Week 16, day 2",
+   "readings": [
+    {
+     "ref": "1 Samuel 19-20",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 78,
+   "title": "1 Samuel 21-22",
+   "note": "Week 16, day 3",
+   "readings": [
+    {
+     "ref": "1 Samuel 21-22",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 79,
+   "title": "Psalm 22, 1 Samuel 24-25:1",
+   "note": "Week 16, day 4",
+   "readings": [
+    {
+     "ref": "Psalm 22",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "1 Samuel 24:1-25:1",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 80,
+   "title": "1 Samuel 28; 31",
+   "note": "Week 16, day 5",
+   "readings": [
+    {
+     "ref": "1 Samuel 28",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "1 Samuel 31",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 81,
+   "title": "2 Samuel 1, 2:1-7",
+   "note": "Week 17, day 1",
+   "readings": [
+    {
+     "ref": "2 Samuel 1",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "2 Samuel 2:1-7",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 82,
+   "title": "2 Samuel 3:1, 5, Psalm 23",
+   "note": "Week 17, day 2",
+   "readings": [
+    {
+     "ref": "2 Samuel 3:1",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "2 Samuel 5",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 23",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 83,
+   "title": "2 Samuel 6-7",
+   "note": "Week 17, day 3",
+   "readings": [
+    {
+     "ref": "2 Samuel 6-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 84,
+   "title": "Psalm 18, 2 Samuel 9",
+   "note": "Week 17, day 4",
+   "readings": [
+    {
+     "ref": "Psalm 18",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "2 Samuel 9",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 85,
+   "title": "2 Samuel 11-12",
+   "note": "Week 17, day 5",
+   "readings": [
+    {
+     "ref": "2 Samuel 11-12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 86,
+   "title": "Psalm 51",
+   "note": "Week 18, day 1",
+   "readings": [
+    {
+     "ref": "Psalm 51",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 87,
+   "title": "2 Samuel 24, Psalm 24",
+   "note": "Week 18, day 2",
+   "readings": [
+    {
+     "ref": "2 Samuel 24",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 24",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 88,
+   "title": "Psalms 1, 19",
+   "note": "Week 18, day 3",
+   "readings": [
+    {
+     "ref": "Psalm 1",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 19",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 89,
+   "title": "Psalms 103, 119:1-48",
+   "note": "Week 18, day 4",
+   "readings": [
+    {
+     "ref": "Psalm 103",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 119:1-48",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 90,
+   "title": "Psalms 119:49-128",
+   "note": "Week 18, day 5",
+   "readings": [
+    {
+     "ref": "Psalm 119:49-128",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 91,
+   "title": "Psalms 119:129-176, 139",
+   "note": "Week 19, day 1",
+   "readings": [
+    {
+     "ref": "Psalm 119:129-176",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 139",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 92,
+   "title": "Psalms 148-150",
+   "note": "Week 19, day 2",
+   "readings": [
+    {
+     "ref": "Psalm 148-150",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 93,
+   "title": "1 Kings 2",
+   "note": "Week 19, day 3",
+   "readings": [
+    {
+     "ref": "1 Kings 2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 94,
+   "title": "1 Kings 3, 6",
+   "note": "Week 19, day 4",
+   "readings": [
+    {
+     "ref": "1 Kings 3",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "1 Kings 6",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 95,
+   "title": "1 Kings 8, 9:1-9",
+   "note": "Week 19, day 5",
+   "readings": [
+    {
+     "ref": "1 Kings 8",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "1 Kings 9:1-9",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 96,
+   "title": "Proverbs 1-2",
+   "note": "Week 20, day 1",
+   "readings": [
+    {
+     "ref": "Proverbs 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 97,
+   "title": "Proverbs 3-4",
+   "note": "Week 20, day 2",
+   "readings": [
+    {
+     "ref": "Proverbs 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 98,
+   "title": "Proverbs 16-18",
+   "note": "Week 20, day 3",
+   "readings": [
+    {
+     "ref": "Proverbs 16-18",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 99,
+   "title": "Proverbs 31",
+   "note": "Week 20, day 4",
+   "readings": [
+    {
+     "ref": "Proverbs 31",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 100,
+   "title": "1 Kings 11-12",
+   "note": "Week 20, day 5",
+   "readings": [
+    {
+     "ref": "1 Kings 11-12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 101,
+   "title": "1 Kings 16:29-34, 17",
+   "note": "Week 21, day 1",
+   "readings": [
+    {
+     "ref": "1 Kings 16:29-34",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "1 Kings 17",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 102,
+   "title": "1 Kings 18-19",
+   "note": "Week 21, day 2",
+   "readings": [
+    {
+     "ref": "1 Kings 18-19",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 103,
+   "title": "1 Kings 21-22",
+   "note": "Week 21, day 3",
+   "readings": [
+    {
+     "ref": "1 Kings 21-22",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 104,
+   "title": "2 Kings 2",
+   "note": "Week 21, day 4",
+   "readings": [
+    {
+     "ref": "2 Kings 2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 105,
+   "title": "2 Kings 5, 6:1-23",
+   "note": "Week 21, day 5",
+   "readings": [
+    {
+     "ref": "2 Kings 5",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "2 Kings 6:1-23",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 106,
+   "title": "Jonah 1-2",
+   "note": "Week 22, day 1",
+   "readings": [
+    {
+     "ref": "Jonah 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 107,
+   "title": "Jonah 3-4",
+   "note": "Week 22, day 2",
+   "readings": [
+    {
+     "ref": "Jonah 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 108,
+   "title": "Hosea 1-3",
+   "note": "Week 22, day 3",
+   "readings": [
+    {
+     "ref": "Hosea 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 109,
+   "title": "Amos 1:1, 9",
+   "note": "Week 22, day 4",
+   "readings": [
+    {
+     "ref": "Amos 1:1",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Amos 9",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 110,
+   "title": "Joel 1-3",
+   "note": "Week 22, day 5",
+   "readings": [
+    {
+     "ref": "Joel 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 111,
+   "title": "Isaiah 6, 9",
+   "note": "Week 23, day 1",
+   "readings": [
+    {
+     "ref": "Isaiah 6",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Isaiah 9",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 112,
+   "title": "Isaiah 44-45",
+   "note": "Week 23, day 2",
+   "readings": [
+    {
+     "ref": "Isaiah 44-45",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 113,
+   "title": "Isaiah 52-53",
+   "note": "Week 23, day 3",
+   "readings": [
+    {
+     "ref": "Isaiah 52-53",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 114,
+   "title": "Isaiah 65-66",
+   "note": "Week 23, day 4",
+   "readings": [
+    {
+     "ref": "Isaiah 65-66",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 115,
+   "title": "Micah 1, 4:6-13, 5",
+   "note": "Week 23, day 5",
+   "readings": [
+    {
+     "ref": "Micah 1",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Micah 4:6-13",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Micah 5",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 116,
+   "title": "2 Kings 17-18",
+   "note": "Week 24, day 1",
+   "readings": [
+    {
+     "ref": "2 Kings 17-18",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 117,
+   "title": "2 Kings 19-21",
+   "note": "Week 24, day 2",
+   "readings": [
+    {
+     "ref": "2 Kings 19-21",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 118,
+   "title": "2 Kings 22-23",
+   "note": "Week 24, day 3",
+   "readings": [
+    {
+     "ref": "2 Kings 22-23",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 119,
+   "title": "Jeremiah 1-3:5",
+   "note": "Week 24, day 4",
+   "readings": [
+    {
+     "ref": "Jeremiah 1:1-3:5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 120,
+   "title": "Jeremiah 25, 29",
+   "note": "Week 24, day 5",
+   "readings": [
+    {
+     "ref": "Jeremiah 25",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Jeremiah 29",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 121,
+   "title": "Jeremiah 31:31-40, 32-33",
+   "note": "Week 25, day 1",
+   "readings": [
+    {
+     "ref": "Jeremiah 31:31-40",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Jeremiah 32-33",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 122,
+   "title": "Jeremiah 52, 2 Kings 24-25",
+   "note": "Week 25, day 2",
+   "readings": [
+    {
+     "ref": "Jeremiah 52",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "2 Kings 24-25",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 123,
+   "title": "Ezekiel 1:1-3, 36:16-38, 37",
+   "note": "Week 25, day 3",
+   "readings": [
+    {
+     "ref": "Ezekiel 1:1-3",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Ezekiel 36:16-38",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Ezekiel 37",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 124,
+   "title": "Daniel 1-2",
+   "note": "Week 25, day 4",
+   "readings": [
+    {
+     "ref": "Daniel 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 125,
+   "title": "Daniel 3-4",
+   "note": "Week 25, day 5",
+   "readings": [
+    {
+     "ref": "Daniel 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 126,
+   "title": "Daniel 5-6",
+   "note": "Week 26, day 1",
+   "readings": [
+    {
+     "ref": "Daniel 5-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 127,
+   "title": "Daniel 9-10, 12",
+   "note": "Week 26, day 2",
+   "readings": [
+    {
+     "ref": "Daniel 9-10",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Daniel 12",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 128,
+   "title": "Ezra 1-2",
+   "note": "Week 26, day 3",
+   "readings": [
+    {
+     "ref": "Ezra 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 129,
+   "title": "Ezra 3-4",
+   "note": "Week 26, day 4",
+   "readings": [
+    {
+     "ref": "Ezra 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 130,
+   "title": "Ezra 5-6",
+   "note": "Week 26, day 5",
+   "readings": [
+    {
+     "ref": "Ezra 5-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 131,
+   "title": "Zechariah 1:1-6, 2, 12",
+   "note": "Week 27, day 1",
+   "readings": [
+    {
+     "ref": "Zechariah 1:1-6",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Zechariah 2",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Zechariah 12",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 132,
+   "title": "Ezra 7-8",
+   "note": "Week 27, day 2",
+   "readings": [
+    {
+     "ref": "Ezra 7-8",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 133,
+   "title": "Ezra 9-10",
+   "note": "Week 27, day 3",
+   "readings": [
+    {
+     "ref": "Ezra 9-10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 134,
+   "title": "Esther 1-2",
+   "note": "Week 27, day 4",
+   "readings": [
+    {
+     "ref": "Esther 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 135,
+   "title": "Esther 3-4",
+   "note": "Week 27, day 5",
+   "readings": [
+    {
+     "ref": "Esther 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 136,
+   "title": "Esther 5-7",
+   "note": "Week 28, day 1",
+   "readings": [
+    {
+     "ref": "Esther 5-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 137,
+   "title": "Esther 8-10",
+   "note": "Week 28, day 2",
+   "readings": [
+    {
+     "ref": "Esther 8-10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 138,
+   "title": "Nehemiah 1-2",
+   "note": "Week 28, day 3",
+   "readings": [
+    {
+     "ref": "Nehemiah 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 139,
+   "title": "Nehemiah 3-4",
+   "note": "Week 28, day 4",
+   "readings": [
+    {
+     "ref": "Nehemiah 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 140,
+   "title": "Nehemiah 5-6",
+   "note": "Week 28, day 5",
+   "readings": [
+    {
+     "ref": "Nehemiah 5-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 141,
+   "title": "Nehemiah 7-8",
+   "note": "Week 29, day 1",
+   "readings": [
+    {
+     "ref": "Nehemiah 7-8",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 142,
+   "title": "Nehemiah 9",
+   "note": "Week 29, day 2",
+   "readings": [
+    {
+     "ref": "Nehemiah 9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 143,
+   "title": "Nehemiah 10",
+   "note": "Week 29, day 3",
+   "readings": [
+    {
+     "ref": "Nehemiah 10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 144,
+   "title": "Nehemiah 11",
+   "note": "Week 29, day 4",
+   "readings": [
+    {
+     "ref": "Nehemiah 11",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 145,
+   "title": "Nehemiah 12",
+   "note": "Week 29, day 5",
+   "readings": [
+    {
+     "ref": "Nehemiah 12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 146,
+   "title": "Nehemiah 13",
+   "note": "Week 30, day 1",
+   "readings": [
+    {
+     "ref": "Nehemiah 13",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 147,
+   "title": "Malachi 1",
+   "note": "Week 30, day 2",
+   "readings": [
+    {
+     "ref": "Malachi 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 148,
+   "title": "Malachi 2",
+   "note": "Week 30, day 3",
+   "readings": [
+    {
+     "ref": "Malachi 2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 149,
+   "title": "Malachi 3",
+   "note": "Week 30, day 4",
+   "readings": [
+    {
+     "ref": "Malachi 3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 150,
+   "title": "Malachi 4",
+   "note": "Week 30, day 5",
+   "readings": [
+    {
+     "ref": "Malachi 4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 151,
+   "title": "Luke 1",
+   "note": "Week 31, day 1",
+   "readings": [
+    {
+     "ref": "Luke 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 152,
+   "title": "Luke 2",
+   "note": "Week 31, day 2",
+   "readings": [
+    {
+     "ref": "Luke 2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 153,
+   "title": "Matthew 1-2",
+   "note": "Week 31, day 3",
+   "readings": [
+    {
+     "ref": "Matthew 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 154,
+   "title": "Mark 1",
+   "note": "Week 31, day 4",
+   "readings": [
+    {
+     "ref": "Mark 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 155,
+   "title": "John 1",
+   "note": "Week 31, day 5",
+   "readings": [
+    {
+     "ref": "John 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 156,
+   "title": "Matthew 3-4",
+   "note": "Week 32, day 1",
+   "readings": [
+    {
+     "ref": "Matthew 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 157,
+   "title": "Matthew 5",
+   "note": "Week 32, day 2",
+   "readings": [
+    {
+     "ref": "Matthew 5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 158,
+   "title": "Matthew 6",
+   "note": "Week 32, day 3",
+   "readings": [
+    {
+     "ref": "Matthew 6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 159,
+   "title": "Matthew 7",
+   "note": "Week 32, day 4",
+   "readings": [
+    {
+     "ref": "Matthew 7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 160,
+   "title": "Matthew 8",
+   "note": "Week 32, day 5",
+   "readings": [
+    {
+     "ref": "Matthew 8",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 161,
+   "title": "Luke 9:10-62",
+   "note": "Week 33, day 1",
+   "readings": [
+    {
+     "ref": "Luke 9:10-62",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 162,
+   "title": "Mark 9-10",
+   "note": "Week 33, day 2",
+   "readings": [
+    {
+     "ref": "Mark 9-10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 163,
+   "title": "Luke 12",
+   "note": "Week 33, day 3",
+   "readings": [
+    {
+     "ref": "Luke 12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 164,
+   "title": "John 3-4",
+   "note": "Week 33, day 4",
+   "readings": [
+    {
+     "ref": "John 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 165,
+   "title": "Luke 14",
+   "note": "Week 33, day 5",
+   "readings": [
+    {
+     "ref": "Luke 14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 166,
+   "title": "John 6",
+   "note": "Week 34, day 1",
+   "readings": [
+    {
+     "ref": "John 6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 167,
+   "title": "Matthew 19:16-30",
+   "note": "Week 34, day 2",
+   "readings": [
+    {
+     "ref": "Matthew 19:16-30",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 168,
+   "title": "Luke 15-16",
+   "note": "Week 34, day 3",
+   "readings": [
+    {
+     "ref": "Luke 15-16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 169,
+   "title": "Luke 17:11-37, 18",
+   "note": "Week 34, day 4",
+   "readings": [
+    {
+     "ref": "Luke 17:11-37",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Luke 18",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 170,
+   "title": "Mark 10",
+   "note": "Week 34, day 5",
+   "readings": [
+    {
+     "ref": "Mark 10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 171,
+   "title": "John 11, Matthew 21:1-13",
+   "note": "Week 35, day 1",
+   "readings": [
+    {
+     "ref": "John 11",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 21:1-13",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 172,
+   "title": "John 13",
+   "note": "Week 35, day 2",
+   "readings": [
+    {
+     "ref": "John 13",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 173,
+   "title": "John 14-15",
+   "note": "Week 35, day 3",
+   "readings": [
+    {
+     "ref": "John 14-15",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 174,
+   "title": "John 16",
+   "note": "Week 35, day 4",
+   "readings": [
+    {
+     "ref": "John 16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 175,
+   "title": "Matthew 24:1-31",
+   "note": "Week 35, day 5",
+   "readings": [
+    {
+     "ref": "Matthew 24:1-31",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 176,
+   "title": "Matthew 24:32-51",
+   "note": "Week 36, day 1",
+   "readings": [
+    {
+     "ref": "Matthew 24:32-51",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 177,
+   "title": "John 17",
+   "note": "Week 36, day 2",
+   "readings": [
+    {
+     "ref": "John 17",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 178,
+   "title": "Matthew 26:35-27:31",
+   "note": "Week 36, day 3",
+   "readings": [
+    {
+     "ref": "Matthew 26:35-27:31",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 179,
+   "title": "Matthew 27:32-66, Luke 23:26-56",
+   "note": "Week 36, day 4",
+   "readings": [
+    {
+     "ref": "Matthew 27:32-66",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Luke 23:26-56",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 180,
+   "title": "John 19",
+   "note": "Week 36, day 5",
+   "readings": [
+    {
+     "ref": "John 19",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 181,
+   "title": "Mark 16",
+   "note": "Week 37, day 1",
+   "readings": [
+    {
+     "ref": "Mark 16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 182,
+   "title": "Luke 24",
+   "note": "Week 37, day 2",
+   "readings": [
+    {
+     "ref": "Luke 24",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 183,
+   "title": "John 20-21",
+   "note": "Week 37, day 3",
+   "readings": [
+    {
+     "ref": "John 20-21",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 184,
+   "title": "Matthew 28",
+   "note": "Week 37, day 4",
+   "readings": [
+    {
+     "ref": "Matthew 28",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 185,
+   "title": "Acts 1",
+   "note": "Week 37, day 5",
+   "readings": [
+    {
+     "ref": "Acts 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 186,
+   "title": "Acts 2-3",
+   "note": "Week 38, day 1",
+   "readings": [
+    {
+     "ref": "Acts 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 187,
+   "title": "Acts 4-5",
+   "note": "Week 38, day 2",
+   "readings": [
+    {
+     "ref": "Acts 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 188,
+   "title": "Acts 6",
+   "note": "Week 38, day 3",
+   "readings": [
+    {
+     "ref": "Acts 6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 189,
+   "title": "Acts 7",
+   "note": "Week 38, day 4",
+   "readings": [
+    {
+     "ref": "Acts 7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 190,
+   "title": "Acts 8-9",
+   "note": "Week 38, day 5",
+   "readings": [
+    {
+     "ref": "Acts 8-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 191,
+   "title": "Acts 10-11",
+   "note": "Week 39, day 1",
+   "readings": [
+    {
+     "ref": "Acts 10-11",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 192,
+   "title": "Acts 12",
+   "note": "Week 39, day 2",
+   "readings": [
+    {
+     "ref": "Acts 12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 193,
+   "title": "Acts 13-14",
+   "note": "Week 39, day 3",
+   "readings": [
+    {
+     "ref": "Acts 13-14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 194,
+   "title": "James 1-2",
+   "note": "Week 39, day 4",
+   "readings": [
+    {
+     "ref": "James 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 195,
+   "title": "James 3-5",
+   "note": "Week 39, day 5",
+   "readings": [
+    {
+     "ref": "James 3-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 196,
+   "title": "Acts 15-16",
+   "note": "Week 40, day 1",
+   "readings": [
+    {
+     "ref": "Acts 15-16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 197,
+   "title": "Galatians 1-3",
+   "note": "Week 40, day 2",
+   "readings": [
+    {
+     "ref": "Galatians 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 198,
+   "title": "Galatians 4-6",
+   "note": "Week 40, day 3",
+   "readings": [
+    {
+     "ref": "Galatians 4-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 199,
+   "title": "Acts 17-18:17",
+   "note": "Week 40, day 4",
+   "readings": [
+    {
+     "ref": "Acts 17:1-18:17",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 200,
+   "title": "1 Thessalonians 1-2",
+   "note": "Week 40, day 5",
+   "readings": [
+    {
+     "ref": "1 Thessalonians 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 201,
+   "title": "1 Thessalonians 3-5",
+   "note": "Week 41, day 1",
+   "readings": [
+    {
+     "ref": "1 Thessalonians 3-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 202,
+   "title": "2 Thessalonians 1-3",
+   "note": "Week 41, day 2",
+   "readings": [
+    {
+     "ref": "2 Thessalonians 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 203,
+   "title": "Acts 18:18-28, 19",
+   "note": "Week 41, day 3",
+   "readings": [
+    {
+     "ref": "Acts 18:18-28",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Acts 19",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 204,
+   "title": "1 Corinthians 1-2",
+   "note": "Week 41, day 4",
+   "readings": [
+    {
+     "ref": "1 Corinthians 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 205,
+   "title": "1 Corinthians 3-4",
+   "note": "Week 41, day 5",
+   "readings": [
+    {
+     "ref": "1 Corinthians 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 206,
+   "title": "1 Corinthians 5-6",
+   "note": "Week 42, day 1",
+   "readings": [
+    {
+     "ref": "1 Corinthians 5-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 207,
+   "title": "1 Corinthians 7-8",
+   "note": "Week 42, day 2",
+   "readings": [
+    {
+     "ref": "1 Corinthians 7-8",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 208,
+   "title": "1 Corinthians 9-10",
+   "note": "Week 42, day 3",
+   "readings": [
+    {
+     "ref": "1 Corinthians 9-10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 209,
+   "title": "1 Corinthians 11-12",
+   "note": "Week 42, day 4",
+   "readings": [
+    {
+     "ref": "1 Corinthians 11-12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 210,
+   "title": "1 Corinthians 13-14",
+   "note": "Week 42, day 5",
+   "readings": [
+    {
+     "ref": "1 Corinthians 13-14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 211,
+   "title": "1 Corinthians 15-16",
+   "note": "Week 43, day 1",
+   "readings": [
+    {
+     "ref": "1 Corinthians 15-16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 212,
+   "title": "2 Corinthians 1-2",
+   "note": "Week 43, day 2",
+   "readings": [
+    {
+     "ref": "2 Corinthians 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 213,
+   "title": "2 Corinthians 3-4",
+   "note": "Week 43, day 3",
+   "readings": [
+    {
+     "ref": "2 Corinthians 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 214,
+   "title": "2 Corinthians 5-6",
+   "note": "Week 43, day 4",
+   "readings": [
+    {
+     "ref": "2 Corinthians 5-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 215,
+   "title": "2 Corinthians 7-8",
+   "note": "Week 43, day 5",
+   "readings": [
+    {
+     "ref": "2 Corinthians 7-8",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 216,
+   "title": "2 Corinthians 9-10",
+   "note": "Week 44, day 1",
+   "readings": [
+    {
+     "ref": "2 Corinthians 9-10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 217,
+   "title": "2 Corinthians 11-13",
+   "note": "Week 44, day 2",
+   "readings": [
+    {
+     "ref": "2 Corinthians 11-13",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 218,
+   "title": "Romans 1-2, Acts 20:1-3",
+   "note": "Week 44, day 3",
+   "readings": [
+    {
+     "ref": "Romans 1-2",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Acts 20:1-3",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 219,
+   "title": "Romans 3-4",
+   "note": "Week 44, day 4",
+   "readings": [
+    {
+     "ref": "Romans 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 220,
+   "title": "Romans 5-6",
+   "note": "Week 44, day 5",
+   "readings": [
+    {
+     "ref": "Romans 5-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 221,
+   "title": "Romans 7-8",
+   "note": "Week 45, day 1",
+   "readings": [
+    {
+     "ref": "Romans 7-8",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 222,
+   "title": "Romans 9-10",
+   "note": "Week 45, day 2",
+   "readings": [
+    {
+     "ref": "Romans 9-10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 223,
+   "title": "Romans 11-12",
+   "note": "Week 45, day 3",
+   "readings": [
+    {
+     "ref": "Romans 11-12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 224,
+   "title": "Romans 13-14",
+   "note": "Week 45, day 4",
+   "readings": [
+    {
+     "ref": "Romans 13-14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 225,
+   "title": "Romans 15-16",
+   "note": "Week 45, day 5",
+   "readings": [
+    {
+     "ref": "Romans 15-16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 226,
+   "title": "Acts 20-21",
+   "note": "Week 46, day 1",
+   "readings": [
+    {
+     "ref": "Acts 20-21",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 227,
+   "title": "Acts 22-23",
+   "note": "Week 46, day 2",
+   "readings": [
+    {
+     "ref": "Acts 22-23",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 228,
+   "title": "Acts 24-25",
+   "note": "Week 46, day 3",
+   "readings": [
+    {
+     "ref": "Acts 24-25",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 229,
+   "title": "Acts 26-27",
+   "note": "Week 46, day 4",
+   "readings": [
+    {
+     "ref": "Acts 26-27",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 230,
+   "title": "Acts 28",
+   "note": "Week 46, day 5",
+   "readings": [
+    {
+     "ref": "Acts 28",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 231,
+   "title": "Colossians 1-2",
+   "note": "Week 47, day 1",
+   "readings": [
+    {
+     "ref": "Colossians 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 232,
+   "title": "Colossians 3-4",
+   "note": "Week 47, day 2",
+   "readings": [
+    {
+     "ref": "Colossians 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 233,
+   "title": "Ephesians 1-2",
+   "note": "Week 47, day 3",
+   "readings": [
+    {
+     "ref": "Ephesians 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 234,
+   "title": "Ephesians 3-4",
+   "note": "Week 47, day 4",
+   "readings": [
+    {
+     "ref": "Ephesians 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 235,
+   "title": "Ephesians 5-6",
+   "note": "Week 47, day 5",
+   "readings": [
+    {
+     "ref": "Ephesians 5-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 236,
+   "title": "Philippians 1-2",
+   "note": "Week 48, day 1",
+   "readings": [
+    {
+     "ref": "Philippians 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 237,
+   "title": "Philippians 3-4",
+   "note": "Week 48, day 2",
+   "readings": [
+    {
+     "ref": "Philippians 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 238,
+   "title": "Hebrews 1-2",
+   "note": "Week 48, day 3",
+   "readings": [
+    {
+     "ref": "Hebrews 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 239,
+   "title": "Hebrews 3-4",
+   "note": "Week 48, day 4",
+   "readings": [
+    {
+     "ref": "Hebrews 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 240,
+   "title": "Hebrews 5-6",
+   "note": "Week 48, day 5",
+   "readings": [
+    {
+     "ref": "Hebrews 5-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 241,
+   "title": "Hebrews 7",
+   "note": "Week 49, day 1",
+   "readings": [
+    {
+     "ref": "Hebrews 7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 242,
+   "title": "Hebrews 8-9",
+   "note": "Week 49, day 2",
+   "readings": [
+    {
+     "ref": "Hebrews 8-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 243,
+   "title": "Hebrews 10",
+   "note": "Week 49, day 3",
+   "readings": [
+    {
+     "ref": "Hebrews 10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 244,
+   "title": "Hebrews 11",
+   "note": "Week 49, day 4",
+   "readings": [
+    {
+     "ref": "Hebrews 11",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 245,
+   "title": "Hebrews 12",
+   "note": "Week 49, day 5",
+   "readings": [
+    {
+     "ref": "Hebrews 12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 246,
+   "title": "1 Timothy 1-3",
+   "note": "Week 50, day 1",
+   "readings": [
+    {
+     "ref": "1 Timothy 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 247,
+   "title": "1 Timothy 4-6",
+   "note": "Week 50, day 2",
+   "readings": [
+    {
+     "ref": "1 Timothy 4-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 248,
+   "title": "2 Timothy 1-2",
+   "note": "Week 50, day 3",
+   "readings": [
+    {
+     "ref": "2 Timothy 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 249,
+   "title": "2 Timothy 3-4",
+   "note": "Week 50, day 4",
+   "readings": [
+    {
+     "ref": "2 Timothy 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 250,
+   "title": "1 Peter 1-2",
+   "note": "Week 50, day 5",
+   "readings": [
+    {
+     "ref": "1 Peter 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 251,
+   "title": "1 Peter 3-4",
+   "note": "Week 51, day 1",
+   "readings": [
+    {
+     "ref": "1 Peter 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 252,
+   "title": "1 Peter 5, 2 Peter 1",
+   "note": "Week 51, day 2",
+   "readings": [
+    {
+     "ref": "1 Peter 5",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "2 Peter 1",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 253,
+   "title": "2 Peter 2-3",
+   "note": "Week 51, day 3",
+   "readings": [
+    {
+     "ref": "2 Peter 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 254,
+   "title": "1 John 1-3",
+   "note": "Week 51, day 4",
+   "readings": [
+    {
+     "ref": "1 John 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 255,
+   "title": "1 John 4-5",
+   "note": "Week 51, day 5",
+   "readings": [
+    {
+     "ref": "1 John 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 256,
+   "title": "Revelation 1",
+   "note": "Week 52, day 1",
+   "readings": [
+    {
+     "ref": "Revelation 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 257,
+   "title": "Revelation 2-3",
+   "note": "Week 52, day 2",
+   "readings": [
+    {
+     "ref": "Revelation 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 258,
+   "title": "Revelation 4-5",
+   "note": "Week 52, day 3",
+   "readings": [
+    {
+     "ref": "Revelation 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 259,
+   "title": "Revelation 18-19",
+   "note": "Week 52, day 4",
+   "readings": [
+    {
+     "ref": "Revelation 18-19",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 260,
+   "title": "Revelation 20-22",
+   "note": "Week 52, day 5",
+   "readings": [
+    {
+     "ref": "Revelation 20-22",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  }
+ ]
+}

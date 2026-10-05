@@ -1,0 +1,296 @@
+{
+ "id": "gospel-of-luke",
+ "name": "The Gospel of Luke",
+ "description": "A chapter a day, read beside the Interleaved Bible's outline.",
+ "start": "2026-10-02",
+ "days": [
+  {
+   "day": 1,
+   "title": "Luke 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 1",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Luke 2",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 2",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "Luke 3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 3",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "Luke 4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 4",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Luke 5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 5",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Luke 6",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 6",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Luke 7",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 7",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Luke 8",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 8",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Luke 9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 9",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Luke 10",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 10",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "Luke 11",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 11",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Luke 12",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 12",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Luke 13",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 13",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Luke 14",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 14",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "Luke 15",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 15",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "Luke 16",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 16",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "Luke 17",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 17",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Luke 18",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 18",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Luke 19",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 19",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Luke 20",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 20",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "Luke 21",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 21",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "Luke 22",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 22",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Luke 23",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 23",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Luke 24",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Luke 24",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,728 @@
+{
+ "id": "bp-pauls-letters",
+ "name": "BibleProject: Paul's Letters",
+ "description": "BibleProject's Paul's Letters plan on the Bible App (60 days, bible.com/reading-plans/4822). BibleProject's videos for each book go well before its first day.",
+ "start": "2026-10-05",
+ "days": [
+  {
+   "day": 1,
+   "title": "Romans 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Romans 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Romans 2-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Romans 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "Romans 4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Romans 4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "Romans 5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Romans 5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Romans 6-7",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Romans 6-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Romans 8-9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Romans 8-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Romans 10-11",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Romans 10-11",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Romans 12-13",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Romans 12-13",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Romans 14-15",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Romans 14-15",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Romans 16",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Romans 16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "1 Corinthians 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Corinthians 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "1 Corinthians 2-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Corinthians 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "1 Corinthians 4-5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Corinthians 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "1 Corinthians 6-7",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Corinthians 6-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "1 Corinthians 8-9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Corinthians 8-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "1 Corinthians 10-11",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Corinthians 10-11",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "1 Corinthians 12-13",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Corinthians 12-13",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "1 Corinthians 14-15",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Corinthians 14-15",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "1 Corinthians 16",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Corinthians 16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "2 Corinthians 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Corinthians 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "2 Corinthians 2-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Corinthians 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "2 Corinthians 4-5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Corinthians 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "2 Corinthians 6-7",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Corinthians 6-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "2 Corinthians 8-9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Corinthians 8-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "2 Corinthians 10-11",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Corinthians 10-11",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "title": "2 Corinthians 12-13",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Corinthians 12-13",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "title": "Galatians 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Galatians 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "title": "Galatians 2-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Galatians 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "title": "Galatians 4-5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Galatians 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "title": "Galatians 6",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Galatians 6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "title": "Ephesians 1-2",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Ephesians 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "title": "Ephesians 3-4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Ephesians 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "title": "Ephesians 5-6",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Ephesians 5-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "title": "Philippians 1-2",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Philippians 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "title": "Philippians 3-4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Philippians 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "title": "Colossians 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Colossians 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "title": "Colossians 2-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Colossians 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "title": "Colossians 4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Colossians 4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "title": "1 Thessalonians 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Thessalonians 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "title": "1 Thessalonians 2-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Thessalonians 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "title": "1 Thessalonians 4-5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Thessalonians 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "title": "2 Thessalonians 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Thessalonians 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "title": "2 Thessalonians 2-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Thessalonians 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "title": "1 Timothy 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Timothy 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "title": "1 Timothy 2-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Timothy 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "title": "1 Timothy 4-5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Timothy 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "title": "1 Timothy 6",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Timothy 6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "title": "2 Timothy 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Timothy 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "title": "2 Timothy 2",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Timothy 2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "title": "2 Timothy 3-4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "2 Timothy 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "title": "Titus 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Titus 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "title": "Titus 2-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Titus 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "title": "Philemon",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Philemon",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "title": "Hebrews 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hebrews 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "title": "Hebrews 2-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hebrews 2-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "title": "Hebrews 4-5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hebrews 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "title": "Hebrews 6-7",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hebrews 6-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "title": "Hebrews 8-9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hebrews 8-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "title": "Hebrews 10-11",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hebrews 10-11",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "title": "Hebrews 12-13",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hebrews 12-13",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  }
+ ]
+}

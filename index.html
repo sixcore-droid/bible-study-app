@@ -1,0 +1,768 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Bible study app from jayms.com: reading plans, seven translations, Hebrew and Greek word by word, cross-references, study notes, Church Fathers, Targums, maps and BibleProject, all on the passage you are reading."><script>window.JAYMS_PUBLIC = true;</script></head><body><title>Study Workstation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="jayms-study.css">
+<!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
+     Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
+
+<header class="top">
+  <button class="railbtn" id="railbtn" aria-controls="rail" aria-expanded="false">Plan</button>
+  <div class="brand">Study Workstation<small>jayms.com</small></div>
+  <span class="flag">Prototype · Not live</span>
+  <form class="goto" id="goform" role="search" autocomplete="off">
+    <input id="goref" list="gobooks" placeholder="Go to a passage: Mark 13:14" aria-label="Go to a passage" spellcheck="false">
+    <button type="submit">Go</button>
+    <span class="gomsg" id="gomsg" role="status"></span>
+  </form>
+  <datalist id="gobooks"></datalist>
+  <form class="goto find" id="findform" role="search" autocomplete="off">
+    <input id="findq" placeholder="Find in the text" aria-label="Find a word in the text" spellcheck="false">
+    <span class="gomsg" id="findmsg" role="status"></span>
+  </form>
+  <span class="sp"></span>
+  <div class="viewsw" id="viewsw" role="group" aria-label="View">
+    <button data-view="me" aria-pressed="true">My desk</button>
+    <button data-view="public" aria-pressed="false">Read along</button>
+  </div>
+  <span class="today" id="today"></span>
+  <button class="helpbtn" id="helpbtn" aria-label="Help: what everything does" title="Help">?</button>
+</header>
+<div class="helpview" id="helpview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Help"><button class="x" id="helpclose" aria-label="Close help">×</button><div id="helpbody">Loading…</div></div></div>
+
+<div class="desk" id="desk">
+  <aside class="rail" id="rail" aria-label="Reading plan">
+    <div class="rgrip" id="rgrip" role="separator" aria-orientation="vertical" aria-label="Drag to resize the reading plan" tabindex="0" title="Drag to resize · double-click to reset"></div>
+    <div class="railin">
+    <div class="plansel">
+      <label class="lbl" for="plan">Reading plan</label>
+      <select id="plan"></select>
+      <label class="planopt"><input type="checkbox" id="addpsalm"> Matching psalm</label>
+      <label class="planopt"><input type="checkbox" id="skiplists"> Skip genealogies &amp; lists</label>
+    </div>
+    <div>
+      <h2 class="planname" id="planname"></h2>
+      <p class="plandesc" id="plandesc"></p>
+    </div>
+    <div class="prog">
+      <div class="lbl"><span id="progtxt"></span><span id="progpct"></span></div>
+      <div class="bar"><i id="progbar"></i></div>
+    </div>
+    <ol class="days" id="days"></ol>
+      </div>
+  </aside>
+
+  <main class="reader" id="reader">
+    <p class="banner" id="banner" hidden></p>
+    <div class="rtabs" id="rtabs" role="tablist" aria-label="Today's readings"></div>
+    <div class="rhead">
+      <div>
+        <div class="lbl" id="rkick"></div>
+        <h1 id="rtitle"></h1>
+        <div class="rlinks" id="rlogos"></div>
+        <p class="why" id="rwhy"></p>
+      </div>
+    </div>
+    <div class="tbar" aria-label="How the text is shown">
+      <div class="seg" id="layoutsw" role="group" aria-label="Layout">
+        <button id="layoutbtn" title="Switch between reading layout and verse by verse"></button>
+      </div>
+      <div class="seg" id="parsw" role="group" aria-label="Columns">
+        <button id="parbtn" title="Switch between one version and two side by side"></button>
+      </div>
+      <div class="vpick">
+        <select id="ver" class="versel" aria-label="Version"></select>
+        <span id="ver2wrap"><span class="lbl">beside</span> <select id="ver2" class="versel" aria-label="Second version"></select></span>
+      </div>
+      <div class="vpick">
+        <span class="lbl">Text</span>
+        <button class="sz" id="smaller" aria-label="Smaller text">A−</button>
+        <button class="sz" id="larger" aria-label="Larger text">A+</button>
+      </div>
+      <div class="vpick"><button class="sz" id="listen" title="Copy the passage as plain text with verse numbers in [brackets], ready to paste into Speechify">Copy for listening</button><span class="lbl" id="listenmsg" aria-live="polite"></span></div>
+    </div>
+    <article class="text" id="text"></article>
+    <p class="jx-line" id="xline" hidden></p>
+    <div class="after">
+      <button class="btn fill" id="markdone">Done</button>
+      <button class="btn" id="nextread">Next →</button>
+    </div>
+    <div class="notes" id="mynotes">
+      <div class="notehead">
+        <label class="lbl" for="note" id="notelbl">My notes</label>
+        <label class="pubtog" for="notepub"><input type="checkbox" id="notepub"> Public</label>
+      </div>
+      <textarea id="note" placeholder="What did you notice? Questions to chase down later?"></textarea>
+      <div class="saverow"><button class="btn fill" id="notesave">Save note</button><span class="saved" id="saved"></span></div>
+      <div class="saverow" id="obsrow" hidden><span class="saved" id="obspath"></span><a class="btn" id="obsopen" target="_blank" rel="noopener" href="#">Open in Obsidian</a><button class="btn" id="obscopy">Copy link</button><span class="saved" id="obsmsg"></span></div>
+    </div>
+    <div class="notes pubnote" id="pubnote" hidden></div>
+  </main>
+
+  <aside class="panel" id="panel" aria-label="Reference panel">
+    <div class="pgrip" id="pgrip" role="separator" aria-orientation="vertical" aria-label="Drag to resize the panel" tabindex="0" title="Drag to resize · double-click to reset"></div>
+    <div class="phead">
+      <div class="sp">
+        <div class="lbl" id="pkick"></div>
+        <h2 id="ptitle"></h2>
+      </div>
+      <button class="x" id="pclose" aria-label="Close panel">×</button>
+    </div>
+    <div class="pbody" id="pbody"></div>
+  </aside>
+
+  <nav class="dock" id="dock" aria-label="Study tools"></nav>
+</div>
+
+<script src="jayms-ref.js"></script>
+<script src="jayms-store.js"></script>
+<script src="x-discuss.js"></script>
+<script src="jayms-study.js"></script>
+<script>
+/* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
+
+/* Plans, passages and versions are data files published beside this page:
+   plans/index.json lists the plans, plans/<id>.json holds each plan's days. Text and every panel's data come by
+   reference from text/<book>.json and index/<book>.json (see jayms-study.js), so any passage can be opened.
+   Changing or adding a plan is a data edit, never a code edit. */
+let PLANINDEX=null, PLANS={}, READINGS=[];
+/* Versions whose text carries the dotted word links (the [w:key] markers in the text files). */
+const LINKED = ["LSB","ESV","NET"];
+const VERNAMES = {LSB:"Legacy Standard Bible",NLT:"New Living Translation",ESV:"English Standard Version",NET:"New English Translation",BSB:"Berean Standard Bible",CSB:"Christian Standard Bible",KJV:"King James Version"};
+
+/* Everything the side panels show comes from the data files listed in docs/DEVELOPER.md section 3 (text/, index/, study/ ...),
+   built by scripts/build-*.py from the tools' own data, jayms.com, the vault and the synced Claude chats. */
+/* The side panels are JaymsStudy components (jayms-study.js). The workstation only hosts them:
+   which one is open, which passage it follows, and what it hears back (a word, a heading). */
+const JST = JaymsStudy;
+/* ?live=0 shows only the copy the workstation was built with (for testing that it matches the live data) */
+try{ if(new URLSearchParams(location.search).get("live")==="0") JST.config({liveOff:true}) }catch(e){}
+/* the reading on screen: one of the day's readings, or a passage opened from the box (S.adhoc) */
+const cur = ()=> S.adhoc || READINGS[S.reading];
+const pd = ()=>{ const r=cur(); return r ? JST.data.peek(r.ref) : null };
+const L = k => (pd()&&pd()[k]) || [];
+function loadPanel(ref){ Promise.all([JST.data.passage(ref), JST.data.xref(ref), JST.data.notes(ref), JST.data.live(), S.view==="public"?null:JST.data.shelf()]).then(()=>{ renderDock() }) }
+const QUICK = [
+  "Walk me through this passage verse by verse",
+  "What is the ANE background here?",
+  "How does this connect to Deuteronomy 32 and John 10?",
+  "Quiz me: 5 questions on this passage"
+];
+
+/* The dock: an order, plus the one tool that belongs to this page alone (Notes). Everything else is a component's own meta. */
+const NOTES_ICON = '<svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>';
+const DOCK = ["verse","outline","word","|","council","gods","facts","posts","corpus","fathers","targum","xref","bp","x","claude","logos","shelf","vocab","ideas","vault","|","wrap","review","config","notes"];
+function toolMeta(id){
+  if(id==="notes") return {id, label:"Notes", name:"All my notes", icon:NOTES_ICON};
+  const P = JST.panels[id]; return Object.assign({}, P.meta);
+}
+function toolCount(id){
+  if(id==="posts") return dayPosts().length;
+  if(id==="x") return cur() && thread(cur().id) ? 1 : 0;
+  if(id==="logos") return ST.c("logos").all().filter(x=>!x.done).length;
+  if(id==="vocab") return ST.c("vocab").all().length;
+  if(id==="ideas") return ST.c("ideas").all().filter(x=>!x.written).length;
+  if(id==="review") return JST.reviewCount(ST.c("vocab").all(), k=>ST.c("reviews").peek(k));
+  if(id==="notes"||id==="claude"||id==="verse"||id==="outline"||id==="word") return null;
+  const r=cur(); return r ? JST.panels[id].count(JST.data.peek(r.ref)) : null;
+}
+/* the public build on jayms.com (scripts/build-public.py sets window.JAYMS_PUBLIC): readers only, so no Notes button */
+const PUBLIC = !!window.JAYMS_PUBLIC;
+const TOOLS = DOCK.filter(id=>!(PUBLIC && id==="notes")).map(id=>id==="|"?{sep:true}:toolMeta(id));
+
+/* ===== STATE ===== */
+/* Saved state moved to canonical reference keys in v024: the three hand ids become their references. */
+const MOVED = {ps82:"psalm-82", dt32:"deuteronomy-32-7-9", jn10:"john-10-31-39"};
+function migrateLocal(){
+  try{
+    if(localStorage.getItem("ws.migrated")==="1") return;
+    for(const [o,n] of Object.entries(MOVED)){
+      for(const p of ["ws.note.","ws.pub.","ws.saved.","ws.draft.","ws.thread.","ws.obs.","jx.draft."]){
+        const v=localStorage.getItem(p+o); if(v==null) continue;
+        if(localStorage.getItem(p+n)==null) localStorage.setItem(p+n,v); localStorage.removeItem(p+o);
+      }
+    }
+    const done=JSON.parse(localStorage.getItem("ws.done")||"{}"), nd={};
+    for(const k in done){ const parts=k.split(":"), last=parts.pop(); nd[[...parts, MOVED[last]||last].join(":")]=done[k]; }
+    localStorage.setItem("ws.done",JSON.stringify(nd)); localStorage.setItem("ws.migrated","1");
+  }catch(e){}
+}
+migrateLocal();
+async function migrateDB(){
+  if(!DB||!OWNER) return;
+  for(const [o,n] of Object.entries(MOVED)){
+    for(const coll of [UID?"data/users/"+UID:null,"pub","threads"]){ if(!coll) continue;
+      try{ const a=await DB.collection(coll).doc(o).get(); if(!a.exists) continue;
+        const b=await DB.collection(coll).doc(n).get(); if(!b.exists) await DB.collection(coll).doc(n).set(a.data());
+        await DB.collection(coll).doc(o).delete(); }catch(e){}
+    }
+  }
+}
+/* v025: everything James saves goes through one store (jayms-store.js). This moves the v024-era keys into it, once. */
+function migrateToStore(){
+  try{
+    if(localStorage.getItem("ws.migrated2")==="1") return;
+    const J=k=>{ try{ const v=localStorage.getItem(k); return v==null?null:JSON.parse(v) }catch(e){ return null } };
+    const put=(c,id,d)=>localStorage.setItem(`js:${c}:${id}`, JSON.stringify(d));
+    const keys=[]; for(let i=0;i<localStorage.length;i++) keys.push(localStorage.key(i));
+    keys.filter(k=>k.startsWith("ws.note.")).forEach(k=>{ const id=k.slice(8), t=J("ws.saved."+id)||Date.now();
+      put("notes",id,{text:J(k)||"", pub:!!J("ws.pub."+id), obsidian:J("ws.obs."+id)||null, createdAt:t, updatedAt:t});
+      if(J("ws.pub."+id) && J(k)) put("pub",id,{text:J(k), createdAt:t, updatedAt:t});
+      ["ws.note.","ws.pub.","ws.saved.","ws.obs."].forEach(p=>localStorage.removeItem(p+id)) });
+    keys.filter(k=>k.startsWith("ws.draft.")).forEach(k=>{ const d=J(k); if(d) put("drafts",k.slice(9),Object.assign({updatedAt:Date.now()},d)); localStorage.removeItem(k) });
+    keys.filter(k=>k.startsWith("ws.thread.")).forEach(k=>{ const t=J(k); if(t&&t.url) put("threads",k.slice(10),Object.assign({updatedAt:t.savedAt||Date.now()},t)); localStorage.removeItem(k) });
+    const done=J("ws.done")||{}; Object.keys(done).forEach(id=>{ if(done[id]) put("done",id,{done:true, at:null, updatedAt:Date.now()}) }); localStorage.removeItem("ws.done");
+    localStorage.setItem("ws.migrated2","1");
+  }catch(e){}
+}
+migrateToStore();
+/* The collections. sync:true = saved to James's account as well as this browser; public:true = readers can read it. */
+const ST = JaymsStore.create({ collections: {
+  notes:   {sync:true},                  // a note per passage: {text, pub, obsidian}
+  drafts:  {sync:false},                 // unsaved note edits, this browser only
+  done:    {sync:true},                  // "plan:day:passage" -> {done, at}
+  pub:     {sync:true, public:true},     // the public copy of a note readers see: {text}
+  threads: {sync:true, public:true},     // the X discussion for a passage: {url, handle, text, savedAt}
+  wraps:   {sync:true},
+  shelfcfg:{sync:true},
+  vocab:   {sync:true},  ideas: {sync:true},  logos: {sync:true},     // ready for the features to come
+  plans:   {sync:true},  answers: {sync:true}, reviews: {sync:true}
+}});
+const store = ST.prefs;                  // per-device settings (layout, widths, version) keep their own keys
+let DB=null, UID=null, SAMPLE=null, OWNER=true, LIVE=false;
+const NOTES={};                          // the note being edited for each passage, loaded from the store
+const thread = id => { const t=ST.c("threads").peek(id); return t&&JaymsX.parse(t.url) ? t : null };
+/* the public text of a note: James sees his own saved public notes (also when previewing Read along); readers see the public copy */
+const pubText = id => { if(OWNER){ const n=ST.c("notes").peek(id); return n&&n.pub ? n.text||"" : "" } return (ST.c("pub").peek(id)||{}).text||"" };
+const isDone = id => !!(ST.c("done").peek(id)||{}).done;
+function dayPosts(){const ids=new Set(); (S.adhoc?[S.adhoc]:READINGS).forEach(r=>((JST.data.peek(r.ref)||{}).posts||[]).forEach(p=>ids.add(p.id))); return [...ids]}
+/* ===== DISCUSSION ON X =====
+   The feature itself is the JaymsX component (x-discuss.js), the same one any jayms.com page can use.
+   The workstation only decides the key (the passage), the copy, the link choices and where threads are stored. */
+function xStore(){ return JaymsStore.forJaymsX(ST.c("threads")) }
+function initNote(id, force){
+  if(NOTES[id] && !force) return;
+  const n=ST.c("notes").peek(id)||{}; NOTES[id]={text:n.text||"", pub:!!n.pub, savedAt:n.updatedAt||null, obsidian:n.obsidian||null};
+  const dr=ST.c("drafts").peek(id); if(dr){ NOTES[id].text=dr.text; NOTES[id].pub=!!dr.pub; DIRTY[id]=true }
+}
+const S = {view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:store.get("skipLists",false),
+           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read")};
+/* public build: Read along only; no My desk switch, no prototype badge */
+if(PUBLIC){ OWNER=false; S.view="public"; S.tool="council"; document.body.classList.add("public-app") }
+const $ = id=>document.getElementById(id);
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ===== PLAN RAIL ===== */
+const plan=()=>PLANS[S.plan];
+/* day N of a plan; a weekdays plan (F260) moves on Monday to Friday only, so a weekend stays on Friday's reading for catching up */
+function todayNum(p){const d0=new Date(p.start+"T00:00:00"), now=new Date(); now.setHours(0,0,0,0);
+  if(!p.weekdays) return Math.floor((now-d0)/864e5)+1;
+  if(now<d0) return 0;
+  let n=0; for(const d=new Date(d0); d<=now; d.setDate(d.getDate()+1)){ const w=d.getDay(); if(w&&w<6) n++ }
+  return Math.max(n,1)}
+const dk=(r,day)=>`${S.plan}:${day||S.day}:${r.did||r.id}`;   // did: the plan's own reference, before skip lists trimmed it
+function dayDone(d){return d.readings.every(x=>isDone(`${S.plan}:${d.day}:${JaymsRef.key(x.ref)}`))}
+function buildDay(){
+  const p=plan(); const d=p.days.find(x=>x.day===S.day)||p.days[0];
+  /* the day's readings, less the chapters James skips (when that box is ticked), plus a psalm (when that one is) */
+  let list = d.readings.slice();
+  /* skipping trims the skipped chapters out of a reading ("Numbers 32-35" becomes "Numbers 32"), and drops a reading left empty */
+  if(S.skipLists && SKIP) list = list.map(x=>{
+    const segs=JaymsRef.parse(x.ref), keep=[];
+    for(const sg of segs){
+      const sk=SKIP[sg.book]||[];
+      if(sg.v1!==1 || sg.v2!==999){ if(!sk.includes(sg.c1) || sg.c1!==sg.c2) keep.push(sg); continue }   /* a verse range stays as it is */
+      let run=null;
+      for(let c=sg.c1;c<=sg.c2;c++){ if(sk.includes(c)){ run=null; continue } if(run && run.c2===c-1) run.c2=c; else { run={book:sg.book,c1:c,v1:1,c2:c,v2:999}; keep.push(run) } }
+    }
+    return keep.length ? Object.assign({}, x, {ref: JaymsRef.format(keep), orig: x.ref}) : null }).filter(Boolean);
+  /* the psalm that goes with the day's chapter (plans/psalm-pairs.json: quotations, cross-references, the Divine Council Index), with the reason */
+  if(S.addPsalm && d.readings.length){ const sg=JaymsRef.parse((list[0]||d.readings[0]).ref)[0];
+    if(sg && sg.book!=="Psalm"){ const pr=PAIRS && PAIRS[`${sg.book}|${sg.c1}`], ps=`Psalm ${pr ? pr[0] : ((S.day-1)%150)+1}`;
+      if(!list.some(x=>JaymsRef.key(x.ref)===JaymsRef.key(ps))) list.push({ref:ps, role:`Psalm for ${sg.book} ${sg.c1}`, why:pr ? pr[1].replace(/^./,c=>c.toUpperCase()) + "." : ""}) } }
+  if(!list.length) list = d.readings.map(x=>Object.assign({}, x, {role:"Usually skipped: a list or genealogy"}));
+  /* a reading is addressed by its reference: id is the canonical key ("psalm-82"), used by notes, done marks and threads */
+  READINGS = list.map(x=>{const id=JaymsRef.key(x.ref); initNote(id); loadPanel(x.ref);
+    const o={id, did:JaymsRef.key(x.orig||x.ref), ref:x.ref, role:x.role||"Reading", why:x.why||"", rows:null};
+    JST.data.text(x.ref).then(rows=>{ o.rows=rows; if(READINGS.includes(o)) renderReader() });
+    return o});
+  if(S.reading>=READINGS.length) S.reading=0;
+}
+function renderPlan(){
+  const p = plan(); if(!p) return;
+  const mine = ST.c("plans").all();
+  $("plan").innerHTML = PLANINDEX.plans.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")
+    + (mine.length ? `<optgroup label="Plans I made">${mine.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")}</optgroup>` : "")
+    + (S.view!=="public" ? `<option value="__build">+ Build a plan\u2026</option>` : "");
+  $("planname").textContent = p.name; $("plandesc").textContent = p.description||"";
+  const t = todayNum(p), total=p.days.length, done=p.days.filter(dayDone).length;
+  $("progtxt").textContent = t<1 ? `Starts ${new Date(p.start+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long"})}` : t>total ? `Finished · ${total} days` : `Day ${t} of ${total}`;
+  $("progpct").textContent = Math.round(done/total*100)+"%";
+  $("progbar").style.width = Math.max(2,done/total*100)+"%";
+  $("days").innerHTML = p.days.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
+    return `<li><button class="day${fin?" done":""}${on?" on":""}" data-day="${d.day}" ${isT?'aria-current="date"':""}>
+      <span class="n">${isT?"Today":"Day "+d.day}</span>
+      <span class="t">${esc(d.title)}${(d.readings.length>1||d.note)?`<small>${esc(d.readings.length>1?"with "+d.readings.slice(1).map(x=>x.ref).join(" · "):d.note)}</small>`:""}</span>
+      <span class="ck" role="img" aria-label="${fin?"done":"not done"}">${fin?"✓":""}</span></button></li>`}).join("");
+}
+/* the chapters James skips (plans/skip.json, built from his vault notes) */
+let SKIP=null, PAIRS=null;
+fetch("plans/psalm-pairs.json").then(r=>r.ok?r.json():null).then(d=>{ PAIRS=d; if(S.addPsalm && PLANINDEX){ buildDay(); render() } }).catch(()=>{});
+fetch("plans/skip.json").then(r=>r.ok?r.json():null).then(d=>{ SKIP=d; if(S.skipLists && PLANINDEX){ buildDay(); render() } }).catch(()=>{});
+function choosePlan(id){
+  S.plan=id; store.set("plan",id); const p=plan(); const t=todayNum(p);
+  S.day=Math.min(Math.max(t,1),p.days.length); S.reading=0; buildDay();
+}
+/* ===== READER ===== */
+function wordify(html){return html.replace(/\[w:(\w+)\](.*?)\[\/w\]/g,(m,k,t)=>`<span class="w${k===S.word&&S.tool==="word"?" on":""}" data-w="${k}" role="button" tabindex="0">${t}</span>`)}
+function renderReader(){
+  const r = cur(); if(!r) return;
+  $("rtabs").innerHTML = READINGS.map((x,i)=>`<button class="rtab${!S.adhoc&&i===S.reading?" on":""}${isDone(dk(x))?" done":""}" role="tab" aria-selected="${!S.adhoc&&i===S.reading}" data-r="${i}"><span class="ok"></span>${esc(x.ref)}</button>`).join("");
+  const isToday = S.day===todayNum(plan());
+  if(S.adhoc) $("rtabs").innerHTML += `<button class="rtab on adhoc" role="tab" aria-selected="true">${esc(S.adhoc.ref)}</button><button class="rtabx" data-close-adhoc title="Close and go back to the day's reading" aria-label="Close ${esc(S.adhoc.ref)}">×</button>`;
+  $("rkick").textContent = S.adhoc ? "Opened passage · not in today's plan" : `${isToday?"Today":"Day "+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
+  $("rtitle").textContent = r.ref;
+  const lg = JaymsRef.refly(r.ref, S.ver);
+  $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
+  $("rlogos").hidden = S.view==="public";
+  $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
+  const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
+  $("ver").innerHTML = opts(S.ver); $("ver2").innerHTML = opts(S.ver2);
+  $("ver2wrap").hidden = !S.par;
+  /* one toggle each: the button names the layout on screen; a tap switches it */
+  $("layoutbtn").textContent = S.layout==="verse" ? "Verse by verse" : "Reading";
+  $("parbtn").textContent = S.par ? "Side by side" : "One version";
+  const vers = S.par ? [S.ver,S.ver2] : [S.ver];
+  const rows = r.rows;
+  const multi = !!rows && new Set(rows.map(x=>x.book+" "+x.c)).size>1;
+  const has = ver => !!rows && rows.some(x=>x.texts[ver]);
+  const textOf=(ver,row)=>{ const t=row.texts[ver]; if(!t) return '<span class="nov">—</span>'; return LINKED.includes(ver)?wordify(t):t.replace(/\[\/?w:?\w*\]/g,"") };
+  const splitSup=t=>{const m=t.match(/<span class='sup'>.*?<\/span>/); return m?[m[0],t.replace(m[0],"")]:["",t]};
+  const vkey=x=>`${x.book}|${x.c}|${x.v}`, vlabel=x=>multi?`${x.c}:${x.v}`:`${x.v}`;
+  const isSel=x=>S.tool==="verse"&&S.vsel&&S.vsel.book===x.book&&S.vsel.c===x.c&&S.vsel.v===x.v;
+  const verseHTML=(ver,x,inPara)=>{ const sel=isSel(x); const [sup,body]=splitSup(textOf(ver,x));
+    const num=`<a href="#" class="vn" data-v="${vkey(x)}" title="Verse ${vlabel(x)} tools">[${vlabel(x)}]</a>`;
+    return inPara ? `${sup}<span class="vs${sel?" sel":""}">${num}${body}</span> ` : `<p class="v${sel?" sel":""}">${sup}<span class="vtag">${ver}</span>${num} ${body}</p>` };
+  /* one group per book and chapter: "Jude 6; 2 Peter 2:4" reads as two, each labelled */
+  const groups=[]; (rows||[]).forEach(x=>{ const g=`${x.book} ${x.c}`; if(!groups.length||groups[groups.length-1].g!==g) groups.push({g,rows:[]}); groups[groups.length-1].rows.push(x) });
+  const blocks=[]; groups.forEach(G=>{ if(groups.length>1) blocks.push({label:G.g}); if(S.layout==="verse") G.rows.forEach(x=>blocks.push({rows:[x]})); else blocks.push({rows:G.rows}) });
+  const blockHTML=(ver,b)=>{ if(S.layout==="verse") return verseHTML(ver,b.rows[0],false);
+    const body=b.rows.map(x=>verseHTML(ver,x,true)).join(""); const m=body.match(/<span class='sup'>.*?<\/span>/);
+    return `${m?m[0]:""}<p class="para"><span class="vtag">${ver}</span>${m?body.replace(m[0],""):body}</p>` };
+  /* the dotted-word note only when the text on screen really has dotted words; otherwise name the versions that do here, if any */
+  const dotted = v => (rows||[]).some(r=>String(r.texts[v]||"").indexOf("[w:")>-1);
+  const shownVers = vers.some(has) ? vers.filter(has) : (has("NET")?["NET"]:[]);
+  const dotVers = LINKED.filter(dotted);
+  const linkNote = shownVers.some(v=>LINKED.includes(v)&&dotted(v)) ? "Dotted words open Word Study" : dotVers.length ? "Dotted word links show in the "+dotVers.join(", ") : "";
+  const missing = rows&&rows.length ? vers.filter(v=>!has(v)) : [];
+  /* a version that isn't loaded for this passage shows the NET in its place, and says so */
+  let eff = vers.map(v=>has(v)||!has("NET")?v:"NET"); if(eff.length===2&&eff[0]===eff[1]) eff=[eff[0]];
+  const par = eff.length===2;
+  $("text").classList.toggle("par",par && !!rows && rows.length>0);
+  /* no text to shape: the layout, column and version controls would change nothing, so they rest */
+  const tb=document.querySelector(".tbar"); tb.classList.toggle("idle", !!rows && !rows.length);
+  tb.querySelectorAll("button,select").forEach(x=>x.disabled=!!rows && !rows.length);
+  if(!rows) $("text").innerHTML = `<p class="empty">Loading ${esc(r.ref)}…</p>`;
+  else if(!rows.length) $("text").innerHTML = `<p class="empty">There's no text for ${esc(r.ref)} in the data yet.</p>`;
+  else $("text").innerHTML =
+      (missing.length ? `<p class="empty nover">${missing.map(v=>VERNAMES[v]).join(" and ")} ${missing.length>1?"aren't":"isn't"} loaded for ${esc(r.ref)} yet, so ${missing.length>1?"they show":"it shows"} the NET.</p>` : "")
+    + (par
+      ? `<div class="phdr"><span class="lbl">${eff[0]}</span><span class="lbl">${eff[1]}</span></div><div class="pgrid">`
+        + blocks.map((b,n)=>b.label?`<div class="pcell seglbl lbl" style="grid-column:1 / -1;grid-row:${n+1};--o:${n*2}">${esc(b.label)}</div>`:"").join("")
+        + eff.map((ver,col)=>blocks.map((b,n)=>b.label?"":`<div class="pcell" data-col="${col}" style="grid-column:${col+1};grid-row:${n+1};--o:${n*2+col}">${blockHTML(ver,b)}</div>`).join("")).join("") + `</div>`
+      : blocks.map(b=>b.label?`<div class="lbl seglbl">${esc(b.label)}</div>`:blockHTML(eff[0],b)).join(""))
+    + `<div class="ver">${[par?"":eff[0], linkNote].filter(Boolean).join(" · ")}</div>`;
+  findApply(false);
+  const th = thread(r.id);
+  $("xline").hidden = !th;
+  if(th) $("xline").innerHTML = JaymsX.lineHTML(th,{owner:S.view!=="public",label:"this reading"});
+  $("markdone").textContent = isDone(dk(r)) ? "\u2713 Done" : "Done";
+  $("nextread").hidden = !!S.adhoc || S.reading>=READINGS.length-1;
+  $("notelbl").textContent = "My notes on "+r.ref;
+  if(document.activeElement!==$("note")) $("note").value = NOTES[r.id].text;
+  $("notepub").checked = !!NOTES[r.id].pub;
+  const pub = S.view==="public";
+  document.body.classList.toggle("view-public",pub);
+  document.querySelectorAll("#viewsw button").forEach(b=>{const on=b.dataset.view===S.view;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
+  $("viewsw").hidden = !OWNER;
+  $("banner").hidden = !pub;
+  $("banner").innerHTML = `<b>Reading along with James.</b> Today's plan, the same Bible and tools, and the notes he has made public. Pick any version you like; it only changes your screen.`;
+  $("mynotes").hidden = pub;
+  $("markdone").hidden = pub || !!S.adhoc;
+  $("pubnote").hidden = !pub;
+  $("pubnote").innerHTML = pubText(r.id)
+    ? `<div class="lbl">James's notes on ${esc(r.ref)}</div>`+box("explain","",`<p>${esc(pubText(r.id)).replace(/\n/g,"<br>")}</p>`)
+    : `<div class="lbl">James's notes on ${esc(r.ref)}</div><p class="empty">No public notes on this reading yet.</p>`;
+  const n=NOTES[r.id], dirty=!!DIRTY[r.id];
+  $("notesave").disabled = !dirty;
+  $("saved").classList.toggle("dirty",dirty);
+  $("saved").textContent = dirty ? "Not saved yet" : (n.text && n.savedAt) ? "Saved " + new Date(n.savedAt).toLocaleString([], {month:"short", day:"numeric", year:"numeric", hour:"numeric", minute:"2-digit"}) : "";
+  $("obsrow").hidden = !n.text.trim() || !n.savedAt || dirty;
+  if(!$("obsrow").hidden){ const path = obsPath(r.ref); n.obsidian = path; $("obspath").textContent = "Obsidian: " + path; $("obsopen").href = obsNewURI(r, n); }
+  document.documentElement.style.setProperty("--reader-size",S.size+"px");
+}
+
+/* ===== DOCK + PANEL ===== */
+function renderDock(){
+  const list = TOOLS.filter(t=>!(t.owner && S.view==="public"));
+  $("dock").innerHTML = list.map(t=>{ if(t.sep) return "<hr>"; const n=toolCount(t.id);
+    return `<button class="dk${S.tool===t.id?" on":""}" data-t="${t.id}" aria-pressed="${S.tool===t.id}" title="${esc(t.name)}">${t.icon}<span>${t.label}</span>${n?`<span class="cnt">${n}</span>`:""}</button>`}).join("");
+}
+const box=(v,h,body)=>`<div class="box v-${v}">${h?`<h3>${h}</h3>`:""}${body}</div>`;
+const outlink=(href,txt)=>href?`<a class="out" href="${href}" target="_blank" rel="noopener">${txt} ↗</a>`:"";
+
+function scriptureFor(sel){
+  const r = cur(), x = (r.rows||[]).find(y=>y.book===sel.book&&y.c===sel.c&&y.v===sel.v); if(!x) return "";
+  const ver = ["LSB",S.ver,"NET"].find(v=>x.texts[v]); return ver ? wordify(x.texts[ver]).replace(/<span class='sup'>.*?<\/span>/,"") : "";
+}
+function notesHTML(){
+  const pub = S.view==="public";
+  const all = READINGS.concat(S.adhoc?[S.adhoc]:[]).map(r=>({r,n:pub?pubText(r.id):NOTES[r.id].text,isPub:!!(NOTES[r.id].pub&&NOTES[r.id].savedAt)})).filter(x=>x.n.trim());
+  return all.length ? all.map(x=>box("explain",x.r.ref+(!pub&&x.isPub?' <span class="pubtag">Public</span>':""),`<p>${esc(x.n).replace(/\n/g,"<br>")}</p>`)).join("")
+    : `<p class="empty">${pub?"James hasn't made any of today's notes public yet.":"Nothing yet today. Notes typed under each reading collect here, so the day reads as one page when you are done."}</p>`;
+}
+/* What each component is told by this page. */
+/* What this page does with each message a panel sends (the names are JaymsStudy.events). One object, every panel. */
+/* a record id that can never repeat, even for two saves in the same millisecond */
+let ID_N = 0;
+function newId(ref){ return `${JaymsRef.key(ref)}~${Date.now()}~${(++ID_N).toString(36)}${Math.random().toString(36).slice(2,6)}` }
+const HANDLERS = {
+  meta:    m => applyMeta(m),
+  word:    k => { S.word=k; if(S.tool!=="word"){ S.tool="word"; renderDock(); renderPanel() } renderReader() },
+  verse:   v => { S.vsel=v; S.tool="verse"; renderReader(); renderDock(); renderPanel() },
+  passage: d => { const err=openPassage(d.ref); if(err) $("gomsg").textContent=err },
+  note:    d => { const id=JaymsRef.key(d.ref); initNote(id); NOTES[id].text=(NOTES[id].text?NOTES[id].text+"\n\n":"")+"Claude: "+d.text; if(id===cur().id) markDirty() },
+  answer:  rec => ST.c("answers").save(rec.id, rec),
+  /* one card per word: adding it again from another passage adds that passage to its list */
+  vocab:   d => { const id=d.k||JaymsRef.key(d.word), x=ST.c("vocab").peek(id)||{}, refs=[...new Set([...(x.refs||(x.ref?[x.ref]:[])), d.ref].filter(Boolean))];
+                  ST.c("vocab").save(id, Object.assign({}, x, d, {refs, gloss:d.gloss||x.gloss||"", addedAt:x.addedAt||Date.now()})) },
+  vocabRemove: d => ST.c("vocab").remove(d.k),
+  ideaSet:     d => { const x=ST.c("ideas").peek(d.id); if(x) ST.c("ideas").save(d.id, Object.assign(x, d.written==null?{}:{written:!!d.written, writtenAt:d.written?Date.now():null}, d.title?{title:d.title}:{})) },
+  ideaRemove:  d => ST.c("ideas").remove(d.id),
+  plan:        p => { ST.c("plans").save(p.id, p); mergeMyPlans(); S.adhoc=null; choosePlan(p.id); rememberOpen(); render() },
+  planRemove:  d => ST.c("plans").remove(d.id),
+  wrap:        d => ST.c("wraps").save(d.key || wrapKey(), d),
+  shelfcfg:    d => ST.c("shelfcfg").save(d.key, d.value),
+  review:      d => { const x=ST.c("reviews").peek(d.k)||{}; ST.c("reviews").save(d.k, {box:d.box, due:d.due, last:d.at, seen:(x.seen||0)+1, knew:(x.knew||0)+(d.knew?1:0)}) },
+  idea:    d => ST.c("ideas").save(newId(d.ref), d),
+  logos:   d => ST.c("logos").save(newId(d.ref), Object.assign({done:false}, d)),
+  thread:  () => { renderReader(); renderDock() },
+  logosDone:   d => { const x=ST.c("logos").peek(d.id); if(x) ST.c("logos").save(d.id, Object.assign(x, {done:!!d.done, doneAt:d.done?Date.now():null})) },
+  logosRemove: d => ST.c("logos").remove(d.id)
+};
+/* the queue redraws itself whenever it changes, wherever the change came from */
+ST.c("logos").on(()=>{ renderDock(); if(S.tool==="logos" && PH) PH.refresh() });
+ST.c("vocab").on(()=>{ renderDock(); if(S.tool==="vocab" && PH) PH.refresh() });
+ST.c("reviews").on(()=>renderDock());
+/* shelf settings live in one place; the shelf and Config both redraw when they change */
+function shelfConfig(){ const c=ST.c("shelfcfg"); return { authors:c.peek("authors"), commentaries:c.peek("commentaries"), studyBibles:c.peek("studyBibles") } }
+ST.c("shelfcfg").on(()=>{ if((S.tool==="shelf"||S.tool==="config") && PH) PH.refresh() });
+ST.c("ideas").on(()=>{ renderDock(); if(S.tool==="ideas" && PH) PH.refresh() });
+/* Open any passage. A reading of the day switches to its tab; anything else opens as its own tab beside them.
+   Returns an error message when the reference can't be read, so the box can say what went wrong. */
+function openPassage(ref){
+  const segs = JaymsRef.parse(ref);
+  if(!segs.length) return `Couldn't read "${ref}" as a Bible reference.`;
+  for(const sg of segs){ const b=JaymsRef.book(sg.book); if(sg.c1<1 || sg.c2>b.chapters) return `${b.ib} has ${b.chapters} chapter${b.chapters>1?"s":""}.`; }
+  const id = JaymsRef.key(segs), i = READINGS.findIndex(x=>x.id===id);
+  S.vsel=null; S.word=null;
+  if(i>=0){ S.adhoc=null; S.reading=i; }
+  else {
+    const o = { id, ref:JaymsRef.format(segs), role:"Opened passage", why:"", rows:null, adhoc:true };
+    S.adhoc = o; initNote(id); loadPanel(o.ref);
+    JST.data.text(o.ref).then(rows=>{ o.rows=rows; if(S.adhoc===o) renderReader() });
+  }
+  rememberOpen(); renderReader(); renderPanel(); renderDock(); window.scrollTo({top:0});
+  return "";
+}
+function closeAdhoc(){ S.adhoc=null; S.vsel=null; rememberOpen(); renderReader(); renderPanel(); renderDock() }
+/* where you were, so a reload comes back to it (same day only) */
+function rememberOpen(){ store.set("open",{date:new Date().toDateString(), plan:S.plan, day:S.day, reading:S.reading, adhoc:S.adhoc?S.adhoc.ref:null}) }
+function restoreOpen(){
+  const o=store.get("open",null); if(!o || o.date!==new Date().toDateString() || o.plan!==S.plan) return;
+  if(o.day!==S.day && PLANS[S.plan].days.some(d=>d.day===o.day)){ S.day=o.day; buildDay(); }
+  if(o.reading<READINGS.length) S.reading=o.reading;
+  if(o.adhoc) openPassage(o.adhoc);
+}
+function panelOptions(id){
+  const r = cur();
+  const o = { ref:r.ref, on:HANDLERS, owner:S.view!=="public" };   // owner:false in Read along hides vocab buttons, Logos links and James-only notes
+  if(id==="word")    o.word = S.word;
+  if(id==="verse")   { o.verse = S.vsel; o.scripture = scriptureFor; }
+  if(id==="vault")   o.vaultName = "Jayms";
+  if(id==="logos")   o.items = () => ST.c("logos").all();
+  if(id==="vocab")   Object.assign(o, { items:() => ST.c("vocab").all(), obsidian:{vault:"Jayms", path:"02-BIBLE/Study Workstation/Vocabulary.md"} });
+  if(id==="wrap")    { const rs = S.adhoc ? [S.adhoc] : READINGS;
+                       Object.assign(o, { saveKey:wrapKey(), ask:SAMPLE, material:wrapMaterial, refs:rs.map(x=>x.ref), saved:()=>ST.c("wraps").peek(wrapKey()),
+                         title: S.adhoc ? S.adhoc.ref : `${plan().name} - Day ${S.day} - ${rs[0].ref}`, obsidian:{vault:"Jayms", folder:"02-BIBLE/Study Workstation/Wrap-ups"} }); }
+  if(id==="xref"||id==="targum") o.version = S.ver;
+  if(id==="shelf"||id==="config") Object.assign(o, { owner:S.view!=="public", config:shelfConfig,
+                       dddVault:"obsidian://open?vault=BOOKS&file="+encodeURIComponent("ZZZ-BOOKS/van der Toorn, Karel; Becking, Bob; van der Horst, Pieter W./Dictionary of Deities and Demons in the Bible") });
+  if(id==="review")  Object.assign(o, { cards:()=>ST.c("vocab").all(), state:k=>ST.c("reviews").peek(k),
+                       quizzes:()=>ST.c("wraps").all().filter(w=>w.parts&&w.parts.quiz).sort((a,b)=>b.at-a.at).map(w=>({title:w.title, refs:w.refs, quiz:w.parts.quiz, at:w.at})) });
+  if(id==="planner") o.skipList = SKIP;
+  if(id==="planner") o.mine = () => ST.c("plans").all().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  if(id==="ideas")   Object.assign(o, { items:() => ST.c("ideas").all(), obsidian:{vault:"Jayms", path:"02-BIBLE/Study Workstation/Post ideas.md"} });
+  o.inVocab = k => !!ST.c("vocab").peek(k);
+  if(id==="posts")   o.alsoRefs = S.adhoc ? [] : READINGS.filter(x=>x!==r).map(x=>x.ref);   // a passage opened with Go stands alone
+  if(id==="claude")  Object.assign(o, { ask:SAMPLE, context:contextFor, quick:QUICK, instructions:"claude-instructions.md",
+                       blurb:`Claude answers by your study rules and starts from your own material: ${r.ref} in the ${S.ver}, your notes, the Divine Council entry, your posts, your Obsidian notes and your past Claude chats on it.`,
+                       placeholder:"Why does verse 7 say they will die like men?",
+                       history:()=>ST.c("answers").all().filter(x=>x.key===r.id).sort((a,b)=>b.at-a.at) });
+  if(id==="x")       { const note=(NOTES[r.id]&&NOTES[r.id].pub&&NOTES[r.id].text)||"";
+                       Object.assign(o, { owner:S.view!=="public", key:r.id, store:xStore(), draft:`${r.ref}\n\n${note.slice(0,200)}`.trim() }); }
+  return o;
+}
+function applyMeta(m){
+  $("pkick").textContent = m.kick; $("ptitle").textContent = m.title;
+  document.body.classList.toggle("panel-wide", !!m.wide);
+  $("pbody").classList.toggle("split", !!m.split);
+  applyPanelWidth(); syncRailBtn();
+}
+let PH = null, PH_KEY = "";
+function renderPanel(){
+  const desk=$("desk");
+  document.body.classList.toggle("panel-open",!!S.tool);
+  if(!S.tool){ if(PH){PH.destroy(); PH=null; PH_KEY=""} desk.classList.add("no-panel"); document.body.classList.remove("panel-wide"); syncRailBtn(); return }
+  desk.classList.remove("no-panel");
+  const r = cur(); if(!r) return;
+  if(S.tool==="notes"){
+    if(PH){PH.destroy(); PH=null; PH_KEY=""}
+    $("pbody").innerHTML = `<div class="jst">${notesHTML()}</div>`;
+    applyMeta({kick:"Today · "+READINGS.length+" readings", title:S.view==="public"?"James's notes":"My notes"});
+    return;
+  }
+  /* the same panel on the same passage keeps its own state (an open word, a typed question) */
+  const key = [S.tool, r.ref, S.view, (S.tool==="xref"||S.tool==="targum")?S.ver:"", S.tool==="word"?S.word:"", S.tool==="verse"?JSON.stringify(S.vsel):"", S.tool==="claude"?!!SAMPLE:""].join("|");
+  if(PH && PH_KEY===key){ PH.refresh(); return }
+  if(PH) PH.destroy();
+  $("pbody").innerHTML = '<div id="pmount"></div>'; $("pbody").scrollTop = 0;
+  PH = new JST.panels[S.tool]($("pmount"), panelOptions(S.tool)); PH_KEY = key;
+}
+/* Panel width: drag the left edge. Remembered; double-click puts it back. */
+let PW = store.get("pw",null);
+function maxPW(){ const r=$("rail"), rw=(getComputedStyle(r).position!=="fixed"&&getComputedStyle(r).display!=="none")?r.getBoundingClientRect().width:0; return Math.max(340, window.innerWidth - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--dock"))||64) - rw - 340) }
+function applyPanelWidth(){ if(PW) document.body.style.setProperty("--panel", Math.min(Math.max(PW,320),maxPW())+"px"); else document.body.style.removeProperty("--panel") }
+(()=>{ const g=$("pgrip"); let x0=0,w0=0;
+  const move=e=>{ PW=Math.min(Math.max(w0+(x0-e.clientX),320),maxPW()); applyPanelWidth() };
+  const up=()=>{ document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up); document.body.classList.remove("dragging"); store.set("pw",PW) };
+  g.addEventListener("pointerdown",e=>{ e.preventDefault(); x0=e.clientX; w0=$("panel").getBoundingClientRect().width; document.body.classList.add("dragging"); document.addEventListener("pointermove",move); document.addEventListener("pointerup",up) });
+  g.addEventListener("dblclick",()=>{ PW=null; store.set("pw",null); applyPanelWidth() });
+  g.addEventListener("keydown",e=>{ if(e.key!=="ArrowLeft"&&e.key!=="ArrowRight") return; e.preventDefault(); PW=($("panel").getBoundingClientRect().width)+(e.key==="ArrowLeft"?40:-40); applyPanelWidth(); store.set("pw",PW) });
+  window.addEventListener("resize",applyPanelWidth);
+})();
+/* Plan width: same idea as the panel. Remembered; double-click puts it back. */
+let RW = store.get("rw",null);
+function maxRW(){ return Math.max(240, Math.min(560, window.innerWidth*0.4)) }
+function applyRailWidth(){ if(RW) document.documentElement.style.setProperty("--rail", Math.min(Math.max(RW,220),maxRW())+"px"); else document.documentElement.style.removeProperty("--rail") }
+(()=>{ const g=$("rgrip"); let x0=0,w0=0;
+  const move=e=>{ RW=Math.min(Math.max(w0+(e.clientX-x0),220),maxRW()); applyRailWidth() };
+  const up=()=>{ document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up); document.body.classList.remove("dragging"); store.set("rw",RW) };
+  g.addEventListener("pointerdown",e=>{ e.preventDefault(); x0=e.clientX; w0=$("rail").getBoundingClientRect().width; document.body.classList.add("dragging"); document.addEventListener("pointermove",move); document.addEventListener("pointerup",up) });
+  g.addEventListener("dblclick",()=>{ RW=null; store.set("rw",null); applyRailWidth() });
+  g.addEventListener("keydown",e=>{ if(e.key!=="ArrowLeft"&&e.key!=="ArrowRight") return; e.preventDefault(); RW=$("rail").getBoundingClientRect().width+(e.key==="ArrowRight"?30:-30); applyRailWidth(); store.set("rw",RW) });
+  window.addEventListener("resize",applyRailWidth); applyRailWidth();
+})();
+function render(){renderPlan();renderReader();renderDock();renderPanel()}
+
+/* ===== EVENTS ===== */
+function contextFor(){
+  const r = cur();
+  const ver = r.rows && r.rows.some(x=>x.texts[S.ver]) ? S.ver : "NET";
+  const text = (r.rows||[]).map(x=>`[${x.c}:${x.v}] `+String(x.texts[ver]||"").replace(/<[^>]+>/g," ").replace(/\[\/?w:?\w*\]/g,"").replace(/ {2,}/g," ").trim()).join("\n");
+  const dc = L("council").find(e=>e.main);
+  const posts=L("posts").map(p=>`- "${p.title}" (${p.url}), cites it ${p.cites} time${p.cites>1?"s":""}: ${p.excerpt}`).join("\n")||"(none cite it yet)";
+  const vault=L("vault").map(n=>`- ${n.t} (${n.path}): ${n.hit}`).join("\n")||"(none)";
+  const chats=L("chats").map(x=>`- ${x.t}, ${x.date}: ${x.tldr}`).join("\n")||"(none)";
+  return `=== JAMES'S MATERIAL FOR THIS QUESTION ===\n\nPassage: ${r.ref} (${VERNAMES[ver]})\n${text}\n\nPlan: ${plan().name}, day ${S.day}. Also reading: ${READINGS.filter(x=>x!==r).map(x=>x.ref).join(", ")}.\n\nDivine Council Index entry: ${dc?`${dc.title}. ${dc.summary} Problem: ${dc.prob} Resolution: ${dc.res}`:"(none for this passage)"}\n\nMy notes on this reading: ${NOTES[r.id].text||"(none yet)"}\n\nMy jayms.com posts that cite ${r.ref}:\n${posts}\n\nMy Obsidian notes that mention it:\n${vault}\n\nMy past Claude chats on it:\n${chats}\n\n=== END OF JAMES'S MATERIAL ===`;
+}
+/* one wrap-up per plan day, or per opened passage */
+function wrapKey(){ return S.adhoc ? `adhoc~${S.adhoc.id}` : `${S.plan}~${S.day}` }
+/* what the wrap-up works from: each of the day's passages, James's note on it, and every Claude answer he saved on it */
+function wrapMaterial(){
+  const rs = S.adhoc ? [S.adhoc] : READINGS;
+  const one = r => {
+    const ver = r.rows && r.rows.some(x=>x.texts[S.ver]) ? S.ver : "NET";
+    const text = (r.rows||[]).map(x=>`[${x.c}:${x.v}] `+String(x.texts[ver]||"").replace(/<[^>]+>/g," ").replace(/\[\/?w:?\w*\]/g,"").replace(/ {2,}/g," ").trim()).join("\n");
+    const note = (NOTES[r.id]&&NOTES[r.id].text) || (ST.c("notes").peek(r.id)||{}).text || "";
+    const ans = ST.c("answers").all().filter(x=>x.key===r.id).sort((a,b)=>a.at-b.at).map(x=>`Question: ${x.question}\nClaude: ${x.text}`).join("\n\n");
+    return `--- ${r.ref} (${r.role||"Opened passage"}) ---\n${r.why?`Why it's in the plan: ${r.why}\n`:""}${text?`Text (${VERNAMES[ver]}):\n${text}\n`:""}\nMy notes:\n${note.trim()||"(none)"}\n\nClaude answers I saved:\n${ans||"(none)"}`;
+  };
+  return `=== JAMES'S MATERIAL FOR THIS WRAP-UP ===\n\n${S.adhoc?"":`Plan: ${plan().name}, day ${S.day}.\n\n`}${rs.map(one).join("\n\n")}\n\n=== END OF JAMES'S MATERIAL ===`;
+}
+async function saveNote(rid){
+  const n=NOTES[rid], ref=(READINGS.concat(S.adhoc?[S.adhoc]:[]).find(x=>x.id===rid)||{}).ref||rid;
+  n.obsidian = n.obsidian || obsPath(ref);
+  await ST.c("notes").save(rid,{text:n.text, pub:n.pub, obsidian:n.obsidian});
+  n.savedAt = ST.c("notes").peek(rid).updatedAt;
+  if(n.pub&&n.text.trim()) await ST.c("pub").save(rid,{text:n.text}); else if(ST.c("pub").peek(rid)) await ST.c("pub").remove(rid);
+}
+document.addEventListener("pointerdown",e=>{ const t=document.getElementById("text"); if(!t) return; const c=e.target.closest&&e.target.closest("#text .pcell[data-col]"); if(c) t.dataset.selcol=c.dataset.col; else if(!e.target.closest||!e.target.closest("#text")) delete t.dataset.selcol; });
+/* Help: the guide lives in help.html, loaded the first time it opens */
+(()=>{ const v=document.getElementById("helpview"), b=document.getElementById("helpbody"); let got=false;
+  const close=()=>{ v.hidden=true; document.getElementById("helpbtn").focus() };
+  document.getElementById("helpbtn").onclick=()=>{ v.hidden=false; if(!got){ got=true; fetch("help.html").then(r=>r.ok?r.text():Promise.reject()).then(t=>b.innerHTML=t).catch(()=>{ got=false; b.textContent="The guide didn't load. Try again." }) } document.getElementById("helpclose").focus() };
+  document.getElementById("helpclose").onclick=close;
+  v.addEventListener("click",e=>{ if(e.target===v) close() });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!v.hidden) close() });
+})();
+function openTool(id){ S.tool = (S.tool===id)?null:id; renderReader(); renderDock(); renderPanel()}
+document.addEventListener("click",e=>{
+  const w=e.target.closest("[data-w]"); if(w){ S.word=w.dataset.w; S.tool="word"; renderReader(); renderDock(); renderPanel(); return}
+  const v=e.target.closest("[data-v]"); if(v){e.preventDefault(); const [b,c,n]=v.dataset.v.split("|"); S.vsel={book:b,c:+c,v:+n}; S.tool="verse"; renderReader(); renderDock(); renderPanel(); return}
+  const t=e.target.closest("[data-t]"); if(t){openTool(t.dataset.t); return}
+  if(e.target.closest("[data-close-adhoc]")){ e.stopPropagation(); closeAdhoc(); return }
+  const dy=e.target.closest("[data-day]"); if(dy){ S.adhoc=null; S.vsel=null; S.word=null;S.day=+dy.dataset.day; S.reading=0; buildDay(); rememberOpen(); render(); $("rail").classList.remove("open"); window.scrollTo({top:0}); return}
+  const r=e.target.closest("[data-r]"); if(r){ S.adhoc=null; S.vsel=null; S.word=null;S.reading=+r.dataset.r; rememberOpen(); renderReader(); renderPanel(); window.scrollTo({top:0}); return}
+});
+document.addEventListener("keydown",e=>{
+  if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".w, .jst-mapimg")){e.preventDefault();e.target.click()}
+  if(e.key==="Escape"&&S.tool&&$("helpview").hidden&&!document.querySelector(".jst-mapview")&&!(e.target.closest&&e.target.closest("input,textarea,select,[contenteditable]"))){openTool(S.tool)}
+});
+$("pclose").onclick=()=>openTool(S.tool);
+$("addpsalm").checked=S.addPsalm; $("skiplists").checked=S.skipLists;
+$("addpsalm").onchange=e=>{ S.addPsalm=e.target.checked; store.set("addPsalm",S.addPsalm); S.reading=0; buildDay(); render() };
+$("skiplists").onchange=e=>{ S.skipLists=e.target.checked; store.set("skipLists",S.skipLists); S.reading=0; buildDay(); render() };
+/* Find in the text: marks every match in the passage on screen, Enter for the next, Shift+Enter for the previous, Esc to clear.
+   Ctrl/Cmd+F goes to the box. It searches the words as shown, so it ignores verse numbers and markup. */
+let FIND_I = 0;
+function findApply(move){
+  const box=$("text"), q=$("findq").value.trim();
+  box.querySelectorAll("mark.hit").forEach(m=>{ m.replaceWith(document.createTextNode(m.textContent)); });
+  box.normalize();
+  if(q.length<2){ $("findmsg").textContent=""; return }
+  const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"gi"), hits=[];
+  const walk=document.createTreeWalker(box, NodeFilter.SHOW_TEXT, {acceptNode:n=>n.parentElement.closest(".sup,.vtag,.lbl,.empty")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  const nodes=[]; while(walk.nextNode()) nodes.push(walk.currentNode);
+  nodes.forEach(n=>{ const t=n.nodeValue; let m, last=0, frag=null; re.lastIndex=0;
+    while((m=re.exec(t))){ frag=frag||document.createDocumentFragment(); frag.append(t.slice(last,m.index)); const mk=document.createElement("mark"); mk.className="hit"; mk.textContent=m[0]; frag.append(mk); hits.push(mk); last=m.index+m[0].length }
+    if(frag){ frag.append(t.slice(last)); n.replaceWith(frag) } });
+  if(!hits.length){ $("findmsg").textContent="none"; return }
+  FIND_I = move===false ? Math.min(FIND_I, hits.length-1) : (FIND_I + move + hits.length) % hits.length;
+  hits[FIND_I].classList.add("now");
+  if(move!==false || document.activeElement===$("findq")) hits[FIND_I].scrollIntoView({block:"center",behavior:"smooth"});
+  $("findmsg").textContent=`${FIND_I+1} of ${hits.length}`;
+}
+$("findform").onsubmit=e=>{ e.preventDefault() };
+$("findq").oninput=()=>{ FIND_I=0; findApply(0) };
+$("findq").onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); findApply(e.shiftKey?-1:1) } else if(e.key==="Escape"){ $("findq").value=""; findApply(0); $("findq").blur() } };
+document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==="f"){ e.preventDefault(); $("findq").focus(); $("findq").select() } });
+/* the header can wrap onto two lines in a narrow window; everything pinned under it follows its real height */
+function setTopH(){ document.documentElement.style.setProperty("--toph", document.querySelector(".top").offsetHeight+"px") }
+setTopH(); window.addEventListener("resize", setTopH);
+if(window.ResizeObserver) new ResizeObserver(setTopH).observe(document.querySelector(".top"));
+$("plan").onchange=e=>{ if(e.target.value==="__build"){ e.target.value=S.plan; S.tool="planner"; renderDock(); renderPanel(); return }
+  S.adhoc=null; choosePlan(e.target.value); rememberOpen(); render()};
+/* plans James builds live in the store beside the plan files, in the same shape */
+function mergeMyPlans(){ ST.c("plans").all().forEach(p=>{ const x=Object.assign({},p); delete x.createdAt; delete x.updatedAt; PLANS[p.id]=x }) }
+ST.c("plans").on((id,d)=>{ if(!PLANINDEX) return; if(d) mergeMyPlans(); else { delete PLANS[id]; if(S.plan===id) choosePlan(PLANINDEX.default) } render() });
+/* the reference box */
+$("gobooks").innerHTML = JaymsRef.books.map(b=>`<option value="${b.name} ">`).join("");
+$("goform").onsubmit=e=>{ e.preventDefault(); const v=$("goref").value.trim(); if(!v) return;
+  const err=openPassage(v); $("gomsg").textContent=err; if(!err){ $("goref").value=""; $("goref").blur(); } };
+$("goref").oninput=()=>{ $("gomsg").textContent="" };
+$("markdone").onclick=()=>{const id=dk(cur()); if(isDone(id)) ST.c("done").remove(id); else ST.c("done").save(id,{done:true, at:Date.now()}); renderPlan(); renderReader()};
+$("nextread").onclick=()=>{if(S.reading<READINGS.length-1){S.reading++; rememberOpen(); S.vsel=null; renderReader(); renderPanel(); window.scrollTo({top:0})}};
+/* Notes save when you press Save (or Cmd/Ctrl+S). Until then the change is held as a draft and marked "Not saved yet". */
+const DIRTY = {};
+function markDirty(){ const rid=cur().id; DIRTY[rid]=true; ST.c("drafts").save(rid,{text:NOTES[rid].text,pub:NOTES[rid].pub}); renderReader() }
+/* The note's copy in the vault: one file per passage. "Open in Obsidian" is an obsidian://new link with the note as its
+   content and overwrite on, so Obsidian itself writes (or updates) the file and opens it. No connection needed. */
+const OBS_FOLDER = "02-BIBLE/Study Workstation";
+function obsPath(ref){ return `${OBS_FOLDER}/${ref.replace(/:/g,".").replace(/[\\/?*"<>|]/g,"-")}.md` }
+function obsURI(path){ return "obsidian://open?vault=Jayms&file="+encodeURIComponent(path.replace(/\.md$/,"")) }
+function obsNewURI(r, n){
+  const body = `---\npassage: "${r.ref}"\nplan: "${plan().name}"\nday: ${S.day}\npublic: ${!!n.pub}\nupdated: ${new Date(n.savedAt).toISOString()}\nsource: Study Workstation\ntags: [study-workstation]\n---\n\n# ${r.ref}\n\n${n.text}\n`;
+  return "obsidian://new?vault=Jayms&file="+encodeURIComponent(obsPath(r.ref).replace(/\.md$/,""))+"&content="+encodeURIComponent(body)+"&overwrite=true";
+}
+async function commitNote(){ const rid=cur().id; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel() }
+$("note").oninput=e=>{const rid=cur().id; NOTES[rid].text=e.target.value; markDirty()};
+$("notepub").onchange=e=>{const rid=cur().id; NOTES[rid].pub=e.target.checked; markDirty()};
+$("notesave").onclick=commitNote;
+/* the passage as plain text for Speechify: a heading line, then one paragraph per chapter with [1]-style verse numbers */
+$("listen").onclick=async()=>{
+  const r=cur(), ver=r.rows&&r.rows.some(x=>x.texts[S.ver])?S.ver:"NET", by={};
+  (r.rows||[]).forEach(x=>{ const g=`${x.book} ${x.c}`; (by[g]=by[g]||[]).push(`[${x.v}] `+String(x.texts[ver]||"").replace(/<[^>]+>/g," ").replace(/\[\/?w:?\w*\]/g,"").replace(/ {2,}/g," ").trim()) });
+  const groups=Object.keys(by), txt=`${r.ref}, ${VERNAMES[ver]}.\n\n`+groups.map(g=>(groups.length>1?g+".\n":"")+by[g].join(" ")).join("\n\n");
+  try{ await navigator.clipboard.writeText(txt); $("listenmsg").textContent=" Copied" }catch(e){ $("listenmsg").textContent=" Copy didn't work here" }
+  setTimeout(()=>$("listenmsg").textContent="",3000);
+};
+$("obscopy").onclick=async()=>{ const u=obsURI(obsPath(cur().ref));
+  try{ await navigator.clipboard.writeText(u); $("obsmsg").textContent="Link copied. Paste it into your browser's address bar." }catch(e){ $("obsmsg").textContent=u } };
+document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="s"&&document.activeElement===$("note")){ e.preventDefault(); commitNote() } });
+window.addEventListener("beforeunload",e=>{ if(Object.keys(DIRTY).length){ e.preventDefault(); e.returnValue="" } });
+$("viewsw").onclick=e=>{const b=e.target.closest("[data-view]"); if(!b) return; S.view=b.dataset.view; if(S.view==="public"&&TOOLS.find(t=>t.id===S.tool&&t.owner)) S.tool="council"; render()};
+/* the two columns never hold the same version: choosing the other column's version swaps the two */
+$("ver").onchange=e=>{ const was=S.ver; S.ver=e.target.value; if(S.ver===S.ver2){ S.ver2=was; store.set("ver2",S.ver2) } store.set("ver",S.ver); renderReader() };
+$("ver2").onchange=e=>{ const was=S.ver2; S.ver2=e.target.value; if(S.ver2===S.ver){ S.ver=was; store.set("ver",S.ver) } store.set("ver2",S.ver2); renderReader() };
+$("layoutbtn").onclick=()=>{S.layout=S.layout==="verse"?"read":"verse";store.set("layout",S.layout);renderReader()};
+$("parbtn").onclick=()=>{S.par=S.par?0:1;store.set("par",S.par);renderReader()};
+$("smaller").onclick=()=>{S.size=Math.max(16,S.size-1);store.set("size",S.size);renderReader()};
+$("larger").onclick=()=>{S.size=Math.min(26,S.size+1);store.set("size",S.size);renderReader()};
+function railShown(){ const r=$("rail"); return getComputedStyle(r).display!=="none" && (getComputedStyle(r).position!=="fixed" || r.classList.contains("open")) }
+function syncRailBtn(){ const on=railShown(); $("railbtn").classList.toggle("on",on); $("railbtn").setAttribute("aria-expanded",on) }
+$("railbtn").onclick=()=>{
+  const r=$("rail");
+  if(r.classList.contains("open")){ r.classList.remove("open") }
+  else if(getComputedStyle(r).position==="fixed" && getComputedStyle(r).display!=="none"){ r.classList.add("open") }
+  else { const hide=!document.body.classList.contains("rail-hidden"); document.body.classList.toggle("rail-hidden",hide); store.set("railHidden",hide);
+         if(!hide && getComputedStyle(r).position==="fixed") r.classList.add("open") }
+  syncRailBtn();
+};
+document.body.classList.toggle("rail-hidden",!!store.get("railHidden",false));
+window.addEventListener("resize",syncRailBtn);
+/* today's date in the top bar, checked every minute so it turns over at midnight */
+function showToday(){ $("today").textContent = new Date().toLocaleDateString("en-GB",{weekday:"long", day:"numeric", month:"long", year:"numeric"}).replace(",","") }
+showToday(); setInterval(showToday, 60000);
+/* Load the plan data, then draw. */
+(async()=>{
+  try{
+    const get=u=>fetch(u).then(x=>{if(!x.ok) throw new Error(u); return x.json()});
+    PLANINDEX = await get("plans/index.json");
+    const plans = await Promise.all(PLANINDEX.plans.map(x=>get(x.file)));
+    plans.forEach(p=>PLANS[p.id]=p); mergeMyPlans();
+    choosePlan(PLANS[S.plan] ? S.plan : PLANINDEX.default);
+    restoreOpen();
+    render();
+  }catch(e){
+    $("rtitle").textContent="Reading plans didn't load";
+    $("rwhy").textContent="The plan files (plans/index.json) couldn't be read. Reload the page to try again.";
+  }
+})();
+
+/* Light up the live parts when the page is open on claude.ai: who is viewing, saved notes, asking Claude. */
+(async()=>{
+  if(!window.claude||!claude.use) return;
+  const user = await claude.use("user");
+  if(user){
+    OWNER = await user.isOwner();
+    if(!OWNER){S.view="public"; if(TOOLS.find(t=>t.id===S.tool&&t.owner)) S.tool="council"}
+    try{UID = await user.id()}catch(e){}
+  }
+  DB = await claude.use("db");
+  if(DB){
+    LIVE = true;
+    await migrateDB();
+    ST.attach(JaymsStore.adapters.artifactDb(DB, UID, ["pub","threads"]), {canWritePublic: OWNER});
+    /* notes saved before v025 sit in data/users/<uid>/<passage>: bring them into the notes collection, then retire them */
+    if(OWNER&&UID){
+      const got = await DB.collection("data/users/"+UID).get().catch(()=>null);
+      for(const d of (got?got.docs:[])){
+        if(d.id.includes("~")) continue; const v=d.data()||{};
+        const mine=ST.c("notes").peek(d.id);
+        if(!mine || (v.updatedAt||0) > (mine.updatedAt||0)) await ST.c("notes").save(d.id,{text:String(v.text||""), pub:!!v.pub, obsidian:v.obsidian||null, updatedAt:v.updatedAt||Date.now()});
+        try{ await DB.collection("data/users/"+UID).doc(d.id).delete() }catch(e){}
+      }
+    }
+    await ST.syncAll();
+    ["notes","pub","threads","done"].forEach(c=>ST.c(c).on(id=>{
+      if(c==="notes" && !DIRTY[id]) initNote(id, true);
+      renderReader(); renderDock(); renderPlan(); if(S.tool==="notes"||S.tool==="x") renderPanel();
+    }));
+    Object.keys(NOTES).forEach(id=>{ if(!DIRTY[id]) initNote(id, true) });
+  }
+  SAMPLE = OWNER ? await claude.use("sample") : null;
+  if(PLANINDEX) render();
+})();
+</script>
+</body></html>

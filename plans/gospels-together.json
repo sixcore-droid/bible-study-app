@@ -1,0 +1,2043 @@
+{
+ "id": "gospels-together",
+ "name": "The Gospels Together",
+ "description": "Jesus' life in the order it happened (Robertson and Broadus's Harmony of the Gospels). Each stretch of events is read in every Gospel that tells it, Matthew, Mark, Luke and John, one a day, before moving on.",
+ "start": "2026-10-05",
+ "days": [
+  {
+   "day": 1,
+   "title": "John 1:1-18",
+   "note": "§2: In his Introduction John Pictures Christ as the Word (Logos)",
+   "readings": [
+    {
+     "ref": "John 1:1-18",
+     "role": "John's account",
+     "why": "In his Introduction John Pictures Christ as the Word (Logos)"
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Matthew 1:1-17",
+   "note": "§3: Apparently Joseph's Genealogy in Matthew and Mary's in Luke",
+   "readings": [
+    {
+     "ref": "Matthew 1:1-17",
+     "role": "Matthew's account",
+     "why": "Apparently Joseph's Genealogy in Matthew and Mary's in Luke"
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "Luke 3:23-38",
+   "note": "§3: Apparently Joseph's Genealogy in Matthew and Mary's in Luke",
+   "readings": [
+    {
+     "ref": "Luke 3:23-38",
+     "role": "Luke's account",
+     "why": "Apparently Joseph's Genealogy in Matthew and Mary's in Luke"
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "Luke 1:1-38",
+   "note": "§4–5: The Annunciation of the Birth of the Baptist to Zacharias ... The Annunciation to the Virgin Mary of the Birth of Jesus",
+   "readings": [
+    {
+     "ref": "Luke 1:1-38",
+     "role": "Luke's account",
+     "why": "The Annunciation of the Birth of the Baptist to Zacharias ... The Annunciation to the Virgin Mary of the Birth of Jesus"
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Luke 1:39-80",
+   "note": "§6–8: The Song of Elizabeth to Mary upon her Visit ... The Birth and Childhood of the Baptist and his Desert Life",
+   "readings": [
+    {
+     "ref": "Luke 1:39-80",
+     "role": "Luke's account",
+     "why": "The Song of Elizabeth to Mary upon her Visit ... The Birth and Childhood of the Baptist and his Desert Life"
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Matthew 1:18-25",
+   "note": "§9–13: The Annunciation to Joseph of the Birth of Jesus ... The Presentation in the Temple with the Homage of Simeon and Anna",
+   "readings": [
+    {
+     "ref": "Matthew 1:18-25",
+     "role": "Matthew's account",
+     "why": "The Annunciation to Joseph of the Birth of Jesus ... The Presentation in the Temple with the Homage of Simeon and Anna"
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Luke 2:1-38",
+   "note": "§9–13: The Annunciation to Joseph of the Birth of Jesus ... The Presentation in the Temple with the Homage of Simeon and Anna",
+   "readings": [
+    {
+     "ref": "Luke 2:1-38",
+     "role": "Luke's account",
+     "why": "The Annunciation to Joseph of the Birth of Jesus ... The Presentation in the Temple with the Homage of Simeon and Anna"
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Matthew 2:1-23",
+   "note": "§14–19: Magi Visit the New-born King of the Jews ... The Eighteen Years at Nazareth",
+   "readings": [
+    {
+     "ref": "Matthew 2:1-23",
+     "role": "Matthew's account",
+     "why": "Magi Visit the New-born King of the Jews ... The Eighteen Years at Nazareth"
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Luke 2:39-52",
+   "note": "§14–19: Magi Visit the New-born King of the Jews ... The Eighteen Years at Nazareth",
+   "readings": [
+    {
+     "ref": "Luke 2:39-52",
+     "role": "Luke's account",
+     "why": "Magi Visit the New-born King of the Jews ... The Eighteen Years at Nazareth"
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Matthew 3:1-12",
+   "note": "§20–23: The Time of the Beginning ... The Forerunner's Picture of the Messiah Before Seeing him",
+   "readings": [
+    {
+     "ref": "Matthew 3:1-12",
+     "role": "Matthew's account",
+     "why": "The Time of the Beginning ... The Forerunner's Picture of the Messiah Before Seeing him"
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "Mark 1:1-8",
+   "note": "§20–23: The Time of the Beginning ... The Forerunner's Picture of the Messiah Before Seeing him",
+   "readings": [
+    {
+     "ref": "Mark 1:1-8",
+     "role": "Mark's account",
+     "why": "The Time of the Beginning ... The Forerunner's Picture of the Messiah Before Seeing him"
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Luke 3:1-18",
+   "note": "§20–23: The Time of the Beginning ... The Forerunner's Picture of the Messiah Before Seeing him",
+   "readings": [
+    {
+     "ref": "Luke 3:1-18",
+     "role": "Luke's account",
+     "why": "The Time of the Beginning ... The Forerunner's Picture of the Messiah Before Seeing him"
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Matthew 3:13-4:11",
+   "note": "§24–28: Jesus Baptized by John in the Jordan ... Jesus Makes his First Disciples",
+   "readings": [
+    {
+     "ref": "Matthew 3:13-4:11",
+     "role": "Matthew's account",
+     "why": "Jesus Baptized by John in the Jordan ... Jesus Makes his First Disciples"
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Mark 1:9-13",
+   "note": "§24–28: Jesus Baptized by John in the Jordan ... Jesus Makes his First Disciples",
+   "readings": [
+    {
+     "ref": "Mark 1:9-13",
+     "role": "Mark's account",
+     "why": "Jesus Baptized by John in the Jordan ... Jesus Makes his First Disciples"
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "Luke 3:21-23; Luke 4:1-13",
+   "note": "§24–28: Jesus Baptized by John in the Jordan ... Jesus Makes his First Disciples",
+   "readings": [
+    {
+     "ref": "Luke 3:21-23",
+     "role": "Luke's account",
+     "why": "Jesus Baptized by John in the Jordan ... Jesus Makes his First Disciples"
+    },
+    {
+     "ref": "Luke 4:1-13",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "John 1:19-51",
+   "note": "§24–28: Jesus Baptized by John in the Jordan ... Jesus Makes his First Disciples",
+   "readings": [
+    {
+     "ref": "John 1:19-51",
+     "role": "John's account",
+     "why": "Jesus Baptized by John in the Jordan ... Jesus Makes his First Disciples"
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "John 2:1-3:21",
+   "note": "§29–32: Jesus Works his First Miracle ... The Interview of Nicodemus with Jesus",
+   "readings": [
+    {
+     "ref": "John 2:1-3:21",
+     "role": "John's account",
+     "why": "Jesus Works his First Miracle ... The Interview of Nicodemus with Jesus"
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Matthew 4:12",
+   "note": "§33–35: The Parallel Ministry of Jesus and John with John's Loyalty to Jesus ... Jesus in Samaria at Jacob's Well and in Sychar",
+   "readings": [
+    {
+     "ref": "Matthew 4:12",
+     "role": "Matthew's account",
+     "why": "The Parallel Ministry of Jesus and John with John's Loyalty to Jesus ... Jesus in Samaria at Jacob's Well and in Sychar"
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Mark 1:14",
+   "note": "§33–35: The Parallel Ministry of Jesus and John with John's Loyalty to Jesus ... Jesus in Samaria at Jacob's Well and in Sychar",
+   "readings": [
+    {
+     "ref": "Mark 1:14",
+     "role": "Mark's account",
+     "why": "The Parallel Ministry of Jesus and John with John's Loyalty to Jesus ... Jesus in Samaria at Jacob's Well and in Sychar"
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Luke 3:19-20",
+   "note": "§33–35: The Parallel Ministry of Jesus and John with John's Loyalty to Jesus ... Jesus in Samaria at Jacob's Well and in Sychar",
+   "readings": [
+    {
+     "ref": "Luke 3:19-20",
+     "role": "Luke's account",
+     "why": "The Parallel Ministry of Jesus and John with John's Loyalty to Jesus ... Jesus in Samaria at Jacob's Well and in Sychar"
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "John 3:22-4:42",
+   "note": "§33–35: The Parallel Ministry of Jesus and John with John's Loyalty to Jesus ... Jesus in Samaria at Jacob's Well and in Sychar",
+   "readings": [
+    {
+     "ref": "John 3:22-4:42",
+     "role": "John's account",
+     "why": "The Parallel Ministry of Jesus and John with John's Loyalty to Jesus ... Jesus in Samaria at Jacob's Well and in Sychar"
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "John 4:43-45",
+   "note": "§36: The Arrival of Jesus in Galilee",
+   "readings": [
+    {
+     "ref": "John 4:43-45",
+     "role": "John's account",
+     "why": "The Arrival of Jesus in Galilee"
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Matthew 4:17; Matthew 4:13-16; Matthew 4:18-22",
+   "note": "§37–42: General Account of his Teaching in Galilee ... The Excitement in the Synagogue Because of the Teaching of Jesus and the Healing of a Demoniac on the Sabbath",
+   "readings": [
+    {
+     "ref": "Matthew 4:17",
+     "role": "Matthew's account",
+     "why": "General Account of his Teaching in Galilee ... The Excitement in the Synagogue Because of the Teaching of Jesus and the Healing of a Demoniac on the Sabbath"
+    },
+    {
+     "ref": "Matthew 4:13-16",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 4:18-22",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Mark 1:14-28",
+   "note": "§37–42: General Account of his Teaching in Galilee ... The Excitement in the Synagogue Because of the Teaching of Jesus and the Healing of a Demoniac on the Sabbath",
+   "readings": [
+    {
+     "ref": "Mark 1:14-28",
+     "role": "Mark's account",
+     "why": "General Account of his Teaching in Galilee ... The Excitement in the Synagogue Because of the Teaching of Jesus and the Healing of a Demoniac on the Sabbath"
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "Luke 4:14-31; Luke 5:1-11; Luke 4:31-37",
+   "note": "§37–42: General Account of his Teaching in Galilee ... The Excitement in the Synagogue Because of the Teaching of Jesus and the Healing of a Demoniac on the Sabbath",
+   "readings": [
+    {
+     "ref": "Luke 4:14-31",
+     "role": "Luke's account",
+     "why": "General Account of his Teaching in Galilee ... The Excitement in the Synagogue Because of the Teaching of Jesus and the Healing of a Demoniac on the Sabbath"
+    },
+    {
+     "ref": "Luke 5:1-11",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Luke 4:31-37",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "title": "John 4:46-54",
+   "note": "§37–42: General Account of his Teaching in Galilee ... The Excitement in the Synagogue Because of the Teaching of Jesus and the Healing of a Demoniac on the Sabbath",
+   "readings": [
+    {
+     "ref": "John 4:46-54",
+     "role": "John's account",
+     "why": "General Account of his Teaching in Galilee ... The Excitement in the Synagogue Because of the Teaching of Jesus and the Healing of a Demoniac on the Sabbath"
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "title": "Matthew 8:14-17; Matthew 4:23-25; Matthew 8:2-4; Matthew 9:1-13",
+   "note": "§43–47: He Heals Peter's Mother-in-law and Many Others ... The Call of Matthew (levi) and his Reception in Honor of Jesus",
+   "readings": [
+    {
+     "ref": "Matthew 8:14-17",
+     "role": "Matthew's account",
+     "why": "He Heals Peter's Mother-in-law and Many Others ... The Call of Matthew (levi) and his Reception in Honor of Jesus"
+    },
+    {
+     "ref": "Matthew 4:23-25",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 8:2-4",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 9:1-13",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "title": "Mark 1:29-2:17",
+   "note": "§43–47: He Heals Peter's Mother-in-law and Many Others ... The Call of Matthew (levi) and his Reception in Honor of Jesus",
+   "readings": [
+    {
+     "ref": "Mark 1:29-2:17",
+     "role": "Mark's account",
+     "why": "He Heals Peter's Mother-in-law and Many Others ... The Call of Matthew (levi) and his Reception in Honor of Jesus"
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "title": "Luke 4:38-44; Luke 5:12-32",
+   "note": "§43–47: He Heals Peter's Mother-in-law and Many Others ... The Call of Matthew (levi) and his Reception in Honor of Jesus",
+   "readings": [
+    {
+     "ref": "Luke 4:38-44",
+     "role": "Luke's account",
+     "why": "He Heals Peter's Mother-in-law and Many Others ... The Call of Matthew (levi) and his Reception in Honor of Jesus"
+    },
+    {
+     "ref": "Luke 5:12-32",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "title": "Matthew 9:14-17",
+   "note": "§48–49: Jesus in Three Parables Defends his Disciples for Feasting Instead of Fasting ... At a Feast in Jerusalem (possibly the Passover) Jesus Heals a Lame Man on the Sabbath and Defends This Action to the Pharisees in a Great Discourse",
+   "readings": [
+    {
+     "ref": "Matthew 9:14-17",
+     "role": "Matthew's account",
+     "why": "Jesus in Three Parables Defends his Disciples for Feasting Instead of Fasting ... At a Feast in Jerusalem (possibly the Passover) Jesus Heals a Lame Man on the Sabbath and Defends This Action to the Pharisees in a Great Discourse"
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "title": "Mark 2:18-22",
+   "note": "§48–49: Jesus in Three Parables Defends his Disciples for Feasting Instead of Fasting ... At a Feast in Jerusalem (possibly the Passover) Jesus Heals a Lame Man on the Sabbath and Defends This Action to the Pharisees in a Great Discourse",
+   "readings": [
+    {
+     "ref": "Mark 2:18-22",
+     "role": "Mark's account",
+     "why": "Jesus in Three Parables Defends his Disciples for Feasting Instead of Fasting ... At a Feast in Jerusalem (possibly the Passover) Jesus Heals a Lame Man on the Sabbath and Defends This Action to the Pharisees in a Great Discourse"
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "title": "Luke 5:33-39",
+   "note": "§48–49: Jesus in Three Parables Defends his Disciples for Feasting Instead of Fasting ... At a Feast in Jerusalem (possibly the Passover) Jesus Heals a Lame Man on the Sabbath and Defends This Action to the Pharisees in a Great Discourse",
+   "readings": [
+    {
+     "ref": "Luke 5:33-39",
+     "role": "Luke's account",
+     "why": "Jesus in Three Parables Defends his Disciples for Feasting Instead of Fasting ... At a Feast in Jerusalem (possibly the Passover) Jesus Heals a Lame Man on the Sabbath and Defends This Action to the Pharisees in a Great Discourse"
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "title": "John 5:1-47",
+   "note": "§48–49: Jesus in Three Parables Defends his Disciples for Feasting Instead of Fasting ... At a Feast in Jerusalem (possibly the Passover) Jesus Heals a Lame Man on the Sabbath and Defends This Action to the Pharisees in a Great Discourse",
+   "readings": [
+    {
+     "ref": "John 5:1-47",
+     "role": "John's account",
+     "why": "Jesus in Three Parables Defends his Disciples for Feasting Instead of Fasting ... At a Feast in Jerusalem (possibly the Passover) Jesus Heals a Lame Man on the Sabbath and Defends This Action to the Pharisees in a Great Discourse"
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "title": "Matthew 12:1-21; Matthew 5:1-7:29",
+   "note": "§50–54: Another Sabbath Controversy with the Pharisees when the Disciples Pluck Ears of Grain in the Fields ... The Sermon on the Mount. Privileges and Requirements of the Messianic Reign, Christ's Standard of Righteousness",
+   "readings": [
+    {
+     "ref": "Matthew 12:1-21",
+     "role": "Matthew's account",
+     "why": "Another Sabbath Controversy with the Pharisees when the Disciples Pluck Ears of Grain in the Fields ... The Sermon on the Mount. Privileges and Requirements of the Messianic Reign, Christ's Standard of Righteousness"
+    },
+    {
+     "ref": "Matthew 5:1-7:29",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "title": "Mark 2:23-3:19",
+   "note": "§50–54: Another Sabbath Controversy with the Pharisees when the Disciples Pluck Ears of Grain in the Fields ... The Sermon on the Mount. Privileges and Requirements of the Messianic Reign, Christ's Standard of Righteousness",
+   "readings": [
+    {
+     "ref": "Mark 2:23-3:19",
+     "role": "Mark's account",
+     "why": "Another Sabbath Controversy with the Pharisees when the Disciples Pluck Ears of Grain in the Fields ... The Sermon on the Mount. Privileges and Requirements of the Messianic Reign, Christ's Standard of Righteousness"
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "title": "Luke 6:1-49",
+   "note": "§50–54: Another Sabbath Controversy with the Pharisees when the Disciples Pluck Ears of Grain in the Fields ... The Sermon on the Mount. Privileges and Requirements of the Messianic Reign, Christ's Standard of Righteousness",
+   "readings": [
+    {
+     "ref": "Luke 6:1-49",
+     "role": "Luke's account",
+     "why": "Another Sabbath Controversy with the Pharisees when the Disciples Pluck Ears of Grain in the Fields ... The Sermon on the Mount. Privileges and Requirements of the Messianic Reign, Christ's Standard of Righteousness"
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "title": "Matthew 8:5-13; Matthew 11:2-19",
+   "note": "§55–57: Jesus Heals a Centurion's Servant at Capernaum ... The Message from the Baptist and the Eulogy of Jesus",
+   "readings": [
+    {
+     "ref": "Matthew 8:5-13",
+     "role": "Matthew's account",
+     "why": "Jesus Heals a Centurion's Servant at Capernaum ... The Message from the Baptist and the Eulogy of Jesus"
+    },
+    {
+     "ref": "Matthew 11:2-19",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "title": "Luke 7:1-35",
+   "note": "§55–57: Jesus Heals a Centurion's Servant at Capernaum ... The Message from the Baptist and the Eulogy of Jesus",
+   "readings": [
+    {
+     "ref": "Luke 7:1-35",
+     "role": "Luke's account",
+     "why": "Jesus Heals a Centurion's Servant at Capernaum ... The Message from the Baptist and the Eulogy of Jesus"
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "title": "Matthew 11:20-30; Matthew 12:22-45",
+   "note": "§58–62: Woes upon the Cities of Opportunity. The Claims of Christ as the Teacher About the Father ... Scribes and Pharisees Demand a Sign",
+   "readings": [
+    {
+     "ref": "Matthew 11:20-30",
+     "role": "Matthew's account",
+     "why": "Woes upon the Cities of Opportunity. The Claims of Christ as the Teacher About the Father ... Scribes and Pharisees Demand a Sign"
+    },
+    {
+     "ref": "Matthew 12:22-45",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "title": "Mark 3:19-30",
+   "note": "§58–62: Woes upon the Cities of Opportunity. The Claims of Christ as the Teacher About the Father ... Scribes and Pharisees Demand a Sign",
+   "readings": [
+    {
+     "ref": "Mark 3:19-30",
+     "role": "Mark's account",
+     "why": "Woes upon the Cities of Opportunity. The Claims of Christ as the Teacher About the Father ... Scribes and Pharisees Demand a Sign"
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "title": "Luke 7:36-8:3",
+   "note": "§58–62: Woes upon the Cities of Opportunity. The Claims of Christ as the Teacher About the Father ... Scribes and Pharisees Demand a Sign",
+   "readings": [
+    {
+     "ref": "Luke 7:36-8:3",
+     "role": "Luke's account",
+     "why": "Woes upon the Cities of Opportunity. The Claims of Christ as the Teacher About the Father ... Scribes and Pharisees Demand a Sign"
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "title": "Matthew 12:46-13:53",
+   "note": "§63–64: Christ's Mother and Brethren Seek to Take him Home ... The First Great Group of Parables",
+   "readings": [
+    {
+     "ref": "Matthew 12:46-13:53",
+     "role": "Matthew's account",
+     "why": "Christ's Mother and Brethren Seek to Take him Home ... The First Great Group of Parables"
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "title": "Mark 3:31-4:34",
+   "note": "§63–64: Christ's Mother and Brethren Seek to Take him Home ... The First Great Group of Parables",
+   "readings": [
+    {
+     "ref": "Mark 3:31-4:34",
+     "role": "Mark's account",
+     "why": "Christ's Mother and Brethren Seek to Take him Home ... The First Great Group of Parables"
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "title": "Luke 8:19-21; Luke 8:4-18",
+   "note": "§63–64: Christ's Mother and Brethren Seek to Take him Home ... The First Great Group of Parables",
+   "readings": [
+    {
+     "ref": "Luke 8:19-21",
+     "role": "Luke's account",
+     "why": "Christ's Mother and Brethren Seek to Take him Home ... The First Great Group of Parables"
+    },
+    {
+     "ref": "Luke 8:4-18",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "title": "Matthew 8:18; Matthew 8:23-34; Matthew 9:18-26",
+   "note": "§65–67: In Crossing the Lake, Jesus Stills the Tempest ... The Return and the Healing of Jairus' Daughter and of the Woman who Only Touched Christ's Garment",
+   "readings": [
+    {
+     "ref": "Matthew 8:18",
+     "role": "Matthew's account",
+     "why": "In Crossing the Lake, Jesus Stills the Tempest ... The Return and the Healing of Jairus' Daughter and of the Woman who Only Touched Christ's Garment"
+    },
+    {
+     "ref": "Matthew 8:23-34",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 9:18-26",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "title": "Mark 4:35-5:43",
+   "note": "§65–67: In Crossing the Lake, Jesus Stills the Tempest ... The Return and the Healing of Jairus' Daughter and of the Woman who Only Touched Christ's Garment",
+   "readings": [
+    {
+     "ref": "Mark 4:35-5:43",
+     "role": "Mark's account",
+     "why": "In Crossing the Lake, Jesus Stills the Tempest ... The Return and the Healing of Jairus' Daughter and of the Woman who Only Touched Christ's Garment"
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "title": "Luke 8:22-56",
+   "note": "§65–67: In Crossing the Lake, Jesus Stills the Tempest ... The Return and the Healing of Jairus' Daughter and of the Woman who Only Touched Christ's Garment",
+   "readings": [
+    {
+     "ref": "Luke 8:22-56",
+     "role": "Luke's account",
+     "why": "In Crossing the Lake, Jesus Stills the Tempest ... The Return and the Healing of Jairus' Daughter and of the Woman who Only Touched Christ's Garment"
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "title": "Matthew 9:27-34; Matthew 13:54-58; Matthew 9:35-11:1",
+   "note": "§68–70: He Heals Two Blind Men and a Dumb Demoniac, a Blasphemous Accusation ... The Third Tour of Galilee After Instructing the Twelve and Sending Them Forth by Twos",
+   "readings": [
+    {
+     "ref": "Matthew 9:27-34",
+     "role": "Matthew's account",
+     "why": "He Heals Two Blind Men and a Dumb Demoniac, a Blasphemous Accusation ... The Third Tour of Galilee After Instructing the Twelve and Sending Them Forth by Twos"
+    },
+    {
+     "ref": "Matthew 13:54-58",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 9:35-11:1",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "title": "Mark 6:1-13",
+   "note": "§68–70: He Heals Two Blind Men and a Dumb Demoniac, a Blasphemous Accusation ... The Third Tour of Galilee After Instructing the Twelve and Sending Them Forth by Twos",
+   "readings": [
+    {
+     "ref": "Mark 6:1-13",
+     "role": "Mark's account",
+     "why": "He Heals Two Blind Men and a Dumb Demoniac, a Blasphemous Accusation ... The Third Tour of Galilee After Instructing the Twelve and Sending Them Forth by Twos"
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "title": "Luke 9:1-6",
+   "note": "§68–70: He Heals Two Blind Men and a Dumb Demoniac, a Blasphemous Accusation ... The Third Tour of Galilee After Instructing the Twelve and Sending Them Forth by Twos",
+   "readings": [
+    {
+     "ref": "Luke 9:1-6",
+     "role": "Luke's account",
+     "why": "He Heals Two Blind Men and a Dumb Demoniac, a Blasphemous Accusation ... The Third Tour of Galilee After Instructing the Twelve and Sending Them Forth by Twos"
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "title": "Matthew 14:1-12",
+   "note": "§71: The Guilty Fears of Herod Antipas in Tiberias About Jesus Because He Had Beheaded the Baptist in Machaerus",
+   "readings": [
+    {
+     "ref": "Matthew 14:1-12",
+     "role": "Matthew's account",
+     "why": "The Guilty Fears of Herod Antipas in Tiberias About Jesus Because He Had Beheaded the Baptist in Machaerus"
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "title": "Mark 6:14-29",
+   "note": "§71: The Guilty Fears of Herod Antipas in Tiberias About Jesus Because He Had Beheaded the Baptist in Machaerus",
+   "readings": [
+    {
+     "ref": "Mark 6:14-29",
+     "role": "Mark's account",
+     "why": "The Guilty Fears of Herod Antipas in Tiberias About Jesus Because He Had Beheaded the Baptist in Machaerus"
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "title": "Luke 9:7-9",
+   "note": "§71: The Guilty Fears of Herod Antipas in Tiberias About Jesus Because He Had Beheaded the Baptist in Machaerus",
+   "readings": [
+    {
+     "ref": "Luke 9:7-9",
+     "role": "Luke's account",
+     "why": "The Guilty Fears of Herod Antipas in Tiberias About Jesus Because He Had Beheaded the Baptist in Machaerus"
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "title": "Matthew 14:13-36",
+   "note": "§72–76: The First Retirement. The Twelve Return, and Jesus Retires with Them Beyond the Lake to Rest. Feeding of the Five Thousand ... The Collapse of the Galilean Campaign Because Jesus Will Not Conform to Popular Messianic Expectations",
+   "readings": [
+    {
+     "ref": "Matthew 14:13-36",
+     "role": "Matthew's account",
+     "why": "The First Retirement. The Twelve Return, and Jesus Retires with Them Beyond the Lake to Rest. Feeding of the Five Thousand ... The Collapse of the Galilean Campaign Because Jesus Will Not Conform to Popular Messianic Expectations"
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "title": "Mark 6:30-56",
+   "note": "§72–76: The First Retirement. The Twelve Return, and Jesus Retires with Them Beyond the Lake to Rest. Feeding of the Five Thousand ... The Collapse of the Galilean Campaign Because Jesus Will Not Conform to Popular Messianic Expectations",
+   "readings": [
+    {
+     "ref": "Mark 6:30-56",
+     "role": "Mark's account",
+     "why": "The First Retirement. The Twelve Return, and Jesus Retires with Them Beyond the Lake to Rest. Feeding of the Five Thousand ... The Collapse of the Galilean Campaign Because Jesus Will Not Conform to Popular Messianic Expectations"
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "title": "Luke 9:10-17",
+   "note": "§72–76: The First Retirement. The Twelve Return, and Jesus Retires with Them Beyond the Lake to Rest. Feeding of the Five Thousand ... The Collapse of the Galilean Campaign Because Jesus Will Not Conform to Popular Messianic Expectations",
+   "readings": [
+    {
+     "ref": "Luke 9:10-17",
+     "role": "Luke's account",
+     "why": "The First Retirement. The Twelve Return, and Jesus Retires with Them Beyond the Lake to Rest. Feeding of the Five Thousand ... The Collapse of the Galilean Campaign Because Jesus Will Not Conform to Popular Messianic Expectations"
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "title": "John 6:1-71",
+   "note": "§72–76: The First Retirement. The Twelve Return, and Jesus Retires with Them Beyond the Lake to Rest. Feeding of the Five Thousand ... The Collapse of the Galilean Campaign Because Jesus Will Not Conform to Popular Messianic Expectations",
+   "readings": [
+    {
+     "ref": "John 6:1-71",
+     "role": "John's account",
+     "why": "The First Retirement. The Twelve Return, and Jesus Retires with Them Beyond the Lake to Rest. Feeding of the Five Thousand ... The Collapse of the Galilean Campaign Because Jesus Will Not Conform to Popular Messianic Expectations"
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "title": "Matthew 15:1-28",
+   "note": "§77–78: Pharisees from Jerusalem Reproach Jesus for Allowing his Disciples to Disregard Their Traditions About Ceremonial Defilement of the Hands. A Puzzling Parable in Reply ... The Second Withdrawal to the Region of Tyre and Sidon and the Healing of the Daughter of a Syro-phoenician Woman",
+   "readings": [
+    {
+     "ref": "Matthew 15:1-28",
+     "role": "Matthew's account",
+     "why": "Pharisees from Jerusalem Reproach Jesus for Allowing his Disciples to Disregard Their Traditions About Ceremonial Defilement of the Hands. A Puzzling Parable in Reply ... The Second Withdrawal to the Region of Tyre and Sidon and the Healing of the Daughter of a Syro-phoenician Woman"
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "title": "Mark 7:1-30",
+   "note": "§77–78: Pharisees from Jerusalem Reproach Jesus for Allowing his Disciples to Disregard Their Traditions About Ceremonial Defilement of the Hands. A Puzzling Parable in Reply ... The Second Withdrawal to the Region of Tyre and Sidon and the Healing of the Daughter of a Syro-phoenician Woman",
+   "readings": [
+    {
+     "ref": "Mark 7:1-30",
+     "role": "Mark's account",
+     "why": "Pharisees from Jerusalem Reproach Jesus for Allowing his Disciples to Disregard Their Traditions About Ceremonial Defilement of the Hands. A Puzzling Parable in Reply ... The Second Withdrawal to the Region of Tyre and Sidon and the Healing of the Daughter of a Syro-phoenician Woman"
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "title": "John 7:1",
+   "note": "§77–78: Pharisees from Jerusalem Reproach Jesus for Allowing his Disciples to Disregard Their Traditions About Ceremonial Defilement of the Hands. A Puzzling Parable in Reply ... The Second Withdrawal to the Region of Tyre and Sidon and the Healing of the Daughter of a Syro-phoenician Woman",
+   "readings": [
+    {
+     "ref": "John 7:1",
+     "role": "John's account",
+     "why": "Pharisees from Jerusalem Reproach Jesus for Allowing his Disciples to Disregard Their Traditions About Ceremonial Defilement of the Hands. A Puzzling Parable in Reply ... The Second Withdrawal to the Region of Tyre and Sidon and the Healing of the Daughter of a Syro-phoenician Woman"
+    }
+   ]
+  },
+  {
+   "day": 61,
+   "title": "Matthew 15:29-16:12",
+   "note": "§79–81: The Third Withdrawal North Through Phoenicia and East Towards Hermon and South into Decapolis (keeping Out of the Territory of Herod Antipas) with the Healing of the Deaf and Dumb Man and the Feeding of the Four Thousand ... The Fourth Retirement to Bethsaida Julias in the Tetrarchy of Herod Philip with Sharp Rebuke of the Dulness of the Disciples on the Way Across and the Healing of a Blind Man in Bethsaida",
+   "readings": [
+    {
+     "ref": "Matthew 15:29-16:12",
+     "role": "Matthew's account",
+     "why": "The Third Withdrawal North Through Phoenicia and East Towards Hermon and South into Decapolis (keeping Out of the Territory of Herod Antipas) with the Healing of the Deaf and Dumb Man and the Feeding of the Four Thousand ... The Fourth Retirement to Bethsaida Julias in the Tetrarchy of Herod Philip with Sharp Rebuke of the Dulness of the Disciples on the Way Across and the Healing of a Blind Man in Bethsaida"
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "title": "Mark 7:31-8:26",
+   "note": "§79–81: The Third Withdrawal North Through Phoenicia and East Towards Hermon and South into Decapolis (keeping Out of the Territory of Herod Antipas) with the Healing of the Deaf and Dumb Man and the Feeding of the Four Thousand ... The Fourth Retirement to Bethsaida Julias in the Tetrarchy of Herod Philip with Sharp Rebuke of the Dulness of the Disciples on the Way Across and the Healing of a Blind Man in Bethsaida",
+   "readings": [
+    {
+     "ref": "Mark 7:31-8:26",
+     "role": "Mark's account",
+     "why": "The Third Withdrawal North Through Phoenicia and East Towards Hermon and South into Decapolis (keeping Out of the Territory of Herod Antipas) with the Healing of the Deaf and Dumb Man and the Feeding of the Four Thousand ... The Fourth Retirement to Bethsaida Julias in the Tetrarchy of Herod Philip with Sharp Rebuke of the Dulness of the Disciples on the Way Across and the Healing of a Blind Man in Bethsaida"
+    }
+   ]
+  },
+  {
+   "day": 63,
+   "title": "Matthew 16:13-17:20",
+   "note": "§82–87: Near Caesarea Philippi Jesus Tests the Faith of the Twelve in his Messiahship ... The Demoniac Boy, Whom the Disciples Could Not Heal",
+   "readings": [
+    {
+     "ref": "Matthew 16:13-17:20",
+     "role": "Matthew's account",
+     "why": "Near Caesarea Philippi Jesus Tests the Faith of the Twelve in his Messiahship ... The Demoniac Boy, Whom the Disciples Could Not Heal"
+    }
+   ]
+  },
+  {
+   "day": 64,
+   "title": "Mark 8:27-9:29",
+   "note": "§82–87: Near Caesarea Philippi Jesus Tests the Faith of the Twelve in his Messiahship ... The Demoniac Boy, Whom the Disciples Could Not Heal",
+   "readings": [
+    {
+     "ref": "Mark 8:27-9:29",
+     "role": "Mark's account",
+     "why": "Near Caesarea Philippi Jesus Tests the Faith of the Twelve in his Messiahship ... The Demoniac Boy, Whom the Disciples Could Not Heal"
+    }
+   ]
+  },
+  {
+   "day": 65,
+   "title": "Luke 9:18-43",
+   "note": "§82–87: Near Caesarea Philippi Jesus Tests the Faith of the Twelve in his Messiahship ... The Demoniac Boy, Whom the Disciples Could Not Heal",
+   "readings": [
+    {
+     "ref": "Luke 9:18-43",
+     "role": "Luke's account",
+     "why": "Near Caesarea Philippi Jesus Tests the Faith of the Twelve in his Messiahship ... The Demoniac Boy, Whom the Disciples Could Not Heal"
+    }
+   ]
+  },
+  {
+   "day": 66,
+   "title": "Matthew 17:22-18:35",
+   "note": "§88–92: Returning Privately Through Galilee, He Again Foretells his Death and Resurrection ... Right Treatment of a Brother who Has Sinned Against One, and Duty of Patiently Forgiving a Brother (parable of the Unmerciful Servant)",
+   "readings": [
+    {
+     "ref": "Matthew 17:22-18:35",
+     "role": "Matthew's account",
+     "why": "Returning Privately Through Galilee, He Again Foretells his Death and Resurrection ... Right Treatment of a Brother who Has Sinned Against One, and Duty of Patiently Forgiving a Brother (parable of the Unmerciful Servant)"
+    }
+   ]
+  },
+  {
+   "day": 67,
+   "title": "Mark 9:30-50",
+   "note": "§88–92: Returning Privately Through Galilee, He Again Foretells his Death and Resurrection ... Right Treatment of a Brother who Has Sinned Against One, and Duty of Patiently Forgiving a Brother (parable of the Unmerciful Servant)",
+   "readings": [
+    {
+     "ref": "Mark 9:30-50",
+     "role": "Mark's account",
+     "why": "Returning Privately Through Galilee, He Again Foretells his Death and Resurrection ... Right Treatment of a Brother who Has Sinned Against One, and Duty of Patiently Forgiving a Brother (parable of the Unmerciful Servant)"
+    }
+   ]
+  },
+  {
+   "day": 68,
+   "title": "Luke 9:43-50",
+   "note": "§88–92: Returning Privately Through Galilee, He Again Foretells his Death and Resurrection ... Right Treatment of a Brother who Has Sinned Against One, and Duty of Patiently Forgiving a Brother (parable of the Unmerciful Servant)",
+   "readings": [
+    {
+     "ref": "Luke 9:43-50",
+     "role": "Luke's account",
+     "why": "Returning Privately Through Galilee, He Again Foretells his Death and Resurrection ... Right Treatment of a Brother who Has Sinned Against One, and Duty of Patiently Forgiving a Brother (parable of the Unmerciful Servant)"
+    }
+   ]
+  },
+  {
+   "day": 69,
+   "title": "Matthew 8:19-22",
+   "note": "§93–95: The Messiah's Followers Must Give Up Everything for his Service ... He Goes Privately to Jerusalem Through Samaria",
+   "readings": [
+    {
+     "ref": "Matthew 8:19-22",
+     "role": "Matthew's account",
+     "why": "The Messiah's Followers Must Give Up Everything for his Service ... He Goes Privately to Jerusalem Through Samaria"
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "title": "Luke 9:57-62; Luke 9:51-56",
+   "note": "§93–95: The Messiah's Followers Must Give Up Everything for his Service ... He Goes Privately to Jerusalem Through Samaria",
+   "readings": [
+    {
+     "ref": "Luke 9:57-62",
+     "role": "Luke's account",
+     "why": "The Messiah's Followers Must Give Up Everything for his Service ... He Goes Privately to Jerusalem Through Samaria"
+    },
+    {
+     "ref": "Luke 9:51-56",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 71,
+   "title": "John 7:2-10",
+   "note": "§93–95: The Messiah's Followers Must Give Up Everything for his Service ... He Goes Privately to Jerusalem Through Samaria",
+   "readings": [
+    {
+     "ref": "John 7:2-10",
+     "role": "John's account",
+     "why": "The Messiah's Followers Must Give Up Everything for his Service ... He Goes Privately to Jerusalem Through Samaria"
+    }
+   ]
+  },
+  {
+   "day": 72,
+   "title": "John 7:11-52",
+   "note": "§96: The Coming of Jesus to the Feast of Tabernacles Creates Intense Excitement Concerning the Messiahship",
+   "readings": [
+    {
+     "ref": "John 7:11-52",
+     "role": "John's account",
+     "why": "The Coming of Jesus to the Feast of Tabernacles Creates Intense Excitement Concerning the Messiahship"
+    }
+   ]
+  },
+  {
+   "day": 73,
+   "title": "John 7:53-8:59",
+   "note": "§97–99: Story of an Adulterous Woman Brought to Jesus for Judgment ... The Pharisees Attempt to Stone Jesus when He Exposes Their Sinfulness",
+   "readings": [
+    {
+     "ref": "John 7:53-8:59",
+     "role": "John's account",
+     "why": "Story of an Adulterous Woman Brought to Jesus for Judgment ... The Pharisees Attempt to Stone Jesus when He Exposes Their Sinfulness"
+    }
+   ]
+  },
+  {
+   "day": 74,
+   "title": "John 9:1-41",
+   "note": "§100: Jesus Heals a Man Born Blind who Outwits the Pharisees. The Rulers Forbid the Recognition of Jesus as the Messiah. The Conversion of the Healed Man",
+   "readings": [
+    {
+     "ref": "John 9:1-41",
+     "role": "John's account",
+     "why": "Jesus Heals a Man Born Blind who Outwits the Pharisees. The Rulers Forbid the Recognition of Jesus as the Messiah. The Conversion of the Healed Man"
+    }
+   ]
+  },
+  {
+   "day": 75,
+   "title": "Luke 10:1-37",
+   "note": "§101–103: In the Parable (allegory) of the Good Shepherd Jesus Draws the Picture of the Hostile Pharisees and Intimates that He Is Going to Die for his Flock and Come to Life Again ... Jesus Answers a Lawyer's Question as to Eternal Life, Giving the Parable of the Good Samaritan",
+   "readings": [
+    {
+     "ref": "Luke 10:1-37",
+     "role": "Luke's account",
+     "why": "In the Parable (allegory) of the Good Shepherd Jesus Draws the Picture of the Hostile Pharisees and Intimates that He Is Going to Die for his Flock and Come to Life Again ... Jesus Answers a Lawyer's Question as to Eternal Life, Giving the Parable of the Good Samaritan"
+    }
+   ]
+  },
+  {
+   "day": 76,
+   "title": "John 10:1-21",
+   "note": "§101–103: In the Parable (allegory) of the Good Shepherd Jesus Draws the Picture of the Hostile Pharisees and Intimates that He Is Going to Die for his Flock and Come to Life Again ... Jesus Answers a Lawyer's Question as to Eternal Life, Giving the Parable of the Good Samaritan",
+   "readings": [
+    {
+     "ref": "John 10:1-21",
+     "role": "John's account",
+     "why": "In the Parable (allegory) of the Good Shepherd Jesus Draws the Picture of the Hostile Pharisees and Intimates that He Is Going to Die for his Flock and Come to Life Again ... Jesus Answers a Lawyer's Question as to Eternal Life, Giving the Parable of the Good Samaritan"
+    }
+   ]
+  },
+  {
+   "day": 77,
+   "title": "Luke 10:38-11:36",
+   "note": "§104–106: Jesus the Guest of Martha and Mary ... Blasphemous Accusation of League with Beelzebub",
+   "readings": [
+    {
+     "ref": "Luke 10:38-11:36",
+     "role": "Luke's account",
+     "why": "Jesus the Guest of Martha and Mary ... Blasphemous Accusation of League with Beelzebub"
+    }
+   ]
+  },
+  {
+   "day": 78,
+   "title": "Luke 11:37-12:59",
+   "note": "§107–108: While Breakfasting with a Pharisee, Jesus Severely Denounces the Pharisees and Lawyers and Excites Their Enmity ... He Speaks to his Disciples and a Vast Throng About Hypocrisy, Covetousness (parable of the Rich Fool), Worldly Anxieties, Watchfulness (parable of the Waiting Servants and of the Wise Steward), and his Own Approaching Passion",
+   "readings": [
+    {
+     "ref": "Luke 11:37-12:59",
+     "role": "Luke's account",
+     "why": "While Breakfasting with a Pharisee, Jesus Severely Denounces the Pharisees and Lawyers and Excites Their Enmity ... He Speaks to his Disciples and a Vast Throng About Hypocrisy, Covetousness (parable of the Rich Fool), Worldly Anxieties, Watchfulness (parable of the Waiting Servants and of the Wise Steward), and his Own Approaching Passion"
+    }
+   ]
+  },
+  {
+   "day": 79,
+   "title": "Luke 13:1-21",
+   "note": "§109–111: All Must Repent or Perish. (two Current Tragedies); Parable of the Barren Fig Tree ... At the Feast of Dedication Jesus Will Not Yet Openly Say that He Is the Messiah. The Jews Try to Stone him",
+   "readings": [
+    {
+     "ref": "Luke 13:1-21",
+     "role": "Luke's account",
+     "why": "All Must Repent or Perish. (two Current Tragedies); Parable of the Barren Fig Tree ... At the Feast of Dedication Jesus Will Not Yet Openly Say that He Is the Messiah. The Jews Try to Stone him"
+    }
+   ]
+  },
+  {
+   "day": 80,
+   "title": "John 10:22-39",
+   "note": "§109–111: All Must Repent or Perish. (two Current Tragedies); Parable of the Barren Fig Tree ... At the Feast of Dedication Jesus Will Not Yet Openly Say that He Is the Messiah. The Jews Try to Stone him",
+   "readings": [
+    {
+     "ref": "John 10:22-39",
+     "role": "John's account",
+     "why": "All Must Repent or Perish. (two Current Tragedies); Parable of the Barren Fig Tree ... At the Feast of Dedication Jesus Will Not Yet Openly Say that He Is the Messiah. The Jews Try to Stone him"
+    }
+   ]
+  },
+  {
+   "day": 81,
+   "title": "Luke 13:22-14:24",
+   "note": "§112–114: The Withdrawal from Jerusalem to Bethany Beyond Jordan ... While Dining (breakfasting) with a Chief Pharisee, He Again Heals on the Sabbath and Defends Himself (comp. Sects. 49 to 51 and 110) Three Parables Suggested by the Occasion",
+   "readings": [
+    {
+     "ref": "Luke 13:22-14:24",
+     "role": "Luke's account",
+     "why": "The Withdrawal from Jerusalem to Bethany Beyond Jordan ... While Dining (breakfasting) with a Chief Pharisee, He Again Heals on the Sabbath and Defends Himself (comp. Sects. 49 to 51 and 110) Three Parables Suggested by the Occasion"
+    }
+   ]
+  },
+  {
+   "day": 82,
+   "title": "John 10:40-42",
+   "note": "§112–114: The Withdrawal from Jerusalem to Bethany Beyond Jordan ... While Dining (breakfasting) with a Chief Pharisee, He Again Heals on the Sabbath and Defends Himself (comp. Sects. 49 to 51 and 110) Three Parables Suggested by the Occasion",
+   "readings": [
+    {
+     "ref": "John 10:40-42",
+     "role": "John's account",
+     "why": "The Withdrawal from Jerusalem to Bethany Beyond Jordan ... While Dining (breakfasting) with a Chief Pharisee, He Again Heals on the Sabbath and Defends Himself (comp. Sects. 49 to 51 and 110) Three Parables Suggested by the Occasion"
+    }
+   ]
+  },
+  {
+   "day": 83,
+   "title": "Luke 14:25-15:32",
+   "note": "§115–116: Great Crowds Follow Him, and He Warns Them to Count the Cost of Discipleship to him (comp. Sects. 70 and 83) ... The Pharisees and the Scribes Murmur Against Jesus for Receiving Sinners. He Defends Himself by Three Great Parables (the Lost Sheep, the Lost Coin, the Lost Son)",
+   "readings": [
+    {
+     "ref": "Luke 14:25-15:32",
+     "role": "Luke's account",
+     "why": "Great Crowds Follow Him, and He Warns Them to Count the Cost of Discipleship to him (comp. Sects. 70 and 83) ... The Pharisees and the Scribes Murmur Against Jesus for Receiving Sinners. He Defends Himself by Three Great Parables (the Lost Sheep, the Lost Coin, the Lost Son)"
+    }
+   ]
+  },
+  {
+   "day": 84,
+   "title": "Luke 16:1-17:10",
+   "note": "§117: Three Parables on Stewardship (to the Disciples, the Parable of the Unjust Steward; to the Pharisees, the Parable of the Rich Man and Lazarus; to the Disciples, the Parable of the Unprofitable Servants)",
+   "readings": [
+    {
+     "ref": "Luke 16:1-17:10",
+     "role": "Luke's account",
+     "why": "Three Parables on Stewardship (to the Disciples, the Parable of the Unjust Steward; to the Pharisees, the Parable of the Rich Man and Lazarus; to the Disciples, the Parable of the Unprofitable Servants)"
+    }
+   ]
+  },
+  {
+   "day": 85,
+   "title": "John 11:1-44",
+   "note": "§118: Jesus Raises Lazarus from the Dead",
+   "readings": [
+    {
+     "ref": "John 11:1-44",
+     "role": "John's account",
+     "why": "Jesus Raises Lazarus from the Dead"
+    }
+   ]
+  },
+  {
+   "day": 86,
+   "title": "Luke 17:11-18:14",
+   "note": "§119–121: The Effect of the Raising of Lazarus (on the People, on the Sanhedrin, on the Movements of Jesus) ... Two Parables on Prayer (the Importunate Widow, the Pharisee and the Publican)",
+   "readings": [
+    {
+     "ref": "Luke 17:11-18:14",
+     "role": "Luke's account",
+     "why": "The Effect of the Raising of Lazarus (on the People, on the Sanhedrin, on the Movements of Jesus) ... Two Parables on Prayer (the Importunate Widow, the Pharisee and the Publican)"
+    }
+   ]
+  },
+  {
+   "day": 87,
+   "title": "John 11:45-54",
+   "note": "§119–121: The Effect of the Raising of Lazarus (on the People, on the Sanhedrin, on the Movements of Jesus) ... Two Parables on Prayer (the Importunate Widow, the Pharisee and the Publican)",
+   "readings": [
+    {
+     "ref": "John 11:45-54",
+     "role": "John's account",
+     "why": "The Effect of the Raising of Lazarus (on the People, on the Sanhedrin, on the Movements of Jesus) ... Two Parables on Prayer (the Importunate Widow, the Pharisee and the Publican)"
+    }
+   ]
+  },
+  {
+   "day": 88,
+   "title": "Matthew 19:1-20:16",
+   "note": "§122–124: Going from Galilee Through Perea, He Teaches Concerning Divorce ... The Rich Young Ruler, the Perils of Riches, and Amazement of the Disciples. The Rewards of Forsaking All to Follow the Messiah Will Be Great, But Will Be Sovereign (parable of the Laborers in the Vineyard)",
+   "readings": [
+    {
+     "ref": "Matthew 19:1-20:16",
+     "role": "Matthew's account",
+     "why": "Going from Galilee Through Perea, He Teaches Concerning Divorce ... The Rich Young Ruler, the Perils of Riches, and Amazement of the Disciples. The Rewards of Forsaking All to Follow the Messiah Will Be Great, But Will Be Sovereign (parable of the Laborers in the Vineyard)"
+    }
+   ]
+  },
+  {
+   "day": 89,
+   "title": "Mark 10:1-31",
+   "note": "§122–124: Going from Galilee Through Perea, He Teaches Concerning Divorce ... The Rich Young Ruler, the Perils of Riches, and Amazement of the Disciples. The Rewards of Forsaking All to Follow the Messiah Will Be Great, But Will Be Sovereign (parable of the Laborers in the Vineyard)",
+   "readings": [
+    {
+     "ref": "Mark 10:1-31",
+     "role": "Mark's account",
+     "why": "Going from Galilee Through Perea, He Teaches Concerning Divorce ... The Rich Young Ruler, the Perils of Riches, and Amazement of the Disciples. The Rewards of Forsaking All to Follow the Messiah Will Be Great, But Will Be Sovereign (parable of the Laborers in the Vineyard)"
+    }
+   ]
+  },
+  {
+   "day": 90,
+   "title": "Luke 18:15-30",
+   "note": "§122–124: Going from Galilee Through Perea, He Teaches Concerning Divorce ... The Rich Young Ruler, the Perils of Riches, and Amazement of the Disciples. The Rewards of Forsaking All to Follow the Messiah Will Be Great, But Will Be Sovereign (parable of the Laborers in the Vineyard)",
+   "readings": [
+    {
+     "ref": "Luke 18:15-30",
+     "role": "Luke's account",
+     "why": "Going from Galilee Through Perea, He Teaches Concerning Divorce ... The Rich Young Ruler, the Perils of Riches, and Amazement of the Disciples. The Rewards of Forsaking All to Follow the Messiah Will Be Great, But Will Be Sovereign (parable of the Laborers in the Vineyard)"
+    }
+   ]
+  },
+  {
+   "day": 91,
+   "title": "Matthew 20:17-34",
+   "note": "§125–127: Jesus Again Foretells to the Disciples his Death and Resurrection (comp. Sects. 83, 85, 86, 88), and Rebukes the Selfish Ambition of James and John ... Jesus Visits Zacchaeus, and Speaks the Parable of the Pounds, and Sets Out for Jerusalem",
+   "readings": [
+    {
+     "ref": "Matthew 20:17-34",
+     "role": "Matthew's account",
+     "why": "Jesus Again Foretells to the Disciples his Death and Resurrection (comp. Sects. 83, 85, 86, 88), and Rebukes the Selfish Ambition of James and John ... Jesus Visits Zacchaeus, and Speaks the Parable of the Pounds, and Sets Out for Jerusalem"
+    }
+   ]
+  },
+  {
+   "day": 92,
+   "title": "Mark 10:32-52",
+   "note": "§125–127: Jesus Again Foretells to the Disciples his Death and Resurrection (comp. Sects. 83, 85, 86, 88), and Rebukes the Selfish Ambition of James and John ... Jesus Visits Zacchaeus, and Speaks the Parable of the Pounds, and Sets Out for Jerusalem",
+   "readings": [
+    {
+     "ref": "Mark 10:32-52",
+     "role": "Mark's account",
+     "why": "Jesus Again Foretells to the Disciples his Death and Resurrection (comp. Sects. 83, 85, 86, 88), and Rebukes the Selfish Ambition of James and John ... Jesus Visits Zacchaeus, and Speaks the Parable of the Pounds, and Sets Out for Jerusalem"
+    }
+   ]
+  },
+  {
+   "day": 93,
+   "title": "Luke 18:31-19:28",
+   "note": "§125–127: Jesus Again Foretells to the Disciples his Death and Resurrection (comp. Sects. 83, 85, 86, 88), and Rebukes the Selfish Ambition of James and John ... Jesus Visits Zacchaeus, and Speaks the Parable of the Pounds, and Sets Out for Jerusalem",
+   "readings": [
+    {
+     "ref": "Luke 18:31-19:28",
+     "role": "Luke's account",
+     "why": "Jesus Again Foretells to the Disciples his Death and Resurrection (comp. Sects. 83, 85, 86, 88), and Rebukes the Selfish Ambition of James and John ... Jesus Visits Zacchaeus, and Speaks the Parable of the Pounds, and Sets Out for Jerusalem"
+    }
+   ]
+  },
+  {
+   "day": 94,
+   "title": "Matthew 21:1-11; Matthew 21:14-19; Matthew 21:12-13",
+   "note": "§128a–130: Jesus Arrives at Bethany Near Jerusalem ... The Desire of Some Greeks to See Jesus Puzzles the Disciples and Leads Jesus in Agitation of Soul to Interpret Life and Death as Sacrifice and to Show How by Being \"lifted Up\" He Will Draw All Men to him",
+   "readings": [
+    {
+     "ref": "Matthew 21:1-11",
+     "role": "Matthew's account",
+     "why": "Jesus Arrives at Bethany Near Jerusalem ... The Desire of Some Greeks to See Jesus Puzzles the Disciples and Leads Jesus in Agitation of Soul to Interpret Life and Death as Sacrifice and to Show How by Being \"lifted Up\" He Will Draw All Men to him"
+    },
+    {
+     "ref": "Matthew 21:14-19",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 21:12-13",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 95,
+   "title": "Mark 11:1-18",
+   "note": "§128a–130: Jesus Arrives at Bethany Near Jerusalem ... The Desire of Some Greeks to See Jesus Puzzles the Disciples and Leads Jesus in Agitation of Soul to Interpret Life and Death as Sacrifice and to Show How by Being \"lifted Up\" He Will Draw All Men to him",
+   "readings": [
+    {
+     "ref": "Mark 11:1-18",
+     "role": "Mark's account",
+     "why": "Jesus Arrives at Bethany Near Jerusalem ... The Desire of Some Greeks to See Jesus Puzzles the Disciples and Leads Jesus in Agitation of Soul to Interpret Life and Death as Sacrifice and to Show How by Being \"lifted Up\" He Will Draw All Men to him"
+    }
+   ]
+  },
+  {
+   "day": 96,
+   "title": "Luke 19:29-48",
+   "note": "§128a–130: Jesus Arrives at Bethany Near Jerusalem ... The Desire of Some Greeks to See Jesus Puzzles the Disciples and Leads Jesus in Agitation of Soul to Interpret Life and Death as Sacrifice and to Show How by Being \"lifted Up\" He Will Draw All Men to him",
+   "readings": [
+    {
+     "ref": "Luke 19:29-48",
+     "role": "Luke's account",
+     "why": "Jesus Arrives at Bethany Near Jerusalem ... The Desire of Some Greeks to See Jesus Puzzles the Disciples and Leads Jesus in Agitation of Soul to Interpret Life and Death as Sacrifice and to Show How by Being \"lifted Up\" He Will Draw All Men to him"
+    }
+   ]
+  },
+  {
+   "day": 97,
+   "title": "John 11:55-12:1; John 11:9-11; John 12:12-50",
+   "note": "§128a–130: Jesus Arrives at Bethany Near Jerusalem ... The Desire of Some Greeks to See Jesus Puzzles the Disciples and Leads Jesus in Agitation of Soul to Interpret Life and Death as Sacrifice and to Show How by Being \"lifted Up\" He Will Draw All Men to him",
+   "readings": [
+    {
+     "ref": "John 11:55-12:1",
+     "role": "John's account",
+     "why": "Jesus Arrives at Bethany Near Jerusalem ... The Desire of Some Greeks to See Jesus Puzzles the Disciples and Leads Jesus in Agitation of Soul to Interpret Life and Death as Sacrifice and to Show How by Being \"lifted Up\" He Will Draw All Men to him"
+    },
+    {
+     "ref": "John 11:9-11",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "John 12:12-50",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 98,
+   "title": "Matthew 21:19-22:14",
+   "note": "§131–132: The Barren Fig Tree Found to Have Withered ... The Rulers (sanhedrin) Formally Challenge the Authority of Jesus as an Accredited Teacher (rabbi)",
+   "readings": [
+    {
+     "ref": "Matthew 21:19-22:14",
+     "role": "Matthew's account",
+     "why": "The Barren Fig Tree Found to Have Withered ... The Rulers (sanhedrin) Formally Challenge the Authority of Jesus as an Accredited Teacher (rabbi)"
+    }
+   ]
+  },
+  {
+   "day": 99,
+   "title": "Mark 11:19-25; Mark 11:27-12:12",
+   "note": "§131–132: The Barren Fig Tree Found to Have Withered ... The Rulers (sanhedrin) Formally Challenge the Authority of Jesus as an Accredited Teacher (rabbi)",
+   "readings": [
+    {
+     "ref": "Mark 11:19-25",
+     "role": "Mark's account",
+     "why": "The Barren Fig Tree Found to Have Withered ... The Rulers (sanhedrin) Formally Challenge the Authority of Jesus as an Accredited Teacher (rabbi)"
+    },
+    {
+     "ref": "Mark 11:27-12:12",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 100,
+   "title": "Luke 21:37-38; Luke 20:1-19",
+   "note": "§131–132: The Barren Fig Tree Found to Have Withered ... The Rulers (sanhedrin) Formally Challenge the Authority of Jesus as an Accredited Teacher (rabbi)",
+   "readings": [
+    {
+     "ref": "Luke 21:37-38",
+     "role": "Luke's account",
+     "why": "The Barren Fig Tree Found to Have Withered ... The Rulers (sanhedrin) Formally Challenge the Authority of Jesus as an Accredited Teacher (rabbi)"
+    },
+    {
+     "ref": "Luke 20:1-19",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 101,
+   "title": "Matthew 22:15-46",
+   "note": "§133–136: The Pharisees and the Herodians Try to Ensnare Jesus About Paying Tribute to Caesar ... Jesus, to the Joy of the Multitude, Silences his Enemies by the Pertinent Question of the Messiah's Descent from David and Lordship Over David",
+   "readings": [
+    {
+     "ref": "Matthew 22:15-46",
+     "role": "Matthew's account",
+     "why": "The Pharisees and the Herodians Try to Ensnare Jesus About Paying Tribute to Caesar ... Jesus, to the Joy of the Multitude, Silences his Enemies by the Pertinent Question of the Messiah's Descent from David and Lordship Over David"
+    }
+   ]
+  },
+  {
+   "day": 102,
+   "title": "Mark 12:13-37",
+   "note": "§133–136: The Pharisees and the Herodians Try to Ensnare Jesus About Paying Tribute to Caesar ... Jesus, to the Joy of the Multitude, Silences his Enemies by the Pertinent Question of the Messiah's Descent from David and Lordship Over David",
+   "readings": [
+    {
+     "ref": "Mark 12:13-37",
+     "role": "Mark's account",
+     "why": "The Pharisees and the Herodians Try to Ensnare Jesus About Paying Tribute to Caesar ... Jesus, to the Joy of the Multitude, Silences his Enemies by the Pertinent Question of the Messiah's Descent from David and Lordship Over David"
+    }
+   ]
+  },
+  {
+   "day": 103,
+   "title": "Luke 20:20-44",
+   "note": "§133–136: The Pharisees and the Herodians Try to Ensnare Jesus About Paying Tribute to Caesar ... Jesus, to the Joy of the Multitude, Silences his Enemies by the Pertinent Question of the Messiah's Descent from David and Lordship Over David",
+   "readings": [
+    {
+     "ref": "Luke 20:20-44",
+     "role": "Luke's account",
+     "why": "The Pharisees and the Herodians Try to Ensnare Jesus About Paying Tribute to Caesar ... Jesus, to the Joy of the Multitude, Silences his Enemies by the Pertinent Question of the Messiah's Descent from David and Lordship Over David"
+    }
+   ]
+  },
+  {
+   "day": 104,
+   "title": "Matthew 23:1-39",
+   "note": "§137: In his Last Public Discourse, Jesus Solemnly Denounces the Scribes and Pharisees (comp. Sect. 107)",
+   "readings": [
+    {
+     "ref": "Matthew 23:1-39",
+     "role": "Matthew's account",
+     "why": "In his Last Public Discourse, Jesus Solemnly Denounces the Scribes and Pharisees (comp. Sect. 107)"
+    }
+   ]
+  },
+  {
+   "day": 105,
+   "title": "Mark 12:38-40",
+   "note": "§137: In his Last Public Discourse, Jesus Solemnly Denounces the Scribes and Pharisees (comp. Sect. 107)",
+   "readings": [
+    {
+     "ref": "Mark 12:38-40",
+     "role": "Mark's account",
+     "why": "In his Last Public Discourse, Jesus Solemnly Denounces the Scribes and Pharisees (comp. Sect. 107)"
+    }
+   ]
+  },
+  {
+   "day": 106,
+   "title": "Luke 20:45-47",
+   "note": "§137: In his Last Public Discourse, Jesus Solemnly Denounces the Scribes and Pharisees (comp. Sect. 107)",
+   "readings": [
+    {
+     "ref": "Luke 20:45-47",
+     "role": "Luke's account",
+     "why": "In his Last Public Discourse, Jesus Solemnly Denounces the Scribes and Pharisees (comp. Sect. 107)"
+    }
+   ]
+  },
+  {
+   "day": 107,
+   "title": "Mark 12:41-44",
+   "note": "§138: Jesus Closely Observes the Contributions in the Temple, and Commends the Poor Widow's Gift",
+   "readings": [
+    {
+     "ref": "Mark 12:41-44",
+     "role": "Mark's account",
+     "why": "Jesus Closely Observes the Contributions in the Temple, and Commends the Poor Widow's Gift"
+    }
+   ]
+  },
+  {
+   "day": 108,
+   "title": "Luke 21:1-4",
+   "note": "§138: Jesus Closely Observes the Contributions in the Temple, and Commends the Poor Widow's Gift",
+   "readings": [
+    {
+     "ref": "Luke 21:1-4",
+     "role": "Luke's account",
+     "why": "Jesus Closely Observes the Contributions in the Temple, and Commends the Poor Widow's Gift"
+    }
+   ]
+  },
+  {
+   "day": 109,
+   "title": "Matthew 24:1-51",
+   "note": "§139: Sitting on the Mount of Olives, Jesus Speaks to his Disciples About the Destruction of Jerusalem, and his Own Second Coming in Apocalyptic Language. The Great Eschatological Discourse",
+   "readings": [
+    {
+     "ref": "Matthew 24:1-51",
+     "role": "Matthew's account",
+     "why": "Sitting on the Mount of Olives, Jesus Speaks to his Disciples About the Destruction of Jerusalem, and his Own Second Coming in Apocalyptic Language. The Great Eschatological Discourse"
+    }
+   ]
+  },
+  {
+   "day": 110,
+   "title": "Mark 13:1-37",
+   "note": "§139: Sitting on the Mount of Olives, Jesus Speaks to his Disciples About the Destruction of Jerusalem, and his Own Second Coming in Apocalyptic Language. The Great Eschatological Discourse",
+   "readings": [
+    {
+     "ref": "Mark 13:1-37",
+     "role": "Mark's account",
+     "why": "Sitting on the Mount of Olives, Jesus Speaks to his Disciples About the Destruction of Jerusalem, and his Own Second Coming in Apocalyptic Language. The Great Eschatological Discourse"
+    }
+   ]
+  },
+  {
+   "day": 111,
+   "title": "Luke 21:5-36",
+   "note": "§139: Sitting on the Mount of Olives, Jesus Speaks to his Disciples About the Destruction of Jerusalem, and his Own Second Coming in Apocalyptic Language. The Great Eschatological Discourse",
+   "readings": [
+    {
+     "ref": "Luke 21:5-36",
+     "role": "Luke's account",
+     "why": "Sitting on the Mount of Olives, Jesus Speaks to his Disciples About the Destruction of Jerusalem, and his Own Second Coming in Apocalyptic Language. The Great Eschatological Discourse"
+    }
+   ]
+  },
+  {
+   "day": 112,
+   "title": "Matthew 26:1-25",
+   "note": "§140–146: Jesus Predicts his Crucifixion Two Days Hence (jewish Friday) ... At the Paschal Meal Jesus Points Out Judas as the Betrayer",
+   "readings": [
+    {
+     "ref": "Matthew 26:1-25",
+     "role": "Matthew's account",
+     "why": "Jesus Predicts his Crucifixion Two Days Hence (jewish Friday) ... At the Paschal Meal Jesus Points Out Judas as the Betrayer"
+    }
+   ]
+  },
+  {
+   "day": 113,
+   "title": "Mark 14:1-21",
+   "note": "§140–146: Jesus Predicts his Crucifixion Two Days Hence (jewish Friday) ... At the Paschal Meal Jesus Points Out Judas as the Betrayer",
+   "readings": [
+    {
+     "ref": "Mark 14:1-21",
+     "role": "Mark's account",
+     "why": "Jesus Predicts his Crucifixion Two Days Hence (jewish Friday) ... At the Paschal Meal Jesus Points Out Judas as the Betrayer"
+    }
+   ]
+  },
+  {
+   "day": 114,
+   "title": "Luke 22:1-16; Luke 22:24-30; Luke 22:21-23",
+   "note": "§140–146: Jesus Predicts his Crucifixion Two Days Hence (jewish Friday) ... At the Paschal Meal Jesus Points Out Judas as the Betrayer",
+   "readings": [
+    {
+     "ref": "Luke 22:1-16",
+     "role": "Luke's account",
+     "why": "Jesus Predicts his Crucifixion Two Days Hence (jewish Friday) ... At the Paschal Meal Jesus Points Out Judas as the Betrayer"
+    },
+    {
+     "ref": "Luke 22:24-30",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Luke 22:21-23",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 115,
+   "title": "John 12:2-8; John 13:1-30",
+   "note": "§140–146: Jesus Predicts his Crucifixion Two Days Hence (jewish Friday) ... At the Paschal Meal Jesus Points Out Judas as the Betrayer",
+   "readings": [
+    {
+     "ref": "John 12:2-8",
+     "role": "John's account",
+     "why": "Jesus Predicts his Crucifixion Two Days Hence (jewish Friday) ... At the Paschal Meal Jesus Points Out Judas as the Betrayer"
+    },
+    {
+     "ref": "John 13:1-30",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 116,
+   "title": "Matthew 26:31-35; Matthew 26:26-29",
+   "note": "§147–149: After the Departure of Judas Jesus Warns the Disciples (peter in Particular) Against Desertion, While All Protest Their Loyalty ... The Farewell Discourse to his Disciples in the Upper Room",
+   "readings": [
+    {
+     "ref": "Matthew 26:31-35",
+     "role": "Matthew's account",
+     "why": "After the Departure of Judas Jesus Warns the Disciples (peter in Particular) Against Desertion, While All Protest Their Loyalty ... The Farewell Discourse to his Disciples in the Upper Room"
+    },
+    {
+     "ref": "Matthew 26:26-29",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 117,
+   "title": "Mark 14:27-31; Mark 14:22-25",
+   "note": "§147–149: After the Departure of Judas Jesus Warns the Disciples (peter in Particular) Against Desertion, While All Protest Their Loyalty ... The Farewell Discourse to his Disciples in the Upper Room",
+   "readings": [
+    {
+     "ref": "Mark 14:27-31",
+     "role": "Mark's account",
+     "why": "After the Departure of Judas Jesus Warns the Disciples (peter in Particular) Against Desertion, While All Protest Their Loyalty ... The Farewell Discourse to his Disciples in the Upper Room"
+    },
+    {
+     "ref": "Mark 14:22-25",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 118,
+   "title": "Luke 22:31-38; Luke 22:17-20",
+   "note": "§147–149: After the Departure of Judas Jesus Warns the Disciples (peter in Particular) Against Desertion, While All Protest Their Loyalty ... The Farewell Discourse to his Disciples in the Upper Room",
+   "readings": [
+    {
+     "ref": "Luke 22:31-38",
+     "role": "Luke's account",
+     "why": "After the Departure of Judas Jesus Warns the Disciples (peter in Particular) Against Desertion, While All Protest Their Loyalty ... The Farewell Discourse to his Disciples in the Upper Room"
+    },
+    {
+     "ref": "Luke 22:17-20",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 119,
+   "title": "John 13:31-14:31",
+   "note": "§147–149: After the Departure of Judas Jesus Warns the Disciples (peter in Particular) Against Desertion, While All Protest Their Loyalty ... The Farewell Discourse to his Disciples in the Upper Room",
+   "readings": [
+    {
+     "ref": "John 13:31-14:31",
+     "role": "John's account",
+     "why": "After the Departure of Judas Jesus Warns the Disciples (peter in Particular) Against Desertion, While All Protest Their Loyalty ... The Farewell Discourse to his Disciples in the Upper Room"
+    }
+   ]
+  },
+  {
+   "day": 120,
+   "title": "John 15:1-27; John 17:1-26",
+   "note": "§150–151: The Discourse on the Way to Gethsemane ... Christ's Intercessory Prayer",
+   "readings": [
+    {
+     "ref": "John 15:1-27",
+     "role": "John's account",
+     "why": "The Discourse on the Way to Gethsemane ... Christ's Intercessory Prayer"
+    },
+    {
+     "ref": "John 17:1-26",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 121,
+   "title": "Matthew 26:30; Matthew 26:36-46",
+   "note": "§152: Going Forth to Gethsemane, Jesus Suffers Long in Agony",
+   "readings": [
+    {
+     "ref": "Matthew 26:30",
+     "role": "Matthew's account",
+     "why": "Going Forth to Gethsemane, Jesus Suffers Long in Agony"
+    },
+    {
+     "ref": "Matthew 26:36-46",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 122,
+   "title": "Mark 14:26; Mark 14:32-42",
+   "note": "§152: Going Forth to Gethsemane, Jesus Suffers Long in Agony",
+   "readings": [
+    {
+     "ref": "Mark 14:26",
+     "role": "Mark's account",
+     "why": "Going Forth to Gethsemane, Jesus Suffers Long in Agony"
+    },
+    {
+     "ref": "Mark 14:32-42",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 123,
+   "title": "Luke 22:39-46",
+   "note": "§152: Going Forth to Gethsemane, Jesus Suffers Long in Agony",
+   "readings": [
+    {
+     "ref": "Luke 22:39-46",
+     "role": "Luke's account",
+     "why": "Going Forth to Gethsemane, Jesus Suffers Long in Agony"
+    }
+   ]
+  },
+  {
+   "day": 124,
+   "title": "John 18:1",
+   "note": "§152: Going Forth to Gethsemane, Jesus Suffers Long in Agony",
+   "readings": [
+    {
+     "ref": "John 18:1",
+     "role": "John's account",
+     "why": "Going Forth to Gethsemane, Jesus Suffers Long in Agony"
+    }
+   ]
+  },
+  {
+   "day": 125,
+   "title": "Matthew 26:47-57; Matthew 26:59-68; Matthew 26:58; Matthew 26:69-75",
+   "note": "§153–156: Jesus Is Betrayed, Arrested, and Forsaken ... Peter Thrice Denies his Lord",
+   "readings": [
+    {
+     "ref": "Matthew 26:47-57",
+     "role": "Matthew's account",
+     "why": "Jesus Is Betrayed, Arrested, and Forsaken ... Peter Thrice Denies his Lord"
+    },
+    {
+     "ref": "Matthew 26:59-68",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 26:58",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 26:69-75",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 126,
+   "title": "Mark 14:43-53; Mark 14:55-65; Mark 14:54; Mark 14:66-72",
+   "note": "§153–156: Jesus Is Betrayed, Arrested, and Forsaken ... Peter Thrice Denies his Lord",
+   "readings": [
+    {
+     "ref": "Mark 14:43-53",
+     "role": "Mark's account",
+     "why": "Jesus Is Betrayed, Arrested, and Forsaken ... Peter Thrice Denies his Lord"
+    },
+    {
+     "ref": "Mark 14:55-65",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Mark 14:54",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Mark 14:66-72",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 127,
+   "title": "Luke 22:47-54; Luke 22:63-65; Luke 22:54-62",
+   "note": "§153–156: Jesus Is Betrayed, Arrested, and Forsaken ... Peter Thrice Denies his Lord",
+   "readings": [
+    {
+     "ref": "Luke 22:47-54",
+     "role": "Luke's account",
+     "why": "Jesus Is Betrayed, Arrested, and Forsaken ... Peter Thrice Denies his Lord"
+    },
+    {
+     "ref": "Luke 22:63-65",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Luke 22:54-62",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 128,
+   "title": "John 18:2-14; John 18:19-24; John 18:15-18; John 18:25-27",
+   "note": "§153–156: Jesus Is Betrayed, Arrested, and Forsaken ... Peter Thrice Denies his Lord",
+   "readings": [
+    {
+     "ref": "John 18:2-14",
+     "role": "John's account",
+     "why": "Jesus Is Betrayed, Arrested, and Forsaken ... Peter Thrice Denies his Lord"
+    },
+    {
+     "ref": "John 18:19-24",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "John 18:15-18",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "John 18:25-27",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 129,
+   "title": "Matthew 27:1; Matthew 27:3-10; Matthew 27:2; Matthew 27:11-26",
+   "note": "§157–161: After Dawn, Jesus Is Formally Condemned by the Sanhedrin ... Jesus the Second Time Before Pilate",
+   "readings": [
+    {
+     "ref": "Matthew 27:1",
+     "role": "Matthew's account",
+     "why": "After Dawn, Jesus Is Formally Condemned by the Sanhedrin ... Jesus the Second Time Before Pilate"
+    },
+    {
+     "ref": "Matthew 27:3-10",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 27:2",
+     "role": "And",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 27:11-26",
+     "role": "And",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 130,
+   "title": "Mark 15:1-15",
+   "note": "§157–161: After Dawn, Jesus Is Formally Condemned by the Sanhedrin ... Jesus the Second Time Before Pilate",
+   "readings": [
+    {
+     "ref": "Mark 15:1-15",
+     "role": "Mark's account",
+     "why": "After Dawn, Jesus Is Formally Condemned by the Sanhedrin ... Jesus the Second Time Before Pilate"
+    }
+   ]
+  },
+  {
+   "day": 131,
+   "title": "Luke 22:66-23:25",
+   "note": "§157–161: After Dawn, Jesus Is Formally Condemned by the Sanhedrin ... Jesus the Second Time Before Pilate",
+   "readings": [
+    {
+     "ref": "Luke 22:66-23:25",
+     "role": "Luke's account",
+     "why": "After Dawn, Jesus Is Formally Condemned by the Sanhedrin ... Jesus the Second Time Before Pilate"
+    }
+   ]
+  },
+  {
+   "day": 132,
+   "title": "John 18:28-19:16",
+   "note": "§157–161: After Dawn, Jesus Is Formally Condemned by the Sanhedrin ... Jesus the Second Time Before Pilate",
+   "readings": [
+    {
+     "ref": "John 18:28-19:16",
+     "role": "John's account",
+     "why": "After Dawn, Jesus Is Formally Condemned by the Sanhedrin ... Jesus the Second Time Before Pilate"
+    }
+   ]
+  },
+  {
+   "day": 133,
+   "title": "Matthew 27:27-56",
+   "note": "§162–166: The Roman Soldiers Mock Jesus ... The Phenomena Accompanying the Death of Christ",
+   "readings": [
+    {
+     "ref": "Matthew 27:27-56",
+     "role": "Matthew's account",
+     "why": "The Roman Soldiers Mock Jesus ... The Phenomena Accompanying the Death of Christ"
+    }
+   ]
+  },
+  {
+   "day": 134,
+   "title": "Mark 15:16-41",
+   "note": "§162–166: The Roman Soldiers Mock Jesus ... The Phenomena Accompanying the Death of Christ",
+   "readings": [
+    {
+     "ref": "Mark 15:16-41",
+     "role": "Mark's account",
+     "why": "The Roman Soldiers Mock Jesus ... The Phenomena Accompanying the Death of Christ"
+    }
+   ]
+  },
+  {
+   "day": 135,
+   "title": "Luke 23:26-49",
+   "note": "§162–166: The Roman Soldiers Mock Jesus ... The Phenomena Accompanying the Death of Christ",
+   "readings": [
+    {
+     "ref": "Luke 23:26-49",
+     "role": "Luke's account",
+     "why": "The Roman Soldiers Mock Jesus ... The Phenomena Accompanying the Death of Christ"
+    }
+   ]
+  },
+  {
+   "day": 136,
+   "title": "John 19:16-30",
+   "note": "§162–166: The Roman Soldiers Mock Jesus ... The Phenomena Accompanying the Death of Christ",
+   "readings": [
+    {
+     "ref": "John 19:16-30",
+     "role": "John's account",
+     "why": "The Roman Soldiers Mock Jesus ... The Phenomena Accompanying the Death of Christ"
+    }
+   ]
+  },
+  {
+   "day": 137,
+   "title": "Matthew 27:57-66",
+   "note": "§167–168: The Burial of the Body of Jesus in the Tomb of Joseph of Arimathea After Proof of his Death ... The Watch of the Women by the Tomb of Jesus",
+   "readings": [
+    {
+     "ref": "Matthew 27:57-66",
+     "role": "Matthew's account",
+     "why": "The Burial of the Body of Jesus in the Tomb of Joseph of Arimathea After Proof of his Death ... The Watch of the Women by the Tomb of Jesus"
+    }
+   ]
+  },
+  {
+   "day": 138,
+   "title": "Mark 15:42-47",
+   "note": "§167–168: The Burial of the Body of Jesus in the Tomb of Joseph of Arimathea After Proof of his Death ... The Watch of the Women by the Tomb of Jesus",
+   "readings": [
+    {
+     "ref": "Mark 15:42-47",
+     "role": "Mark's account",
+     "why": "The Burial of the Body of Jesus in the Tomb of Joseph of Arimathea After Proof of his Death ... The Watch of the Women by the Tomb of Jesus"
+    }
+   ]
+  },
+  {
+   "day": 139,
+   "title": "Luke 23:50-56",
+   "note": "§167–168: The Burial of the Body of Jesus in the Tomb of Joseph of Arimathea After Proof of his Death ... The Watch of the Women by the Tomb of Jesus",
+   "readings": [
+    {
+     "ref": "Luke 23:50-56",
+     "role": "Luke's account",
+     "why": "The Burial of the Body of Jesus in the Tomb of Joseph of Arimathea After Proof of his Death ... The Watch of the Women by the Tomb of Jesus"
+    }
+   ]
+  },
+  {
+   "day": 140,
+   "title": "John 19:31-42",
+   "note": "§167–168: The Burial of the Body of Jesus in the Tomb of Joseph of Arimathea After Proof of his Death ... The Watch of the Women by the Tomb of Jesus",
+   "readings": [
+    {
+     "ref": "John 19:31-42",
+     "role": "John's account",
+     "why": "The Burial of the Body of Jesus in the Tomb of Joseph of Arimathea After Proof of his Death ... The Watch of the Women by the Tomb of Jesus"
+    }
+   ]
+  },
+  {
+   "day": 141,
+   "title": "Matthew 28:1-15",
+   "note": "§169–176: The Visit of the Women to the Tomb of Jesus ... The Appearance to Two Disciples (cleopas and Another) on the Way to Emmaus",
+   "readings": [
+    {
+     "ref": "Matthew 28:1-15",
+     "role": "Matthew's account",
+     "why": "The Visit of the Women to the Tomb of Jesus ... The Appearance to Two Disciples (cleopas and Another) on the Way to Emmaus"
+    }
+   ]
+  },
+  {
+   "day": 142,
+   "title": "Mark 16:1-13",
+   "note": "§169–176: The Visit of the Women to the Tomb of Jesus ... The Appearance to Two Disciples (cleopas and Another) on the Way to Emmaus",
+   "readings": [
+    {
+     "ref": "Mark 16:1-13",
+     "role": "Mark's account",
+     "why": "The Visit of the Women to the Tomb of Jesus ... The Appearance to Two Disciples (cleopas and Another) on the Way to Emmaus"
+    }
+   ]
+  },
+  {
+   "day": 143,
+   "title": "Luke 24:1-32",
+   "note": "§169–176: The Visit of the Women to the Tomb of Jesus ... The Appearance to Two Disciples (cleopas and Another) on the Way to Emmaus",
+   "readings": [
+    {
+     "ref": "Luke 24:1-32",
+     "role": "Luke's account",
+     "why": "The Visit of the Women to the Tomb of Jesus ... The Appearance to Two Disciples (cleopas and Another) on the Way to Emmaus"
+    }
+   ]
+  },
+  {
+   "day": 144,
+   "title": "John 20:1-18",
+   "note": "§169–176: The Visit of the Women to the Tomb of Jesus ... The Appearance to Two Disciples (cleopas and Another) on the Way to Emmaus",
+   "readings": [
+    {
+     "ref": "John 20:1-18",
+     "role": "John's account",
+     "why": "The Visit of the Women to the Tomb of Jesus ... The Appearance to Two Disciples (cleopas and Another) on the Way to Emmaus"
+    }
+   ]
+  },
+  {
+   "day": 145,
+   "title": "Mark 16:14",
+   "note": "§177–180: The Report of the Two Disciples and the News of the Appearance to Simon Peter ... The Appearance to Seven Disciples Beside the Sea of Galilee. The Miraculous Draught of Fishes",
+   "readings": [
+    {
+     "ref": "Mark 16:14",
+     "role": "Mark's account",
+     "why": "The Report of the Two Disciples and the News of the Appearance to Simon Peter ... The Appearance to Seven Disciples Beside the Sea of Galilee. The Miraculous Draught of Fishes"
+    }
+   ]
+  },
+  {
+   "day": 146,
+   "title": "Luke 24:33-43",
+   "note": "§177–180: The Report of the Two Disciples and the News of the Appearance to Simon Peter ... The Appearance to Seven Disciples Beside the Sea of Galilee. The Miraculous Draught of Fishes",
+   "readings": [
+    {
+     "ref": "Luke 24:33-43",
+     "role": "Luke's account",
+     "why": "The Report of the Two Disciples and the News of the Appearance to Simon Peter ... The Appearance to Seven Disciples Beside the Sea of Galilee. The Miraculous Draught of Fishes"
+    }
+   ]
+  },
+  {
+   "day": 147,
+   "title": "John 20:19-21:25",
+   "note": "§177–180: The Report of the Two Disciples and the News of the Appearance to Simon Peter ... The Appearance to Seven Disciples Beside the Sea of Galilee. The Miraculous Draught of Fishes",
+   "readings": [
+    {
+     "ref": "John 20:19-21:25",
+     "role": "John's account",
+     "why": "The Report of the Two Disciples and the News of the Appearance to Simon Peter ... The Appearance to Seven Disciples Beside the Sea of Galilee. The Miraculous Draught of Fishes"
+    }
+   ]
+  },
+  {
+   "day": 148,
+   "title": "Matthew 28:16-20",
+   "note": "§181–184: The Appearance to About Five Hundred on an Appointed Mountain in Galilee, and a Commission Given ... The Last Appearance and the Ascension",
+   "readings": [
+    {
+     "ref": "Matthew 28:16-20",
+     "role": "Matthew's account",
+     "why": "The Appearance to About Five Hundred on an Appointed Mountain in Galilee, and a Commission Given ... The Last Appearance and the Ascension"
+    }
+   ]
+  },
+  {
+   "day": 149,
+   "title": "Mark 16:15-20",
+   "note": "§181–184: The Appearance to About Five Hundred on an Appointed Mountain in Galilee, and a Commission Given ... The Last Appearance and the Ascension",
+   "readings": [
+    {
+     "ref": "Mark 16:15-20",
+     "role": "Mark's account",
+     "why": "The Appearance to About Five Hundred on an Appointed Mountain in Galilee, and a Commission Given ... The Last Appearance and the Ascension"
+    }
+   ]
+  },
+  {
+   "day": 150,
+   "title": "Luke 24:44-53",
+   "note": "§181–184: The Appearance to About Five Hundred on an Appointed Mountain in Galilee, and a Commission Given ... The Last Appearance and the Ascension",
+   "readings": [
+    {
+     "ref": "Luke 24:44-53",
+     "role": "Luke's account",
+     "why": "The Appearance to About Five Hundred on an Appointed Mountain in Galilee, and a Commission Given ... The Last Appearance and the Ascension"
+    }
+   ]
+  }
+ ]
+}

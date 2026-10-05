@@ -1,0 +1,51 @@
+{
+ "_about": "Every reading plan the workstation offers. To add one, drop its file in plans/ and add a line here.",
+ "default": "divine-council-thread",
+ "plans": [
+  {
+   "id": "divine-council-thread",
+   "file": "plans/divine-council-thread.json",
+   "name": "The Divine Council Thread"
+  },
+  {
+   "id": "gospel-of-luke",
+   "file": "plans/gospel-of-luke.json",
+   "name": "The Gospel of Luke"
+  },
+  {
+   "id": "psalms-150",
+   "file": "plans/psalms-150.json",
+   "name": "A Psalm a Day"
+  },
+  {
+   "id": "f260",
+   "file": "plans/f260.json",
+   "name": "F260"
+  },
+  {
+   "id": "f260-nt",
+   "file": "plans/f260-nt.json",
+   "name": "F260 NT"
+  },
+  {
+   "id": "gospels-together",
+   "file": "plans/gospels-together.json",
+   "name": "The Gospels Together"
+  },
+  {
+   "id": "bp-minor-prophets",
+   "file": "plans/bp-minor-prophets.json",
+   "name": "BibleProject: Minor Prophets"
+  },
+  {
+   "id": "bp-major-prophets",
+   "file": "plans/bp-major-prophets.json",
+   "name": "BibleProject: Major Prophets"
+  },
+  {
+   "id": "bp-pauls-letters",
+   "file": "plans/bp-pauls-letters.json",
+   "name": "BibleProject: Paul's Letters"
+  }
+ ]
+}

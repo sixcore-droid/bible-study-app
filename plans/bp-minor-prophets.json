@@ -1,0 +1,308 @@
+{
+ "id": "bp-minor-prophets",
+ "name": "BibleProject: Minor Prophets",
+ "description": "BibleProject's Minor Prophets plan on the Bible App (25 days, bible.com/reading-plans/9084). BibleProject's videos for each book go well before its first day.",
+ "start": "2026-10-05",
+ "days": [
+  {
+   "day": 1,
+   "title": "Hosea 1-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hosea 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Hosea 4-6",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hosea 4-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "Hosea 7-9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hosea 7-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "Hosea 10-12",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hosea 10-12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Hosea 13-14",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Hosea 13-14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Joel 1-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Joel 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Amos 1-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Amos 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Amos 4-6",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Amos 4-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Amos 7-9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Amos 7-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Obadiah",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Obadiah",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "Jonah 1-4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Jonah 1-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Micah 1-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Micah 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Micah 4-5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Micah 4-5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Micah 6-7",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Micah 6-7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "Nahum 1-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Nahum 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "Habakkuk 1-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Habakkuk 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "Zephaniah 1-3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zephaniah 1-3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Haggai 1-2",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Haggai 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Zechariah 1-2",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 1-2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Zechariah 3-4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 3-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "Zechariah 5-6",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 5-6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "Zechariah 7-9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 7-9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Zechariah 10-12",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 10-12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Zechariah 13-14",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 13-14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "Malachi 1-4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Malachi 1-4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  }
+ ]
+}

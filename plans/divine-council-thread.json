@@ -1,0 +1,414 @@
+{
+ "id": "divine-council-thread",
+ "name": "The Divine Council Thread",
+ "description": "The Divine Council Index in its teaching order: one passage a day, with the texts that answer it.",
+ "start": "2026-10-01",
+ "days": [
+  {
+   "day": 1,
+   "title": "Genesis 1:26-27",
+   "note": "Council and assembly",
+   "readings": [
+    {
+     "ref": "Genesis 1:26-27",
+     "role": "Main reading",
+     "why": "Let us make man in our image, and then a singular verb does the making."
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Psalm 82",
+   "note": "Council and assembly",
+   "readings": [
+    {
+     "ref": "Psalm 82",
+     "role": "Main reading",
+     "why": "God stands in the divine assembly and passes sentence on the elohim He put in charge."
+    },
+    {
+     "ref": "Deuteronomy 32:7-9",
+     "role": "Read with",
+     "why": "The allotment that Psalm 82:8 asks God to take back. The two passages are one argument read from opposite ends."
+    },
+    {
+     "ref": "John 10:31-39",
+     "role": "Read with",
+     "why": "Jesus quotes Psalm 82:6 to answer a charge of blasphemy."
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "1 Kings 22:19-23",
+   "note": "Council and assembly",
+   "readings": [
+    {
+     "ref": "1 Kings 22:19-23",
+     "role": "Main reading",
+     "why": "Micaiah reports seeing Yahweh enthroned with the host standing to His right and left."
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "Job 1:6-12",
+   "note": "Council and assembly",
+   "readings": [
+    {
+     "ref": "Job 1:6-12",
+     "role": "Main reading",
+     "why": "The sons of God present themselves and the satan comes among them."
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Psalm 89:5-7",
+   "note": "Council and assembly",
+   "readings": [
+    {
+     "ref": "Psalm 89:5-7",
+     "role": "Main reading",
+     "why": "Yahweh is feared in the council of the holy ones, and nothing in the skies compares to Him."
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Isaiah 6:1-8",
+   "note": "Council and assembly",
+   "readings": [
+    {
+     "ref": "Isaiah 6:1-8",
+     "role": "Main reading",
+     "why": "The throne room, the seraphim, and the plural question, who will go for us."
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Daniel 7:9-14",
+   "note": "Council and assembly",
+   "readings": [
+    {
+     "ref": "Daniel 7:9-14",
+     "role": "Main reading",
+     "why": "Thrones are set in place, plural, the court sits, and one like a son of man comes on the clouds."
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Isaiah 24:21-23",
+   "note": "Council and assembly",
+   "readings": [
+    {
+     "ref": "Isaiah 24:21-23",
+     "role": "Main reading",
+     "why": "Yahweh punishes the host of heaven above and the kings of earth below, then reigns before His elders."
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Deuteronomy 32:8-9",
+   "note": "Cosmic geography",
+   "readings": [
+    {
+     "ref": "Deuteronomy 32:8-9",
+     "role": "Main reading",
+     "why": "The Most High divided the nations, and the number He divided them by is where the whole argument turns."
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Deuteronomy 32:43; Hebrews 1:6",
+   "note": "Cosmic geography",
+   "readings": [
+    {
+     "ref": "Deuteronomy 32:43; Hebrews 1:6",
+     "role": "Main reading",
+     "why": "The end of the Song of Moses, where the Masoretic text is one line and every other witness is longer."
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "Deuteronomy 4:19-20",
+   "note": "Cosmic geography",
+   "readings": [
+    {
+     "ref": "Deuteronomy 4:19-20",
+     "role": "Main reading",
+     "why": "Israel must not worship the host of heaven, which Yahweh allotted to all the other peoples."
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Genesis 11:1-9",
+   "note": "Cosmic geography",
+   "readings": [
+    {
+     "ref": "Genesis 11:1-9",
+     "role": "Main reading",
+     "why": "Babel, the scattering, and the moment the nations are set aside."
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Daniel 10:13, 20-21",
+   "note": "Cosmic geography",
+   "readings": [
+    {
+     "ref": "Daniel 10:13, 20-21",
+     "role": "Main reading",
+     "why": "A prince of Persia resists for twenty-one days, a prince of Greece is coming, and Michael fights for Israel."
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Acts 17:26-27",
+   "note": "Cosmic geography",
+   "readings": [
+    {
+     "ref": "Acts 17:26-27",
+     "role": "Main reading",
+     "why": "Paul tells the Areopagus that God fixed the times and the boundaries of the nations."
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "Genesis 3:1-15",
+   "note": "Rebellion 1 · Eden",
+   "readings": [
+    {
+     "ref": "Genesis 3:1-15",
+     "role": "Main reading",
+     "why": "The nachash in the garden, and the sentence passed on it."
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "Ezekiel 28:11-19",
+   "note": "Rebellion 1 · Eden",
+   "readings": [
+    {
+     "ref": "Ezekiel 28:11-19",
+     "role": "Main reading",
+     "why": "A guardian cherub in Eden, on the holy mountain, cast out for pride."
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "Isaiah 14:12-15",
+   "note": "Rebellion 1 · Eden",
+   "readings": [
+    {
+     "ref": "Isaiah 14:12-15",
+     "role": "Main reading",
+     "why": "Helel ben-shachar, shining one, son of the dawn, falls from heaven."
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Genesis 6:1-4",
+   "note": "Rebellion 2 · the Watchers",
+   "readings": [
+    {
+     "ref": "Genesis 6:1-4",
+     "role": "Main reading",
+     "why": "The sons of God take wives, and the Nephilim are in the earth."
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Jude 6; 2 Peter 2:4",
+   "note": "Rebellion 2 · the Watchers",
+   "readings": [
+    {
+     "ref": "Jude 6; 2 Peter 2:4",
+     "role": "Main reading",
+     "why": "Angels who abandoned their proper dwelling, held in chains until judgment."
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Jude 14-15",
+   "note": "Rebellion 2 · the Watchers",
+   "readings": [
+    {
+     "ref": "Jude 14-15",
+     "role": "Main reading",
+     "why": "Jude quotes Enoch, the seventh from Adam, by name."
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "Numbers 13:33",
+   "note": "Rebellion 2 · the Watchers",
+   "readings": [
+    {
+     "ref": "Numbers 13:33",
+     "role": "Main reading",
+     "why": "The spies report the Nephilim, the sons of Anak, and call themselves grasshoppers."
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "Joshua 11:21-22",
+   "note": "Rebellion 2 · the Watchers",
+   "readings": [
+    {
+     "ref": "Joshua 11:21-22",
+     "role": "Main reading",
+     "why": "Joshua cuts off the Anakim from the hill country, and none are left except in Gaza, Gath and Ashdod."
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Leviticus 16:8-10",
+   "note": "Rebellion 2 · the Watchers",
+   "readings": [
+    {
+     "ref": "Leviticus 16:8-10",
+     "role": "Main reading",
+     "why": "One goat for Yahweh, one goat for Azazel, sent into the wilderness."
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Mark 5:1-20",
+   "note": "Rebellion 2 · the Watchers",
+   "readings": [
+    {
+     "ref": "Mark 5:1-20",
+     "role": "Main reading",
+     "why": "Legion, in Gentile territory east of the lake, begging not to be sent to the abyss."
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "1 Samuel 28:13",
+   "note": "Two powers and elohim",
+   "readings": [
+    {
+     "ref": "1 Samuel 28:13",
+     "role": "Main reading",
+     "why": "The medium at Endor sees an elohim coming up out of the earth, and it is Samuel."
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "title": "John 10:31-36",
+   "note": "Two powers and elohim",
+   "readings": [
+    {
+     "ref": "John 10:31-36",
+     "role": "Main reading",
+     "why": "Jesus answers a charge of blasphemy by quoting Psalm 82."
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "title": "Matthew 1:1-6",
+   "note": "The reversal",
+   "readings": [
+    {
+     "ref": "Matthew 1:1-6",
+     "role": "Main reading",
+     "why": "Four women named in the genealogy of Jesus, each with an irregular story."
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "title": "Matthew 16:13-20",
+   "note": "The reversal",
+   "readings": [
+    {
+     "ref": "Matthew 16:13-20",
+     "role": "Main reading",
+     "why": "Caesarea Philippi, the gates of Hades, and the confession."
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "title": "Matthew 17:1-8",
+   "note": "The reversal",
+   "readings": [
+    {
+     "ref": "Matthew 17:1-8",
+     "role": "Main reading",
+     "why": "The transfiguration, six days later, on a high mountain."
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "title": "Luke 10:1-20",
+   "note": "The reversal",
+   "readings": [
+    {
+     "ref": "Luke 10:1-20",
+     "role": "Main reading",
+     "why": "Seventy sent out, and Satan falling like lightning when they return."
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "title": "Ephesians 6:10-12",
+   "note": "The reversal",
+   "readings": [
+    {
+     "ref": "Ephesians 6:10-12",
+     "role": "Main reading",
+     "why": "The struggle is not against flesh and blood but against rulers, authorities, and cosmic powers."
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "title": "1 Corinthians 11:10",
+   "note": "The reversal",
+   "readings": [
+    {
+     "ref": "1 Corinthians 11:10",
+     "role": "Main reading",
+     "why": "A woman ought to have authority on her head, because of the angels."
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "title": "1 Peter 3:18-22",
+   "note": "The reversal",
+   "readings": [
+    {
+     "ref": "1 Peter 3:18-22",
+     "role": "Main reading",
+     "why": "Christ proclaims to the spirits in prison, the ones disobedient in the days of Noah."
+    }
+   ]
+  }
+ ]
+}
