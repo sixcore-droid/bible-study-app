@@ -57,7 +57,9 @@
               /* the live tool data the jayms.com tools themselves read (the alpha tool runner's $base): edits there show up here with no rebuild */
               toolData: "https://raw.githubusercontent.com/sixcore-droid/jayms-tool-data/main/",
               /* jayms.com's own data (posts, glossary terms): same-origin once the workstation is on jayms.com */
-              siteData: "https://jayms.com/wp-json/wp/v2/" };
+              siteData: "https://jayms.com/wp-json/wp/v2/",
+              /* the public site's per-book files come in ten-chapter pieces (see bookFile) */
+              chunks: !!global.JAYMS_PUBLIC };
   function config(o) { Object.assign(CFG, o || {}); return CFG; }
   /* Every link goes to the exact page, never a guess. Each pattern was checked against jayms.com:
      an entry has its own page at <tool>/<id>/; the Interleaved Bible opens a passage with #read=Book|Ref. */
@@ -139,15 +141,44 @@
     if (!(path in cache)) cache[path] = fetch(CFG.base + path).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
     return cache[path];
   }
+  /* a book's text/, study/ or index/ data. The public site splits each book into ten-chapter pieces (<book>-<n>.json, made by
+     scripts/build-public.py) so a passage downloads only the pieces it touches; the pieces are merged back into the whole-book
+     shape, so every caller reads the same structure either way. James's copies keep one file per book (the Artifact file limit). */
+  function deepMerge(a, b) {
+    Object.keys(b).forEach(function (k) {
+      var x = a[k], y = b[k];
+      if (Array.isArray(y)) { var seen = {}, out = (Array.isArray(x) ? x : []).slice(); out.forEach(function (e) { seen[JSON.stringify(e)] = 1; });
+        y.forEach(function (e) { var j = JSON.stringify(e); if (!seen[j]) { seen[j] = 1; out.push(e); } }); a[k] = out; }
+      else if (y && typeof y === "object") a[k] = deepMerge(x && typeof x === "object" && !Array.isArray(x) ? x : {}, y);
+      else a[k] = y;
+    });
+    return a;
+  }
+  function bookFile(dir, book, segs) {
+    if (!CFG.chunks) return getJSON(dir + "/" + bookSlug(book) + ".json");
+    var ns = {};
+    (segs || []).forEach(function (s) { if (s.book !== book) return; for (var c = s.c1; c <= s.c2; c++) ns[Math.floor((c - 1) / 10)] = 1; });
+    var list = Object.keys(ns); if (!list.length) list = ["0"];
+    return Promise.all(list.map(function (n) { return getJSON(dir + "/" + bookSlug(book) + "-" + n + ".json"); })).then(function (parts) {
+      var ok = parts.filter(Boolean); return ok.length ? ok.reduce(function (m, p) { return deepMerge(m, p); }, {}) : null;
+    });
+  }
   var WORDS = {};                         // Strong's key -> entry, filled from each book's lexicon
+  /* a Hebrew word's name for readers: Strong's spells samekh "c" (cod, cabib, checed) and the divine name "Yehovah";
+     shown as sod, sabib, chesed and Yahweh (as the LSB has it). "ch" (chet) is left alone. The Word Study data isn't changed. */
+  function wordName(k, t) {
+    k = String(k || "").toLowerCase(); t = String(t || "");
+    if (k === "h3068" || k === "h3069") return "Yahweh";
+    return k.charAt(0) === "h" ? t.replace(/c(?!h)/g, "s").replace(/C(?!h)/g, "S") : t;
+  }
   var PEEK = {};                          // ref -> assembled passage data (sync access for badges)
   var SHARED = ["council", "gods", "posts", "vault", "chats", "library"];
   /* the public build (window.JAYMS_PUBLIC) has no vault or chats files: they are James's private notes */
   function shared() { var keys = SHARED.filter(function (k) { return !(global.JAYMS_PUBLIC && (k === "vault" || k === "chats")); });
     return Promise.all(keys.map(function (k) { return getJSON("index/_" + k + ".json"); })).then(function (a) { var o = {}; SHARED.forEach(function (k) { o[k] = {}; }); keys.forEach(function (k, i) { o[k] = a[i] || {}; }); return o; }); }
-  function bookIndex(b) {
-    return getJSON("index/" + bookSlug(b) + ".json").then(function (ix) {
-      if (ix && !ix.__words) { ix.__words = 1; Object.keys(ix.lex || {}).forEach(function (k) { if (!WORDS[k]) WORDS[k] = Object.assign({ k: k }, ix.lex[k]); }); }
+  function bookIndex(b, segs) {
+    return bookFile("index", b, segs).then(function (ix) {
+      if (ix && !ix.__words) { ix.__words = 1; Object.keys(ix.lex || {}).forEach(function (k) { if (!WORDS[k]) WORDS[k] = Object.assign({ k: k }, ix.lex[k], { t: wordName(k, ix.lex[k].t) }); }); }
       return ix;
     });
   }
@@ -276,7 +307,7 @@
       var by = {}; (D.entries || []).forEach(function (e) { by[String(e.strong).toUpperCase()] = e; });
       LV.ws = by;
       Object.keys(by).forEach(function (k) { var e = by[k];
-        WORDS[k.toLowerCase()] = Object.assign(WORDS[k.toLowerCase()] || {}, { k: k.toLowerCase(), t: e.title, s: e.strong, gloss: e.gloss || "", count: (e.count || 0).toLocaleString("en-US"), def: e.def || "", spread: e.spread || "" }); });
+        WORDS[k.toLowerCase()] = Object.assign(WORDS[k.toLowerCase()] || {}, { k: k.toLowerCase(), t: wordName(k, e.title), s: e.strong, gloss: e.gloss || "", count: (e.count || 0).toLocaleString("en-US"), def: e.def || "", spread: e.spread || "" }); });
     }); },
     diffs: function () { return getLive(CFG.toolData + "translation-differences-alpha.json").then(function (D) {
       var main = (D.card || {}).mainField || "summary";
@@ -390,7 +421,7 @@
       var books = []; segs.forEach(function (s) { if (books.indexOf(s.book) < 0) books.push(s.book); });
       /* wait for the live sources (or 8 seconds, then use the built copy for any still loading) */
       var live = Promise.race([liveAll(), new Promise(function (ok) { setTimeout(ok, 8000); })]);
-      return (cache["p:" + key] = Promise.all([shared()].concat(books.map(bookIndex), [live])).then(function (a) {
+      return (cache["p:" + key] = Promise.all([shared()].concat(books.map(function (b) { return bookIndex(b, segs); }), [live])).then(function (a) {
         var ixs = {}; books.forEach(function (b, i) { if (a[i + 1]) ixs[b] = a[i + 1]; });
         var d = segs.length ? assemble(ref, segs, ixs, a[0]) : { ref: ref, missing: true, segs: [], council: [], gods: [], facts: [], posts: [], vault: [], chats: [], library: [], words: [], verseNotes: {} };
         PEEK[ref] = d; return d;
@@ -401,7 +432,7 @@
     /* the passage's text in every version the data has: [{book, c, v, texts: {LSB: "...", NET: "..."}}] */
     text: function (ref) {
       var segs = R.parse(ref), books = []; segs.forEach(function (s) { if (books.indexOf(s.book) < 0) books.push(s.book); });
-      return Promise.all(books.map(function (b) { return getJSON("text/" + bookSlug(b) + ".json"); })).then(function (files) {
+      return Promise.all(books.map(function (b) { return bookFile("text", b, segs); })).then(function (files) {
         var tx = {}; books.forEach(function (b, i) { tx[b] = (files[i] && files[i].versions) || {}; });
         var rows = [];
         segs.forEach(function (s) {
@@ -430,7 +461,7 @@
     xref: function (ref) {
       var segs = data.segs(ref), books = [];
       segs.forEach(function (q) { if (books.indexOf(q.book) < 0) books.push(q.book); });
-      return Promise.all(books.map(function (b) { return getJSON("study/" + bookSlug(b) + ".json"); })).then(function (files) {
+      return Promise.all(books.map(function (b) { return bookFile("study", b, segs); })).then(function (files) {
         var by = {}, out = [];
         var add = function (tref, votes, src, lab) {
           var ts = R.parse(tref); if (!ts.length || ts.some(function (a) { return segs.some(function (b) { return R.overlap(a, b); }); })) return;
@@ -468,7 +499,7 @@
     notes: function (ref) {
       var segs = data.segs(ref), books = [];
       segs.forEach(function (q) { if (books.indexOf(q.book) < 0) books.push(q.book); });
-      return Promise.all(books.map(function (b) { return getJSON("study/" + bookSlug(b) + ".json"); })).then(function (files) {
+      return Promise.all(books.map(function (b) { return bookFile("study", b, segs); })).then(function (files) {
         var out = [];
         segs.forEach(function (q) {
           ((files[books.indexOf(q.book)] || {}).n || []).forEach(function (n) {
@@ -483,7 +514,7 @@
     fathers: function (ref) {
       var segs = data.segs(ref), books = [];
       segs.forEach(function (q) { if (books.indexOf(q.book) < 0) books.push(q.book); });
-      return Promise.all(books.map(function (b) { return getJSON("study/" + bookSlug(b) + ".json"); })).then(function (files) {
+      return Promise.all(books.map(function (b) { return bookFile("study", b, segs); })).then(function (files) {
         var out = [];
         segs.forEach(function (q) {
           ((files[books.indexOf(q.book)] || {}).f || []).forEach(function (f) {
@@ -497,7 +528,7 @@
     targum: function (ref) {
       var segs = data.segs(ref), books = [];
       segs.forEach(function (q) { if (books.indexOf(q.book) < 0) books.push(q.book); });
-      return Promise.all(books.map(function (b) { return getJSON("study/" + bookSlug(b) + ".json"); })).then(function (files) {
+      return Promise.all(books.map(function (b) { return bookFile("study", b, segs); })).then(function (files) {
         var rows = [], src = {};
         segs.forEach(function (q) {
           var F = files[books.indexOf(q.book)] || {}, T = F.t || {};

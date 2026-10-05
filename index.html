@@ -339,7 +339,7 @@ function renderReader(){
   const rows = r.rows;
   const multi = !!rows && new Set(rows.map(x=>x.book+" "+x.c)).size>1;
   const has = ver => !!rows && rows.some(x=>x.texts[ver]);
-  const textOf=(ver,row)=>{ const t=row.texts[ver]; if(!t) return '<span class="nov">—</span>'; return LINKED.includes(ver)?wordify(t):t.replace(/\[\/?w:?\w*\]/g,"") };
+  const textOf=(ver,row)=>{ const t=row.texts[ver]; if(!t) return '<span class="nov">not in this version</span>'; return LINKED.includes(ver)?wordify(t):t.replace(/\[\/?w:?\w*\]/g,"") };
   const splitSup=t=>{const m=t.match(/<span class='sup'>.*?<\/span>/); return m?[m[0],t.replace(m[0],"")]:["",t]};
   const vkey=x=>`${x.book}|${x.c}|${x.v}`, vlabel=x=>multi?`${x.c}:${x.v}`:`${x.v}`;
   const isSel=x=>S.tool==="verse"&&S.vsel&&S.vsel.book===x.book&&S.vsel.c===x.c&&S.vsel.v===x.v;
