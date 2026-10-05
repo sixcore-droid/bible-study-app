@@ -77,8 +77,9 @@
         <button class="sz" id="smaller" aria-label="Smaller text">A−</button>
         <button class="sz" id="larger" aria-label="Larger text">A+</button>
       </div>
-      <div class="vpick"><button class="sz" id="listen" title="Copy the passage as plain text with verse numbers in [brackets], ready to paste into Speechify">Copy for listening</button><span class="lbl" id="listenmsg" aria-live="polite"></span></div>
+      <div class="vpick" id="voicewrap" hidden><button class="sz" id="voicecfg" aria-expanded="false" title="Speechify voice and speed">Voice</button></div>
     </div>
+    <div id="spfhost" hidden></div>
     <article class="text" id="text"></article>
     <p class="jx-line" id="xline" hidden></p>
     <div class="after">
@@ -90,7 +91,7 @@
         <label class="lbl" for="note" id="notelbl">My notes</label>
         <label class="pubtog" for="notepub"><input type="checkbox" id="notepub"> Public</label>
       </div>
-      <textarea id="note" placeholder="What did you notice? Questions to chase down later?"></textarea>
+      <textarea id="note"></textarea>
       <div class="saverow"><button class="btn fill" id="notesave">Save note</button><span class="saved" id="saved"></span></div>
       <div class="saverow" id="obsrow" hidden><span class="saved" id="obspath"></span><a class="btn" id="obsopen" target="_blank" rel="noopener" href="#">Open in Obsidian</a><button class="btn" id="obscopy">Copy link</button><span class="saved" id="obsmsg"></span></div>
     </div>
@@ -364,6 +365,7 @@ function renderReader(){
   /* a version that isn't loaded for this passage shows the NET in its place, and says so */
   let eff = vers.map(v=>has(v)||!has("NET")?v:"NET"); if(eff.length===2&&eff[0]===eff[1]) eff=[eff[0]];
   const par = eff.length===2;
+  READ_VERS = eff;
   $("text").classList.toggle("par",par && !!rows && rows.length>0);
   /* no text to shape: the layout, column and version controls would change nothing, so they rest */
   const tb=document.querySelector(".tbar"); tb.classList.toggle("idle", !!rows && !rows.length);
@@ -373,10 +375,11 @@ function renderReader(){
   else $("text").innerHTML =
       (missing.length ? `<p class="empty nover">${missing.map(v=>VERNAMES[v]).join(" and ")} ${missing.length>1?"aren't":"isn't"} loaded for ${esc(r.ref)} yet, so ${missing.length>1?"they show":"it shows"} the NET.</p>` : "")
     + (par
-      ? `<div class="phdr"><span class="lbl">${eff[0]}</span><span class="lbl">${eff[1]}</span></div><div class="pgrid">`
+      ? `<div class="phdr">${eff.map((v,c)=>`<span class="lbl">${v}${readBtns(c)}</span>`).join("")}</div><div class="pgrid">`
         + blocks.map((b,n)=>b.label?`<div class="pcell seglbl lbl" style="grid-column:1 / -1;grid-row:${n+1};--o:${n*2}">${esc(b.label)}</div>`:"").join("")
         + eff.map((ver,col)=>blocks.map((b,n)=>b.label?"":`<div class="pcell" data-col="${col}" style="grid-column:${col+1};grid-row:${n+1};--o:${n*2+col}">${blockHTML(ver,b)}</div>`).join("")).join("") + `</div>`
-      : blocks.map(b=>b.label?`<div class="lbl seglbl">${esc(b.label)}</div>`:blockHTML(eff[0],b)).join(""))
+      : (SPF ? `<div class="phdr one"><span class="lbl">${eff[0]}${readBtns(0)}</span></div>` : "")
+        + `<div class="pone" data-col="0">` + blocks.map(b=>b.label?`<div class="lbl seglbl">${esc(b.label)}</div>`:blockHTML(eff[0],b)).join("") + `</div>`)
     + `<div class="ver">${[par?"":eff[0], linkNote].filter(Boolean).join(" · ")}</div>`;
   findApply(false);
   const th = thread(r.id);
@@ -706,14 +709,35 @@ async function commitNote(){ const rid=cur().id; if(!DIRTY[rid]) return; await s
 $("note").oninput=e=>{const rid=cur().id; NOTES[rid].text=e.target.value; markDirty()};
 $("notepub").onchange=e=>{const rid=cur().id; NOTES[rid].pub=e.target.checked; markDirty()};
 $("notesave").onclick=commitNote;
-/* the passage as plain text for Speechify: a heading line, then one paragraph per chapter with [1]-style verse numbers */
-$("listen").onclick=async()=>{
-  const r=cur(), ver=r.rows&&r.rows.some(x=>x.texts[S.ver])?S.ver:"NET", by={};
-  (r.rows||[]).forEach(x=>{ const g=`${x.book} ${x.c}`; (by[g]=by[g]||[]).push(`[${x.v}] `+String(x.texts[ver]||"").replace(/<[^>]+>/g," ").replace(/\[\/?w:?\w*\]/g,"").replace(/ {2,}/g," ").trim()) });
-  const groups=Object.keys(by), txt=`${r.ref}, ${VERNAMES[ver]}.\n\n`+groups.map(g=>(groups.length>1?g+".\n":"")+by[g].join(" ")).join("\n\n");
-  try{ await navigator.clipboard.writeText(txt); $("listenmsg").textContent=" Copied" }catch(e){ $("listenmsg").textContent=" Copy didn't work here" }
-  setTimeout(()=>$("listenmsg").textContent="",3000);
-};
+/* Speechify, on the desk only: the reader and key come from ~/jayms/speechify/web through serve.py (never in this repo or on the site).
+   Each version column gets Highlight (select that column's text) and Read (Speechify reads it); Voice opens the voice and speed bar. */
+let SPF = false, READ_VERS = [];
+function readBtns(c){ return SPF ? `<span class="rdbtns"><button class="sz" data-hl="${c}" title="Highlight this column">Highlight</button><button class="sz spf-btn" data-rd="${c}" title="Read this column aloud in Speechify"><span class="spf-ico">▶</span> <span class="spf-lab">Read</span></button></span>` : "" }
+function colText(c){
+  const r=cur(), ver=READ_VERS[c]||S.ver, by={};
+  (r.rows||[]).forEach(x=>{ const g=`${x.book} ${x.c}`; (by[g]=by[g]||[]).push(String(x.texts[ver]||"").replace(/<span class='sup'>.*?<\/span>/g," ").replace(/<[^>]+>/g," ").replace(/\[\/?w:?\w*\]/g,"").replace(/\s{2,}/g," ").trim()) });
+  const groups=Object.keys(by);
+  return `${r.ref}.\n\n`+groups.map(g=>(groups.length>1?g+".\n":"")+by[g].filter(Boolean).join(" ")).join("\n\n");
+}
+function highlightCol(c){
+  const t=$("text"), cells=[...t.querySelectorAll(`.pcell[data-col="${c}"], .pone[data-col="${c}"]`)];
+  if(!cells.length) return;
+  if(cells[0].classList.contains("pcell")) t.dataset.selcol=c;
+  const sel=getSelection(), rg=document.createRange(); rg.setStartBefore(cells[0]); rg.setEndAfter(cells[cells.length-1]);
+  sel.removeAllRanges(); sel.addRange(rg);
+}
+$("text").addEventListener("click",e=>{
+  const h=e.target.closest("[data-hl]"), rd=e.target.closest("[data-rd]");
+  if(h){ e.preventDefault(); highlightCol(+h.dataset.hl); }
+  if(rd && window.Speechify){ e.preventDefault(); const c=+rd.dataset.rd; rd.__spfBtn=rd;
+    Speechify.read(rd, { text: colText(c), highlight: ()=>highlightCol(c) }); }
+});
+$("voicecfg").onclick=()=>{ const h=$("spfhost"), open=h.hidden; h.hidden=!open; $("voicecfg").setAttribute("aria-expanded",String(open)); if(open && window.Speechify){ const b=Speechify.bar(h), l=b&&b.querySelector("#spf-load"); if(l&&!l.dataset.done){ l.dataset.done=1; l.click() } } };
+if(!PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname)){
+  const load=src=>new Promise((ok,no)=>{ const sc=document.createElement("script"); sc.src=src; sc.onload=ok; sc.onerror=no; document.head.appendChild(sc) });
+  load("/speechify/speechify-key.js").then(()=>{ Object.assign(window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}, { bar:false, selector:"[data-spf-none]" }); return load("/speechify/speechify-reader.js") })
+    .then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }).catch(()=>{});
+}
 $("obscopy").onclick=async()=>{ const u=obsURI(obsPath(cur().ref));
   try{ await navigator.clipboard.writeText(u); $("obsmsg").textContent="Link copied. Paste it into your browser's address bar." }catch(e){ $("obsmsg").textContent=u } };
 document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="s"&&document.activeElement===$("note")){ e.preventDefault(); commitNote() } });
