@@ -249,6 +249,8 @@ const S = {view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"co
            size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read")};
 /* public build: Read along only; no My desk switch, no prototype badge */
 if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
+/* a refresh brings back the panel that was open (null = none); a first visit keeps the default above */
+{ const t=store.get("tool","__unset"); if(t!=="__unset" && (t===null || TOOLS.some(x=>x.id===t && !(x.owner && S.view==="public")))) S.tool=t; }
 const $ = id=>document.getElementById(id);
 const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
@@ -402,6 +404,19 @@ function renderReader(){
   $("obsrow").hidden = !n.text.trim() || !n.savedAt || dirty;
   if(!$("obsrow").hidden){ const path = obsPath(r.ref); n.obsidian = path; $("obspath").textContent = "Obsidian: " + path; $("obsopen").href = obsNewURI(r, n); }
   document.documentElement.style.setProperty("--reader-size",S.size+"px");
+  /* after a refresh, return to where the page was scrolled, once this reading's text is on screen */
+  if(PENDING_SCROLL && r.rows){
+    if(PENDING_SCROLL.id===r.id){ const y=PENDING_SCROLL.y; PENDING_SCROLL=null;
+      /* opening a passage scrolls to the top straight after rendering, so set the position after that, and once more as late text settles */
+      [60,400].forEach(ms=>setTimeout(()=>{ if(!USER_MOVED && Math.abs(window.scrollY-y)>40) window.scrollTo(0,y) },ms)) }
+    else if(RESTORED) PENDING_SCROLL=null }   // once the last place is restored, a different reading (a new day) starts at the top
+}
+var PENDING_SCROLL = store.get("scroll", null);   // var: renderReader may run before this line does
+var USER_MOVED = false;   // once you scroll or type yourself, the restore never moves the page
+["wheel","touchstart","keydown","mousedown"].forEach(ev=>window.addEventListener(ev,()=>{ USER_MOVED=true },{once:true,passive:true}));
+{ let t=null; const save=()=>{ const r=cur(); if(r && !PENDING_SCROLL) store.set("scroll",{id:r.id, y:Math.round(window.scrollY)}) };
+  window.addEventListener("scroll",()=>{ clearTimeout(t); t=setTimeout(save,300) },{passive:true});
+  window.addEventListener("pagehide",save);   // a refresh right after scrolling still keeps the spot
 }
 
 /* ===== DOCK + PANEL ===== */
@@ -480,8 +495,9 @@ function openPassage(ref){
 function closeAdhoc(){ S.adhoc=null; S.vsel=null; rememberOpen(); renderReader(); renderPanel(); renderDock() }
 /* where you were, so a reload comes back to it (same day only) */
 function rememberOpen(){ store.set("open",{date:new Date().toDateString(), plan:S.plan, day:S.day, reading:S.reading, adhoc:S.adhoc?S.adhoc.ref:null}) }
+var RESTORED=false;   // set once restoreOpen has put back the last reading, so a saved scroll position isn't dropped too early
 function restoreOpen(){
-  const o=store.get("open",null); if(!o || o.date!==new Date().toDateString() || o.plan!==S.plan) return;
+  const o=store.get("open",null); RESTORED=true; if(!o || o.date!==new Date().toDateString() || o.plan!==S.plan) return;
   if(o.day!==S.day && PLANS[S.plan].days.some(d=>d.day===o.day)){ S.day=o.day; buildDay(); }
   if(o.reading<READINGS.length) S.reading=o.reading;
   if(o.adhoc) openPassage(o.adhoc);
@@ -523,6 +539,7 @@ function applyMeta(m){
 }
 let PH = null, PH_KEY = "";
 function renderPanel(){
+  store.set("tool", S.tool);   // remembered for a refresh
   const desk=$("desk");
   document.body.classList.toggle("panel-open",!!S.tool);
   if(!S.tool){ if(PH){PH.destroy(); PH=null; PH_KEY=""} desk.classList.add("no-panel"); document.body.classList.remove("panel-wide"); syncRailBtn(); return }
