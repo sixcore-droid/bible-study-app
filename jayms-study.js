@@ -214,7 +214,23 @@
      so the panels never know where their data came from. A source that can't be reached falls back to the copy the build made
      from that same source; only the Bible text, the interlinear, and James's own vault, chats and Logos shelf are local by design. */
   var LV = { ok: {}, ch: {}, shared: { council: {}, gods: {}, posts: {} }, facts: {}, ws: null, diffs: null };
-  function getLive(url) { return fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
+  /* live data (jayms.com REST, the tool-data repo) is kept in the browser's Cache Storage for LIVE_TTL, so a visit doesn't
+     re-download every post each time; an older copy is used if the network fails. No Cache Storage (some sandboxes): straight fetch. */
+  var LIVE_TTL = (global.JAYMS_PUBLIC ? 6 * 3600 : 300) * 1000, LIVE_CACHE = "jst-live-1";   // the site: 6 hours; James's desk: 5 minutes, so his edits show
+  function getLive(url) {
+    var net = function () { return fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }); };
+    var store = null;
+    try { if (global.caches && global.isSecureContext) store = global.caches.open(LIVE_CACHE); } catch (e) {}
+    if (!store) return net().then(JSON.parse);
+    return store.then(function (c) {
+      return c.match(url).then(function (hit) {
+        var age = hit ? Date.now() - Number(hit.headers.get("x-saved") || 0) : Infinity;
+        if (hit && age < LIVE_TTL) return hit.text();
+        return net().then(function (t) { c.put(url, new Response(t, { headers: { "x-saved": String(Date.now()) } })).catch(function () {}); return t; })
+          .catch(function (e) { if (hit) return hit.text(); throw e; });
+      });
+    }, function () { return net(); }).then(JSON.parse);
+  }
   /* jayms.com refuses quick back-to-back requests (429), so paged reads go one at a time, spaced, with a few retries */
   function wait(ms) { return new Promise(function (ok) { setTimeout(ok, ms); }); }
   function getPaged(base) {
@@ -1144,9 +1160,15 @@
     if (!m) return Promise.resolve("");
     if (MAPURL[m.id]) return Promise.resolve(MAPURL[m.id]);
     if (!m.b) return Promise.resolve((MAPURL[m.id] = m.img));
-    var b = BUNDLES[m.b] || (BUNDLES[m.b] = fetch(CFG.base + m.b).then(function (r) { if (!r.ok) throw new Error(r.status); return r.blob(); }));
-    return b.then(function (blob) { return (MAPURL[m.id] = URL.createObjectURL(blob.slice(m.o, m.o + m.n, "image/jpeg"))); })
-      .catch(function () { return (MAPURL[m.id] = m.img); });
+    var cut = function (blob) { return (MAPURL[m.id] = URL.createObjectURL(blob.slice(m.o, m.o + m.n, "image/jpeg"))); };
+    if (BUNDLES[m.b]) return BUNDLES[m.b].then(cut).catch(function () { return (MAPURL[m.id] = m.img); });
+    /* ask for this map's bytes only (about 170 KB, not the 12 MB bundle); a server that ignores Range sends the whole bundle,
+       which is then kept and sliced for every other map in it */
+    return fetch(CFG.base + m.b, { headers: { Range: "bytes=" + m.o + "-" + (m.o + m.n - 1) } }).then(function (r) {
+      if (r.status === 206) return r.blob().then(function (b) { return (MAPURL[m.id] = URL.createObjectURL(new Blob([b], { type: "image/jpeg" }))); });
+      if (!r.ok) throw new Error(r.status);
+      BUNDLES[m.b] = r.blob(); return BUNDLES[m.b].then(cut);
+    }).catch(function () { return (MAPURL[m.id] = m.img); });
   }
   /* full screen: fit to the screen, tap to see it at full size and scroll around, x or Esc to close */
   function mapViewer(m) {
@@ -1692,7 +1714,8 @@
       var one = list.length === 1;
       if (!BP_EMBED) return box("scripture", "", '<div class="item">' + (one ? "" : '<div class="lbl">Listen (LSB)</div>') + list.map(function (x) { return outlink("https://www.youtube.com/watch?v=" + x.id, one ? "Listen to " + esc(x.t) + " (LSB)" : esc(x.t)); }).join(" ") + "</div>");
       var btn = function (x, i) {
-        var rest = list.slice(i + 1).map(function (y) { return y.id; }), src = "https://www.youtube-nocookie.com/embed/" + x.id + "?autoplay=1&rel=0" + (rest.length ? "&playlist=" + rest.join(",") : "");
+        /* the playlist must start with the chapter tapped: given only the later ones, YouTube skips straight to them */
+        var rest = list.slice(i + 1).map(function (y) { return y.id; }), src = "https://www.youtube-nocookie.com/embed/" + x.id + "?autoplay=1&rel=0" + (rest.length ? "&playlist=" + [x.id].concat(rest).join(",") : "");
         return '<button class="' + (one ? "btn" : "chip") + '" data-jst-lsbplay data-src="' + esc(src) + '" data-url="https://www.youtube.com/watch?v=' + x.id + '">' + (one ? "Listen to " + esc(x.t) + " (LSB)" : esc(x.t)) + "</button>";
       };
       return box("scripture", "", '<div class="item" data-jst-lsb>' + (one ? "" : '<div class="lbl">Listen (LSB)</div><div class="chips">') + list.map(btn).join("") + (one ? "" : "</div>") + '<div data-jst-lsbslot></div></div>');

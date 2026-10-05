@@ -1,5 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Bible study app from jayms.com: reading plans, seven translations, Hebrew and Greek word by word, cross-references, study notes, Church Fathers, Targums, maps and BibleProject, all on the passage you are reading."><script>window.JAYMS_PUBLIC = true;</script></head><body><title>Study Workstation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="jayms-study.css">
@@ -9,7 +8,6 @@
 <header class="top">
   <button class="railbtn" id="railbtn" aria-controls="rail" aria-expanded="false">Plan</button>
   <div class="brand">Study Workstation<small>jayms.com</small></div>
-  <span class="flag">Prototype · Not live</span>
   <form class="goto" id="goform" role="search" autocomplete="off">
     <input id="goref" list="gobooks" placeholder="Go to a passage: Mark 13:14" aria-label="Go to a passage" spellcheck="false">
     <button type="submit">Go</button>
@@ -168,7 +166,7 @@ function toolCount(id){
 }
 /* the public build on jayms.com (scripts/build-public.py sets window.JAYMS_PUBLIC): readers only, so no Notes button */
 const PUBLIC = !!window.JAYMS_PUBLIC;
-const TOOLS = DOCK.filter(id=>!(PUBLIC && id==="notes")).map(id=>id==="|"?{sep:true}:toolMeta(id));
+const TOOLS = DOCK.filter(id=>!(PUBLIC && (id==="notes"||id==="x"))).map(id=>id==="|"?{sep:true}:toolMeta(id));
 
 /* ===== STATE ===== */
 /* Saved state moved to canonical reference keys in v024: the three hand ids become their references. */
@@ -257,7 +255,10 @@ const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;
 /* ===== PLAN RAIL ===== */
 const plan=()=>PLANS[S.plan];
 /* day N of a plan; a weekdays plan (F260) moves on Monday to Friday only, so a weekend stays on Friday's reading for catching up */
-function todayNum(p){const d0=new Date(p.start+"T00:00:00"), now=new Date(); now.setHours(0,0,0,0);
+/* when a plan starts: James's own start date on his desk; on the public site, the day the visitor first opened that plan (they begin at day 1) */
+function planStart(p){ if(!PUBLIC) return p.start; const k="start:"+p.id; let d=store.get(k,null);
+  if(!d){ const t=new Date(); d=`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`; store.set(k,d) } return d }
+function todayNum(p){const d0=new Date(planStart(p)+"T00:00:00"), now=new Date(); now.setHours(0,0,0,0);
   if(!p.weekdays) return Math.floor((now-d0)/864e5)+1;
   if(now<d0) return 0;
   let n=0; for(const d=new Date(d0); d<=now; d.setDate(d.getDate()+1)){ const w=d.getDay(); if(w&&w<6) n++ }
@@ -298,7 +299,7 @@ function renderPlan(){
     + (S.view!=="public" ? `<option value="__build">+ Build a plan\u2026</option>` : "");
   $("planname").textContent = p.name; $("plandesc").textContent = p.description||"";
   const t = todayNum(p), total=p.days.length, done=p.days.filter(dayDone).length;
-  $("progtxt").textContent = t<1 ? `Starts ${new Date(p.start+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long"})}` : t>total ? `Finished · ${total} days` : `Day ${t} of ${total}`;
+  $("progtxt").textContent = t<1 ? `Starts ${new Date(planStart(p)+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long"})}` : t>total ? `Finished · ${total} days` : `Day ${t} of ${total}`;
   $("progpct").textContent = Math.round(done/total*100)+"%";
   $("progbar").style.width = Math.max(2,done/total*100)+"%";
   $("days").innerHTML = p.days.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
@@ -389,11 +390,11 @@ function renderReader(){
   $("viewsw").hidden = !OWNER;
   $("banner").hidden = !pub;
   $("banner").innerHTML = PUBLIC   /* the public site has no saved notes to show (they live on James's own copy) */
-    ? `<b>Reading along with James.</b> Today's plan with the same Bible and tools he uses. Pick any version you like; it only changes your screen.`
+    ? `<b>Read at your own pace.</b> Pick a plan and start at day 1, with seven Bibles and the same study tools James uses. Pick any version you like; it only changes your screen.`
     : `<b>Reading along with James.</b> Today's plan, the same Bible and tools, and the notes he has made public. Pick any version you like; it only changes your screen.`;
   $("mynotes").hidden = pub;
   $("markdone").hidden = pub || !!S.adhoc;
-  $("pubnote").hidden = !pub;
+  $("pubnote").hidden = !pub || PUBLIC;   // the public site has no saved notes
   $("pubnote").innerHTML = pubText(r.id)
     ? `<div class="lbl">James's notes on ${esc(r.ref)}</div>`+box("explain","",`<p>${esc(pubText(r.id)).replace(/\n/g,"<br>")}</p>`)
     : `<div class="lbl">James's notes on ${esc(r.ref)}</div><p class="empty">No public notes on this reading yet.</p>`;
@@ -480,7 +481,7 @@ ST.c("ideas").on(()=>{ renderDock(); if(S.tool==="ideas" && PH) PH.refresh() });
 function openPassage(ref){
   const segs = JaymsRef.parse(ref);
   if(!segs.length) return `Couldn't read "${ref}" as a Bible reference.`;
-  for(const sg of segs){ const b=JaymsRef.book(sg.book); if(sg.c1<1 || sg.c2>b.chapters) return `${b.ib} has ${b.chapters} chapter${b.chapters>1?"s":""}.`; }
+  const bad = JaymsRef.check(segs); if(bad) return bad;   // chapter and verse must exist ("Revelation 22 has 21 verses.")
   const id = JaymsRef.key(segs), i = READINGS.findIndex(x=>x.id===id);
   S.vsel=null; S.word=null;
   if(i>=0){ S.adhoc=null; S.reading=i; }

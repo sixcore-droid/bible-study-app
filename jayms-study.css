@@ -424,4 +424,6 @@ body.rail-hidden .rail:not(.open){display:none}
 .u-faded{opacity:.5 !important}
 /* the public build on jayms.com (body.public-app): readers only */
 .public-app #viewsw,.public-app .flag{display:none}
+/* Help: owner-only entries hide on the site; reader versions show only there */
+.public-app .owner-only,body:not(.public-app) .public-only{display:none}
 .jst-player{width:100%;aspect-ratio:16/9;border:0;display:block;margin-top:8px}
