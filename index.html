@@ -78,6 +78,7 @@
         <button class="sz" id="larger" aria-label="Larger text">A+</button>
       </div>
       <div class="vpick" id="voicewrap" hidden><button class="sz" id="voicecfg" aria-expanded="false" title="Speechify voice and speed">Voice</button></div>
+      <div class="vpick chnav"><button class="sz" id="prevch" aria-label="Previous chapter">«</button><button class="sz" id="nextch" aria-label="Next chapter">»</button></div>
     </div>
     <div id="spfhost" hidden></div>
     <article class="text" id="text"></article>
@@ -387,6 +388,7 @@ function renderReader(){
         + `<div class="pone" data-col="0">` + blocks.map(b=>b.label?`<div class="lbl seglbl">${esc(b.label)}</div>`:blockHTML(eff[0],b)).join("") + `</div>`)
     + `<div class="ver">${[par?"":eff[0], linkNote].filter(Boolean).join(" · ")}</div>`;
   findApply(false);
+  syncChapterNav();
   const th = thread(r.id);
   $("xline").hidden = !th;
   if(th) $("xline").innerHTML = JaymsX.lineHTML(th,{owner:S.view!=="public",label:"this reading"});
@@ -764,6 +766,18 @@ $("ver2").onchange=e=>{ const was=S.ver2; S.ver2=e.target.value; if(S.ver2===S.v
 $("layoutbtn").onclick=()=>{S.layout=S.layout==="verse"?"read":"verse";store.set("layout",S.layout);renderReader()};
 $("parbtn").onclick=()=>{S.par=S.par?0:1;store.set("par",S.par);renderReader()};
 $("smaller").onclick=()=>{S.size=Math.max(16,S.size-1);store.set("size",S.size);renderReader()};
+/* « » the chapter before or after the one on screen (across books too); it opens like a passage from the Go box */
+function stepChapter(d){
+  const segs=JaymsRef.parse(cur().ref); if(!segs.length) return null;
+  const s=d<0?segs[0]:segs[segs.length-1], books=JaymsRef.books, b=JaymsRef.book(s.book);
+  let c=(d<0?s.c1:s.c2)+d, bk=b;
+  if(c<1){ bk=books[b.order-1]; if(!bk) return null; c=bk.chapters }
+  else if(c>b.chapters){ bk=books[b.order+1]; if(!bk) return null; c=1 }
+  return bk.chapters===1 ? bk.name : `${bk.name} ${c}`;
+}
+function syncChapterNav(){ [["prevch",-1],["nextch",1]].forEach(([id,d])=>{ const t=cur()&&stepChapter(d); $(id).disabled=!t; $(id).title=t?(d<0?"Previous chapter: ":"Next chapter: ")+t:"" }) }
+$("prevch").onclick=()=>{ const t=stepChapter(-1); if(t) openPassage(t) };
+$("nextch").onclick=()=>{ const t=stepChapter(1); if(t) openPassage(t) };
 $("larger").onclick=()=>{S.size=Math.min(26,S.size+1);store.set("size",S.size);renderReader()};
 function railShown(){ const r=$("rail"); return getComputedStyle(r).display!=="none" && (getComputedStyle(r).position!=="fixed" || r.classList.contains("open")) }
 function syncRailBtn(){ const on=railShown(); $("railbtn").classList.toggle("on",on); $("railbtn").setAttribute("aria-expanded",on) }

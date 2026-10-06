@@ -241,6 +241,8 @@ mark.hit.now{background:var(--gold);color:var(--paper-deep)}
 .text{max-width:68ch;background:var(--paper-deep);border:1px solid var(--line);border-left:3px solid var(--edge-text);border-radius:6px;padding:16px 22px}
 .text.par{max-width:none}
 .tbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tbar .chnav{margin-left:auto;gap:6px}
+.tbar .chnav .sz{min-width:40px;font-size:16px}
 .seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .seg button{padding:7px 13px;font-size:15px;border-right:1px solid var(--line)}
 .seg button:last-child{border-right:0}
