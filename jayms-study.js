@@ -836,6 +836,64 @@
     }
   }, { slug: "fact-book-alpha" }, function (d) { return d ? (d.facts || []).length : null; });
 
+  // ------------------------------------------------------------------ Maps
+  /* Every place named in the passage (STEPBible's positions) pinned on the Digital Atlas of the Roman Empire, an ancient-world base
+     map (ancient names, terrain, Roman roads; dh.gu.se, CC BY), then the Biblica Bible maps for the passage and for each place.
+     Leaflet draws the map; it loads from cdnjs the first time the panel opens. Where outside images are blocked (claude.ai) the
+     panel lists the places and maps without the drawn map. */
+  var LEAFLET = null;
+  function leaflet() {
+    if (LEAFLET) return LEAFLET;
+    LEAFLET = new Promise(function (ok, no) {
+      var css = document.createElement("link"); css.rel = "stylesheet"; css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"; document.head.appendChild(css);
+      var sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"; sc.onload = function () { ok(global.L); }; sc.onerror = no; document.head.appendChild(sc);
+    });
+    return LEAFLET;
+  }
+  define("Maps", { id: "maps", label: "Maps", name: "Maps of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>' }, {
+    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; })]).then(function (r) { self.nm = r[0]; self.mp = r[2] || {}; }); },
+    view: function () {
+      var self = this, places = namesIn(this.nm, this.o.ref).filter(function (p) { return p.t === "Place"; });
+      var pinned = places.filter(function (p) { return p.ll; });
+      var ms = mapsFor(this.o.ref), h = "";
+      if (pinned.length && CFG.onlineMaps) h += '<div class="jst-leaf" data-jst-leaf></div><p class="ctx u-fs13">Tap a pin for the place. Base map: <a href="https://dh.gu.se/dare/" target="_blank" rel="noopener">Digital Atlas of the Roman Empire</a> (CC BY); positions: STEPBible.</p>';
+      if (places.length) h += '<div class="lbl u-mt14">Places in ' + esc(this.o.ref) + " (" + places.length + ")</div>" + places.map(function (p) {
+        var on = (self.mp[p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
+        return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") +
+          (on.length ? '<div class="chips">' + on.map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>" : "") +
+          (p.ll && CFG.onlineMaps ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + "</div>"); }).join("");
+      else h += none("No place is named in " + esc(this.o.ref) + ".");
+      h += '<div class="lbl u-mt14">Bible maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>" + (ms.length ? box("witness", "", '<div class="item">' + ms.map(function (m) { return '<p class="u-m5"><button class="tt jst-xt" data-jst-pmap="' + esc(m.id) + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button></p>"; }).join("") + "</div>") : none("No Biblica map is tied to this passage."));
+      h += '<p class="ctx u-fs13">Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
+      return { kick: "Maps \u00B7 " + places.length + " places", title: "Where this happens", body: h };
+    },
+    after: function () {
+      var self = this, box_ = this.el.querySelector("[data-jst-leaf]");
+      if (!box_) return;
+      var pinned = namesIn(this.nm, this.o.ref).filter(function (p) { return p.t === "Place" && p.ll; });
+      leaflet().then(function (L) {
+        if (!self.alive || !box_.isConnected) return;
+        var map = L.map(box_, { scrollWheelZoom: false, attributionControl: false, maxZoom: 11 });
+        L.tileLayer("https://dh.gu.se/tiles/imperium/{z}/{x}/{y}.png", { maxZoom: 11 }).addTo(map);
+        self._pins = {};
+        var pts = pinned.map(function (p) {
+          var mk = L.circleMarker(p.ll, { radius: 7, color: "#5a3c10", weight: 2, fillColor: "#d4a85c", fillOpacity: .95 }).addTo(map)
+            .bindPopup("<b>" + esc(p.n) + "</b>" + (p.b ? "<br>" + esc(p.b) : ""));
+          self._pins[p.id] = mk; return p.ll; });
+        if (pts.length === 1) map.setView(pts[0], 8); else map.fitBounds(pts, { padding: [28, 28], maxZoom: 9 });
+        self._map = map;
+      }).catch(function () { box_.outerHTML = '<p class="ctx">The map didn\'t load here.</p>'; });
+    },
+    click: function (e) {
+      var m = e.target.closest("[data-jst-pmap]");
+      if (m) { e.stopPropagation(); mapViewer(MAPBY[m.getAttribute("data-jst-pmap")]); return; }
+      var f = e.target.closest("[data-jst-fly]");
+      if (f && this._map) { e.stopPropagation(); var mk = this._pins[f.getAttribute("data-jst-fly")]; if (mk) { this._map.setView(mk.getLatLng(), 9); mk.openPopup(); this.el.closest(".pbody, #pbody") && (this.el.parentNode.scrollTop = 0); } return; }
+      Panel.prototype.click.call(this, e);
+    },
+    destroy: function () { if (this._map) { try { this._map.remove(); } catch (e) {} this._map = null; } Panel.prototype.destroy.call(this); }
+  }, {}, function (d) { return null; });
+
   // ------------------------------------------------------------------ Posts
   define("Posts", { id: "posts", label: "Posts", name: "My posts on jayms.com", icon: ICON.posts }, {
     prepare: function () { var self = this; return Promise.all((this.o.alsoRefs || []).map(data.passage)).then(function (ds) { self.also = ds; }); },
