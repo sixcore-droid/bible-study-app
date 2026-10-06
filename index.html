@@ -324,6 +324,10 @@ function renderPlan(){
 let SKIP=null, PAIRS=null;
 fetch("plans/psalm-pairs.json").then(r=>r.ok?r.json():null).then(d=>{ PAIRS=d; if(S.addPsalm && PLANINDEX){ buildDay(); render() } }).catch(()=>{});
 fetch("plans/skip.json").then(r=>r.ok?r.json():null).then(d=>{ SKIP=d; if(S.skipLists && PLANINDEX){ buildDay(); render() } }).catch(()=>{});
+/* a plan file can say how far James has already read ("doneThrough": a day): those days are ticked once in each browser */
+function seedDone(p){ if(!p || !p.doneThrough) return; const k=`seeded:${p.id}:${p.doneThrough}`; if(store.get(k,false)) return;
+  p.days.filter(d=>d.day<=p.doneThrough).forEach(d=>d.readings.forEach(x=>{ const id=`${p.id}:${d.day}:${JaymsRef.key(x.ref)}`; if(!isDone(id)) ST.c("done").save(id,{done:true, at:Date.now()}) }));
+  store.set(k,true) }
 function choosePlan(id){
   S.plan=id; store.set("plan",id); const p=plan(); const t=todayNum(p);
   S.day=Math.min(Math.max(t,1),p.days.length); S.reading=0; buildDay();
@@ -811,7 +815,7 @@ showToday(); setInterval(showToday, 60000);
     const get=u=>fetch(u).then(x=>{if(!x.ok) throw new Error(u); return x.json()});
     PLANINDEX = await get("plans/index.json");
     const plans = await Promise.all(PLANINDEX.plans.map(x=>get(x.file)));
-    plans.forEach(p=>PLANS[p.id]=p); mergeMyPlans();
+    plans.forEach(p=>PLANS[p.id]=p); mergeMyPlans(); plans.forEach(seedDone);
     choosePlan(PLANS[S.plan] ? S.plan : PLANINDEX.default);
     restoreOpen();
     render();

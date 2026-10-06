@@ -2,7 +2,7 @@
  "id": "ot-reading-plan",
  "name": "My OT Reading Plan",
  "description": "The Old Testament a chapter a day in James's order (the prophets placed in the history, genealogies and lists left out), with a psalm and a Proverbs portion each day. From his OT Reading Plan note.",
- "start": "2026-05-29",
+ "start": "2026-05-11",
  "days": [
   {
    "day": 1,
@@ -11290,5 +11290,6 @@
     }
    ]
   }
- ]
+ ],
+ "doneThrough": 148
 }
