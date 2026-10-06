@@ -69,7 +69,6 @@
               /* the art relay: the Art Institute's image server turns browsers away, so the site's snippet 254 or the local server fetches the picture */
               artAPI: global.JAYMS_PUBLIC ? location.origin + "/wp-json/jayms-bsa/v1/art"
                         : /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.origin + "/api/art" : null };
-  function artImg(id, w) { return CFG.artAPI ? CFG.artAPI + "?id=" + encodeURIComponent(id) + "&w=" + (w || 400) : "https://www.artic.edu/iiif/2/" + id + "/full/" + (w || 400) + ",/0/default.jpg"; }
   function config(o) { Object.assign(CFG, o || {}); return CFG; }
   /* Every link goes to the exact page, never a guess. Each pattern was checked against jayms.com:
      an entry has its own page at <tool>/<id>/; the Interleaved Bible opens a passage with #read=Book|Ref. */
@@ -961,6 +960,7 @@
       h += '<p class="ctx u-fs13">Which scrolls hold which verses: ETCBC/Martin Abegg (CC BY-NC 4.0). Photographs: <a href="https://www.deadseascrolls.org.il/" target="_blank" rel="noopener">Leon Levy Dead Sea Scrolls Digital Library</a>, Israel Antiquities Authority. Tap one for full screen.</p>';
       return { kick: "Dead Sea Scrolls \u00B7 " + list.length + " manuscript" + (list.length > 1 ? "s" : ""), title: "Scrolls of " + this.o.ref, body: h };
     },
+    after: function () { dropBroken(this.el); },
     click: function (e) {
       var im = e.target.closest("[data-jst-scroll]");
       if (im) { e.stopPropagation(); mapViewer({ id: "dss-" + im.getAttribute("data-jst-scroll"), t: im.getAttribute("data-t"), img: im.getAttribute("data-jst-scroll") + "=s2000" }); return; }
@@ -969,86 +969,52 @@
   }, {}, function (d) { return null; });
 
   // ------------------------------------------------------------------ Art
-  /* Public-domain art of the passage from the Art Institute of Chicago's open collection (api.artic.edu, no key, CC0 data).
-     It searches the passage's main people (STEPBible), keeps works whose title names one of them, and drops bare portrait
-     titles ("Daniel Mytens"). Pictures come from the museum's IIIF server; tap one for full screen. Where outside images are
-     blocked (claude.ai) the panel says so. */
-  var ART = {};
-  /* two open collections, each answer reduced to {src, id, title, img, full, who, date, url} */
-  function artSearch(q) {
-    if (ART[q]) return ART[q];
-    var aic = fetch("https://api.artic.edu/api/v1/artworks/search?q=" + encodeURIComponent(q) + "&query%5Bterm%5D%5Bis_public_domain%5D=true&fields=id,title,image_id,artist_title,date_display&limit=30")
-      .then(function (r) { return r.ok ? r.json() : { data: [] }; }).then(function (d) { return (d.data || []).filter(function (a) { return a.image_id; }).map(function (a) {
-        return { src: "Art Institute of Chicago", id: "aic" + a.id, title: a.title, img: artImg(a.image_id, 400), full: artImg(a.image_id, 1686), who: a.artist_title, date: a.date_display, url: "https://www.artic.edu/artworks/" + a.id }; }); }).catch(function () { return []; });
-    var cma = fetch("https://openaccess-api.clevelandart.org/api/artworks/?q=" + encodeURIComponent(q) + "&has_image=1&cc0=1&limit=30&fields=id,title,creators,creation_date,images,url,type")
-      .then(function (r) { return r.ok ? r.json() : { data: [] }; }).then(function (d) { return (d.data || []).map(function (a) { var im = a.images || {};
-        return { src: "Cleveland Museum of Art", id: "cma" + a.id, title: a.title, img: (im.web || {}).url, full: (im.print || im.web || {}).url, who: ((a.creators || [])[0] || {}).description || a.type, date: a.creation_date, url: a.url }; }).filter(function (a) { return a.img; }); }).catch(function () { return []; });
-    return (ART[q] = Promise.all([aic, cma]).then(function (r) { return r[0].concat(r[1]); }));
+  /* Paintings of the scene in front of you, matched by its verses ahead of time (art.json, scripts/build-art.py): artworks museums
+     have tagged with the scene's Iconclass code (the subject index they use; listed in Wikidata), and Wikimedia Commons scene
+     categories for the rest. No search by name at view time, so no namesakes and no dead links. Exact scenes first; scenes the
+     text only implies (the Lamentation, the Rest on the Flight) follow as "Related". Then the relics and objects tied to the verses.
+     Tap a picture for full screen. Where outside images are blocked (claude.ai) the panel says so. */
+  /* a picture that won't load takes its card with it, so the panel never shows empty frames */
+  function dropBroken(root) {
+    root.querySelectorAll("img").forEach(function (i) {
+      var gone = function () { var f = i.closest("figure") || (i.classList.contains("jst-relic") ? i : null); if (f) f.remove(); };
+      if (i.complete && i.getAttribute("src") && !i.naturalWidth) gone(); else i.addEventListener("error", gone, { once: true });
+    });
   }
   define("Art", { id: "art", label: "Art", name: "Art of this passage", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 16l5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="8.5" r="1.5"/></svg>' }, {
     prepare: function () {
-      var self = this;
-      var segs0 = data.segs(this.o.ref);
-      getJSON("relics.json").then(function (d) {   // the hand-picked artifacts tied to these verses (scripts/build-relics.py)
-        self.relics = ((d && d.relics) || []).filter(function (x) { return x.refs.some(function (r) { return R.parse(r).some(function (a) { return segs0.some(function (q) { return R.overlap(a, q); }); }); }); });
-        if (self.alive && self.art) self.paint();
-      }).catch(function () {});
-      return data.names().then(function (nm) {
-        /* the people named most in the passage (a person's verse count within it), up to three */
-        var segs = data.segs(self.o.ref), seen = {}, ppl = [];
-        segs.forEach(function (q) { for (var c = q.c1; c <= (q.c2 || q.c1); c++) ((nm && nm.ix[q.book] || {})[c] || []).forEach(function (row) {
-          var p = nm.p[row[0]]; if (!p || p.t === "Place" || /Group|Language|Time/.test(p.t)) return;
-          var n = row.slice(1).filter(function (v) { return (c > q.c1 || v >= q.v1) && (c < (q.c2 || q.c1) || v <= q.v2); }).length; if (!n) return;
-          if (!seen[p.n]) { seen[p.n] = { n: p.n, k: 0 }; ppl.push(seen[p.n]); } seen[p.n].k += n; }); });
-        ppl.sort(function (a, b) { return b.k - a.k; });
-        self.who = ppl.slice(0, 3).map(function (x) { return x.n; });
-        self.nobody = !self.who.length;   // no one named (a parable, a psalm): the search runs on the story words alone
-        /* the story words from the outline's titles for these verses ("the Lions Could Not Harm Him" -> lions) sharpen the search */
-        return Promise.all(segs.map(function (q) { return data.outline(q.book).catch(function () { return null; }); })).then(function (ols) {
-          var STOP = /^(that|this|with|from|into|them|they|their|when|what|will|shall|have|been|were|there|over|upon|unto|could|would|before|after|again|three|times|daily|never|only|just|even|himself|itself|people|which|while|whose|within|without)$/i, words = {};
-          ols.forEach(function (ol, k) { if (!ol) return; (ol.eras || []).forEach(function (er) { (er.events || []).forEach(function (ev) {
-            var on = R.parse(ev.books || "").some(function (x) { return R.overlap(x, segs[k]); }); if (!on) return;
-            String(ev.title || "").replace(/[^A-Za-z' ]/g, " ").split(/\s+/).forEach(function (w) { w = w.replace(/'s$/, "").toLowerCase();
-              if (w.length >= 4 && !STOP.test(w) && self.who.every(function (n) { return n.toLowerCase() !== w; })) words[w] = (words[w] || 0) + 1; }); }); }); });
-          self.story = Object.keys(words).sort(function (a, b) { return words[b] - words[a]; }).slice(0, 6);
-          var qs = self.who.slice();
-          if (self.nobody) { if (self.story.length > 1) qs.push(self.story.slice(0, 2).join(" ")); self.story.slice(0, 2).forEach(function (w) { qs.push(w); }); }
-          else self.story.slice(0, 3).forEach(function (w) { qs.push(self.who[0] + " " + w); });
-          return Promise.all(qs.map(artSearch));
-        });
-      }).then(function (lists) {
-        var names = self.who, story = self.story || [], out = [], seen = {};
-        [].concat.apply([], lists || []).forEach(function (a) {
-          if (seen[a.id]) return;
-          var t = a.title || "", hit = names.filter(function (n) { return new RegExp("(^|[^\\w-])" + n + "(?![\\w-])", "i").test(t); });   // "Amédée-David" isn't David
-          var sw0 = story.filter(function (w) { return new RegExp("\\b" + w, "i").test(t); }).length;
-          if (!hit.length && !(self.nobody && sw0 >= (story.length > 1 ? 2 : 1))) return;
-          if (hit.length === 1 && hit[0] !== names[0] && !sw0) return;   // only a minor name and nothing of the story: likely another Darius
-          if (/^([A-Z][a-z]+\.? ){1,3}[A-Z][a-z]+$/.test(t.trim()) && hit.length < 2) return;   // "Daniel Mytens", "Samuel Fisher Bradford": a portrait of someone else
-          if (/(\bMrs?\.|\b(Portrait|Priory|Church|Chapel|Cathedral|Street|Avenue|Saint|St\.|Examining|Studio|Comte|Baron|Madame|Monsieur|Duke|Duchess|Countess|Self)\b)/i.test(t)) return;   // a namesake, not the Bible figure
-          var sw = story.filter(function (w) { return new RegExp("\\b" + w, "i").test(t); }).length;
-          seen[a.id] = 1; a._sc = hit.length * 2 + sw * 3; out.push(a);
-        });
-        out.sort(function (x, y) { return y._sc - x._sc; });
-        self.art = out.slice(0, 16);
-      });
+      var self = this, segs = data.segs(this.o.ref);
+      this.bk = R.book(segs[0].book).name;
+      var hits = function (refs) { return refs.some(function (r) { return R.parse(r).some(function (a) { return segs.some(function (q) { return R.overlap(a, q); }); }); }); };
+      return Promise.all([
+        getJSON("art.json").then(function (d) { self.scenes = ((d && d.subjects) || []).filter(function (x) { return x.works.length && hits(x.refs); }); }).catch(function () { self.scenes = []; }),
+        getJSON("relics.json").then(function (d) { self.relics = ((d && d.relics) || []).filter(function (x) { return hits(x.refs); }); }).catch(function () { self.relics = []; })
+      ]);
     },
     view: function () {
       if (!CFG.onlineMaps) return { kick: "Art", title: "Art of this passage", body: none("Pictures from other sites can't show here. Open the app on jayms.com or your desk.") };
-      var a = this.art || [], what = this.who.length ? this.who.join(", ") + (this.story && this.story.length ? " (" + this.story.slice(0, 3).join(", ") + ")" : "") : (this.story || []).slice(0, 2).join(" ");
-      var h = "", rel = this.relics || [];
-      if (rel.length) h += '<div class="lbl">Relics and places (' + rel.length + ")</div>" + rel.map(function (x) {
+      var sc = (this.scenes || []).filter(function (x) { return !x.near; }), near = (this.scenes || []).filter(function (x) { return x.near; }), rel = this.relics || [], shown = 0;
+      var bk = this.bk;
+      var scene = function (x) {   /* the verses in the book you're reading come first; the Gospel parallels after, three at most */
+        var rs = x.refs.filter(function (r) { return r.indexOf(bk + " ") === 0; }).concat(x.refs.filter(function (r) { return r.indexOf(bk + " ") !== 0; }));
+        return '<div class="lbl u-mt14">' + esc(x.t) + " · " + esc(rs.slice(0, 3).join("; ") + (rs.length > 3 ? " +" + (rs.length - 3) : "")) + "</div>" + (x.look ? '<p class="ctx u-m4-8">' + esc(x.look) + "</p>" : "") +
+          '<div class="jst-artgrid">' + x.works.map(function (w) {
+            var cap = [w.by, w.d || w.y].filter(Boolean).join(", ");
+            return '<figure><img src="' + esc(w.img) + '" alt="' + esc(w.t) + '"' + (shown++ >= 6 ? ' loading="lazy"' : "") + ' referrerpolicy="no-referrer" data-jst-art data-full="' + esc(w.full || w.img) + '" data-t="' + esc([w.t, cap, w.at].filter(Boolean).join(", ")) + '" role="button" tabindex="0">' +
+              "<figcaption><b>" + esc(w.t) + "</b>" + (cap ? "<br>" + esc(cap) : "") + (w.at ? "<br>" + esc(w.at) : "") + " " + outlink(w.page, "Source") + "</figcaption></figure>"; }).join("") + "</div>";
+      };
+      var h = sc.map(scene).join("");
+      if (near.length) h += (sc.length ? '<details class="jst-past u-mt14"><summary class="lbl">Related scenes (' + near.length + ")</summary>" : "") + near.map(scene).join("") + (sc.length ? "</details>" : "");
+      if (!sc.length && !near.length) h += none("No paintings of a scene in " + esc(this.o.ref) + " yet.");
+      if (rel.length) h += '<div class="lbl u-mt14">Relics and objects (' + rel.length + ")</div>" + rel.map(function (x) {
         return box("witness", "", '<div class="item">' + (x.img ? '<img class="jst-relic" src="' + esc(x.img) + '" alt="' + esc(x.t) + '" referrerpolicy="no-referrer" data-jst-art data-full="' + esc(x.img.replace(/\/\d+px-/, "/1280px-")) + '" data-t="' + esc(x.t) + '" role="button" tabindex="0">' : "") +
           '<span class="when">' + esc(x.museum) + '</span><span class="tt">' + esc(x.t) + '</span><p class="u-m4-8 u-fs15">' + esc(x.x) + "</p>" +
-          '<p class="sub u-fs13">' + esc(x.refs.join(" \u00B7 ")) + "</p>" + outlink(x.url, "Read more") + "</div>"); }).join("");
-      h += '<div class="lbl u-mt14">Art (' + a.length + ')</div><p class="ctx">Searched for ' + esc(what || this.o.ref) + '.</p>';
-      h += a.length ? '<div class="jst-artgrid">' + a.map(function (x, n) {
-        return '<figure><img src="' + esc(x.img) + '" alt="' + esc(x.title) + '"' + (n >= 8 ? ' loading="lazy"' : "") + ' referrerpolicy="no-referrer" data-jst-art data-full="' + esc(x.full || x.img) + '" data-t="' + esc(x.title) + '" role="button" tabindex="0">' +
-          '<figcaption><b>' + esc(x.title) + "</b><br>" + esc([x.who, x.date].filter(Boolean).join(", ")) + " " + outlink(x.url, x.src === "Cleveland Museum of Art" ? "Cleveland" : "Chicago") + "</figcaption></figure>"; }).join("") + "</div>"
-        : none("No public-domain artwork matches " + esc(what || this.o.ref) + ".");
-      h += '<p class="ctx u-fs13">Art: <a href="https://www.artic.edu/collection" target="_blank" rel="noopener">Art Institute of Chicago</a> and <a href="https://www.clevelandart.org/open-access" target="_blank" rel="noopener">Cleveland Museum of Art</a> open collections, public-domain works only. Relics: photos and summaries from Wikipedia (CC BY-SA). Tap a picture for full screen.</p>';
-      return { kick: "Art \u00B7 " + a.length + " works" + (rel.length ? ", " + rel.length + " relics" : ""), title: "Art and relics", body: h };
+          '<p class="sub u-fs13">' + esc(x.refs.join(" · ")) + "</p>" + outlink(x.url, "Read more") + "</div>"); }).join("");
+      h += '<p class="ctx u-fs13">Paintings: works museums have tagged with the scene’s <a href="https://iconclass.org/" target="_blank" rel="noopener">Iconclass</a> subject, from Wikidata, and Wikimedia Commons scene collections; photos on Wikimedia Commons (each Source link has the details). Relics: photos and summaries from Wikipedia (CC BY-SA). Tap a picture for full screen.</p>';
+      var all = sc.concat(near), nw = all.reduce(function (n, x) { return n + x.works.length; }, 0);
+      return { kick: "Art · " + (all.length ? all.length + " scene" + (all.length > 1 ? "s" : "") + ", " + nw + " works" : "no scenes") + (rel.length ? ", " + rel.length + " relics" : ""), title: "Art and relics", body: h };
     },
+    after: function () { dropBroken(this.el); },
     click: function (e) {
       var im = e.target.closest("[data-jst-art]");
       if (im) { e.stopPropagation(); var full = im.getAttribute("data-full") || im.src; mapViewer({ id: "art-" + full, t: im.getAttribute("data-t"), img: full }); return; }
