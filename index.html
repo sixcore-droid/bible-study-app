@@ -248,7 +248,7 @@ function initNote(id, force){
   const n=ST.c("notes").peek(id)||{}; NOTES[id]={text:n.text||"", pub:!!n.pub, savedAt:n.updatedAt||null, obsidian:n.obsidian||null};
   const dr=ST.c("drafts").peek(id); if(dr){ NOTES[id].text=dr.text; NOTES[id].pub=!!dr.pub; DIRTY[id]=true }
 }
-const S = {view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:store.get("skipLists",false),
+const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:store.get("skipLists",false),
            size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read")};
 /* public build: Read along only; no My desk switch, no prototype badge */
 if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
@@ -328,9 +328,8 @@ function renderReader(){
   const r = cur(); if(!r) return;
   $("rtabs").innerHTML = READINGS.map((x,i)=>`<button class="rtab${!S.adhoc&&i===S.reading?" on":""}${isDone(dk(x))?" done":""}" role="tab" aria-selected="${!S.adhoc&&i===S.reading}" data-r="${i}"><span class="ok"></span>${esc(x.ref)}</button>`).join("");
   const isToday = S.day===todayNum(plan());
-  /* a passage opened with Go keeps its tab until its × closes it, even while a day's reading is on screen (S.parked) */
-  const ad = S.adhoc || S.parked;
-  if(ad) $("rtabs").innerHTML += `<button class="rtab${S.adhoc?" on":""} adhoc" role="tab" aria-selected="${!!S.adhoc}"${S.adhoc?"":" data-reopen-adhoc"}>${esc(ad.ref)}</button><button class="rtabx" data-close-adhoc title="Close ${esc(ad.ref)}" aria-label="Close ${esc(ad.ref)}">×</button>`;
+  /* every passage opened with Go (or « ») keeps its own tab until its × closes it (S.opened); S.adhoc is the one on screen */
+  $("rtabs").innerHTML += S.opened.map((o,n)=>`<span class="rtabgrp"><button class="rtab${S.adhoc===o?" on":""} adhoc" role="tab" aria-selected="${S.adhoc===o}" data-open-tab="${n}">${esc(o.ref)}</button><button class="rtabx" data-close-adhoc="${n}" title="Close ${esc(o.ref)}" aria-label="Close ${esc(o.ref)}">×</button></span>`).join("");
   $("rkick").textContent = S.adhoc ? "Opened passage · not in today's plan" : `${isToday?(plan().weekly?"This week":"Today"):(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
   $("rtitle").textContent = r.ref;
   const lg = JaymsRef.refly(r.ref, S.ver);
@@ -497,34 +496,40 @@ ST.c("shelfcfg").on(()=>{ if((S.tool==="shelf"||S.tool==="config") && PH) PH.ref
 ST.c("ideas").on(()=>{ renderDock(); if(S.tool==="ideas" && PH) PH.refresh() });
 /* Open any passage. A reading of the day switches to its tab; anything else opens as its own tab beside them.
    Returns an error message when the reference can't be read, so the box can say what went wrong. */
-function openPassage(ref){
+function openPassage(ref, replace){
   const segs = JaymsRef.parse(ref);
   if(!segs.length) return `Couldn't read "${ref}" as a Bible reference.`;
   const bad = JaymsRef.check(segs); if(bad) return bad;   // chapter and verse must exist ("Revelation 22 has 21 verses.")
   const id = JaymsRef.key(segs), i = READINGS.findIndex(x=>x.id===id);
   S.vsel=null; S.word=null;
-  if(i>=0){ park(); S.reading=i; }
+  const had = S.opened.find(x=>x.id===id);
+  if(i>=0){ S.adhoc=null; S.reading=i; }
+  else if(had) S.adhoc = had;
   else {
     const o = { id, ref:JaymsRef.format(segs), role:"Opened passage", why:"", rows:null, adhoc:true };
-    S.adhoc = o; S.parked = null; initNote(id); loadPanel(o.ref);
+    /* « » step the tab on screen to the next chapter; Go adds a tab beside the others */
+    const at = replace && S.adhoc ? S.opened.indexOf(S.adhoc) : -1;
+    if(at>=0) S.opened[at] = o; else S.opened.push(o);
+    S.adhoc = o; initNote(id); loadPanel(o.ref);
     JST.data.text(o.ref).then(rows=>{ o.rows=rows; if(S.adhoc===o) renderReader() });
   }
   rememberOpen(); renderReader(); renderPanel(); renderDock(); readerTop();
   return "";
 }
-function closeAdhoc(){ S.adhoc=null; S.parked=null; S.vsel=null; rememberOpen(); renderReader(); renderPanel(); renderDock() }
+/* closing a tab: the one on screen falls back to the opened tab beside it, or the day's reading */
+function closeAdhoc(n){ const o=S.opened[n]; if(!o) return; S.opened.splice(n,1);
+  if(S.adhoc===o) S.adhoc = S.opened[Math.min(n, S.opened.length-1)] || null;
+  S.vsel=null; rememberOpen(); renderReader(); renderPanel(); renderDock() }
 /* where you were, so a reload comes back to it (same day only) */
-function rememberOpen(){ store.set("open",{date:new Date().toDateString(), plan:S.plan, day:S.day, reading:S.reading, adhoc:S.adhoc?S.adhoc.ref:null, parked:S.parked?S.parked.ref:null}) }
+function rememberOpen(){ store.set("open",{date:new Date().toDateString(), plan:S.plan, day:S.day, reading:S.reading, opened:S.opened.map(x=>x.ref), on:S.adhoc?S.opened.indexOf(S.adhoc):-1}) }
 var RESTORED=false;   // set once restoreOpen has put back the last reading, so a saved scroll position isn't dropped too early
 function restoreOpen(){
   const o=store.get("open",null); RESTORED=true; if(!o || o.date!==new Date().toDateString() || o.plan!==S.plan) return;
   if(o.day!==S.day && PLANS[S.plan].days.some(d=>d.day===o.day)){ S.day=o.day; buildDay(); }
   if(o.reading<READINGS.length) S.reading=o.reading;
-  if(o.adhoc) openPassage(o.adhoc);
-  else if(o.parked){ openPassage(o.parked); park() }
+  (o.opened || (o.adhoc ? [o.adhoc] : []).concat(o.parked ? [o.parked] : [])).forEach(r=>openPassage(r));
+  S.adhoc = o.on>=0 && S.opened[o.on] ? S.opened[o.on] : (o.adhoc && S.opened[0]) || null;
 }
-/* step back to a day's reading but keep the opened passage's tab */
-function park(){ if(S.adhoc){ S.parked=S.adhoc; S.adhoc=null } }
 function panelOptions(id){
   const r = cur();
   const o = { ref:r.ref, on:HANDLERS, owner:S.view!=="public" };   // owner:false in Read along hides vocab buttons, Logos links and James-only notes
@@ -657,10 +662,10 @@ document.addEventListener("click",e=>{
   const w=e.target.closest("[data-w]"); if(w){ S.word=w.dataset.w; S.tool="word"; renderReader(); renderDock(); renderPanel(); return}
   const v=e.target.closest("[data-v]"); if(v){e.preventDefault(); const [b,c,n]=v.dataset.v.split("|"); S.vsel={book:b,c:+c,v:+n}; S.tool="verse"; renderReader(); renderDock(); renderPanel(); return}
   const t=e.target.closest("[data-t]"); if(t){openTool(t.dataset.t); return}
-  if(e.target.closest("[data-close-adhoc]")){ e.stopPropagation(); closeAdhoc(); return }
-  const dy=e.target.closest("[data-day]"); if(dy){ park(); S.vsel=null; S.word=null;S.day=+dy.dataset.day; S.reading=0; buildDay(); rememberOpen(); render(); $("rail").classList.remove("open"); readerTop(); return}
-  if(e.target.closest("[data-reopen-adhoc]")){ S.adhoc=S.parked; S.parked=null; S.vsel=null; S.word=null; rememberOpen(); renderReader(); renderPanel(); renderDock(); readerTop(); return }
-  const r=e.target.closest("[data-r]"); if(r){ park(); S.vsel=null; S.word=null;S.reading=+r.dataset.r; rememberOpen(); renderReader(); renderPanel(); readerTop(); return}
+  const cx=e.target.closest("[data-close-adhoc]"); if(cx){ e.stopPropagation(); closeAdhoc(+cx.dataset.closeAdhoc); return }
+  const dy=e.target.closest("[data-day]"); if(dy){ S.adhoc=null; S.vsel=null; S.word=null;S.day=+dy.dataset.day; S.reading=0; buildDay(); rememberOpen(); render(); $("rail").classList.remove("open"); readerTop(); return}
+  const ot=e.target.closest("[data-open-tab]"); if(ot){ S.adhoc=S.opened[+ot.dataset.openTab]||null; S.vsel=null; S.word=null; rememberOpen(); renderReader(); renderPanel(); renderDock(); readerTop(); return }
+  const r=e.target.closest("[data-r]"); if(r){ S.adhoc=null; S.vsel=null; S.word=null;S.reading=+r.dataset.r; rememberOpen(); renderReader(); renderPanel(); readerTop(); return}
 });
 document.addEventListener("keydown",e=>{
   if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".w, .jst-mapimg")){e.preventDefault();e.target.click()}
@@ -776,8 +781,8 @@ function stepChapter(d){
   return bk.chapters===1 ? bk.name : `${bk.name} ${c}`;
 }
 function syncChapterNav(){ [["prevch",-1],["nextch",1]].forEach(([id,d])=>{ const t=cur()&&stepChapter(d); $(id).disabled=!t; $(id).title=t?(d<0?"Previous chapter: ":"Next chapter: ")+t:"" }) }
-$("prevch").onclick=()=>{ const t=stepChapter(-1); if(t) openPassage(t) };
-$("nextch").onclick=()=>{ const t=stepChapter(1); if(t) openPassage(t) };
+$("prevch").onclick=()=>{ const t=stepChapter(-1); if(t) openPassage(t, true) };
+$("nextch").onclick=()=>{ const t=stepChapter(1); if(t) openPassage(t, true) };
 $("larger").onclick=()=>{S.size=Math.min(26,S.size+1);store.set("size",S.size);renderReader()};
 function railShown(){ const r=$("rail"); return getComputedStyle(r).display!=="none" && (getComputedStyle(r).position!=="fixed" || r.classList.contains("open")) }
 function syncRailBtn(){ const on=railShown(); $("railbtn").classList.toggle("on",on); $("railbtn").setAttribute("aria-expanded",on) }
