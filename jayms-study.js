@@ -1006,13 +1006,17 @@
       var h = sc.map(scene).join("");
       if (near.length) h += (sc.length ? '<details class="jst-past u-mt14"><summary class="lbl">Related scenes (' + near.length + ")</summary>" : "") + near.map(scene).join("") + (sc.length ? "</details>" : "");
       if (!sc.length && !near.length) h += none("No paintings of a scene in " + esc(this.o.ref) + " yet.");
-      if (rel.length) h += '<div class="lbl u-mt14">Relics and objects (' + rel.length + ")</div>" + rel.map(function (x) {
+      /* the objects in the story (a shofar for Joshua 6, a lepton for the widow's mite), then inscriptions and finds that bear on it */
+      var card = function (x) {
         return box("witness", "", '<div class="item">' + (x.img ? '<img class="jst-relic" src="' + esc(x.img) + '" alt="' + esc(x.t) + '" referrerpolicy="no-referrer" data-jst-art data-full="' + esc(x.img.replace(/\/\d+px-/, "/1280px-")) + '" data-t="' + esc(x.t) + '" role="button" tabindex="0">' : "") +
-          '<span class="when">' + esc(x.museum) + '</span><span class="tt">' + esc(x.t) + '</span><p class="u-m4-8 u-fs15">' + esc(x.x) + "</p>" +
-          '<p class="sub u-fs13">' + esc(x.refs.join(" · ")) + "</p>" + outlink(x.url, "Read more") + "</div>"); }).join("");
-      h += '<p class="ctx u-fs13">Paintings: works museums have tagged with the scene’s <a href="https://iconclass.org/" target="_blank" rel="noopener">Iconclass</a> subject, from Wikidata, and Wikimedia Commons scene collections; photos on Wikimedia Commons (each Source link has the details). Relics: photos and summaries from Wikipedia (CC BY-SA). Tap a picture for full screen.</p>';
+          (x.museum ? '<span class="when">' + esc(x.museum) + "</span>" : "") + '<span class="tt">' + esc(x.t) + '</span><p class="u-m4-8 u-fs15">' + esc(x.x) + "</p>" +
+          '<p class="sub u-fs13">' + esc(x.refs.join(" \u00B7 ")) + "</p>" + outlink(x.url, "Read more") + "</div>"); };
+      var objs = rel.filter(function (x) { return x.kind === "object"; }), finds = rel.filter(function (x) { return x.kind !== "object"; });
+      if (objs.length) h += '<div class="lbl u-mt14">Objects in the story (' + objs.length + ")</div>" + objs.map(card).join("");
+      if (finds.length) h += '<div class="lbl u-mt14">Relics and inscriptions (' + finds.length + ")</div>" + finds.map(card).join("");
+      h += '<p class="ctx u-fs13">Paintings: works museums have tagged with the scene’s <a href="https://iconclass.org/" target="_blank" rel="noopener">Iconclass</a> subject, from Wikidata, and Wikimedia Commons scene collections; photos on Wikimedia Commons (each Source link has the details). Objects and relics: photos and articles from Wikipedia (CC BY-SA). Tap a picture for full screen.</p>';
       var all = sc.concat(near), nw = all.reduce(function (n, x) { return n + x.works.length; }, 0);
-      return { kick: "Art · " + (all.length ? all.length + " scene" + (all.length > 1 ? "s" : "") + ", " + nw + " works" : "no scenes") + (rel.length ? ", " + rel.length + " relics" : ""), title: "Art and relics", body: h };
+      return { kick: "Art · " + (all.length ? all.length + " scene" + (all.length > 1 ? "s" : "") + ", " + nw + " works" : "no scenes") + (rel.length ? ", " + rel.length + " objects and relics" : ""), title: "Art and relics", body: h };
     },
     after: function () { dropBroken(this.el); },
     click: function (e) {

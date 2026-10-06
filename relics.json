@@ -453,6 +453,1282 @@
    "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Nineveh_-_Mashki_Gate.jpg/330px-Nineveh_-_Mashki_Gate.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
    "url": "https://en.wikipedia.org/wiki/Nineveh",
    "x": "Nineveh was an ancient Near Eastern city of Upper Mesopotamia, located in the modern-day city of Mosul in northern Iraq. It is located on the eastern bank of the Tigris River and was the capital and largest city of the Neo-Assyrian Empire, and potentially the wealthiest city in the ancient world. Today, it is a common "
+  },
+  {
+   "t": "Shofar",
+   "w": "Shofar",
+   "museum": "Ram's-horn shofars in Jewish museum collections; ancient forms shown on synagogue mosaics",
+   "refs": [
+    "Joshua 6",
+    "Leviticus 25:9",
+    "Judges 7:16-22"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Shofar-16-Zachi-Evenor.jpg/330px-Shofar-16-Zachi-Evenor.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Shofar",
+   "x": "The shofar is a hollowed ram's horn, the same instrument the priests blew as they circled Jericho.",
+   "kind": "object",
+   "what": "ram's horn trumpet"
+  },
+  {
+   "t": "Trumpets of Tutankhamun",
+   "w": "Tutankhamun's trumpets",
+   "museum": "Grand Egyptian Museum, Giza (formerly Egyptian Museum, Cairo)",
+   "refs": [
+    "Numbers 10:1-10",
+    "2 Chronicles 5:12-13"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Tutankhamun%27s_bronze_trumpet.jpg/330px-Tutankhamun%27s_bronze_trumpet.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Tutankhamun's_trumpets",
+   "x": "These silver and bronze trumpets from about 1320 BC show the long straight metal trumpet of the kind Moses was told to hammer out of silver.",
+   "kind": "object",
+   "what": "trumpet"
+  },
+  {
+   "t": "Lyres of Ur",
+   "w": "Lyres of Ur",
+   "museum": "British Museum, London; Penn Museum, Philadelphia; Iraq Museum, Baghdad",
+   "refs": [
+    "Genesis 4:21",
+    "1 Samuel 16:23",
+    "Psalm 137:2"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/The_Queen%27s_gold_lyre_from_the_Royal_Cemetery_at_Ur._C._2500_BCE._Iraq_Museum.jpg/330px-The_Queen%27s_gold_lyre_from_the_Royal_Cemetery_at_Ur._C._2500_BCE._Iraq_Museum.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Lyres_of_Ur",
+   "x": "These lyres from the royal tombs of Ur show the wooden frame and strings of the instrument the Bible calls a kinnor, the lyre David played.",
+   "kind": "object",
+   "what": "lyre (kinnor)"
+  },
+  {
+   "t": "Kinnor",
+   "w": "Kinnor",
+   "museum": "Depicted on Bar Kokhba coins and Iron Age seals and ivories",
+   "refs": [
+    "1 Samuel 16:23",
+    "Psalm 33:2",
+    "Psalm 137:2"
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/a/af/Kinnor_played_before_a_king.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+   "url": "https://en.wikipedia.org/wiki/Kinnor",
+   "x": "Ancient images of the kinnor show a small hand-held lyre with a yoke and strings, the instrument David played for Saul.",
+   "kind": "object",
+   "what": "lyre"
+  },
+  {
+   "t": "Nevel (harp)",
+   "w": "Nevel (instrument)",
+   "museum": "Known from ancient Near Eastern reliefs and depictions",
+   "refs": [
+    "Psalm 33:2",
+    "1 Samuel 10:5",
+    "Psalm 150:3"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Nevelancient.png/330px-Nevelancient.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Nevel_(instrument)",
+   "x": "The nevel was a larger stringed instrument than the kinnor, and ancient images show the kind of harp named alongside the lyre in the Psalms.",
+   "kind": "object",
+   "what": "harp"
+  },
+  {
+   "t": "Sistrum",
+   "w": "Sistrum",
+   "museum": "Egyptian examples in the British Museum, Louvre and Metropolitan Museum of Art",
+   "refs": [
+    "2 Samuel 6:5"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Mostra_Olearie_-_sistro_1010384.JPG/330px-Mostra_Olearie_-_sistro_1010384.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Sistrum",
+   "x": "Ancient sistrums are metal rattles on a handle, the instrument many translations see in the noise of celebration as David brought up the ark.",
+   "kind": "object",
+   "what": "sistrum (rattle)"
+  },
+  {
+   "t": "Ancient cymbals",
+   "w": "Cymbal",
+   "museum": "Bronze examples excavated across the Near East and Mediterranean",
+   "refs": [
+    "1 Chronicles 15:16-19",
+    "Psalm 150:5",
+    "1 Corinthians 13:1"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/ZildjianCustomRide.jpg/330px-ZildjianCustomRide.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Cymbal",
+   "x": "Small bronze cymbals from antiquity show the clashing plates the Levite musicians struck and Paul had in mind for a noisy cymbal.",
+   "kind": "object",
+   "what": "cymbals"
+  },
+  {
+   "t": "Frame drum",
+   "w": "Frame drum",
+   "museum": "Many Iron Age clay figurines of women holding frame drums, e.g. Israel Museum",
+   "refs": [
+    "Exodus 15:20",
+    "1 Samuel 18:6",
+    "Psalm 150:4"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Bebny_szama%C5%84skie.jpg/330px-Bebny_szama%C5%84skie.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Frame_drum",
+   "x": "Clay figurines from Iron Age Israel show women holding a round frame drum, the toph Miriam played after the Red Sea crossing.",
+   "kind": "object",
+   "what": "tambourine (toph)"
+  },
+  {
+   "t": "Aulos",
+   "w": "Aulos",
+   "museum": "Greek and Roman examples in the British Museum and Louvre",
+   "refs": [
+    "Matthew 9:23",
+    "Matthew 11:17",
+    "1 Corinthians 14:7",
+    "Revelation 18:22"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Banquet_Euaion_Louvre_G467_n2_cropped.jpg/330px-Banquet_Euaion_Louvre_G467_n2_cropped.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Aulos",
+   "x": "The aulos was the double reed pipe of the Greek and Roman world, the instrument of the flute players at the house of Jairus.",
+   "kind": "object",
+   "what": "pipe / flute"
+  },
+  {
+   "t": "Sling",
+   "w": "Sling (weapon)",
+   "museum": "Ancient sling remains and depictions in many collections",
+   "refs": [
+    "1 Samuel 17:40-50",
+    "Judges 20:16"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Girl_using_Gofan.jpg/330px-Girl_using_Gofan.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Sling_(weapon)",
+   "x": "A shepherd's sling was a pouch on two cords, the weapon David used to bring down Goliath.",
+   "kind": "object",
+   "what": "sling"
+  },
+  {
+   "t": "Scale armour",
+   "w": "Scale armour",
+   "museum": "Bronze scales excavated at Near Eastern sites",
+   "refs": [
+    "1 Samuel 17:5",
+    "1 Samuel 17:38"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Cricau_Festival_2013_-_Lorica_squamata_-_6.jpg/330px-Cricau_Festival_2013_-_Lorica_squamata_-_6.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Scale_armour",
+   "x": "Bronze scale armour was made of overlapping metal plates, the kind of coat of mail Goliath wore.",
+   "kind": "object",
+   "what": "coat of mail"
+  },
+  {
+   "t": "Greaves",
+   "w": "Greave",
+   "museum": "Bronze examples in Greek and Mediterranean collections",
+   "refs": [
+    "1 Samuel 17:6"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Greaves_Denda_-_Inv_4330_%28Staatliche_Antikensammlungen%2C_Munich%2C_Germany%29-transparent.png/330px-Greaves_Denda_-_Inv_4330_%28Staatliche_Antikensammlungen%2C_Munich%2C_Germany%29-transparent.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Greave",
+   "x": "Ancient bronze greaves are shin guards, the exact piece of armour the text says Goliath wore on his legs.",
+   "kind": "object",
+   "what": "bronze greaves"
+  },
+  {
+   "t": "Gladius",
+   "w": "Gladius",
+   "museum": "Roman examples in many museums, including the Sword of Tiberius, British Museum, London",
+   "refs": [
+    "Ephesians 6:17",
+    "Romans 13:4"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Uncrossed_gladius.jpg/330px-Uncrossed_gladius.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Gladius",
+   "x": "The gladius was the Roman legionary's short sword, the blade Paul calls the sword of the Spirit.",
+   "kind": "object",
+   "what": "Roman sword"
+  },
+  {
+   "t": "Lorica segmentata",
+   "w": "Lorica segmentata",
+   "museum": "Excavated examples from Corbridge and Kalkriese",
+   "refs": [
+    "Ephesians 6:14",
+    "1 Thessalonians 5:8"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Lorica_segmentata_remains_and_recreation.jpg/330px-Lorica_segmentata_remains_and_recreation.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Lorica_segmentata",
+   "x": "The banded iron body armour of the Roman legionary shows the breastplate Paul tells believers to put on.",
+   "kind": "object",
+   "what": "Roman breastplate"
+  },
+  {
+   "t": "Scutum",
+   "w": "Scutum",
+   "museum": "Yale University Art Gallery (the Dura-Europos scutum)",
+   "refs": [
+    "Ephesians 6:16"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Ag-obj-5959-001-pub-large_%28cropped%29.jpg/330px-Ag-obj-5959-001-pub-large_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Scutum",
+   "x": "The Roman scutum was a large curved door-shaped shield, the thureos Paul names as the shield of faith.",
+   "kind": "object",
+   "what": "Roman shield"
+  },
+  {
+   "t": "Galea",
+   "w": "Galea (helmet)",
+   "museum": "Roman examples in many museums",
+   "refs": [
+    "Ephesians 6:17",
+    "1 Thessalonians 5:8"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Roman_Auxillary_Infantry_Helmet%2C_c._98-117_AD_%2843219328511%29.jpg/330px-Roman_Auxillary_Infantry_Helmet%2C_c._98-117_AD_%2843219328511%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Galea_(helmet)",
+   "x": "Roman legionary helmets show the helmet of salvation Paul pictured on the soldier guarding him.",
+   "kind": "object",
+   "what": "Roman helmet"
+  },
+  {
+   "t": "Caligae",
+   "w": "Caligae",
+   "museum": "Excavated examples from Vindolanda and other Roman forts",
+   "refs": [
+    "Ephesians 6:15"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Caligae_from_side.jpg/330px-Caligae_from_side.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Caligae",
+   "x": "Roman military boots were hobnailed sandals built for marching, the footwear behind Paul's feet fitted with the gospel of peace.",
+   "kind": "object",
+   "what": "soldier's boots"
+  },
+  {
+   "t": "Cingulum militare",
+   "w": "Cingulum militare",
+   "museum": "Excavated fittings in many Roman collections",
+   "refs": [
+    "Ephesians 6:14"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Roman_cingulum_1.jpg/330px-Roman_cingulum_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Cingulum_militare",
+   "x": "The Roman soldier's belt held his gear and marked his rank, the belt Paul calls the belt of truth.",
+   "kind": "object",
+   "what": "soldier's belt"
+  },
+  {
+   "t": "Battering ram",
+   "w": "Battering ram",
+   "museum": "Shown on Assyrian palace reliefs in the British Museum",
+   "refs": [
+    "Ezekiel 4:2",
+    "Ezekiel 21:22",
+    "Ezekiel 26:9"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Baba_Vida_Klearchos_2_battering_ram.jpg/330px-Baba_Vida_Klearchos_2_battering_ram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Battering_ram",
+   "x": "Assyrian reliefs show wheeled battering rams against city walls, the siege engine Ezekiel was told to set against his model of Jerusalem.",
+   "kind": "object",
+   "what": "battering ram"
+  },
+  {
+   "t": "Siege engine",
+   "w": "Siege engine",
+   "museum": "Shown on Assyrian palace reliefs; Greek and Roman examples reconstructed",
+   "refs": [
+    "2 Chronicles 26:15",
+    "Deuteronomy 20:19-20"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Battering_ram.jpg/330px-Battering_ram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Siege_engine",
+   "x": "Ancient siege engines were machines for attacking or defending walls, the kind Uzziah built to shoot arrows and great stones.",
+   "kind": "object",
+   "what": "siege engines"
+  },
+  {
+   "t": "Tyrian shekel",
+   "w": "Tyrian shekel",
+   "museum": "Israel Museum, Jerusalem; British Museum, London",
+   "refs": [
+    "Matthew 17:24-27",
+    "Matthew 26:14-16",
+    "Matthew 27:3-10"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/AlexanderI.jpg/330px-AlexanderI.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Tyrian_shekel",
+   "x": "The silver shekel of Tyre was the coin required for the temple tax and the likeliest coin in the thirty pieces of silver paid to Judas.",
+   "kind": "object",
+   "what": "shekel / thirty pieces of silver"
+  },
+  {
+   "t": "Tribute penny",
+   "w": "Tribute penny",
+   "museum": "British Museum, London, and many coin collections",
+   "refs": [
+    "Mark 12:13-17",
+    "Matthew 22:15-22",
+    "Luke 20:20-26"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Emperor_Tiberius_Denarius_-_Tribute_Penny.jpg/330px-Emperor_Tiberius_Denarius_-_Tribute_Penny.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Tribute_penny",
+   "x": "The silver denarius of Tiberius carries the emperor's face and title, the image and inscription Jesus asked about.",
+   "kind": "object",
+   "what": "denarius of Tiberius"
+  },
+  {
+   "t": "Denarius",
+   "w": "Denarius",
+   "museum": "Roman coin collections worldwide",
+   "refs": [
+    "Matthew 20:1-16",
+    "Luke 10:35",
+    "John 12:5",
+    "Revelation 6:6"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Octavian_and_Antony_denarius.jpg/330px-Octavian_and_Antony_denarius.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Denarius",
+   "x": "The denarius was a silver coin worth a labourer's day wage, the pay in the parable of the vineyard workers.",
+   "kind": "object",
+   "what": "denarius"
+  },
+  {
+   "t": "Widow's mite",
+   "w": "Lesson of the widow's mite",
+   "museum": "Israel Museum, Jerusalem, and many coin collections",
+   "refs": [
+    "Mark 12:41-44",
+    "Luke 21:1-4",
+    "Luke 12:59"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/en/thumb/f/f8/Widowsmite.jpg/330px-Widowsmite.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Lesson_of_the_widow's_mite",
+   "x": "The tiny bronze lepton, often struck by Alexander Jannaeus, is the smallest coin in circulation and the one the widow gave.",
+   "kind": "object",
+   "what": "lepton"
+  },
+  {
+   "t": "Quadrans",
+   "w": "Quadrans",
+   "museum": "Roman coin collections worldwide",
+   "refs": [
+    "Mark 12:42",
+    "Matthew 5:26"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Aes_Grave_Quadrans2.jpg/330px-Aes_Grave_Quadrans2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Quadrans",
+   "x": "The quadrans was the smallest Roman bronze coin, the one Mark uses to explain the value of the widow's two lepta.",
+   "kind": "object",
+   "what": "quadrans (penny)"
+  },
+  {
+   "t": "As",
+   "w": "As (Roman coin)",
+   "museum": "Roman coin collections worldwide",
+   "refs": [
+    "Matthew 10:29",
+    "Luke 12:6"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Vecchi_051_-_transparent_background.PNG/330px-Vecchi_051_-_transparent_background.PNG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/As_(Roman_coin)",
+   "x": "The bronze as, called assarion in Greek, is the small coin that bought two sparrows.",
+   "kind": "object",
+   "what": "assarion"
+  },
+  {
+   "t": "Drachma",
+   "w": "Ancient drachma",
+   "museum": "Greek coin collections worldwide",
+   "refs": [
+    "Luke 15:8-10"
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Athens_545-510_BC_Didrachm.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+   "url": "https://en.wikipedia.org/wiki/Ancient_drachma",
+   "x": "The silver drachma was a day's wage coin of the Greek world, the coin the woman swept the house to find.",
+   "kind": "object",
+   "what": "drachma (silver coin)"
+  },
+  {
+   "t": "Daric",
+   "w": "Daric",
+   "museum": "British Museum, London",
+   "refs": [
+    "Ezra 2:69",
+    "Ezra 8:27",
+    "Nehemiah 7:70-72",
+    "1 Chronicles 29:7"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Achaemenid_coin_daric_420BC_front.jpg/330px-Achaemenid_coin_daric_420BC_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Daric",
+   "x": "The gold daric of the Persian kings is the coin counted in the gifts for rebuilding the temple.",
+   "kind": "object",
+   "what": "daric"
+  },
+  {
+   "t": "Judaea Capta coinage",
+   "w": "Judaea Capta coinage",
+   "museum": "British Museum, London; Israel Museum, Jerusalem",
+   "refs": [
+    "Luke 21:20-24",
+    "Luke 19:41-44"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Sestertius_-_Vespasiano_-_Iudaea_Capta-RIC_0424.jpg/330px-Sestertius_-_Vespasiano_-_Iudaea_Capta-RIC_0424.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Judaea_Capta_coinage",
+   "x": "Rome struck these coins showing a mourning woman under a palm to celebrate the fall of Jerusalem in AD 70 that Jesus foretold.",
+   "kind": "object",
+   "what": "coins of Jerusalem's fall"
+  },
+  {
+   "t": "Herodian oil lamp",
+   "w": "Oil lamp",
+   "museum": "Excavated widely in Judea; Israel Museum, Jerusalem",
+   "refs": [
+    "Matthew 25:1-13",
+    "Mark 4:21",
+    "Matthew 5:15"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Group_of_ancient_hellenistic_an_roan_oil_lamps.jpg/330px-Group_of_ancient_hellenistic_an_roan_oil_lamps.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Oil_lamp",
+   "x": "The small clay oil lamp of the period held only a little oil, which is why the wise virgins carried extra in flasks.",
+   "kind": "object",
+   "what": "oil lamp"
+  },
+  {
+   "t": "Wax tablet",
+   "w": "Wax tablet",
+   "museum": "Excavated examples from Vindolanda, Pompeii and Egypt",
+   "refs": [
+    "Luke 1:63"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Replica_of_roman_wax_writing_tablet_with_stylus.jpg/330px-Replica_of_roman_wax_writing_tablet_with_stylus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Wax_tablet",
+   "x": "A wooden tablet coated with wax was the everyday notepad of the Roman world, what Zechariah asked for to write his son's name.",
+   "kind": "object",
+   "what": "writing tablet"
+  },
+  {
+   "t": "Scroll",
+   "w": "Scroll",
+   "museum": "Dead Sea Scrolls at the Shrine of the Book, Israel Museum",
+   "refs": [
+    "Jeremiah 36",
+    "Luke 4:16-20",
+    "Revelation 5:1"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Joshua_Roll.jpg/330px-Joshua_Roll.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Scroll",
+   "x": "Ancient scrolls were long sheets of leather or papyrus rolled up, the kind Baruch wrote and Jesus unrolled in the synagogue.",
+   "kind": "object",
+   "what": "scroll"
+  },
+  {
+   "t": "Papyrus",
+   "w": "Papyrus",
+   "museum": "Papyrus documents in the British Library, Chester Beatty and many collections",
+   "refs": [
+    "2 John 12",
+    "3 John 13"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Papyrus.jpg/330px-Papyrus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Papyrus",
+   "x": "Papyrus sheets were the paper of the ancient world, the paper John says he would rather not use.",
+   "kind": "object",
+   "what": "paper"
+  },
+  {
+   "t": "Parchment",
+   "w": "Parchment",
+   "museum": "Ancient parchment manuscripts in many collections",
+   "refs": [
+    "2 Timothy 4:13"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Parchment_from_goatskin.jpg/330px-Parchment_from_goatskin.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Parchment",
+   "x": "Parchment was prepared animal skin for writing, the parchments Paul asked Timothy to bring.",
+   "kind": "object",
+   "what": "parchments"
+  },
+  {
+   "t": "Scribal palette",
+   "w": "Inkwell",
+   "museum": "Egyptian examples in the British Museum and Metropolitan Museum of Art",
+   "refs": [
+    "Ezekiel 9:2-3",
+    "Ezekiel 9:11"
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Inkwell15.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+   "url": "https://en.wikipedia.org/wiki/Inkwell",
+   "x": "Ancient scribes carried a palette with ink wells and reed pens, the writing case on the hip of the man in linen in Ezekiel's vision.",
+   "kind": "object",
+   "what": "writing case"
+  },
+  {
+   "t": "Cylinder seal",
+   "w": "Cylinder seal",
+   "museum": "British Museum, Louvre and many Near Eastern collections",
+   "refs": [
+    "Job 38:14"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Cylinder_seal_king_Louvre_AO6620.jpg/330px-Cylinder_seal_king_Louvre_AO6620.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Cylinder_seal",
+   "x": "A cylinder seal rolled across wet clay leaves its picture behind, the image behind clay under the seal in Job.",
+   "kind": "object",
+   "what": "seal"
+  },
+  {
+   "t": "Bulla",
+   "w": "Bulla (seal)",
+   "museum": "Hundreds of Judean bullae in the Israel Museum and other collections",
+   "refs": [
+    "Jeremiah 32:10-14"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Accountancy_clay_envelope_Louvre_Sb1932.jpg/330px-Accountancy_clay_envelope_Louvre_Sb1932.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Bulla_(seal)",
+   "x": "Clay bullae pressed with a seal closed rolled documents, the way Jeremiah's land deed was sealed.",
+   "kind": "object",
+   "what": "sealed deed"
+  },
+  {
+   "t": "LMLK seal",
+   "w": "LMLK seal",
+   "museum": "Israel Museum, Jerusalem, and many excavated jar handles",
+   "refs": [
+    "2 Chronicles 32:27-29"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Lmlk-seal_impression-h2d-gg22_2003-02-21.jpg/330px-Lmlk-seal_impression-h2d-gg22_2003-02-21.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/LMLK_seal",
+   "x": "Jar handles stamped 'belonging to the king' come from Hezekiah's reign and show the royal storehouses he filled.",
+   "kind": "object",
+   "what": "royal storage jars"
+  },
+  {
+   "t": "Elephantine papyri",
+   "w": "Elephantine papyri and ostraca",
+   "museum": "Brooklyn Museum; Egyptian Museum of Berlin",
+   "refs": [
+    "Nehemiah 2:10",
+    "Nehemiah 12:22-23"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Papyrus_narrating_the_story_of_the_wise_chancellor_Ahiqar._Aramaic_script._5th_century_BCE._From_Elephantine%2C_Egypt._Neues_Museum.jpg/330px-Papyrus_narrating_the_story_of_the_wise_chancellor_Ahiqar._Aramaic_script._5th_century_BCE._From_Elephantine%2C_Egypt._Neues_Museum.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Elephantine_papyri_and_ostraca",
+   "x": "These Jewish letters from Persian Egypt name Sanballat governor of Samaria and Johanan the high priest, men Nehemiah also names.",
+   "kind": "object",
+   "what": "letters naming Sanballat and Johanan"
+  },
+  {
+   "t": "Greek Magical Papyri",
+   "w": "Greek Magical Papyri",
+   "museum": "British Library, Louvre, Berlin and other collections",
+   "refs": [
+    "Acts 19:18-19"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Greco-Roman_Set.jpg/330px-Greco-Roman_Set.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Greek_Magical_Papyri",
+   "x": "These papyrus spell books show the kind of magic books the Ephesians burned.",
+   "kind": "object",
+   "what": "books of magic"
+  },
+  {
+   "t": "Teraphim",
+   "w": "Teraphim",
+   "museum": "Small household figurines excavated at Near Eastern sites",
+   "refs": [
+    "Genesis 31:19",
+    "Genesis 31:34-35",
+    "1 Samuel 19:13"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Kircher_oedipus_aegyptiacus_26_teraphim.png/330px-Kircher_oedipus_aegyptiacus_26_teraphim.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Teraphim",
+   "x": "Teraphim were household god images small enough for Rachel to hide in a camel saddle.",
+   "kind": "object",
+   "what": "household gods"
+  },
+  {
+   "t": "Judean pillar figurines",
+   "w": "Judean pillar figure",
+   "museum": "Israel Museum, Jerusalem",
+   "refs": [
+    "2 Kings 23:4-7",
+    "Jeremiah 44:15-19"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Ceramic_Judean_pillar-based_figurine_Beth_Shemesh_Iron_II_800-586_BCE_Penn_Museum_02.jpg/330px-Ceramic_Judean_pillar-based_figurine_Beth_Shemesh_Iron_II_800-586_BCE_Penn_Museum_02.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Judean_pillar_figure",
+   "x": "Hundreds of these clay figurines from Judah are often linked to the goddess worship Josiah purged and Jeremiah condemned.",
+   "kind": "object",
+   "what": "female figurines"
+  },
+  {
+   "t": "Baal with Thunderbolt",
+   "w": "Baal with Thunderbolt",
+   "museum": "Louvre, Paris",
+   "refs": [
+    "1 Kings 18:20-40",
+    "Judges 6:25-32"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Baal_thunderbolt_Louvre_AO15775.jpg/330px-Baal_thunderbolt_Louvre_AO15775.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Baal_with_Thunderbolt",
+   "x": "This stele from Ugarit shows Baal as a storm god raising a club and a lightning spear, the god Elijah confronted on Carmel.",
+   "kind": "object",
+   "what": "Baal"
+  },
+  {
+   "t": "Massebah",
+   "w": "Matzevah",
+   "museum": "Excavated at Tel Arad and other sites; Israel Museum, Jerusalem",
+   "refs": [
+    "Genesis 28:18-22",
+    "Exodus 23:24",
+    "Deuteronomy 16:22"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Massebotlady.png/330px-Massebotlady.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Matzevah",
+   "x": "A massebah is an upright standing stone, like the pillar Jacob set up at Bethel.",
+   "kind": "object",
+   "what": "standing stone"
+  },
+  {
+   "t": "Anubis Shrine",
+   "w": "Anubis Shrine",
+   "museum": "Grand Egyptian Museum, Giza (formerly Egyptian Museum, Cairo)",
+   "refs": [
+    "Exodus 25:10-15",
+    "Joshua 3:3"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Tutankhamun_jackal.jpg/330px-Tutankhamun_jackal.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Anubis_Shrine",
+   "x": "This gilded chest from Tutankhamun's tomb rides on carrying poles, like the ark carried by the priests.",
+   "kind": "object",
+   "what": "ark with carrying poles"
+  },
+  {
+   "t": "Lamassu",
+   "w": "Lamassu",
+   "museum": "British Museum, Louvre and Institute for the Study of Ancient Cultures, Chicago",
+   "refs": [
+    "Ezekiel 1:5-10",
+    "Ezekiel 10:14"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Iraqi_Museum.jpg/330px-Iraqi_Museum.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Lamassu",
+   "x": "Assyrian guardian figures combine a man's face, a bull's body, a lion's strength and eagle's wings, the same mix Ezekiel saw in the living creatures.",
+   "kind": "object",
+   "what": "living creatures"
+  },
+  {
+   "t": "Nabu statue",
+   "w": "Nabu",
+   "museum": "British Museum, London",
+   "refs": [
+    "Isaiah 46:1"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Colossal_statue_of_the_god_Nabu%2C_8th_century_BCE%2C_from_Nimrud%2C_Iraq_Museum.jpg/330px-Colossal_statue_of_the_god_Nabu%2C_8th_century_BCE%2C_from_Nimrud%2C_Iraq_Museum.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Nabu",
+   "x": "Statues of the Babylonian god Nabu show the idol Isaiah calls Nebo, carried off on beasts of burden.",
+   "kind": "object",
+   "what": "Nebo"
+  },
+  {
+   "t": "Marduk",
+   "w": "Marduk",
+   "museum": "Shown on Babylonian cylinder seals and boundary stones",
+   "refs": [
+    "Isaiah 46:1",
+    "Jeremiah 50:2"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Chaos_Monster_and_Sun_God.png/330px-Chaos_Monster_and_Sun_God.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Marduk",
+   "x": "Babylonian images of Marduk show the chief god the prophets call Bel and Merodach.",
+   "kind": "object",
+   "what": "Bel / Merodach"
+  },
+  {
+   "t": "Magdala stone",
+   "w": "Magdala stone",
+   "museum": "Excavated at the Magdala synagogue",
+   "refs": [
+    "Exodus 25:31-40"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Magdala_Stone_%284%29.jpg/330px-Magdala_Stone_%284%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Magdala_stone",
+   "x": "This carved stone from a first-century synagogue shows a seven-branched lampstand, probably cut by someone who had seen the temple menorah.",
+   "kind": "object",
+   "what": "lampstand"
+  },
+  {
+   "t": "Ram in a Thicket",
+   "w": "Ram in a Thicket",
+   "museum": "British Museum, London; Penn Museum, Philadelphia",
+   "refs": [
+    "Genesis 22:13"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Raminathicket2.jpg/330px-Raminathicket2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Ram_in_a_Thicket",
+   "x": "Excavators named this gold goat statue from Ur after Genesis 22:13 because it shows a horned animal caught in a bush.",
+   "kind": "object",
+   "what": "ram caught in a thicket"
+  },
+  {
+   "t": "Tefillin",
+   "w": "Tefillin",
+   "museum": "Tefillin cases and slips found in the Qumran caves",
+   "refs": [
+    "Matthew 23:5",
+    "Deuteronomy 6:8"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/A_set_of_Tefillin.jpg/330px-A_set_of_Tefillin.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Tefillin",
+   "x": "Tefillin found at Qumran are tiny leather boxes holding Scripture slips, the phylacteries Jesus said some made broad for show.",
+   "kind": "object",
+   "what": "phylacteries"
+  },
+  {
+   "t": "Mezuzah",
+   "w": "Mezuzah",
+   "museum": "Mezuzah texts found at Qumran",
+   "refs": [
+    "Deuteronomy 6:9",
+    "Deuteronomy 11:20"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Mezuzah_Museum_of_the_History_of_Polish_Jews_in_Warsaw.JPG/330px-Mezuzah_Museum_of_the_History_of_Polish_Jews_in_Warsaw.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Mezuzah",
+   "x": "A mezuzah is a small Scripture case fixed to a doorpost, the practice taken from writing the words on the doorposts.",
+   "kind": "object",
+   "what": "doorpost scripture"
+  },
+  {
+   "t": "Tzitzit",
+   "w": "Tzitzit",
+   "museum": "Shown on ancient textiles and depictions",
+   "refs": [
+    "Numbers 15:37-41",
+    "Matthew 9:20",
+    "Matthew 23:5"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Tzitzis_Shot.JPG/330px-Tzitzis_Shot.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Tzitzit",
+   "x": "Tzitzit are the knotted tassels on a garment's corners, the fringe the bleeding woman touched.",
+   "kind": "object",
+   "what": "tassels"
+  },
+  {
+   "t": "Theodotus inscription",
+   "w": "Theodotos inscription",
+   "museum": "Rockefeller Museum, Jerusalem",
+   "refs": [
+    "Acts 6:9",
+    "Luke 4:16"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/8V2A3067_%2847715698331%29.jpg/330px-8V2A3067_%2847715698331%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Theodotos_inscription",
+   "x": "This first-century inscription records a Jerusalem synagogue built for reading the law and housing visitors, the kind Diaspora Jews attended in Acts 6.",
+   "kind": "object",
+   "what": "synagogue"
+  },
+  {
+   "t": "Quern-stone",
+   "w": "Quern-stone",
+   "museum": "Excavated at many Israelite and Near Eastern sites",
+   "refs": [
+    "Matthew 24:41",
+    "Exodus 11:5",
+    "Judges 9:53"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Basalt_quern.jpg/330px-Basalt_quern.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Quern-stone",
+   "x": "A hand mill of two stones ground grain at home, the mill two women grind at in Matthew 24:41.",
+   "kind": "object",
+   "what": "hand mill"
+  },
+  {
+   "t": "Donkey mill",
+   "w": "Millstone",
+   "museum": "Roman donkey mills preserved at Pompeii and Capernaum",
+   "refs": [
+    "Matthew 18:6",
+    "Mark 9:42",
+    "Revelation 18:21"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Millstone_Anatomy.jpg/330px-Millstone_Anatomy.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Millstone",
+   "x": "Large Roman millstones turned by a donkey are the mylos onikos Jesus spoke of hanging around the neck.",
+   "kind": "object",
+   "what": "great millstone"
+  },
+  {
+   "t": "Threshing board",
+   "w": "Threshing board",
+   "museum": "Traditional examples in agricultural museums",
+   "refs": [
+    "Isaiah 41:15",
+    "2 Samuel 24:22",
+    "Amos 1:3"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Trillo-1.JPG/330px-Trillo-1.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Threshing_board",
+   "x": "A threshing sledge was a heavy board studded with sharp stones or iron dragged over grain, the tool Isaiah and Amos describe.",
+   "kind": "object",
+   "what": "threshing sledge"
+  },
+  {
+   "t": "Ard",
+   "w": "Ard (plough)",
+   "museum": "Ancient examples and depictions in many collections",
+   "refs": [
+    "1 Kings 19:19",
+    "Luke 9:62",
+    "Isaiah 2:4",
+    "Micah 4:3"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/AncientPlough.jpg/330px-AncientPlough.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Ard_(plough)",
+   "x": "The simple scratch plough pulled by oxen is the plough Elisha drove and Jesus said not to look back from.",
+   "kind": "object",
+   "what": "plough"
+  },
+  {
+   "t": "Winepress",
+   "w": "Winepress",
+   "museum": "Rock-cut winepresses excavated across Israel",
+   "refs": [
+    "Isaiah 5:2",
+    "Isaiah 63:2-3",
+    "Matthew 21:33",
+    "Revelation 14:19-20"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/PikiWiki_Israel_13706_Wine_press_in_Shivta.jpg/330px-PikiWiki_Israel_13706_Wine_press_in_Shivta.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Winepress",
+   "x": "Excavated winepresses are rock-cut treading floors draining into a vat, the press dug in the vineyard of Isaiah 5 and Matthew 21.",
+   "kind": "object",
+   "what": "winepress"
+  },
+  {
+   "t": "Olive press",
+   "w": "Olive oil extraction",
+   "museum": "Excavated at Tel Miqne-Ekron, Capernaum and many sites",
+   "refs": [
+    "Matthew 26:36",
+    "Mark 14:32",
+    "Exodus 27:20"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Capernaum_roman_olive_press_by_David_Shankbone.jpg/330px-Capernaum_roman_olive_press_by_David_Shankbone.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Olive_oil_extraction",
+   "x": "Ancient olive presses crushed and squeezed olives for oil, and Gethsemane means oil press.",
+   "kind": "object",
+   "what": "oil press (Gethsemane)"
+  },
+  {
+   "t": "Potter's wheel",
+   "w": "Potter's wheel",
+   "museum": "Ancient stone wheel bearings excavated at Hazor, Lachish and elsewhere",
+   "refs": [
+    "Jeremiah 18:1-6"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/T%C3%B6pferscheibe.jpg/330px-T%C3%B6pferscheibe.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Potter's_wheel",
+   "x": "The potter's wheel of stone turned by hand or foot is what Jeremiah watched the potter working at.",
+   "kind": "object",
+   "what": "potter's wheel"
+  },
+  {
+   "t": "Plumb bob",
+   "w": "Plumb bob",
+   "museum": "Ancient Egyptian and Roman examples in many collections",
+   "refs": [
+    "Amos 7:7-8",
+    "Zechariah 4:10"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Plumb_bob.jpg/330px-Plumb_bob.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Plumb_bob",
+   "x": "A plumb line is a weight on a cord to test a wall for true, the line the Lord held against Israel in Amos 7.",
+   "kind": "object",
+   "what": "plumb line"
+  },
+  {
+   "t": "Spindle whorl",
+   "w": "Spindle whorl",
+   "museum": "Excavated at nearly every Iron Age site in Israel",
+   "refs": [
+    "Proverbs 31:19",
+    "Exodus 35:25-26"
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Wirtel01.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+   "url": "https://en.wikipedia.org/wiki/Spindle_whorl",
+   "x": "Spindle whorls are the weights on a hand spindle, the tool of the woman in Proverbs 31 spinning thread.",
+   "kind": "object",
+   "what": "spindle"
+  },
+  {
+   "t": "Warp-weighted loom",
+   "w": "Warp-weighted loom",
+   "museum": "Loom weights excavated at many Iron Age sites",
+   "refs": [
+    "1 Samuel 17:7",
+    "2 Samuel 21:19"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/Warp-weighted_loom_twill.jpg/330px-Warp-weighted_loom_twill.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Warp-weighted_loom",
+   "x": "Upright looms with a heavy wooden beam explain why Goliath's spear shaft was compared to a weaver's beam.",
+   "kind": "object",
+   "what": "weaver's beam"
+  },
+  {
+   "t": "Taboon oven",
+   "w": "Tabun oven",
+   "museum": "Excavated clay ovens at Israelite sites",
+   "refs": [
+    "Leviticus 2:4",
+    "Leviticus 26:26",
+    "Hosea 7:4-7"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Tabun_-_2.jpg/330px-Tabun_-_2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Tabun_oven",
+   "x": "The clay taboon was a small domed household oven, the oven of the grain offering and of Hosea's image.",
+   "kind": "object",
+   "what": "oven"
+  },
+  {
+   "t": "Mortar and pestle",
+   "w": "Mortar and pestle",
+   "museum": "Stone examples excavated across the Near East",
+   "refs": [
+    "Numbers 11:8",
+    "Proverbs 27:22"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/White-Mortar-and-Pestle.jpg/330px-White-Mortar-and-Pestle.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Mortar_and_pestle",
+   "x": "A stone mortar and pestle crushed grain and spices, the way Israel prepared manna.",
+   "kind": "object",
+   "what": "mortar"
+  },
+  {
+   "t": "Manger",
+   "w": "Manger",
+   "museum": "Stone mangers excavated at Megiddo and other sites",
+   "refs": [
+    "Luke 2:7",
+    "Luke 2:12",
+    "Luke 2:16"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Livestock_trough_near_Empire_Ranch_Arizona_2007.jpg/330px-Livestock_trough_near_Empire_Ranch_Arizona_2007.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Manger",
+   "x": "Ancient feeding troughs were often carved from stone, the manger where Mary laid Jesus.",
+   "kind": "object",
+   "what": "manger"
+  },
+  {
+   "t": "Wineskin",
+   "w": "Wineskin",
+   "museum": "Traditional skins and ancient depictions",
+   "refs": [
+    "Matthew 9:17",
+    "Mark 2:22",
+    "Joshua 9:4"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Bronze_statuette_of_a_satyr_with_a_torch_and_wineskin_MET_DP118083.jpg/330px-Bronze_statuette_of_a_satyr_with_a_torch_and_wineskin_MET_DP118083.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Wineskin",
+   "x": "Whole goatskins sewn up to carry wine stretched and cracked with age, which is why new wine needs new skins.",
+   "kind": "object",
+   "what": "wineskins"
+  },
+  {
+   "t": "Alabastron",
+   "w": "Alabastron",
+   "museum": "Examples in the British Museum, Louvre and Metropolitan Museum of Art",
+   "refs": [
+    "Mark 14:3",
+    "Matthew 26:7",
+    "Luke 7:37"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Alabastron_Italy_Louvre_S2375.jpg/330px-Alabastron_Italy_Louvre_S2375.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Alabastron",
+   "x": "An alabastron was a small narrow-necked flask for perfume, the alabaster jar broken over Jesus' head.",
+   "kind": "object",
+   "what": "alabaster flask"
+  },
+  {
+   "t": "Kohl",
+   "w": "Kohl (cosmetics)",
+   "museum": "Egyptian and Levantine kohl tubes in many collections",
+   "refs": [
+    "2 Kings 9:30",
+    "Jeremiah 4:30",
+    "Ezekiel 23:40"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Eye_make-up_%28mascara%29.jpg/330px-Eye_make-up_%28mascara%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Kohl_(cosmetics)",
+   "x": "Kohl was black eye paint kept in small tubes, what Jezebel put on before Jehu arrived.",
+   "kind": "object",
+   "what": "eye paint"
+  },
+  {
+   "t": "Tyrian purple",
+   "w": "Tyrian purple",
+   "museum": "Murex shell heaps excavated at Tyre and Sidon",
+   "refs": [
+    "Acts 16:14",
+    "Luke 16:19",
+    "Mark 15:17"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Purple_Purpur_%28retouched%29.jpg/330px-Purple_Purpur_%28retouched%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Tyrian_purple",
+   "x": "Purple dye from murex sea snails was costly, the trade of Lydia and the robe of the rich man.",
+   "kind": "object",
+   "what": "purple cloth"
+  },
+  {
+   "t": "Mummy",
+   "w": "Mummy",
+   "museum": "Egyptian mummies in the British Museum, Cairo and many collections",
+   "refs": [
+    "Genesis 50:2-3",
+    "Genesis 50:26"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Ramses_I_Mummy.jpg/330px-Ramses_I_Mummy.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Mummy",
+   "x": "Egyptian mummies show the embalming that took forty days for Jacob and placed Joseph in a coffin in Egypt.",
+   "kind": "object",
+   "what": "embalming"
+  },
+  {
+   "t": "Yehohanan",
+   "w": "Jehohanan",
+   "museum": "Excavated at Givat HaMivtar, Jerusalem; replica in the Israel Museum",
+   "refs": [
+    "John 19:16-18",
+    "John 20:25"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Hombre_de_Giv%27at_ha-Mivtar..jpg/330px-Hombre_de_Giv%27at_ha-Mivtar..jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Jehohanan",
+   "x": "The heel bone of a crucified man named Yehohanan still has the iron nail through it, physical evidence of Roman crucifixion in Jerusalem.",
+   "kind": "object",
+   "what": "crucifixion nail"
+  },
+  {
+   "t": "Alexamenos graffito",
+   "w": "Alexamenos graffito",
+   "museum": "Palatine Museum, Rome",
+   "refs": [
+    "1 Corinthians 1:23",
+    "Mark 15:29-32"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Christparody.jpg/330px-Christparody.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Alexamenos_graffito",
+   "x": "This Roman wall scratching mocks a Christian worshipping a crucified figure with a donkey's head, the foolishness of the cross Paul names.",
+   "kind": "object",
+   "what": "mockery of the cross"
+  },
+  {
+   "t": "Stocks",
+   "w": "Stocks",
+   "museum": "Known from ancient sources and later examples",
+   "refs": [
+    "Acts 16:24",
+    "Jeremiah 20:2"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Stocks_%28PSF%29.png/330px-Stocks_%28PSF%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Stocks",
+   "x": "Stocks clamped a prisoner's feet in a wooden frame, how Paul and Silas were held at Philippi.",
+   "kind": "object",
+   "what": "stocks"
+  },
+  {
+   "t": "Herod's Family Tomb",
+   "w": "Herod's family tomb",
+   "museum": "Excavated in Jerusalem",
+   "refs": [
+    "Mark 15:46",
+    "Mark 16:3-4",
+    "Matthew 27:60"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Old_tomb_entrance_%284160525370%29.jpg/330px-Old_tomb_entrance_%284160525370%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Herod's_family_tomb",
+   "x": "This first-century Jerusalem tomb still has its round blocking stone, the kind rolled across the entrance of Jesus' tomb.",
+   "kind": "object",
+   "what": "rolling stone tomb"
+  },
+  {
+   "t": "Kyrenia ship",
+   "w": "The Kyrenia Ship",
+   "museum": "Kyrenia Castle Shipwreck Museum, Cyprus",
+   "refs": [
+    "Jonah 1:3-5",
+    "Acts 27:1-8"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Kyrenia_ship.jpg/330px-Kyrenia_ship.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/The_Kyrenia_Ship",
+   "x": "This small Greek merchant ship from about 300 BC shows the kind of coastal trading vessel Jonah boarded at Joppa.",
+   "kind": "object",
+   "what": "merchant ship"
+  },
+  {
+   "t": "Uluburun shipwreck",
+   "w": "Uluburun shipwreck",
+   "museum": "Bodrum Museum of Underwater Archaeology, Turkey",
+   "refs": [
+    "Ezekiel 27:12-25",
+    "1 Kings 10:22"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Uluburun1.jpg/330px-Uluburun1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Uluburun_shipwreck",
+   "x": "This Late Bronze Age wreck carried copper, tin, glass, ivory and spices, the mixed cargo of the trade Ezekiel lists for Tyre.",
+   "kind": "object",
+   "what": "ships of Tarshish trade"
+  },
+  {
+   "t": "Chariots of Tutankhamun",
+   "w": "Chariots of Tutankhamun",
+   "museum": "Grand Egyptian Museum, Giza (formerly Egyptian Museum, Cairo)",
+   "refs": [
+    "Exodus 14:6-9",
+    "Genesis 41:43"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Tutankhamun_KV62_Chariot_%281999%29.jpg/330px-Tutankhamun_KV62_Chariot_%281999%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Chariots_of_Tutankhamun",
+   "x": "These light two-wheeled Egyptian chariots show the vehicle Pharaoh's army drove into the sea.",
+   "kind": "object",
+   "what": "chariot"
+  },
+  {
+   "t": "Tomb of Rekhmire",
+   "w": "TT100",
+   "museum": "Theban tomb TT100, Luxor",
+   "refs": [
+    "Exodus 1:14",
+    "Exodus 5:6-19"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/TT100.jpg/330px-TT100.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/TT100",
+   "x": "Paintings in this tomb show foreign labourers making mud bricks under taskmasters, the work Israel did in Egypt.",
+   "kind": "object",
+   "what": "brickmaking"
+  },
+  {
+   "t": "Ziggurat of Ur",
+   "w": "Ziggurat of Ur",
+   "museum": "Excavated at Tell el-Muqayyar, Iraq",
+   "refs": [
+    "Genesis 11:1-9",
+    "Genesis 11:31"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Ziggarat_of_Ur_001.jpg/330px-Ziggarat_of_Ur_001.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Ziggurat_of_Ur",
+   "x": "This stepped brick temple tower from Abram's city shows the kind of tower the builders of Babel set out to make.",
+   "kind": "object",
+   "what": "tower of Babel"
+  },
+  {
+   "t": "Deir Alla Inscription",
+   "w": "Deir Alla inscription",
+   "museum": "Jordan Archaeological Museum, Amman",
+   "refs": [
+    "Numbers 22-24"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Deir_%27Alla_Inscription.png/330px-Deir_%27Alla_Inscription.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Deir_Alla_inscription",
+   "x": "This plaster text names Balaam son of Beor as a seer of the gods, the same prophet hired by Balak.",
+   "kind": "object",
+   "what": "Balaam son of Beor"
+  },
+  {
+   "t": "Apadana",
+   "w": "Apadana",
+   "museum": "Excavated at Persepolis and Susa",
+   "refs": [
+    "Esther 1:5-6"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Persepolis001.jpg/330px-Persepolis001.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Apadana",
+   "x": "The columned audience halls of the Persian kings show the setting of the king's feast in Esther 1.",
+   "kind": "object",
+   "what": "Persian royal hall"
+  },
+  {
+   "t": "Oxus Treasure",
+   "w": "Oxus Treasure",
+   "museum": "British Museum, London",
+   "refs": [
+    "Esther 1:7"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/The_Oxus_Treasure_at_the_British_Museum%2C_London._From_Takht-i_Kuwad%2C_Tajikistan._Achaemenid_period%2C_5th-4th_century_BCE.jpg/330px-The_Oxus_Treasure_at_the_British_Museum%2C_London._From_Takht-i_Kuwad%2C_Tajikistan._Achaemenid_period%2C_5th-4th_century_BCE.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Oxus_Treasure",
+   "x": "Gold cups and ornaments from the Persian empire show the kind of golden vessels served at Ahasuerus's banquet.",
+   "kind": "object",
+   "what": "golden vessels"
+  },
+  {
+   "t": "East India House Inscription",
+   "w": "East India House Inscription",
+   "museum": "British Museum, London",
+   "refs": [
+    "Daniel 4:29-30"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/British_Museum_inscribed_stone_of_Nebuchadnezzar_II.jpg/330px-British_Museum_inscribed_stone_of_Nebuchadnezzar_II.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/East_India_House_Inscription",
+   "x": "In this stone text Nebuchadnezzar boasts of building Babylon, the same boast he makes in Daniel 4.",
+   "kind": "object",
+   "what": "Nebuchadnezzar's Babylon"
+  },
+  {
+   "t": "Venus tablet of Ammisaduqa",
+   "w": "Venus tablet of Ammisaduqa",
+   "museum": "British Museum, London",
+   "refs": [
+    "Isaiah 47:13",
+    "Daniel 2:27"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Venus_Tablet_of_Ammisaduqa.jpg/330px-Venus_Tablet_of_Ammisaduqa.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Venus_tablet_of_Ammisaduqa",
+   "x": "This Babylonian omen tablet records Venus sightings to predict the future, the star-gazing Isaiah mocked.",
+   "kind": "object",
+   "what": "astrologers"
+  },
+  {
+   "t": "Clay liver model",
+   "w": "Haruspex",
+   "museum": "Babylonian clay liver models, British Museum, London; Etruscan bronze Liver of Piacenza, Piacenza",
+   "refs": [
+    "Ezekiel 21:21"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Piacenza_Bronzeleber.jpg/330px-Piacenza_Bronzeleber.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Haruspex",
+   "x": "Ancient liver models, Babylonian clay ones and the later Etruscan bronze liver of Piacenza, were used to read omens, the method the king of Babylon used at the crossroads.",
+   "kind": "object",
+   "what": "looking at the liver"
+  },
+  {
+   "t": "Augustus of Prima Porta",
+   "w": "Augustus of Prima Porta",
+   "museum": "Vatican Museums, Rome",
+   "refs": [
+    "Luke 2:1"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Statue-Augustus.jpg/330px-Statue-Augustus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Augustus_of_Prima_Porta",
+   "x": "This statue shows Augustus as the emperor whose decree sent Joseph and Mary to Bethlehem.",
+   "kind": "object",
+   "what": "Caesar Augustus"
+  },
+  {
+   "t": "Victory Stele of Esarhaddon",
+   "w": "Esarhaddon",
+   "museum": "Pergamon Museum, Berlin",
+   "refs": [
+    "2 Kings 19:28",
+    "2 Kings 19:37",
+    "Isaiah 37:29",
+    "2 Chronicles 33:11"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Detail._Sam%27al_stele_of_Esarhaddon%2C_671_BCE%2C_Pergamon_Museum.jpg/330px-Detail._Sam%27al_stele_of_Esarhaddon%2C_671_BCE%2C_Pergamon_Museum.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Esarhaddon",
+   "x": "This stele from Sam'al shows Esarhaddon holding captives by cords fixed to rings through their lips, the treatment the prophets meant by a hook in the nose.",
+   "kind": "object",
+   "what": "hooks in the nose"
+  },
+  {
+   "t": "Tomb painting of Khnumhotep II",
+   "w": "Khnumhotep II",
+   "museum": "Excavated at Beni Hasan, Egypt",
+   "refs": [
+    "Genesis 12:10",
+    "Genesis 46:5-7"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Beni-Hassan-KhnoumhotepII.jpg/330px-Beni-Hassan-KhnoumhotepII.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Khnumhotep_II",
+   "x": "A wall painting in his tomb shows a Semitic clan with donkeys and colourful clothes arriving in Egypt, like the patriarchs' journeys.",
+   "kind": "object",
+   "what": "Semitic travellers into Egypt"
   }
  ]
 }
