@@ -911,12 +911,39 @@
   }, { alsoRefs: [] }, function (d) { return d ? (d.posts || []).length : null; });
 
   // ------------------------------------------------------------------ Library (Corpus Atlas)
-  define("Library", { id: "corpus", label: "Library", name: "Corpus Library", icon: ICON.corpus }, {
+  /* Tools: the free study sites, each opened straight at the passage on screen, then the texts outside the Bible tied to it.
+     One place for the free tools that are otherwise scattered across the web. Book names per site, in canonical order. */
+  var SITE_BOOK = {
+    blb: "gen exo lev num deu jos jdg rth 1sa 2sa 1ki 2ki 1ch 2ch ezr neh est job psa pro ecc sng isa jer lam eze dan hos joe amo oba jon mic nah hab zep hag zec mal mat mar luk jhn act rom 1co 2co gal eph phl col 1th 2th 1ti 2ti tit phm heb jas 1pe 2pe 1jo 2jo 3jo jde rev".split(" "),
+    osis: "Gen Exod Lev Num Deut Josh Judg Ruth 1Sam 2Sam 1Kgs 2Kgs 1Chr 2Chr Ezra Neh Esth Job Ps Prov Eccl Song Isa Jer Lam Ezek Dan Hos Joel Amos Obad Jonah Mic Nah Hab Zeph Hag Zech Mal Matt Mark Luke John Acts Rom 1Cor 2Cor Gal Eph Phil Col 1Thess 2Thess 1Tim 2Tim Titus Phlm Heb Jas 1Pet 2Pet 1John 2John 3John Jude Rev".split(" "),
+    sefaria: "Genesis Exodus Leviticus Numbers Deuteronomy Joshua Judges Ruth I_Samuel II_Samuel I_Kings II_Kings I_Chronicles II_Chronicles Ezra Nehemiah Esther Job Psalms Proverbs Ecclesiastes Song_of_Songs Isaiah Jeremiah Lamentations Ezekiel Daniel Hosea Joel Amos Obadiah Jonah Micah Nahum Habakkuk Zephaniah Haggai Zechariah Malachi".split(" ")
+  };
+  function toolLinks(q) {
+    var b = R.book(q.book), i = b.order, name = b.name === "Psalm" ? "Psalms" : b.name, c = q.c1, v = q.v1 || 1, one = b.chapters === 1;
+    var full = q.v2 && q.v2 !== 999 && !(q.c1 === q.c2 && q.v1 === 1 && q.v2 === 999), ref = name + " " + c + (full ? ":" + v : "");
+    var hub = name.toLowerCase().replace(/ /g, "_").replace("song_of_songs", "songs");
+    var ew = (b.name === "Psalm" ? "psalm" : b.name === "Song of Songs" ? "song-of-solomon" : b.name.toLowerCase().replace(/ /g, "-")) + "-" + c;
+    var L = [
+      ["Blue Letter Bible", "Interlinear, lexicons and commentaries, in the LSB", "https://www.blueletterbible.org/lsb/" + SITE_BOOK.blb[i] + "/" + c + "/" + v + "/"],
+      ["Bible Hub", "Interlinear, parallel versions and many commentaries", full ? "https://biblehub.com/interlinear/" + hub + "/" + c + "-" + v + ".htm" : "https://biblehub.com/" + hub + "/" + c + ".htm"],
+      ["Bible Hub commentaries", "Every commentary they carry on this verse", "https://biblehub.com/commentaries/" + hub + "/" + c + "-" + v + ".htm"],
+      ["STEPBible", "Tyndale House: original-language study, free", "https://www.stepbible.org/?q=version=ESV|reference=" + SITE_BOOK.osis[i] + "." + c + (full ? "." + v : "")],
+      ["NET Bible", "The NET with all its translators' notes", "https://netbible.org/bible/" + encodeURIComponent(name + " " + c)],
+      ["Bible Gateway", "LSB, NASB, ESV and NET side by side", "https://www.biblegateway.com/passage/?search=" + encodeURIComponent(ref) + "&version=LSB;NASB;ESV;NET"],
+      ["OpenBible cross references", "What the rest of the Bible says, ranked by votes", "https://www.openbible.info/labs/cross-references/search?q=" + encodeURIComponent(name + " " + c + ":" + v)],
+      ["Enduring Word", "David Guzik's free commentary", "https://enduringword.com/bible-commentary/" + ew + "/"]
+    ];
+    if (i < 39) L.push(["Sefaria", "The Hebrew with Jewish commentary (Rashi, Ramban ...)", "https://www.sefaria.org/" + SITE_BOOK.sefaria[i] + "." + c + (full ? "." + v : "") + "?lang=bi"]);
+    return L;
+  }
+  define("Library", { id: "corpus", label: "Tools", name: "Free tools and texts", icon: ICON.corpus }, {
     view: function () {
-      var lib = L(this, "library");
-      var h = lib.length ? lib.map(function (c) { return box("witness", "", '<div class="item"><span class="when">' + esc(c.when) + '</span><span class="tt">' + esc(c.t) + '</span><span class="sub">' + esc(c.trad) + '</span><p class="u-m8-0 u-fs15">' + esc(c.why) + "</p></div>"); }).join("")
-        : none("No library text is tied to " + esc(this.o.ref) + " yet.");
-      return { kick: "Corpus Library \u00B7 " + lib.length + " of 854 texts", title: "Outside the Bible", body: h + outlink(CFG.corpus, "Open the Corpus Atlas") };
+      var lib = L(this, "library"), q = data.segs(this.o.ref)[0], h = "";
+      if (q) h += '<div class="lbl">Free tools on ' + esc(this.o.ref) + "</div>" + box("scripture", "", '<div class="item">' + toolLinks(q).map(function (t) {
+        return '<p class="u-m8">' + outlink(t[2], esc(t[0])) + '<br><span class="u-fs15">' + esc(t[1]) + "</span></p>"; }).join("") + "</div>");
+      h += '<div class="lbl u-mt14">Texts outside the Bible (' + lib.length + ")</div>" + (lib.length ? lib.map(function (c) { return box("witness", "", '<div class="item"><span class="when">' + esc(c.when) + '</span><span class="tt">' + esc(c.t) + '</span><span class="sub">' + esc(c.trad) + '</span><p class="u-m8-0 u-fs15">' + esc(c.why) + "</p></div>"); }).join("")
+        : none("No text outside the Bible is tied to " + esc(this.o.ref) + " yet.")) + outlink(CFG.corpus, "Open the Corpus Atlas");
+      return { kick: "Tools \u00B7 free study sites at this passage", title: "Free tools", body: h };
     }
   }, {}, function (d) { return d ? (d.library || []).length : null; });
 
