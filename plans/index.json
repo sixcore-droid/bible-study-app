@@ -33,6 +33,11 @@
    "name": "F260 Memory Verses"
   },
   {
+   "id": "ot-reading-plan",
+   "file": "plans/ot-reading-plan.json",
+   "name": "My OT Reading Plan"
+  },
+  {
    "id": "gospels-together",
    "file": "plans/gospels-together.json",
    "name": "The Gospels Together"

@@ -44,7 +44,6 @@
       <label class="lbl" for="plan">Reading plan</label>
       <select id="plan"></select>
       <label class="planopt"><input type="checkbox" id="addpsalm"> Matching psalm</label>
-      <label class="planopt"><input type="checkbox" id="skiplists"> Skip genealogies &amp; lists</label>
     </div>
     <div>
       <h2 class="planname" id="planname"></h2>
@@ -59,7 +58,6 @@
   </aside>
 
   <main class="reader" id="reader">
-    <p class="banner" id="banner" hidden></p>
     <div class="rtabs" id="rtabs" role="tablist" aria-label="Today's readings"></div>
     <div class="rhead">
       <div>
@@ -256,7 +254,7 @@ function initNote(id, force){
   const n=ST.c("notes").peek(id)||{}; NOTES[id]={text:n.text||"", pub:!!n.pub, savedAt:n.updatedAt||null, obsidian:n.obsidian||null};
   const dr=ST.c("drafts").peek(id); if(dr){ NOTES[id].text=dr.text; NOTES[id].pub=!!dr.pub; DIRTY[id]=true }
 }
-const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:store.get("skipLists",false),
+const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:false   /* the box is gone (6 Oct): "My OT Reading Plan" leaves the genealogies out instead */,
            size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read")};
 /* public build: Read along only; no My desk switch, no prototype badge */
 if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
@@ -408,10 +406,6 @@ function renderReader(){
   document.body.classList.toggle("view-public",pub);
   document.querySelectorAll("#viewsw button").forEach(b=>{const on=b.dataset.view===S.view;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
   $("viewsw").hidden = !OWNER;
-  $("banner").hidden = !pub;
-  $("banner").innerHTML = PUBLIC   /* the public site has no saved notes to show (they live on James's own copy) */
-    ? `<b>Read at your own pace.</b> Pick a plan and start at day 1, with ten Bibles and the same study tools James uses. Pick any version you like; it only changes your screen.`
-    : `<b>Reading along with James.</b> Today's plan, the same Bible and tools, and the notes he has made public. Pick any version you like; it only changes your screen.`;
   $("mynotes").hidden = pub;
   $("markdone").hidden = pub || !!S.adhoc;
   $("pubnote").hidden = !pub || PUBLIC;   // the public site has no saved notes
@@ -685,9 +679,8 @@ document.addEventListener("keydown",e=>{
   if(e.key==="Escape"&&S.tool&&$("helpview").hidden&&!document.querySelector(".jst-mapview")&&!(e.target.closest&&e.target.closest("input,textarea,select,[contenteditable]"))){openTool(S.tool)}
 });
 $("pclose").onclick=()=>openTool(S.tool);
-$("addpsalm").checked=S.addPsalm; $("skiplists").checked=S.skipLists;
+$("addpsalm").checked=S.addPsalm;
 $("addpsalm").onchange=e=>{ S.addPsalm=e.target.checked; store.set("addPsalm",S.addPsalm); S.reading=0; buildDay(); render() };
-$("skiplists").onchange=e=>{ S.skipLists=e.target.checked; store.set("skipLists",S.skipLists); S.reading=0; buildDay(); render() };
 /* Find in the text: marks every match in the passage on screen, Enter for the next, Shift+Enter for the previous, Esc to clear.
    Ctrl/Cmd+F goes to the box. It searches the words as shown, so it ignores verse numbers and markup. */
 let FIND_I = 0;

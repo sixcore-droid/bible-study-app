@@ -252,7 +252,7 @@ mark.hit.now{background:var(--gold);color:var(--paper-deep)}
 .versel{background:var(--paper-deep);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:5px 8px;font:500 15px var(--read)}
 .rctl{flex-wrap:wrap}
 .rctl button{border:1px solid var(--line);border-radius:6px;padding:5px 10px;font-family:var(--label);font-size:13px}
-.text{max-width:68ch;background:var(--paper-deep);border:1px solid var(--line);border-left:3px solid var(--edge-text);border-radius:6px;padding:16px 22px}
+.text{max-width:none;background:var(--paper-deep);border:1px solid var(--line);border-left:3px solid var(--edge-text);border-radius:6px;padding:16px 22px}
 .text.par{max-width:none}
 .tbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .tbar .chnav{margin-left:auto;gap:6px}
