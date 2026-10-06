@@ -164,7 +164,7 @@
      ref.ly only sends the browser to Logos on the web, so it is the fallback for a version not in his library.
      A list ("Daniel 10:13, 20-21") gets one link per part; Song of Songs must be "Song".
      Checked 3 Oct 2026 by opening links in Logos: LSB 1 Kings 22:19, Song 2:4, NLT Psalm 82:1-8, a study Bible at 1 Kings 22:19. */
-  var LOGOS_ID = { LSB: "LGCYSTNDRDBBLSB", NLT: "1.0.171", ESV: "1.0.710", NET: "NETBIBLE2ED", KJV: "KJV1900", CSB: "CSB", NASB: "NASB2020", NIV: "NIV2011", NKJV: "1.0.30" };
+  var LOGOS_ID = { LSB: "LGCYSTNDRDBBLSB", NLT: "1.0.171", ESV: "1.0.710", NET: "NETBIBLE2ED", KJV: "KJV1900", CSB: "CSB", NASB: "NASB2020", MSG: "1.0.165", NIV: "NIV2011", NKJV: "1.0.30" };
   function logosRef(s) {
     var bk = book(s.book), tok = REFLY_BOOK[s.book] || s.book.replace(/\s+/g, ""), one = bk && bk.chapters === 1, r;
     if (s.v1 === 1 && s.v2 === 999) r = s.c1 === s.c2 ? (one ? "1" : String(s.c1)) : s.c1 + "-" + s.c2;

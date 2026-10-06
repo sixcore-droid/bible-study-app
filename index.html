@@ -127,7 +127,7 @@
 let PLANINDEX=null, PLANS={}, READINGS=[];
 /* Versions whose text carries the dotted word links (the [w:key] markers in the text files). */
 const LINKED = ["LSB","ESV","NET"];
-const VERNAMES = {LSB:"Legacy Standard Bible",NLT:"New Living Translation",ESV:"English Standard Version",NET:"New English Translation",BSB:"Berean Standard Bible",CSB:"Christian Standard Bible",KJV:"King James Version"};
+const VERNAMES = {LSB:"Legacy Standard Bible",NLT:"New Living Translation",ESV:"English Standard Version",NET:"New English Translation",BSB:"Berean Standard Bible",CSB:"Christian Standard Bible",NASB:"New American Standard Bible 2020",MSG:"The Message",LXX:"Brenton Septuagint (Greek OT in English)",KJV:"King James Version"};
 
 /* Everything the side panels show comes from the data files listed in docs/DEVELOPER.md section 3 (text/, index/, study/ ...),
    built by scripts/build-*.py from the tools' own data, jayms.com, the vault and the synced Claude chats. */
@@ -374,7 +374,9 @@ function renderReader(){
   if(!rows) $("text").innerHTML = `<p class="empty">Loading ${esc(r.ref)}…</p>`;
   else if(!rows.length) $("text").innerHTML = `<p class="empty">There's no text for ${esc(r.ref)} in the data yet.</p>`;
   else $("text").innerHTML =
-      (missing.length ? `<p class="empty nover">${missing.map(v=>VERNAMES[v]).join(" and ")} ${missing.length>1?"aren't":"isn't"} loaded for ${esc(r.ref)} yet, so ${missing.length>1?"they show":"it shows"} the NET.</p>` : "")
+      (missing.length ? `<p class="empty nover">${missing.length===1 && missing[0]==="LXX" && JaymsRef.book(rows[0].book) && JaymsRef.book(rows[0].book).order>=39
+          ? "The Septuagint is the Old Testament only, so this column shows the NET."
+          : `${missing.map(v=>VERNAMES[v]).join(" and ")} ${missing.length>1?"aren't":"isn't"} loaded for ${esc(r.ref)} yet, so ${missing.length>1?"they show":"it shows"} the NET.`}</p>` : "")
     + (par
       ? `<div class="phdr">${eff.map((v,c)=>`<span class="lbl">${v}${readBtns(c)}</span>`).join("")}</div><div class="pgrid">`
         + blocks.map((b,n)=>b.label?`<div class="pcell seglbl lbl" style="grid-column:1 / -1;grid-row:${n+1};--o:${n*2}">${esc(b.label)}</div>`:"").join("")
@@ -397,7 +399,7 @@ function renderReader(){
   $("viewsw").hidden = !OWNER;
   $("banner").hidden = !pub;
   $("banner").innerHTML = PUBLIC   /* the public site has no saved notes to show (they live on James's own copy) */
-    ? `<b>Read at your own pace.</b> Pick a plan and start at day 1, with seven Bibles and the same study tools James uses. Pick any version you like; it only changes your screen.`
+    ? `<b>Read at your own pace.</b> Pick a plan and start at day 1, with ten Bibles and the same study tools James uses. Pick any version you like; it only changes your screen.`
     : `<b>Reading along with James.</b> Today's plan, the same Bible and tools, and the notes he has made public. Pick any version you like; it only changes your screen.`;
   $("mynotes").hidden = pub;
   $("markdone").hidden = pub || !!S.adhoc;
