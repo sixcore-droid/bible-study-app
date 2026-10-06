@@ -1014,6 +1014,18 @@
       var objs = rel.filter(function (x) { return x.kind === "object"; }), finds = rel.filter(function (x) { return x.kind !== "object"; });
       if (objs.length) h += '<div class="lbl u-mt14">Objects in the story (' + objs.length + ")</div>" + objs.map(card).join("");
       if (finds.length) h += '<div class="lbl u-mt14">Relics and inscriptions (' + finds.length + ")</div>" + finds.map(card).join("");
+      /* more in the museums' own collections: searched by the scene's main name (Jericho, Isaac, Pilate), or the book's */
+      var key = (function () { var t = (sc[0] || near[0] || {}).t || "", ws = t.match(/\b[A-Z][a-z\u00C0-\u017F']+\b/g) || [];
+        ws = ws.filter(function (w) { return !/^(The|A|An|Parable|Christ|Jesus|God|Lord|Saint|St|Creation|Division|Return|Fall|Sacrifice)$/.test(w); });
+        if (ws.length) return ws[ws.length - 1].replace(/'s$/, "");
+        t = t.split(" \u00B7 ")[0].replace(/^(the\s+)?(parable of\s+)?(the\s+)?/i, "");   // "Parable of the lost sheep" -> "lost sheep"
+        return t || this.o.ref; }).call(this);
+      h += '<div class="lbl u-mt14">More in the museums</div><p class="u-fs15">' + [
+        ["British Museum", "https://www.britishmuseum.org/collection/search?keyword=" + encodeURIComponent(key), key],
+        ["Museum of the Bible", "https://collections.museumofthebible.org/search?q=" + encodeURIComponent(bk === "Psalm" ? "Psalms" : bk), bk === "Psalm" ? "Psalms" : bk],
+        ["Index of Medieval Art", "https://theindex.princeton.edu/", ""]
+      ].map(function (m) { return outlink(m[1], m[0]) + (m[2] ? ' <span class="sub">' + esc(m[2]) + "</span>" : ""); }).join(" \u00B7 ") +
+        '</p><p class="ctx u-fs13">The Index of Medieval Art has no search link: search it for ' + esc(key) + " once it opens.</p>";
       h += '<p class="ctx u-fs13">Paintings: works museums have tagged with the scene’s <a href="https://iconclass.org/" target="_blank" rel="noopener">Iconclass</a> subject, from Wikidata, and Wikimedia Commons scene collections; photos on Wikimedia Commons (each Source link has the details). Objects and relics: photos and articles from Wikipedia (CC BY-SA). Tap a picture for full screen.</p>';
       var all = sc.concat(near), nw = all.reduce(function (n, x) { return n + x.works.length; }, 0);
       return { kick: "Art · " + (all.length ? all.length + " scene" + (all.length > 1 ? "s" : "") + ", " + nw + " works" : "no scenes") + (rel.length ? ", " + rel.length + " objects and relics" : ""), title: "Art and relics", body: h };
