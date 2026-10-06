@@ -1,1 +1,1 @@
-{"version":"v121","date":"2026-10-06 15:43","note":"BP button renamed Media (videos, podcasts and articles)"}
+{"version":"v122","date":"2026-10-06 15:47","note":"Art panel pictures: fetched through a relay (desk server /api/art, snippet 254 /art on jayms.com) since the museum's image server turns browsers away; full-name portrait titles dropped"}

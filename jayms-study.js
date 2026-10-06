@@ -65,7 +65,11 @@
               onlineMaps: /(^|\.)jayms\.com$|\.github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname),
               /* the podcast relay (Podcast Index needs a secret and refuses browsers): the site's snippet 254, or the local server */
               podcastAPI: global.JAYMS_PUBLIC ? location.origin + "/wp-json/jayms-bsa/v1/podcasts"
-                        : /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.origin + "/api/podcasts" : null };
+                        : /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.origin + "/api/podcasts" : null,
+              /* the art relay: the Art Institute's image server turns browsers away, so the site's snippet 254 or the local server fetches the picture */
+              artAPI: global.JAYMS_PUBLIC ? location.origin + "/wp-json/jayms-bsa/v1/art"
+                        : /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.origin + "/api/art" : null };
+  function artImg(id, w) { return CFG.artAPI ? CFG.artAPI + "?id=" + encodeURIComponent(id) + "&w=" + (w || 400) : "https://www.artic.edu/iiif/2/" + id + "/full/" + (w || 400) + ",/0/default.jpg"; }
   function config(o) { Object.assign(CFG, o || {}); return CFG; }
   /* Every link goes to the exact page, never a guess. Each pattern was checked against jayms.com:
      an entry has its own page at <tool>/<id>/; the Interleaved Bible opens a passage with #read=Book|Ref. */
@@ -975,7 +979,7 @@
           var sw0 = story.filter(function (w) { return new RegExp("\\b" + w, "i").test(t); }).length;
           if (!hit.length && !(self.nobody && sw0 >= (story.length > 1 ? 2 : 1))) return;
           if (hit.length === 1 && hit[0] !== names[0] && !sw0) return;   // only a minor name and nothing of the story: likely another Darius
-          if (/^[A-Z][a-z]+ [A-Z][a-z]+$/.test(t.trim()) && hit.length < 2) return;   // "Daniel Mytens": a portrait of someone else
+          if (/^([A-Z][a-z]+\.? ){1,3}[A-Z][a-z]+$/.test(t.trim()) && hit.length < 2) return;   // "Daniel Mytens", "Samuel Fisher Bradford": a portrait of someone else
           if (/(\bMrs?\.|\b(Portrait|Priory|Church|Chapel|Cathedral|Street|Avenue|Saint|St\.)\b)/i.test(t)) return;   // a namesake, not the Bible figure
           var sw = story.filter(function (w) { return new RegExp("\\b" + w, "i").test(t); }).length;
           seen[a.id] = 1; a._sc = hit.length * 2 + sw * 3; out.push(a);
@@ -988,8 +992,8 @@
       if (!CFG.onlineMaps) return { kick: "Art", title: "Art of this passage", body: none("Pictures from other sites can't show here. Open the app on jayms.com or your desk.") };
       var a = this.art || [], what = this.who.length ? this.who.join(", ") + (this.story && this.story.length ? " (" + this.story.slice(0, 3).join(", ") + ")" : "") : (this.story || []).slice(0, 2).join(" ");
       var h = '<p class="ctx">Searched for ' + esc(what || this.o.ref) + '.</p>';
-      h += a.length ? '<div class="jst-artgrid">' + a.map(function (x) {
-        return '<figure><img src="https://www.artic.edu/iiif/2/' + esc(x.image_id) + '/full/400,/0/default.jpg" alt="' + esc(x.title) + '" loading="lazy" data-jst-art="' + esc(x.image_id) + '" data-t="' + esc(x.title) + '" role="button" tabindex="0">' +
+      h += a.length ? '<div class="jst-artgrid">' + a.map(function (x, n) {
+        return '<figure><img src="' + esc(artImg(x.image_id, 400)) + '" alt="' + esc(x.title) + '"' + (n >= 8 ? ' loading="lazy"' : "") + ' referrerpolicy="no-referrer" data-jst-art="' + esc(x.image_id) + '" data-t="' + esc(x.title) + '" role="button" tabindex="0">' +
           '<figcaption><b>' + esc(x.title) + "</b><br>" + esc([x.artist_title, x.date_display].filter(Boolean).join(", ")) + " " + outlink("https://www.artic.edu/artworks/" + x.id, "Museum") + "</figcaption></figure>"; }).join("") + "</div>"
         : none("No public-domain artwork at the Art Institute matches " + esc(what || this.o.ref) + ".");
       h += '<p class="ctx u-fs13">From the <a href="https://www.artic.edu/collection" target="_blank" rel="noopener">Art Institute of Chicago</a>, public-domain works only. Tap a picture for full screen.</p>';
@@ -997,7 +1001,7 @@
     },
     click: function (e) {
       var im = e.target.closest("[data-jst-art]");
-      if (im) { e.stopPropagation(); var id = im.getAttribute("data-jst-art"); mapViewer({ id: "art-" + id, t: im.getAttribute("data-t"), img: "https://www.artic.edu/iiif/2/" + id + "/full/1686,/0/default.jpg" }); return; }
+      if (im) { e.stopPropagation(); var id = im.getAttribute("data-jst-art"); mapViewer({ id: "art-" + id, t: im.getAttribute("data-t"), img: artImg(id, 1686) }); return; }
       Panel.prototype.click.call(this, e);
     }
   }, {}, function (d) { return null; });
@@ -1495,7 +1499,7 @@
     if (!m) return;
     mapURL(m).then(function (u) {
       var v = document.createElement("div"); v.className = "jst-mapview";
-      v.innerHTML = '<div class="jst-mapbar"><span>' + esc(m.t) + '</span><button class="btn" data-x aria-label="Close">\u00D7</button></div><div class="jst-mapscroll"><img src="' + u + '" alt="' + esc(m.t) + '"></div>';
+      v.innerHTML = '<div class="jst-mapbar"><span>' + esc(m.t) + '</span><button class="btn" data-x aria-label="Close">\u00D7</button></div><div class="jst-mapscroll"><img src="' + u + '" alt="' + esc(m.t) + '" referrerpolicy="no-referrer"></div>';
       var close = function () { v.remove(); document.removeEventListener("keydown", key); };
       var key = function (e) { if (e.key === "Escape") close(); };
       v.addEventListener("click", function (e) {
