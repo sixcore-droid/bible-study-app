@@ -24,8 +24,16 @@
     <button data-view="public" aria-pressed="false">Read along</button>
   </div>
   <span class="today" id="today"></span>
+  <button class="topbtn" id="aboutbtn" aria-label="About this project" title="Why this exists">About</button>
+  <a class="topbtn support" href="https://buymeacoffee.com/JAYMS" target="_blank" rel="noopener" title="Buy me a coffee">Support</a>
   <button class="helpbtn" id="helpbtn" aria-label="Help: what everything does" title="Help">?</button>
 </header>
+<div class="helpview" id="aboutview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="About"><button class="x" id="aboutclose" aria-label="Close">×</button>
+  <h2>Why this exists</h2>
+  <p>There are a lot of free Bible study tools out there, and they are scattered across the web. This is an attempt to build something easy to use and intuitive: one stop for those free tools, working together beside the text.</p>
+  <p>I made this Bible Study Workstation for how I study the Bible.</p>
+  <p class="ctx">James McLaughlin · <a href="https://jayms.com/" target="_blank" rel="noopener">jayms.com</a> · <a href="https://buymeacoffee.com/JAYMS" target="_blank" rel="noopener">Buy me a coffee</a></p>
+</div></div>
 <div class="helpview" id="helpview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Help"><button class="x" id="helpclose" aria-label="Close help">×</button><div id="helpbody">Loading…</div></div></div>
 
 <div class="desk" id="desk">
@@ -654,6 +662,11 @@ document.addEventListener("pointerdown",e=>{ const t=document.getElementById("te
     /* which version this copy is (version.json, written by ws.sh snap): the desk, claude.ai and the site should all match */
     fetch("version.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(v=>{ if(v) b.insertAdjacentHTML("beforeend",`<p class="ctx u-fs13">Version ${esc(v.version)} · ${esc(v.date)}</p>`) }).catch(()=>{}) }).catch(()=>{ got=false; b.textContent="The guide didn't load. Try again." }) } document.getElementById("helpclose").focus() };
   document.getElementById("helpclose").onclick=close;
+  const av=document.getElementById("aboutview"), aclose=()=>{ av.hidden=true; document.getElementById("aboutbtn").focus() };
+  document.getElementById("aboutbtn").onclick=()=>{ av.hidden=false; document.getElementById("aboutclose").focus() };
+  document.getElementById("aboutclose").onclick=aclose;
+  av.addEventListener("click",e=>{ if(e.target===av) aclose() });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!av.hidden) aclose() });
   v.addEventListener("click",e=>{ if(e.target===v) close() });
   document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!v.hidden) close() });
 })();
