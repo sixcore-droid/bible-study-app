@@ -417,6 +417,8 @@
     dss: function () { return getJSON("dss.json"); },
     bibleproject: function () { return getJSON("bibleproject.json"); },
     lsbAudio: function () { return getJSON("lsb-audio.json"); },
+    /* Michael S. Heiser Foundation articles by the chapters they cite (scripts/fetch-heiser.py) */
+    heiser: function () { return getJSON("heiser.json").catch(function () { return null; }); },
     /* a podcast's episodes through the relay, kept in the browser for 12 hours: {episodes:[{t, link, date, dur, audio, desc}]} */
     podcast: function (feed) {
       if (!CFG.podcastAPI) return Promise.resolve(null);
@@ -1796,7 +1798,15 @@
     prepare: function () {
       var self = this;
       data.podcast(NBP_FEED).then(function (p) { self.nbp = p; if (self.alive && self.d) self.paint(); });   // arrives when it arrives
-      return Promise.all([data.bibleproject(), data.lsbAudio()]).then(function (r) { self.d = r[0]; self.au = r[1]; });
+      return Promise.all([data.bibleproject(), data.lsbAudio(), data.heiser()]).then(function (r) { self.d = r[0]; self.au = r[1]; self.hf = r[2]; });
+    },
+    /* Heiser Foundation articles that cite the passage's chapters: one citing more of them first, then the site's own order (most citations) */
+    heiserFor: function (segs) {
+      var hf = this.hf, score = {}, order = [];
+      if (!hf) return [];
+      segs.forEach(function (q) { var ch = hf.chapters[q.book] || {};
+        for (var c = q.c1; c <= (q.c2 || q.c1); c++) (ch[c] || []).forEach(function (id, rank) { if (!(id in score)) { score[id] = 0; order.push(id); } score[id] += 1000 - rank; }); });
+      return order.sort(function (a, b) { return score[b] - score[a]; }).map(function (id) { return hf.articles[id]; }).filter(Boolean);
     },
     /* Naked Bible Podcast episodes on the passage: a passage named in the title counts most, then ones the description names */
     nbpFor: function (segs) {
@@ -1839,13 +1849,22 @@
       (d.book[name] || []).forEach(function (i) { score[i] = (score[i] || 0) + 100; });
       var ids = Object.keys(score).map(Number).filter(function (i) { return !seen[i]; }).sort(function (a, z) { return score[z] - score[a]; });
       /* podcasts get their own tab: there are far more of them than videos and articles */
-      var nbp = this.nbpFor(data.segs(this.o.ref));
-      var count = function (ks) { return ids.filter(function (i) { return ks.indexOf(I[i][0]) > -1; }).length + (ks.indexOf("p") > -1 ? nbp.length : 0); };
-      var TABS = [["watch", "Videos & articles", ["v", "a", "g"]], ["pod", "Podcasts", ["p"]]];
+      var nbp = this.nbpFor(data.segs(this.o.ref)), hf = this.heiserFor(data.segs(this.o.ref));
+      var count = function (ks) { return ids.filter(function (i) { return ks.indexOf(I[i][0]) > -1; }).length + (ks.indexOf("p") > -1 ? nbp.length : 0) + (ks.indexOf("h") > -1 ? hf.length : 0); };
+      var TABS = [["watch", "Videos & articles", ["v", "a", "g"]], ["pod", "Podcasts", ["p"]], ["heiser", "Heiser", ["h"]]];
       /* a tab with nothing in it isn't the one to open on */
-      var tab = BP_TAB === "pod" ? TABS[1] : TABS[0];
-      if (!count(tab[2])) tab = tab === TABS[0] ? TABS[1] : TABS[0];
-      if (ids.length || nbp.length) h += '<div class="chips u-m10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t ? " on" : "") + '" data-jst-bptab="' + t[0] + '">' + t[1] + " (" + count(t[2]) + ")</button>"; }).join("") + "</div>";
+      var tab = TABS.filter(function (t) { return t[0] === BP_TAB; })[0] || TABS[0];
+      if (!count(tab[2])) tab = TABS.filter(function (t) { return count(t[2]); })[0] || TABS[0];
+      if (tab[0] === "heiser" && hf.length) {
+        var hopen = st.allhf, hshown = hopen ? hf : hf.slice(0, 8);
+        h += '<div class="chips u-m10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t ? " on" : "") + '" data-jst-bptab="' + t[0] + '">' + t[1] + " (" + count(t[2]) + ")</button>"; }).join("") + "</div>";
+        h += '<div class="lbl">Michael S. Heiser Foundation (' + hf.length + ")</div>" + box("witness", "", '<div class="item">' + hshown.map(function (a) {
+          return '<p class="u-m8">' + outlink(a.u, esc(a.t)) + '<br><span class="u-fs15">' + esc(new Date(a.d + "T12:00:00").toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })) + "</span></p>"; }).join("") + "</div>") +
+          (hf.length > 8 ? '<div class="askrow"><button class="btn" data-jst-bpall="hf">' + (hopen ? "Fewer" : "All " + hf.length) + "</button></div>" : "");
+        h += '<p class="ctx u-fs13">From <a href="https://michaelsheiserfoundation.org/articles/" target="_blank" rel="noopener">michaelsheiserfoundation.org</a>: articles that cite these chapters, the ones citing them most first.</p>';
+        return { kick: "BibleProject \u00B7 " + ids.length, title: name + " " + q.c1 + (q.c2 && q.c2 !== q.c1 ? "\u2013" + q.c2 : ""), body: h };
+      }
+      if (ids.length || nbp.length || hf.length) h += '<div class="chips u-m10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t ? " on" : "") + '" data-jst-bptab="' + t[0] + '">' + t[1] + " (" + count(t[2]) + ")</button>"; }).join("") + "</div>";
       if (tab[1] === "Podcasts" && nbp.length) {
         var nopen = st.allnbp, nshown = nopen ? nbp : nbp.slice(0, 6);
         h += '<div class="lbl">Naked Bible Podcast (' + nbp.length + ")</div>" + box("witness", "", '<div class="item">' + nshown.map(function (e) {
@@ -1861,7 +1880,7 @@
           (list.length > 6 ? '<div class="askrow"><button class="btn" data-jst-bpall="' + k + '">' + (open ? "Fewer" : "All " + list.length) + "</button></div>" : "");
       });
       if (ids.length && !count(tab[2])) h += none("No " + tab[1].toLowerCase() + " for " + esc(this.o.ref) + ".");
-      if (!ids.length && !nbp.length) h += none("BibleProject has nothing filed under " + esc(this.o.ref) + " beyond the guide.");
+      if (!ids.length && !nbp.length && !hf.length) h += none("BibleProject has nothing filed under " + esc(this.o.ref) + " beyond the guide.");
       h += '<p class="ctx u-fs13">From <a href="https://bibleproject.com/" target="_blank" rel="noopener">bibleproject.com</a>' + (nbp.length ? ' and the <a href="https://nakedbiblepodcast.com/" target="_blank" rel="noopener">Naked Bible Podcast</a> (episode list via Podcast Index)' : "") + ', matched by the passages each one names. Strongest match first.</p>';
       return { kick: "BibleProject \u00B7 " + ids.length, title: name + " " + q.c1 + (q.c2 && q.c2 !== q.c1 ? "\u2013" + q.c2 : ""), body: h };
     },
