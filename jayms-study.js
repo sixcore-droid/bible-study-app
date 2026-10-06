@@ -797,7 +797,10 @@
       ids.sort(function (x, y) { return rank[y] - rank[x]; });
       var seenT = {}; ids = ids.filter(function (i) { var t = MAPBY[i].t.replace(/^[^:]+:\s*/, ""); if (seenT[t]) return false; seenT[t] = 1; return true; });
       if (!ids.length) return "";
-      return '<div class="chips u-mt6">' + ids.slice(0, 4).map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>";
+      var first = MAPBY[ids[0]], name = function (i) { return esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")); };
+      /* the best map shows on the card; tap it (or any title) for full screen */
+      return '<div class="lbl u-mt8">Map \u00B7 ' + name(ids[0]) + '</div><img class="jst-mapimg u-mt6" src="' + esc(mapOnline(first)) + '" alt="' + esc(first.t) + '" data-jst-pmap="' + esc(ids[0]) + '" role="button" tabindex="0" title="Full screen"' + (++this._maps > 2 ? ' loading="lazy"' : "") + ">" +
+        (ids.length > 1 ? '<div class="lbl u-mt8">More maps</div><div class="chips">' + ids.slice(1, 5).map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + name(i) + "</button>"; }).join("") + "</div>" : "");
     },
     /* STEPBible's own entry: the short one at once, the full article when opened */
     stepHTML: function (p) {
@@ -809,11 +812,12 @@
       if (m) { e.stopPropagation(); mapViewer(MAPBY[m.getAttribute("data-jst-pmap")]); return; }
       var sum = e.target.closest("[data-jst-step] summary");
       if (sum) { var d = sum.parentNode, slot = d.querySelector("[data-jst-art]"), id = d.getAttribute("data-jst-step");
-        if (!slot.innerHTML) getJSON("names-articles.json").then(function (a) { var t = a && a[id]; if (t) slot.innerHTML = "<p class=\"u-m4-8\">" + esc(t) + "</p>"; }).catch(function () {}); }
+        if (!slot.innerHTML) getJSON("names-articles.json").then(function (a) { var t = a && a[id]; if (t) slot.innerHTML = t.split(/\s*<br\s*\/?>\s*/i).filter(Boolean).map(function (x) { return "<p class=\"u-m4-8\">" + esc(x) + "</p>"; }).join(""); }).catch(function () {}); }
       Panel.prototype.click.call(this, e);
     },
     view: function () {
       var f = L(this, "facts"), st = namesIn(this.nm, this.o.ref), used = {};
+      this._maps = 0;   // the first two maps load at once; the rest as they scroll into view
       /* a Fact Book entry gets STEPBible's family line or map when the same name is in the passage */
       var self = this, extra = function (p) { return p ? self.mapsHTML(p) + self.stepHTML(p) : ""; };
       var match = function (x) { for (var i = 0; i < st.length; i++) if (!used[i] && st[i].n === x.title) { used[i] = 1; return st[i]; } return null; };
