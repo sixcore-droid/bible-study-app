@@ -137,6 +137,9 @@ a.btn{text-decoration:none;display:inline-block}
 .wc-sfx{cursor:default;opacity:.85}
 .jst-leaf{height:340px;border-radius:6px;border:1px solid var(--line);margin:4px 0 6px;background:#a9c3cf}
 .jst-leaf .leaflet-popup-content{font:14px/1.4 var(--read);color:#222}
+.jst-fam{display:flex;flex-direction:column;gap:12px;margin:6px 0 10px}
+.jst-famrow{border-left:3px solid var(--line);padding-left:12px}
+.jst-famme{border-left-color:var(--gold);padding:6px 0 6px 12px}
 .jst-artgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:8px 0}
 .jst-artgrid figure{margin:0}
 .jst-artgrid img{width:100%;height:150px;object-fit:cover;border-radius:6px;cursor:zoom-in;background:var(--paper)}

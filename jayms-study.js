@@ -894,6 +894,42 @@
     destroy: function () { if (this._map) { try { this._map.remove(); } catch (e) {} this._map = null; } Panel.prototype.destroy.call(this); }
   }, {}, function (d) { return null; });
 
+  // ------------------------------------------------------------------ Family
+  /* A family tree for anyone named in the passage (STEPBible's TIPNR links): grandparents, parents, the person with their
+     spouses and brothers and sisters, children and grandchildren. Tap any relative to move the tree to them. */
+  define("Family", { id: "family", label: "Family", name: "Family tree", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2"/><circle cx="6" cy="19.5" r="2"/><circle cx="18" cy="19.5" r="2"/><path d="M12 6.5v6M6 17.5v-5h12v5"/></svg>' }, {
+    prepare: function () { var self = this; return data.names().then(function (n) { self.nm = n; }); },
+    view: function () {
+      var nm = this.nm, st = this.st;
+      if (!nm) return { kick: "Family", title: "Family tree", body: none("The family data didn't load.") };
+      var P = nm.p, here = namesIn(nm, this.o.ref).filter(function (p) { return p.t === "Male" || p.t === "Female"; });
+      var ids = function (p, k) { return ((p && p[k + "i"]) || []).filter(function (i) { return i && P[i]; }); };
+      var withKids = here.filter(function (p) { return ids(p, "par").length || ids(p, "ch").length || ids(p, "sp").length; });
+      if (!st.focus || !P[st.focus]) st.focus = (withKids[0] || here[0] || {}).id;
+      if (!st.focus) return { kick: "Family", title: "Family tree", body: none("No one with a recorded family is named in " + esc(this.o.ref) + ".") };
+      var f = P[st.focus], chip = function (i, on) { var p = P[i]; return '<button class="chip' + (on ? " on" : "") + '" data-jst-fam="' + esc(i) + '" title="' + esc(p.b || p.d || "") + '">' + esc(p.n) + "</button>"; };
+      var row = function (label, list) { return list.length ? '<div class="jst-famrow"><div class="lbl">' + label + '</div><div class="chips">' + list.map(function (i) { return chip(i); }).join("") + "</div></div>" : ""; };
+      var uniq = function (a) { var o = []; a.forEach(function (x) { if (o.indexOf(x) < 0) o.push(x); }); return o; };
+      var par = ids(f, "par"), kids = ids(f, "ch");
+      var grand = uniq([].concat.apply([], par.map(function (i) { return ids(P[i], "par"); })));
+      var gkids = uniq([].concat.apply([], kids.map(function (i) { return ids(P[i], "ch"); })));
+      var h = "";
+      if (here.length > 1) h += '<div class="lbl">Named in ' + esc(this.o.ref) + '</div><div class="chips u-mb10">' + here.map(function (p) { return chip(p.id, p.id === st.focus); }).join("") + "</div>";
+      h += '<div class="jst-fam">' + row("Grandparents", grand) + row("Parents", par) +
+        '<div class="jst-famrow jst-famme"><div class="lbl">' + esc(f.d || "") + '</div><div class="tt u-fs20">' + esc(f.n) + "</div>" + (f.b ? '<p class="u-m4-8 u-fs15">' + esc(f.b) + "</p>" : "") + (f.tr ? '<p class="sub u-fs13">' + esc(f.tr) + "</p>" : "") + "</div>" +
+        row(f.t === "Female" ? "Husband" + (ids(f, "sp").length > 1 ? "s" : "") : "Wife" + (ids(f, "sp").length > 1 ? "s" : ""), ids(f, "sp")) +
+        row("Brothers and sisters", ids(f, "sib")) + row("Children", kids) + row("Grandchildren", gkids) + "</div>";
+      if (!par.length && !kids.length && !ids(f, "sp").length && !ids(f, "sib").length) h += none("STEPBible records no family for " + esc(f.n) + ".");
+      h += '<p class="ctx u-fs13">Tap a name to move the tree to them. From <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (TIPNR, CC BY 4.0).</p>';
+      return { kick: "Family \u00B7 " + here.length + " people here", title: f.n + "'s family", body: h };
+    },
+    click: function (e) {
+      var c = e.target.closest("[data-jst-fam]");
+      if (c) { e.stopPropagation(); this.st.focus = c.getAttribute("data-jst-fam"); this.paint(); this.el.parentNode && (this.el.parentNode.scrollTop = 0); return; }
+      Panel.prototype.click.call(this, e);
+    }
+  }, {}, function (d) { return null; });
+
   // ------------------------------------------------------------------ Art
   /* Public-domain art of the passage from the Art Institute of Chicago's open collection (api.artic.edu, no key, CC0 data).
      It searches the passage's main people (STEPBible), keeps works whose title names one of them, and drops bare portrait
