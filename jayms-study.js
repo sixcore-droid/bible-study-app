@@ -974,14 +974,25 @@
      titles ("Daniel Mytens"). Pictures come from the museum's IIIF server; tap one for full screen. Where outside images are
      blocked (claude.ai) the panel says so. */
   var ART = {};
+  /* two open collections, each answer reduced to {src, id, title, img, full, who, date, url} */
   function artSearch(q) {
     if (ART[q]) return ART[q];
-    var u = "https://api.artic.edu/api/v1/artworks/search?q=" + encodeURIComponent(q) + "&query%5Bterm%5D%5Bis_public_domain%5D=true&fields=id,title,image_id,artist_title,date_display&limit=30";
-    return (ART[q] = fetch(u).then(function (r) { return r.ok ? r.json() : { data: [] }; }).then(function (d) { return d.data || []; }).catch(function () { return []; }));
+    var aic = fetch("https://api.artic.edu/api/v1/artworks/search?q=" + encodeURIComponent(q) + "&query%5Bterm%5D%5Bis_public_domain%5D=true&fields=id,title,image_id,artist_title,date_display&limit=30")
+      .then(function (r) { return r.ok ? r.json() : { data: [] }; }).then(function (d) { return (d.data || []).filter(function (a) { return a.image_id; }).map(function (a) {
+        return { src: "Art Institute of Chicago", id: "aic" + a.id, title: a.title, img: artImg(a.image_id, 400), full: artImg(a.image_id, 1686), who: a.artist_title, date: a.date_display, url: "https://www.artic.edu/artworks/" + a.id }; }); }).catch(function () { return []; });
+    var cma = fetch("https://openaccess-api.clevelandart.org/api/artworks/?q=" + encodeURIComponent(q) + "&has_image=1&cc0=1&limit=30&fields=id,title,creators,creation_date,images,url,type")
+      .then(function (r) { return r.ok ? r.json() : { data: [] }; }).then(function (d) { return (d.data || []).map(function (a) { var im = a.images || {};
+        return { src: "Cleveland Museum of Art", id: "cma" + a.id, title: a.title, img: (im.web || {}).url, full: (im.print || im.web || {}).url, who: ((a.creators || [])[0] || {}).description || a.type, date: a.creation_date, url: a.url }; }).filter(function (a) { return a.img; }); }).catch(function () { return []; });
+    return (ART[q] = Promise.all([aic, cma]).then(function (r) { return r[0].concat(r[1]); }));
   }
   define("Art", { id: "art", label: "Art", name: "Art of this passage", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 16l5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="8.5" r="1.5"/></svg>' }, {
     prepare: function () {
       var self = this;
+      var segs0 = data.segs(this.o.ref);
+      getJSON("relics.json").then(function (d) {   // the hand-picked artifacts tied to these verses (scripts/build-relics.py)
+        self.relics = ((d && d.relics) || []).filter(function (x) { return x.refs.some(function (r) { return R.parse(r).some(function (a) { return segs0.some(function (q) { return R.overlap(a, q); }); }); }); });
+        if (self.alive && self.art) self.paint();
+      }).catch(function () {});
       return data.names().then(function (nm) {
         /* the people named most in the passage (a person's verse count within it), up to three */
         var segs = data.segs(self.o.ref), seen = {}, ppl = [];
@@ -1008,13 +1019,13 @@
       }).then(function (lists) {
         var names = self.who, story = self.story || [], out = [], seen = {};
         [].concat.apply([], lists || []).forEach(function (a) {
-          if (!a.image_id || seen[a.id]) return;
+          if (seen[a.id]) return;
           var t = a.title || "", hit = names.filter(function (n) { return new RegExp("(^|[^\\w-])" + n + "(?![\\w-])", "i").test(t); });   // "Amédée-David" isn't David
           var sw0 = story.filter(function (w) { return new RegExp("\\b" + w, "i").test(t); }).length;
           if (!hit.length && !(self.nobody && sw0 >= (story.length > 1 ? 2 : 1))) return;
           if (hit.length === 1 && hit[0] !== names[0] && !sw0) return;   // only a minor name and nothing of the story: likely another Darius
           if (/^([A-Z][a-z]+\.? ){1,3}[A-Z][a-z]+$/.test(t.trim()) && hit.length < 2) return;   // "Daniel Mytens", "Samuel Fisher Bradford": a portrait of someone else
-          if (/(\bMrs?\.|\b(Portrait|Priory|Church|Chapel|Cathedral|Street|Avenue|Saint|St\.)\b)/i.test(t)) return;   // a namesake, not the Bible figure
+          if (/(\bMrs?\.|\b(Portrait|Priory|Church|Chapel|Cathedral|Street|Avenue|Saint|St\.|Examining|Studio|Comte|Baron|Madame|Monsieur|Duke|Duchess|Countess|Self)\b)/i.test(t)) return;   // a namesake, not the Bible figure
           var sw = story.filter(function (w) { return new RegExp("\\b" + w, "i").test(t); }).length;
           seen[a.id] = 1; a._sc = hit.length * 2 + sw * 3; out.push(a);
         });
@@ -1025,17 +1036,22 @@
     view: function () {
       if (!CFG.onlineMaps) return { kick: "Art", title: "Art of this passage", body: none("Pictures from other sites can't show here. Open the app on jayms.com or your desk.") };
       var a = this.art || [], what = this.who.length ? this.who.join(", ") + (this.story && this.story.length ? " (" + this.story.slice(0, 3).join(", ") + ")" : "") : (this.story || []).slice(0, 2).join(" ");
-      var h = '<p class="ctx">Searched for ' + esc(what || this.o.ref) + '.</p>';
+      var h = "", rel = this.relics || [];
+      if (rel.length) h += '<div class="lbl">Relics and places (' + rel.length + ")</div>" + rel.map(function (x) {
+        return box("witness", "", '<div class="item">' + (x.img ? '<img class="jst-relic" src="' + esc(x.img) + '" alt="' + esc(x.t) + '" referrerpolicy="no-referrer" data-jst-art data-full="' + esc(x.img.replace(/\/\d+px-/, "/1280px-")) + '" data-t="' + esc(x.t) + '" role="button" tabindex="0">' : "") +
+          '<span class="when">' + esc(x.museum) + '</span><span class="tt">' + esc(x.t) + '</span><p class="u-m4-8 u-fs15">' + esc(x.x) + "</p>" +
+          '<p class="sub u-fs13">' + esc(x.refs.join(" \u00B7 ")) + "</p>" + outlink(x.url, "Read more") + "</div>"); }).join("");
+      h += '<div class="lbl u-mt14">Art (' + a.length + ')</div><p class="ctx">Searched for ' + esc(what || this.o.ref) + '.</p>';
       h += a.length ? '<div class="jst-artgrid">' + a.map(function (x, n) {
-        return '<figure><img src="' + esc(artImg(x.image_id, 400)) + '" alt="' + esc(x.title) + '"' + (n >= 8 ? ' loading="lazy"' : "") + ' referrerpolicy="no-referrer" data-jst-art="' + esc(x.image_id) + '" data-t="' + esc(x.title) + '" role="button" tabindex="0">' +
-          '<figcaption><b>' + esc(x.title) + "</b><br>" + esc([x.artist_title, x.date_display].filter(Boolean).join(", ")) + " " + outlink("https://www.artic.edu/artworks/" + x.id, "Museum") + "</figcaption></figure>"; }).join("") + "</div>"
-        : none("No public-domain artwork at the Art Institute matches " + esc(what || this.o.ref) + ".");
-      h += '<p class="ctx u-fs13">From the <a href="https://www.artic.edu/collection" target="_blank" rel="noopener">Art Institute of Chicago</a>, public-domain works only. Tap a picture for full screen.</p>';
-      return { kick: "Art \u00B7 " + a.length + " works", title: "Art of this passage", body: h };
+        return '<figure><img src="' + esc(x.img) + '" alt="' + esc(x.title) + '"' + (n >= 8 ? ' loading="lazy"' : "") + ' referrerpolicy="no-referrer" data-jst-art data-full="' + esc(x.full || x.img) + '" data-t="' + esc(x.title) + '" role="button" tabindex="0">' +
+          '<figcaption><b>' + esc(x.title) + "</b><br>" + esc([x.who, x.date].filter(Boolean).join(", ")) + " " + outlink(x.url, x.src === "Cleveland Museum of Art" ? "Cleveland" : "Chicago") + "</figcaption></figure>"; }).join("") + "</div>"
+        : none("No public-domain artwork matches " + esc(what || this.o.ref) + ".");
+      h += '<p class="ctx u-fs13">Art: <a href="https://www.artic.edu/collection" target="_blank" rel="noopener">Art Institute of Chicago</a> and <a href="https://www.clevelandart.org/open-access" target="_blank" rel="noopener">Cleveland Museum of Art</a> open collections, public-domain works only. Relics: photos and summaries from Wikipedia (CC BY-SA). Tap a picture for full screen.</p>';
+      return { kick: "Art \u00B7 " + a.length + " works" + (rel.length ? ", " + rel.length + " relics" : ""), title: "Art and relics", body: h };
     },
     click: function (e) {
       var im = e.target.closest("[data-jst-art]");
-      if (im) { e.stopPropagation(); var id = im.getAttribute("data-jst-art"); mapViewer({ id: "art-" + id, t: im.getAttribute("data-t"), img: artImg(id, 1686) }); return; }
+      if (im) { e.stopPropagation(); var full = im.getAttribute("data-full") || im.src; mapViewer({ id: "art-" + full, t: im.getAttribute("data-t"), img: full }); return; }
       Panel.prototype.click.call(this, e);
     }
   }, {}, function (d) { return null; });

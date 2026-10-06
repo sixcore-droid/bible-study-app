@@ -140,6 +140,7 @@ a.btn{text-decoration:none;display:inline-block}
 .jst-fam{display:flex;flex-direction:column;gap:12px;margin:6px 0 10px}
 .jst-famrow{border-left:3px solid var(--line);padding-left:12px}
 .jst-famme{border-left-color:var(--gold);padding:6px 0 6px 12px}
+.jst-relic{float:right;width:110px;height:110px;object-fit:cover;border-radius:6px;margin:0 0 8px 12px;cursor:zoom-in;background:var(--paper)}
 .jst-artgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:8px 0}
 .jst-artgrid figure{margin:0}
 .jst-artgrid img{width:100%;height:150px;object-fit:cover;border-radius:6px;cursor:zoom-in;background:var(--paper)}

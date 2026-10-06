@@ -1,0 +1,458 @@
+{
+ "_about": "Hand-picked artifacts tied to Bible passages; summaries and photos from Wikipedia (CC BY-SA). Built from scripts/build-relics.py.",
+ "relics": [
+  {
+   "t": "Mesha Stele",
+   "w": "Mesha Stele",
+   "museum": "Louvre, Paris",
+   "refs": [
+    "2 Kings 3"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/P1120870_Louvre_st%C3%A8le_de_M%C3%A9sha_AO5066_rwk.JPG/330px-P1120870_Louvre_st%C3%A8le_de_M%C3%A9sha_AO5066_rwk.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Mesha_Stele",
+   "x": "The Mesha Stele, also known as the Moabite Stone, is a stele dated around 840 BCE containing a significant Canaanite inscription in the name of King Mesha of Moab. Mesha tells how Chemosh, the god of Moab, had been angry with his people and had allowed them to be subjugated to the Kingdom of Israel, but at length, Chem"
+  },
+  {
+   "t": "Tel Dan Stele",
+   "w": "Tel Dan stele",
+   "museum": "Israel Museum, Jerusalem",
+   "refs": [
+    "2 Kings 8:7-15",
+    "2 Kings 9-10",
+    "2 Chronicles 22"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/JRSLM_300116_Tel_Dan_Stele_01.jpg/330px-JRSLM_300116_Tel_Dan_Stele_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Tel_Dan_stele",
+   "x": "The Tel Dan Stele is a fragmentary stele with an Old Aramaic inscription written in the Phoenician script. It is generally dated to the 9th-century BCE, though some scholars have proposed later dates; it is one of the earliest, extra-biblical references to a Davidic dynasty. In 1993, it was discovered by Gila Cook, a m"
+  },
+  {
+   "t": "Black Obelisk of Shalmaneser III",
+   "w": "Black Obelisk of Shalmaneser III",
+   "museum": "British Museum, London",
+   "refs": [
+    "2 Kings 9-10"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/The_Black_Obelisk_of_Shalmaneser_III%2C_9th_century_BC%2C_from_Nimrud%2C_Iraq._The_British_Museum.jpg/330px-The_Black_Obelisk_of_Shalmaneser_III%2C_9th_century_BC%2C_from_Nimrud%2C_Iraq._The_British_Museum.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Black_Obelisk_of_Shalmaneser_III",
+   "x": "The Black Obelisk of Shalmaneser III is a black limestone Neo-Assyrian sculpture with many scenes in bas-relief and inscriptions. It comes from Nimrud, in northern Iraq, and commemorates the deeds of King Shalmaneser III. It is on display at the British Museum in London, and several other museums have cast replicas."
+  },
+  {
+   "t": "Taylor Prism (Sennacherib's annals)",
+   "w": "Sennacherib's Annals",
+   "museum": "British Museum / Oriental Institute",
+   "refs": [
+    "2 Kings 18-19",
+    "Isaiah 36-37",
+    "2 Chronicles 32"
+   ],
+   "img": "",
+   "url": "https://en.wikipedia.org/wiki/Sennacherib's_Annals",
+   "x": "Sennacherib's Annals are the annals of Sennacherib, emperor of the Neo-Assyrian Empire. They are found inscribed on several artifacts, and the final versions were found in three clay prisms inscribed with the same text: the Taylor Prism is in the British Museum, the ISAC or Chicago Prism in the Institute for the Study "
+  },
+  {
+   "t": "Lachish reliefs",
+   "w": "Lachish reliefs",
+   "museum": "British Museum, London",
+   "refs": [
+    "2 Kings 18:13-17",
+    "2 Chronicles 32:9",
+    "Micah 1:13"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Lachish_inscription.jpeg/330px-Lachish_inscription.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Lachish_reliefs",
+   "x": "The Lachish reliefs are a set of Assyrian palace reliefs narrating the story of the Assyrian victory over the kingdom of Judah during the siege of Lachish in 701 BC. Carved between 700 and 681 BC, as a decoration of the South-West Palace of Sennacherib in Nineveh, the relief is today in the British Museum in London, an"
+  },
+  {
+   "t": "Siloam inscription",
+   "w": "Siloam inscription",
+   "museum": "Istanbul Archaeology Museums",
+   "refs": [
+    "2 Kings 20:20",
+    "2 Chronicles 32:30"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Siloam_Inscription_2.jpg/330px-Siloam_Inscription_2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Siloam_inscription",
+   "x": "The Siloam inscription, Silwan inscription or Shiloah inscription, known as KAI 189, is a Hebrew inscription found in the Siloam tunnel which brings water from the Gihon Spring to the Pool of Siloam, located in the City of David in East Jerusalem neighborhood of Silwan. The inscription records the construction of the t"
+  },
+  {
+   "t": "Cyrus Cylinder",
+   "w": "Cyrus Cylinder",
+   "museum": "British Museum, London",
+   "refs": [
+    "Ezra 1",
+    "2 Chronicles 36:22-23",
+    "Isaiah 44:28-45:13"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Cyrus_Cylinder_front.jpg/330px-Cyrus_Cylinder_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Cyrus_Cylinder",
+   "x": "The Cyrus Cylinder is an ancient clay cylinder, now broken into several pieces, on which is written an Achaemenid royal inscription in Akkadian cuneiform script in the name of the Persian king Cyrus the Great. It dates from the 6th century BC and was discovered in the ruins of the ancient Mesopotamian city of Babylon i"
+  },
+  {
+   "t": "Nabonidus Cylinder",
+   "w": "Cylinders of Nabonidus",
+   "museum": "British Museum, London",
+   "refs": [
+    "Daniel 5"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Cylinder_of_Nabonidus_from_the_temple_of_Shamash_at_Larsa%2C_Mesopotamia..JPG/330px-Cylinder_of_Nabonidus_from_the_temple_of_Shamash_at_Larsa%2C_Mesopotamia..JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Cylinders_of_Nabonidus",
+   "x": "The Cylinders of Nabonidus refers to cuneiform inscriptions of king Nabonidus of Babylonia. These inscriptions were made on clay cylinders. They include the Nabonidus Cylinder from Sippar, and the Nabonidus Cylinders from Ur, four in number."
+  },
+  {
+   "t": "Babylonian Chronicle of Nebuchadnezzar's siege of Jerusalem",
+   "w": "Babylonian Chronicles",
+   "museum": "British Museum, London",
+   "refs": [
+    "2 Kings 24",
+    "2 Chronicles 36",
+    "Jeremiah 52"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/ABC_05_Early_Years_of_Nebuchadnezzar_chronicle.jpg/330px-ABC_05_Early_Years_of_Nebuchadnezzar_chronicle.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Babylonian_Chronicles",
+   "x": "The Babylonian Chronicles are a loosely defined series of about 45 tablets recording major events in Babylonian history."
+  },
+  {
+   "t": "Jehoiachin's ration tablets",
+   "w": "Jehoiachin's Rations Tablets",
+   "museum": "Pergamon Museum, Berlin",
+   "refs": [
+    "2 Kings 25:27-30",
+    "Jeremiah 52:31-34"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Jehoiachin_Ration_Tablet.JPG/330px-Jehoiachin_Ration_Tablet.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Jehoiachin's_Rations_Tablets",
+   "x": "Jehoiachin's rations tablets date from the 6th century BC and describe the oil rations set aside for a royal captive identified as Jeconiah, king of Judah. Tablets from the royal archives of Nebuchadnezzar II, emperor of the Neo-Babylonian Empire, were unearthed in the ruins of Babylon that contain food rations paid to"
+  },
+  {
+   "t": "Ishtar Gate",
+   "w": "Ishtar Gate",
+   "museum": "Pergamon Museum, Berlin",
+   "refs": [
+    "Daniel 1-4",
+    "Jeremiah 50-51"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Berl%C3%ADn%2C_Museo_de_P%C3%A9rgamo_05.jpg/330px-Berl%C3%ADn%2C_Museo_de_P%C3%A9rgamo_05.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Ishtar_Gate",
+   "x": "The Ishtar Gate was the eighth gate to the inner city wall of Babylon. It was constructed c. 569 BC by order of King Nebuchadnezzar II on the north side of the city. It was part of a grand walled processional way leading into the city."
+  },
+  {
+   "t": "Merneptah Stele",
+   "w": "Merneptah Stele",
+   "museum": "Egyptian Museum, Cairo",
+   "refs": [
+    "Judges 1-5",
+    "Joshua 24"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Merneptah_Steli_%28cropped%29.jpg/330px-Merneptah_Steli_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Merneptah_Stele",
+   "x": "The Merneptah Stele, also known as the Israel Stele or the Victory Stele of Merneptah, is an inscription by Merneptah, a pharaoh in ancient Egypt who reigned from 1213 to 1203 BCE. Discovered by Flinders Petrie at Thebes in 1896, it is now housed at the Egyptian Museum in Cairo."
+  },
+  {
+   "t": "Ketef Hinnom silver scrolls",
+   "w": "Ketef Hinnom scrolls",
+   "museum": "Israel Museum, Jerusalem",
+   "refs": [
+    "Numbers 6:24-26"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Kettef_Hinnom_scrolls1.jpg/330px-Kettef_Hinnom_scrolls1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Ketef_Hinnom_scrolls",
+   "x": "The Ketef Hinnom scrolls, also described as Ketef Hinnom amulets, are the oldest surviving texts currently known from the Hebrew Bible, dated to c. 600 BCE. The text, written in the Paleo-Hebrew script, has fragmentary phrases and words paralleling the Book of Numbers in the Hebrew Bible, and has been described as \"one"
+  },
+  {
+   "t": "Flood tablet (Epic of Gilgamesh, Tablet XI)",
+   "w": "Gilgamesh flood myth",
+   "museum": "British Museum, London",
+   "refs": [
+    "Genesis 6-9"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/British_Museum_Flood_Tablet_1.jpg/330px-British_Museum_Flood_Tablet_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Gilgamesh_flood_myth",
+   "x": "The Gilgamesh flood myth is a partial narrative of the Gilgamesh Epic. It is one of three Mesopotamian flood myths alongside the one included in the Eridu Genesis, and an episode from the Atra-Hasis Epic. \nMany scholars believe that the Gilgamesh flood myth was added to Tablet XI in the \"standard version\" of the Gilgam"
+  },
+  {
+   "t": "Enuma Elish tablets",
+   "w": "Enūma Eliš",
+   "museum": "British Museum, London",
+   "refs": [
+    "Genesis 1-2",
+    "Psalm 74:12-17"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Chaos_Monster_and_Sun_God.png/330px-Chaos_Monster_and_Sun_God.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/En%C5%ABma_Eli%C5%A1",
+   "x": "Enūma Eliš, meaning \"When on High\", is a Babylonian creation myth from the late 2nd millennium BCE and the only complete surviving account of ancient near eastern cosmology. It was recovered by English archaeologist Austen Henry Layard in 1849 in the ruined Library of Ashurbanipal at Nineveh. A form of the myth was fir"
+  },
+  {
+   "t": "Code of Hammurabi",
+   "w": "Code of Hammurabi",
+   "museum": "Louvre, Paris",
+   "refs": [
+    "Exodus 21-23",
+    "Deuteronomy 19:21"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/P1050763_Louvre_code_Hammurabi_face_rwk.JPG/330px-P1050763_Louvre_code_Hammurabi_face_rwk.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Code_of_Hammurabi",
+   "x": "The Code of Hammurabi is a Babylonian legal text composed c. 1753 BC. It is the longest, best-organized, and best-preserved legal text from the ancient Near East. It is written in the Old Babylonian dialect of Akkadian, purportedly by Hammurabi, sixth king of the First Dynasty of Babylon. The primary copy of the text i"
+  },
+  {
+   "t": "Amarna letters",
+   "w": "Amarna letters",
+   "museum": "British Museum and others",
+   "refs": [
+    "Joshua 10",
+    "Judges 1"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Five_Amarna_letters_on_display_at_the_British_Museum%2C_LondonA.jpg/330px-Five_Amarna_letters_on_display_at_the_British_Museum%2C_LondonA.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Amarna_letters",
+   "x": "The Amarna letters are an archive, written on clay tablets, primarily consisting of diplomatic correspondence between the Egyptian administration and its representatives in Canaan and Amurru, or neighboring kingdom leaders, during the New Kingdom, spanning a period of no more than thirty years in the middle of the 14th"
+  },
+  {
+   "t": "Kurkh Monoliths (Ahab at Qarqar)",
+   "w": "Kurkh Monoliths",
+   "museum": "British Museum, London",
+   "refs": [
+    "1 Kings 16:29-22:40"
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Karkar.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+   "url": "https://en.wikipedia.org/wiki/Kurkh_Monoliths",
+   "x": "The Kurkh Monoliths are two Assyrian stelae of c. 852 BC and 879 BC that contain a description of the reigns of Ashurnasirpal II and his son Shalmaneser III. The Monoliths were discovered in 1861 by a British archaeologist John George Taylor, who was the British Consul-General stationed in the Ottoman Eyalet of Kurdist"
+  },
+  {
+   "t": "Sargon II's palace reliefs",
+   "w": "Sargon II",
+   "museum": "Louvre, Paris",
+   "refs": [
+    "Isaiah 20:1",
+    "2 Kings 17:6"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Sargon_II%2C_Iraq_Museum_in_Baghdad.jpg/330px-Sargon_II%2C_Iraq_Museum_in_Baghdad.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Sargon_II",
+   "x": "Sargon II was the king of the Neo-Assyrian Empire from 722 BC to his death in battle in 705. Most likely the son of Tiglath-Pileser III, Sargon is generally believed to have become king after overthrowing Shalmaneser V, most likely his brother. He is typically considered the founder of a new dynastic line, the Sargonid"
+  },
+  {
+   "t": "Shishak relief at Karnak",
+   "w": "Bubastite Portal",
+   "museum": "Karnak Temple, Luxor",
+   "refs": [
+    "1 Kings 14:25-26",
+    "2 Chronicles 12"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Karnak_Tempel_19.jpg/330px-Karnak_Tempel_19.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Bubastite_Portal",
+   "x": "The Bubastite Portal is a gate is located in Karnak, within the Precinct of Amun-Re temple complex, between the temple of Ramesses III and the second pylon. It records the conquests and military campaigns c. 925 BC of Shoshenq I, of the Twenty-second Dynasty. Shoshenq has been identified with the biblical Shishaq, such"
+  },
+  {
+   "t": "Lachish letters",
+   "w": "Lachish letters",
+   "museum": "British Museum and Israel Museum",
+   "refs": [
+    "Jeremiah 34:7"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Steen_met_inscriptie_in_het_Lahish_schrift%2C_Bestanddeelnr_255-6141.jpg/330px-Steen_met_inscriptie_in_het_Lahish_schrift%2C_Bestanddeelnr_255-6141.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Lachish_letters",
+   "x": "The Lachish Letters are a series of letters written in carbon ink containing ancient Israelite inscriptions in Ancient Hebrew on clay ostraca. The letters were discovered at the excavations at Lachish."
+  },
+  {
+   "t": "Pool of Siloam",
+   "w": "Pool of Siloam",
+   "museum": "Jerusalem",
+   "refs": [
+    "John 9"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Pool_of_Siloam_and_Lower_%28Old%29_Pool_in_the_Ordnance_Survey_of_Jerusalem.png/330px-Pool_of_Siloam_and_Lower_%28Old%29_Pool_in_the_Ordnance_Survey_of_Jerusalem.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Pool_of_Siloam",
+   "x": "The term Pool of Siloam refers to several rock-cut pools located southeast of the walls of the Old City of Jerusalem. The pools were fed by the waters of the Gihon Spring, carried there by the Siloam tunnel."
+  },
+  {
+   "t": "Pool of Bethesda",
+   "w": "Pool of Bethesda",
+   "museum": "Jerusalem",
+   "refs": [
+    "John 5:1-15"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Jerusalem_Bethesda_BW_1.JPG/330px-Jerusalem_Bethesda_BW_1.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Pool_of_Bethesda",
+   "x": "The Pool of Bethesda is referred to in John's Gospel in the Christian New Testament, in an account of Jesus healing a paralyzed man at a pool of water in Jerusalem, described as being near the Sheep Gate and surrounded by five covered colonnades or porticoes. It is also referred to as Bethzatha. It is now associated wi"
+  },
+  {
+   "t": "Pilate Stone",
+   "w": "Pilate stone",
+   "museum": "Israel Museum, Jerusalem",
+   "refs": [
+    "Matthew 27",
+    "Mark 15",
+    "Luke 23",
+    "John 18-19"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Pontius_Pilate_Inscription.JPG/330px-Pontius_Pilate_Inscription.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Pilate_stone",
+   "x": "The Pilate stone is a damaged block of carved limestone, with dimensions 82 cm × 65 cm, which bears a partially intact inscription attributed to Pontius Pilate, a prefect of the Roman province of Judaea in the 1st century AD. It was discovered at the archaeological site of Caesarea Maritima in 1961."
+  },
+  {
+   "t": "Caiaphas ossuary",
+   "w": "Caiaphas ossuary",
+   "museum": "Israel Museum, Jerusalem",
+   "refs": [
+    "Matthew 26:57-68",
+    "John 18:12-28"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Ossuary_of_the_high_priest_Joseph_Caiaphas_P1180839.JPG/330px-Ossuary_of_the_high_priest_Joseph_Caiaphas_P1180839.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Caiaphas_ossuary",
+   "x": "The Caiaphas ossuary is one of twelve ossuaries or bone boxes, discovered in a burial cave in south Jerusalem in December 1990, two of which featured the name \"Caiaphas\"."
+  },
+  {
+   "t": "Galilee Boat (Jesus boat)",
+   "w": "Sea of Galilee Boat",
+   "museum": "Yigal Allon Centre, Ginosar",
+   "refs": [
+    "Mark 4:35-41",
+    "Luke 5:1-11",
+    "John 21"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/JesusBoat.jpg/330px-JesusBoat.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Sea_of_Galilee_Boat",
+   "x": "The Ancient Galilee Boat, also known as the Jesus Boat, is an ancient fishing boat from the 1st century AD, discovered in 1986 on the north-west shore of the Sea of Galilee in Israel. The remains of the boat, 27 feet long, 7.5 feet wide and with a maximum preserved height of 4.3 feet, first appeared during a drought, w"
+  },
+  {
+   "t": "Temple Warning inscription",
+   "w": "Temple Warning inscription",
+   "museum": "Istanbul Archaeology Museums",
+   "refs": [
+    "Acts 21:27-36",
+    "Ephesians 2:14"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Jerusalem_Temple_Warning_Inscription.jpg/330px-Jerusalem_Temple_Warning_Inscription.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Temple_Warning_inscription",
+   "x": "The Temple Warning inscription, also known as the Temple Balustrade inscription or the Soreg inscription, is an inscription that hung along the balustrade outside the Sanctuary of the Second Temple in Jerusalem. Two of these tablets have been found. The inscription was a warning to pagan visitors to the temple not to p"
+  },
+  {
+   "t": "Gallio inscription (Delphi)",
+   "w": "Delphi Inscription",
+   "museum": "Delphi Archaeological Museum",
+   "refs": [
+    "Acts 18:12-17"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Delphes_Gallion.jpg/330px-Delphes_Gallion.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Delphi_Inscription",
+   "x": "The Delphi Inscription, or Gallio Inscription, is the name given to the collection of nine fragments of a letter written by the Roman emperor Claudius in 52 CE which was discovered early in the 20th century at the Temple of Apollo in Delphi, Greece."
+  },
+  {
+   "t": "Erastus inscription",
+   "w": "Erastus of Corinth",
+   "museum": "Ancient Corinth",
+   "refs": [
+    "Romans 16:23",
+    "Acts 19:22",
+    "2 Timothy 4:20"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Erastus%2C_Olympus%2C_Rhodion%2C_Sosipater%2C_Quartus_and_Tertius_%28Menologion_of_Basil_II%29.jpg/330px-Erastus%2C_Olympus%2C_Rhodion%2C_Sosipater%2C_Quartus_and_Tertius_%28Menologion_of_Basil_II%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Erastus_of_Corinth",
+   "x": "Erastus of Corinth, also known as Erastus of Paneas, held the political office of steward, in Corinth, according to the Epistle to the Romans 16:23 of the New Testament. The office is defined as \"the manager of household or of household affairs\" or, in this context, \"treasurer\". The King James Version uses the translat"
+  },
+  {
+   "t": "Arch of Titus (spoils of the Temple)",
+   "w": "Arch of Titus",
+   "museum": "Roman Forum, Rome",
+   "refs": [
+    "Matthew 24:1-2",
+    "Luke 21:5-24",
+    "Mark 13:1-2"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Arch_Titus%2C_Forum_Romanum%2C_Rome%2C_Italy.jpg/330px-Arch_Titus%2C_Forum_Romanum%2C_Rome%2C_Italy.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Arch_of_Titus",
+   "x": "The Arch of Titus is a 1st-century AD honorific arch, located on the Via Sacra, Rome, just to the south-east of the Roman Forum. It was constructed in c. 81 AD by Emperor Domitian shortly after the death of his older brother Titus to commemorate Titus's official deification or consecratio and the victory of Titus toget"
+  },
+  {
+   "t": "Ephesus (the theatre of Acts 19)",
+   "w": "Ephesus",
+   "museum": "Ephesus, Turkey",
+   "refs": [
+    "Acts 19:23-41"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Ephesus_Celsus_Library_Fa%C3%A7ade.jpg/330px-Ephesus_Celsus_Library_Fa%C3%A7ade.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Ephesus",
+   "x": "Ephesus was an ancient Greek city on the coast of Ionia, in present-day Selçuk in İzmir Province, Turkey. It was built in the 10th century BC on the site of Apasa, a city-state that was also the capital of Arzawa, by Attic and Ionian Greek colonists. During the Classical Greek era, it was one of twelve cities that were"
+  },
+  {
+   "t": "Synagogue at Capernaum",
+   "w": "Capernaum",
+   "museum": "Capernaum, Galilee",
+   "refs": [
+    "Mark 1:21-28",
+    "Luke 4:31-37",
+    "John 6:59"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Sites_of_Christianity_in_the_Galillee_-_Ruins_of_the_ancient_Great_Synagogue_at_Capernaum_%28or_Kfar_Nahum%29_on_the_shore_of_the_Lake_of_Galilee%2C_Northern_Israel.jpg/330px-thumbnail.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Capernaum",
+   "x": "Capernaum was a fishing village established during the time of the Hasmoneans in Israel, located on the northern shore of the Sea of Galilee. It had a population of about 1,500 in the 1st century AD. Archaeological excavations have revealed two ancient synagogues built successively at the same spot. A house progressive"
+  },
+  {
+   "t": "Great Isaiah Scroll",
+   "w": "Isaiah Scroll",
+   "museum": "Shrine of the Book, Israel Museum",
+   "refs": [
+    "Isaiah 1-66"
+   ],
+   "img": "",
+   "url": "https://en.wikipedia.org/wiki/Isaiah_Scroll",
+   "x": "The Isaiah Scroll, designated 1QIsaa and also known as the Great Isaiah Scroll, is one of the seven Dead Sea Scrolls that were first discovered by Bedouin shepherds in 1947 from Qumran Cave 1. The scroll is written in Hebrew and contains the entire Book of Isaiah from beginning to end, apart from a few small damaged po"
+  },
+  {
+   "t": "Nash Papyrus",
+   "w": "Nash Papyrus",
+   "museum": "Cambridge University Library",
+   "refs": [
+    "Exodus 20:1-17",
+    "Deuteronomy 5:6-21",
+    "Deuteronomy 6:4-5"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/2nd_century_Hebrew_decalogue.jpg/330px-2nd_century_Hebrew_decalogue.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Nash_Papyrus",
+   "x": "The Nash Papyrus is a collection of four papyrus fragments acquired in Egypt in 1902, inscribed with a Hebrew text which mainly contains the Ten Commandments and the first part of the Shema Yisrael prayer, in a form that differs substantially from the later, canonical Masoretic Text and is in parts more similar to the "
+  },
+  {
+   "t": "Rylands Library Papyrus P52",
+   "w": "Rylands Library Papyrus P52",
+   "museum": "John Rylands Library, Manchester",
+   "refs": [
+    "John 18:31-38"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Manchester%2C_John_Rylands_Library_Ms_Greek_P_457_%28Papyrus_52%29_recto_John_18%2C_31-33.jpg/330px-Manchester%2C_John_Rylands_Library_Ms_Greek_P_457_%28Papyrus_52%29_recto_John_18%2C_31-33.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Rylands_Library_Papyrus_P52",
+   "x": "The Rylands Library Papyrus P52, also known as the St John's fragment and with an accession reference of Papyrus Rylands Greek 457, is a fragment from a papyrus codex, measuring 3.5 by 2.5 inches at its widest, and conserved with the Rylands Papyri at the John Rylands University Library Manchester, UK. The front (recto"
+  },
+  {
+   "t": "Codex Sinaiticus",
+   "w": "Codex Sinaiticus",
+   "museum": "British Library, London",
+   "refs": [
+    "Matthew 1-28"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Sinaiticus_text.jpg/330px-Sinaiticus_text.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Codex_Sinaiticus",
+   "x": "The Codex Sinaiticus, also called the Sinai Bible, is a fourth-century Christian manuscript of a Greek Bible, containing the majority of the Greek Old Testament, including the deuterocanonical books, and the Greek New Testament, with both the Epistle of Barnabas and the Shepherd of Hermas included. It is designated by "
+  },
+  {
+   "t": "Tower of Babel stele (Etemenanki)",
+   "w": "Etemenanki",
+   "museum": "Schøyen Collection",
+   "refs": [
+    "Genesis 11:1-9"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Etemenanki_drawing.gif/330px-Etemenanki_drawing.gif?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Etemenanki",
+   "x": "Etemenanki was a Babylonian ziggurat dedicated to the Mesopotamian god Marduk. It is now in ruins, which are located about 90 kilometres (56 mi) south of Baghdad. Some scholars have proposed Etemenanki as the ziggurat that may have influenced the biblical account of the Tower of Babel."
+  },
+  {
+   "t": "Nineveh, the city Jonah preached to",
+   "w": "Nineveh",
+   "museum": "Mosul, Iraq (reliefs in the British Museum)",
+   "refs": [
+    "Jonah 1-4",
+    "Nahum 1-3"
+   ],
+   "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Nineveh_-_Mashki_Gate.jpg/330px-Nineveh_-_Mashki_Gate.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "url": "https://en.wikipedia.org/wiki/Nineveh",
+   "x": "Nineveh was an ancient Near Eastern city of Upper Mesopotamia, located in the modern-day city of Mosul in northern Iraq. It is located on the eastern bank of the Tigris River and was the capital and largest city of the Neo-Assyrian Empire, and potentially the wealthiest city in the ancient world. Today, it is a common "
+  }
+ ]
+}
