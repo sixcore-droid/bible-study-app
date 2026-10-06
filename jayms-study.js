@@ -418,6 +418,8 @@
     bibleproject: function () { return getJSON("bibleproject.json"); },
     lsbAudio: function () { return getJSON("lsb-audio.json"); },
     /* Michael S. Heiser Foundation articles by the chapters they cite (scripts/fetch-heiser.py) */
+    /* STEPBible's people and places (scripts/build-names.py): family lines and map positions for the Fact Book panel */
+    names: function () { return getJSON("names.json").catch(function () { return null; }); },
     heiser: function () { return getJSON("heiser.json").catch(function () { return null; }); },
     /* a podcast's episodes through the relay, kept in the browser for 12 hours: {episodes:[{t, link, date, dur, audio, desc}]} */
     podcast: function (feed) {
@@ -755,12 +757,48 @@
   }, {}, function (d) { return d ? (d.gods || []).length : null; });
 
   // ------------------------------------------------------------------ Fact Book
+  /* STEPBible's records for the people and places named in the passage, in the order they first appear */
+  function namesIn(nm, ref) {
+    if (!nm) return [];
+    var out = [], seen = {};
+    data.segs(ref).forEach(function (q) {
+      for (var c = q.c1; c <= (q.c2 || q.c1); c++) (((nm.ix[q.book] || {})[c]) || []).forEach(function (row) {
+        var lo = c === q.c1 ? q.v1 : 1, hi = c === (q.c2 || q.c1) ? q.v2 : 999;
+        if (!row.slice(1).some(function (v) { return v >= lo && v <= hi; }) || seen[row[0]]) return;
+        seen[row[0]] = 1; out.push(nm.p[row[0]]);
+      });
+    });
+    return out;
+  }
+  /* one line of family, or a place's map: "Son of Salmon and Rahab · husband of Ruth · father of Obed · Tribe of Judah" */
+  function nameLine(p) {
+    var and = function (a) { return a.length > 1 ? a.slice(0, -1).join(", ") + " and " + a[a.length - 1] : a[0]; };
+    if (p.t === "Place") return [p.tr && p.tr !== p.n ? esc(p.tr) : "", p.ll ? outlink("https://www.google.com/maps/@" + p.ll[0] + "," + p.ll[1] + ",12z", "Map") : ""].filter(Boolean).join(" \u00B7 ");
+    var f = p.t === "Female", bits = [];
+    if (p.par) bits.push((f ? "Daughter" : "Son") + " of " + and(p.par));
+    if (p.sib) bits.push((f ? "sister" : "brother") + " of " + and(p.sib));
+    if (p.sp) bits.push((f ? "wife" : "husband") + " of " + and(p.sp));
+    if (p.ch) bits.push((f ? "mother" : "father") + " of " + and(p.ch.slice(0, 6)) + (p.ch.length > 6 ? " and " + (p.ch.length - 6) + " more" : ""));
+    if (p.tr) bits.push(p.tr);
+    return esc(bits.join(" \u00B7 ").replace(/^./, function (x) { return x.toUpperCase(); }));
+  }
   define("FactBook", { id: "facts", label: "Fact Book", name: "Fact Book", icon: ICON.facts }, {
+    prepare: function () { var self = this; return data.names().then(function (n) { self.nm = n; }); },
     view: function () {
-      var f = L(this, "facts");
-      var h = f.length ? f.map(function (x) { return box("apparatus", "", '<div class="item"><span class="when">' + esc([x.kind, x.about].filter(Boolean).join(" \u00B7 ")) + '</span><span class="tt">' + esc(x.title) + '</span><p class="sub u-m4-8 u-fs15">' + esc(x.note) + "</p>" + outlink(entryURL("facts", x.id), "Fact Book entry") + "</div>"); }).join("")
-        : none("The Fact Book has no people or places in " + esc(this.o.ref) + ".");
-      return { kick: "Fact Book \u00B7 " + f.length + " people and places", title: "People and places here", body: h + outlink(CFG.site + "bible-entity-explorer/", "Open the Fact Book") +
+      var f = L(this, "facts"), st = namesIn(this.nm, this.o.ref), used = {};
+      /* a Fact Book entry gets STEPBible's family line or map when the same name is in the passage */
+      var match = function (x) { for (var i = 0; i < st.length; i++) if (!used[i] && st[i].n === x.title) { used[i] = 1; return st[i]; } return null; };
+      var h = f.map(function (x) { var p = match(x), line = p ? nameLine(p) : "";
+        return box("apparatus", "", '<div class="item"><span class="when">' + esc([x.kind, x.about].filter(Boolean).join(" \u00B7 ")) + '</span><span class="tt">' + esc(x.title) + '</span><p class="sub u-m4-8 u-fs15">' + esc(x.note) + "</p>" +
+          (line ? '<p class="u-m4-8 u-fs15">' + line + "</p>" : "") + outlink(entryURL("facts", x.id), "Fact Book entry") + "</div>"); }).join("");
+      var more = st.filter(function (p, i) { return !used[i]; });
+      if (more.length) h += (f.length ? '<div class="lbl u-mt14">Also named here</div>' : "") + more.map(function (p) {
+        var line = nameLine(p);
+        return box("apparatus", "", '<div class="item"><span class="when">' + esc(p.t === "Place" ? "Place" : (p.d || "Person")) + '</span><span class="tt">' + esc(p.n) + "</span>" +
+          (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + (line ? '<p class="u-m4-8 u-fs15">' + line + "</p>" : "") + "</div>"); }).join("");
+      if (!f.length && !more.length) h = none("No people or places are named in " + esc(this.o.ref) + ".");
+      return { kick: "Fact Book \u00B7 " + (f.length + more.length) + " people and places", title: "People and places here", body: h + outlink(CFG.site + "bible-entity-explorer/", "Open the Fact Book") +
+        '<p class="ctx u-fs13">Family lines, maps and the "Also named here" list: <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (TIPNR, CC BY 4.0).</p>' +
         (LV.ok.facts ? "" : '<p class="ctx u-fs13">' + liveNote() + "</p>") };
     }
   }, { slug: "fact-book-alpha" }, function (d) { return d ? (d.facts || []).length : null; });
