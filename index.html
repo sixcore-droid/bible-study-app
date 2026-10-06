@@ -263,6 +263,7 @@ const plan=()=>PLANS[S.plan];
 function planStart(p){ if(!PUBLIC) return p.start; const k="start:"+p.id; let d=store.get(k,null);
   if(!d){ const t=new Date(); d=`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`; store.set(k,d) } return d }
 function todayNum(p){const d0=new Date(planStart(p)+"T00:00:00"), now=new Date(); now.setHours(0,0,0,0);
+  if(p.weekly) return now<d0 ? 0 : Math.floor((now-d0)/(7*864e5))+1;   // one entry a week (the F260 memory verses)
   if(!p.weekdays) return Math.floor((now-d0)/864e5)+1;
   if(now<d0) return 0;
   let n=0; for(const d=new Date(d0); d<=now; d.setDate(d.getDate()+1)){ const w=d.getDay(); if(w&&w<6) n++ }
@@ -303,12 +304,12 @@ function renderPlan(){
     + (S.view!=="public" ? `<option value="__build">+ Build a plan\u2026</option>` : "");
   $("planname").textContent = p.name; $("plandesc").textContent = p.description||"";
   const t = todayNum(p), total=p.days.length, done=p.days.filter(dayDone).length;
-  $("progtxt").textContent = t<1 ? `Starts ${new Date(planStart(p)+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long"})}` : t>total ? `Finished · ${total} days` : `Day ${t} of ${total}`;
+  $("progtxt").textContent = t<1 ? `Starts ${new Date(planStart(p)+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long"})}` : t>total ? `Finished · ${total} ${p.weekly?"weeks":"days"}` : `${p.weekly?"Week":"Day"} ${t} of ${total}`;
   $("progpct").textContent = Math.round(done/total*100)+"%";
   $("progbar").style.width = Math.max(2,done/total*100)+"%";
   $("days").innerHTML = p.days.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
     return `<li><button class="day${fin?" done":""}${on?" on":""}" data-day="${d.day}" ${isT?'aria-current="date"':""}>
-      <span class="n">${isT?"Today":"Day "+d.day}</span>
+      <span class="n">${isT?(p.weekly?"This week":"Today"):(p.weekly?"Week ":"Day ")+d.day}</span>
       <span class="t">${esc(d.title)}${(d.readings.length>1||d.note)?`<small>${esc(d.readings.length>1?"with "+d.readings.slice(1).map(x=>x.ref).join(" · "):d.note)}</small>`:""}</span>
       <span class="ck" role="img" aria-label="${fin?"done":"not done"}">${fin?"✓":""}</span></button></li>`}).join("");
 }
@@ -327,7 +328,7 @@ function renderReader(){
   $("rtabs").innerHTML = READINGS.map((x,i)=>`<button class="rtab${!S.adhoc&&i===S.reading?" on":""}${isDone(dk(x))?" done":""}" role="tab" aria-selected="${!S.adhoc&&i===S.reading}" data-r="${i}"><span class="ok"></span>${esc(x.ref)}</button>`).join("");
   const isToday = S.day===todayNum(plan());
   if(S.adhoc) $("rtabs").innerHTML += `<button class="rtab on adhoc" role="tab" aria-selected="true">${esc(S.adhoc.ref)}</button><button class="rtabx" data-close-adhoc title="Close and go back to the day's reading" aria-label="Close ${esc(S.adhoc.ref)}">×</button>`;
-  $("rkick").textContent = S.adhoc ? "Opened passage · not in today's plan" : `${isToday?"Today":"Day "+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
+  $("rkick").textContent = S.adhoc ? "Opened passage · not in today's plan" : `${isToday?(plan().weekly?"This week":"Today"):(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
   $("rtitle").textContent = r.ref;
   const lg = JaymsRef.refly(r.ref, S.ver);
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");

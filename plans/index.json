@@ -28,6 +28,11 @@
    "name": "F260 NT"
   },
   {
+   "id": "f260-memory",
+   "file": "plans/f260-memory.json",
+   "name": "F260 Memory Verses"
+  },
+  {
    "id": "gospels-together",
    "file": "plans/gospels-together.json",
    "name": "The Gospels Together"

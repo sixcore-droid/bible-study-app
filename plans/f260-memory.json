@@ -1,0 +1,893 @@
+{
+ "id": "f260-memory",
+ "name": "F260 Memory Verses",
+ "description": "The F260's two memory verses for each of its 52 weeks, one week at a time alongside the F260 readings (Robby Gallaty and Replicate Ministries).",
+ "start": "2026-10-05",
+ "weekly": true,
+ "days": [
+  {
+   "day": 1,
+   "title": "Genesis 1:27",
+   "note": "Week 1",
+   "readings": [
+    {
+     "ref": "Genesis 1:27",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Hebrews 11:7",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Hebrews 11:6",
+   "note": "Week 2",
+   "readings": [
+    {
+     "ref": "Hebrews 11:6",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Hebrews 11:8-10",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "Romans 4:20-22",
+   "note": "Week 3",
+   "readings": [
+    {
+     "ref": "Romans 4:20-22",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Hebrews 11:17-19",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "2 Corinthians 10:12",
+   "note": "Week 4",
+   "readings": [
+    {
+     "ref": "2 Corinthians 10:12",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "1 John 3:18",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Romans 8:28-30",
+   "note": "Week 5",
+   "readings": [
+    {
+     "ref": "Romans 8:28-30",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Ephesians 3:20-21",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Genesis 50:20",
+   "note": "Week 6",
+   "readings": [
+    {
+     "ref": "Genesis 50:20",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Hebrews 11:24-26",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "John 1:29",
+   "note": "Week 7",
+   "readings": [
+    {
+     "ref": "John 1:29",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Hebrews 9:22",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Exodus 20:1-3",
+   "note": "Week 8",
+   "readings": [
+    {
+     "ref": "Exodus 20:1-3",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Galatians 5:14",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Exodus 33:16",
+   "note": "Week 9",
+   "readings": [
+    {
+     "ref": "Exodus 33:16",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 22:37-39",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Leviticus 26:13",
+   "note": "Week 10",
+   "readings": [
+    {
+     "ref": "Leviticus 26:13",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Deuteronomy 31:7-8",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "Deuteronomy 4:7",
+   "note": "Week 11",
+   "readings": [
+    {
+     "ref": "Deuteronomy 4:7",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Deuteronomy 6:4-9",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Joshua 1:8-9",
+   "note": "Week 12",
+   "readings": [
+    {
+     "ref": "Joshua 1:8-9",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 1:1-2",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Joshua 24:14-15",
+   "note": "Week 13",
+   "readings": [
+    {
+     "ref": "Joshua 24:14-15",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Judges 2:12",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Psalm 19:14",
+   "note": "Week 14",
+   "readings": [
+    {
+     "ref": "Psalm 19:14",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Galatians 4:4-5",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "1 Samuel 15:22",
+   "note": "Week 15",
+   "readings": [
+    {
+     "ref": "1 Samuel 15:22",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "1 Samuel 16:7",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "1 Samuel 17:46-47",
+   "note": "Week 16",
+   "readings": [
+    {
+     "ref": "1 Samuel 17:46-47",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "2 Timothy 4:17",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "Psalm 23:1-3",
+   "note": "Week 17",
+   "readings": [
+    {
+     "ref": "Psalm 23:1-3",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 51:10-13",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Psalm 1:1-6",
+   "note": "Week 18",
+   "readings": [
+    {
+     "ref": "Psalm 1:1-6",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 119:7-11",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Psalm 139:1-3",
+   "note": "Week 19",
+   "readings": [
+    {
+     "ref": "Psalm 139:1-3",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 139:15-16",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Proverbs 1:7",
+   "note": "Week 20",
+   "readings": [
+    {
+     "ref": "Proverbs 1:7",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 3:5-6",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "Psalm 17:15",
+   "note": "Week 21",
+   "readings": [
+    {
+     "ref": "Psalm 17:15",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 63:1",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "Psalm 16:11",
+   "note": "Week 22",
+   "readings": [
+    {
+     "ref": "Psalm 16:11",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "John 11:25-26",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Isaiah 53:5-6",
+   "note": "Week 23",
+   "readings": [
+    {
+     "ref": "Isaiah 53:5-6",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "1 Peter 2:23-24",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Proverbs 29:18",
+   "note": "Week 24",
+   "readings": [
+    {
+     "ref": "Proverbs 29:18",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Jeremiah 1:15",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "Ezekiel 36:26-27",
+   "note": "Week 25",
+   "readings": [
+    {
+     "ref": "Ezekiel 36:26-27",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Daniel 4:35",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "title": "Daniel 6:26-27",
+   "note": "Week 26",
+   "readings": [
+    {
+     "ref": "Daniel 6:26-27",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Daniel 9:19",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "title": "Zephaniah 3:17",
+   "note": "Week 27",
+   "readings": [
+    {
+     "ref": "Zephaniah 3:17",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "1 Peter 3:15",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "title": "Deuteronomy 29:29",
+   "note": "Week 28",
+   "readings": [
+    {
+     "ref": "Deuteronomy 29:29",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 101:3-4",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "title": "Nehemiah 6:9",
+   "note": "Week 29",
+   "readings": [
+    {
+     "ref": "Nehemiah 6:9",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Nehemiah 9:6",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "title": "Psalm 51:17",
+   "note": "Week 30",
+   "readings": [
+    {
+     "ref": "Psalm 51:17",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Colossians 1:19-20",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "title": "John 1:1-2",
+   "note": "Week 31",
+   "readings": [
+    {
+     "ref": "John 1:1-2",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "John 1:14",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "title": "Matthew 5:16",
+   "note": "Week 32",
+   "readings": [
+    {
+     "ref": "Matthew 5:16",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Matthew 6:33",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "title": "Luke 14:26-27",
+   "note": "Week 33",
+   "readings": [
+    {
+     "ref": "Luke 14:26-27",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Luke 14:33",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "title": "Mark 10:45",
+   "note": "Week 34",
+   "readings": [
+    {
+     "ref": "Mark 10:45",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "John 6:37",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "title": "John 13:34-35",
+   "note": "Week 35",
+   "readings": [
+    {
+     "ref": "John 13:34-35",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "John 15:4-5",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "title": "Luke 23:34",
+   "note": "Week 36",
+   "readings": [
+    {
+     "ref": "Luke 23:34",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "John 17:3",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "title": "Matthew 28:18-20",
+   "note": "Week 37",
+   "readings": [
+    {
+     "ref": "Matthew 28:18-20",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Acts 1:8",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "title": "Acts 2:42",
+   "note": "Week 38",
+   "readings": [
+    {
+     "ref": "Acts 2:42",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Acts 4:31",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "title": "James 1:2-4",
+   "note": "Week 39",
+   "readings": [
+    {
+     "ref": "James 1:2-4",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "James 2:17",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "title": "Acts 17:11",
+   "note": "Week 40",
+   "readings": [
+    {
+     "ref": "Acts 17:11",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Acts 17:24-25",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "title": "1 Corinthians 1:18",
+   "note": "Week 41",
+   "readings": [
+    {
+     "ref": "1 Corinthians 1:18",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "1 Thessalonians 5:23-24",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "title": "1 Corinthians 10:13",
+   "note": "Week 42",
+   "readings": [
+    {
+     "ref": "1 Corinthians 10:13",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "1 Corinthians 13:13",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "title": "Romans 1:16-17",
+   "note": "Week 43",
+   "readings": [
+    {
+     "ref": "Romans 1:16-17",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "1 Corinthians 15:3-4",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "title": "Romans 5:1",
+   "note": "Week 44",
+   "readings": [
+    {
+     "ref": "Romans 5:1",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "2 Corinthians 10:4",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "title": "Romans 8:1",
+   "note": "Week 45",
+   "readings": [
+    {
+     "ref": "Romans 8:1",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Romans 12:1-2",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "title": "Acts 20:24",
+   "note": "Week 46",
+   "readings": [
+    {
+     "ref": "Acts 20:24",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "2 Corinthians 4:7-10",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "title": "Ephesians 2:8-10",
+   "note": "Week 47",
+   "readings": [
+    {
+     "ref": "Ephesians 2:8-10",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Colossians 2:6-7",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "title": "Philippians 3:7-8",
+   "note": "Week 48",
+   "readings": [
+    {
+     "ref": "Philippians 3:7-8",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Hebrews 4:14-16",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "title": "Galatians 2:19-20",
+   "note": "Week 49",
+   "readings": [
+    {
+     "ref": "Galatians 2:19-20",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "2 Corinthians 5:17",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "title": "2 Timothy 2:1-2",
+   "note": "Week 50",
+   "readings": [
+    {
+     "ref": "2 Timothy 2:1-2",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "2 Timothy 2:15",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "title": "1 Peter 2:11",
+   "note": "Week 51",
+   "readings": [
+    {
+     "ref": "1 Peter 2:11",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "1 John 4:10-11",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "title": "Revelation 3:19",
+   "note": "Week 52",
+   "readings": [
+    {
+     "ref": "Revelation 3:19",
+     "role": "Memory verse",
+     "why": ""
+    },
+    {
+     "ref": "Revelation 21:3-4",
+     "role": "Memory verse",
+     "why": ""
+    }
+   ]
+  }
+ ]
+}
