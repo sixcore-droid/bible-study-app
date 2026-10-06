@@ -2058,7 +2058,7 @@
   var BP_EMBED = /(^|\.)jayms\.com$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
   var NBP_FEED = "446953";   // the Naked Bible Podcast's Podcast Index feed id
   var BP_KIND = { v: "Videos", a: "Articles", p: "Podcast episodes", g: "Guides" }, BP_TAB = "watch";
-  define("BibleProject", { id: "bp", label: "BP", name: "BibleProject on this passage", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>' }, {
+  define("BibleProject", { id: "bp", label: "Media", name: "Videos, podcasts and articles on this passage", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>' }, {
     prepare: function () {
       var self = this;
       data.podcast(NBP_FEED).then(function (p) { self.nbp = p; if (self.alive && self.d) self.paint(); });   // arrives when it arrives
@@ -2126,7 +2126,7 @@
           return '<p class="u-m8">' + outlink(a.u, esc(a.t)) + '<br><span class="u-fs15">' + esc(new Date(a.d + "T12:00:00").toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })) + "</span></p>"; }).join("") + "</div>") +
           (hf.length > 8 ? '<div class="askrow"><button class="btn" data-jst-bpall="hf">' + (hopen ? "Fewer" : "All " + hf.length) + "</button></div>" : "");
         h += '<p class="ctx u-fs13">From <a href="https://michaelsheiserfoundation.org/articles/" target="_blank" rel="noopener">michaelsheiserfoundation.org</a>: articles that cite these chapters, the ones citing them most first.</p>';
-        return { kick: "BibleProject \u00B7 " + ids.length, title: name + " " + q.c1 + (q.c2 && q.c2 !== q.c1 ? "\u2013" + q.c2 : ""), body: h };
+        return { kick: "Media \u00B7 BibleProject, podcasts, Heiser", title: name + " " + q.c1 + (q.c2 && q.c2 !== q.c1 ? "\u2013" + q.c2 : ""), body: h };
       }
       if (ids.length || nbp.length || hf.length) h += '<div class="chips u-m10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t ? " on" : "") + '" data-jst-bptab="' + t[0] + '">' + t[1] + " (" + count(t[2]) + ")</button>"; }).join("") + "</div>";
       if (tab[1] === "Podcasts" && nbp.length) {
@@ -2146,7 +2146,7 @@
       if (ids.length && !count(tab[2])) h += none("No " + tab[1].toLowerCase() + " for " + esc(this.o.ref) + ".");
       if (!ids.length && !nbp.length && !hf.length) h += none("BibleProject has nothing filed under " + esc(this.o.ref) + " beyond the guide.");
       h += '<p class="ctx u-fs13">From <a href="https://bibleproject.com/" target="_blank" rel="noopener">bibleproject.com</a>' + (nbp.length ? ' and the <a href="https://nakedbiblepodcast.com/" target="_blank" rel="noopener">Naked Bible Podcast</a> (episode list via Podcast Index)' : "") + ', matched by the passages each one names. Strongest match first.</p>';
-      return { kick: "BibleProject \u00B7 " + ids.length, title: name + " " + q.c1 + (q.c2 && q.c2 !== q.c1 ? "\u2013" + q.c2 : ""), body: h };
+      return { kick: "Media \u00B7 BibleProject, podcasts, Heiser", title: name + " " + q.c1 + (q.c2 && q.c2 !== q.c1 ? "\u2013" + q.c2 : ""), body: h };
     },
     destroy: function () { if (this._csp) document.removeEventListener("securitypolicyviolation", this._csp); Panel.prototype.destroy.call(this); },
     click: function (e) {
