@@ -137,6 +137,10 @@ a.btn{text-decoration:none;display:inline-block}
 .wc-sfx{cursor:default;opacity:.85}
 .jst-leaf{height:340px;border-radius:6px;border:1px solid var(--line);margin:4px 0 6px;background:#a9c3cf}
 .jst-leaf .leaflet-popup-content{font:14px/1.4 var(--read);color:#222}
+.jst-artgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:8px 0}
+.jst-artgrid figure{margin:0}
+.jst-artgrid img{width:100%;height:150px;object-fit:cover;border-radius:6px;cursor:zoom-in;background:var(--paper)}
+.jst-artgrid figcaption{font-size:13px;line-height:1.35;margin-top:4px;color:var(--ink)}
 .jst-mapimg{display:block;width:100%;height:auto;margin:10px 0 2px;border-radius:6px;background:var(--paper);cursor:zoom-in}
 .jst-mapview{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.88);display:flex;flex-direction:column}
 .jst-mapbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;color:var(--ink);font:600 15px/1.3 var(--label)}

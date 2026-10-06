@@ -894,6 +894,78 @@
     destroy: function () { if (this._map) { try { this._map.remove(); } catch (e) {} this._map = null; } Panel.prototype.destroy.call(this); }
   }, {}, function (d) { return null; });
 
+  // ------------------------------------------------------------------ Art
+  /* Public-domain art of the passage from the Art Institute of Chicago's open collection (api.artic.edu, no key, CC0 data).
+     It searches the passage's main people (STEPBible), keeps works whose title names one of them, and drops bare portrait
+     titles ("Daniel Mytens"). Pictures come from the museum's IIIF server; tap one for full screen. Where outside images are
+     blocked (claude.ai) the panel says so. */
+  var ART = {};
+  function artSearch(q) {
+    if (ART[q]) return ART[q];
+    var u = "https://api.artic.edu/api/v1/artworks/search?q=" + encodeURIComponent(q) + "&query%5Bterm%5D%5Bis_public_domain%5D=true&fields=id,title,image_id,artist_title,date_display&limit=30";
+    return (ART[q] = fetch(u).then(function (r) { return r.ok ? r.json() : { data: [] }; }).then(function (d) { return d.data || []; }).catch(function () { return []; }));
+  }
+  define("Art", { id: "art", label: "Art", name: "Art of this passage", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 16l5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="8.5" r="1.5"/></svg>' }, {
+    prepare: function () {
+      var self = this;
+      return data.names().then(function (nm) {
+        /* the people named most in the passage (a person's verse count within it), up to three */
+        var segs = data.segs(self.o.ref), seen = {}, ppl = [];
+        segs.forEach(function (q) { for (var c = q.c1; c <= (q.c2 || q.c1); c++) ((nm && nm.ix[q.book] || {})[c] || []).forEach(function (row) {
+          var p = nm.p[row[0]]; if (!p || p.t === "Place" || /Group|Language|Time/.test(p.t)) return;
+          var n = row.slice(1).filter(function (v) { return (c > q.c1 || v >= q.v1) && (c < (q.c2 || q.c1) || v <= q.v2); }).length; if (!n) return;
+          if (!seen[p.n]) { seen[p.n] = { n: p.n, k: 0 }; ppl.push(seen[p.n]); } seen[p.n].k += n; }); });
+        ppl.sort(function (a, b) { return b.k - a.k; });
+        self.who = ppl.slice(0, 3).map(function (x) { return x.n; });
+        self.nobody = !self.who.length;   // no one named (a parable, a psalm): the search runs on the story words alone
+        /* the story words from the outline's titles for these verses ("the Lions Could Not Harm Him" -> lions) sharpen the search */
+        return Promise.all(segs.map(function (q) { return data.outline(q.book).catch(function () { return null; }); })).then(function (ols) {
+          var STOP = /^(that|this|with|from|into|them|they|their|when|what|will|shall|have|been|were|there|over|upon|unto|could|would|before|after|again|three|times|daily|never|only|just|even|himself|itself|people|which|while|whose|within|without)$/i, words = {};
+          ols.forEach(function (ol, k) { if (!ol) return; (ol.eras || []).forEach(function (er) { (er.events || []).forEach(function (ev) {
+            var on = R.parse(ev.books || "").some(function (x) { return R.overlap(x, segs[k]); }); if (!on) return;
+            String(ev.title || "").replace(/[^A-Za-z' ]/g, " ").split(/\s+/).forEach(function (w) { w = w.replace(/'s$/, "").toLowerCase();
+              if (w.length >= 4 && !STOP.test(w) && self.who.every(function (n) { return n.toLowerCase() !== w; })) words[w] = (words[w] || 0) + 1; }); }); }); });
+          self.story = Object.keys(words).sort(function (a, b) { return words[b] - words[a]; }).slice(0, 6);
+          var qs = self.who.slice();
+          if (self.nobody) { if (self.story.length > 1) qs.push(self.story.slice(0, 2).join(" ")); self.story.slice(0, 2).forEach(function (w) { qs.push(w); }); }
+          else self.story.slice(0, 3).forEach(function (w) { qs.push(self.who[0] + " " + w); });
+          return Promise.all(qs.map(artSearch));
+        });
+      }).then(function (lists) {
+        var names = self.who, story = self.story || [], out = [], seen = {};
+        [].concat.apply([], lists || []).forEach(function (a) {
+          if (!a.image_id || seen[a.id]) return;
+          var t = a.title || "", hit = names.filter(function (n) { return new RegExp("(^|[^\\w-])" + n + "(?![\\w-])", "i").test(t); });   // "Amédée-David" isn't David
+          var sw0 = story.filter(function (w) { return new RegExp("\\b" + w, "i").test(t); }).length;
+          if (!hit.length && !(self.nobody && sw0 >= (story.length > 1 ? 2 : 1))) return;
+          if (hit.length === 1 && hit[0] !== names[0] && !sw0) return;   // only a minor name and nothing of the story: likely another Darius
+          if (/^[A-Z][a-z]+ [A-Z][a-z]+$/.test(t.trim()) && hit.length < 2) return;   // "Daniel Mytens": a portrait of someone else
+          if (/(\bMrs?\.|\b(Portrait|Priory|Church|Chapel|Cathedral|Street|Avenue|Saint|St\.)\b)/i.test(t)) return;   // a namesake, not the Bible figure
+          var sw = story.filter(function (w) { return new RegExp("\\b" + w, "i").test(t); }).length;
+          seen[a.id] = 1; a._sc = hit.length * 2 + sw * 3; out.push(a);
+        });
+        out.sort(function (x, y) { return y._sc - x._sc; });
+        self.art = out.slice(0, 16);
+      });
+    },
+    view: function () {
+      if (!CFG.onlineMaps) return { kick: "Art", title: "Art of this passage", body: none("Pictures from other sites can't show here. Open the app on jayms.com or your desk.") };
+      var a = this.art || [], what = this.who.length ? this.who.join(", ") + (this.story && this.story.length ? " (" + this.story.slice(0, 3).join(", ") + ")" : "") : (this.story || []).slice(0, 2).join(" ");
+      var h = '<p class="ctx">Searched for ' + esc(what || this.o.ref) + '.</p>';
+      h += a.length ? '<div class="jst-artgrid">' + a.map(function (x) {
+        return '<figure><img src="https://www.artic.edu/iiif/2/' + esc(x.image_id) + '/full/400,/0/default.jpg" alt="' + esc(x.title) + '" loading="lazy" data-jst-art="' + esc(x.image_id) + '" data-t="' + esc(x.title) + '" role="button" tabindex="0">' +
+          '<figcaption><b>' + esc(x.title) + "</b><br>" + esc([x.artist_title, x.date_display].filter(Boolean).join(", ")) + " " + outlink("https://www.artic.edu/artworks/" + x.id, "Museum") + "</figcaption></figure>"; }).join("") + "</div>"
+        : none("No public-domain artwork at the Art Institute matches " + esc(what || this.o.ref) + ".");
+      h += '<p class="ctx u-fs13">From the <a href="https://www.artic.edu/collection" target="_blank" rel="noopener">Art Institute of Chicago</a>, public-domain works only. Tap a picture for full screen.</p>';
+      return { kick: "Art \u00B7 " + a.length + " works", title: "Art of this passage", body: h };
+    },
+    click: function (e) {
+      var im = e.target.closest("[data-jst-art]");
+      if (im) { e.stopPropagation(); var id = im.getAttribute("data-jst-art"); mapViewer({ id: "art-" + id, t: im.getAttribute("data-t"), img: "https://www.artic.edu/iiif/2/" + id + "/full/1686,/0/default.jpg" }); return; }
+      Panel.prototype.click.call(this, e);
+    }
+  }, {}, function (d) { return null; });
+
   // ------------------------------------------------------------------ Posts
   define("Posts", { id: "posts", label: "Posts", name: "My posts on jayms.com", icon: ICON.posts }, {
     prepare: function () { var self = this; return Promise.all((this.o.alsoRefs || []).map(data.passage)).then(function (ds) { self.also = ds; }); },
