@@ -765,7 +765,7 @@
       for (var c = q.c1; c <= (q.c2 || q.c1); c++) (((nm.ix[q.book] || {})[c]) || []).forEach(function (row) {
         var lo = c === q.c1 ? q.v1 : 1, hi = c === (q.c2 || q.c1) ? q.v2 : 999;
         if (!row.slice(1).some(function (v) { return v >= lo && v <= hi; }) || seen[row[0]]) return;
-        seen[row[0]] = 1; out.push(nm.p[row[0]]);
+        seen[row[0]] = 1; out.push(Object.assign({ id: row[0] }, nm.p[row[0]]));
       });
     });
     return out;
@@ -773,7 +773,7 @@
   /* one line of family, or a place's map: "Son of Salmon and Rahab · husband of Ruth · father of Obed · Tribe of Judah" */
   function nameLine(p) {
     var and = function (a) { return a.length > 1 ? a.slice(0, -1).join(", ") + " and " + a[a.length - 1] : a[0]; };
-    if (p.t === "Place") return [p.tr && p.tr !== p.n ? esc(p.tr) : "", p.ll ? outlink("https://www.google.com/maps/@" + p.ll[0] + "," + p.ll[1] + ",12z", "Map") : ""].filter(Boolean).join(" \u00B7 ");
+    if (p.t === "Place") return p.tr && p.tr !== p.n ? esc(p.tr) : "";
     var f = p.t === "Female", bits = [];
     if (p.par) bits.push((f ? "Daughter" : "Son") + " of " + and(p.par));
     if (p.sib) bits.push((f ? "sister" : "brother") + " of " + and(p.sib));
@@ -783,22 +783,51 @@
     return esc(bits.join(" \u00B7 ").replace(/^./, function (x) { return x.toUpperCase(); }));
   }
   define("FactBook", { id: "facts", label: "Fact Book", name: "Fact Book", icon: ICON.facts }, {
-    prepare: function () { var self = this; return data.names().then(function (n) { self.nm = n; }); },
+    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; })]).then(function (r) { self.nm = r[0]; self.mp = r[2] || {}; }); },
+    /* the Bible-era maps a place is on (Biblica Open Bible Maps, tagged by place): they open full screen here */
+    mapsHTML: function (p) {
+      var segs = data.segs(this.o.ref), ot = segs[0] && R.book(segs[0].book).order < 39, rank = {};
+      /* the maps for this passage first, then this book's, then this testament's (an OT place in Ruth shouldn't open a Matthew map first) */
+      var ids = (this.mp[p.n] || []).filter(function (i) { return MAPBY[i]; });
+      ids.forEach(function (i, n) { var m = MAPBY[i], r = m.r || [], sc = 0;
+        if (r.some(function (x) { return segs.some(function (q) { return R.overlap({ book: x[0], c1: x[1], v1: x[2], c2: x[3], v2: x[4] }, q); }); })) sc += 4;
+        if (r.some(function (x) { return segs.some(function (q) { return x[0] === q.book; }); })) sc += 2;
+        if ((i.charAt(0) === "O") === !!ot) sc += 1;
+        rank[i] = sc * 1000 - n; });
+      ids.sort(function (x, y) { return rank[y] - rank[x]; });
+      var seenT = {}; ids = ids.filter(function (i) { var t = MAPBY[i].t.replace(/^[^:]+:\s*/, ""); if (seenT[t]) return false; seenT[t] = 1; return true; });
+      if (!ids.length) return "";
+      return '<div class="chips u-mt6">' + ids.slice(0, 4).map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>";
+    },
+    /* STEPBible's own entry: the short one at once, the full article when opened */
+    stepHTML: function (p) {
+      if (!p.s) return "";
+      return '<details class="jst-past" data-jst-step="' + esc(p.id) + '"><summary class="lbl">STEPBible entry</summary><p class="u-m4-8 u-fs15">' + esc(p.s) + '</p><div class="u-fs15" data-jst-art></div></details>';
+    },
+    click: function (e) {
+      var m = e.target.closest("[data-jst-pmap]");
+      if (m) { e.stopPropagation(); mapViewer(MAPBY[m.getAttribute("data-jst-pmap")]); return; }
+      var sum = e.target.closest("[data-jst-step] summary");
+      if (sum) { var d = sum.parentNode, slot = d.querySelector("[data-jst-art]"), id = d.getAttribute("data-jst-step");
+        if (!slot.innerHTML) getJSON("names-articles.json").then(function (a) { var t = a && a[id]; if (t) slot.innerHTML = "<p class=\"u-m4-8\">" + esc(t) + "</p>"; }).catch(function () {}); }
+      Panel.prototype.click.call(this, e);
+    },
     view: function () {
       var f = L(this, "facts"), st = namesIn(this.nm, this.o.ref), used = {};
       /* a Fact Book entry gets STEPBible's family line or map when the same name is in the passage */
+      var self = this, extra = function (p) { return p ? self.mapsHTML(p) + self.stepHTML(p) : ""; };
       var match = function (x) { for (var i = 0; i < st.length; i++) if (!used[i] && st[i].n === x.title) { used[i] = 1; return st[i]; } return null; };
       var h = f.map(function (x) { var p = match(x), line = p ? nameLine(p) : "";
         return box("apparatus", "", '<div class="item"><span class="when">' + esc([x.kind, x.about].filter(Boolean).join(" \u00B7 ")) + '</span><span class="tt">' + esc(x.title) + '</span><p class="sub u-m4-8 u-fs15">' + esc(x.note) + "</p>" +
-          (line ? '<p class="u-m4-8 u-fs15">' + line + "</p>" : "") + outlink(entryURL("facts", x.id), "Fact Book entry") + "</div>"); }).join("");
+          (line ? '<p class="u-m4-8 u-fs15">' + line + "</p>" : "") + extra(p) + outlink(entryURL("facts", x.id), "Fact Book entry") + "</div>"); }).join("");
       var more = st.filter(function (p, i) { return !used[i]; });
       if (more.length) h += (f.length ? '<div class="lbl u-mt14">Also named here</div>' : "") + more.map(function (p) {
         var line = nameLine(p);
         return box("apparatus", "", '<div class="item"><span class="when">' + esc(p.t === "Place" ? "Place" : (p.d || "Person")) + '</span><span class="tt">' + esc(p.n) + "</span>" +
-          (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + (line ? '<p class="u-m4-8 u-fs15">' + line + "</p>" : "") + "</div>"); }).join("");
+          (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + (line ? '<p class="u-m4-8 u-fs15">' + line + "</p>" : "") + extra(p) + "</div>"); }).join("");
       if (!f.length && !more.length) h = none("No people or places are named in " + esc(this.o.ref) + ".");
       return { kick: "Fact Book \u00B7 " + (f.length + more.length) + " people and places", title: "People and places here", body: h + outlink(CFG.site + "bible-entity-explorer/", "Open the Fact Book") +
-        '<p class="ctx u-fs13">Family lines, maps and the "Also named here" list: <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (TIPNR, CC BY 4.0).</p>' +
+        '<p class="ctx u-fs13">Family lines, STEPBible entries and "Also named here": <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (TIPNR, CC BY 4.0). Maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one to open it full screen.</p>' +
         (LV.ok.facts ? "" : '<p class="ctx u-fs13">' + liveNote() + "</p>") };
     }
   }, { slug: "fact-book-alpha" }, function (d) { return d ? (d.facts || []).length : null; });
