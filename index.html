@@ -160,7 +160,7 @@ const QUICK = [
 
 /* The dock: an order, plus the one tool that belongs to this page alone (Notes). Everything else is a component's own meta. */
 const NOTES_ICON = '<svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>';
-const DOCK = ["verse","outline","word","|","council","gods","facts","family","maps","art","posts","corpus","fathers","targum","xref","bp","x","chats","logos","shelf","vocab","ideas","vault","|","wrap","review","config","notes"];
+const DOCK = ["verse","outline","word","|","council","gods","facts","family","maps","art","scrolls","posts","corpus","fathers","targum","xref","bp","x","chats","logos","shelf","vocab","ideas","vault","|","wrap","review","config","notes"];
 function toolMeta(id){
   if(id==="notes") return {id, label:"Notes", name:"All my notes", icon:NOTES_ICON};
   const P = JST.panels[id]; return Object.assign({}, P.meta);

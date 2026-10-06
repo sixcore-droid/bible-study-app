@@ -934,6 +934,40 @@
     }
   }, {}, function (d) { return null; });
 
+  // ------------------------------------------------------------------ Scrolls
+  /* The Dead Sea Scrolls that contain the passage (dss.json, ETCBC/Abegg, CC BY-NC 4.0), with the Leon Levy library's own
+     photographs of each manuscript (dss-images.json, scripts/build-dss-images.py). Tap a photo for full screen. */
+  define("Scrolls", { id: "scrolls", label: "Scrolls", name: "Dead Sea Scrolls of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M6 4h11a2 2 0 0 1 0 4H6M6 4a2 2 0 0 0 0 4v10a2 2 0 0 0 2 2h11a2 2 0 0 1 0-4H8"/></svg>' }, {
+    prepare: function () { var self = this; return Promise.all([data.dss(), getJSON("dss-images.json").catch(function () { return {}; })]).then(function (r) { self.D = r[0]; self.im = r[1] || {}; }); },
+    view: function () {
+      var D = this.D, im = this.im, by = {}, order = [];
+      if (!D) return { kick: "Scrolls", title: "Dead Sea Scrolls", body: none("The scroll data didn't load.") };
+      data.segs(this.o.ref).forEach(function (q) {
+        for (var c = q.c1; c <= (q.c2 || q.c1); c++) { var ch = D.v[q.book + "|" + c] || {};
+          Object.keys(ch).forEach(function (v) { var n = +v; if ((c === q.c1 && n < q.v1) || (c === (q.c2 || q.c1) && n > q.v2)) return;
+            ch[v].forEach(function (ms) { if (!by[ms]) { by[ms] = { ms: ms, vs: [] }; order.push(ms); } by[ms].vs.push([q.book, c, n]); }); }); }
+      });
+      var list = order.map(function (k) { return by[k]; }).sort(function (a, b) { return b.vs.length - a.vs.length; });
+      /* "1:1-8, 13-15" */
+      var spans = function (vs) { var out = [], lastC = null, run = null;
+        vs.forEach(function (x) { if (run && x[1] === run.c && x[2] === run.b + 1) { run.b = x[2]; return; } run = { c: x[1], a: x[2], b: x[2] }; out.push(run); });
+        return out.map(function (r) { var t = (r.c !== lastC ? r.c + ":" : "") + r.a + (r.b > r.a ? "\u2013" + r.b : ""); lastC = r.c; return t; }).join(", "); };
+      if (!list.length) return { kick: "Scrolls \u00B7 none", title: "Dead Sea Scrolls", body: none("No Dead Sea Scroll manuscript contains " + esc(this.o.ref) + ". Many books survive only in pieces.") };
+      var h = list.map(function (x) {
+        var s = D.s[x.ms] || [x.ms, ""], ph = (im[x.ms] || []).slice(0, 4);
+        return box("witness", "", '<div class="item"><span class="when">' + esc(x.ms) + " \u00B7 " + x.vs.length + " verse" + (x.vs.length > 1 ? "s" : "") + '</span><span class="tt">' + esc(s[0]) + '</span><p class="sub u-m4-8 u-fs15">' + esc(spans(x.vs)) + "</p>" +
+          (ph.length && CFG.onlineMaps ? '<div class="jst-artgrid">' + ph.map(function (p) { return '<figure><img src="' + esc(p[0]) + '=s400" alt="' + esc(s[0] + " plate " + p[1]) + '" referrerpolicy="no-referrer" data-jst-scroll="' + esc(p[0]) + '" data-t="' + esc(s[0] + (p[1] ? ", plate " + p[1] : "") + (p[2] ? ", " + p[2] : "")) + '" role="button" tabindex="0"><figcaption>' + esc([p[1] ? "Plate " + p[1] : "", p[2]].filter(Boolean).join(" \u00B7 ")) + "</figcaption></figure>"; }).join("") + "</div>" : "") +
+          outlink(s[1], s[1].indexOf("imj.org.il") > -1 ? "Open the scroll (Israel Museum)" : "All photographs (Leon Levy Library)") + "</div>"); }).join("");
+      h += '<p class="ctx u-fs13">Which scrolls hold which verses: ETCBC/Martin Abegg (CC BY-NC 4.0). Photographs: <a href="https://www.deadseascrolls.org.il/" target="_blank" rel="noopener">Leon Levy Dead Sea Scrolls Digital Library</a>, Israel Antiquities Authority. Tap one for full screen.</p>';
+      return { kick: "Dead Sea Scrolls \u00B7 " + list.length + " manuscript" + (list.length > 1 ? "s" : ""), title: "Scrolls of " + this.o.ref, body: h };
+    },
+    click: function (e) {
+      var im = e.target.closest("[data-jst-scroll]");
+      if (im) { e.stopPropagation(); mapViewer({ id: "dss-" + im.getAttribute("data-jst-scroll"), t: im.getAttribute("data-t"), img: im.getAttribute("data-jst-scroll") + "=s2000" }); return; }
+      Panel.prototype.click.call(this, e);
+    }
+  }, {}, function (d) { return null; });
+
   // ------------------------------------------------------------------ Art
   /* Public-domain art of the passage from the Art Institute of Chicago's open collection (api.artic.edu, no key, CC0 data).
      It searches the passage's main people (STEPBible), keeps works whose title names one of them, and drops bare portrait
