@@ -1,1 +1,1 @@
-{"version":"v143","date":"2026-10-06 22:19","note":"Dock: Maps, Family, Art and Scrolls count their entries too (greyed when the passage has none)"}
+{"version":"v144","date":"2026-10-06 22:26","note":"Installable app (PWA): icon, manifest, service worker (opens offline; Bible text saved as it's read), head tags; snippet relay for sw.js and the manifest"}

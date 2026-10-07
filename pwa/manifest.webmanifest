@@ -1,0 +1,17 @@
+{
+  "id": "/bible-study-app/",
+  "name": "Bible Study App",
+  "short_name": "Bible Study",
+  "description": "A free Bible study app from jayms.com: reading plans, translations side by side, Hebrew and Greek word by word, cross-references, study notes, maps and more, all on the passage you are reading.",
+  "start_url": "/bible-study-app/",
+  "scope": "/bible-study-app/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d0e11",
+  "theme_color": "#0d0e11",
+  "categories": ["books", "education"],
+  "icons": [
+    { "src": "https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "https://sixcore-droid.github.io/bible-study-app/pwa/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

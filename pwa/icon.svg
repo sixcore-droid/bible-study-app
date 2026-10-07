@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Bible Study App icon: an open book in the app's gold on its dark paper. The book sits inside the middle 60%,
+       so the same picture works as a maskable icon (Android crops to a circle or squircle). -->
+  <rect width="512" height="512" fill="#0d0e11"/>
+  <g fill="none" stroke="#d4a85c" stroke-width="16" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M256 186 C222 160 176 152 130 160 L130 340 C176 332 222 340 256 366 Z"/>
+    <path d="M256 186 C290 160 336 152 382 160 L382 340 C336 332 290 340 256 366 Z"/>
+  </g>
+  <g fill="none" stroke="#d4a85c" stroke-width="7" stroke-linecap="round" opacity=".75">
+    <path d="M160 204 C186 200 212 204 232 214"/><path d="M160 236 C186 232 212 236 232 246"/><path d="M160 268 C186 264 212 268 232 278"/>
+    <path d="M352 204 C326 200 300 204 280 214"/><path d="M352 236 C326 232 300 236 280 246"/><path d="M352 268 C326 264 300 268 280 278"/>
+  </g>
+</svg>
