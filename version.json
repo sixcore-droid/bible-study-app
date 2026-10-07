@@ -1,1 +1,1 @@
-{"version":"v146","date":"2026-10-06 22:45","note":"PWA: register the worker with a full scope address (the page's <base> would send it to GitHub)"}
+{"version":"v147","date":"2026-10-06 22:55","note":"Docs: how the PWA is built"}
