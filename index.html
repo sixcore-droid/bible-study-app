@@ -324,13 +324,16 @@ function renderPlan(){
   /* the list starts where you are: the first day not yet done (or today), and the days before it follow at the bottom, so
      the plan menu above is never a long scroll away and day 1 comes round again after the last day */
   const first=(p.days.find(d=>!dayDone(d))||p.days.find(d=>d.day===t)||p.days[0]).day;
-  const order=p.days.filter(d=>d.day>=first).concat(p.days.filter(d=>d.day<first));
-  $("days").innerHTML = order.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
+  const full=p.days.filter(d=>d.day>=first).concat(p.days.filter(d=>d.day<first));
+  /* a week at a time: where you are and the six after it; the rest behind "Show all" (the day you picked stays in view) */
+  const SHOW=7, order = S.allDays ? full : full.filter((d,i)=>i<SHOW || d.day===S.day);
+  const more = full.length>order.length || S.allDays ? `<li><button class="daysmore" data-alldays>${S.allDays?"Show fewer":"Show all "+full.length+(p.weekly?" weeks":" days")}</button></li>` : "";
+  $("days").innerHTML = (S.allDays ? more : "") + order.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
     const sep = d.day===p.days[0].day && first>p.days[0].day ? `<li class="days-sep lbl">Done · from ${p.weekly?"week":"day"} 1</li>` : "";
     return sep+`<li><button class="day${fin?" done":""}${on?" on":""}" data-day="${d.day}" ${isT?'aria-current="date"':""}>
       <span class="n">${isT?(p.weekly?"This week":"Today"):(p.weekly?"Week ":"Day ")+d.day}</span>
       <span class="t">${esc(d.title)}${(d.readings.length>1||d.note)?`<small>${esc(d.readings.length>1?"with "+d.readings.slice(1).map(x=>x.ref).join(" · "):d.note)}</small>`:""}</span>
-      <span class="ck" role="img" aria-label="${fin?"done":"not done"}">${fin?"✓":""}</span></button></li>`}).join("");
+      <span class="ck" role="img" aria-label="${fin?"done":"not done"}">${fin?"✓":""}</span></button></li>`}).join("") + (S.allDays ? "" : more);   // "Show fewer" sits at the top of the long list, where you are
   /* the day you're on is in view when the plan opens (no scrolling down from day 1): once per plan and day, and only if it's out of sight */
   const at=S.plan+":"+S.day; if(renderPlan.at!==at){ renderPlan.at=at; setTimeout(()=>{
     const el=$("days").querySelector(".day.on")||$("days").querySelector("[aria-current]"); if(!el) return;
@@ -693,6 +696,7 @@ document.addEventListener("click",e=>{
   const v=e.target.closest("[data-v]"); if(v){e.preventDefault(); const [b,c,n]=v.dataset.v.split("|"); S.vsel={book:b,c:+c,v:+n}; S.tool="verse"; renderReader(); renderDock(); renderPanel(); return}
   const t=e.target.closest("[data-t]"); if(t){openTool(t.dataset.t); return}
   const cx=e.target.closest("[data-close-adhoc]"); if(cx){ e.stopPropagation(); closeAdhoc(+cx.dataset.closeAdhoc); return }
+  if(e.target.closest("[data-alldays]")){ S.allDays=!S.allDays; renderPlan(); return }
   const dy=e.target.closest("[data-day]"); if(dy){ S.adhoc=null; S.vsel=null; S.word=null;S.day=+dy.dataset.day; S.reading=0; buildDay(); rememberOpen(); render(); $("rail").classList.remove("open"); readerTop(); return}
   const ot=e.target.closest("[data-open-tab]"); if(ot){ S.adhoc=S.opened[+ot.dataset.openTab]||null; S.vsel=null; S.word=null; rememberOpen(); renderReader(); renderPanel(); renderDock(); readerTop(); return }
   const r=e.target.closest("[data-r]"); if(r){ S.adhoc=null; S.vsel=null; S.word=null;S.reading=+r.dataset.r; rememberOpen(); renderReader(); renderPanel(); readerTop(); return}

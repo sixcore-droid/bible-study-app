@@ -233,6 +233,8 @@ mark.hit.now{background:var(--gold);color:var(--paper-deep)}
 .bar i{display:block;height:100%;background:var(--gold);border-radius:3px;transition:width .3s}
 .prog .lbl{display:flex;justify-content:space-between}
 .days{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;flex:none}
+.daysmore{width:100%;margin-top:6px;padding:9px 10px;border:1px dashed var(--line);border-radius:7px;background:none;color:var(--gold);font:500 14px var(--label);text-align:center}
+.daysmore:hover{border-color:var(--gold)}
 .days-sep{margin:14px 10px 4px;padding-top:12px;border-top:1px solid var(--line)}
 .day{display:grid;grid-template-columns:44px 1fr 20px;gap:8px;align-items:start;padding:9px 10px;border-radius:7px;border:1px solid transparent;text-align:left;width:100%}
 .day:hover{background:var(--paper-deep)}
