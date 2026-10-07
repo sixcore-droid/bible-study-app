@@ -72,7 +72,7 @@
         <button id="layoutbtn" title="Switch between reading layout and verse by verse"></button>
       </div>
       <div class="seg" id="parsw" role="group" aria-label="Columns">
-        <button id="parbtn" title="Switch between one version and two side by side"></button>
+        <button id="parbtn" title="Switch between one version and two in parallel"></button>
       </div>
       <div class="vpick">
         <select id="ver" class="versel" aria-label="Version"></select>
@@ -356,9 +356,9 @@ function renderReader(){
   const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
   $("ver").innerHTML = opts(S.ver); $("ver2").innerHTML = opts(S.ver2);
   $("ver2wrap").hidden = !S.par;
-  /* one toggle each: the button names the layout on screen; a tap switches it */
-  $("layoutbtn").textContent = S.layout==="verse" ? "Verse by verse" : "Reading";
-  $("parbtn").textContent = S.par ? "Side by side" : "One version";
+  /* one toggle each: the button names what a tap switches to, not what's on screen */
+  $("layoutbtn").textContent = S.layout==="verse" ? "Reading view" : "Verse by verse";
+  $("parbtn").textContent = S.par ? "One version" : "Parallel";
   const vers = S.par ? [S.ver,S.ver2] : [S.ver];
   const rows = r.rows;
   const multi = !!rows && new Set(rows.map(x=>x.book+" "+x.c)).size>1;
