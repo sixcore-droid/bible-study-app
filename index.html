@@ -412,7 +412,9 @@ function renderReader(){
     return inPara ? `${sup}<span class="vs${sel?" sel":""}">${num}${body}</span> ` : `<p class="v${sel?" sel":""}">${sup}<span class="vtag">${ver}</span>${num} ${body}</p>` };
   /* one group per book and chapter: "Jude 6; 2 Peter 2:4" reads as two, each labelled */
   const groups=[]; (rows||[]).forEach(x=>{ const g=`${x.book} ${x.c}`; if(!groups.length||groups[groups.length-1].g!==g) groups.push({g,rows:[]}); groups[groups.length-1].rows.push(x) });
-  const blocks=[]; groups.forEach(G=>{ if(groups.length>1) blocks.push({label:G.g}); if(S.layout==="verse") G.rows.forEach(x=>blocks.push({rows:[x]})); else blocks.push({rows:G.rows}) });
+  const blocks=[]; groups.forEach(G=>{ if(groups.length>1) blocks.push({label:G.g}); if(S.layout==="verse") G.rows.forEach(x=>blocks.push({rows:[x]}));
+    /* Reading view: a new paragraph wherever the text's own paragraphs begin (x.para, from the ESV's paragraphing) */
+    else { let run=[]; G.rows.forEach(x=>{ if(x.para && run.length){ blocks.push({rows:run}); run=[] } run.push(x) }); if(run.length) blocks.push({rows:run}) } });
   const blockHTML=(ver,b)=>{ if(S.layout==="verse") return verseHTML(ver,b.rows[0],false);
     const body=b.rows.map(x=>verseHTML(ver,x,true)).join(""); const m=body.match(/<span class='sup'>.*?<\/span>/);
     return `${m?m[0]:""}<p class="para"><span class="vtag">${ver}</span>${m?body.replace(m[0],""):body}</p>` };

@@ -456,11 +456,11 @@
     },
     peek: function (ref) { return PEEK[ref]; },
     segs: function (ref) { return R.parse(ref).map(withSlug); },
-    /* the passage's text in every version the data has: [{book, c, v, texts: {LSB: "...", NET: "..."}}] */
+    /* the passage's text in every version the data has: [{book, c, v, texts: {LSB: "...", NET: "..."}, para}] */
     text: function (ref) {
       var segs = R.parse(ref), books = []; segs.forEach(function (s) { if (books.indexOf(s.book) < 0) books.push(s.book); });
       return Promise.all(books.map(function (b) { return bookFile("text", b, segs); })).then(function (files) {
-        var tx = {}; books.forEach(function (b, i) { tx[b] = (files[i] && files[i].versions) || {}; });
+        var tx = {}, pa = {}; books.forEach(function (b, i) { tx[b] = (files[i] && files[i].versions) || {}; pa[b] = (files[i] && files[i].para) || {}; });
         var rows = [];
         segs.forEach(function (s) {
           var vs = tx[s.book];
@@ -469,7 +469,7 @@
             Object.keys(nums).map(Number).sort(function (a, b) { return a - b; }).forEach(function (v) {
               if (!R.contains([s], s.book, c, v)) return;
               var t = {}; Object.keys(vs).forEach(function (ver) { var x = ((vs[ver] || {})[c] || {})[v]; if (x) t[ver] = x; });
-              rows.push({ book: s.book, c: c, v: v, texts: t });
+              rows.push({ book: s.book, c: c, v: v, texts: t, para: (pa[s.book][c] || []).indexOf(v) > -1 });   // para: a paragraph starts here (Reading view)
             });
           }
         });
