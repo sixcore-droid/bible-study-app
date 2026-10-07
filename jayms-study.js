@@ -422,7 +422,7 @@
     lsbAudio: function () { return getJSON("lsb-audio.json"); },
     /* Michael S. Heiser Foundation articles by the chapters they cite (scripts/fetch-heiser.py) */
     /* STEPBible's people and places (scripts/build-names.py): family lines and map positions for the Fact Book panel */
-    names: function () { return getJSON("names.json").catch(function () { return null; }); },
+    names: function () { return getJSON("names.json").then(function (d) { NAMESD = d; return d; }).catch(function () { return null; }); },
     heiser: function () { return getJSON("heiser.json").catch(function () { return null; }); },
     /* a podcast's episodes through the relay, kept in the browser for 12 hours: {episodes:[{t, link, date, dur, audio, desc}]} */
     podcast: function (feed) {
@@ -761,6 +761,7 @@
 
   // ------------------------------------------------------------------ Fact Book
   /* STEPBible's records for the people and places named in the passage, in the order they first appear */
+  var NAMESD = null;   // names.json once loaded, so the Fact Book button can count people and places without waiting
   function namesIn(nm, ref) {
     if (!nm) return [];
     var out = [], seen = {};
@@ -837,7 +838,9 @@
         '<p class="ctx u-fs13">Family lines, STEPBible entries and "Also named here": <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (TIPNR, CC BY 4.0). Maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one to open it full screen.</p>' +
         (LV.ok.facts ? "" : '<p class="ctx u-fs13">' + liveNote() + "</p>") };
     }
-  }, { slug: "fact-book-alpha" }, function (d) { return d ? (d.facts || []).length : null; });
+  }, { slug: "fact-book-alpha" }, function (d) {   // entries plus the people and places named; unknown (null) until names.json is in
+    if (!d) return null; var f = (d.facts || []).length;
+    return NAMESD ? f + namesIn(NAMESD, d.ref).length : (f || null); });
 
   // ------------------------------------------------------------------ Maps
   /* Every place named in the passage (STEPBible's positions) pinned on the Digital Atlas of the Roman Empire, an ancient-world base
@@ -1089,7 +1092,7 @@
         : none("No text outside the Bible is tied to " + esc(this.o.ref) + " yet.")) + outlink(CFG.corpus, "Open the Corpus Atlas");
       return { kick: "Tools \u00B7 free study sites at this passage", title: "Free tools", body: h };
     }
-  }, {}, function (d) { return d ? (d.library || []).length : null; });
+  }, {}, function (d) { return d && (d.library || []).length || null; });   // the free tools are always there: never shown as empty
 
   // ------------------------------------------------------------------ Vault (Obsidian)
   /* Each note opens with a plain obsidian:// link (vault + path), the same link Obsidian's own "Copy Obsidian URL" gives. */

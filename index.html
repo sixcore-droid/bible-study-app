@@ -472,10 +472,12 @@ var USER_MOVED = false;   // once you scroll or type yourself, the restore never
 }
 
 /* ===== DOCK + PANEL ===== */
+setTimeout(()=>JST.data.names().then(()=>renderDock()),1500);   // after the first paint, so the Fact Book button can count people and places
 function renderDock(){
   const list = TOOLS.filter(t=>!(t.owner && S.view==="public"));
   $("dock").innerHTML = list.map(t=>{ if(t.sep) return "<hr>"; const n=toolCount(t.id);
-    return `<button class="dk${S.tool===t.id?" on":""}" data-t="${t.id}" aria-pressed="${S.tool===t.id}" title="${esc(t.name)}">${t.icon}<span>${t.label}</span>${n?`<span class="cnt">${n}</span>`:""}</button>`}).join("");
+    /* a number: how many for this passage; greyed: nothing for this passage; plain: always something there */
+    return `<button class="dk${S.tool===t.id?" on":""}${n===0?" none":""}" data-t="${t.id}" aria-pressed="${S.tool===t.id}" title="${esc(t.name)}${n===0?" (nothing for this passage)":""}">${t.icon}<span>${t.label}</span>${n?`<span class="cnt">${n}</span>`:""}</button>`}).join("");
 }
 const box=(v,h,body)=>`<div class="box v-${v}">${h?`<h3>${h}</h3>`:""}${body}</div>`;
 const outlink=(href,txt)=>href?`<a class="out" href="${href}" target="_blank" rel="noopener">${txt} ↗</a>`:"";

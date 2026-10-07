@@ -393,6 +393,8 @@ body.rail-hidden .rail:not(.open){display:none}
 .dk span{font-family:var(--label);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;line-height:1.1;text-align:center}
 .dk:hover{background:var(--paper-deep)}
 .dk.on{background:var(--paper-deep);border-color:var(--gold)}
+.dk.none{opacity:.4}
+.dk.none.on{opacity:1}
 .dk.on svg{stroke:var(--gold)}
 /* the count sits on the icon's corner, so every button is the same shape whether it has one or not */
 .dk .cnt{position:absolute;top:0;left:calc(50% + 6px);font-family:var(--label);font-size:10.5px;line-height:15px;min-width:15px;text-align:center;background:var(--gold);color:var(--paper-deep);border-radius:8px;padding:0 4px}
