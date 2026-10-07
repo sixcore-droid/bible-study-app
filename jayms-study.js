@@ -2097,8 +2097,8 @@
   define("BibleProject", { id: "bp", label: "Media", name: "Videos, podcasts and articles on this passage", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>' }, {
     prepare: function () {
       var self = this;
-      data.podcast(NBP_FEED).then(function (p) { self.nbp = p; if (self.alive && self.d) self.paint(); });   // arrives when it arrives
-      return Promise.all([data.bibleproject(), data.lsbAudio(), data.heiser()]).then(function (r) { self.d = r[0]; self.au = r[1]; self.hf = r[2]; });
+      data.podcast(NBP_FEED).then(function (p) { self.nbp = p; if (self.alive && self.bp) self.paint(); });   /* self.d is the passage until the BibleProject list lands, so wait on self.bp */   // arrives when it arrives
+      return Promise.all([data.bibleproject(), data.lsbAudio(), data.heiser()]).then(function (r) { self.bp = r[0]; self.au = r[1]; self.hf = r[2]; });
     },
     /* Heiser Foundation articles that cite the passage's chapters: one citing more of them first, then the site's own order (most citations) */
     heiserFor: function (segs) {
@@ -2135,7 +2135,7 @@
 
 
     view: function () {
-      var d = this.d, st = this.st, q = data.segs(this.o.ref)[0];
+      var d = this.bp, st = this.st, q = data.segs(this.o.ref)[0];
       if (!q) return { kick: "BibleProject", title: this.o.ref, body: none("Open a passage first.") };
       if (!d) return { kick: "BibleProject", title: this.o.ref, body: none("The BibleProject list didn't load.") };
       var b = R.book(q.book), name = b.name, I = d.items, seen = {}, h = "";

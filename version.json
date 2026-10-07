@@ -1,1 +1,1 @@
-{"version":"v132","date":"2026-10-06 21:22","note":"Reading plan list starts at the first unfinished day; done days follow at the bottom from day 1"}
+{"version":"v133","date":"2026-10-06 21:29","note":"Media panel: fix the redraw crash when the podcast list arrives first (reading 'Psalm' of undefined)"}
