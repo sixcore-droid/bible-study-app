@@ -1,8 +1,8 @@
 {
  "id": "ot-reading-plan",
  "name": "My OT Reading Plan",
- "description": "The Old Testament a chapter a day in James's order (the prophets placed in the history, genealogies and lists left out), with a psalm and a Proverbs portion each day. From his OT Reading Plan note.",
- "start": "2026-05-11",
+ "description": "The Old Testament a chapter a day in James's order (the prophets placed in the history; genealogies and lists greyed), with a psalm and a Proverbs portion each day. From his OT Reading Plan note.",
+ "start": "2026-03-02",
  "days": [
   {
    "day": 1,
@@ -15,12 +15,12 @@
      "why": ""
     },
     {
-     "ref": "Psalm 21",
+     "ref": "Psalm 101",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 24:1-22",
+     "ref": "Proverbs 17:15-28",
      "role": "Proverbs",
      "why": ""
     }
@@ -37,12 +37,12 @@
      "why": ""
     },
     {
-     "ref": "Psalm 22",
+     "ref": "Psalm 102",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 24:23-34",
+     "ref": "Proverbs 18:1-12",
      "role": "Proverbs",
      "why": ""
     }
@@ -59,12 +59,12 @@
      "why": ""
     },
     {
-     "ref": "Psalm 23",
+     "ref": "Psalm 103",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 25:1-14",
+     "ref": "Proverbs 18:13-24",
      "role": "Proverbs",
      "why": ""
     }
@@ -81,6 +81,1552 @@
      "why": ""
     },
     {
+     "ref": "Psalm 104",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 19:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Genesis 5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 5",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 105",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 19:15-29",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ],
+   "list": true
+  },
+  {
+   "day": 6,
+   "title": "Genesis 6",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 6",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 106",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 20:1-15",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Genesis 7",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 7",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 107",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 20:16-30",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Genesis 8",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 8",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 108",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 21:1-16",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Genesis 9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 9",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 109",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 21:17-31",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Genesis 10",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 10",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 110",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 22:1-16",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ],
+   "list": true
+  },
+  {
+   "day": 11,
+   "title": "Genesis 11",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 11",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 111",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 22:17-29",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Genesis 12",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 12",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 112",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 23:1-18",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Genesis 13",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 13",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 113",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 23:19-35",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Genesis 14",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 14",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 114",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 24:1-22",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "Genesis 15",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 15",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 115",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 24:23-34",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "Genesis 16",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 16",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 116",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 25:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "Genesis 17",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 17",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 117",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 25:15-28",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Genesis 18",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 18",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 118",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 26:1-16",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Genesis 19",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 19",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 119",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 26:17-28",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Genesis 20",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 20",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 120",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 27:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "Genesis 21",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 21",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 121",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 27:15-27",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "Genesis 22",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 22",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 122",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 28:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Genesis 23",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 23",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 123",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 28:15-28",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Genesis 24",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 24",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 124",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 29:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "Genesis 25",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 25",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 125",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 29:15-27",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "title": "Genesis 26",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 26",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 126",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 30:1-17",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "title": "Genesis 27",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 27",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 127",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 30:18-33",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "title": "Genesis 28",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 28",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 128",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 31:1-9",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "title": "Genesis 29",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 29",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 129",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 31:10-31",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "title": "Genesis 30",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 30",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 130",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 1:1-19",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "title": "Genesis 31",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 31",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 131",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 1:20-33",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "title": "Genesis 32",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 32",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 132",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 2:1-22",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "title": "Genesis 33",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 33",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 133",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 3:1-18",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "title": "Genesis 34",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 34",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 134",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 3:19-35",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "title": "Genesis 35",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 35",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 135",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 4:1-27",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "title": "Genesis 36",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 36",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 136",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 5:1-23",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ],
+   "list": true
+  },
+  {
+   "day": 37,
+   "title": "Genesis 37",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 37",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 137",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 6:1-19",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "title": "Genesis 38",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 38",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 138",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 6:20-35",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "title": "Genesis 39",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 39",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 139",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 7:1-27",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "title": "Genesis 40",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 40",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 140",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 8:1-21",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "title": "Genesis 41",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 41",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 141",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 8:22-36",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "title": "Genesis 42",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 42",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 142",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 9:1-18",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "title": "Genesis 43",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 43",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 143",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 10:1-17",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "title": "Genesis 44",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 44",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 144",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 10:18-32",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "title": "Genesis 45",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 45",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 145",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 11:1-15",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "title": "Genesis 46",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 46",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 146",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 11:16-31",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "title": "Genesis 47",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 47",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 147",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 12:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "title": "Genesis 48",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 48",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 148",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 12:15-28",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "title": "Genesis 49",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 49",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 149",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 13:1-13",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "title": "Genesis 50",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Genesis 50",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 150",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 13:14-25",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "title": "Exodus 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 1",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 1",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 14:1-18",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "title": "Exodus 2",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 2",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 2",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 14:19-35",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "title": "Exodus 3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 3",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 3",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 15:1-17",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "title": "Exodus 4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 4",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 4",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 15:18-33",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "title": "Exodus 5",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 5",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 5",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 16:1-16",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "title": "Exodus 6",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 6",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 6",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 16:17-33",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "title": "Exodus 7",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 7",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 7",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 17:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "title": "Exodus 8",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 8",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 8",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 17:15-28",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "title": "Exodus 9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 9",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 9",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 18:1-12",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "title": "Exodus 10",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 10",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 10",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 18:13-24",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 61,
+   "title": "Exodus 11",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 11",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 11",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 19:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "title": "Exodus 12",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 12",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 12",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 19:15-29",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 63,
+   "title": "Exodus 13",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 13",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 13",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 20:1-15",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 64,
+   "title": "Exodus 14",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 14",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 14",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 20:16-30",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 65,
+   "title": "Exodus 15",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 15",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 15",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 21:1-16",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 66,
+   "title": "Exodus 16",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 16",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 16",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 21:17-31",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 67,
+   "title": "Exodus 17",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 17",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 17",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 22:1-16",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 68,
+   "title": "Exodus 18",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 18",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 18",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 22:17-29",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 69,
+   "title": "Exodus 19",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 19",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 19",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 23:1-18",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "title": "Exodus 20",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 20",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 20",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 23:19-35",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 71,
+   "title": "Exodus 21",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 21",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 21",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 24:1-22",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ],
+   "list": true
+  },
+  {
+   "day": 72,
+   "title": "Exodus 22",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 22",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 22",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 24:23-34",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ],
+   "list": true
+  },
+  {
+   "day": 73,
+   "title": "Exodus 23",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 23",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 23",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 25:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ],
+   "list": true
+  },
+  {
+   "day": 74,
+   "title": "Exodus 24",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Exodus 24",
+     "role": "Reading",
+     "why": ""
+    },
+    {
      "ref": "Psalm 24",
      "role": "Psalm",
      "why": ""
@@ -93,12 +1639,12 @@
    ]
   },
   {
-   "day": 5,
-   "title": "Genesis 6",
+   "day": 75,
+   "title": "Exodus 25",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 6",
+     "ref": "Exodus 25",
      "role": "Reading",
      "why": ""
     },
@@ -112,15 +1658,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 6,
-   "title": "Genesis 7",
+   "day": 76,
+   "title": "Exodus 26",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 7",
+     "ref": "Exodus 26",
      "role": "Reading",
      "why": ""
     },
@@ -134,15 +1681,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 7,
-   "title": "Genesis 8",
+   "day": 77,
+   "title": "Exodus 27",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 8",
+     "ref": "Exodus 27",
      "role": "Reading",
      "why": ""
     },
@@ -156,15 +1704,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 8,
-   "title": "Genesis 9",
+   "day": 78,
+   "title": "Exodus 28",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 9",
+     "ref": "Exodus 28",
      "role": "Reading",
      "why": ""
     },
@@ -178,15 +1727,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 9,
-   "title": "Genesis 11",
+   "day": 79,
+   "title": "Exodus 29",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 11",
+     "ref": "Exodus 29",
      "role": "Reading",
      "why": ""
     },
@@ -200,15 +1750,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 10,
-   "title": "Genesis 12",
+   "day": 80,
+   "title": "Exodus 30",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 12",
+     "ref": "Exodus 30",
      "role": "Reading",
      "why": ""
     },
@@ -222,15 +1773,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 11,
-   "title": "Genesis 13",
+   "day": 81,
+   "title": "Exodus 31",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 13",
+     "ref": "Exodus 31",
      "role": "Reading",
      "why": ""
     },
@@ -244,15 +1796,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 12,
-   "title": "Genesis 14",
+   "day": 82,
+   "title": "Exodus 32",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 14",
+     "ref": "Exodus 32",
      "role": "Reading",
      "why": ""
     },
@@ -269,12 +1822,12 @@
    ]
   },
   {
-   "day": 13,
-   "title": "Genesis 15",
+   "day": 83,
+   "title": "Exodus 33",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 15",
+     "ref": "Exodus 33",
      "role": "Reading",
      "why": ""
     },
@@ -291,12 +1844,12 @@
    ]
   },
   {
-   "day": 14,
-   "title": "Genesis 16",
+   "day": 84,
+   "title": "Exodus 34",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 16",
+     "ref": "Exodus 34",
      "role": "Reading",
      "why": ""
     },
@@ -313,12 +1866,12 @@
    ]
   },
   {
-   "day": 15,
-   "title": "Genesis 17",
+   "day": 85,
+   "title": "Exodus 35",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 17",
+     "ref": "Exodus 35",
      "role": "Reading",
      "why": ""
     },
@@ -332,15 +1885,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 16,
-   "title": "Genesis 18",
+   "day": 86,
+   "title": "Exodus 36",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 18",
+     "ref": "Exodus 36",
      "role": "Reading",
      "why": ""
     },
@@ -354,15 +1908,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 17,
-   "title": "Genesis 19",
+   "day": 87,
+   "title": "Exodus 37",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 19",
+     "ref": "Exodus 37",
      "role": "Reading",
      "why": ""
     },
@@ -376,15 +1931,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 18,
-   "title": "Genesis 20",
+   "day": 88,
+   "title": "Exodus 38",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 20",
+     "ref": "Exodus 38",
      "role": "Reading",
      "why": ""
     },
@@ -398,15 +1954,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 19,
-   "title": "Genesis 21",
+   "day": 89,
+   "title": "Exodus 39",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 21",
+     "ref": "Exodus 39",
      "role": "Reading",
      "why": ""
     },
@@ -420,15 +1977,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 20,
-   "title": "Genesis 22",
+   "day": 90,
+   "title": "Exodus 40",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 22",
+     "ref": "Exodus 40",
      "role": "Reading",
      "why": ""
     },
@@ -442,15 +2000,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 21,
-   "title": "Genesis 23",
+   "day": 91,
+   "title": "Numbers 1",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 23",
+     "ref": "Numbers 1",
      "role": "Reading",
      "why": ""
     },
@@ -464,15 +2023,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 22,
-   "title": "Genesis 24",
+   "day": 92,
+   "title": "Numbers 2",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 24",
+     "ref": "Numbers 2",
      "role": "Reading",
      "why": ""
     },
@@ -486,15 +2046,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 23,
-   "title": "Genesis 25",
+   "day": 93,
+   "title": "Numbers 3",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 25",
+     "ref": "Numbers 3",
      "role": "Reading",
      "why": ""
     },
@@ -508,15 +2069,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 24,
-   "title": "Genesis 26",
+   "day": 94,
+   "title": "Numbers 4",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 26",
+     "ref": "Numbers 4",
      "role": "Reading",
      "why": ""
     },
@@ -530,15 +2092,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 25,
-   "title": "Genesis 27",
+   "day": 95,
+   "title": "Numbers 5",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 27",
+     "ref": "Numbers 5",
      "role": "Reading",
      "why": ""
     },
@@ -552,15 +2115,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 26,
-   "title": "Genesis 28",
+   "day": 96,
+   "title": "Numbers 6",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 28",
+     "ref": "Numbers 6",
      "role": "Reading",
      "why": ""
     },
@@ -574,15 +2138,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 27,
-   "title": "Genesis 29",
+   "day": 97,
+   "title": "Numbers 7",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 29",
+     "ref": "Numbers 7",
      "role": "Reading",
      "why": ""
     },
@@ -596,15 +2161,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 28,
-   "title": "Genesis 30",
+   "day": 98,
+   "title": "Numbers 8",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 30",
+     "ref": "Numbers 8",
      "role": "Reading",
      "why": ""
     },
@@ -618,15 +2184,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 29,
-   "title": "Genesis 31",
+   "day": 99,
+   "title": "Numbers 9",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 31",
+     "ref": "Numbers 9",
      "role": "Reading",
      "why": ""
     },
@@ -640,15 +2207,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 30,
-   "title": "Genesis 32",
+   "day": 100,
+   "title": "Numbers 10",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 32",
+     "ref": "Numbers 10",
      "role": "Reading",
      "why": ""
     },
@@ -665,12 +2233,12 @@
    ]
   },
   {
-   "day": 31,
-   "title": "Genesis 33",
+   "day": 101,
+   "title": "Numbers 11",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 33",
+     "ref": "Numbers 11",
      "role": "Reading",
      "why": ""
     },
@@ -687,12 +2255,12 @@
    ]
   },
   {
-   "day": 32,
-   "title": "Genesis 34",
+   "day": 102,
+   "title": "Numbers 12",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 34",
+     "ref": "Numbers 12",
      "role": "Reading",
      "why": ""
     },
@@ -709,12 +2277,12 @@
    ]
   },
   {
-   "day": 33,
-   "title": "Genesis 35",
+   "day": 103,
+   "title": "Numbers 13",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 35",
+     "ref": "Numbers 13",
      "role": "Reading",
      "why": ""
     },
@@ -731,12 +2299,12 @@
    ]
   },
   {
-   "day": 34,
-   "title": "Genesis 37",
+   "day": 104,
+   "title": "Numbers 14",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 37",
+     "ref": "Numbers 14",
      "role": "Reading",
      "why": ""
     },
@@ -753,12 +2321,12 @@
    ]
   },
   {
-   "day": 35,
-   "title": "Genesis 38",
+   "day": 105,
+   "title": "Numbers 15",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 38",
+     "ref": "Numbers 15",
      "role": "Reading",
      "why": ""
     },
@@ -772,15 +2340,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 36,
-   "title": "Genesis 39",
+   "day": 106,
+   "title": "Numbers 16",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 39",
+     "ref": "Numbers 16",
      "role": "Reading",
      "why": ""
     },
@@ -797,12 +2366,12 @@
    ]
   },
   {
-   "day": 37,
-   "title": "Genesis 40",
+   "day": 107,
+   "title": "Numbers 17",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 40",
+     "ref": "Numbers 17",
      "role": "Reading",
      "why": ""
     },
@@ -819,12 +2388,12 @@
    ]
   },
   {
-   "day": 38,
-   "title": "Genesis 41",
+   "day": 108,
+   "title": "Numbers 18",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 41",
+     "ref": "Numbers 18",
      "role": "Reading",
      "why": ""
     },
@@ -838,15 +2407,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 39,
-   "title": "Genesis 42",
+   "day": 109,
+   "title": "Numbers 19",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 42",
+     "ref": "Numbers 19",
      "role": "Reading",
      "why": ""
     },
@@ -860,15 +2430,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 40,
-   "title": "Genesis 43",
+   "day": 110,
+   "title": "Numbers 20",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 43",
+     "ref": "Numbers 20",
      "role": "Reading",
      "why": ""
     },
@@ -885,12 +2456,12 @@
    ]
   },
   {
-   "day": 41,
-   "title": "Genesis 44",
+   "day": 111,
+   "title": "Numbers 21",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 44",
+     "ref": "Numbers 21",
      "role": "Reading",
      "why": ""
     },
@@ -907,12 +2478,12 @@
    ]
   },
   {
-   "day": 42,
-   "title": "Genesis 45",
+   "day": 112,
+   "title": "Numbers 22",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 45",
+     "ref": "Numbers 22",
      "role": "Reading",
      "why": ""
     },
@@ -929,12 +2500,12 @@
    ]
   },
   {
-   "day": 43,
-   "title": "Genesis 46",
+   "day": 113,
+   "title": "Numbers 23",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 46",
+     "ref": "Numbers 23",
      "role": "Reading",
      "why": ""
     },
@@ -951,12 +2522,12 @@
    ]
   },
   {
-   "day": 44,
-   "title": "Genesis 47",
+   "day": 114,
+   "title": "Numbers 24",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 47",
+     "ref": "Numbers 24",
      "role": "Reading",
      "why": ""
     },
@@ -973,12 +2544,12 @@
    ]
   },
   {
-   "day": 45,
-   "title": "Genesis 48",
+   "day": 115,
+   "title": "Numbers 25",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 48",
+     "ref": "Numbers 25",
      "role": "Reading",
      "why": ""
     },
@@ -995,12 +2566,12 @@
    ]
   },
   {
-   "day": 46,
-   "title": "Genesis 49",
+   "day": 116,
+   "title": "Numbers 26",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 49",
+     "ref": "Numbers 26",
      "role": "Reading",
      "why": ""
     },
@@ -1014,15 +2585,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 47,
-   "title": "Genesis 50",
+   "day": 117,
+   "title": "Numbers 27",
    "note": "",
    "readings": [
     {
-     "ref": "Genesis 50",
+     "ref": "Numbers 27",
      "role": "Reading",
      "why": ""
     },
@@ -1039,12 +2611,12 @@
    ]
   },
   {
-   "day": 48,
-   "title": "Exodus 1",
+   "day": 118,
+   "title": "Numbers 28",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 1",
+     "ref": "Numbers 28",
      "role": "Reading",
      "why": ""
     },
@@ -1058,15 +2630,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 49,
-   "title": "Exodus 2",
+   "day": 119,
+   "title": "Numbers 29",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 2",
+     "ref": "Numbers 29",
      "role": "Reading",
      "why": ""
     },
@@ -1080,15 +2653,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 50,
-   "title": "Exodus 3",
+   "day": 120,
+   "title": "Numbers 30",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 3",
+     "ref": "Numbers 30",
      "role": "Reading",
      "why": ""
     },
@@ -1102,15 +2676,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 51,
-   "title": "Exodus 4",
+   "day": 121,
+   "title": "Numbers 31",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 4",
+     "ref": "Numbers 31",
      "role": "Reading",
      "why": ""
     },
@@ -1124,15 +2699,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 52,
-   "title": "Exodus 5",
+   "day": 122,
+   "title": "Numbers 32",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 5",
+     "ref": "Numbers 32",
      "role": "Reading",
      "why": ""
     },
@@ -1146,15 +2722,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 53,
-   "title": "Exodus 6",
+   "day": 123,
+   "title": "Numbers 33",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 6",
+     "ref": "Numbers 33",
      "role": "Reading",
      "why": ""
     },
@@ -1168,15 +2745,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 54,
-   "title": "Exodus 7",
+   "day": 124,
+   "title": "Numbers 34",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 7",
+     "ref": "Numbers 34",
      "role": "Reading",
      "why": ""
     },
@@ -1190,15 +2768,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 55,
-   "title": "Exodus 8",
+   "day": 125,
+   "title": "Numbers 35",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 8",
+     "ref": "Numbers 35",
      "role": "Reading",
      "why": ""
     },
@@ -1212,15 +2791,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 56,
-   "title": "Exodus 9",
+   "day": 126,
+   "title": "Numbers 36",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 9",
+     "ref": "Numbers 36",
      "role": "Reading",
      "why": ""
     },
@@ -1234,15 +2814,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 57,
-   "title": "Exodus 10",
+   "day": 127,
+   "title": "Deuteronomy 1",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 10",
+     "ref": "Deuteronomy 1",
      "role": "Reading",
      "why": ""
     },
@@ -1259,12 +2840,12 @@
    ]
   },
   {
-   "day": 58,
-   "title": "Exodus 11",
+   "day": 128,
+   "title": "Deuteronomy 2",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 11",
+     "ref": "Deuteronomy 2",
      "role": "Reading",
      "why": ""
     },
@@ -1281,12 +2862,12 @@
    ]
   },
   {
-   "day": 59,
-   "title": "Exodus 12",
+   "day": 129,
+   "title": "Deuteronomy 3",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 12",
+     "ref": "Deuteronomy 3",
      "role": "Reading",
      "why": ""
     },
@@ -1303,12 +2884,12 @@
    ]
   },
   {
-   "day": 60,
-   "title": "Exodus 13",
+   "day": 130,
+   "title": "Deuteronomy 4",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 13",
+     "ref": "Deuteronomy 4",
      "role": "Reading",
      "why": ""
     },
@@ -1325,12 +2906,12 @@
    ]
   },
   {
-   "day": 61,
-   "title": "Exodus 14",
+   "day": 131,
+   "title": "Deuteronomy 5",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 14",
+     "ref": "Deuteronomy 5",
      "role": "Reading",
      "why": ""
     },
@@ -1347,12 +2928,12 @@
    ]
   },
   {
-   "day": 62,
-   "title": "Exodus 15",
+   "day": 132,
+   "title": "Deuteronomy 6",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 15",
+     "ref": "Deuteronomy 6",
      "role": "Reading",
      "why": ""
     },
@@ -1369,12 +2950,12 @@
    ]
   },
   {
-   "day": 63,
-   "title": "Exodus 16",
+   "day": 133,
+   "title": "Deuteronomy 7",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 16",
+     "ref": "Deuteronomy 7",
      "role": "Reading",
      "why": ""
     },
@@ -1391,12 +2972,12 @@
    ]
   },
   {
-   "day": 64,
-   "title": "Exodus 17",
+   "day": 134,
+   "title": "Deuteronomy 8",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 17",
+     "ref": "Deuteronomy 8",
      "role": "Reading",
      "why": ""
     },
@@ -1413,12 +2994,12 @@
    ]
   },
   {
-   "day": 65,
-   "title": "Exodus 18",
+   "day": 135,
+   "title": "Deuteronomy 9",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 18",
+     "ref": "Deuteronomy 9",
      "role": "Reading",
      "why": ""
     },
@@ -1432,15 +3013,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 66,
-   "title": "Exodus 19",
+   "day": 136,
+   "title": "Deuteronomy 10",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 19",
+     "ref": "Deuteronomy 10",
      "role": "Reading",
      "why": ""
     },
@@ -1454,15 +3036,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 67,
-   "title": "Exodus 20",
+   "day": 137,
+   "title": "Deuteronomy 11",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 20",
+     "ref": "Deuteronomy 11",
      "role": "Reading",
      "why": ""
     },
@@ -1476,15 +3059,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 68,
-   "title": "Exodus 24",
+   "day": 138,
+   "title": "Deuteronomy 12",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 24",
+     "ref": "Deuteronomy 12",
      "role": "Reading",
      "why": ""
     },
@@ -1498,15 +3082,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 69,
-   "title": "Exodus 32",
+   "day": 139,
+   "title": "Deuteronomy 13",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 32",
+     "ref": "Deuteronomy 13",
      "role": "Reading",
      "why": ""
     },
@@ -1520,15 +3105,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 70,
-   "title": "Exodus 33",
+   "day": 140,
+   "title": "Deuteronomy 14",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 33",
+     "ref": "Deuteronomy 14",
      "role": "Reading",
      "why": ""
     },
@@ -1542,15 +3128,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 71,
-   "title": "Exodus 34",
+   "day": 141,
+   "title": "Deuteronomy 15",
    "note": "",
    "readings": [
     {
-     "ref": "Exodus 34",
+     "ref": "Deuteronomy 15",
      "role": "Reading",
      "why": ""
     },
@@ -1564,15 +3151,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 72,
-   "title": "Numbers 10",
+   "day": 142,
+   "title": "Deuteronomy 16",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 10",
+     "ref": "Deuteronomy 16",
      "role": "Reading",
      "why": ""
     },
@@ -1586,15 +3174,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 73,
-   "title": "Numbers 11",
+   "day": 143,
+   "title": "Deuteronomy 17",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 11",
+     "ref": "Deuteronomy 17",
      "role": "Reading",
      "why": ""
     },
@@ -1608,15 +3197,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 74,
-   "title": "Numbers 12",
+   "day": 144,
+   "title": "Deuteronomy 18",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 12",
+     "ref": "Deuteronomy 18",
      "role": "Reading",
      "why": ""
     },
@@ -1630,15 +3220,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 75,
-   "title": "Numbers 13",
+   "day": 145,
+   "title": "Deuteronomy 19",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 13",
+     "ref": "Deuteronomy 19",
      "role": "Reading",
      "why": ""
     },
@@ -1652,15 +3243,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 76,
-   "title": "Numbers 14",
+   "day": 146,
+   "title": "Deuteronomy 20",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 14",
+     "ref": "Deuteronomy 20",
      "role": "Reading",
      "why": ""
     },
@@ -1674,15 +3266,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 77,
-   "title": "Numbers 16",
+   "day": 147,
+   "title": "Deuteronomy 21",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 16",
+     "ref": "Deuteronomy 21",
      "role": "Reading",
      "why": ""
     },
@@ -1696,15 +3289,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 78,
-   "title": "Numbers 17",
+   "day": 148,
+   "title": "Deuteronomy 22",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 17",
+     "ref": "Deuteronomy 22",
      "role": "Reading",
      "why": ""
     },
@@ -1718,15 +3312,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 79,
-   "title": "Numbers 20",
+   "day": 149,
+   "title": "Deuteronomy 23",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 20",
+     "ref": "Deuteronomy 23",
      "role": "Reading",
      "why": ""
     },
@@ -1740,15 +3335,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 80,
-   "title": "Numbers 21",
+   "day": 150,
+   "title": "Deuteronomy 24",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 21",
+     "ref": "Deuteronomy 24",
      "role": "Reading",
      "why": ""
     },
@@ -1762,15 +3358,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 81,
-   "title": "Numbers 22",
+   "day": 151,
+   "title": "Deuteronomy 25",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 22",
+     "ref": "Deuteronomy 25",
      "role": "Reading",
      "why": ""
     },
@@ -1784,15 +3381,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 82,
-   "title": "Numbers 23",
+   "day": 152,
+   "title": "Deuteronomy 26",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 23",
+     "ref": "Deuteronomy 26",
      "role": "Reading",
      "why": ""
     },
@@ -1806,15 +3404,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 83,
-   "title": "Numbers 24",
+   "day": 153,
+   "title": "Deuteronomy 27",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 24",
+     "ref": "Deuteronomy 27",
      "role": "Reading",
      "why": ""
     },
@@ -1831,12 +3430,12 @@
    ]
   },
   {
-   "day": 84,
-   "title": "Numbers 25",
+   "day": 154,
+   "title": "Deuteronomy 28",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 25",
+     "ref": "Deuteronomy 28",
      "role": "Reading",
      "why": ""
     },
@@ -1853,12 +3452,12 @@
    ]
   },
   {
-   "day": 85,
-   "title": "Numbers 27",
+   "day": 155,
+   "title": "Deuteronomy 29",
    "note": "",
    "readings": [
     {
-     "ref": "Numbers 27",
+     "ref": "Deuteronomy 29",
      "role": "Reading",
      "why": ""
     },
@@ -1875,12 +3474,12 @@
    ]
   },
   {
-   "day": 86,
-   "title": "Deuteronomy 1",
+   "day": 156,
+   "title": "Deuteronomy 30",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 1",
+     "ref": "Deuteronomy 30",
      "role": "Reading",
      "why": ""
     },
@@ -1897,12 +3496,12 @@
    ]
   },
   {
-   "day": 87,
-   "title": "Deuteronomy 2",
+   "day": 157,
+   "title": "Deuteronomy 31",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 2",
+     "ref": "Deuteronomy 31",
      "role": "Reading",
      "why": ""
     },
@@ -1919,12 +3518,12 @@
    ]
   },
   {
-   "day": 88,
-   "title": "Deuteronomy 3",
+   "day": 158,
+   "title": "Deuteronomy 32",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 3",
+     "ref": "Deuteronomy 32",
      "role": "Reading",
      "why": ""
     },
@@ -1941,12 +3540,12 @@
    ]
   },
   {
-   "day": 89,
-   "title": "Deuteronomy 4",
+   "day": 159,
+   "title": "Deuteronomy 33",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 4",
+     "ref": "Deuteronomy 33",
      "role": "Reading",
      "why": ""
     },
@@ -1963,12 +3562,12 @@
    ]
   },
   {
-   "day": 90,
-   "title": "Deuteronomy 5",
+   "day": 160,
+   "title": "Deuteronomy 34",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 5",
+     "ref": "Deuteronomy 34",
      "role": "Reading",
      "why": ""
     },
@@ -1985,12 +3584,12 @@
    ]
   },
   {
-   "day": 91,
-   "title": "Deuteronomy 6",
+   "day": 161,
+   "title": "Joshua 1",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 6",
+     "ref": "Joshua 1",
      "role": "Reading",
      "why": ""
     },
@@ -2007,12 +3606,12 @@
    ]
   },
   {
-   "day": 92,
-   "title": "Deuteronomy 7",
+   "day": 162,
+   "title": "Joshua 2",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 7",
+     "ref": "Joshua 2",
      "role": "Reading",
      "why": ""
     },
@@ -2029,12 +3628,12 @@
    ]
   },
   {
-   "day": 93,
-   "title": "Deuteronomy 8",
+   "day": 163,
+   "title": "Joshua 3",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 8",
+     "ref": "Joshua 3",
      "role": "Reading",
      "why": ""
     },
@@ -2051,12 +3650,12 @@
    ]
   },
   {
-   "day": 94,
-   "title": "Deuteronomy 27",
+   "day": 164,
+   "title": "Joshua 4",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 27",
+     "ref": "Joshua 4",
      "role": "Reading",
      "why": ""
     },
@@ -2073,12 +3672,12 @@
    ]
   },
   {
-   "day": 95,
-   "title": "Deuteronomy 28",
+   "day": 165,
+   "title": "Joshua 5",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 28",
+     "ref": "Joshua 5",
      "role": "Reading",
      "why": ""
     },
@@ -2095,12 +3694,12 @@
    ]
   },
   {
-   "day": 96,
-   "title": "Deuteronomy 29",
+   "day": 166,
+   "title": "Joshua 6",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 29",
+     "ref": "Joshua 6",
      "role": "Reading",
      "why": ""
     },
@@ -2117,12 +3716,12 @@
    ]
   },
   {
-   "day": 97,
-   "title": "Deuteronomy 30",
+   "day": 167,
+   "title": "Joshua 7",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 30",
+     "ref": "Joshua 7",
      "role": "Reading",
      "why": ""
     },
@@ -2139,12 +3738,12 @@
    ]
   },
   {
-   "day": 98,
-   "title": "Deuteronomy 31",
+   "day": 168,
+   "title": "Joshua 8",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 31",
+     "ref": "Joshua 8",
      "role": "Reading",
      "why": ""
     },
@@ -2161,12 +3760,12 @@
    ]
   },
   {
-   "day": 99,
-   "title": "Deuteronomy 32",
+   "day": 169,
+   "title": "Joshua 9",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 32",
+     "ref": "Joshua 9",
      "role": "Reading",
      "why": ""
     },
@@ -2183,12 +3782,12 @@
    ]
   },
   {
-   "day": 100,
-   "title": "Deuteronomy 33",
+   "day": 170,
+   "title": "Joshua 10",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 33",
+     "ref": "Joshua 10",
      "role": "Reading",
      "why": ""
     },
@@ -2205,12 +3804,12 @@
    ]
   },
   {
-   "day": 101,
-   "title": "Deuteronomy 34",
+   "day": 171,
+   "title": "Joshua 11",
    "note": "",
    "readings": [
     {
-     "ref": "Deuteronomy 34",
+     "ref": "Joshua 11",
      "role": "Reading",
      "why": ""
     },
@@ -2227,12 +3826,12 @@
    ]
   },
   {
-   "day": 102,
-   "title": "Joshua 1",
+   "day": 172,
+   "title": "Joshua 12",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 1",
+     "ref": "Joshua 12",
      "role": "Reading",
      "why": ""
     },
@@ -2246,15 +3845,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 103,
-   "title": "Joshua 2",
+   "day": 173,
+   "title": "Joshua 13",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 2",
+     "ref": "Joshua 13",
      "role": "Reading",
      "why": ""
     },
@@ -2268,15 +3868,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 104,
-   "title": "Joshua 3",
+   "day": 174,
+   "title": "Joshua 14",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 3",
+     "ref": "Joshua 14",
      "role": "Reading",
      "why": ""
     },
@@ -2290,15 +3891,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 105,
-   "title": "Joshua 4",
+   "day": 175,
+   "title": "Joshua 15",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 4",
+     "ref": "Joshua 15",
      "role": "Reading",
      "why": ""
     },
@@ -2312,15 +3914,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 106,
-   "title": "Joshua 5",
+   "day": 176,
+   "title": "Joshua 16",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 5",
+     "ref": "Joshua 16",
      "role": "Reading",
      "why": ""
     },
@@ -2334,15 +3937,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 107,
-   "title": "Joshua 6",
+   "day": 177,
+   "title": "Joshua 17",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 6",
+     "ref": "Joshua 17",
      "role": "Reading",
      "why": ""
     },
@@ -2356,15 +3960,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 108,
-   "title": "Joshua 7",
+   "day": 178,
+   "title": "Joshua 18",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 7",
+     "ref": "Joshua 18",
      "role": "Reading",
      "why": ""
     },
@@ -2378,15 +3983,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 109,
-   "title": "Joshua 8",
+   "day": 179,
+   "title": "Joshua 19",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 8",
+     "ref": "Joshua 19",
      "role": "Reading",
      "why": ""
     },
@@ -2400,15 +4006,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 110,
-   "title": "Joshua 9",
+   "day": 180,
+   "title": "Joshua 20",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 9",
+     "ref": "Joshua 20",
      "role": "Reading",
      "why": ""
     },
@@ -2422,15 +4029,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 111,
-   "title": "Joshua 10",
+   "day": 181,
+   "title": "Joshua 21",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 10",
+     "ref": "Joshua 21",
      "role": "Reading",
      "why": ""
     },
@@ -2444,15 +4052,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 112,
-   "title": "Joshua 11",
+   "day": 182,
+   "title": "Joshua 22",
    "note": "",
    "readings": [
     {
-     "ref": "Joshua 11",
+     "ref": "Joshua 22",
      "role": "Reading",
      "why": ""
     },
@@ -2466,10 +4075,11 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 113,
+   "day": 183,
    "title": "Joshua 23",
    "note": "",
    "readings": [
@@ -2491,7 +4101,7 @@
    ]
   },
   {
-   "day": 114,
+   "day": 184,
    "title": "Joshua 24",
    "note": "",
    "readings": [
@@ -2513,7 +4123,7 @@
    ]
   },
   {
-   "day": 115,
+   "day": 185,
    "title": "Judges 1",
    "note": "",
    "readings": [
@@ -2535,7 +4145,7 @@
    ]
   },
   {
-   "day": 116,
+   "day": 186,
    "title": "Judges 2",
    "note": "",
    "readings": [
@@ -2557,7 +4167,7 @@
    ]
   },
   {
-   "day": 117,
+   "day": 187,
    "title": "Judges 3",
    "note": "",
    "readings": [
@@ -2579,7 +4189,7 @@
    ]
   },
   {
-   "day": 118,
+   "day": 188,
    "title": "Judges 4",
    "note": "",
    "readings": [
@@ -2601,7 +4211,7 @@
    ]
   },
   {
-   "day": 119,
+   "day": 189,
    "title": "Judges 5",
    "note": "",
    "readings": [
@@ -2623,7 +4233,7 @@
    ]
   },
   {
-   "day": 120,
+   "day": 190,
    "title": "Judges 6",
    "note": "",
    "readings": [
@@ -2645,7 +4255,7 @@
    ]
   },
   {
-   "day": 121,
+   "day": 191,
    "title": "Judges 7",
    "note": "",
    "readings": [
@@ -2667,7 +4277,7 @@
    ]
   },
   {
-   "day": 122,
+   "day": 192,
    "title": "Judges 8",
    "note": "",
    "readings": [
@@ -2689,7 +4299,7 @@
    ]
   },
   {
-   "day": 123,
+   "day": 193,
    "title": "Judges 9",
    "note": "",
    "readings": [
@@ -2711,7 +4321,7 @@
    ]
   },
   {
-   "day": 124,
+   "day": 194,
    "title": "Judges 10",
    "note": "",
    "readings": [
@@ -2733,7 +4343,7 @@
    ]
   },
   {
-   "day": 125,
+   "day": 195,
    "title": "Judges 11",
    "note": "",
    "readings": [
@@ -2755,7 +4365,7 @@
    ]
   },
   {
-   "day": 126,
+   "day": 196,
    "title": "Judges 12",
    "note": "",
    "readings": [
@@ -2777,7 +4387,7 @@
    ]
   },
   {
-   "day": 127,
+   "day": 197,
    "title": "Judges 13",
    "note": "",
    "readings": [
@@ -2799,7 +4409,7 @@
    ]
   },
   {
-   "day": 128,
+   "day": 198,
    "title": "Judges 14",
    "note": "",
    "readings": [
@@ -2821,7 +4431,7 @@
    ]
   },
   {
-   "day": 129,
+   "day": 199,
    "title": "Judges 15",
    "note": "",
    "readings": [
@@ -2843,7 +4453,7 @@
    ]
   },
   {
-   "day": 130,
+   "day": 200,
    "title": "Judges 16",
    "note": "",
    "readings": [
@@ -2865,7 +4475,7 @@
    ]
   },
   {
-   "day": 131,
+   "day": 201,
    "title": "Judges 17",
    "note": "",
    "readings": [
@@ -2887,7 +4497,7 @@
    ]
   },
   {
-   "day": 132,
+   "day": 202,
    "title": "Judges 18",
    "note": "",
    "readings": [
@@ -2909,7 +4519,7 @@
    ]
   },
   {
-   "day": 133,
+   "day": 203,
    "title": "Judges 19",
    "note": "",
    "readings": [
@@ -2931,7 +4541,7 @@
    ]
   },
   {
-   "day": 134,
+   "day": 204,
    "title": "Judges 20",
    "note": "",
    "readings": [
@@ -2953,7 +4563,7 @@
    ]
   },
   {
-   "day": 135,
+   "day": 205,
    "title": "Judges 21",
    "note": "",
    "readings": [
@@ -2975,7 +4585,7 @@
    ]
   },
   {
-   "day": 136,
+   "day": 206,
    "title": "Ruth 1",
    "note": "",
    "readings": [
@@ -2997,7 +4607,7 @@
    ]
   },
   {
-   "day": 137,
+   "day": 207,
    "title": "Ruth 2",
    "note": "",
    "readings": [
@@ -3019,7 +4629,7 @@
    ]
   },
   {
-   "day": 138,
+   "day": 208,
    "title": "Ruth 3",
    "note": "",
    "readings": [
@@ -3041,7 +4651,7 @@
    ]
   },
   {
-   "day": 139,
+   "day": 209,
    "title": "Ruth 4",
    "note": "",
    "readings": [
@@ -3063,7 +4673,7 @@
    ]
   },
   {
-   "day": 140,
+   "day": 210,
    "title": "1 Samuel 1",
    "note": "",
    "readings": [
@@ -3085,7 +4695,7 @@
    ]
   },
   {
-   "day": 141,
+   "day": 211,
    "title": "1 Samuel 2",
    "note": "",
    "readings": [
@@ -3107,7 +4717,7 @@
    ]
   },
   {
-   "day": 142,
+   "day": 212,
    "title": "1 Samuel 3",
    "note": "",
    "readings": [
@@ -3129,7 +4739,7 @@
    ]
   },
   {
-   "day": 143,
+   "day": 213,
    "title": "1 Samuel 4",
    "note": "",
    "readings": [
@@ -3151,7 +4761,7 @@
    ]
   },
   {
-   "day": 144,
+   "day": 214,
    "title": "1 Samuel 5",
    "note": "",
    "readings": [
@@ -3173,7 +4783,7 @@
    ]
   },
   {
-   "day": 145,
+   "day": 215,
    "title": "1 Samuel 6",
    "note": "",
    "readings": [
@@ -3195,7 +4805,7 @@
    ]
   },
   {
-   "day": 146,
+   "day": 216,
    "title": "1 Samuel 7",
    "note": "",
    "readings": [
@@ -3217,7 +4827,7 @@
    ]
   },
   {
-   "day": 147,
+   "day": 217,
    "title": "1 Samuel 8",
    "note": "",
    "readings": [
@@ -3239,7 +4849,7 @@
    ]
   },
   {
-   "day": 148,
+   "day": 218,
    "title": "1 Samuel 9",
    "note": "",
    "readings": [
@@ -3261,7 +4871,7 @@
    ]
   },
   {
-   "day": 149,
+   "day": 219,
    "title": "1 Samuel 10",
    "note": "",
    "readings": [
@@ -3283,7 +4893,7 @@
    ]
   },
   {
-   "day": 150,
+   "day": 220,
    "title": "1 Samuel 11",
    "note": "",
    "readings": [
@@ -3305,7 +4915,7 @@
    ]
   },
   {
-   "day": 151,
+   "day": 221,
    "title": "1 Samuel 12",
    "note": "",
    "readings": [
@@ -3327,7 +4937,7 @@
    ]
   },
   {
-   "day": 152,
+   "day": 222,
    "title": "1 Samuel 13",
    "note": "",
    "readings": [
@@ -3349,7 +4959,7 @@
    ]
   },
   {
-   "day": 153,
+   "day": 223,
    "title": "1 Samuel 14",
    "note": "",
    "readings": [
@@ -3371,7 +4981,7 @@
    ]
   },
   {
-   "day": 154,
+   "day": 224,
    "title": "1 Samuel 15",
    "note": "",
    "readings": [
@@ -3393,7 +5003,7 @@
    ]
   },
   {
-   "day": 155,
+   "day": 225,
    "title": "1 Samuel 16",
    "note": "",
    "readings": [
@@ -3415,7 +5025,7 @@
    ]
   },
   {
-   "day": 156,
+   "day": 226,
    "title": "1 Samuel 17",
    "note": "",
    "readings": [
@@ -3437,7 +5047,7 @@
    ]
   },
   {
-   "day": 157,
+   "day": 227,
    "title": "1 Samuel 18",
    "note": "",
    "readings": [
@@ -3459,7 +5069,7 @@
    ]
   },
   {
-   "day": 158,
+   "day": 228,
    "title": "1 Samuel 19",
    "note": "",
    "readings": [
@@ -3481,7 +5091,7 @@
    ]
   },
   {
-   "day": 159,
+   "day": 229,
    "title": "1 Samuel 20",
    "note": "",
    "readings": [
@@ -3503,7 +5113,7 @@
    ]
   },
   {
-   "day": 160,
+   "day": 230,
    "title": "1 Samuel 21",
    "note": "",
    "readings": [
@@ -3525,7 +5135,7 @@
    ]
   },
   {
-   "day": 161,
+   "day": 231,
    "title": "1 Samuel 22",
    "note": "",
    "readings": [
@@ -3547,7 +5157,7 @@
    ]
   },
   {
-   "day": 162,
+   "day": 232,
    "title": "1 Samuel 23",
    "note": "",
    "readings": [
@@ -3569,7 +5179,7 @@
    ]
   },
   {
-   "day": 163,
+   "day": 233,
    "title": "1 Samuel 24",
    "note": "",
    "readings": [
@@ -3591,7 +5201,7 @@
    ]
   },
   {
-   "day": 164,
+   "day": 234,
    "title": "1 Samuel 25",
    "note": "",
    "readings": [
@@ -3613,7 +5223,7 @@
    ]
   },
   {
-   "day": 165,
+   "day": 235,
    "title": "1 Samuel 26",
    "note": "",
    "readings": [
@@ -3635,7 +5245,7 @@
    ]
   },
   {
-   "day": 166,
+   "day": 236,
    "title": "1 Samuel 27",
    "note": "",
    "readings": [
@@ -3657,7 +5267,7 @@
    ]
   },
   {
-   "day": 167,
+   "day": 237,
    "title": "1 Samuel 28",
    "note": "",
    "readings": [
@@ -3679,7 +5289,7 @@
    ]
   },
   {
-   "day": 168,
+   "day": 238,
    "title": "1 Samuel 29",
    "note": "",
    "readings": [
@@ -3701,7 +5311,7 @@
    ]
   },
   {
-   "day": 169,
+   "day": 239,
    "title": "1 Samuel 30",
    "note": "",
    "readings": [
@@ -3723,7 +5333,7 @@
    ]
   },
   {
-   "day": 170,
+   "day": 240,
    "title": "1 Samuel 31",
    "note": "",
    "readings": [
@@ -3745,7 +5355,7 @@
    ]
   },
   {
-   "day": 171,
+   "day": 241,
    "title": "2 Samuel 1",
    "note": "",
    "readings": [
@@ -3767,7 +5377,7 @@
    ]
   },
   {
-   "day": 172,
+   "day": 242,
    "title": "2 Samuel 2",
    "note": "",
    "readings": [
@@ -3789,7 +5399,7 @@
    ]
   },
   {
-   "day": 173,
+   "day": 243,
    "title": "2 Samuel 3",
    "note": "",
    "readings": [
@@ -3811,7 +5421,7 @@
    ]
   },
   {
-   "day": 174,
+   "day": 244,
    "title": "2 Samuel 4",
    "note": "",
    "readings": [
@@ -3833,7 +5443,7 @@
    ]
   },
   {
-   "day": 175,
+   "day": 245,
    "title": "2 Samuel 5",
    "note": "",
    "readings": [
@@ -3855,7 +5465,7 @@
    ]
   },
   {
-   "day": 176,
+   "day": 246,
    "title": "2 Samuel 6",
    "note": "",
    "readings": [
@@ -3877,7 +5487,7 @@
    ]
   },
   {
-   "day": 177,
+   "day": 247,
    "title": "2 Samuel 7",
    "note": "",
    "readings": [
@@ -3899,7 +5509,7 @@
    ]
   },
   {
-   "day": 178,
+   "day": 248,
    "title": "2 Samuel 8",
    "note": "",
    "readings": [
@@ -3921,7 +5531,7 @@
    ]
   },
   {
-   "day": 179,
+   "day": 249,
    "title": "2 Samuel 9",
    "note": "",
    "readings": [
@@ -3943,7 +5553,7 @@
    ]
   },
   {
-   "day": 180,
+   "day": 250,
    "title": "2 Samuel 10",
    "note": "",
    "readings": [
@@ -3965,7 +5575,7 @@
    ]
   },
   {
-   "day": 181,
+   "day": 251,
    "title": "2 Samuel 11",
    "note": "",
    "readings": [
@@ -3987,7 +5597,7 @@
    ]
   },
   {
-   "day": 182,
+   "day": 252,
    "title": "2 Samuel 12",
    "note": "",
    "readings": [
@@ -4009,7 +5619,7 @@
    ]
   },
   {
-   "day": 183,
+   "day": 253,
    "title": "2 Samuel 13",
    "note": "",
    "readings": [
@@ -4031,7 +5641,7 @@
    ]
   },
   {
-   "day": 184,
+   "day": 254,
    "title": "2 Samuel 14",
    "note": "",
    "readings": [
@@ -4053,7 +5663,7 @@
    ]
   },
   {
-   "day": 185,
+   "day": 255,
    "title": "2 Samuel 15",
    "note": "",
    "readings": [
@@ -4075,7 +5685,7 @@
    ]
   },
   {
-   "day": 186,
+   "day": 256,
    "title": "2 Samuel 16",
    "note": "",
    "readings": [
@@ -4097,7 +5707,7 @@
    ]
   },
   {
-   "day": 187,
+   "day": 257,
    "title": "2 Samuel 17",
    "note": "",
    "readings": [
@@ -4119,7 +5729,7 @@
    ]
   },
   {
-   "day": 188,
+   "day": 258,
    "title": "2 Samuel 18",
    "note": "",
    "readings": [
@@ -4141,7 +5751,7 @@
    ]
   },
   {
-   "day": 189,
+   "day": 259,
    "title": "2 Samuel 19",
    "note": "",
    "readings": [
@@ -4163,7 +5773,7 @@
    ]
   },
   {
-   "day": 190,
+   "day": 260,
    "title": "2 Samuel 20",
    "note": "",
    "readings": [
@@ -4185,7 +5795,7 @@
    ]
   },
   {
-   "day": 191,
+   "day": 261,
    "title": "2 Samuel 21",
    "note": "",
    "readings": [
@@ -4207,7 +5817,7 @@
    ]
   },
   {
-   "day": 192,
+   "day": 262,
    "title": "2 Samuel 22",
    "note": "",
    "readings": [
@@ -4229,7 +5839,7 @@
    ]
   },
   {
-   "day": 193,
+   "day": 263,
    "title": "2 Samuel 23",
    "note": "",
    "readings": [
@@ -4251,7 +5861,7 @@
    ]
   },
   {
-   "day": 194,
+   "day": 264,
    "title": "2 Samuel 24",
    "note": "",
    "readings": [
@@ -4273,7 +5883,7 @@
    ]
   },
   {
-   "day": 195,
+   "day": 265,
    "title": "1 Kings 1",
    "note": "",
    "readings": [
@@ -4295,7 +5905,7 @@
    ]
   },
   {
-   "day": 196,
+   "day": 266,
    "title": "1 Kings 2",
    "note": "",
    "readings": [
@@ -4317,7 +5927,7 @@
    ]
   },
   {
-   "day": 197,
+   "day": 267,
    "title": "1 Kings 3",
    "note": "",
    "readings": [
@@ -4339,7 +5949,7 @@
    ]
   },
   {
-   "day": 198,
+   "day": 268,
    "title": "1 Kings 4",
    "note": "",
    "readings": [
@@ -4361,7 +5971,7 @@
    ]
   },
   {
-   "day": 199,
+   "day": 269,
    "title": "1 Kings 5",
    "note": "",
    "readings": [
@@ -4383,7 +5993,53 @@
    ]
   },
   {
-   "day": 200,
+   "day": 270,
+   "title": "1 Kings 6",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Kings 6",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 70",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 9:1-18",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ],
+   "list": true
+  },
+  {
+   "day": 271,
+   "title": "1 Kings 7",
+   "note": "",
+   "readings": [
+    {
+     "ref": "1 Kings 7",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 71",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 10:1-17",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ],
+   "list": true
+  },
+  {
+   "day": 272,
    "title": "1 Kings 8",
    "note": "",
    "readings": [
@@ -4393,19 +6049,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 70",
+     "ref": "Psalm 72",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 9:1-18",
+     "ref": "Proverbs 10:18-32",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 201,
+   "day": 273,
    "title": "1 Kings 9",
    "note": "",
    "readings": [
@@ -4415,19 +6071,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 71",
+     "ref": "Psalm 73",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 10:1-17",
+     "ref": "Proverbs 11:1-15",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 202,
+   "day": 274,
    "title": "1 Kings 10",
    "note": "",
    "readings": [
@@ -4437,19 +6093,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 72",
+     "ref": "Psalm 74",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 10:18-32",
+     "ref": "Proverbs 11:16-31",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 203,
+   "day": 275,
    "title": "1 Kings 11",
    "note": "",
    "readings": [
@@ -4459,19 +6115,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 73",
+     "ref": "Psalm 75",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 11:1-15",
+     "ref": "Proverbs 12:1-14",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 204,
+   "day": 276,
    "title": "1 Kings 12",
    "note": "",
    "readings": [
@@ -4481,19 +6137,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 74",
+     "ref": "Psalm 76",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 11:16-31",
+     "ref": "Proverbs 12:15-28",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 205,
+   "day": 277,
    "title": "1 Kings 13",
    "note": "",
    "readings": [
@@ -4503,19 +6159,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 75",
+     "ref": "Psalm 77",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 12:1-14",
+     "ref": "Proverbs 13:1-13",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 206,
+   "day": 278,
    "title": "1 Kings 14",
    "note": "",
    "readings": [
@@ -4525,19 +6181,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 76",
+     "ref": "Psalm 78",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 12:15-28",
+     "ref": "Proverbs 13:14-25",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 207,
+   "day": 279,
    "title": "1 Kings 15",
    "note": "",
    "readings": [
@@ -4547,19 +6203,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 77",
+     "ref": "Psalm 79",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 13:1-13",
+     "ref": "Proverbs 14:1-18",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 208,
+   "day": 280,
    "title": "1 Kings 16",
    "note": "",
    "readings": [
@@ -4569,19 +6225,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 78",
+     "ref": "Psalm 80",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 13:14-25",
+     "ref": "Proverbs 14:19-35",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 209,
+   "day": 281,
    "title": "1 Kings 17",
    "note": "",
    "readings": [
@@ -4591,19 +6247,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 79",
+     "ref": "Psalm 81",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 14:1-18",
+     "ref": "Proverbs 15:1-17",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 210,
+   "day": 282,
    "title": "1 Kings 18",
    "note": "",
    "readings": [
@@ -4613,19 +6269,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 80",
+     "ref": "Psalm 82",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 14:19-35",
+     "ref": "Proverbs 15:18-33",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 211,
+   "day": 283,
    "title": "1 Kings 19",
    "note": "",
    "readings": [
@@ -4635,19 +6291,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 81",
+     "ref": "Psalm 83",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 15:1-17",
+     "ref": "Proverbs 16:1-16",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 212,
+   "day": 284,
    "title": "1 Kings 20",
    "note": "",
    "readings": [
@@ -4657,19 +6313,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 82",
+     "ref": "Psalm 84",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 15:18-33",
+     "ref": "Proverbs 16:17-33",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 213,
+   "day": 285,
    "title": "1 Kings 21",
    "note": "",
    "readings": [
@@ -4679,19 +6335,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 83",
+     "ref": "Psalm 85",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 16:1-16",
+     "ref": "Proverbs 17:1-14",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 214,
+   "day": 286,
    "title": "1 Kings 22",
    "note": "",
    "readings": [
@@ -4701,19 +6357,19 @@
      "why": ""
     },
     {
-     "ref": "Psalm 84",
+     "ref": "Psalm 86",
      "role": "Psalm",
      "why": ""
     },
     {
-     "ref": "Proverbs 16:17-33",
+     "ref": "Proverbs 17:15-28",
      "role": "Proverbs",
      "why": ""
     }
    ]
   },
   {
-   "day": 215,
+   "day": 287,
    "title": "Joel 1",
    "note": "",
    "readings": [
@@ -4723,50 +6379,6 @@
      "why": ""
     },
     {
-     "ref": "Psalm 85",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
-     "why": ""
-    }
-   ]
-  },
-  {
-   "day": 216,
-   "title": "Joel 2",
-   "note": "",
-   "readings": [
-    {
-     "ref": "Joel 2",
-     "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 86",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
-     "why": ""
-    }
-   ]
-  },
-  {
-   "day": 217,
-   "title": "Joel 3",
-   "note": "",
-   "readings": [
-    {
-     "ref": "Joel 3",
-     "role": "Reading",
-     "why": ""
-    },
-    {
      "ref": "Psalm 87",
      "role": "Psalm",
      "why": ""
@@ -4779,12 +6391,12 @@
    ]
   },
   {
-   "day": 218,
-   "title": "Obadiah 1",
+   "day": 288,
+   "title": "Joel 2",
    "note": "",
    "readings": [
     {
-     "ref": "Obadiah 1",
+     "ref": "Joel 2",
      "role": "Reading",
      "why": ""
     },
@@ -4801,12 +6413,12 @@
    ]
   },
   {
-   "day": 219,
-   "title": "2 Kings 1",
+   "day": 289,
+   "title": "Joel 3",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 1",
+     "ref": "Joel 3",
      "role": "Reading",
      "why": ""
     },
@@ -4823,12 +6435,12 @@
    ]
   },
   {
-   "day": 220,
-   "title": "2 Kings 2",
+   "day": 290,
+   "title": "Obadiah 1",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 2",
+     "ref": "Obadiah 1",
      "role": "Reading",
      "why": ""
     },
@@ -4845,12 +6457,12 @@
    ]
   },
   {
-   "day": 221,
-   "title": "2 Kings 3",
+   "day": 291,
+   "title": "2 Kings 1",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 3",
+     "ref": "2 Kings 1",
      "role": "Reading",
      "why": ""
     },
@@ -4867,12 +6479,12 @@
    ]
   },
   {
-   "day": 222,
-   "title": "2 Kings 4",
+   "day": 292,
+   "title": "2 Kings 2",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 4",
+     "ref": "2 Kings 2",
      "role": "Reading",
      "why": ""
     },
@@ -4889,12 +6501,12 @@
    ]
   },
   {
-   "day": 223,
-   "title": "2 Kings 5",
+   "day": 293,
+   "title": "2 Kings 3",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 5",
+     "ref": "2 Kings 3",
      "role": "Reading",
      "why": ""
     },
@@ -4911,12 +6523,12 @@
    ]
   },
   {
-   "day": 224,
-   "title": "2 Kings 6",
+   "day": 294,
+   "title": "2 Kings 4",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 6",
+     "ref": "2 Kings 4",
      "role": "Reading",
      "why": ""
     },
@@ -4933,12 +6545,12 @@
    ]
   },
   {
-   "day": 225,
-   "title": "2 Kings 7",
+   "day": 295,
+   "title": "2 Kings 5",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 7",
+     "ref": "2 Kings 5",
      "role": "Reading",
      "why": ""
     },
@@ -4955,12 +6567,12 @@
    ]
   },
   {
-   "day": 226,
-   "title": "2 Kings 8",
+   "day": 296,
+   "title": "2 Kings 6",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 8",
+     "ref": "2 Kings 6",
      "role": "Reading",
      "why": ""
     },
@@ -4977,12 +6589,12 @@
    ]
   },
   {
-   "day": 227,
-   "title": "2 Kings 9",
+   "day": 297,
+   "title": "2 Kings 7",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 9",
+     "ref": "2 Kings 7",
      "role": "Reading",
      "why": ""
     },
@@ -4999,12 +6611,12 @@
    ]
   },
   {
-   "day": 228,
-   "title": "2 Kings 10",
+   "day": 298,
+   "title": "2 Kings 8",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 10",
+     "ref": "2 Kings 8",
      "role": "Reading",
      "why": ""
     },
@@ -5021,12 +6633,12 @@
    ]
   },
   {
-   "day": 229,
-   "title": "2 Kings 11",
+   "day": 299,
+   "title": "2 Kings 9",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 11",
+     "ref": "2 Kings 9",
      "role": "Reading",
      "why": ""
     },
@@ -5043,12 +6655,12 @@
    ]
   },
   {
-   "day": 230,
-   "title": "2 Kings 12",
+   "day": 300,
+   "title": "2 Kings 10",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 12",
+     "ref": "2 Kings 10",
      "role": "Reading",
      "why": ""
     },
@@ -5065,12 +6677,12 @@
    ]
   },
   {
-   "day": 231,
-   "title": "2 Kings 13",
+   "day": 301,
+   "title": "2 Kings 11",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 13",
+     "ref": "2 Kings 11",
      "role": "Reading",
      "why": ""
     },
@@ -5087,12 +6699,12 @@
    ]
   },
   {
-   "day": 232,
-   "title": "2 Kings 14",
+   "day": 302,
+   "title": "2 Kings 12",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 14",
+     "ref": "2 Kings 12",
      "role": "Reading",
      "why": ""
     },
@@ -5109,12 +6721,12 @@
    ]
   },
   {
-   "day": 233,
-   "title": "Jonah 1",
+   "day": 303,
+   "title": "2 Kings 13",
    "note": "",
    "readings": [
     {
-     "ref": "Jonah 1",
+     "ref": "2 Kings 13",
      "role": "Reading",
      "why": ""
     },
@@ -5131,12 +6743,12 @@
    ]
   },
   {
-   "day": 234,
-   "title": "Jonah 2",
+   "day": 304,
+   "title": "2 Kings 14",
    "note": "",
    "readings": [
     {
-     "ref": "Jonah 2",
+     "ref": "2 Kings 14",
      "role": "Reading",
      "why": ""
     },
@@ -5153,12 +6765,12 @@
    ]
   },
   {
-   "day": 235,
-   "title": "Jonah 3",
+   "day": 305,
+   "title": "Jonah 1",
    "note": "",
    "readings": [
     {
-     "ref": "Jonah 3",
+     "ref": "Jonah 1",
      "role": "Reading",
      "why": ""
     },
@@ -5175,12 +6787,12 @@
    ]
   },
   {
-   "day": 236,
-   "title": "Jonah 4",
+   "day": 306,
+   "title": "Jonah 2",
    "note": "",
    "readings": [
     {
-     "ref": "Jonah 4",
+     "ref": "Jonah 2",
      "role": "Reading",
      "why": ""
     },
@@ -5197,12 +6809,12 @@
    ]
   },
   {
-   "day": 237,
-   "title": "Amos 1",
+   "day": 307,
+   "title": "Jonah 3",
    "note": "",
    "readings": [
     {
-     "ref": "Amos 1",
+     "ref": "Jonah 3",
      "role": "Reading",
      "why": ""
     },
@@ -5219,12 +6831,12 @@
    ]
   },
   {
-   "day": 238,
-   "title": "Amos 2",
+   "day": 308,
+   "title": "Jonah 4",
    "note": "",
    "readings": [
     {
-     "ref": "Amos 2",
+     "ref": "Jonah 4",
      "role": "Reading",
      "why": ""
     },
@@ -5241,12 +6853,12 @@
    ]
   },
   {
-   "day": 239,
-   "title": "Amos 3",
+   "day": 309,
+   "title": "Amos 1",
    "note": "",
    "readings": [
     {
-     "ref": "Amos 3",
+     "ref": "Amos 1",
      "role": "Reading",
      "why": ""
     },
@@ -5263,12 +6875,12 @@
    ]
   },
   {
-   "day": 240,
-   "title": "Amos 4",
+   "day": 310,
+   "title": "Amos 2",
    "note": "",
    "readings": [
     {
-     "ref": "Amos 4",
+     "ref": "Amos 2",
      "role": "Reading",
      "why": ""
     },
@@ -5285,12 +6897,12 @@
    ]
   },
   {
-   "day": 241,
-   "title": "Amos 5",
+   "day": 311,
+   "title": "Amos 3",
    "note": "",
    "readings": [
     {
-     "ref": "Amos 5",
+     "ref": "Amos 3",
      "role": "Reading",
      "why": ""
     },
@@ -5307,12 +6919,12 @@
    ]
   },
   {
-   "day": 242,
-   "title": "Amos 6",
+   "day": 312,
+   "title": "Amos 4",
    "note": "",
    "readings": [
     {
-     "ref": "Amos 6",
+     "ref": "Amos 4",
      "role": "Reading",
      "why": ""
     },
@@ -5329,12 +6941,12 @@
    ]
   },
   {
-   "day": 243,
-   "title": "Amos 7",
+   "day": 313,
+   "title": "Amos 5",
    "note": "",
    "readings": [
     {
-     "ref": "Amos 7",
+     "ref": "Amos 5",
      "role": "Reading",
      "why": ""
     },
@@ -5351,12 +6963,12 @@
    ]
   },
   {
-   "day": 244,
-   "title": "Amos 8",
+   "day": 314,
+   "title": "Amos 6",
    "note": "",
    "readings": [
     {
-     "ref": "Amos 8",
+     "ref": "Amos 6",
      "role": "Reading",
      "why": ""
     },
@@ -5373,12 +6985,12 @@
    ]
   },
   {
-   "day": 245,
-   "title": "Amos 9",
+   "day": 315,
+   "title": "Amos 7",
    "note": "",
    "readings": [
     {
-     "ref": "Amos 9",
+     "ref": "Amos 7",
      "role": "Reading",
      "why": ""
     },
@@ -5395,12 +7007,12 @@
    ]
   },
   {
-   "day": 246,
-   "title": "Hosea 1",
+   "day": 316,
+   "title": "Amos 8",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 1",
+     "ref": "Amos 8",
      "role": "Reading",
      "why": ""
     },
@@ -5417,12 +7029,12 @@
    ]
   },
   {
-   "day": 247,
-   "title": "Hosea 2",
+   "day": 317,
+   "title": "Amos 9",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 2",
+     "ref": "Amos 9",
      "role": "Reading",
      "why": ""
     },
@@ -5439,12 +7051,12 @@
    ]
   },
   {
-   "day": 248,
-   "title": "Hosea 3",
+   "day": 318,
+   "title": "Hosea 1",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 3",
+     "ref": "Hosea 1",
      "role": "Reading",
      "why": ""
     },
@@ -5461,12 +7073,12 @@
    ]
   },
   {
-   "day": 249,
-   "title": "Hosea 4",
+   "day": 319,
+   "title": "Hosea 2",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 4",
+     "ref": "Hosea 2",
      "role": "Reading",
      "why": ""
     },
@@ -5483,12 +7095,12 @@
    ]
   },
   {
-   "day": 250,
-   "title": "Hosea 5",
+   "day": 320,
+   "title": "Hosea 3",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 5",
+     "ref": "Hosea 3",
      "role": "Reading",
      "why": ""
     },
@@ -5505,12 +7117,12 @@
    ]
   },
   {
-   "day": 251,
-   "title": "Hosea 6",
+   "day": 321,
+   "title": "Hosea 4",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 6",
+     "ref": "Hosea 4",
      "role": "Reading",
      "why": ""
     },
@@ -5527,12 +7139,12 @@
    ]
   },
   {
-   "day": 252,
-   "title": "Hosea 7",
+   "day": 322,
+   "title": "Hosea 5",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 7",
+     "ref": "Hosea 5",
      "role": "Reading",
      "why": ""
     },
@@ -5549,12 +7161,12 @@
    ]
   },
   {
-   "day": 253,
-   "title": "Hosea 8",
+   "day": 323,
+   "title": "Hosea 6",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 8",
+     "ref": "Hosea 6",
      "role": "Reading",
      "why": ""
     },
@@ -5571,12 +7183,12 @@
    ]
   },
   {
-   "day": 254,
-   "title": "Hosea 9",
+   "day": 324,
+   "title": "Hosea 7",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 9",
+     "ref": "Hosea 7",
      "role": "Reading",
      "why": ""
     },
@@ -5593,12 +7205,12 @@
    ]
   },
   {
-   "day": 255,
-   "title": "Hosea 10",
+   "day": 325,
+   "title": "Hosea 8",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 10",
+     "ref": "Hosea 8",
      "role": "Reading",
      "why": ""
     },
@@ -5615,12 +7227,12 @@
    ]
   },
   {
-   "day": 256,
-   "title": "Hosea 11",
+   "day": 326,
+   "title": "Hosea 9",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 11",
+     "ref": "Hosea 9",
      "role": "Reading",
      "why": ""
     },
@@ -5637,12 +7249,12 @@
    ]
   },
   {
-   "day": 257,
-   "title": "Hosea 12",
+   "day": 327,
+   "title": "Hosea 10",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 12",
+     "ref": "Hosea 10",
      "role": "Reading",
      "why": ""
     },
@@ -5659,12 +7271,12 @@
    ]
   },
   {
-   "day": 258,
-   "title": "Hosea 13",
+   "day": 328,
+   "title": "Hosea 11",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 13",
+     "ref": "Hosea 11",
      "role": "Reading",
      "why": ""
     },
@@ -5681,12 +7293,12 @@
    ]
   },
   {
-   "day": 259,
-   "title": "Hosea 14",
+   "day": 329,
+   "title": "Hosea 12",
    "note": "",
    "readings": [
     {
-     "ref": "Hosea 14",
+     "ref": "Hosea 12",
      "role": "Reading",
      "why": ""
     },
@@ -5703,12 +7315,12 @@
    ]
   },
   {
-   "day": 260,
-   "title": "Micah 1",
+   "day": 330,
+   "title": "Hosea 13",
    "note": "",
    "readings": [
     {
-     "ref": "Micah 1",
+     "ref": "Hosea 13",
      "role": "Reading",
      "why": ""
     },
@@ -5725,12 +7337,12 @@
    ]
   },
   {
-   "day": 261,
-   "title": "Micah 2",
+   "day": 331,
+   "title": "Hosea 14",
    "note": "",
    "readings": [
     {
-     "ref": "Micah 2",
+     "ref": "Hosea 14",
      "role": "Reading",
      "why": ""
     },
@@ -5747,12 +7359,12 @@
    ]
   },
   {
-   "day": 262,
-   "title": "Micah 3",
+   "day": 332,
+   "title": "Micah 1",
    "note": "",
    "readings": [
     {
-     "ref": "Micah 3",
+     "ref": "Micah 1",
      "role": "Reading",
      "why": ""
     },
@@ -5769,12 +7381,12 @@
    ]
   },
   {
-   "day": 263,
-   "title": "Micah 4",
+   "day": 333,
+   "title": "Micah 2",
    "note": "",
    "readings": [
     {
-     "ref": "Micah 4",
+     "ref": "Micah 2",
      "role": "Reading",
      "why": ""
     },
@@ -5791,12 +7403,12 @@
    ]
   },
   {
-   "day": 264,
-   "title": "Micah 5",
+   "day": 334,
+   "title": "Micah 3",
    "note": "",
    "readings": [
     {
-     "ref": "Micah 5",
+     "ref": "Micah 3",
      "role": "Reading",
      "why": ""
     },
@@ -5813,12 +7425,12 @@
    ]
   },
   {
-   "day": 265,
-   "title": "Micah 6",
+   "day": 335,
+   "title": "Micah 4",
    "note": "",
    "readings": [
     {
-     "ref": "Micah 6",
+     "ref": "Micah 4",
      "role": "Reading",
      "why": ""
     },
@@ -5835,12 +7447,12 @@
    ]
   },
   {
-   "day": 266,
-   "title": "Micah 7",
+   "day": 336,
+   "title": "Micah 5",
    "note": "",
    "readings": [
     {
-     "ref": "Micah 7",
+     "ref": "Micah 5",
      "role": "Reading",
      "why": ""
     },
@@ -5857,12 +7469,12 @@
    ]
   },
   {
-   "day": 267,
-   "title": "2 Kings 15",
+   "day": 337,
+   "title": "Micah 6",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 15",
+     "ref": "Micah 6",
      "role": "Reading",
      "why": ""
     },
@@ -5879,12 +7491,12 @@
    ]
   },
   {
-   "day": 268,
-   "title": "2 Kings 16",
+   "day": 338,
+   "title": "Micah 7",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 16",
+     "ref": "Micah 7",
      "role": "Reading",
      "why": ""
     },
@@ -5901,12 +7513,12 @@
    ]
   },
   {
-   "day": 269,
-   "title": "2 Kings 17",
+   "day": 339,
+   "title": "2 Kings 15",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 17",
+     "ref": "2 Kings 15",
      "role": "Reading",
      "why": ""
     },
@@ -5923,12 +7535,12 @@
    ]
   },
   {
-   "day": 270,
-   "title": "2 Kings 18",
+   "day": 340,
+   "title": "2 Kings 16",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 18",
+     "ref": "2 Kings 16",
      "role": "Reading",
      "why": ""
     },
@@ -5945,12 +7557,12 @@
    ]
   },
   {
-   "day": 271,
-   "title": "2 Kings 19",
+   "day": 341,
+   "title": "2 Kings 17",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 19",
+     "ref": "2 Kings 17",
      "role": "Reading",
      "why": ""
     },
@@ -5967,12 +7579,12 @@
    ]
   },
   {
-   "day": 272,
-   "title": "2 Kings 20",
+   "day": 342,
+   "title": "2 Kings 18",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 20",
+     "ref": "2 Kings 18",
      "role": "Reading",
      "why": ""
     },
@@ -5989,12 +7601,12 @@
    ]
   },
   {
-   "day": 273,
-   "title": "2 Kings 21",
+   "day": 343,
+   "title": "2 Kings 19",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 21",
+     "ref": "2 Kings 19",
      "role": "Reading",
      "why": ""
     },
@@ -6011,12 +7623,12 @@
    ]
   },
   {
-   "day": 274,
-   "title": "2 Kings 22",
+   "day": 344,
+   "title": "2 Kings 20",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 22",
+     "ref": "2 Kings 20",
      "role": "Reading",
      "why": ""
     },
@@ -6033,12 +7645,12 @@
    ]
   },
   {
-   "day": 275,
-   "title": "2 Kings 23",
+   "day": 345,
+   "title": "2 Kings 21",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 23",
+     "ref": "2 Kings 21",
      "role": "Reading",
      "why": ""
     },
@@ -6055,12 +7667,12 @@
    ]
   },
   {
-   "day": 276,
-   "title": "2 Kings 24",
+   "day": 346,
+   "title": "2 Kings 22",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 24",
+     "ref": "2 Kings 22",
      "role": "Reading",
      "why": ""
     },
@@ -6077,12 +7689,12 @@
    ]
   },
   {
-   "day": 277,
-   "title": "2 Kings 25",
+   "day": 347,
+   "title": "2 Kings 23",
    "note": "",
    "readings": [
     {
-     "ref": "2 Kings 25",
+     "ref": "2 Kings 23",
      "role": "Reading",
      "why": ""
     },
@@ -6099,12 +7711,12 @@
    ]
   },
   {
-   "day": 278,
-   "title": "Isaiah 1",
+   "day": 348,
+   "title": "2 Kings 24",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 1",
+     "ref": "2 Kings 24",
      "role": "Reading",
      "why": ""
     },
@@ -6121,12 +7733,12 @@
    ]
   },
   {
-   "day": 279,
-   "title": "Isaiah 2",
+   "day": 349,
+   "title": "2 Kings 25",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 2",
+     "ref": "2 Kings 25",
      "role": "Reading",
      "why": ""
     },
@@ -6143,12 +7755,12 @@
    ]
   },
   {
-   "day": 280,
-   "title": "Isaiah 3",
+   "day": 350,
+   "title": "Isaiah 1",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 3",
+     "ref": "Isaiah 1",
      "role": "Reading",
      "why": ""
     },
@@ -6165,12 +7777,12 @@
    ]
   },
   {
-   "day": 281,
-   "title": "Isaiah 4",
+   "day": 351,
+   "title": "Isaiah 2",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 4",
+     "ref": "Isaiah 2",
      "role": "Reading",
      "why": ""
     },
@@ -6187,12 +7799,12 @@
    ]
   },
   {
-   "day": 282,
-   "title": "Isaiah 5",
+   "day": 352,
+   "title": "Isaiah 3",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 5",
+     "ref": "Isaiah 3",
      "role": "Reading",
      "why": ""
     },
@@ -6209,12 +7821,12 @@
    ]
   },
   {
-   "day": 283,
-   "title": "Isaiah 6",
+   "day": 353,
+   "title": "Isaiah 4",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 6",
+     "ref": "Isaiah 4",
      "role": "Reading",
      "why": ""
     },
@@ -6231,12 +7843,12 @@
    ]
   },
   {
-   "day": 284,
-   "title": "Isaiah 7",
+   "day": 354,
+   "title": "Isaiah 5",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 7",
+     "ref": "Isaiah 5",
      "role": "Reading",
      "why": ""
     },
@@ -6253,12 +7865,12 @@
    ]
   },
   {
-   "day": 285,
-   "title": "Isaiah 8",
+   "day": 355,
+   "title": "Isaiah 6",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 8",
+     "ref": "Isaiah 6",
      "role": "Reading",
      "why": ""
     },
@@ -6275,12 +7887,12 @@
    ]
   },
   {
-   "day": 286,
-   "title": "Isaiah 9",
+   "day": 356,
+   "title": "Isaiah 7",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 9",
+     "ref": "Isaiah 7",
      "role": "Reading",
      "why": ""
     },
@@ -6297,12 +7909,12 @@
    ]
   },
   {
-   "day": 287,
-   "title": "Isaiah 10",
+   "day": 357,
+   "title": "Isaiah 8",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 10",
+     "ref": "Isaiah 8",
      "role": "Reading",
      "why": ""
     },
@@ -6319,12 +7931,12 @@
    ]
   },
   {
-   "day": 288,
-   "title": "Isaiah 11",
+   "day": 358,
+   "title": "Isaiah 9",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 11",
+     "ref": "Isaiah 9",
      "role": "Reading",
      "why": ""
     },
@@ -6341,12 +7953,12 @@
    ]
   },
   {
-   "day": 289,
-   "title": "Isaiah 12",
+   "day": 359,
+   "title": "Isaiah 10",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 12",
+     "ref": "Isaiah 10",
      "role": "Reading",
      "why": ""
     },
@@ -6363,12 +7975,12 @@
    ]
   },
   {
-   "day": 290,
-   "title": "Isaiah 13",
+   "day": 360,
+   "title": "Isaiah 11",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 13",
+     "ref": "Isaiah 11",
      "role": "Reading",
      "why": ""
     },
@@ -6385,12 +7997,12 @@
    ]
   },
   {
-   "day": 291,
-   "title": "Isaiah 14",
+   "day": 361,
+   "title": "Isaiah 12",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 14",
+     "ref": "Isaiah 12",
      "role": "Reading",
      "why": ""
     },
@@ -6407,12 +8019,12 @@
    ]
   },
   {
-   "day": 292,
-   "title": "Isaiah 15",
+   "day": 362,
+   "title": "Isaiah 13",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 15",
+     "ref": "Isaiah 13",
      "role": "Reading",
      "why": ""
     },
@@ -6429,12 +8041,12 @@
    ]
   },
   {
-   "day": 293,
-   "title": "Isaiah 16",
+   "day": 363,
+   "title": "Isaiah 14",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 16",
+     "ref": "Isaiah 14",
      "role": "Reading",
      "why": ""
     },
@@ -6451,12 +8063,12 @@
    ]
   },
   {
-   "day": 294,
-   "title": "Isaiah 17",
+   "day": 364,
+   "title": "Isaiah 15",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 17",
+     "ref": "Isaiah 15",
      "role": "Reading",
      "why": ""
     },
@@ -6473,12 +8085,12 @@
    ]
   },
   {
-   "day": 295,
-   "title": "Isaiah 18",
+   "day": 365,
+   "title": "Isaiah 16",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 18",
+     "ref": "Isaiah 16",
      "role": "Reading",
      "why": ""
     },
@@ -6495,12 +8107,12 @@
    ]
   },
   {
-   "day": 296,
-   "title": "Isaiah 19",
+   "day": 366,
+   "title": "Isaiah 17",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 19",
+     "ref": "Isaiah 17",
      "role": "Reading",
      "why": ""
     },
@@ -6517,12 +8129,12 @@
    ]
   },
   {
-   "day": 297,
-   "title": "Isaiah 20",
+   "day": 367,
+   "title": "Isaiah 18",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 20",
+     "ref": "Isaiah 18",
      "role": "Reading",
      "why": ""
     },
@@ -6539,12 +8151,12 @@
    ]
   },
   {
-   "day": 298,
-   "title": "Isaiah 21",
+   "day": 368,
+   "title": "Isaiah 19",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 21",
+     "ref": "Isaiah 19",
      "role": "Reading",
      "why": ""
     },
@@ -6561,12 +8173,12 @@
    ]
   },
   {
-   "day": 299,
-   "title": "Isaiah 22",
+   "day": 369,
+   "title": "Isaiah 20",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 22",
+     "ref": "Isaiah 20",
      "role": "Reading",
      "why": ""
     },
@@ -6583,12 +8195,12 @@
    ]
   },
   {
-   "day": 300,
-   "title": "Isaiah 23",
+   "day": 370,
+   "title": "Isaiah 21",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 23",
+     "ref": "Isaiah 21",
      "role": "Reading",
      "why": ""
     },
@@ -6605,12 +8217,12 @@
    ]
   },
   {
-   "day": 301,
-   "title": "Isaiah 24",
+   "day": 371,
+   "title": "Isaiah 22",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 24",
+     "ref": "Isaiah 22",
      "role": "Reading",
      "why": ""
     },
@@ -6627,12 +8239,12 @@
    ]
   },
   {
-   "day": 302,
-   "title": "Isaiah 25",
+   "day": 372,
+   "title": "Isaiah 23",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 25",
+     "ref": "Isaiah 23",
      "role": "Reading",
      "why": ""
     },
@@ -6649,12 +8261,12 @@
    ]
   },
   {
-   "day": 303,
-   "title": "Isaiah 26",
+   "day": 373,
+   "title": "Isaiah 24",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 26",
+     "ref": "Isaiah 24",
      "role": "Reading",
      "why": ""
     },
@@ -6671,12 +8283,12 @@
    ]
   },
   {
-   "day": 304,
-   "title": "Isaiah 27",
+   "day": 374,
+   "title": "Isaiah 25",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 27",
+     "ref": "Isaiah 25",
      "role": "Reading",
      "why": ""
     },
@@ -6693,12 +8305,12 @@
    ]
   },
   {
-   "day": 305,
-   "title": "Isaiah 28",
+   "day": 375,
+   "title": "Isaiah 26",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 28",
+     "ref": "Isaiah 26",
      "role": "Reading",
      "why": ""
     },
@@ -6715,12 +8327,12 @@
    ]
   },
   {
-   "day": 306,
-   "title": "Isaiah 29",
+   "day": 376,
+   "title": "Isaiah 27",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 29",
+     "ref": "Isaiah 27",
      "role": "Reading",
      "why": ""
     },
@@ -6737,12 +8349,12 @@
    ]
   },
   {
-   "day": 307,
-   "title": "Isaiah 30",
+   "day": 377,
+   "title": "Isaiah 28",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 30",
+     "ref": "Isaiah 28",
      "role": "Reading",
      "why": ""
     },
@@ -6759,12 +8371,12 @@
    ]
   },
   {
-   "day": 308,
-   "title": "Isaiah 31",
+   "day": 378,
+   "title": "Isaiah 29",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 31",
+     "ref": "Isaiah 29",
      "role": "Reading",
      "why": ""
     },
@@ -6781,12 +8393,12 @@
    ]
   },
   {
-   "day": 309,
-   "title": "Isaiah 32",
+   "day": 379,
+   "title": "Isaiah 30",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 32",
+     "ref": "Isaiah 30",
      "role": "Reading",
      "why": ""
     },
@@ -6803,12 +8415,12 @@
    ]
   },
   {
-   "day": 310,
-   "title": "Isaiah 33",
+   "day": 380,
+   "title": "Isaiah 31",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 33",
+     "ref": "Isaiah 31",
      "role": "Reading",
      "why": ""
     },
@@ -6825,12 +8437,12 @@
    ]
   },
   {
-   "day": 311,
-   "title": "Isaiah 34",
+   "day": 381,
+   "title": "Isaiah 32",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 34",
+     "ref": "Isaiah 32",
      "role": "Reading",
      "why": ""
     },
@@ -6847,12 +8459,12 @@
    ]
   },
   {
-   "day": 312,
-   "title": "Isaiah 35",
+   "day": 382,
+   "title": "Isaiah 33",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 35",
+     "ref": "Isaiah 33",
      "role": "Reading",
      "why": ""
     },
@@ -6869,12 +8481,12 @@
    ]
   },
   {
-   "day": 313,
-   "title": "Isaiah 36",
+   "day": 383,
+   "title": "Isaiah 34",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 36",
+     "ref": "Isaiah 34",
      "role": "Reading",
      "why": ""
     },
@@ -6891,12 +8503,12 @@
    ]
   },
   {
-   "day": 314,
-   "title": "Isaiah 37",
+   "day": 384,
+   "title": "Isaiah 35",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 37",
+     "ref": "Isaiah 35",
      "role": "Reading",
      "why": ""
     },
@@ -6913,12 +8525,12 @@
    ]
   },
   {
-   "day": 315,
-   "title": "Isaiah 38",
+   "day": 385,
+   "title": "Isaiah 36",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 38",
+     "ref": "Isaiah 36",
      "role": "Reading",
      "why": ""
     },
@@ -6935,12 +8547,12 @@
    ]
   },
   {
-   "day": 316,
-   "title": "Isaiah 39",
+   "day": 386,
+   "title": "Isaiah 37",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 39",
+     "ref": "Isaiah 37",
      "role": "Reading",
      "why": ""
     },
@@ -6957,12 +8569,12 @@
    ]
   },
   {
-   "day": 317,
-   "title": "Isaiah 40",
+   "day": 387,
+   "title": "Isaiah 38",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 40",
+     "ref": "Isaiah 38",
      "role": "Reading",
      "why": ""
     },
@@ -6979,12 +8591,12 @@
    ]
   },
   {
-   "day": 318,
-   "title": "Isaiah 41",
+   "day": 388,
+   "title": "Isaiah 39",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 41",
+     "ref": "Isaiah 39",
      "role": "Reading",
      "why": ""
     },
@@ -7001,12 +8613,12 @@
    ]
   },
   {
-   "day": 319,
-   "title": "Isaiah 42",
+   "day": 389,
+   "title": "Isaiah 40",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 42",
+     "ref": "Isaiah 40",
      "role": "Reading",
      "why": ""
     },
@@ -7023,12 +8635,12 @@
    ]
   },
   {
-   "day": 320,
-   "title": "Isaiah 43",
+   "day": 390,
+   "title": "Isaiah 41",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 43",
+     "ref": "Isaiah 41",
      "role": "Reading",
      "why": ""
     },
@@ -7045,12 +8657,12 @@
    ]
   },
   {
-   "day": 321,
-   "title": "Isaiah 44",
+   "day": 391,
+   "title": "Isaiah 42",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 44",
+     "ref": "Isaiah 42",
      "role": "Reading",
      "why": ""
     },
@@ -7067,12 +8679,12 @@
    ]
   },
   {
-   "day": 322,
-   "title": "Isaiah 45",
+   "day": 392,
+   "title": "Isaiah 43",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 45",
+     "ref": "Isaiah 43",
      "role": "Reading",
      "why": ""
     },
@@ -7089,12 +8701,12 @@
    ]
   },
   {
-   "day": 323,
-   "title": "Isaiah 46",
+   "day": 393,
+   "title": "Isaiah 44",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 46",
+     "ref": "Isaiah 44",
      "role": "Reading",
      "why": ""
     },
@@ -7111,12 +8723,12 @@
    ]
   },
   {
-   "day": 324,
-   "title": "Isaiah 47",
+   "day": 394,
+   "title": "Isaiah 45",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 47",
+     "ref": "Isaiah 45",
      "role": "Reading",
      "why": ""
     },
@@ -7133,12 +8745,12 @@
    ]
   },
   {
-   "day": 325,
-   "title": "Isaiah 48",
+   "day": 395,
+   "title": "Isaiah 46",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 48",
+     "ref": "Isaiah 46",
      "role": "Reading",
      "why": ""
     },
@@ -7155,12 +8767,12 @@
    ]
   },
   {
-   "day": 326,
-   "title": "Isaiah 49",
+   "day": 396,
+   "title": "Isaiah 47",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 49",
+     "ref": "Isaiah 47",
      "role": "Reading",
      "why": ""
     },
@@ -7177,12 +8789,12 @@
    ]
   },
   {
-   "day": 327,
-   "title": "Isaiah 50",
+   "day": 397,
+   "title": "Isaiah 48",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 50",
+     "ref": "Isaiah 48",
      "role": "Reading",
      "why": ""
     },
@@ -7199,12 +8811,12 @@
    ]
   },
   {
-   "day": 328,
-   "title": "Isaiah 51",
+   "day": 398,
+   "title": "Isaiah 49",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 51",
+     "ref": "Isaiah 49",
      "role": "Reading",
      "why": ""
     },
@@ -7221,12 +8833,12 @@
    ]
   },
   {
-   "day": 329,
-   "title": "Isaiah 52",
+   "day": 399,
+   "title": "Isaiah 50",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 52",
+     "ref": "Isaiah 50",
      "role": "Reading",
      "why": ""
     },
@@ -7243,12 +8855,12 @@
    ]
   },
   {
-   "day": 330,
-   "title": "Isaiah 53",
+   "day": 400,
+   "title": "Isaiah 51",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 53",
+     "ref": "Isaiah 51",
      "role": "Reading",
      "why": ""
     },
@@ -7265,12 +8877,12 @@
    ]
   },
   {
-   "day": 331,
-   "title": "Isaiah 54",
+   "day": 401,
+   "title": "Isaiah 52",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 54",
+     "ref": "Isaiah 52",
      "role": "Reading",
      "why": ""
     },
@@ -7287,12 +8899,12 @@
    ]
   },
   {
-   "day": 332,
-   "title": "Isaiah 55",
+   "day": 402,
+   "title": "Isaiah 53",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 55",
+     "ref": "Isaiah 53",
      "role": "Reading",
      "why": ""
     },
@@ -7309,12 +8921,12 @@
    ]
   },
   {
-   "day": 333,
-   "title": "Isaiah 56",
+   "day": 403,
+   "title": "Isaiah 54",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 56",
+     "ref": "Isaiah 54",
      "role": "Reading",
      "why": ""
     },
@@ -7331,12 +8943,12 @@
    ]
   },
   {
-   "day": 334,
-   "title": "Isaiah 57",
+   "day": 404,
+   "title": "Isaiah 55",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 57",
+     "ref": "Isaiah 55",
      "role": "Reading",
      "why": ""
     },
@@ -7353,12 +8965,12 @@
    ]
   },
   {
-   "day": 335,
-   "title": "Isaiah 58",
+   "day": 405,
+   "title": "Isaiah 56",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 58",
+     "ref": "Isaiah 56",
      "role": "Reading",
      "why": ""
     },
@@ -7375,12 +8987,12 @@
    ]
   },
   {
-   "day": 336,
-   "title": "Isaiah 59",
+   "day": 406,
+   "title": "Isaiah 57",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 59",
+     "ref": "Isaiah 57",
      "role": "Reading",
      "why": ""
     },
@@ -7397,12 +9009,12 @@
    ]
   },
   {
-   "day": 337,
-   "title": "Isaiah 60",
+   "day": 407,
+   "title": "Isaiah 58",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 60",
+     "ref": "Isaiah 58",
      "role": "Reading",
      "why": ""
     },
@@ -7419,12 +9031,12 @@
    ]
   },
   {
-   "day": 338,
-   "title": "Isaiah 61",
+   "day": 408,
+   "title": "Isaiah 59",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 61",
+     "ref": "Isaiah 59",
      "role": "Reading",
      "why": ""
     },
@@ -7441,12 +9053,12 @@
    ]
   },
   {
-   "day": 339,
-   "title": "Isaiah 62",
+   "day": 409,
+   "title": "Isaiah 60",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 62",
+     "ref": "Isaiah 60",
      "role": "Reading",
      "why": ""
     },
@@ -7463,12 +9075,12 @@
    ]
   },
   {
-   "day": 340,
-   "title": "Isaiah 63",
+   "day": 410,
+   "title": "Isaiah 61",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 63",
+     "ref": "Isaiah 61",
      "role": "Reading",
      "why": ""
     },
@@ -7485,12 +9097,12 @@
    ]
   },
   {
-   "day": 341,
-   "title": "Isaiah 64",
+   "day": 411,
+   "title": "Isaiah 62",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 64",
+     "ref": "Isaiah 62",
      "role": "Reading",
      "why": ""
     },
@@ -7507,12 +9119,12 @@
    ]
   },
   {
-   "day": 342,
-   "title": "Isaiah 65",
+   "day": 412,
+   "title": "Isaiah 63",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 65",
+     "ref": "Isaiah 63",
      "role": "Reading",
      "why": ""
     },
@@ -7529,12 +9141,12 @@
    ]
   },
   {
-   "day": 343,
-   "title": "Isaiah 66",
+   "day": 413,
+   "title": "Isaiah 64",
    "note": "",
    "readings": [
     {
-     "ref": "Isaiah 66",
+     "ref": "Isaiah 64",
      "role": "Reading",
      "why": ""
     },
@@ -7551,12 +9163,12 @@
    ]
   },
   {
-   "day": 344,
-   "title": "Nahum 1",
+   "day": 414,
+   "title": "Isaiah 65",
    "note": "",
    "readings": [
     {
-     "ref": "Nahum 1",
+     "ref": "Isaiah 65",
      "role": "Reading",
      "why": ""
     },
@@ -7573,12 +9185,12 @@
    ]
   },
   {
-   "day": 345,
-   "title": "Nahum 2",
+   "day": 415,
+   "title": "Isaiah 66",
    "note": "",
    "readings": [
     {
-     "ref": "Nahum 2",
+     "ref": "Isaiah 66",
      "role": "Reading",
      "why": ""
     },
@@ -7595,12 +9207,12 @@
    ]
   },
   {
-   "day": 346,
-   "title": "Nahum 3",
+   "day": 416,
+   "title": "Nahum 1",
    "note": "",
    "readings": [
     {
-     "ref": "Nahum 3",
+     "ref": "Nahum 1",
      "role": "Reading",
      "why": ""
     },
@@ -7617,12 +9229,12 @@
    ]
   },
   {
-   "day": 347,
-   "title": "Habakkuk 1",
+   "day": 417,
+   "title": "Nahum 2",
    "note": "",
    "readings": [
     {
-     "ref": "Habakkuk 1",
+     "ref": "Nahum 2",
      "role": "Reading",
      "why": ""
     },
@@ -7639,12 +9251,12 @@
    ]
   },
   {
-   "day": 348,
-   "title": "Habakkuk 2",
+   "day": 418,
+   "title": "Nahum 3",
    "note": "",
    "readings": [
     {
-     "ref": "Habakkuk 2",
+     "ref": "Nahum 3",
      "role": "Reading",
      "why": ""
     },
@@ -7661,12 +9273,12 @@
    ]
   },
   {
-   "day": 349,
-   "title": "Habakkuk 3",
+   "day": 419,
+   "title": "Habakkuk 1",
    "note": "",
    "readings": [
     {
-     "ref": "Habakkuk 3",
+     "ref": "Habakkuk 1",
      "role": "Reading",
      "why": ""
     },
@@ -7683,12 +9295,12 @@
    ]
   },
   {
-   "day": 350,
-   "title": "Zephaniah 1",
+   "day": 420,
+   "title": "Habakkuk 2",
    "note": "",
    "readings": [
     {
-     "ref": "Zephaniah 1",
+     "ref": "Habakkuk 2",
      "role": "Reading",
      "why": ""
     },
@@ -7705,12 +9317,12 @@
    ]
   },
   {
-   "day": 351,
-   "title": "Zephaniah 2",
+   "day": 421,
+   "title": "Habakkuk 3",
    "note": "",
    "readings": [
     {
-     "ref": "Zephaniah 2",
+     "ref": "Habakkuk 3",
      "role": "Reading",
      "why": ""
     },
@@ -7727,12 +9339,12 @@
    ]
   },
   {
-   "day": 352,
-   "title": "Zephaniah 3",
+   "day": 422,
+   "title": "Zephaniah 1",
    "note": "",
    "readings": [
     {
-     "ref": "Zephaniah 3",
+     "ref": "Zephaniah 1",
      "role": "Reading",
      "why": ""
     },
@@ -7749,12 +9361,12 @@
    ]
   },
   {
-   "day": 353,
-   "title": "Jeremiah 1",
+   "day": 423,
+   "title": "Zephaniah 2",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 1",
+     "ref": "Zephaniah 2",
      "role": "Reading",
      "why": ""
     },
@@ -7771,12 +9383,12 @@
    ]
   },
   {
-   "day": 354,
-   "title": "Jeremiah 2",
+   "day": 424,
+   "title": "Zephaniah 3",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 2",
+     "ref": "Zephaniah 3",
      "role": "Reading",
      "why": ""
     },
@@ -7793,12 +9405,12 @@
    ]
   },
   {
-   "day": 355,
-   "title": "Jeremiah 3",
+   "day": 425,
+   "title": "Jeremiah 1",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 3",
+     "ref": "Jeremiah 1",
      "role": "Reading",
      "why": ""
     },
@@ -7815,12 +9427,12 @@
    ]
   },
   {
-   "day": 356,
-   "title": "Jeremiah 4",
+   "day": 426,
+   "title": "Jeremiah 2",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 4",
+     "ref": "Jeremiah 2",
      "role": "Reading",
      "why": ""
     },
@@ -7837,12 +9449,12 @@
    ]
   },
   {
-   "day": 357,
-   "title": "Jeremiah 5",
+   "day": 427,
+   "title": "Jeremiah 3",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 5",
+     "ref": "Jeremiah 3",
      "role": "Reading",
      "why": ""
     },
@@ -7859,12 +9471,12 @@
    ]
   },
   {
-   "day": 358,
-   "title": "Jeremiah 6",
+   "day": 428,
+   "title": "Jeremiah 4",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 6",
+     "ref": "Jeremiah 4",
      "role": "Reading",
      "why": ""
     },
@@ -7881,12 +9493,12 @@
    ]
   },
   {
-   "day": 359,
-   "title": "Jeremiah 7",
+   "day": 429,
+   "title": "Jeremiah 5",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 7",
+     "ref": "Jeremiah 5",
      "role": "Reading",
      "why": ""
     },
@@ -7903,12 +9515,12 @@
    ]
   },
   {
-   "day": 360,
-   "title": "Jeremiah 8",
+   "day": 430,
+   "title": "Jeremiah 6",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 8",
+     "ref": "Jeremiah 6",
      "role": "Reading",
      "why": ""
     },
@@ -7925,12 +9537,12 @@
    ]
   },
   {
-   "day": 361,
-   "title": "Jeremiah 9",
+   "day": 431,
+   "title": "Jeremiah 7",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 9",
+     "ref": "Jeremiah 7",
      "role": "Reading",
      "why": ""
     },
@@ -7947,12 +9559,12 @@
    ]
   },
   {
-   "day": 362,
-   "title": "Jeremiah 10",
+   "day": 432,
+   "title": "Jeremiah 8",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 10",
+     "ref": "Jeremiah 8",
      "role": "Reading",
      "why": ""
     },
@@ -7969,12 +9581,12 @@
    ]
   },
   {
-   "day": 363,
-   "title": "Jeremiah 11",
+   "day": 433,
+   "title": "Jeremiah 9",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 11",
+     "ref": "Jeremiah 9",
      "role": "Reading",
      "why": ""
     },
@@ -7991,12 +9603,12 @@
    ]
   },
   {
-   "day": 364,
-   "title": "Jeremiah 12",
+   "day": 434,
+   "title": "Jeremiah 10",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 12",
+     "ref": "Jeremiah 10",
      "role": "Reading",
      "why": ""
     },
@@ -8013,12 +9625,12 @@
    ]
   },
   {
-   "day": 365,
-   "title": "Jeremiah 13",
+   "day": 435,
+   "title": "Jeremiah 11",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 13",
+     "ref": "Jeremiah 11",
      "role": "Reading",
      "why": ""
     },
@@ -8035,12 +9647,12 @@
    ]
   },
   {
-   "day": 366,
-   "title": "Jeremiah 14",
+   "day": 436,
+   "title": "Jeremiah 12",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 14",
+     "ref": "Jeremiah 12",
      "role": "Reading",
      "why": ""
     },
@@ -8057,12 +9669,12 @@
    ]
   },
   {
-   "day": 367,
-   "title": "Jeremiah 15",
+   "day": 437,
+   "title": "Jeremiah 13",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 15",
+     "ref": "Jeremiah 13",
      "role": "Reading",
      "why": ""
     },
@@ -8079,12 +9691,12 @@
    ]
   },
   {
-   "day": 368,
-   "title": "Jeremiah 16",
+   "day": 438,
+   "title": "Jeremiah 14",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 16",
+     "ref": "Jeremiah 14",
      "role": "Reading",
      "why": ""
     },
@@ -8101,12 +9713,12 @@
    ]
   },
   {
-   "day": 369,
-   "title": "Jeremiah 17",
+   "day": 439,
+   "title": "Jeremiah 15",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 17",
+     "ref": "Jeremiah 15",
      "role": "Reading",
      "why": ""
     },
@@ -8123,12 +9735,12 @@
    ]
   },
   {
-   "day": 370,
-   "title": "Jeremiah 18",
+   "day": 440,
+   "title": "Jeremiah 16",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 18",
+     "ref": "Jeremiah 16",
      "role": "Reading",
      "why": ""
     },
@@ -8145,12 +9757,12 @@
    ]
   },
   {
-   "day": 371,
-   "title": "Jeremiah 19",
+   "day": 441,
+   "title": "Jeremiah 17",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 19",
+     "ref": "Jeremiah 17",
      "role": "Reading",
      "why": ""
     },
@@ -8167,12 +9779,12 @@
    ]
   },
   {
-   "day": 372,
-   "title": "Jeremiah 20",
+   "day": 442,
+   "title": "Jeremiah 18",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 20",
+     "ref": "Jeremiah 18",
      "role": "Reading",
      "why": ""
     },
@@ -8189,12 +9801,12 @@
    ]
   },
   {
-   "day": 373,
-   "title": "Jeremiah 21",
+   "day": 443,
+   "title": "Jeremiah 19",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 21",
+     "ref": "Jeremiah 19",
      "role": "Reading",
      "why": ""
     },
@@ -8211,12 +9823,12 @@
    ]
   },
   {
-   "day": 374,
-   "title": "Jeremiah 22",
+   "day": 444,
+   "title": "Jeremiah 20",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 22",
+     "ref": "Jeremiah 20",
      "role": "Reading",
      "why": ""
     },
@@ -8233,12 +9845,12 @@
    ]
   },
   {
-   "day": 375,
-   "title": "Jeremiah 23",
+   "day": 445,
+   "title": "Jeremiah 21",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 23",
+     "ref": "Jeremiah 21",
      "role": "Reading",
      "why": ""
     },
@@ -8255,12 +9867,12 @@
    ]
   },
   {
-   "day": 376,
-   "title": "Jeremiah 24",
+   "day": 446,
+   "title": "Jeremiah 22",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 24",
+     "ref": "Jeremiah 22",
      "role": "Reading",
      "why": ""
     },
@@ -8277,12 +9889,12 @@
    ]
   },
   {
-   "day": 377,
-   "title": "Jeremiah 25",
+   "day": 447,
+   "title": "Jeremiah 23",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 25",
+     "ref": "Jeremiah 23",
      "role": "Reading",
      "why": ""
     },
@@ -8299,12 +9911,12 @@
    ]
   },
   {
-   "day": 378,
-   "title": "Jeremiah 26",
+   "day": 448,
+   "title": "Jeremiah 24",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 26",
+     "ref": "Jeremiah 24",
      "role": "Reading",
      "why": ""
     },
@@ -8321,12 +9933,12 @@
    ]
   },
   {
-   "day": 379,
-   "title": "Jeremiah 27",
+   "day": 449,
+   "title": "Jeremiah 25",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 27",
+     "ref": "Jeremiah 25",
      "role": "Reading",
      "why": ""
     },
@@ -8343,12 +9955,12 @@
    ]
   },
   {
-   "day": 380,
-   "title": "Jeremiah 28",
+   "day": 450,
+   "title": "Jeremiah 26",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 28",
+     "ref": "Jeremiah 26",
      "role": "Reading",
      "why": ""
     },
@@ -8365,12 +9977,12 @@
    ]
   },
   {
-   "day": 381,
-   "title": "Jeremiah 29",
+   "day": 451,
+   "title": "Jeremiah 27",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 29",
+     "ref": "Jeremiah 27",
      "role": "Reading",
      "why": ""
     },
@@ -8387,12 +9999,12 @@
    ]
   },
   {
-   "day": 382,
-   "title": "Jeremiah 30",
+   "day": 452,
+   "title": "Jeremiah 28",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 30",
+     "ref": "Jeremiah 28",
      "role": "Reading",
      "why": ""
     },
@@ -8409,12 +10021,12 @@
    ]
   },
   {
-   "day": 383,
-   "title": "Jeremiah 31",
+   "day": 453,
+   "title": "Jeremiah 29",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 31",
+     "ref": "Jeremiah 29",
      "role": "Reading",
      "why": ""
     },
@@ -8431,12 +10043,12 @@
    ]
   },
   {
-   "day": 384,
-   "title": "Jeremiah 32",
+   "day": 454,
+   "title": "Jeremiah 30",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 32",
+     "ref": "Jeremiah 30",
      "role": "Reading",
      "why": ""
     },
@@ -8453,12 +10065,12 @@
    ]
   },
   {
-   "day": 385,
-   "title": "Jeremiah 33",
+   "day": 455,
+   "title": "Jeremiah 31",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 33",
+     "ref": "Jeremiah 31",
      "role": "Reading",
      "why": ""
     },
@@ -8475,12 +10087,12 @@
    ]
   },
   {
-   "day": 386,
-   "title": "Jeremiah 34",
+   "day": 456,
+   "title": "Jeremiah 32",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 34",
+     "ref": "Jeremiah 32",
      "role": "Reading",
      "why": ""
     },
@@ -8497,12 +10109,12 @@
    ]
   },
   {
-   "day": 387,
-   "title": "Jeremiah 35",
+   "day": 457,
+   "title": "Jeremiah 33",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 35",
+     "ref": "Jeremiah 33",
      "role": "Reading",
      "why": ""
     },
@@ -8519,12 +10131,12 @@
    ]
   },
   {
-   "day": 388,
-   "title": "Jeremiah 36",
+   "day": 458,
+   "title": "Jeremiah 34",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 36",
+     "ref": "Jeremiah 34",
      "role": "Reading",
      "why": ""
     },
@@ -8541,12 +10153,12 @@
    ]
   },
   {
-   "day": 389,
-   "title": "Jeremiah 37",
+   "day": 459,
+   "title": "Jeremiah 35",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 37",
+     "ref": "Jeremiah 35",
      "role": "Reading",
      "why": ""
     },
@@ -8563,12 +10175,12 @@
    ]
   },
   {
-   "day": 390,
-   "title": "Jeremiah 38",
+   "day": 460,
+   "title": "Jeremiah 36",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 38",
+     "ref": "Jeremiah 36",
      "role": "Reading",
      "why": ""
     },
@@ -8585,12 +10197,12 @@
    ]
   },
   {
-   "day": 391,
-   "title": "Jeremiah 39",
+   "day": 461,
+   "title": "Jeremiah 37",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 39",
+     "ref": "Jeremiah 37",
      "role": "Reading",
      "why": ""
     },
@@ -8607,12 +10219,12 @@
    ]
   },
   {
-   "day": 392,
-   "title": "Jeremiah 40",
+   "day": 462,
+   "title": "Jeremiah 38",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 40",
+     "ref": "Jeremiah 38",
      "role": "Reading",
      "why": ""
     },
@@ -8629,12 +10241,12 @@
    ]
   },
   {
-   "day": 393,
-   "title": "Jeremiah 41",
+   "day": 463,
+   "title": "Jeremiah 39",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 41",
+     "ref": "Jeremiah 39",
      "role": "Reading",
      "why": ""
     },
@@ -8651,12 +10263,12 @@
    ]
   },
   {
-   "day": 394,
-   "title": "Jeremiah 42",
+   "day": 464,
+   "title": "Jeremiah 40",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 42",
+     "ref": "Jeremiah 40",
      "role": "Reading",
      "why": ""
     },
@@ -8673,12 +10285,12 @@
    ]
   },
   {
-   "day": 395,
-   "title": "Jeremiah 43",
+   "day": 465,
+   "title": "Jeremiah 41",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 43",
+     "ref": "Jeremiah 41",
      "role": "Reading",
      "why": ""
     },
@@ -8695,12 +10307,12 @@
    ]
   },
   {
-   "day": 396,
-   "title": "Jeremiah 44",
+   "day": 466,
+   "title": "Jeremiah 42",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 44",
+     "ref": "Jeremiah 42",
      "role": "Reading",
      "why": ""
     },
@@ -8717,12 +10329,12 @@
    ]
   },
   {
-   "day": 397,
-   "title": "Jeremiah 45",
+   "day": 467,
+   "title": "Jeremiah 43",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 45",
+     "ref": "Jeremiah 43",
      "role": "Reading",
      "why": ""
     },
@@ -8739,12 +10351,12 @@
    ]
   },
   {
-   "day": 398,
-   "title": "Jeremiah 46",
+   "day": 468,
+   "title": "Jeremiah 44",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 46",
+     "ref": "Jeremiah 44",
      "role": "Reading",
      "why": ""
     },
@@ -8761,12 +10373,12 @@
    ]
   },
   {
-   "day": 399,
-   "title": "Jeremiah 47",
+   "day": 469,
+   "title": "Jeremiah 45",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 47",
+     "ref": "Jeremiah 45",
      "role": "Reading",
      "why": ""
     },
@@ -8783,12 +10395,12 @@
    ]
   },
   {
-   "day": 400,
-   "title": "Jeremiah 48",
+   "day": 470,
+   "title": "Jeremiah 46",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 48",
+     "ref": "Jeremiah 46",
      "role": "Reading",
      "why": ""
     },
@@ -8805,12 +10417,12 @@
    ]
   },
   {
-   "day": 401,
-   "title": "Jeremiah 49",
+   "day": 471,
+   "title": "Jeremiah 47",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 49",
+     "ref": "Jeremiah 47",
      "role": "Reading",
      "why": ""
     },
@@ -8827,12 +10439,12 @@
    ]
   },
   {
-   "day": 402,
-   "title": "Jeremiah 50",
+   "day": 472,
+   "title": "Jeremiah 48",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 50",
+     "ref": "Jeremiah 48",
      "role": "Reading",
      "why": ""
     },
@@ -8849,12 +10461,12 @@
    ]
   },
   {
-   "day": 403,
-   "title": "Jeremiah 51",
+   "day": 473,
+   "title": "Jeremiah 49",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 51",
+     "ref": "Jeremiah 49",
      "role": "Reading",
      "why": ""
     },
@@ -8871,12 +10483,12 @@
    ]
   },
   {
-   "day": 404,
-   "title": "Jeremiah 52",
+   "day": 474,
+   "title": "Jeremiah 50",
    "note": "",
    "readings": [
     {
-     "ref": "Jeremiah 52",
+     "ref": "Jeremiah 50",
      "role": "Reading",
      "why": ""
     },
@@ -8893,12 +10505,12 @@
    ]
   },
   {
-   "day": 405,
-   "title": "Lamentations 1",
+   "day": 475,
+   "title": "Jeremiah 51",
    "note": "",
    "readings": [
     {
-     "ref": "Lamentations 1",
+     "ref": "Jeremiah 51",
      "role": "Reading",
      "why": ""
     },
@@ -8915,12 +10527,12 @@
    ]
   },
   {
-   "day": 406,
-   "title": "Lamentations 2",
+   "day": 476,
+   "title": "Jeremiah 52",
    "note": "",
    "readings": [
     {
-     "ref": "Lamentations 2",
+     "ref": "Jeremiah 52",
      "role": "Reading",
      "why": ""
     },
@@ -8937,12 +10549,12 @@
    ]
   },
   {
-   "day": 407,
-   "title": "Lamentations 3",
+   "day": 477,
+   "title": "Lamentations 1",
    "note": "",
    "readings": [
     {
-     "ref": "Lamentations 3",
+     "ref": "Lamentations 1",
      "role": "Reading",
      "why": ""
     },
@@ -8959,12 +10571,12 @@
    ]
   },
   {
-   "day": 408,
-   "title": "Lamentations 4",
+   "day": 478,
+   "title": "Lamentations 2",
    "note": "",
    "readings": [
     {
-     "ref": "Lamentations 4",
+     "ref": "Lamentations 2",
      "role": "Reading",
      "why": ""
     },
@@ -8981,12 +10593,12 @@
    ]
   },
   {
-   "day": 409,
-   "title": "Lamentations 5",
+   "day": 479,
+   "title": "Lamentations 3",
    "note": "",
    "readings": [
     {
-     "ref": "Lamentations 5",
+     "ref": "Lamentations 3",
      "role": "Reading",
      "why": ""
     },
@@ -9003,12 +10615,12 @@
    ]
   },
   {
-   "day": 410,
-   "title": "Ezekiel 1",
+   "day": 480,
+   "title": "Lamentations 4",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 1",
+     "ref": "Lamentations 4",
      "role": "Reading",
      "why": ""
     },
@@ -9025,12 +10637,12 @@
    ]
   },
   {
-   "day": 411,
-   "title": "Ezekiel 2",
+   "day": 481,
+   "title": "Lamentations 5",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 2",
+     "ref": "Lamentations 5",
      "role": "Reading",
      "why": ""
     },
@@ -9047,12 +10659,12 @@
    ]
   },
   {
-   "day": 412,
-   "title": "Ezekiel 3",
+   "day": 482,
+   "title": "Ezekiel 1",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 3",
+     "ref": "Ezekiel 1",
      "role": "Reading",
      "why": ""
     },
@@ -9069,12 +10681,12 @@
    ]
   },
   {
-   "day": 413,
-   "title": "Ezekiel 4",
+   "day": 483,
+   "title": "Ezekiel 2",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 4",
+     "ref": "Ezekiel 2",
      "role": "Reading",
      "why": ""
     },
@@ -9091,12 +10703,12 @@
    ]
   },
   {
-   "day": 414,
-   "title": "Ezekiel 5",
+   "day": 484,
+   "title": "Ezekiel 3",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 5",
+     "ref": "Ezekiel 3",
      "role": "Reading",
      "why": ""
     },
@@ -9113,12 +10725,12 @@
    ]
   },
   {
-   "day": 415,
-   "title": "Ezekiel 6",
+   "day": 485,
+   "title": "Ezekiel 4",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 6",
+     "ref": "Ezekiel 4",
      "role": "Reading",
      "why": ""
     },
@@ -9135,12 +10747,12 @@
    ]
   },
   {
-   "day": 416,
-   "title": "Ezekiel 7",
+   "day": 486,
+   "title": "Ezekiel 5",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 7",
+     "ref": "Ezekiel 5",
      "role": "Reading",
      "why": ""
     },
@@ -9157,12 +10769,12 @@
    ]
   },
   {
-   "day": 417,
-   "title": "Ezekiel 8",
+   "day": 487,
+   "title": "Ezekiel 6",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 8",
+     "ref": "Ezekiel 6",
      "role": "Reading",
      "why": ""
     },
@@ -9179,12 +10791,12 @@
    ]
   },
   {
-   "day": 418,
-   "title": "Ezekiel 9",
+   "day": 488,
+   "title": "Ezekiel 7",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 9",
+     "ref": "Ezekiel 7",
      "role": "Reading",
      "why": ""
     },
@@ -9201,12 +10813,12 @@
    ]
   },
   {
-   "day": 419,
-   "title": "Ezekiel 10",
+   "day": 489,
+   "title": "Ezekiel 8",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 10",
+     "ref": "Ezekiel 8",
      "role": "Reading",
      "why": ""
     },
@@ -9223,12 +10835,12 @@
    ]
   },
   {
-   "day": 420,
-   "title": "Ezekiel 11",
+   "day": 490,
+   "title": "Ezekiel 9",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 11",
+     "ref": "Ezekiel 9",
      "role": "Reading",
      "why": ""
     },
@@ -9245,12 +10857,12 @@
    ]
   },
   {
-   "day": 421,
-   "title": "Ezekiel 12",
+   "day": 491,
+   "title": "Ezekiel 10",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 12",
+     "ref": "Ezekiel 10",
      "role": "Reading",
      "why": ""
     },
@@ -9267,12 +10879,12 @@
    ]
   },
   {
-   "day": 422,
-   "title": "Ezekiel 13",
+   "day": 492,
+   "title": "Ezekiel 11",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 13",
+     "ref": "Ezekiel 11",
      "role": "Reading",
      "why": ""
     },
@@ -9289,12 +10901,12 @@
    ]
   },
   {
-   "day": 423,
-   "title": "Ezekiel 14",
+   "day": 493,
+   "title": "Ezekiel 12",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 14",
+     "ref": "Ezekiel 12",
      "role": "Reading",
      "why": ""
     },
@@ -9311,12 +10923,12 @@
    ]
   },
   {
-   "day": 424,
-   "title": "Ezekiel 15",
+   "day": 494,
+   "title": "Ezekiel 13",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 15",
+     "ref": "Ezekiel 13",
      "role": "Reading",
      "why": ""
     },
@@ -9333,12 +10945,12 @@
    ]
   },
   {
-   "day": 425,
-   "title": "Ezekiel 16",
+   "day": 495,
+   "title": "Ezekiel 14",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 16",
+     "ref": "Ezekiel 14",
      "role": "Reading",
      "why": ""
     },
@@ -9355,12 +10967,12 @@
    ]
   },
   {
-   "day": 426,
-   "title": "Ezekiel 17",
+   "day": 496,
+   "title": "Ezekiel 15",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 17",
+     "ref": "Ezekiel 15",
      "role": "Reading",
      "why": ""
     },
@@ -9377,12 +10989,12 @@
    ]
   },
   {
-   "day": 427,
-   "title": "Ezekiel 18",
+   "day": 497,
+   "title": "Ezekiel 16",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 18",
+     "ref": "Ezekiel 16",
      "role": "Reading",
      "why": ""
     },
@@ -9399,12 +11011,12 @@
    ]
   },
   {
-   "day": 428,
-   "title": "Ezekiel 19",
+   "day": 498,
+   "title": "Ezekiel 17",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 19",
+     "ref": "Ezekiel 17",
      "role": "Reading",
      "why": ""
     },
@@ -9421,12 +11033,12 @@
    ]
   },
   {
-   "day": 429,
-   "title": "Ezekiel 20",
+   "day": 499,
+   "title": "Ezekiel 18",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 20",
+     "ref": "Ezekiel 18",
      "role": "Reading",
      "why": ""
     },
@@ -9443,12 +11055,12 @@
    ]
   },
   {
-   "day": 430,
-   "title": "Ezekiel 21",
+   "day": 500,
+   "title": "Ezekiel 19",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 21",
+     "ref": "Ezekiel 19",
      "role": "Reading",
      "why": ""
     },
@@ -9465,12 +11077,12 @@
    ]
   },
   {
-   "day": 431,
-   "title": "Ezekiel 22",
+   "day": 501,
+   "title": "Ezekiel 20",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 22",
+     "ref": "Ezekiel 20",
      "role": "Reading",
      "why": ""
     },
@@ -9487,12 +11099,12 @@
    ]
   },
   {
-   "day": 432,
-   "title": "Ezekiel 23",
+   "day": 502,
+   "title": "Ezekiel 21",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 23",
+     "ref": "Ezekiel 21",
      "role": "Reading",
      "why": ""
     },
@@ -9509,12 +11121,12 @@
    ]
   },
   {
-   "day": 433,
-   "title": "Ezekiel 24",
+   "day": 503,
+   "title": "Ezekiel 22",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 24",
+     "ref": "Ezekiel 22",
      "role": "Reading",
      "why": ""
     },
@@ -9531,12 +11143,12 @@
    ]
   },
   {
-   "day": 434,
-   "title": "Ezekiel 25",
+   "day": 504,
+   "title": "Ezekiel 23",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 25",
+     "ref": "Ezekiel 23",
      "role": "Reading",
      "why": ""
     },
@@ -9553,12 +11165,12 @@
    ]
   },
   {
-   "day": 435,
-   "title": "Ezekiel 26",
+   "day": 505,
+   "title": "Ezekiel 24",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 26",
+     "ref": "Ezekiel 24",
      "role": "Reading",
      "why": ""
     },
@@ -9575,12 +11187,12 @@
    ]
   },
   {
-   "day": 436,
-   "title": "Ezekiel 27",
+   "day": 506,
+   "title": "Ezekiel 25",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 27",
+     "ref": "Ezekiel 25",
      "role": "Reading",
      "why": ""
     },
@@ -9597,12 +11209,12 @@
    ]
   },
   {
-   "day": 437,
-   "title": "Ezekiel 28",
+   "day": 507,
+   "title": "Ezekiel 26",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 28",
+     "ref": "Ezekiel 26",
      "role": "Reading",
      "why": ""
     },
@@ -9619,12 +11231,12 @@
    ]
   },
   {
-   "day": 438,
-   "title": "Ezekiel 29",
+   "day": 508,
+   "title": "Ezekiel 27",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 29",
+     "ref": "Ezekiel 27",
      "role": "Reading",
      "why": ""
     },
@@ -9641,12 +11253,12 @@
    ]
   },
   {
-   "day": 439,
-   "title": "Ezekiel 30",
+   "day": 509,
+   "title": "Ezekiel 28",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 30",
+     "ref": "Ezekiel 28",
      "role": "Reading",
      "why": ""
     },
@@ -9663,12 +11275,12 @@
    ]
   },
   {
-   "day": 440,
-   "title": "Ezekiel 31",
+   "day": 510,
+   "title": "Ezekiel 29",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 31",
+     "ref": "Ezekiel 29",
      "role": "Reading",
      "why": ""
     },
@@ -9685,12 +11297,12 @@
    ]
   },
   {
-   "day": 441,
-   "title": "Ezekiel 32",
+   "day": 511,
+   "title": "Ezekiel 30",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 32",
+     "ref": "Ezekiel 30",
      "role": "Reading",
      "why": ""
     },
@@ -9707,12 +11319,12 @@
    ]
   },
   {
-   "day": 442,
-   "title": "Ezekiel 33",
+   "day": 512,
+   "title": "Ezekiel 31",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 33",
+     "ref": "Ezekiel 31",
      "role": "Reading",
      "why": ""
     },
@@ -9729,12 +11341,12 @@
    ]
   },
   {
-   "day": 443,
-   "title": "Ezekiel 34",
+   "day": 513,
+   "title": "Ezekiel 32",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 34",
+     "ref": "Ezekiel 32",
      "role": "Reading",
      "why": ""
     },
@@ -9751,12 +11363,12 @@
    ]
   },
   {
-   "day": 444,
-   "title": "Ezekiel 35",
+   "day": 514,
+   "title": "Ezekiel 33",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 35",
+     "ref": "Ezekiel 33",
      "role": "Reading",
      "why": ""
     },
@@ -9773,12 +11385,12 @@
    ]
   },
   {
-   "day": 445,
-   "title": "Ezekiel 36",
+   "day": 515,
+   "title": "Ezekiel 34",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 36",
+     "ref": "Ezekiel 34",
      "role": "Reading",
      "why": ""
     },
@@ -9795,12 +11407,12 @@
    ]
   },
   {
-   "day": 446,
-   "title": "Ezekiel 37",
+   "day": 516,
+   "title": "Ezekiel 35",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 37",
+     "ref": "Ezekiel 35",
      "role": "Reading",
      "why": ""
     },
@@ -9817,12 +11429,12 @@
    ]
   },
   {
-   "day": 447,
-   "title": "Ezekiel 38",
+   "day": 517,
+   "title": "Ezekiel 36",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 38",
+     "ref": "Ezekiel 36",
      "role": "Reading",
      "why": ""
     },
@@ -9839,12 +11451,12 @@
    ]
   },
   {
-   "day": 448,
-   "title": "Ezekiel 39",
+   "day": 518,
+   "title": "Ezekiel 37",
    "note": "",
    "readings": [
     {
-     "ref": "Ezekiel 39",
+     "ref": "Ezekiel 37",
      "role": "Reading",
      "why": ""
     },
@@ -9861,12 +11473,12 @@
    ]
   },
   {
-   "day": 449,
-   "title": "Daniel 1",
+   "day": 519,
+   "title": "Ezekiel 38",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 1",
+     "ref": "Ezekiel 38",
      "role": "Reading",
      "why": ""
     },
@@ -9883,12 +11495,12 @@
    ]
   },
   {
-   "day": 450,
-   "title": "Daniel 2",
+   "day": 520,
+   "title": "Ezekiel 39",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 2",
+     "ref": "Ezekiel 39",
      "role": "Reading",
      "why": ""
     },
@@ -9905,12 +11517,12 @@
    ]
   },
   {
-   "day": 451,
-   "title": "Daniel 3",
+   "day": 521,
+   "title": "Ezekiel 40",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 3",
+     "ref": "Ezekiel 40",
      "role": "Reading",
      "why": ""
     },
@@ -9924,15 +11536,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 452,
-   "title": "Daniel 4",
+   "day": 522,
+   "title": "Ezekiel 41",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 4",
+     "ref": "Ezekiel 41",
      "role": "Reading",
      "why": ""
     },
@@ -9946,15 +11559,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 453,
-   "title": "Daniel 5",
+   "day": 523,
+   "title": "Ezekiel 42",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 5",
+     "ref": "Ezekiel 42",
      "role": "Reading",
      "why": ""
     },
@@ -9968,15 +11582,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 454,
-   "title": "Daniel 6",
+   "day": 524,
+   "title": "Ezekiel 43",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 6",
+     "ref": "Ezekiel 43",
      "role": "Reading",
      "why": ""
     },
@@ -9990,15 +11605,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 455,
-   "title": "Daniel 7",
+   "day": 525,
+   "title": "Ezekiel 44",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 7",
+     "ref": "Ezekiel 44",
      "role": "Reading",
      "why": ""
     },
@@ -10012,15 +11628,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 456,
-   "title": "Daniel 8",
+   "day": 526,
+   "title": "Ezekiel 45",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 8",
+     "ref": "Ezekiel 45",
      "role": "Reading",
      "why": ""
     },
@@ -10034,15 +11651,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 457,
-   "title": "Daniel 9",
+   "day": 527,
+   "title": "Ezekiel 46",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 9",
+     "ref": "Ezekiel 46",
      "role": "Reading",
      "why": ""
     },
@@ -10056,15 +11674,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 458,
-   "title": "Daniel 10",
+   "day": 528,
+   "title": "Ezekiel 47",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 10",
+     "ref": "Ezekiel 47",
      "role": "Reading",
      "why": ""
     },
@@ -10078,15 +11697,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 459,
-   "title": "Daniel 11",
+   "day": 529,
+   "title": "Ezekiel 48",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 11",
+     "ref": "Ezekiel 48",
      "role": "Reading",
      "why": ""
     },
@@ -10100,15 +11720,16 @@
      "role": "Proverbs",
      "why": ""
     }
-   ]
+   ],
+   "list": true
   },
   {
-   "day": 460,
-   "title": "Daniel 12",
+   "day": 530,
+   "title": "Daniel 1",
    "note": "",
    "readings": [
     {
-     "ref": "Daniel 12",
+     "ref": "Daniel 1",
      "role": "Reading",
      "why": ""
     },
@@ -10125,12 +11746,12 @@
    ]
   },
   {
-   "day": 461,
-   "title": "Ezra 1",
+   "day": 531,
+   "title": "Daniel 2",
    "note": "",
    "readings": [
     {
-     "ref": "Ezra 1",
+     "ref": "Daniel 2",
      "role": "Reading",
      "why": ""
     },
@@ -10147,12 +11768,12 @@
    ]
   },
   {
-   "day": 462,
-   "title": "Ezra 2",
+   "day": 532,
+   "title": "Daniel 3",
    "note": "",
    "readings": [
     {
-     "ref": "Ezra 2",
+     "ref": "Daniel 3",
      "role": "Reading",
      "why": ""
     },
@@ -10169,12 +11790,12 @@
    ]
   },
   {
-   "day": 463,
-   "title": "Ezra 3",
+   "day": 533,
+   "title": "Daniel 4",
    "note": "",
    "readings": [
     {
-     "ref": "Ezra 3",
+     "ref": "Daniel 4",
      "role": "Reading",
      "why": ""
     },
@@ -10191,12 +11812,12 @@
    ]
   },
   {
-   "day": 464,
-   "title": "Ezra 4",
+   "day": 534,
+   "title": "Daniel 5",
    "note": "",
    "readings": [
     {
-     "ref": "Ezra 4",
+     "ref": "Daniel 5",
      "role": "Reading",
      "why": ""
     },
@@ -10213,12 +11834,12 @@
    ]
   },
   {
-   "day": 465,
-   "title": "Ezra 5",
+   "day": 535,
+   "title": "Daniel 6",
    "note": "",
    "readings": [
     {
-     "ref": "Ezra 5",
+     "ref": "Daniel 6",
      "role": "Reading",
      "why": ""
     },
@@ -10235,12 +11856,12 @@
    ]
   },
   {
-   "day": 466,
-   "title": "Ezra 6",
+   "day": 536,
+   "title": "Daniel 7",
    "note": "",
    "readings": [
     {
-     "ref": "Ezra 6",
+     "ref": "Daniel 7",
      "role": "Reading",
      "why": ""
     },
@@ -10257,12 +11878,12 @@
    ]
   },
   {
-   "day": 467,
-   "title": "Ezra 7",
+   "day": 537,
+   "title": "Daniel 8",
    "note": "",
    "readings": [
     {
-     "ref": "Ezra 7",
+     "ref": "Daniel 8",
      "role": "Reading",
      "why": ""
     },
@@ -10279,12 +11900,12 @@
    ]
   },
   {
-   "day": 468,
-   "title": "Ezra 8",
+   "day": 538,
+   "title": "Daniel 9",
    "note": "",
    "readings": [
     {
-     "ref": "Ezra 8",
+     "ref": "Daniel 9",
      "role": "Reading",
      "why": ""
     },
@@ -10301,12 +11922,12 @@
    ]
   },
   {
-   "day": 469,
-   "title": "Ezra 9",
+   "day": 539,
+   "title": "Daniel 10",
    "note": "",
    "readings": [
     {
-     "ref": "Ezra 9",
+     "ref": "Daniel 10",
      "role": "Reading",
      "why": ""
     },
@@ -10323,12 +11944,12 @@
    ]
   },
   {
-   "day": 470,
-   "title": "Ezra 10",
+   "day": 540,
+   "title": "Daniel 11",
    "note": "",
    "readings": [
     {
-     "ref": "Ezra 10",
+     "ref": "Daniel 11",
      "role": "Reading",
      "why": ""
     },
@@ -10345,12 +11966,12 @@
    ]
   },
   {
-   "day": 471,
-   "title": "Nehemiah 1",
+   "day": 541,
+   "title": "Daniel 12",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 1",
+     "ref": "Daniel 12",
      "role": "Reading",
      "why": ""
     },
@@ -10367,12 +11988,12 @@
    ]
   },
   {
-   "day": 472,
-   "title": "Nehemiah 2",
+   "day": 542,
+   "title": "Ezra 1",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 2",
+     "ref": "Ezra 1",
      "role": "Reading",
      "why": ""
     },
@@ -10389,12 +12010,12 @@
    ]
   },
   {
-   "day": 473,
-   "title": "Nehemiah 3",
+   "day": 543,
+   "title": "Ezra 2",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 3",
+     "ref": "Ezra 2",
      "role": "Reading",
      "why": ""
     },
@@ -10411,12 +12032,12 @@
    ]
   },
   {
-   "day": 474,
-   "title": "Nehemiah 4",
+   "day": 544,
+   "title": "Ezra 3",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 4",
+     "ref": "Ezra 3",
      "role": "Reading",
      "why": ""
     },
@@ -10433,12 +12054,12 @@
    ]
   },
   {
-   "day": 475,
-   "title": "Nehemiah 5",
+   "day": 545,
+   "title": "Ezra 4",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 5",
+     "ref": "Ezra 4",
      "role": "Reading",
      "why": ""
     },
@@ -10455,12 +12076,12 @@
    ]
   },
   {
-   "day": 476,
-   "title": "Nehemiah 6",
+   "day": 546,
+   "title": "Ezra 5",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 6",
+     "ref": "Ezra 5",
      "role": "Reading",
      "why": ""
     },
@@ -10477,12 +12098,12 @@
    ]
   },
   {
-   "day": 477,
-   "title": "Nehemiah 7",
+   "day": 547,
+   "title": "Ezra 6",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 7",
+     "ref": "Ezra 6",
      "role": "Reading",
      "why": ""
     },
@@ -10499,12 +12120,12 @@
    ]
   },
   {
-   "day": 478,
-   "title": "Nehemiah 8",
+   "day": 548,
+   "title": "Ezra 7",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 8",
+     "ref": "Ezra 7",
      "role": "Reading",
      "why": ""
     },
@@ -10521,12 +12142,12 @@
    ]
   },
   {
-   "day": 479,
-   "title": "Nehemiah 9",
+   "day": 549,
+   "title": "Ezra 8",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 9",
+     "ref": "Ezra 8",
      "role": "Reading",
      "why": ""
     },
@@ -10543,12 +12164,12 @@
    ]
   },
   {
-   "day": 480,
-   "title": "Nehemiah 10",
+   "day": 550,
+   "title": "Ezra 9",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 10",
+     "ref": "Ezra 9",
      "role": "Reading",
      "why": ""
     },
@@ -10565,12 +12186,12 @@
    ]
   },
   {
-   "day": 481,
-   "title": "Nehemiah 11",
+   "day": 551,
+   "title": "Ezra 10",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 11",
+     "ref": "Ezra 10",
      "role": "Reading",
      "why": ""
     },
@@ -10587,12 +12208,12 @@
    ]
   },
   {
-   "day": 482,
-   "title": "Nehemiah 12",
+   "day": 552,
+   "title": "Nehemiah 1",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 12",
+     "ref": "Nehemiah 1",
      "role": "Reading",
      "why": ""
     },
@@ -10609,12 +12230,12 @@
    ]
   },
   {
-   "day": 483,
-   "title": "Nehemiah 13",
+   "day": 553,
+   "title": "Nehemiah 2",
    "note": "",
    "readings": [
     {
-     "ref": "Nehemiah 13",
+     "ref": "Nehemiah 2",
      "role": "Reading",
      "why": ""
     },
@@ -10631,12 +12252,12 @@
    ]
   },
   {
-   "day": 484,
-   "title": "Esther 1",
+   "day": 554,
+   "title": "Nehemiah 3",
    "note": "",
    "readings": [
     {
-     "ref": "Esther 1",
+     "ref": "Nehemiah 3",
      "role": "Reading",
      "why": ""
     },
@@ -10653,12 +12274,12 @@
    ]
   },
   {
-   "day": 485,
-   "title": "Esther 2",
+   "day": 555,
+   "title": "Nehemiah 4",
    "note": "",
    "readings": [
     {
-     "ref": "Esther 2",
+     "ref": "Nehemiah 4",
      "role": "Reading",
      "why": ""
     },
@@ -10675,12 +12296,12 @@
    ]
   },
   {
-   "day": 486,
-   "title": "Esther 3",
+   "day": 556,
+   "title": "Nehemiah 5",
    "note": "",
    "readings": [
     {
-     "ref": "Esther 3",
+     "ref": "Nehemiah 5",
      "role": "Reading",
      "why": ""
     },
@@ -10697,12 +12318,12 @@
    ]
   },
   {
-   "day": 487,
-   "title": "Esther 4",
+   "day": 557,
+   "title": "Nehemiah 6",
    "note": "",
    "readings": [
     {
-     "ref": "Esther 4",
+     "ref": "Nehemiah 6",
      "role": "Reading",
      "why": ""
     },
@@ -10719,12 +12340,12 @@
    ]
   },
   {
-   "day": 488,
-   "title": "Esther 5",
+   "day": 558,
+   "title": "Nehemiah 7",
    "note": "",
    "readings": [
     {
-     "ref": "Esther 5",
+     "ref": "Nehemiah 7",
      "role": "Reading",
      "why": ""
     },
@@ -10741,12 +12362,12 @@
    ]
   },
   {
-   "day": 489,
-   "title": "Esther 6",
+   "day": 559,
+   "title": "Nehemiah 8",
    "note": "",
    "readings": [
     {
-     "ref": "Esther 6",
+     "ref": "Nehemiah 8",
      "role": "Reading",
      "why": ""
     },
@@ -10763,12 +12384,12 @@
    ]
   },
   {
-   "day": 490,
-   "title": "Esther 7",
+   "day": 560,
+   "title": "Nehemiah 9",
    "note": "",
    "readings": [
     {
-     "ref": "Esther 7",
+     "ref": "Nehemiah 9",
      "role": "Reading",
      "why": ""
     },
@@ -10785,12 +12406,12 @@
    ]
   },
   {
-   "day": 491,
-   "title": "Esther 8",
+   "day": 561,
+   "title": "Nehemiah 10",
    "note": "",
    "readings": [
     {
-     "ref": "Esther 8",
+     "ref": "Nehemiah 10",
      "role": "Reading",
      "why": ""
     },
@@ -10807,12 +12428,12 @@
    ]
   },
   {
-   "day": 492,
-   "title": "Esther 9",
+   "day": 562,
+   "title": "Nehemiah 11",
    "note": "",
    "readings": [
     {
-     "ref": "Esther 9",
+     "ref": "Nehemiah 11",
      "role": "Reading",
      "why": ""
     },
@@ -10829,12 +12450,12 @@
    ]
   },
   {
-   "day": 493,
-   "title": "Esther 10",
+   "day": 563,
+   "title": "Nehemiah 12",
    "note": "",
    "readings": [
     {
-     "ref": "Esther 10",
+     "ref": "Nehemiah 12",
      "role": "Reading",
      "why": ""
     },
@@ -10851,12 +12472,12 @@
    ]
   },
   {
-   "day": 494,
-   "title": "Haggai 1",
+   "day": 564,
+   "title": "Nehemiah 13",
    "note": "",
    "readings": [
     {
-     "ref": "Haggai 1",
+     "ref": "Nehemiah 13",
      "role": "Reading",
      "why": ""
     },
@@ -10873,12 +12494,12 @@
    ]
   },
   {
-   "day": 495,
-   "title": "Haggai 2",
+   "day": 565,
+   "title": "Esther 1",
    "note": "",
    "readings": [
     {
-     "ref": "Haggai 2",
+     "ref": "Esther 1",
      "role": "Reading",
      "why": ""
     },
@@ -10895,12 +12516,12 @@
    ]
   },
   {
-   "day": 496,
-   "title": "Zechariah 1",
+   "day": 566,
+   "title": "Esther 2",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 1",
+     "ref": "Esther 2",
      "role": "Reading",
      "why": ""
     },
@@ -10917,12 +12538,12 @@
    ]
   },
   {
-   "day": 497,
-   "title": "Zechariah 2",
+   "day": 567,
+   "title": "Esther 3",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 2",
+     "ref": "Esther 3",
      "role": "Reading",
      "why": ""
     },
@@ -10939,12 +12560,12 @@
    ]
   },
   {
-   "day": 498,
-   "title": "Zechariah 3",
+   "day": 568,
+   "title": "Esther 4",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 3",
+     "ref": "Esther 4",
      "role": "Reading",
      "why": ""
     },
@@ -10961,12 +12582,12 @@
    ]
   },
   {
-   "day": 499,
-   "title": "Zechariah 4",
+   "day": 569,
+   "title": "Esther 5",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 4",
+     "ref": "Esther 5",
      "role": "Reading",
      "why": ""
     },
@@ -10983,12 +12604,12 @@
    ]
   },
   {
-   "day": 500,
-   "title": "Zechariah 5",
+   "day": 570,
+   "title": "Esther 6",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 5",
+     "ref": "Esther 6",
      "role": "Reading",
      "why": ""
     },
@@ -11005,12 +12626,12 @@
    ]
   },
   {
-   "day": 501,
-   "title": "Zechariah 6",
+   "day": 571,
+   "title": "Esther 7",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 6",
+     "ref": "Esther 7",
      "role": "Reading",
      "why": ""
     },
@@ -11027,12 +12648,12 @@
    ]
   },
   {
-   "day": 502,
-   "title": "Zechariah 7",
+   "day": 572,
+   "title": "Esther 8",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 7",
+     "ref": "Esther 8",
      "role": "Reading",
      "why": ""
     },
@@ -11049,12 +12670,12 @@
    ]
   },
   {
-   "day": 503,
-   "title": "Zechariah 8",
+   "day": 573,
+   "title": "Esther 9",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 8",
+     "ref": "Esther 9",
      "role": "Reading",
      "why": ""
     },
@@ -11071,12 +12692,12 @@
    ]
   },
   {
-   "day": 504,
-   "title": "Zechariah 9",
+   "day": 574,
+   "title": "Esther 10",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 9",
+     "ref": "Esther 10",
      "role": "Reading",
      "why": ""
     },
@@ -11093,12 +12714,12 @@
    ]
   },
   {
-   "day": 505,
-   "title": "Zechariah 10",
+   "day": 575,
+   "title": "Haggai 1",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 10",
+     "ref": "Haggai 1",
      "role": "Reading",
      "why": ""
     },
@@ -11115,12 +12736,12 @@
    ]
   },
   {
-   "day": 506,
-   "title": "Zechariah 11",
+   "day": 576,
+   "title": "Haggai 2",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 11",
+     "ref": "Haggai 2",
      "role": "Reading",
      "why": ""
     },
@@ -11137,12 +12758,12 @@
    ]
   },
   {
-   "day": 507,
-   "title": "Zechariah 12",
+   "day": 577,
+   "title": "Zechariah 1",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 12",
+     "ref": "Zechariah 1",
      "role": "Reading",
      "why": ""
     },
@@ -11159,12 +12780,12 @@
    ]
   },
   {
-   "day": 508,
-   "title": "Zechariah 13",
+   "day": 578,
+   "title": "Zechariah 2",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 13",
+     "ref": "Zechariah 2",
      "role": "Reading",
      "why": ""
     },
@@ -11181,12 +12802,12 @@
    ]
   },
   {
-   "day": 509,
-   "title": "Zechariah 14",
+   "day": 579,
+   "title": "Zechariah 3",
    "note": "",
    "readings": [
     {
-     "ref": "Zechariah 14",
+     "ref": "Zechariah 3",
      "role": "Reading",
      "why": ""
     },
@@ -11203,12 +12824,12 @@
    ]
   },
   {
-   "day": 510,
-   "title": "Malachi 1",
+   "day": 580,
+   "title": "Zechariah 4",
    "note": "",
    "readings": [
     {
-     "ref": "Malachi 1",
+     "ref": "Zechariah 4",
      "role": "Reading",
      "why": ""
     },
@@ -11225,12 +12846,12 @@
    ]
   },
   {
-   "day": 511,
-   "title": "Malachi 2",
+   "day": 581,
+   "title": "Zechariah 5",
    "note": "",
    "readings": [
     {
-     "ref": "Malachi 2",
+     "ref": "Zechariah 5",
      "role": "Reading",
      "why": ""
     },
@@ -11247,12 +12868,12 @@
    ]
   },
   {
-   "day": 512,
-   "title": "Malachi 3",
+   "day": 582,
+   "title": "Zechariah 6",
    "note": "",
    "readings": [
     {
-     "ref": "Malachi 3",
+     "ref": "Zechariah 6",
      "role": "Reading",
      "why": ""
     },
@@ -11269,12 +12890,12 @@
    ]
   },
   {
-   "day": 513,
-   "title": "Malachi 4",
+   "day": 583,
+   "title": "Zechariah 7",
    "note": "",
    "readings": [
     {
-     "ref": "Malachi 4",
+     "ref": "Zechariah 7",
      "role": "Reading",
      "why": ""
     },
@@ -11289,7 +12910,249 @@
      "why": ""
     }
    ]
+  },
+  {
+   "day": 584,
+   "title": "Zechariah 8",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 8",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 84",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 24:1-22",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 585,
+   "title": "Zechariah 9",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 9",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 85",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 24:23-34",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 586,
+   "title": "Zechariah 10",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 10",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 86",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 25:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 587,
+   "title": "Zechariah 11",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 11",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 87",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 25:15-28",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 588,
+   "title": "Zechariah 12",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 12",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 88",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 26:1-16",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 589,
+   "title": "Zechariah 13",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 13",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 89",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 26:17-28",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 590,
+   "title": "Zechariah 14",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Zechariah 14",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 90",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 27:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 591,
+   "title": "Malachi 1",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Malachi 1",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 91",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 27:15-27",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 592,
+   "title": "Malachi 2",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Malachi 2",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 92",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 28:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 593,
+   "title": "Malachi 3",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Malachi 3",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 93",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 28:15-28",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 594,
+   "title": "Malachi 4",
+   "note": "",
+   "readings": [
+    {
+     "ref": "Malachi 4",
+     "role": "Reading",
+     "why": ""
+    },
+    {
+     "ref": "Psalm 94",
+     "role": "Psalm",
+     "why": ""
+    },
+    {
+     "ref": "Proverbs 29:1-14",
+     "role": "Proverbs",
+     "why": ""
+    }
+   ]
   }
  ],
- "doneThrough": 148
+ "doneThrough": 218
 }

@@ -46,6 +46,7 @@
       <ul id="planlist" class="planlist" hidden></ul>
       <select id="plan" hidden></select>
       <label class="planopt"><input type="checkbox" id="addpsalm"> Matching psalm</label>
+      <label class="planopt"><input type="checkbox" id="hidelists"> Hide genealogies &amp; lists</label>
     </div>
     <div>
       <h2 class="planname" id="planname"></h2>
@@ -272,8 +273,9 @@ const plan=()=>PLANS[S.plan];
 function planStart(p){ if(!PUBLIC) return p.start; const k="start:"+p.id; let d=store.get(k,null);
   if(!d){ const t=new Date(); d=`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`; store.set(k,d) } return d }
 function todayNum(p){const d0=new Date(planStart(p)+"T00:00:00"), now=new Date(); now.setHours(0,0,0,0);
-  if(p.weekly) return now<d0 ? 0 : Math.floor((now-d0)/(7*864e5))+1;   // one entry a week (the F260 memory verses)
-  if(!p.weekdays) return Math.floor((now-d0)/864e5)+1;
+  const days=Math.round((now-d0)/864e5);   // round, not floor: a span across the clocks changing is an hour short of whole days
+  if(p.weekly) return now<d0 ? 0 : Math.floor(days/7)+1;   // one entry a week (the F260 memory verses)
+  if(!p.weekdays) return days+1;
   if(now<d0) return 0;
   let n=0; for(const d=new Date(d0); d<=now; d.setDate(d.getDate()+1)){ const w=d.getDay(); if(w&&w<6) n++ }
   return Math.max(n,1)}
@@ -323,16 +325,18 @@ function renderPlan(){
   $("progbar").style.width = Math.max(2,done/total*100)+"%";
   /* the list starts where you are: the first day not yet done (or today), and the days before it follow at the bottom, so
      the plan menu above is never a long scroll away and day 1 comes round again after the last day */
-  const first=(p.days.find(d=>!dayDone(d))||p.days.find(d=>d.day===t)||p.days[0]).day;
-  const full=p.days.filter(d=>d.day>=first).concat(p.days.filter(d=>d.day<first));
+  /* genealogies and lists (a plan's "list" days, or chapters in plans/skip.json): greyed, never where the list starts, hidden with the box */
+  const isList=d=>d.list || (!!SKIP && d.readings.length>0 && (()=>{ const g=JaymsRef.parse(d.readings[0].ref)[0]; return !!g && (SKIP[g.book]||[]).includes(g.c1) && (!g.c2 || g.c2===g.c1) })());
+  const first=(p.days.find(d=>!dayDone(d) && !isList(d))||p.days.find(d=>d.day===t)||p.days[0]).day;
+  const full=p.days.filter(d=>d.day>=first).concat(p.days.filter(d=>d.day<first)).filter(d=>!S.hideLists || !isList(d) || d.day===S.day);
   /* a week at a time: where you are and the six after it; the rest behind "Show all" (the day you picked stays in view) */
   const SHOW=7, order = S.allDays ? full : full.filter((d,i)=>i<SHOW || d.day===S.day);
   const more = full.length>order.length || S.allDays ? `<li><button class="daysmore" data-alldays>${S.allDays?"Show fewer":"Show all "+full.length+(p.weekly?" weeks":" days")}</button></li>` : "";
   $("days").innerHTML = (S.allDays ? more : "") + order.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
     const sep = d.day===p.days[0].day && first>p.days[0].day ? `<li class="days-sep lbl">Done · from ${p.weekly?"week":"day"} 1</li>` : "";
-    return sep+`<li><button class="day${fin?" done":""}${on?" on":""}" data-day="${d.day}" ${isT?'aria-current="date"':""}>
+    return sep+`<li><button class="day${fin?" done":""}${on?" on":""}${isList(d)?" list":""}" data-day="${d.day}" ${isT?'aria-current="date"':""}>
       <span class="n">${isT?(p.weekly?"This week":"Today"):(p.weekly?"Week ":"Day ")+d.day}</span>
-      <span class="t">${esc(d.title)}${(d.readings.length>1||d.note)?`<small>${esc(d.readings.length>1?"with "+d.readings.slice(1).map(x=>x.ref).join(" · "):d.note)}</small>`:""}</span>
+      <span class="t">${esc(d.title)}${isList(d)?' <em class="listtag">genealogy / list</em>':""}${(d.readings.length>1||d.note)?`<small>${esc(d.readings.length>1?"with "+d.readings.slice(1).map(x=>x.ref).join(" · "):d.note)}</small>`:""}</span>
       <span class="ck" role="img" aria-label="${fin?"done":"not done"}">${fin?"✓":""}</span></button></li>`}).join("") + (S.allDays ? "" : more);   // "Show fewer" sits at the top of the long list, where you are
   /* the day you're on is in view when the plan opens (no scrolling down from day 1): once per plan and day, and only if it's out of sight */
   const at=S.plan+":"+S.day; if(renderPlan.at!==at){ renderPlan.at=at; setTimeout(()=>{
@@ -549,11 +553,11 @@ function closeAdhoc(n){ const o=S.opened[n]; if(!o) return; S.opened.splice(n,1)
   if(S.adhoc===o) S.adhoc = S.opened[Math.min(n, S.opened.length-1)] || null;
   S.vsel=null; rememberOpen(); renderReader(); renderPanel(); renderDock() }
 /* where you were, so a reload comes back to it (same day only) */
-function rememberOpen(){ store.set("open",{date:new Date().toDateString(), plan:S.plan, day:S.day, reading:S.reading, opened:S.opened.map(x=>x.ref), on:S.adhoc?S.opened.indexOf(S.adhoc):-1}) }
+function rememberOpen(){ store.set("open",{date:new Date().toDateString(), plan:S.plan, n:(PLANS[S.plan]||{days:[]}).days.length, day:S.day, reading:S.reading, opened:S.opened.map(x=>x.ref), on:S.adhoc?S.opened.indexOf(S.adhoc):-1}) }
 var RESTORED=false;   // set once restoreOpen has put back the last reading, so a saved scroll position isn't dropped too early
 function restoreOpen(){
   const o=store.get("open",null); RESTORED=true; if(!o || o.date!==new Date().toDateString() || o.plan!==S.plan) return;
-  if(o.day!==S.day && PLANS[S.plan].days.some(d=>d.day===o.day)){ S.day=o.day; buildDay(); }
+  if(o.day!==S.day && o.n===PLANS[S.plan].days.length && PLANS[S.plan].days.some(d=>d.day===o.day)){ S.day=o.day; buildDay(); }   // a rebuilt plan renumbers its days: start at today
   if(o.reading<READINGS.length) S.reading=o.reading;
   (o.opened || (o.adhoc ? [o.adhoc] : []).concat(o.parked ? [o.parked] : [])).forEach(r=>openPassage(r));
   S.adhoc = o.on>=0 && S.opened[o.on] ? S.opened[o.on] : (o.adhoc && S.opened[0]) || null;
@@ -707,6 +711,8 @@ document.addEventListener("keydown",e=>{
 });
 $("pclose").onclick=()=>openTool(S.tool);
 $("addpsalm").checked=S.addPsalm;
+S.hideLists=store.get("hideLists",false); $("hidelists").checked=S.hideLists;
+$("hidelists").onchange=e=>{ S.hideLists=e.target.checked; store.set("hideLists",S.hideLists); renderPlan() };
 $("addpsalm").onchange=e=>{ S.addPsalm=e.target.checked; store.set("addPsalm",S.addPsalm); S.reading=0; buildDay(); render() };
 /* Find in the text: marks every match in the passage on screen, Enter for the next, Shift+Enter for the previous, Esc to clear.
    Ctrl/Cmd+F goes to the box. It searches the words as shown, so it ignores verse numbers and markup. */

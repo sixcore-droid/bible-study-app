@@ -56,7 +56,7 @@
   --ink:#ede4d3; --ink-bright:#ffffff; --muted:#847a6a; --line:#3a342c;
   --gold:#d4a85c; --rust:#d4664f;
   --edge-text:#d4a85c; --edge-original:#9fb8a8; --edge-modern:#b299c9;
-  --edge-note:#a8a565; --edge-open:#8fb4d9; --edge-alert:#d4664f; --edge-apparatus:#847a6a;
+  --edge-note:#a8a565; --edge-open:#8fb4d9; --edge-alert:#d4664f; --edge-apparatus:#847a6a;--list-ink:#9aa3ad;
   --display:"Cormorant Garamond",Georgia,serif;
   --read:"Archivo","Segoe UI",system-ui,sans-serif;
   --label:"IBM Plex Mono",ui-monospace,Menlo,monospace;
@@ -233,6 +233,10 @@ mark.hit.now{background:var(--gold);color:var(--paper-deep)}
 .bar i{display:block;height:100%;background:var(--gold);border-radius:3px;transition:width .3s}
 .prog .lbl{display:flex;justify-content:space-between}
 .days{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;flex:none}
+/* a genealogy or list chapter: still there, but set back (a cooler colour, not the unreadable muted grey) */
+.day.list .t{color:var(--list-ink)}
+.day.list .n{color:var(--list-ink)}
+.day .listtag{font:italic 400 12px var(--label);color:var(--list-ink);margin-left:4px;white-space:nowrap}
 .daysmore{width:100%;margin-top:6px;padding:9px 10px;border:1px dashed var(--line);border-radius:7px;background:none;color:var(--gold);font:500 14px var(--label);text-align:center}
 .daysmore:hover{border-color:var(--gold)}
 .days-sep{margin:14px 10px 4px;padding-top:12px;border-top:1px solid var(--line)}
