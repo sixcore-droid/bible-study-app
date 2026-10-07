@@ -217,6 +217,15 @@ mark.hit.now{background:var(--gold);color:var(--paper-deep)}
 .railin{height:100%;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--line) transparent;overscroll-behavior:contain;padding:22px 18px;display:flex;flex-direction:column;gap:18px}
 .plansel{display:flex;flex-direction:column;gap:6px}
 .plansel select{width:100%;background:var(--paper-deep);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:9px 10px;font:500 16px var(--read)}
+.planpick{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;background:var(--paper-deep);color:var(--ink-bright);border:1px solid var(--line);border-radius:6px;padding:9px 12px;font:500 16px var(--read);text-align:left}
+.planpick .caret{color:var(--gold)}
+.planpick[aria-expanded="true"]{border-color:var(--gold)}
+.planlist{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+.planlist button{width:100%;text-align:left;padding:9px 12px;border-radius:6px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:500 15px var(--read)}
+.planlist button:hover{background:var(--paper-deep)}
+.planlist button.on{border-color:var(--gold);color:var(--ink-bright)}
+.planlist button.on .sub{color:var(--gold);font-size:13px;margin-left:6px}
+.planlist button.build{border-style:dashed}
 .planname{font-family:var(--display);font-size:26px;font-weight:600;line-height:1.15;color:var(--ink-bright);margin:0;text-wrap:balance}
 .plandesc{font-size:15px;margin:0}
 .prog{display:flex;flex-direction:column;gap:6px}

@@ -41,8 +41,10 @@
     <div class="rgrip" id="rgrip" role="separator" aria-orientation="vertical" aria-label="Drag to resize the reading plan" tabindex="0" title="Drag to resize · double-click to reset"></div>
     <div class="railin">
     <div class="plansel">
-      <label class="lbl" for="plan">Reading plan</label>
-      <select id="plan"></select>
+      <label class="lbl" for="planpick">Reading plan</label>
+      <button id="planpick" class="planpick" aria-expanded="false" aria-controls="planlist"></button>
+      <ul id="planlist" class="planlist" hidden></ul>
+      <select id="plan" hidden></select>
       <label class="planopt"><input type="checkbox" id="addpsalm"> Matching psalm</label>
     </div>
     <div>
@@ -309,6 +311,11 @@ function renderPlan(){
   $("plan").innerHTML = PLANINDEX.plans.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")
     + (mine.length ? `<optgroup label="Plans I made">${mine.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")}</optgroup>` : "")
     + (S.view!=="public" ? `<option value="__build">+ Build a plan\u2026</option>` : "");
+  /* the plans as buttons under one "current plan" button (the select stays as the hidden source of truth) */
+  const opts=[...PLANINDEX.plans.map(x=>[x.id,x.name]), ...mine.map(x=>[x.id,x.name])];
+  $("planpick").innerHTML = `<span>${esc(p.name)}</span><span class="caret" aria-hidden="true">▾</span>`;
+  $("planlist").innerHTML = opts.map(([id,n])=>`<li><button data-pickplan="${id}" class="${id===S.plan?"on":""}"${id===S.plan?' aria-current="true"':""}>${esc(n)}${id===S.plan?' <span class="sub">reading now</span>':""}</button></li>`).join("")
+    + (S.view!=="public" ? `<li><button data-pickplan="__build" class="build">+ Build a plan…</button></li>` : "");
   $("planname").textContent = p.name; $("plandesc").textContent = p.description||"";
   const t = todayNum(p), total=p.days.length, done=p.days.filter(dayDone).length;
   $("progtxt").textContent = t<1 ? `Starts ${new Date(planStart(p)+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long"})}` : t>total ? `Finished · ${total} ${p.weekly?"weeks":"days"}` : `${p.weekly?"Week":"Day"} ${t} of ${total}`;
@@ -725,6 +732,9 @@ document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey) && e.key.toLo
 function setTopH(){ document.documentElement.style.setProperty("--toph", document.querySelector(".top").offsetHeight+"px") }
 setTopH(); window.addEventListener("resize", setTopH);
 if(window.ResizeObserver) new ResizeObserver(setTopH).observe(document.querySelector(".top"));
+$("planpick").onclick=()=>{ const open=$("planlist").hidden; $("planlist").hidden=!open; $("planpick").setAttribute("aria-expanded",open) };
+$("planlist").onclick=e=>{ const b=e.target.closest("[data-pickplan]"); if(!b) return; $("planlist").hidden=true; $("planpick").setAttribute("aria-expanded",false);
+  $("plan").value=b.dataset.pickplan; $("plan").onchange({target:$("plan")}) };
 $("plan").onchange=e=>{ if(e.target.value==="__build"){ e.target.value=S.plan; S.tool="planner"; renderDock(); renderPanel(); return }
   S.adhoc=null; choosePlan(e.target.value); rememberOpen(); render()};
 /* plans James builds live in the store beside the plan files, in the same shape */

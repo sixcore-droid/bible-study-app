@@ -1,1 +1,1 @@
-{"version":"v133","date":"2026-10-06 21:29","note":"Media panel: fix the redraw crash when the podcast list arrives first (reading 'Psalm' of undefined)"}
+{"version":"v134","date":"2026-10-06 21:35","note":"Reading plan: plans picked from a button list (current plan marked) instead of a dropdown"}
