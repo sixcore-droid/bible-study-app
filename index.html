@@ -7,7 +7,7 @@
 
 <header class="top">
   <button class="railbtn" id="railbtn" aria-controls="rail" aria-expanded="false">Plan</button>
-  <div class="brand">Study Workstation<small>jayms.com</small></div>
+  <div class="brand">Study Workstation<small><a id="brandlink" href="https://jayms.com/bible-study-app/" target="_blank" rel="noopener" title="Open the online version on jayms.com">jayms.com</a></small></div>
   <form class="goto" id="goform" role="search" autocomplete="off">
     <input id="goref" list="gobooks" placeholder="Go to a passage: Mark 13:14" aria-label="Go to a passage" spellcheck="false">
     <button type="submit">Go</button>
@@ -180,6 +180,7 @@ function toolCount(id){
 }
 /* the public build on jayms.com (scripts/build-public.py sets window.JAYMS_PUBLIC): readers only, so no Notes button */
 const PUBLIC = !!window.JAYMS_PUBLIC;
+if(PUBLIC){ const bl=document.getElementById("brandlink"); bl.href="https://jayms.com/"; bl.removeAttribute("target"); bl.title="jayms.com" }   // already the online version: go to the site
 const TOOLS = DOCK.filter(id=>!(PUBLIC && (id==="notes"||id==="x"))).map(id=>id==="|"?{sep:true}:toolMeta(id));
 
 /* ===== STATE ===== */

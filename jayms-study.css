@@ -177,6 +177,8 @@ a{color:var(--gold)}
   padding:12px 20px;background:var(--paper);border-bottom:1px solid var(--line)}
 .brand{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:.02em;color:var(--ink-bright)}
 .brand small{font-family:var(--label);font-size:13px;font-weight:400;letter-spacing:.12em;color:var(--gold);margin-left:10px;text-transform:uppercase}
+.brand small a{color:inherit;text-decoration:none}
+.brand small a:hover{text-decoration:underline;text-underline-offset:3px}
 .flag{font-family:var(--label);font-size:13px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--rust);color:var(--rust);padding:2px 8px;border-radius:3px}
 .top .sp{flex:1}
 .today{font-family:var(--label);font-size:13px;color:var(--ink)}
