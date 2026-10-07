@@ -1,13 +1,13 @@
 /* Bible Study App service worker: what makes the app installable and lets it open with no connection.
-   Served from https://jayms.com/bible-study-app/sw.js (snippet 254 relays it from GitHub Pages), so it covers the app's own
+   Served from https://jayms.com/bible-study-app/sw (no .js: the host answers .js addresses itself; snippet 254 relays it from GitHub Pages), so it covers the app's own
    address, /bible-study-app/. The app's files themselves come from GitHub Pages (the page's <base>); this worker keeps copies.
      - The page and the app's code, styles, help and plans: saved when the app is installed, so it always opens.
      - Bible text, study notes and the other data: saved the first time each piece is read, then shown from the copy at once
        while a fresh copy is fetched behind it (so a new build arrives on the next visit).
      - jayms.com's live data (posts, glossary): fresh when online, the last copy when not.
      - Everything else (YouTube, BibleProject, podcasts, Claude): straight to the network, untouched.
-   scripts/build-public.py fills in v144 on every build; a new version replaces the old app copy. */
-const VERSION = "v144";
+   scripts/build-public.py fills in v145 on every build; a new version replaces the old app copy. */
+const VERSION = "v145";
 const GH = "https://sixcore-droid.github.io/bible-study-app/";
 const PAGE = "/bible-study-app/";
 const SHELL = "bsa-shell-" + VERSION, DATA = "bsa-data", LIVE = "bsa-live";

@@ -1,1 +1,1 @@
-{"version":"v144","date":"2026-10-06 22:26","note":"Installable app (PWA): icon, manifest, service worker (opens offline; Bible text saved as it's read), head tags; snippet relay for sw.js and the manifest"}
+{"version":"v145","date":"2026-10-06 22:29","note":"PWA: worker served at /bible-study-app/sw (the host answers .js addresses itself)"}
