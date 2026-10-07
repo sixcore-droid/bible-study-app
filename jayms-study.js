@@ -417,7 +417,11 @@
         return { terms: terms, keys: keys, live: true };
       }).catch(function () { return null; }));
     },
-    dss: function () { return getJSON("dss.json"); },
+    dss: function () { return getJSON("dss.json").then(function (d) { DSSD = d; return d; }); },
+    /* what the dock buttons count from, loaded once after the first paint (small files; the panels load their own full data) */
+    counts: function () { return Promise.all([data.names(), data.maps().catch(function () {}), data.dss().catch(function () {}),
+      getJSON("art-refs.json").then(function (d) { ARTREFS = d || []; }).catch(function () { ARTREFS = []; }),
+      getJSON("relics.json").then(function (d) { RELREFS = ((d && d.relics) || []).map(function (x) { return x.refs; }); }).catch(function () { RELREFS = []; })]); },
     bibleproject: function () { return getJSON("bibleproject.json"); },
     lsbAudio: function () { return getJSON("lsb-audio.json"); },
     /* Michael S. Heiser Foundation articles by the chapters they cite (scripts/fetch-heiser.py) */
@@ -761,7 +765,18 @@
 
   // ------------------------------------------------------------------ Fact Book
   /* STEPBible's records for the people and places named in the passage, in the order they first appear */
-  var NAMESD = null;   // names.json once loaded, so the Fact Book button can count people and places without waiting
+  var NAMESD = null, DSSD = null, ARTREFS = null, RELREFS = null;   // loaded by data.counts(), so the dock buttons can count without opening their panels
+  function refsHit(refs, ref) { var segs = data.segs(ref); return refs.some(function (r) { return R.parse(r).some(function (a) { return segs.some(function (q) { return R.overlap(a, q); }); }); }); }
+  /* the manuscripts holding any verse of the passage, most verses first (the Scrolls panel and its button) */
+  function dssList(D, ref) {
+    var by = {}, order = [];
+    data.segs(ref).forEach(function (q) {
+      for (var c = q.c1; c <= (q.c2 || q.c1); c++) { var ch = D.v[q.book + "|" + c] || {};
+        Object.keys(ch).forEach(function (v) { var n = +v; if ((c === q.c1 && n < q.v1) || (c === (q.c2 || q.c1) && n > q.v2)) return;
+          ch[v].forEach(function (ms) { if (!by[ms]) { by[ms] = { ms: ms, vs: [] }; order.push(ms); } by[ms].vs.push([q.book, c, n]); }); }); }
+    });
+    return order.map(function (k) { return by[k]; }).sort(function (a, b) { return b.vs.length - a.vs.length; });
+  }
   function namesIn(nm, ref) {
     if (!nm) return [];
     var out = [], seen = {};
@@ -899,7 +914,9 @@
       Panel.prototype.click.call(this, e);
     },
     destroy: function () { if (this._map) { try { this._map.remove(); } catch (e) {} this._map = null; } Panel.prototype.destroy.call(this); }
-  }, {}, function (d) { return null; });
+  }, {}, function (d) {   // places named plus Bible maps for the verses
+    if (!d || !NAMESD || !MAPIDX) return null;
+    return namesIn(NAMESD, d.ref).filter(function (p) { return p.t === "Place"; }).length + mapsFor(d.ref).length; });
 
   // ------------------------------------------------------------------ Family
   /* A family tree for anyone named in the passage (STEPBible's TIPNR links): grandparents, parents, the person with their
@@ -935,7 +952,9 @@
       if (c) { e.stopPropagation(); this.st.focus = c.getAttribute("data-jst-fam"); this.paint(); this.el.parentNode && (this.el.parentNode.scrollTop = 0); return; }
       Panel.prototype.click.call(this, e);
     }
-  }, {}, function (d) { return null; });
+  }, {}, function (d) {   // the people named, each with a family tree to show
+    if (!d || !NAMESD) return null;
+    return namesIn(NAMESD, d.ref).filter(function (p) { return p.t === "Male" || p.t === "Female"; }).length; });
 
   // ------------------------------------------------------------------ Scrolls
   /* The Dead Sea Scrolls that contain the passage (dss.json, ETCBC/Abegg, CC BY-NC 4.0), with the Leon Levy library's own
@@ -943,14 +962,9 @@
   define("Scrolls", { id: "scrolls", label: "Scrolls", name: "Dead Sea Scrolls of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M6 4h11a2 2 0 0 1 0 4H6M6 4a2 2 0 0 0 0 4v10a2 2 0 0 0 2 2h11a2 2 0 0 1 0-4H8"/></svg>' }, {
     prepare: function () { var self = this; return Promise.all([data.dss(), getJSON("dss-images.json").catch(function () { return {}; })]).then(function (r) { self.D = r[0]; self.im = r[1] || {}; }); },
     view: function () {
-      var D = this.D, im = this.im, by = {}, order = [];
+      var D = this.D, im = this.im;
       if (!D) return { kick: "Scrolls", title: "Dead Sea Scrolls", body: none("The scroll data didn't load.") };
-      data.segs(this.o.ref).forEach(function (q) {
-        for (var c = q.c1; c <= (q.c2 || q.c1); c++) { var ch = D.v[q.book + "|" + c] || {};
-          Object.keys(ch).forEach(function (v) { var n = +v; if ((c === q.c1 && n < q.v1) || (c === (q.c2 || q.c1) && n > q.v2)) return;
-            ch[v].forEach(function (ms) { if (!by[ms]) { by[ms] = { ms: ms, vs: [] }; order.push(ms); } by[ms].vs.push([q.book, c, n]); }); }); }
-      });
-      var list = order.map(function (k) { return by[k]; }).sort(function (a, b) { return b.vs.length - a.vs.length; });
+      var list = dssList(D, this.o.ref);
       /* "1:1-8, 13-15" */
       var spans = function (vs) { var out = [], lastC = null, run = null;
         vs.forEach(function (x) { if (run && x[1] === run.c && x[2] === run.b + 1) { run.b = x[2]; return; } run = { c: x[1], a: x[2], b: x[2] }; out.push(run); });
@@ -970,7 +984,7 @@
       if (im) { e.stopPropagation(); mapViewer({ id: "dss-" + im.getAttribute("data-jst-scroll"), t: im.getAttribute("data-t"), img: im.getAttribute("data-jst-scroll") + "=s2000" }); return; }
       Panel.prototype.click.call(this, e);
     }
-  }, {}, function (d) { return null; });
+  }, {}, function (d) { return d && DSSD ? dssList(DSSD, d.ref).length : null; });   // manuscripts holding these verses
 
   // ------------------------------------------------------------------ Art
   /* Paintings of the scene in front of you, matched by its verses ahead of time (art.json, scripts/build-art.py): artworks museums
@@ -1040,7 +1054,9 @@
       if (im) { e.stopPropagation(); var full = im.getAttribute("data-full") || im.src; mapViewer({ id: "art-" + full, t: im.getAttribute("data-t"), img: full }); return; }
       Panel.prototype.click.call(this, e);
     }
-  }, {}, function (d) { return null; });
+  }, {}, function (d) {   // scenes painted plus objects and relics tied to the verses
+    if (!d || !ARTREFS || !RELREFS) return null;
+    return ARTREFS.filter(function (r) { return refsHit(r, d.ref); }).length + RELREFS.filter(function (r) { return refsHit(r, d.ref); }).length; });
 
   // ------------------------------------------------------------------ Posts
   define("Posts", { id: "posts", label: "Posts", name: "My posts on jayms.com", icon: ICON.posts }, {

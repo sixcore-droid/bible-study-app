@@ -472,7 +472,7 @@ var USER_MOVED = false;   // once you scroll or type yourself, the restore never
 }
 
 /* ===== DOCK + PANEL ===== */
-setTimeout(()=>JST.data.names().then(()=>renderDock()),1500);   // after the first paint, so the Fact Book button can count people and places
+setTimeout(()=>JST.data.counts().then(()=>renderDock()),1500);   // after the first paint: what the dock buttons count from (people, places, maps, scrolls, art)
 function renderDock(){
   const list = TOOLS.filter(t=>!(t.owner && S.view==="public"));
   $("dock").innerHTML = list.map(t=>{ if(t.sep) return "<hr>"; const n=toolCount(t.id);
