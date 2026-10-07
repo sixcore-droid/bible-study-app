@@ -38,6 +38,11 @@
    "name": "My OT Reading Plan"
   },
   {
+   "id": "psalms-proverbs",
+   "file": "plans/psalms-proverbs.json",
+   "name": "Psalms & Proverbs"
+  },
+  {
    "id": "gospels-together",
    "file": "plans/gospels-together.json",
    "name": "The Gospels Together"

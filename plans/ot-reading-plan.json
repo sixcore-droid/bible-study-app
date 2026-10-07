@@ -1,7 +1,7 @@
 {
  "id": "ot-reading-plan",
  "name": "My OT Reading Plan",
- "description": "The Old Testament a chapter a day in James's order (the prophets placed in the history; genealogies and lists greyed), with a psalm and a Proverbs portion each day. From his OT Reading Plan note.",
+ "description": "The Old Testament a chapter a day in James's order (the prophets placed in the history; genealogies and lists greyed). From his OT Reading Plan note. The psalm and Proverbs portion are their own plan, Psalms & Proverbs.",
  "start": "2026-03-02",
  "days": [
   {
@@ -12,16 +12,6 @@
     {
      "ref": "Genesis 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 101",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -35,16 +25,6 @@
      "ref": "Genesis 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 102",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -56,16 +36,6 @@
     {
      "ref": "Genesis 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 103",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -79,16 +49,6 @@
      "ref": "Genesis 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 104",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -100,16 +60,6 @@
     {
      "ref": "Genesis 5",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 105",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -124,16 +74,6 @@
      "ref": "Genesis 6",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 106",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -145,16 +85,6 @@
     {
      "ref": "Genesis 7",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 107",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -168,16 +98,6 @@
      "ref": "Genesis 8",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 108",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -190,16 +110,6 @@
      "ref": "Genesis 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 109",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -211,16 +121,6 @@
     {
      "ref": "Genesis 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 110",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -235,16 +135,6 @@
      "ref": "Genesis 11",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 111",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -256,16 +146,6 @@
     {
      "ref": "Genesis 12",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 112",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -279,16 +159,6 @@
      "ref": "Genesis 13",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 113",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -300,16 +170,6 @@
     {
      "ref": "Genesis 14",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 114",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -323,16 +183,6 @@
      "ref": "Genesis 15",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 115",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -344,16 +194,6 @@
     {
      "ref": "Genesis 16",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 116",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -367,16 +207,6 @@
      "ref": "Genesis 17",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 117",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -388,16 +218,6 @@
     {
      "ref": "Genesis 18",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 118",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -411,16 +231,6 @@
      "ref": "Genesis 19",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 119",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -432,16 +242,6 @@
     {
      "ref": "Genesis 20",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 120",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -455,16 +255,6 @@
      "ref": "Genesis 21",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 121",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -476,16 +266,6 @@
     {
      "ref": "Genesis 22",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 122",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -499,16 +279,6 @@
      "ref": "Genesis 23",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 123",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -520,16 +290,6 @@
     {
      "ref": "Genesis 24",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 124",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -543,16 +303,6 @@
      "ref": "Genesis 25",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 125",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -564,16 +314,6 @@
     {
      "ref": "Genesis 26",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 126",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -587,16 +327,6 @@
      "ref": "Genesis 27",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 127",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:18-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -608,16 +338,6 @@
     {
      "ref": "Genesis 28",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 128",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:1-9",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -631,16 +351,6 @@
      "ref": "Genesis 29",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 129",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:10-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -652,16 +362,6 @@
     {
      "ref": "Genesis 30",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 130",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:1-19",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -675,16 +375,6 @@
      "ref": "Genesis 31",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 131",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:20-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -696,16 +386,6 @@
     {
      "ref": "Genesis 32",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 132",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 2:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -719,16 +399,6 @@
      "ref": "Genesis 33",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 133",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -740,16 +410,6 @@
     {
      "ref": "Genesis 34",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 134",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -763,16 +423,6 @@
      "ref": "Genesis 35",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 135",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 4:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -784,16 +434,6 @@
     {
      "ref": "Genesis 36",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 136",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 5:1-23",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -808,16 +448,6 @@
      "ref": "Genesis 37",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 137",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:1-19",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -829,16 +459,6 @@
     {
      "ref": "Genesis 38",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 138",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:20-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -852,16 +472,6 @@
      "ref": "Genesis 39",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 139",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 7:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -873,16 +483,6 @@
     {
      "ref": "Genesis 40",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 140",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:1-21",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -896,16 +496,6 @@
      "ref": "Genesis 41",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 141",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:22-36",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -917,16 +507,6 @@
     {
      "ref": "Genesis 42",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 142",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 9:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -940,16 +520,6 @@
      "ref": "Genesis 43",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 143",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -961,16 +531,6 @@
     {
      "ref": "Genesis 44",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 144",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:18-32",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -984,16 +544,6 @@
      "ref": "Genesis 45",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 145",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1005,16 +555,6 @@
     {
      "ref": "Genesis 46",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 146",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:16-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1028,16 +568,6 @@
      "ref": "Genesis 47",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 147",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1049,16 +579,6 @@
     {
      "ref": "Genesis 48",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 148",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1072,16 +592,6 @@
      "ref": "Genesis 49",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 149",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:1-13",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1093,16 +603,6 @@
     {
      "ref": "Genesis 50",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 150",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:14-25",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1116,16 +616,6 @@
      "ref": "Exodus 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 1",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1137,16 +627,6 @@
     {
      "ref": "Exodus 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 2",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1160,16 +640,6 @@
      "ref": "Exodus 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 3",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1181,16 +651,6 @@
     {
      "ref": "Exodus 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 4",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:18-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1204,16 +664,6 @@
      "ref": "Exodus 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 5",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1225,16 +675,6 @@
     {
      "ref": "Exodus 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 6",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:17-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1248,16 +688,6 @@
      "ref": "Exodus 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 7",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1269,16 +699,6 @@
     {
      "ref": "Exodus 8",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 8",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1292,16 +712,6 @@
      "ref": "Exodus 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 9",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1313,16 +723,6 @@
     {
      "ref": "Exodus 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 10",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1336,16 +736,6 @@
      "ref": "Exodus 11",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 11",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1357,16 +747,6 @@
     {
      "ref": "Exodus 12",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 12",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1380,16 +760,6 @@
      "ref": "Exodus 13",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 13",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1401,16 +771,6 @@
     {
      "ref": "Exodus 14",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 14",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1424,16 +784,6 @@
      "ref": "Exodus 15",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 15",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1445,16 +795,6 @@
     {
      "ref": "Exodus 16",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 16",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1468,16 +808,6 @@
      "ref": "Exodus 17",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 17",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1489,16 +819,6 @@
     {
      "ref": "Exodus 18",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 18",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1512,16 +832,6 @@
      "ref": "Exodus 19",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 19",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1534,16 +844,6 @@
      "ref": "Exodus 20",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 20",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1555,16 +855,6 @@
     {
      "ref": "Exodus 21",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 21",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -1579,16 +869,6 @@
      "ref": "Exodus 22",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 22",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -1601,16 +881,6 @@
     {
      "ref": "Exodus 23",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 23",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -1625,16 +895,6 @@
      "ref": "Exodus 24",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 24",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1646,16 +906,6 @@
     {
      "ref": "Exodus 25",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 25",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -1670,16 +920,6 @@
      "ref": "Exodus 26",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 26",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -1692,16 +932,6 @@
     {
      "ref": "Exodus 27",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 27",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -1716,16 +946,6 @@
      "ref": "Exodus 28",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 28",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -1738,16 +958,6 @@
     {
      "ref": "Exodus 29",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 29",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -1762,16 +972,6 @@
      "ref": "Exodus 30",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 30",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -1784,16 +984,6 @@
     {
      "ref": "Exodus 31",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 31",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -1808,16 +998,6 @@
      "ref": "Exodus 32",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 32",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1829,16 +1009,6 @@
     {
      "ref": "Exodus 33",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 33",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -1852,16 +1022,6 @@
      "ref": "Exodus 34",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 34",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:18-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -1873,16 +1033,6 @@
     {
      "ref": "Exodus 35",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 35",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:1-9",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -1897,16 +1047,6 @@
      "ref": "Exodus 36",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 36",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:10-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -1919,16 +1059,6 @@
     {
      "ref": "Exodus 37",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 37",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:1-19",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -1943,16 +1073,6 @@
      "ref": "Exodus 38",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 38",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:20-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -1965,16 +1085,6 @@
     {
      "ref": "Exodus 39",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 39",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 2:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -1989,16 +1099,6 @@
      "ref": "Exodus 40",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 40",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -2011,16 +1111,6 @@
     {
      "ref": "Numbers 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 41",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2035,16 +1125,6 @@
      "ref": "Numbers 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 42",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 4:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -2057,16 +1137,6 @@
     {
      "ref": "Numbers 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 43",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 5:1-23",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2081,16 +1151,6 @@
      "ref": "Numbers 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 44",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:1-19",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -2103,16 +1163,6 @@
     {
      "ref": "Numbers 5",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 45",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:20-35",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2127,16 +1177,6 @@
      "ref": "Numbers 6",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 46",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 7:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -2149,16 +1189,6 @@
     {
      "ref": "Numbers 7",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 47",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:1-21",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2173,16 +1203,6 @@
      "ref": "Numbers 8",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 48",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:22-36",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -2195,16 +1215,6 @@
     {
      "ref": "Numbers 9",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 49",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 9:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2219,16 +1229,6 @@
      "ref": "Numbers 10",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 50",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2240,16 +1240,6 @@
     {
      "ref": "Numbers 11",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 51",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:18-32",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -2263,16 +1253,6 @@
      "ref": "Numbers 12",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 52",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2284,16 +1264,6 @@
     {
      "ref": "Numbers 13",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 53",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:16-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -2307,16 +1277,6 @@
      "ref": "Numbers 14",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 54",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2328,16 +1288,6 @@
     {
      "ref": "Numbers 15",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 55",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2352,16 +1302,6 @@
      "ref": "Numbers 16",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 56",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:1-13",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2374,16 +1314,6 @@
      "ref": "Numbers 17",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 57",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:14-25",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2395,16 +1325,6 @@
     {
      "ref": "Numbers 18",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 58",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2419,16 +1339,6 @@
      "ref": "Numbers 19",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 59",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -2442,16 +1352,6 @@
      "ref": "Numbers 20",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 60",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2463,16 +1363,6 @@
     {
      "ref": "Numbers 21",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 61",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:18-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -2486,16 +1376,6 @@
      "ref": "Numbers 22",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 62",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2507,16 +1387,6 @@
     {
      "ref": "Numbers 23",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 63",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:17-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -2530,16 +1400,6 @@
      "ref": "Numbers 24",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 64",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2552,16 +1412,6 @@
      "ref": "Numbers 25",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 65",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2573,16 +1423,6 @@
     {
      "ref": "Numbers 26",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 66",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2597,16 +1437,6 @@
      "ref": "Numbers 27",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 67",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2618,16 +1448,6 @@
     {
      "ref": "Numbers 28",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 68",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2642,16 +1462,6 @@
      "ref": "Numbers 29",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 69",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -2664,16 +1474,6 @@
     {
      "ref": "Numbers 30",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 70",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2688,16 +1488,6 @@
      "ref": "Numbers 31",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 71",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -2710,16 +1500,6 @@
     {
      "ref": "Numbers 32",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 72",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2734,16 +1514,6 @@
      "ref": "Numbers 33",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 73",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -2756,16 +1526,6 @@
     {
      "ref": "Numbers 34",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 74",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2780,16 +1540,6 @@
      "ref": "Numbers 35",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 75",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -2802,16 +1552,6 @@
     {
      "ref": "Numbers 36",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 76",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -2826,16 +1566,6 @@
      "ref": "Deuteronomy 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 77",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2847,16 +1577,6 @@
     {
      "ref": "Deuteronomy 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 78",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -2870,16 +1590,6 @@
      "ref": "Deuteronomy 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 79",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2891,16 +1601,6 @@
     {
      "ref": "Deuteronomy 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 80",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -2914,16 +1614,6 @@
      "ref": "Deuteronomy 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 81",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2935,16 +1625,6 @@
     {
      "ref": "Deuteronomy 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 82",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -2958,16 +1638,6 @@
      "ref": "Deuteronomy 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 83",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -2980,16 +1650,6 @@
      "ref": "Deuteronomy 8",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 84",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3001,16 +1661,6 @@
     {
      "ref": "Deuteronomy 9",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 85",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3025,16 +1675,6 @@
      "ref": "Deuteronomy 10",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 86",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3047,16 +1687,6 @@
     {
      "ref": "Deuteronomy 11",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 87",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3071,16 +1701,6 @@
      "ref": "Deuteronomy 12",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 88",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3093,16 +1713,6 @@
     {
      "ref": "Deuteronomy 13",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 89",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:15-27",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3117,16 +1727,6 @@
      "ref": "Deuteronomy 14",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 90",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3139,16 +1739,6 @@
     {
      "ref": "Deuteronomy 15",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 91",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:18-33",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3163,16 +1753,6 @@
      "ref": "Deuteronomy 16",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 92",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:1-9",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3185,16 +1765,6 @@
     {
      "ref": "Deuteronomy 17",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 93",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:10-31",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3209,16 +1779,6 @@
      "ref": "Deuteronomy 18",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 94",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:1-19",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3231,16 +1791,6 @@
     {
      "ref": "Deuteronomy 19",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 95",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:20-33",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3255,16 +1805,6 @@
      "ref": "Deuteronomy 20",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 96",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 2:1-22",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3277,16 +1817,6 @@
     {
      "ref": "Deuteronomy 21",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 97",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3301,16 +1831,6 @@
      "ref": "Deuteronomy 22",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 98",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3323,16 +1843,6 @@
     {
      "ref": "Deuteronomy 23",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 99",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 4:1-27",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3347,16 +1857,6 @@
      "ref": "Deuteronomy 24",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 100",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 5:1-23",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3369,16 +1869,6 @@
     {
      "ref": "Deuteronomy 25",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 101",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:1-19",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3393,16 +1883,6 @@
      "ref": "Deuteronomy 26",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 102",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:20-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3416,16 +1896,6 @@
      "ref": "Deuteronomy 27",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 103",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 7:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3437,16 +1907,6 @@
     {
      "ref": "Deuteronomy 28",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 104",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:1-21",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -3460,16 +1920,6 @@
      "ref": "Deuteronomy 29",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 105",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:22-36",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3481,16 +1931,6 @@
     {
      "ref": "Deuteronomy 30",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 106",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 9:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -3504,16 +1944,6 @@
      "ref": "Deuteronomy 31",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 107",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3525,16 +1955,6 @@
     {
      "ref": "Deuteronomy 32",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 108",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:18-32",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -3548,16 +1968,6 @@
      "ref": "Deuteronomy 33",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 109",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3569,16 +1979,6 @@
     {
      "ref": "Deuteronomy 34",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 110",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:16-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -3592,16 +1992,6 @@
      "ref": "Joshua 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 111",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3613,16 +2003,6 @@
     {
      "ref": "Joshua 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 112",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -3636,16 +2016,6 @@
      "ref": "Joshua 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 113",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:1-13",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3657,16 +2027,6 @@
     {
      "ref": "Joshua 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 114",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:14-25",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -3680,16 +2040,6 @@
      "ref": "Joshua 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 115",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3701,16 +2051,6 @@
     {
      "ref": "Joshua 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 116",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -3724,16 +2064,6 @@
      "ref": "Joshua 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 117",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3745,16 +2075,6 @@
     {
      "ref": "Joshua 8",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 118",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:18-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -3768,16 +2088,6 @@
      "ref": "Joshua 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 119",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3789,16 +2099,6 @@
     {
      "ref": "Joshua 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 120",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:17-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -3812,16 +2112,6 @@
      "ref": "Joshua 11",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 121",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -3833,16 +2123,6 @@
     {
      "ref": "Joshua 12",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 122",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3857,16 +2137,6 @@
      "ref": "Joshua 13",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 123",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3879,16 +2149,6 @@
     {
      "ref": "Joshua 14",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 124",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3903,16 +2163,6 @@
      "ref": "Joshua 15",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 125",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3925,16 +2175,6 @@
     {
      "ref": "Joshua 16",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 126",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3949,16 +2189,6 @@
      "ref": "Joshua 17",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 127",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -3971,16 +2201,6 @@
     {
      "ref": "Joshua 18",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 128",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -3995,16 +2215,6 @@
      "ref": "Joshua 19",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 129",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -4017,16 +2227,6 @@
     {
      "ref": "Joshua 20",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 130",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -4041,16 +2241,6 @@
      "ref": "Joshua 21",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 131",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -4063,16 +2253,6 @@
     {
      "ref": "Joshua 22",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 132",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -4087,16 +2267,6 @@
      "ref": "Joshua 23",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 133",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4108,16 +2278,6 @@
     {
      "ref": "Joshua 24",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 134",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4131,16 +2291,6 @@
      "ref": "Judges 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 135",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4152,16 +2302,6 @@
     {
      "ref": "Judges 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 136",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4175,16 +2315,6 @@
      "ref": "Judges 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 137",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4196,16 +2326,6 @@
     {
      "ref": "Judges 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 138",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4219,16 +2339,6 @@
      "ref": "Judges 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 139",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4240,16 +2350,6 @@
     {
      "ref": "Judges 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 140",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4263,16 +2363,6 @@
      "ref": "Judges 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 141",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4284,16 +2374,6 @@
     {
      "ref": "Judges 8",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 142",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4307,16 +2387,6 @@
      "ref": "Judges 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 143",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4328,16 +2398,6 @@
     {
      "ref": "Judges 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 144",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4351,16 +2411,6 @@
      "ref": "Judges 11",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 145",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4372,16 +2422,6 @@
     {
      "ref": "Judges 12",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 146",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:15-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4395,16 +2435,6 @@
      "ref": "Judges 13",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 147",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4416,16 +2446,6 @@
     {
      "ref": "Judges 14",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 148",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:18-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4439,16 +2459,6 @@
      "ref": "Judges 15",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 149",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:1-9",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4460,16 +2470,6 @@
     {
      "ref": "Judges 16",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 150",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:10-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4483,16 +2483,6 @@
      "ref": "Judges 17",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 1",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:1-19",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4504,16 +2494,6 @@
     {
      "ref": "Judges 18",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 2",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:20-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4527,16 +2507,6 @@
      "ref": "Judges 19",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 3",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 2:1-22",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4548,16 +2518,6 @@
     {
      "ref": "Judges 20",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 4",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4571,16 +2531,6 @@
      "ref": "Judges 21",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 5",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4592,16 +2542,6 @@
     {
      "ref": "Ruth 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 6",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 4:1-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4615,16 +2555,6 @@
      "ref": "Ruth 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 7",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 5:1-23",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4636,16 +2566,6 @@
     {
      "ref": "Ruth 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 8",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:1-19",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4659,16 +2579,6 @@
      "ref": "Ruth 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 9",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:20-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4680,16 +2590,6 @@
     {
      "ref": "1 Samuel 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 10",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 7:1-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4703,16 +2603,6 @@
      "ref": "1 Samuel 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 11",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:1-21",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4724,16 +2614,6 @@
     {
      "ref": "1 Samuel 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 12",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:22-36",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4747,16 +2627,6 @@
      "ref": "1 Samuel 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 13",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 9:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4768,16 +2638,6 @@
     {
      "ref": "1 Samuel 5",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 14",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4791,16 +2651,6 @@
      "ref": "1 Samuel 6",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 15",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:18-32",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4812,16 +2662,6 @@
     {
      "ref": "1 Samuel 7",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 16",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:1-15",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4835,16 +2675,6 @@
      "ref": "1 Samuel 8",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 17",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:16-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4856,16 +2686,6 @@
     {
      "ref": "1 Samuel 9",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 18",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4879,16 +2699,6 @@
      "ref": "1 Samuel 10",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 19",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4900,16 +2710,6 @@
     {
      "ref": "1 Samuel 11",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 20",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:1-13",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4923,16 +2723,6 @@
      "ref": "1 Samuel 12",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 21",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:14-25",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4944,16 +2734,6 @@
     {
      "ref": "1 Samuel 13",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 22",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -4967,16 +2747,6 @@
      "ref": "1 Samuel 14",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 23",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -4988,16 +2758,6 @@
     {
      "ref": "1 Samuel 15",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 24",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5011,16 +2771,6 @@
      "ref": "1 Samuel 16",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 25",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:18-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5032,16 +2782,6 @@
     {
      "ref": "1 Samuel 17",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 26",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5055,16 +2795,6 @@
      "ref": "1 Samuel 18",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 27",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:17-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5076,16 +2806,6 @@
     {
      "ref": "1 Samuel 19",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 28",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5099,16 +2819,6 @@
      "ref": "1 Samuel 20",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 29",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5120,16 +2830,6 @@
     {
      "ref": "1 Samuel 21",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 30",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5143,16 +2843,6 @@
      "ref": "1 Samuel 22",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 31",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5164,16 +2854,6 @@
     {
      "ref": "1 Samuel 23",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 32",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5187,16 +2867,6 @@
      "ref": "1 Samuel 24",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 33",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5208,16 +2878,6 @@
     {
      "ref": "1 Samuel 25",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 34",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5231,16 +2891,6 @@
      "ref": "1 Samuel 26",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 35",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5252,16 +2902,6 @@
     {
      "ref": "1 Samuel 27",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 36",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5275,16 +2915,6 @@
      "ref": "1 Samuel 28",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 37",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5296,16 +2926,6 @@
     {
      "ref": "1 Samuel 29",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 38",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5319,16 +2939,6 @@
      "ref": "1 Samuel 30",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 39",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5340,16 +2950,6 @@
     {
      "ref": "1 Samuel 31",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 40",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5363,16 +2963,6 @@
      "ref": "2 Samuel 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 41",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5384,16 +2974,6 @@
     {
      "ref": "2 Samuel 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 42",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5407,16 +2987,6 @@
      "ref": "2 Samuel 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 43",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5428,16 +2998,6 @@
     {
      "ref": "2 Samuel 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 44",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5451,16 +3011,6 @@
      "ref": "2 Samuel 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 45",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5472,16 +3022,6 @@
     {
      "ref": "2 Samuel 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 46",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5495,16 +3035,6 @@
      "ref": "2 Samuel 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 47",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5516,16 +3046,6 @@
     {
      "ref": "2 Samuel 8",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 48",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5539,16 +3059,6 @@
      "ref": "2 Samuel 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 49",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5560,16 +3070,6 @@
     {
      "ref": "2 Samuel 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 50",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5583,16 +3083,6 @@
      "ref": "2 Samuel 11",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 51",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5604,16 +3094,6 @@
     {
      "ref": "2 Samuel 12",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 52",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5627,16 +3107,6 @@
      "ref": "2 Samuel 13",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 53",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5648,16 +3118,6 @@
     {
      "ref": "2 Samuel 14",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 54",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5671,16 +3131,6 @@
      "ref": "2 Samuel 15",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 55",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:18-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5692,16 +3142,6 @@
     {
      "ref": "2 Samuel 16",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 56",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:1-9",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5715,16 +3155,6 @@
      "ref": "2 Samuel 17",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 57",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:10-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5736,16 +3166,6 @@
     {
      "ref": "2 Samuel 18",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 58",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:1-19",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5759,16 +3179,6 @@
      "ref": "2 Samuel 19",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 59",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:20-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5780,16 +3190,6 @@
     {
      "ref": "2 Samuel 20",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 60",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 2:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5803,16 +3203,6 @@
      "ref": "2 Samuel 21",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 61",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5824,16 +3214,6 @@
     {
      "ref": "2 Samuel 22",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 62",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5847,16 +3227,6 @@
      "ref": "2 Samuel 23",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 63",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 4:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5868,16 +3238,6 @@
     {
      "ref": "2 Samuel 24",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 64",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 5:1-23",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5891,16 +3251,6 @@
      "ref": "1 Kings 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 65",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:1-19",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5912,16 +3262,6 @@
     {
      "ref": "1 Kings 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 66",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:20-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5935,16 +3275,6 @@
      "ref": "1 Kings 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 67",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 7:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -5956,16 +3286,6 @@
     {
      "ref": "1 Kings 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 68",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:1-21",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -5979,16 +3299,6 @@
      "ref": "1 Kings 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 69",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:22-36",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6000,16 +3310,6 @@
     {
      "ref": "1 Kings 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 70",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 9:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -6024,16 +3324,6 @@
      "ref": "1 Kings 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 71",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -6047,16 +3337,6 @@
      "ref": "1 Kings 8",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 72",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:18-32",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6068,16 +3348,6 @@
     {
      "ref": "1 Kings 9",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 73",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:1-15",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6091,16 +3361,6 @@
      "ref": "1 Kings 10",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 74",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:16-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6112,16 +3372,6 @@
     {
      "ref": "1 Kings 11",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 75",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6135,16 +3385,6 @@
      "ref": "1 Kings 12",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 76",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6156,16 +3396,6 @@
     {
      "ref": "1 Kings 13",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 77",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:1-13",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6179,16 +3409,6 @@
      "ref": "1 Kings 14",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 78",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:14-25",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6200,16 +3420,6 @@
     {
      "ref": "1 Kings 15",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 79",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6223,16 +3433,6 @@
      "ref": "1 Kings 16",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 80",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6244,16 +3444,6 @@
     {
      "ref": "1 Kings 17",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 81",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6267,16 +3457,6 @@
      "ref": "1 Kings 18",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 82",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:18-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6288,16 +3468,6 @@
     {
      "ref": "1 Kings 19",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 83",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6311,16 +3481,6 @@
      "ref": "1 Kings 20",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 84",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:17-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6332,16 +3492,6 @@
     {
      "ref": "1 Kings 21",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 85",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6355,16 +3505,6 @@
      "ref": "1 Kings 22",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 86",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6376,16 +3516,6 @@
     {
      "ref": "Joel 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 87",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6399,16 +3529,6 @@
      "ref": "Joel 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 88",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6420,16 +3540,6 @@
     {
      "ref": "Joel 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 89",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6443,16 +3553,6 @@
      "ref": "Obadiah 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 90",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6464,16 +3564,6 @@
     {
      "ref": "2 Kings 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 91",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6487,16 +3577,6 @@
      "ref": "2 Kings 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 92",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6508,16 +3588,6 @@
     {
      "ref": "2 Kings 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 93",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6531,16 +3601,6 @@
      "ref": "2 Kings 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 94",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6552,16 +3612,6 @@
     {
      "ref": "2 Kings 5",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 95",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6575,16 +3625,6 @@
      "ref": "2 Kings 6",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 96",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6596,16 +3636,6 @@
     {
      "ref": "2 Kings 7",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 97",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6619,16 +3649,6 @@
      "ref": "2 Kings 8",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 98",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6640,16 +3660,6 @@
     {
      "ref": "2 Kings 9",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 99",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6663,16 +3673,6 @@
      "ref": "2 Kings 10",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 100",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6684,16 +3684,6 @@
     {
      "ref": "2 Kings 11",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 101",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6707,16 +3697,6 @@
      "ref": "2 Kings 12",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 102",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6728,16 +3708,6 @@
     {
      "ref": "2 Kings 13",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 103",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6751,16 +3721,6 @@
      "ref": "2 Kings 14",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 104",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6772,16 +3732,6 @@
     {
      "ref": "Jonah 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 105",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6795,16 +3745,6 @@
      "ref": "Jonah 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 106",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6816,16 +3756,6 @@
     {
      "ref": "Jonah 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 107",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6839,16 +3769,6 @@
      "ref": "Jonah 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 108",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6860,16 +3780,6 @@
     {
      "ref": "Amos 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 109",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6883,16 +3793,6 @@
      "ref": "Amos 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 110",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6904,16 +3804,6 @@
     {
      "ref": "Amos 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 111",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6927,16 +3817,6 @@
      "ref": "Amos 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 112",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:18-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6948,16 +3828,6 @@
     {
      "ref": "Amos 5",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 113",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:1-9",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -6971,16 +3841,6 @@
      "ref": "Amos 6",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 114",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:10-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -6992,16 +3852,6 @@
     {
      "ref": "Amos 7",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 115",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:1-19",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7015,16 +3865,6 @@
      "ref": "Amos 8",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 116",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:20-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7036,16 +3876,6 @@
     {
      "ref": "Amos 9",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 117",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 2:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7059,16 +3889,6 @@
      "ref": "Hosea 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 118",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7080,16 +3900,6 @@
     {
      "ref": "Hosea 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 119",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7103,16 +3913,6 @@
      "ref": "Hosea 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 120",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 4:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7124,16 +3924,6 @@
     {
      "ref": "Hosea 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 121",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 5:1-23",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7147,16 +3937,6 @@
      "ref": "Hosea 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 122",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:1-19",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7168,16 +3948,6 @@
     {
      "ref": "Hosea 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 123",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:20-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7191,16 +3961,6 @@
      "ref": "Hosea 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 124",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 7:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7212,16 +3972,6 @@
     {
      "ref": "Hosea 8",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 125",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:1-21",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7235,16 +3985,6 @@
      "ref": "Hosea 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 126",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:22-36",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7256,16 +3996,6 @@
     {
      "ref": "Hosea 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 127",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 9:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7279,16 +4009,6 @@
      "ref": "Hosea 11",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 128",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7300,16 +4020,6 @@
     {
      "ref": "Hosea 12",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 129",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:18-32",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7323,16 +4033,6 @@
      "ref": "Hosea 13",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 130",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7344,16 +4044,6 @@
     {
      "ref": "Hosea 14",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 131",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:16-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7367,16 +4057,6 @@
      "ref": "Micah 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 132",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7388,16 +4068,6 @@
     {
      "ref": "Micah 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 133",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7411,16 +4081,6 @@
      "ref": "Micah 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 134",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:1-13",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7432,16 +4092,6 @@
     {
      "ref": "Micah 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 135",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:14-25",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7455,16 +4105,6 @@
      "ref": "Micah 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 136",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7476,16 +4116,6 @@
     {
      "ref": "Micah 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 137",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7499,16 +4129,6 @@
      "ref": "Micah 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 138",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7520,16 +4140,6 @@
     {
      "ref": "2 Kings 15",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 139",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:18-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7543,16 +4153,6 @@
      "ref": "2 Kings 16",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 140",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7564,16 +4164,6 @@
     {
      "ref": "2 Kings 17",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 141",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:17-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7587,16 +4177,6 @@
      "ref": "2 Kings 18",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 142",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7608,16 +4188,6 @@
     {
      "ref": "2 Kings 19",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 143",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7631,16 +4201,6 @@
      "ref": "2 Kings 20",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 144",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7652,16 +4212,6 @@
     {
      "ref": "2 Kings 21",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 145",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7675,16 +4225,6 @@
      "ref": "2 Kings 22",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 146",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7696,16 +4236,6 @@
     {
      "ref": "2 Kings 23",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 147",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7719,16 +4249,6 @@
      "ref": "2 Kings 24",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 148",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7740,16 +4260,6 @@
     {
      "ref": "2 Kings 25",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 149",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7763,16 +4273,6 @@
      "ref": "Isaiah 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 150",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7784,16 +4284,6 @@
     {
      "ref": "Isaiah 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 1",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7807,16 +4297,6 @@
      "ref": "Isaiah 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 2",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7828,16 +4308,6 @@
     {
      "ref": "Isaiah 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 3",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7851,16 +4321,6 @@
      "ref": "Isaiah 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 4",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7872,16 +4332,6 @@
     {
      "ref": "Isaiah 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 5",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7895,16 +4345,6 @@
      "ref": "Isaiah 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 6",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7916,16 +4356,6 @@
     {
      "ref": "Isaiah 8",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 7",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7939,16 +4369,6 @@
      "ref": "Isaiah 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 8",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -7960,16 +4380,6 @@
     {
      "ref": "Isaiah 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 9",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -7983,16 +4393,6 @@
      "ref": "Isaiah 11",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 10",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8004,16 +4404,6 @@
     {
      "ref": "Isaiah 12",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 11",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8027,16 +4417,6 @@
      "ref": "Isaiah 13",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 12",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8048,16 +4428,6 @@
     {
      "ref": "Isaiah 14",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 13",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8071,16 +4441,6 @@
      "ref": "Isaiah 15",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 14",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8092,16 +4452,6 @@
     {
      "ref": "Isaiah 16",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 15",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8115,16 +4465,6 @@
      "ref": "Isaiah 17",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 16",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8136,16 +4476,6 @@
     {
      "ref": "Isaiah 18",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 17",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:15-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8159,16 +4489,6 @@
      "ref": "Isaiah 19",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 18",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8180,16 +4500,6 @@
     {
      "ref": "Isaiah 20",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 19",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:18-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8203,16 +4513,6 @@
      "ref": "Isaiah 21",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 20",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:1-9",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8224,16 +4524,6 @@
     {
      "ref": "Isaiah 22",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 21",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:10-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8247,16 +4537,6 @@
      "ref": "Isaiah 23",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 22",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:1-19",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8268,16 +4548,6 @@
     {
      "ref": "Isaiah 24",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 23",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:20-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8291,16 +4561,6 @@
      "ref": "Isaiah 25",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 24",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 2:1-22",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8312,16 +4572,6 @@
     {
      "ref": "Isaiah 26",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 25",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8335,16 +4585,6 @@
      "ref": "Isaiah 27",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 26",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8356,16 +4596,6 @@
     {
      "ref": "Isaiah 28",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 27",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 4:1-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8379,16 +4609,6 @@
      "ref": "Isaiah 29",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 28",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 5:1-23",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8400,16 +4620,6 @@
     {
      "ref": "Isaiah 30",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 29",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:1-19",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8423,16 +4633,6 @@
      "ref": "Isaiah 31",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 30",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:20-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8444,16 +4644,6 @@
     {
      "ref": "Isaiah 32",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 31",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 7:1-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8467,16 +4657,6 @@
      "ref": "Isaiah 33",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 32",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:1-21",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8488,16 +4668,6 @@
     {
      "ref": "Isaiah 34",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 33",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:22-36",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8511,16 +4681,6 @@
      "ref": "Isaiah 35",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 34",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 9:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8532,16 +4692,6 @@
     {
      "ref": "Isaiah 36",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 35",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8555,16 +4705,6 @@
      "ref": "Isaiah 37",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 36",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:18-32",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8576,16 +4716,6 @@
     {
      "ref": "Isaiah 38",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 37",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:1-15",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8599,16 +4729,6 @@
      "ref": "Isaiah 39",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 38",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:16-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8620,16 +4740,6 @@
     {
      "ref": "Isaiah 40",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 39",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8643,16 +4753,6 @@
      "ref": "Isaiah 41",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 40",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8664,16 +4764,6 @@
     {
      "ref": "Isaiah 42",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 41",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:1-13",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8687,16 +4777,6 @@
      "ref": "Isaiah 43",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 42",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:14-25",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8708,16 +4788,6 @@
     {
      "ref": "Isaiah 44",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 43",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8731,16 +4801,6 @@
      "ref": "Isaiah 45",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 44",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8752,16 +4812,6 @@
     {
      "ref": "Isaiah 46",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 45",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8775,16 +4825,6 @@
      "ref": "Isaiah 47",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 46",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:18-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8796,16 +4836,6 @@
     {
      "ref": "Isaiah 48",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 47",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8819,16 +4849,6 @@
      "ref": "Isaiah 49",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 48",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:17-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8840,16 +4860,6 @@
     {
      "ref": "Isaiah 50",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 49",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8863,16 +4873,6 @@
      "ref": "Isaiah 51",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 50",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8884,16 +4884,6 @@
     {
      "ref": "Isaiah 52",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 51",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8907,16 +4897,6 @@
      "ref": "Isaiah 53",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 52",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8928,16 +4908,6 @@
     {
      "ref": "Isaiah 54",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 53",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8951,16 +4921,6 @@
      "ref": "Isaiah 55",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 54",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -8972,16 +4932,6 @@
     {
      "ref": "Isaiah 56",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 55",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -8995,16 +4945,6 @@
      "ref": "Isaiah 57",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 56",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9016,16 +4956,6 @@
     {
      "ref": "Isaiah 58",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 57",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9039,16 +4969,6 @@
      "ref": "Isaiah 59",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 58",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9060,16 +4980,6 @@
     {
      "ref": "Isaiah 60",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 59",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9083,16 +4993,6 @@
      "ref": "Isaiah 61",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 60",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9104,16 +5004,6 @@
     {
      "ref": "Isaiah 62",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 61",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9127,16 +5017,6 @@
      "ref": "Isaiah 63",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 62",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9148,16 +5028,6 @@
     {
      "ref": "Isaiah 64",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 63",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9171,16 +5041,6 @@
      "ref": "Isaiah 65",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 64",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9192,16 +5052,6 @@
     {
      "ref": "Isaiah 66",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 65",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9215,16 +5065,6 @@
      "ref": "Nahum 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 66",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9236,16 +5076,6 @@
     {
      "ref": "Nahum 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 67",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9259,16 +5089,6 @@
      "ref": "Nahum 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 68",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9280,16 +5100,6 @@
     {
      "ref": "Habakkuk 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 69",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9303,16 +5113,6 @@
      "ref": "Habakkuk 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 70",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9324,16 +5124,6 @@
     {
      "ref": "Habakkuk 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 71",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9347,16 +5137,6 @@
      "ref": "Zephaniah 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 72",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9368,16 +5148,6 @@
     {
      "ref": "Zephaniah 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 73",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9391,16 +5161,6 @@
      "ref": "Zephaniah 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 74",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9412,16 +5172,6 @@
     {
      "ref": "Jeremiah 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 75",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9435,16 +5185,6 @@
      "ref": "Jeremiah 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 76",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:18-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9456,16 +5196,6 @@
     {
      "ref": "Jeremiah 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 77",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:1-9",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9479,16 +5209,6 @@
      "ref": "Jeremiah 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 78",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:10-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9500,16 +5220,6 @@
     {
      "ref": "Jeremiah 5",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 79",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:1-19",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9523,16 +5233,6 @@
      "ref": "Jeremiah 6",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 80",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:20-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9544,16 +5244,6 @@
     {
      "ref": "Jeremiah 7",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 81",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 2:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9567,16 +5257,6 @@
      "ref": "Jeremiah 8",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 82",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9588,16 +5268,6 @@
     {
      "ref": "Jeremiah 9",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 83",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9611,16 +5281,6 @@
      "ref": "Jeremiah 10",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 84",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 4:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9632,16 +5292,6 @@
     {
      "ref": "Jeremiah 11",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 85",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 5:1-23",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9655,16 +5305,6 @@
      "ref": "Jeremiah 12",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 86",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:1-19",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9676,16 +5316,6 @@
     {
      "ref": "Jeremiah 13",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 87",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:20-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9699,16 +5329,6 @@
      "ref": "Jeremiah 14",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 88",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 7:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9720,16 +5340,6 @@
     {
      "ref": "Jeremiah 15",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 89",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:1-21",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9743,16 +5353,6 @@
      "ref": "Jeremiah 16",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 90",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:22-36",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9764,16 +5364,6 @@
     {
      "ref": "Jeremiah 17",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 91",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 9:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9787,16 +5377,6 @@
      "ref": "Jeremiah 18",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 92",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9808,16 +5388,6 @@
     {
      "ref": "Jeremiah 19",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 93",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:18-32",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9831,16 +5401,6 @@
      "ref": "Jeremiah 20",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 94",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9852,16 +5412,6 @@
     {
      "ref": "Jeremiah 21",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 95",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:16-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9875,16 +5425,6 @@
      "ref": "Jeremiah 22",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 96",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9896,16 +5436,6 @@
     {
      "ref": "Jeremiah 23",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 97",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9919,16 +5449,6 @@
      "ref": "Jeremiah 24",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 98",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:1-13",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9940,16 +5460,6 @@
     {
      "ref": "Jeremiah 25",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 99",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:14-25",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -9963,16 +5473,6 @@
      "ref": "Jeremiah 26",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 100",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -9984,16 +5484,6 @@
     {
      "ref": "Jeremiah 27",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 101",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10007,16 +5497,6 @@
      "ref": "Jeremiah 28",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 102",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10028,16 +5508,6 @@
     {
      "ref": "Jeremiah 29",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 103",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:18-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10051,16 +5521,6 @@
      "ref": "Jeremiah 30",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 104",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10072,16 +5532,6 @@
     {
      "ref": "Jeremiah 31",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 105",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:17-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10095,16 +5545,6 @@
      "ref": "Jeremiah 32",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 106",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10116,16 +5556,6 @@
     {
      "ref": "Jeremiah 33",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 107",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10139,16 +5569,6 @@
      "ref": "Jeremiah 34",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 108",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10160,16 +5580,6 @@
     {
      "ref": "Jeremiah 35",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 109",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10183,16 +5593,6 @@
      "ref": "Jeremiah 36",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 110",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10204,16 +5604,6 @@
     {
      "ref": "Jeremiah 37",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 111",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10227,16 +5617,6 @@
      "ref": "Jeremiah 38",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 112",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10248,16 +5628,6 @@
     {
      "ref": "Jeremiah 39",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 113",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10271,16 +5641,6 @@
      "ref": "Jeremiah 40",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 114",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10292,16 +5652,6 @@
     {
      "ref": "Jeremiah 41",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 115",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10315,16 +5665,6 @@
      "ref": "Jeremiah 42",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 116",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10336,16 +5676,6 @@
     {
      "ref": "Jeremiah 43",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 117",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10359,16 +5689,6 @@
      "ref": "Jeremiah 44",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 118",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10380,16 +5700,6 @@
     {
      "ref": "Jeremiah 45",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 119",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10403,16 +5713,6 @@
      "ref": "Jeremiah 46",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 120",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10424,16 +5724,6 @@
     {
      "ref": "Jeremiah 47",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 121",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10447,16 +5737,6 @@
      "ref": "Jeremiah 48",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 122",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10468,16 +5748,6 @@
     {
      "ref": "Jeremiah 49",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 123",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10491,16 +5761,6 @@
      "ref": "Jeremiah 50",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 124",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10512,16 +5772,6 @@
     {
      "ref": "Jeremiah 51",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 125",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10535,16 +5785,6 @@
      "ref": "Jeremiah 52",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 126",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10556,16 +5796,6 @@
     {
      "ref": "Lamentations 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 127",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10579,16 +5809,6 @@
      "ref": "Lamentations 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 128",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10600,16 +5820,6 @@
     {
      "ref": "Lamentations 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 129",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10623,16 +5833,6 @@
      "ref": "Lamentations 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 130",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10644,16 +5844,6 @@
     {
      "ref": "Lamentations 5",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 131",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:15-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10667,16 +5857,6 @@
      "ref": "Ezekiel 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 132",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10688,16 +5868,6 @@
     {
      "ref": "Ezekiel 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 133",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:18-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10711,16 +5881,6 @@
      "ref": "Ezekiel 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 134",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:1-9",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10732,16 +5892,6 @@
     {
      "ref": "Ezekiel 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 135",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:10-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10755,16 +5905,6 @@
      "ref": "Ezekiel 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 136",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:1-19",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10776,16 +5916,6 @@
     {
      "ref": "Ezekiel 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 137",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:20-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10799,16 +5929,6 @@
      "ref": "Ezekiel 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 138",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 2:1-22",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10820,16 +5940,6 @@
     {
      "ref": "Ezekiel 8",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 139",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10843,16 +5953,6 @@
      "ref": "Ezekiel 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 140",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10864,16 +5964,6 @@
     {
      "ref": "Ezekiel 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 141",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 4:1-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10887,16 +5977,6 @@
      "ref": "Ezekiel 11",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 142",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 5:1-23",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10908,16 +5988,6 @@
     {
      "ref": "Ezekiel 12",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 143",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:1-19",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10931,16 +6001,6 @@
      "ref": "Ezekiel 13",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 144",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:20-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10952,16 +6012,6 @@
     {
      "ref": "Ezekiel 14",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 145",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 7:1-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -10975,16 +6025,6 @@
      "ref": "Ezekiel 15",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 146",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:1-21",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -10996,16 +6036,6 @@
     {
      "ref": "Ezekiel 16",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 147",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:22-36",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11019,16 +6049,6 @@
      "ref": "Ezekiel 17",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 148",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 9:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11040,16 +6060,6 @@
     {
      "ref": "Ezekiel 18",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 149",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11063,16 +6073,6 @@
      "ref": "Ezekiel 19",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 150",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:18-32",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11084,16 +6084,6 @@
     {
      "ref": "Ezekiel 20",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 1",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:1-15",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11107,16 +6097,6 @@
      "ref": "Ezekiel 21",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 2",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:16-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11128,16 +6108,6 @@
     {
      "ref": "Ezekiel 22",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 3",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11151,16 +6121,6 @@
      "ref": "Ezekiel 23",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 4",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11172,16 +6132,6 @@
     {
      "ref": "Ezekiel 24",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 5",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:1-13",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11195,16 +6145,6 @@
      "ref": "Ezekiel 25",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 6",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:14-25",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11216,16 +6156,6 @@
     {
      "ref": "Ezekiel 26",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 7",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11239,16 +6169,6 @@
      "ref": "Ezekiel 27",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 8",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11260,16 +6180,6 @@
     {
      "ref": "Ezekiel 28",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 9",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11283,16 +6193,6 @@
      "ref": "Ezekiel 29",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 10",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:18-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11304,16 +6204,6 @@
     {
      "ref": "Ezekiel 30",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 11",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11327,16 +6217,6 @@
      "ref": "Ezekiel 31",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 12",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:17-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11348,16 +6228,6 @@
     {
      "ref": "Ezekiel 32",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 13",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11371,16 +6241,6 @@
      "ref": "Ezekiel 33",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 14",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11392,16 +6252,6 @@
     {
      "ref": "Ezekiel 34",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 15",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11415,16 +6265,6 @@
      "ref": "Ezekiel 35",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 16",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11436,16 +6276,6 @@
     {
      "ref": "Ezekiel 36",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 17",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11459,16 +6289,6 @@
      "ref": "Ezekiel 37",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 18",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11480,16 +6300,6 @@
     {
      "ref": "Ezekiel 38",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 19",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11503,16 +6313,6 @@
      "ref": "Ezekiel 39",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 20",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11524,16 +6324,6 @@
     {
      "ref": "Ezekiel 40",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 21",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -11548,16 +6338,6 @@
      "ref": "Ezekiel 41",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 22",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -11570,16 +6350,6 @@
     {
      "ref": "Ezekiel 42",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 23",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -11594,16 +6364,6 @@
      "ref": "Ezekiel 43",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 24",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -11616,16 +6376,6 @@
     {
      "ref": "Ezekiel 44",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 25",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -11640,16 +6390,6 @@
      "ref": "Ezekiel 45",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 26",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -11662,16 +6402,6 @@
     {
      "ref": "Ezekiel 46",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 27",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -11686,16 +6416,6 @@
      "ref": "Ezekiel 47",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 28",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
-     "why": ""
     }
    ],
    "list": true
@@ -11708,16 +6428,6 @@
     {
      "ref": "Ezekiel 48",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 29",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ],
@@ -11732,16 +6442,6 @@
      "ref": "Daniel 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 30",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11753,16 +6453,6 @@
     {
      "ref": "Daniel 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 31",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11776,16 +6466,6 @@
      "ref": "Daniel 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 32",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11797,16 +6477,6 @@
     {
      "ref": "Daniel 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 33",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11820,16 +6490,6 @@
      "ref": "Daniel 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 34",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11841,16 +6501,6 @@
     {
      "ref": "Daniel 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 35",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11864,16 +6514,6 @@
      "ref": "Daniel 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 36",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11885,16 +6525,6 @@
     {
      "ref": "Daniel 8",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 37",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11908,16 +6538,6 @@
      "ref": "Daniel 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 38",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:15-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11929,16 +6549,6 @@
     {
      "ref": "Daniel 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 39",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:1-17",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11952,16 +6562,6 @@
      "ref": "Daniel 11",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 40",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 30:18-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -11973,16 +6573,6 @@
     {
      "ref": "Daniel 12",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 41",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:1-9",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -11996,16 +6586,6 @@
      "ref": "Ezra 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 42",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 31:10-31",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12017,16 +6597,6 @@
     {
      "ref": "Ezra 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 43",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:1-19",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12040,16 +6610,6 @@
      "ref": "Ezra 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 44",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 1:20-33",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12061,16 +6621,6 @@
     {
      "ref": "Ezra 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 45",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 2:1-22",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12084,16 +6634,6 @@
      "ref": "Ezra 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 46",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12105,16 +6645,6 @@
     {
      "ref": "Ezra 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 47",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 3:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12128,16 +6658,6 @@
      "ref": "Ezra 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 48",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 4:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12149,16 +6669,6 @@
     {
      "ref": "Ezra 8",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 49",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 5:1-23",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12172,16 +6682,6 @@
      "ref": "Ezra 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 50",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:1-19",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12193,16 +6693,6 @@
     {
      "ref": "Ezra 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 51",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 6:20-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12216,16 +6706,6 @@
      "ref": "Nehemiah 1",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 52",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 7:1-27",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12237,16 +6717,6 @@
     {
      "ref": "Nehemiah 2",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 53",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:1-21",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12260,16 +6730,6 @@
      "ref": "Nehemiah 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 54",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 8:22-36",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12281,16 +6741,6 @@
     {
      "ref": "Nehemiah 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 55",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 9:1-18",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12304,16 +6754,6 @@
      "ref": "Nehemiah 5",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 56",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12325,16 +6765,6 @@
     {
      "ref": "Nehemiah 6",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 57",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 10:18-32",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12348,16 +6778,6 @@
      "ref": "Nehemiah 7",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 58",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12369,16 +6789,6 @@
     {
      "ref": "Nehemiah 8",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 59",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 11:16-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12392,16 +6802,6 @@
      "ref": "Nehemiah 9",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 60",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12413,16 +6813,6 @@
     {
      "ref": "Nehemiah 10",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 61",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 12:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12436,16 +6826,6 @@
      "ref": "Nehemiah 11",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 62",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:1-13",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12457,16 +6837,6 @@
     {
      "ref": "Nehemiah 12",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 63",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 13:14-25",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12480,16 +6850,6 @@
      "ref": "Nehemiah 13",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 64",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12501,16 +6861,6 @@
     {
      "ref": "Esther 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 65",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 14:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12524,16 +6874,6 @@
      "ref": "Esther 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 66",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:1-17",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12545,16 +6885,6 @@
     {
      "ref": "Esther 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 67",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 15:18-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12568,16 +6898,6 @@
      "ref": "Esther 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 68",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12589,16 +6909,6 @@
     {
      "ref": "Esther 5",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 69",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 16:17-33",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12612,16 +6922,6 @@
      "ref": "Esther 6",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 70",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12633,16 +6933,6 @@
     {
      "ref": "Esther 7",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 71",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 17:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12656,16 +6946,6 @@
      "ref": "Esther 8",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 72",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:1-12",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12677,16 +6957,6 @@
     {
      "ref": "Esther 9",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 73",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 18:13-24",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12700,16 +6970,6 @@
      "ref": "Esther 10",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 74",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12721,16 +6981,6 @@
     {
      "ref": "Haggai 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 75",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 19:15-29",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12744,16 +6994,6 @@
      "ref": "Haggai 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 76",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:1-15",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12765,16 +7005,6 @@
     {
      "ref": "Zechariah 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 77",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 20:16-30",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12788,16 +7018,6 @@
      "ref": "Zechariah 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 78",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12809,16 +7029,6 @@
     {
      "ref": "Zechariah 3",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 79",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 21:17-31",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12832,16 +7042,6 @@
      "ref": "Zechariah 4",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 80",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12853,16 +7053,6 @@
     {
      "ref": "Zechariah 5",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 81",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 22:17-29",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12876,16 +7066,6 @@
      "ref": "Zechariah 6",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 82",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:1-18",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12897,16 +7077,6 @@
     {
      "ref": "Zechariah 7",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 83",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 23:19-35",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12920,16 +7090,6 @@
      "ref": "Zechariah 8",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 84",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:1-22",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12941,16 +7101,6 @@
     {
      "ref": "Zechariah 9",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 85",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 24:23-34",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -12964,16 +7114,6 @@
      "ref": "Zechariah 10",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 86",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -12985,16 +7125,6 @@
     {
      "ref": "Zechariah 11",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 87",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 25:15-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -13008,16 +7138,6 @@
      "ref": "Zechariah 12",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 88",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:1-16",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -13029,16 +7149,6 @@
     {
      "ref": "Zechariah 13",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 89",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 26:17-28",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -13052,16 +7162,6 @@
      "ref": "Zechariah 14",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 90",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -13073,16 +7173,6 @@
     {
      "ref": "Malachi 1",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 91",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 27:15-27",
-     "role": "Proverbs",
      "why": ""
     }
    ]
@@ -13096,16 +7186,6 @@
      "ref": "Malachi 2",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 92",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:1-14",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -13118,16 +7198,6 @@
      "ref": "Malachi 3",
      "role": "Reading",
      "why": ""
-    },
-    {
-     "ref": "Psalm 93",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 28:15-28",
-     "role": "Proverbs",
-     "why": ""
     }
    ]
   },
@@ -13139,16 +7209,6 @@
     {
      "ref": "Malachi 4",
      "role": "Reading",
-     "why": ""
-    },
-    {
-     "ref": "Psalm 94",
-     "role": "Psalm",
-     "why": ""
-    },
-    {
-     "ref": "Proverbs 29:1-14",
-     "role": "Proverbs",
      "why": ""
     }
    ]
