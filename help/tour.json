@@ -1,6 +1,6 @@
 {
  "_about": "The Help window's tutorial: each shot is a real screenshot of the app with numbered arrows to its buttons, and the list under it says what each does. tools/help-shots/shoot.mjs takes the screenshots from the running desk (http://localhost:8940/) and writes them into help.html between the TOUR markers. When a feature is added, add its callout here and run: node tools/help-shots/shoot.mjs. scripts/check.py fails if a top-bar, toolbar or dock button has no callout. 'dock: true' builds its callouts from the dock itself, with each button's text taken from help.html (its <dt>). 'who': owner = only on James's desk, public = only on jayms.com.",
- "width": 1440,
+ "width": 1600,
  "shots": [
   {
    "id": "topbar",
@@ -24,7 +24,8 @@
     {
      "sel": "#brandlink",
      "name": "jayms.com",
-     "text": "Opens the online version of the app on jayms.com."
+     "text": "Opens the online version of the app on jayms.com.",
+     "optional": true
     },
     {
      "sel": "#appsw",
@@ -48,6 +49,12 @@
      "who": "owner"
     },
     {
+     "sel": "#today",
+     "name": "Today's date",
+     "text": "Today's date, month/day/year; the reading plan's Today follows it.",
+     "optional": true
+    },
+    {
      "sel": "#aboutbtn",
      "name": "About",
      "text": "Why this app exists."
@@ -62,8 +69,7 @@
      "name": "?",
      "text": "This guide, plus the buttons to report a bug or ask for a feature."
     }
-   ],
-   "width": 2200
+   ]
   },
   {
    "id": "plan",
@@ -350,8 +356,7 @@
      "text": "Steps to the previous or next mark in the chapter (the arrow keys do too).",
      "at": "bottom"
     }
-   ],
-   "width": 2200
+   ]
   },
   {
    "id": "phone",

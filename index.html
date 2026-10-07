@@ -867,7 +867,7 @@ $("railbtn").onclick=()=>{
 document.body.classList.toggle("rail-hidden",!!store.get("railHidden",false));
 window.addEventListener("resize",syncRailBtn);
 /* today's date in the top bar, checked every minute so it turns over at midnight */
-function showToday(){ $("today").textContent = new Date().toLocaleDateString("en-GB",{weekday:"long", day:"numeric", month:"long", year:"numeric"}).replace(",","") }
+function showToday(){ const d=new Date(), p=n=>String(n).padStart(2,"0"); $("today").textContent = `${p(d.getMonth()+1)}/${p(d.getDate())}/${p(d.getFullYear()%100)}` }   // 10/07/26
 showToday(); setInterval(showToday, 60000);
 /* ===== HEBREW & GREEK =====
    "Hebrew and Greek Without Learning Either" read a chapter at a time. The tracks are ordinary plans (plans/hg-*.json, "app":"hg"),
