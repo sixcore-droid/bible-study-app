@@ -319,6 +319,13 @@ function renderPlan(){
       <span class="n">${isT?(p.weekly?"This week":"Today"):(p.weekly?"Week ":"Day ")+d.day}</span>
       <span class="t">${esc(d.title)}${(d.readings.length>1||d.note)?`<small>${esc(d.readings.length>1?"with "+d.readings.slice(1).map(x=>x.ref).join(" · "):d.note)}</small>`:""}</span>
       <span class="ck" role="img" aria-label="${fin?"done":"not done"}">${fin?"✓":""}</span></button></li>`}).join("");
+  /* the day you're on is in view when the plan opens (no scrolling down from day 1): once per plan and day, and only if it's out of sight */
+  const at=S.plan+":"+S.day; if(renderPlan.at!==at){ renderPlan.at=at; setTimeout(()=>{
+    const el=$("days").querySelector(".day.on")||$("days").querySelector("[aria-current]"); if(!el) return;
+    const box=[document.querySelector(".railin"),$("rail")].find(x=>x && x.scrollHeight>x.clientHeight+1); if(!box) return;
+    const r=el.getBoundingClientRect(), b=box.getBoundingClientRect();
+    if(r.top<b.top || r.bottom>b.bottom) box.scrollTop += r.top-b.top-(b.height-r.height)/3;
+  },0) }
 }
 /* the chapters James skips (plans/skip.json, built from his vault notes) */
 let SKIP=null, PAIRS=null;
