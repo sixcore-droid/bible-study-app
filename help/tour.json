@@ -1,0 +1,387 @@
+{
+ "_about": "The Help window's tutorial: each shot is a real screenshot of the app with numbered arrows to its buttons, and the list under it says what each does. tools/help-shots/shoot.mjs takes the screenshots from the running desk (http://localhost:8940/) and writes them into help.html between the TOUR markers. When a feature is added, add its callout here and run: node tools/help-shots/shoot.mjs. scripts/check.py fails if a top-bar, toolbar or dock button has no callout. 'dock: true' builds its callouts from the dock itself, with each button's text taken from help.html (its <dt>). 'who': owner = only on James's desk, public = only on jayms.com.",
+ "width": 1440,
+ "shots": [
+  {
+   "id": "topbar",
+   "title": "The top bar",
+   "intro": "Along the top, left to right.",
+   "app": "study",
+   "clip": ".top",
+   "pad": [
+    8,
+    8,
+    70,
+    8
+   ],
+   "at": "bottom",
+   "callouts": [
+    {
+     "sel": "#railbtn",
+     "name": "Plan",
+     "text": "Shows or hides the reading plan on the left (on a phone it slides in)."
+    },
+    {
+     "sel": "#brandlink",
+     "name": "jayms.com",
+     "text": "Opens the online version of the app on jayms.com."
+    },
+    {
+     "sel": "#appsw",
+     "name": "Bible Study / Hebrew & Greek",
+     "text": "Switches between the two apps. Hebrew & Greek reads John, Genesis and Psalms with the places the original shapes the English marked."
+    },
+    {
+     "sel": "#goref",
+     "name": "Go to a passage",
+     "text": "Type any reference, like Mark 13:14 or Psalm 82, and press Go. It opens in its own tab beside the day's readings."
+    },
+    {
+     "sel": "#findq",
+     "name": "Find in the text",
+     "text": "Highlights a word everywhere in the passage on screen. Enter jumps to the next one."
+    },
+    {
+     "sel": "#viewsw",
+     "name": "My desk / Read along",
+     "text": "My desk is your full view. Read along shows what a visitor sees.",
+     "who": "owner"
+    },
+    {
+     "sel": "#aboutbtn",
+     "name": "About",
+     "text": "Why this app exists."
+    },
+    {
+     "sel": ".top .support",
+     "name": "Donate",
+     "text": "Buy Me a Coffee, to support the project."
+    },
+    {
+     "sel": "#helpbtn",
+     "name": "?",
+     "text": "This guide, plus the buttons to report a bug or ask for a feature."
+    }
+   ],
+   "width": 2200
+  },
+  {
+   "id": "plan",
+   "title": "The reading plan",
+   "intro": "The left side: which plan you're reading and where you are in it.",
+   "app": "study",
+   "clip": "#rail",
+   "clipHeight": 760,
+   "pad": [
+    0,
+    220,
+    0,
+    0
+   ],
+   "at": "right",
+   "callouts": [
+    {
+     "sel": "#planpick",
+     "name": "Reading plan",
+     "text": "Tap to pick a plan. Each app lists its own plans."
+    },
+    {
+     "sel": "#addpsalm",
+     "up": "label",
+     "name": "Matching psalm",
+     "text": "Adds a psalm that matches the day's reading."
+    },
+    {
+     "sel": "#hidelists",
+     "up": "label",
+     "name": "Hide genealogies & lists",
+     "text": "Genealogy and list chapters are greyed in the list; this takes them out."
+    },
+    {
+     "sel": ".prog",
+     "name": "Progress",
+     "text": "Which day of the plan it is, and how much is done."
+    },
+    {
+     "sel": "#days .day",
+     "name": "A day",
+     "text": "Tap a day to read it. The list starts at the first day not yet done."
+    },
+    {
+     "sel": "#days .day .ck",
+     "name": "Done tick",
+     "text": "Ticks itself when every reading that day is marked Done."
+    },
+    {
+     "sel": "[data-alldays]",
+     "name": "Show all",
+     "text": "Long plans show the next seven days; this opens the rest.",
+     "optional": true
+    }
+   ]
+  },
+  {
+   "id": "reader",
+   "title": "The reader",
+   "intro": "The middle: the passage, and how it's shown.",
+   "app": "study",
+   "clip": ".reader",
+   "clipHeight": 540,
+   "pad": [
+    60,
+    30,
+    0,
+    30
+   ],
+   "at": "top",
+   "callouts": [
+    {
+     "sel": "#rtabs .rtab",
+     "name": "Reading tabs",
+     "text": "One tab for each of the day's readings, and one for each passage you open with Go. × closes an opened passage."
+    },
+    {
+     "sel": "#rlogos a",
+     "name": "Open in Logos",
+     "text": "Opens the passage in your Logos app.",
+     "who": "owner",
+     "at": "left"
+    },
+    {
+     "sel": "#layoutbtn",
+     "name": "Verse by verse / Reading view",
+     "text": "Named for what it switches to: one verse per line, or paragraphs."
+    },
+    {
+     "sel": "#parbtn",
+     "name": "Parallel / One version",
+     "text": "Shows two versions side by side, paragraph by paragraph."
+    },
+    {
+     "sel": "#ver",
+     "name": "Version",
+     "text": "Which translation you read in: LSB, ESV, NET, NLT, NASB, CSB, BSB, KJV, MSG or Brenton's Septuagint."
+    },
+    {
+     "sel": "#smaller",
+     "name": "A− and A+",
+     "text": "Makes the text smaller or bigger.",
+     "up": ".vpick"
+    },
+    {
+     "sel": "#voicecfg",
+     "name": "Voice",
+     "text": "Speechify voice and speed for Read.",
+     "who": "owner",
+     "optional": true
+    },
+    {
+     "sel": ".chnav",
+     "name": "« »",
+     "text": "Previous and next chapter."
+    },
+    {
+     "sel": "#text .vn",
+     "name": "Verse number",
+     "text": "Tap a verse number for that verse's tools.",
+     "at": "left"
+    },
+    {
+     "sel": ".rdbtns",
+     "name": "Highlight and Read",
+     "text": "Highlight marks a column; Read reads it aloud with Speechify.",
+     "who": "owner",
+     "optional": true,
+     "at": "right"
+    }
+   ]
+  },
+  {
+   "id": "after",
+   "title": "Under the text",
+   "intro": "When you've read it.",
+   "app": "study",
+   "clip": "#markdone",
+   "clipTo": "#mynotes",
+   "pad": [
+    20,
+    240,
+    20,
+    30
+   ],
+   "at": "right",
+   "who": "owner",
+   "callouts": [
+    {
+     "sel": "#markdone",
+     "name": "Done",
+     "text": "Marks this reading done; the day ticks when all its readings are."
+    },
+    {
+     "sel": "#nextread",
+     "name": "Next →",
+     "text": "The next reading of the day.",
+     "optional": true
+    },
+    {
+     "sel": "#note",
+     "name": "My notes",
+     "text": "Your note on this passage. It saves to your notes and can open in Obsidian."
+    },
+    {
+     "sel": "#notepub",
+     "up": "label",
+     "name": "Public",
+     "text": "Lets visitors on jayms.com read this note."
+    },
+    {
+     "sel": "#notesave",
+     "name": "Save note",
+     "text": "Saves the note (Cmd+S works too)."
+    }
+   ],
+   "tall": 2600
+  },
+  {
+   "id": "dock",
+   "title": "The side buttons",
+   "intro": "Down the right edge (along the bottom on a phone). Each opens a panel about the passage on screen. A number is how many there are for this passage, a greyed button has nothing for it, and a plain one always has something.",
+   "app": "study",
+   "clip": "#dock",
+   "pad": [
+    0,
+    0,
+    0,
+    330
+   ],
+   "at": "left",
+   "dock": true,
+   "tall": 1700
+  },
+  {
+   "id": "panel",
+   "title": "A panel",
+   "intro": "What opens when you tap a side button.",
+   "app": "study",
+   "open": "facts",
+   "clip": "#panel",
+   "clipHeight": 520,
+   "pad": [
+    10,
+    10,
+    10,
+    240
+   ],
+   "at": "left",
+   "callouts": [
+    {
+     "sel": "#ptitle",
+     "name": "Heading",
+     "text": "What the panel is showing, for which passage."
+    },
+    {
+     "sel": "#pclose",
+     "name": "×",
+     "text": "Closes the panel. Tapping the same side button closes it too.",
+     "at": "bottom"
+    },
+    {
+     "sel": "#pgrip",
+     "name": "Edge",
+     "text": "Drag the panel's edge to make it wider or narrower; double-click puts it back."
+    },
+    {
+     "sel": "#pbody .box",
+     "name": "Boxes",
+     "text": "Each box's coloured edge says what it is: gold is Scripture, green is an ancient witness, olive is a reading of it, blue is an open question."
+    }
+   ],
+   "passage": "Ruth 4"
+  },
+  {
+   "id": "hg",
+   "title": "Hebrew & Greek",
+   "intro": "The same frame, reading John, Genesis or Psalms with the places the original shapes the English marked.",
+   "app": "hg",
+   "mark": true,
+   "clip": "body",
+   "clipHeight": 720,
+   "pad": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "at": "top",
+   "callouts": [
+    {
+     "sel": "#appsw [data-app=hg]",
+     "name": "Hebrew & Greek",
+     "text": "Switches to this app; Bible Study switches back. Each remembers its own plan.",
+     "at": "bottom"
+    },
+    {
+     "sel": "#text .mk",
+     "name": "A marked word",
+     "text": "An underlined word is a place the English Bibles part company. Red changes the claim, gold the emphasis, grey is cosmetic.",
+     "at": "left"
+    },
+    {
+     "sel": "#text .mtag",
+     "name": "The original word",
+     "text": "The Hebrew or Greek word, in English letters, right after the word it explains. Hover either and both light up; tap to open it.",
+     "at": "bottom"
+    },
+    {
+     "sel": ".hgopt",
+     "name": "Marks to show",
+     "text": "Under the plan: Original words shows or hides the tags; the colour boxes turn each kind of mark on or off.",
+     "at": "right"
+    },
+    {
+     "sel": "#dock [data-t=marks]",
+     "name": "Marks",
+     "text": "The panel for the mark you tapped: the versions around it, then plain English, what you're seeing, why translators split and the rule to carry away. ‹ › or the arrow keys step through the chapter's marks.",
+     "at": "left"
+    },
+    {
+     "sel": "#pbody .chnav",
+     "name": "‹ ›",
+     "text": "Steps to the previous or next mark in the chapter (the arrow keys do too).",
+     "at": "bottom"
+    }
+   ],
+   "width": 2200
+  },
+  {
+   "id": "phone",
+   "title": "On a phone",
+   "intro": "The same app, narrower.",
+   "app": "study",
+   "phone": true,
+   "clip": "body",
+   "clipHeight": 844,
+   "pad": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "at": "top",
+   "callouts": [
+    {
+     "sel": "#railbtn",
+     "name": "Plan",
+     "text": "Slides the reading plan in from the left.",
+     "at": "top"
+    },
+    {
+     "sel": "#dock",
+     "name": "Side buttons",
+     "text": "Along the bottom; swipe sideways for more. A panel opens as a sheet over the text."
+    }
+   ],
+   "offsetTop": 64
+  }
+ ]
+}

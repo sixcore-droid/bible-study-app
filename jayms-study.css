@@ -494,3 +494,10 @@ body.hg-noorig .mtag{display:none}
 .v.mkhas{border-left:3px solid var(--dc);padding-left:10px}
 .planopt .dot{width:9px;height:9px;border-radius:50%;background:var(--dc);display:inline-block}
 .mkclause mark{background:none;color:var(--ink-bright);box-shadow:inset 0 -0.42em 0 rgba(212,168,92,.38)}
+
+/* ---------- Help: the tutorial (real screenshots with numbered arrows, written by tools/help-shots/shoot.mjs) ---------- */
+.helpbox .tourimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;margin:8px 0 10px;background:var(--paper)}
+.helpbox .tourlist{margin:0 0 6px;padding-left:28px}
+.helpbox .tourlist li{font-size:17px;line-height:1.5;margin:5px 0}
+.helpbox .tourlist li::marker{font-family:var(--label);font-weight:600;color:var(--gold)}
+.helpbox .tourlist b{color:var(--ink-bright);margin-right:4px}
