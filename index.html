@@ -183,7 +183,7 @@ const PUBLIC = !!window.JAYMS_PUBLIC;
 /* the installable app (PWA): only on jayms.com, where the worker lives at the app's own address (the page's <base> points
    elsewhere, so the address is written out in full) */
 if(PUBLIC && location.hostname==="jayms.com" && "serviceWorker" in navigator)
-  window.addEventListener("load",()=>navigator.serviceWorker.register(location.origin+"/bible-study-app/sw",{scope:"/bible-study-app/"}).catch(()=>{}));
+  window.addEventListener("load",()=>navigator.serviceWorker.register(location.origin+"/bible-study-app/sw",{scope:location.origin+"/bible-study-app/"}).catch(()=>{}));
 if(PUBLIC){ const bl=document.getElementById("brandlink"); bl.href="https://jayms.com/"; bl.removeAttribute("target"); bl.title="jayms.com" }   // already the online version: go to the site
 const TOOLS = DOCK.filter(id=>!(PUBLIC && (id==="notes"||id==="x"))).map(id=>id==="|"?{sep:true}:toolMeta(id));
 

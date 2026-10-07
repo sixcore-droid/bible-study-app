@@ -1,1 +1,1 @@
-{"version":"v145","date":"2026-10-06 22:29","note":"PWA: worker served at /bible-study-app/sw (the host answers .js addresses itself)"}
+{"version":"v146","date":"2026-10-06 22:45","note":"PWA: register the worker with a full scope address (the page's <base> would send it to GitHub)"}
