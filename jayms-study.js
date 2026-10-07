@@ -1061,7 +1061,7 @@
     return ARTREFS.filter(function (r) { return refsHit(r, d.ref); }).length + RELREFS.filter(function (r) { return refsHit(r, d.ref); }).length; });
 
   // ------------------------------------------------------------------ Posts
-  define("Posts", { id: "posts", label: "Posts", name: "My posts on jayms.com", icon: ICON.posts }, {
+  define("Posts", { id: "posts", label: "Posts", name: "From the blog: posts on jayms.com", icon: ICON.posts }, {
     prepare: function () { var self = this; return Promise.all((this.o.alsoRefs || []).map(data.passage)).then(function (ds) { self.also = ds; }); },
     view: function () {
       var self = this, mine = L(this, "posts");
@@ -1072,7 +1072,7 @@
         var fresh = ((self.also && self.also[i] && self.also[i].posts) || []).filter(function (p) { if (ids[p.id]) return false; ids[p.id] = 1; return true; });
         if (fresh.length) h += '<div class="lbl u-mt6">Also for ' + esc(r) + "</div>" + fresh.map(row).join("");
       });
-      return { kick: "jayms.com \u00B7 " + Object.keys(ids).length + " posts", title: "My posts", body: h };
+      return { kick: "jayms.com \u00B7 " + Object.keys(ids).length + " posts", title: "From the blog", body: h };
     }
   }, { alsoRefs: [] }, function (d) { return d ? (d.posts || []).length : null; });
 
