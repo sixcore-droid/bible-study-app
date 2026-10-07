@@ -1,0 +1,561 @@
+{
+ "id": "hg-genesis",
+ "app": "hg",
+ "name": "Genesis",
+ "description": "Hebrew and Greek Without Learning Either: Genesis, a chapter a day. Every mark is a place the English Bibles part company, and what in the Hebrew made them.",
+ "start": "2026-10-07",
+ "days": [
+  {
+   "day": 1,
+   "title": "Genesis 1",
+   "note": "12 marks",
+   "readings": [
+    {
+     "ref": "Genesis 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Genesis 2",
+   "note": "13 marks",
+   "readings": [
+    {
+     "ref": "Genesis 2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "Genesis 3",
+   "note": "7 marks",
+   "readings": [
+    {
+     "ref": "Genesis 3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "Genesis 4",
+   "note": "7 marks",
+   "readings": [
+    {
+     "ref": "Genesis 4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Genesis 5",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Genesis 5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Genesis 6",
+   "note": "7 marks",
+   "readings": [
+    {
+     "ref": "Genesis 6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Genesis 7",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Genesis 7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Genesis 8",
+   "note": "4 marks",
+   "readings": [
+    {
+     "ref": "Genesis 8",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Genesis 9",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Genesis 9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Genesis 10",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "Genesis 11",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Genesis 11",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Genesis 12",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Genesis 12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Genesis 14",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Genesis 15",
+   "note": "4 marks",
+   "readings": [
+    {
+     "ref": "Genesis 15",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "Genesis 16",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "Genesis 17",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Genesis 17",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "Genesis 18",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 18",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Genesis 19",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Genesis 19",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Genesis 20",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 20",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Genesis 21",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 21",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "Genesis 22",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Genesis 22",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "Genesis 23",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 23",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Genesis 24",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 24",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Genesis 25",
+   "note": "5 marks",
+   "readings": [
+    {
+     "ref": "Genesis 25",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "Genesis 26",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 26",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "title": "Genesis 28",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 28",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "title": "Genesis 29",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 29",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "title": "Genesis 30",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 30",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "title": "Genesis 31",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Genesis 31",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "title": "Genesis 32",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 32",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "title": "Genesis 33",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 33",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "title": "Genesis 34",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 34",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "title": "Genesis 35",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 35",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "title": "Genesis 36",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 36",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "title": "Genesis 37",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Genesis 37",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "title": "Genesis 38",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 38",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "title": "Genesis 39",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 39",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "title": "Genesis 40",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 40",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "title": "Genesis 41",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 41",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "title": "Genesis 42",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 42",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "title": "Genesis 44",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Genesis 44",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "title": "Genesis 45",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 45",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "title": "Genesis 47",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 47",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "title": "Genesis 48",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 48",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "title": "Genesis 49",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 49",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "title": "Genesis 50",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Genesis 50",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  }
+ ]
+}

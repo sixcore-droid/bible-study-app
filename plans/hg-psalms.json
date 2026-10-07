@@ -1,0 +1,609 @@
+{
+ "id": "hg-psalms",
+ "app": "hg",
+ "name": "Psalms",
+ "description": "Hebrew and Greek Without Learning Either: Psalms, a chapter a day. Every mark is a place the English Bibles part company, and what in the Hebrew made them.",
+ "start": "2026-10-07",
+ "days": [
+  {
+   "day": 1,
+   "title": "Psalm 1",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Psalm 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Psalm 2",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Psalm 2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "Psalm 4",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "Psalm 7",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Psalm 8",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 8",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Psalm 14",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Psalm 16",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Psalm 17",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 17",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Psalm 19",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Psalm 19",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Psalm 22",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Psalm 22",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "Psalm 23",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Psalm 23",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Psalm 27",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 27",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Psalm 29",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 29",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Psalm 32",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 32",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "Psalm 34",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 34",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "Psalm 37",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 37",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "Psalm 39",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 39",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Psalm 40",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 40",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Psalm 41",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 41",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Psalm 42",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 42",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "Psalm 45",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 45",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "Psalm 46",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 46",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Psalm 47",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 47",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Psalm 48",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 48",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "Psalm 51",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "Psalm 51",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "title": "Psalm 60",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 60",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "title": "Psalm 68",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Psalm 68",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "title": "Psalm 72",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Psalm 72",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "title": "Psalm 74",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 74",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "title": "Psalm 82",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 82",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "title": "Psalm 84",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 84",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "title": "Psalm 88",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 88",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "title": "Psalm 89",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 89",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "title": "Psalm 90",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 90",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "title": "Psalm 91",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 91",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "title": "Psalm 93",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 93",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "title": "Psalm 95",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 95",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "title": "Psalm 100",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 100",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "title": "Psalm 103",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 103",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "title": "Psalm 104",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 104",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "title": "Psalm 105",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 105",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "title": "Psalm 110",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 110",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "title": "Psalm 116",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 116",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "title": "Psalm 118",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "Psalm 118",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "title": "Psalm 121",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 121",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "title": "Psalm 127",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 127",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "title": "Psalm 139",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 139",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "title": "Psalm 141",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 141",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "title": "Psalm 145",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 145",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "title": "Psalm 150",
+   "note": "1 mark",
+   "readings": [
+    {
+     "ref": "Psalm 150",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  }
+ ]
+}

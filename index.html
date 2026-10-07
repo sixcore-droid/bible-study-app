@@ -8,6 +8,10 @@
 <header class="top">
   <button class="railbtn" id="railbtn" aria-controls="rail" aria-expanded="false">Plan</button>
   <div class="brand">Study Workstation<small><a id="brandlink" href="https://jayms.com/bible-study-app/" target="_blank" rel="noopener" title="Open the online version on jayms.com">jayms.com</a></small></div>
+  <div class="viewsw" id="appsw" role="group" aria-label="Which app">
+    <button data-app="study" aria-pressed="true">Bible Study</button>
+    <button data-app="hg" aria-pressed="false">Hebrew &amp; Greek</button>
+  </div>
   <form class="goto" id="goform" role="search" autocomplete="off">
     <input id="goref" list="gobooks" placeholder="Go to a passage: Mark 13:14" aria-label="Go to a passage" spellcheck="false">
     <button type="submit">Go</button>
@@ -47,6 +51,10 @@
       <select id="plan" hidden></select>
       <label class="planopt"><input type="checkbox" id="addpsalm"> Matching psalm</label>
       <label class="planopt"><input type="checkbox" id="hidelists"> Hide genealogies &amp; lists</label>
+      <label class="planopt hgopt" hidden><input type="checkbox" id="hgorig"> Original words</label>
+      <label class="planopt hgopt mk-claim" hidden><input type="checkbox" data-hgcat="claim"> <i class="dot"></i> Changes the claim</label>
+      <label class="planopt hgopt mk-emphasis" hidden><input type="checkbox" data-hgcat="emphasis"> <i class="dot"></i> Changes the emphasis</label>
+      <label class="planopt hgopt mk-cosmetic" hidden><input type="checkbox" data-hgcat="cosmetic"> <i class="dot"></i> Cosmetic</label>
     </div>
     <div>
       <h2 class="planname" id="planname"></h2>
@@ -163,12 +171,13 @@ const QUICK = [
 
 /* The dock: an order, plus the one tool that belongs to this page alone (Notes). Everything else is a component's own meta. */
 const NOTES_ICON = '<svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>';
-const DOCK = ["verse","outline","word","|","council","gods","facts","family","maps","art","scrolls","posts","corpus","fathers","targum","xref","bp","x","chats","logos","shelf","vocab","ideas","vault","|","wrap","review","config","notes"];
+const DOCK = ["marks","verse","outline","word","|","council","gods","facts","family","maps","art","scrolls","posts","corpus","fathers","targum","xref","bp","x","chats","logos","shelf","vocab","ideas","vault","|","wrap","review","config","notes"];
 function toolMeta(id){
   if(id==="notes") return {id, label:"Notes", name:"All my notes", icon:NOTES_ICON};
   const P = JST.panels[id]; return Object.assign({}, P.meta);
 }
 function toolCount(id){
+  if(id==="marks") return hgSpots().length;
   if(id==="posts") return dayPosts().length;
   if(id==="x") return cur() && thread(cur().id) ? 1 : 0;
   if(id==="logos") return ST.c("logos").all().filter(x=>!x.done).length;
@@ -263,6 +272,7 @@ function initNote(id, force){
   const dr=ST.c("drafts").peek(id); if(dr){ NOTES[id].text=dr.text; NOTES[id].pub=!!dr.pub; DIRTY[id]=true }
 }
 const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:false   /* the box is gone (6 Oct): "My OT Reading Plan" leaves the genealogies out instead */,
+           app:store.get("app","study"), mark:null, hgShow:store.get("hgShow",{claim:true, emphasis:true, cosmetic:false}), hgOrig:store.get("hgOrig",true),   /* the Hebrew & Greek mode */
            size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read")};
 /* public build: Read along only; no My desk switch, no prototype badge */
 if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
@@ -314,15 +324,21 @@ function buildDay(){
 }
 function renderPlan(){
   const p = plan(); if(!p) return;
-  const mine = ST.c("plans").all();
-  $("plan").innerHTML = PLANINDEX.plans.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")
+  const hg = S.app==="hg", appPlans = PLANINDEX.plans.filter(x=>(x.app||"study")===S.app);   // each app lists its own plans
+  const mine = hg ? [] : ST.c("plans").all();
+  $("plan").innerHTML = appPlans.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")
     + (mine.length ? `<optgroup label="Plans I made">${mine.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")}</optgroup>` : "")
-    + (S.view!=="public" ? `<option value="__build">+ Build a plan\u2026</option>` : "");
+    + (S.view!=="public" && !hg ? `<option value="__build">+ Build a plan\u2026</option>` : "");
   /* the plans as buttons under one "current plan" button (the select stays as the hidden source of truth) */
-  const opts=[...PLANINDEX.plans.map(x=>[x.id,x.name]), ...mine.map(x=>[x.id,x.name])];
+  const opts=[...appPlans.map(x=>[x.id,x.name]), ...mine.map(x=>[x.id,x.name])];
   $("planpick").innerHTML = `<span>${esc(p.name)}</span><span class="caret" aria-hidden="true">▾</span>`;
   $("planlist").innerHTML = opts.map(([id,n])=>`<li><button data-pickplan="${id}" class="${id===S.plan?"on":""}"${id===S.plan?' aria-current="true"':""}>${esc(n)}${id===S.plan?' <span class="sub">reading now</span>':""}</button></li>`).join("")
-    + (S.view!=="public" ? `<li><button data-pickplan="__build" class="build">+ Build a plan…</button></li>` : "");
+    + (S.view!=="public" && !hg ? `<li><button data-pickplan="__build" class="build">+ Build a plan…</button></li>` : "");
+  /* the options under the plan: Bible Study's, or the Hebrew & Greek mode's */
+  ["addpsalm","hidelists"].forEach(id=>$(id).closest("label").hidden=hg);
+  document.querySelectorAll(".hgopt").forEach(l=>l.hidden=!hg);
+  document.querySelectorAll("#appsw button").forEach(b=>{ const on=b.dataset.app===S.app; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on) });
+  document.body.classList.toggle("hg-noorig", hg && !S.hgOrig);
   $("planname").textContent = p.name; $("plandesc").textContent = p.description||"";
   const t = todayNum(p), total=p.days.length, done=p.days.filter(dayDone).length;
   $("progtxt").textContent = t<1 ? `Starts ${new Date(planStart(p)+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long"})}` : t>total ? `Finished · ${total} ${p.weekly?"weeks":"days"}` : `${p.weekly?"Week":"Day"} ${t} of ${total}`;
@@ -335,7 +351,7 @@ function renderPlan(){
   const first=(p.days.find(d=>!dayDone(d) && !isList(d))||p.days.find(d=>d.day===t)||p.days[0]).day;
   const full=p.days.filter(d=>d.day>=first).concat(p.days.filter(d=>d.day<first)).filter(d=>!S.hideLists || !isList(d) || d.day===S.day);
   /* a week at a time: where you are and the six after it; the rest behind "Show all" (the day you picked stays in view) */
-  const SHOW=7, order = S.allDays ? full : full.filter((d,i)=>i<SHOW || d.day===S.day);
+  const SHOW=7, order = S.allDays || (S.app==="hg" && full.length<=50) ? full : full.filter((d,i)=>i<SHOW || d.day===S.day);   // Hebrew & Greek: 50 days or fewer simply scroll
   const more = full.length>order.length || S.allDays ? `<li><button class="daysmore" data-alldays>${S.allDays?"Show fewer":"Show all "+full.length+(p.weekly?" weeks":" days")}</button></li>` : "";
   $("days").innerHTML = (S.allDays ? more : "") + order.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
     const sep = d.day===p.days[0].day && first>p.days[0].day ? `<li class="days-sep lbl">Done · from ${p.weekly?"week":"day"} 1</li>` : "";
@@ -360,7 +376,7 @@ function seedDone(p){ if(!p || !p.doneThrough) return; const k=`seeded:${p.id}:$
   p.days.filter(d=>d.day<=p.doneThrough).forEach(d=>d.readings.forEach(x=>{ const id=`${p.id}:${d.day}:${JaymsRef.key(x.ref)}`; if(!isDone(id)) ST.c("done").save(id,{done:true, at:Date.now()}) }));
   store.set(k,true) }
 function choosePlan(id){
-  S.plan=id; store.set("plan",id); const p=plan(); const t=todayNum(p);
+  S.plan=id; store.set(S.app==="hg"?"plan:hg":"plan",id); const p=plan(); const t=todayNum(p);   // each app remembers its own plan
   S.day=Math.min(Math.max(t,1),p.days.length); S.reading=0; buildDay();
 }
 /* ===== READER ===== */
@@ -427,6 +443,7 @@ function renderReader(){
       : (SPF ? `<div class="phdr one"><span class="lbl">${eff[0]}${readBtns(0)}</span></div>` : "")
         + `<div class="pone" data-col="0">` + blocks.map(b=>b.label?`<div class="lbl seglbl">${esc(b.label)}</div>`:blockHTML(eff[0],b)).join("") + `</div>`)
     + `<div class="ver">${[par?"":eff[0], linkNote].filter(Boolean).join(" · ")}</div>`;
+  if(S.app==="hg") hgApply();   // the Hebrew & Greek marks, laid on the text just drawn
   findApply(false);
   syncChapterNav();
   const th = thread(r.id);
@@ -478,7 +495,7 @@ var USER_MOVED = false;   // once you scroll or type yourself, the restore never
 /* ===== DOCK + PANEL ===== */
 setTimeout(()=>JST.data.counts().then(()=>renderDock()),1500);   // after the first paint: what the dock buttons count from (people, places, maps, scrolls, art)
 function renderDock(){
-  const list = TOOLS.filter(t=>!(t.owner && S.view==="public"));
+  const list = TOOLS.filter(t=>!(t.owner && S.view==="public") && !(t.id==="marks" && S.app!=="hg"));
   $("dock").innerHTML = list.map(t=>{ if(t.sep) return "<hr>"; const n=toolCount(t.id);
     /* a number: how many for this passage; greyed: nothing for this passage; plain: always something there */
     return `<button class="dk${S.tool===t.id?" on":""}${n===0?" none":""}" data-t="${t.id}" aria-pressed="${S.tool===t.id}" title="${esc(t.name)}${n===0?" (nothing for this passage)":""}">${t.icon}<span>${t.label}</span>${n?`<span class="cnt">${n}</span>`:""}</button>`}).join("");
@@ -505,6 +522,7 @@ const HANDLERS = {
   meta:    m => applyMeta(m),
   word:    k => { S.word=k; if(S.tool!=="word"){ S.tool="word"; renderDock(); renderPanel() } renderReader() },
   verse:   v => { S.vsel=v; S.tool="verse"; renderReader(); renderDock(); renderPanel() },
+  mark:    id => { S.mark=id; S.tool="marks"; renderReader(); renderDock(); renderPanel() },
   passage: d => { const err=openPassage(d.ref); if(err) $("gomsg").textContent=err },
   note:    d => { const id=JaymsRef.key(d.ref); initNote(id); NOTES[id].text=(NOTES[id].text?NOTES[id].text+"\n\n":"")+"Claude: "+d.text; if(id===cur().id) markDirty() },
   answer:  rec => ST.c("answers").save(rec.id, rec),
@@ -572,6 +590,7 @@ function restoreOpen(){
 function panelOptions(id){
   const r = cur();
   const o = { ref:r.ref, on:HANDLERS, owner:S.view!=="public" };   // owner:false in Read along hides vocab buttons, Logos links and James-only notes
+  if(id==="marks")   { const sp=hgSpots(); o.mark = sp.find(x=>x.id===S.mark) || null; o.list = sp.map(x=>x.id); }
   if(id==="word")    o.word = S.word;
   if(id==="verse")   { o.verse = S.vsel; o.scripture = scriptureFor; }
   if(id==="vault")   o.vaultName = "Jayms";
@@ -619,7 +638,7 @@ function renderPanel(){
     return;
   }
   /* the same panel on the same passage keeps its own state (an open word, a typed question) */
-  const key = [S.tool, r.ref, S.view, (S.tool==="xref"||S.tool==="targum")?S.ver:"", S.tool==="word"?S.word:"", S.tool==="verse"?JSON.stringify(S.vsel):"", S.tool==="claude"?!!SAMPLE:""].join("|");
+  const key = [S.tool, r.ref, S.view, (S.tool==="xref"||S.tool==="targum")?S.ver:"", S.tool==="word"?S.word:"", S.tool==="verse"?JSON.stringify(S.vsel):"", S.tool==="claude"?!!SAMPLE:"", S.tool==="marks"?S.mark+"|"+hgSpots().map(x=>x.id).join(","):""].join("|");
   if(PH && PH_KEY===key){ PH.refresh(); return }
   if(PH) PH.destroy();
   $("pbody").innerHTML = '<div id="pmount"></div>'; $("pbody").scrollTop = 0;
@@ -848,6 +867,76 @@ window.addEventListener("resize",syncRailBtn);
 /* today's date in the top bar, checked every minute so it turns over at midnight */
 function showToday(){ $("today").textContent = new Date().toLocaleDateString("en-GB",{weekday:"long", day:"numeric", month:"long", year:"numeric"}).replace(",","") }
 showToday(); setInterval(showToday, 60000);
+/* ===== HEBREW & GREEK =====
+   "Hebrew and Greek Without Learning Either" read a chapter at a time. The tracks are ordinary plans (plans/hg-*.json, "app":"hg"),
+   so the rail, reader, toolbar, notes and dock are Bible Study's own; this lays the marks on the text (hebrew-greek.json, by
+   scripts/build-hebrew-greek.py), and the Marks panel (jayms-study.js) explains one. Nothing here runs in Bible Study. */
+let HGD = null;
+const MK = JST.marks;
+function hgDefault(){ if(S.app!=="hg") return PLANINDEX.default; const p=PLANINDEX.plans.find(x=>x.app==="hg"); return p ? p.id : PLANINDEX.default }
+function hgLoad(){ if(HGD) return; JST.data.hg().then(d=>{ HGD=d||{spots:{}}; if(S.app==="hg"){ renderReader(); renderDock(); renderPanel() } }) }
+/* the marks in the passage on screen that the category boxes let through, in verse order */
+function hgSpots(){
+  const r=cur(); if(!HGD || !r || S.app!=="hg") return [];
+  const out=[]; JaymsRef.parse(r.ref).forEach(g=>{ for(let c=g.c1;c<=g.c2;c++) (HGD.spots[`${g.book}|${c}`]||[]).forEach(x=>{ if(S.hgShow[x.category]!==false && JaymsRef.contains([g],g.book,c,x.v)) out.push(x) }) });
+  return out.sort((a,b)=>a.c-b.c||a.v-b.v);
+}
+/* underline each mark's own English word and put its tag right after it; a mark with no single word tags its verse */
+function hgApply(){
+  const list=hgSpots(); if(!list.length) return;
+  const by={}; list.forEach(x=>(x.vs||[x.v]).forEach(v=>(by[`${x.c}|${v}`]=by[`${x.c}|${v}`]||[]).push(x)));
+  $("text").querySelectorAll("a.vn[data-v]").forEach(a=>{
+    const [, c, v] = a.dataset.v.split("|"), here = by[`${c}|${v}`]; if(!here) return;
+    const box = a.closest(".vs, p.v"); if(!box) return;
+    if(box.matches("p.v")) box.classList.add("mkhas", "mk-"+here[0].category);
+    /* the verse's words, across its text nodes (not the number, version tag or notes) */
+    const walk=document.createTreeWalker(box, NodeFilter.SHOW_TEXT, {acceptNode:n=>n.parentElement.closest(".vn,.vtag,.sup,.nov,.lbl")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+    const nodes=[]; while(walk.nextNode()) nodes.push(walk.currentNode);
+    const words=[]; nodes.forEach(n=>{ const re=/[A-Za-z\u00C0-\u017F']+/g; let m; while((m=re.exec(n.nodeValue))) words.push({n, i:m.index, t:m[0]}) });
+    const toks=[]; words.forEach(w=>{ toks.push(" "); toks.push(w.t) }); toks.push(" ");   // the shape JST.marks.find reads: words at odd indexes
+    const owner={}, last={}, loose=[];
+    here.forEach(x=>{ const at=MK.find(toks, x, +v).filter(i=>!(i in owner)); if(!at.length){ if(+v===x.v) loose.push(x); return }
+      at.forEach(i=>owner[i]=x); last[x.id]=at[at.length-1] });
+    const tagFor = x => { const b=document.createElement("button"); b.className=`mtag mk-${x.category}${S.mark===x.id?" cur":""}`; b.dataset.mark=x.id; b.title=x.summary; b.textContent=MK.tag(x); return b };
+    /* wrap from the end, so earlier offsets in the same text node stay true */
+    Object.keys(owner).map(Number).sort((a,b)=>b-a).forEach(i=>{
+      const w=words[(i-1)/2], x=owner[i], rg=document.createRange(); rg.setStart(w.n,w.i); rg.setEnd(w.n,w.i+w.t.length);
+      const sp=document.createElement("span"); sp.className=`mk mk-${x.category}${S.mark===x.id?" cur":""}`; sp.dataset.mark=x.id; sp.tabIndex=0; sp.setAttribute("role","button");
+      rg.surroundContents(sp); if(last[x.id]===i) sp.after(tagFor(x));
+    });
+    loose.forEach(x=>box.append(tagFor(x)));
+  });
+}
+function hgSwitch(app){
+  if(app===S.app) return;
+  S.app=app; store.set("app",app); S.mark=null; S.adhoc=null;
+  if(S.tool==="marks" || app==="hg") S.tool=null;   // the panel stays shut until a mark is tapped
+  const want = store.get(app==="hg"?"plan:hg":"plan",null);
+  choosePlan(PLANS[want] && (PLANS[want].app||"study")===app ? want : hgDefault());
+  if(app==="hg") hgLoad();
+  rememberOpen(); render();
+}
+document.addEventListener("click",e=>{
+  const ap=e.target.closest("#appsw [data-app]"); if(ap){ hgSwitch(ap.dataset.app); return }
+  const mk=e.target.closest("#text [data-mark]"); if(mk){ e.preventDefault(); HANDLERS.mark(mk.dataset.mark) }
+});
+document.addEventListener("change",e=>{
+  if(e.target.id==="hgorig"){ S.hgOrig=e.target.checked; store.set("hgOrig",S.hgOrig); renderPlan(); return }
+  const c=e.target.closest("[data-hgcat]"); if(c){ S.hgShow=Object.assign({},S.hgShow,{[c.dataset.hgcat]:c.checked}); store.set("hgShow",S.hgShow);
+    if(S.mark && !hgSpots().some(x=>x.id===S.mark)) S.mark=null; renderReader(); renderDock(); renderPanel() }
+});
+/* a mark's word and its tag light up together */
+const hgLit=(id,on)=>$("text").querySelectorAll(`[data-mark="${id}"]`).forEach(x=>x.classList.toggle("lit",on));
+$("text").addEventListener("mouseover",e=>{ const x=e.target.closest("[data-mark]"); if(x) hgLit(x.dataset.mark,true) });
+$("text").addEventListener("mouseout",e=>{ const x=e.target.closest("[data-mark]"); if(x) hgLit(x.dataset.mark,false) });
+document.addEventListener("keydown",e=>{
+  if(S.app!=="hg") return;
+  if((e.key==="Enter"||e.key===" ") && e.target.matches && e.target.matches("#text .mk")){ e.preventDefault(); HANDLERS.mark(e.target.dataset.mark); return }
+  if(S.tool==="marks" && S.mark && (e.key==="ArrowRight"||e.key==="ArrowLeft") && !(e.target.closest && e.target.closest("input,textarea,select"))){
+    const ids=hgSpots().map(x=>x.id), n=ids[ids.indexOf(S.mark)+(e.key==="ArrowRight"?1:-1)]; if(n){ e.preventDefault(); HANDLERS.mark(n) } }
+});
+$("hgorig").checked=S.hgOrig; document.querySelectorAll("[data-hgcat]").forEach(c=>c.checked=S.hgShow[c.dataset.hgcat]!==false);
+
 /* Load the plan data, then draw. */
 (async()=>{
   try{
@@ -855,7 +944,9 @@ showToday(); setInterval(showToday, 60000);
     PLANINDEX = await get("plans/index.json");
     const plans = await Promise.all(PLANINDEX.plans.map(x=>get(x.file)));
     plans.forEach(p=>PLANS[p.id]=p); mergeMyPlans(); plans.forEach(seedDone);
-    choosePlan(PLANS[S.plan] ? S.plan : PLANINDEX.default);
+    if(S.app==="hg") S.plan = store.get("plan:hg",null);
+    choosePlan(PLANS[S.plan] && (PLANS[S.plan].app||"study")===S.app ? S.plan : hgDefault());
+    if(S.app==="hg") hgLoad();
     restoreOpen();
     render();
   }catch(e){

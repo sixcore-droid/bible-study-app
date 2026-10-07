@@ -61,6 +61,24 @@
    "id": "bp-pauls-letters",
    "file": "plans/bp-pauls-letters.json",
    "name": "BibleProject: Paul's Letters"
+  },
+  {
+   "id": "hg-john",
+   "file": "plans/hg-john.json",
+   "name": "John",
+   "app": "hg"
+  },
+  {
+   "id": "hg-genesis",
+   "file": "plans/hg-genesis.json",
+   "name": "Genesis",
+   "app": "hg"
+  },
+  {
+   "id": "hg-psalms",
+   "file": "plans/hg-psalms.json",
+   "name": "Psalms",
+   "app": "hg"
   }
  ]
 }

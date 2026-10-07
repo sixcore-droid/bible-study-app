@@ -1,0 +1,261 @@
+{
+ "id": "hg-john",
+ "app": "hg",
+ "name": "John",
+ "description": "Hebrew and Greek Without Learning Either: John, a chapter a day. Every mark is a place the English Bibles part company, and what in the Greek made them.",
+ "start": "2026-10-07",
+ "days": [
+  {
+   "day": 1,
+   "title": "John 1",
+   "note": "14 marks",
+   "readings": [
+    {
+     "ref": "John 1",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "John 2",
+   "note": "7 marks",
+   "readings": [
+    {
+     "ref": "John 2",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "John 3",
+   "note": "11 marks",
+   "readings": [
+    {
+     "ref": "John 3",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "John 4",
+   "note": "7 marks",
+   "readings": [
+    {
+     "ref": "John 4",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "John 5",
+   "note": "5 marks",
+   "readings": [
+    {
+     "ref": "John 5",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "John 6",
+   "note": "6 marks",
+   "readings": [
+    {
+     "ref": "John 6",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "John 7",
+   "note": "4 marks",
+   "readings": [
+    {
+     "ref": "John 7",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "John 8",
+   "note": "6 marks",
+   "readings": [
+    {
+     "ref": "John 8",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "John 9",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "John 9",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "John 10",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "John 10",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "John 11",
+   "note": "4 marks",
+   "readings": [
+    {
+     "ref": "John 11",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "John 12",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "John 12",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "John 13",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "John 13",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "John 14",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "John 14",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "John 15",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "John 15",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "John 16",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "John 16",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "John 17",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "John 17",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "John 18",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "John 18",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "John 19",
+   "note": "3 marks",
+   "readings": [
+    {
+     "ref": "John 19",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "John 20",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "John 20",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "John 21",
+   "note": "2 marks",
+   "readings": [
+    {
+     "ref": "John 21",
+     "role": "Reading",
+     "why": ""
+    }
+   ]
+  }
+ ]
+}

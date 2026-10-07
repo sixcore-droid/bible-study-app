@@ -418,6 +418,7 @@
       }).catch(function () { return null; }));
     },
     dss: function () { return getJSON("dss.json").then(function (d) { DSSD = d; return d; }); },
+    hg: function () { return getJSON("hebrew-greek.json"); },   // the Hebrew & Greek mode's marks (scripts/build-hebrew-greek.py)
     /* what the dock buttons count from, loaded once after the first paint (small files; the panels load their own full data) */
     counts: function () { return Promise.all([data.names(), data.maps().catch(function () {}), data.dss().catch(function () {}),
       getJSON("art-refs.json").then(function (d) { ARTREFS = d || []; }).catch(function () { ARTREFS = []; }),
@@ -634,6 +635,7 @@
     shelfcfg:   "a shelf setting changed                  {key: authors|commentaries|studyBibles, value}",
     ideaSet:    "change a logged idea                     {id, written?, title?}",
     ideaRemove: "drop a logged idea                       {id}",
+    mark:    "show this Hebrew & Greek mark            \"john-1-1\" (mark id)",
     logos:   "queue Logos searches                     {queries:[...], ref, answerId}",
     logosDone:   "mark a queued Logos block done or not    {id, done}",
     logosRemove: "drop a queued Logos block                {id}",
@@ -2263,6 +2265,70 @@
     },
     destroy: function () { if (this.xh) this.xh.destroy(); Panel.prototype.destroy.call(this); }
   }, { owner: false, key: null, store: null, draft: null, links: null });
+
+  // ------------------------------------------------------------------ Marks (the Hebrew & Greek mode)
+  /* Where a mark's English word sits in a verse. A mark (hebrew-greek.json) names, verse by verse, the English for its Hebrew or
+     Greek word and which time it occurs ("tv": {"1": [[["was"], 0], ...]}); this finds it in any version's text. Used by the page,
+     to underline the word and tag it, and by the Marks panel, to show each version's words around it. */
+  var MK_SMALL = /^(the|a|an|of|to|in|and|is|was|be|i|he|it)$/;
+  function mkTokens(t) { return String(t || "").split(/([A-Za-z\u00C0-\u017F']+)/); }   // odd indexes are words
+  function mkSame(tk, w, loose) { tk = tk.toLowerCase(); if (tk === w) return true; if (!loose || w.length < 4) return false; return tk.indexOf(w.slice(0, Math.max(4, w.length - 2))) === 0; }   // loose: created ~ create
+  function mkFind(toks, s, v) {
+    var hits = [];
+    ((s.tv || {})[v || s.v] || []).forEach(function (t) {
+      var cands = t[0], occ = t[1], done = false;
+      [false, true].forEach(function (loose) {
+        cands.forEach(function (c) {
+          if (done) return;
+          var all = c.toLowerCase().split(/\s+/), ws = all.length > 1 ? all.filter(function (w) { return !MK_SMALL.test(w); }) : all, starts = [];
+          if (!ws.length) return;
+          for (var i = 1; i < toks.length; i += 2) { var ok = true; for (var k = 0; k < ws.length; k++) { var tk = toks[i + 2 * k]; if (!tk || !mkSame(tk, ws[k], loose)) { ok = false; break; } } if (ok) starts.push(i); }
+          if (starts.length) { var at = starts[Math.min(occ, starts.length - 1)]; for (var k2 = 0; k2 < ws.length; k2++) hits.push(at + 2 * k2); done = true; }
+        });
+      });
+    });
+    return hits.filter(function (x, i) { return hits.indexOf(x) === i; }).sort(function (a, b) { return a - b; });
+  }
+  var MK_CAT = { claim: "Changes the claim", emphasis: "Changes the emphasis", cosmetic: "Cosmetic" };
+  var MK_FAM = { range: "Word range", merge: "Merged senses", syntax: "Syntax", rare: "Rare word", text: "Manuscripts", drift: "English drift", hebraism: "Hebraism", aspect: "Verb aspect", article: "The article", genitive: "Genitive" };
+  /* the tag in the line: the original word in English letters, short */
+  function mkTag(s) { var w = (s.w || "").trim(); if (!w || w[0] === "(") return MK_FAM[s.family] || "note"; w = w.split(" (")[0]; return w.length > 26 ? w.slice(0, 24).replace(/\s+\S*$/, "") + "\u2026" : w; }
+  api.marks = { tokens: mkTokens, find: mkFind, tag: mkTag, cat: MK_CAT, fam: MK_FAM };
+
+  /* The panel for one mark: the versions cut to the words around it, then the tool's own explanation, in its own order.
+     opts: mark (the mark), list (the marks shown in this chapter, in order, for ‹ ›), on.mark(id) to step. */
+  define("Marks", { id: "marks", label: "Marks", name: "Hebrew and Greek marks", icon: '<svg viewBox="0 0 24 24"><path d="M4 18h16"/><path d="M7 14l3-8 3 8M8 11.5h4"/><path d="M15 6h4M17 6v8"/></svg>' }, {
+    prepare: function () { var self = this; return data.text(this.o.ref).then(function (rows) { self.rows = rows || []; }); },
+    view: function () {
+      var s = this.o.mark, list = this.o.list || [], st = this.st;
+      if (!s) return { kick: "Marks", title: "Hebrew and Greek", body: none("Tap an underlined word or a tag in the text.") };
+      var i = list.indexOf(s.id), row = (this.rows || []).filter(function (r) { return r.v === s.v; })[0], vers = ["LSB", "ESV", "NET", "NLT", "KJV"];
+      var clean = function (t) { return String(t || "").replace(/\[w:\w+\]|\[\/w\]/g, "").replace(/<[^>]+>/g, ""); };
+      var clause = function (text) {
+        var toks = mkTokens(clean(text)), at = mkFind(toks, s, s.v), m = function (t, j) { return at.indexOf(j) > -1 ? "<mark>" + esc(t) + "</mark>" : esc(t); };
+        if (!at.length || st.full) return toks.map(m).join("");
+        var lo = Math.max(0, at[0] - 12), hi = Math.min(toks.length, at[at.length - 1] + 13);
+        return (lo > 0 ? "\u2026 " : "") + toks.slice(lo, hi).map(function (t, j) { return m(t, lo + j); }).join("") + (hi < toks.length ? " \u2026" : "");
+      };
+      var para = function (t) { return t ? String(t).split(/\n\n+/).map(function (p) { return "<p>" + md(p) + "</p>"; }).join("") : ""; };
+      var part = function (v, title, body) { return body ? box(v, title, body) : ""; };
+      var h = '<div class="vpick chnav"><button class="sz" data-jst-mark="-1"' + (i <= 0 ? " disabled" : "") + ' aria-label="Previous mark">\u2039</button><button class="sz" data-jst-mark="1"' + (i >= list.length - 1 ? " disabled" : "") + ' aria-label="Next mark">\u203A</button></div>';
+      h += box("explain", "", "<p>" + esc(s.summary) + "</p>" + (s.w ? '<p class="lbl u-mt6">' + esc(s.w) + " \u00B7 " + esc(MK_FAM[s.family] || "") + " \u00B7 " + esc(s.lang || "") + "</p>" : ""));
+      if (row) h += box("scripture", "The versions", vers.filter(function (v) { return row.texts[v]; }).map(function (v) { return '<p class="u-m5"><span class="lbl">' + v + '</span> <span class="mkclause">' + clause(row.texts[v]) + "</span></p>"; }).join("") +
+        '<button class="sz" data-jst-full>' + (st.full ? "Just the words around it" : "Whole verse") + "</button>");
+      h += part("plain", "First, in plain English", para(s.plain)) + part("witness", "What you are seeing", para(s.seeing)) + part("open", "Why translators split", para(s.why)) +
+        part("explain", "The rule to carry away", para(s.rule)) + part("explain", "Why this verse", para(s.whyThis)) +
+        part("scripture", "King James", s.kjv ? "<p>" + md(s.kjv) + "</p>" + (s.kjvWhy ? para(s.kjvWhy) : "") : "") + part("wording", "How the others read it", para(s.others)) + part("open", "Choosing between them", para(s.choosing));
+      h += '<p class="ctx u-fs13">From <a href="https://jayms.com/bible-study-tools-2/bible-translation-differences/" target="_blank" rel="noopener">Hebrew and Greek Without Learning Either</a> on jayms.com.</p>';
+      return { kick: "Mark " + (i + 1) + " of " + list.length + " \u00B7 " + (MK_CAT[s.category] || ""), title: this.o.ref.split(" ")[0] === "Psalm" ? "Psalm " + s.c + ":" + s.v + " \u00B7 " + mkTag(s) : s.title.replace(/[a-z]$/, "").split(",")[0].replace(/(\d+:\d+)[a-z]/, "$1") + " \u00B7 " + mkTag(s), body: h };
+    },
+    click: function (e) {
+      var st = e.target.closest("[data-jst-mark]"), list = this.o.list || [];
+      if (st) { e.stopPropagation(); var n = list[list.indexOf(this.o.mark.id) + Number(st.getAttribute("data-jst-mark"))]; if (n) this.emit("mark", n); return; }
+      if (e.target.closest("[data-jst-full]")) { e.stopPropagation(); this.st.full = !this.st.full; this.paint(); return; }
+      Panel.prototype.click.call(this, e);
+    }
+  }, { mark: null, list: [] }, function () { return null; });
 
   global.JaymsStudy = api;
 })(window);
