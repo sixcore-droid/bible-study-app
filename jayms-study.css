@@ -388,13 +388,14 @@ body.rail-hidden .rail:not(.open){display:none}
 
 /* dock */
 .dock{grid-column:-2 / -1;border-left:1px solid var(--line);background:var(--paper);display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 0;position:sticky;top:var(--toph);height:calc(100vh - var(--toph));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
-.dk{flex:none;width:52px;padding:5px 0 4px;border-radius:8px;display:flex;flex-direction:column;align-items:center;gap:3px;border:1px solid transparent}
+.dk{flex:none;width:52px;padding:5px 0 4px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;border:1px solid transparent;position:relative}
 .dk svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.6}
 .dk span{font-family:var(--label);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;line-height:1.1;text-align:center}
 .dk:hover{background:var(--paper-deep)}
 .dk.on{background:var(--paper-deep);border-color:var(--gold)}
 .dk.on svg{stroke:var(--gold)}
-.dk .cnt{font-family:var(--label);font-size:11px;background:var(--gold);color:var(--paper-deep);border-radius:9px;padding:0 5px;margin-top:-2px}
+/* the count sits on the icon's corner, so every button is the same shape whether it has one or not */
+.dk .cnt{position:absolute;top:0;left:calc(50% + 6px);font-family:var(--label);font-size:10.5px;line-height:15px;min-width:15px;text-align:center;background:var(--gold);color:var(--paper-deep);border-radius:8px;padding:0 4px}
 .dock hr{width:36px;border:0;border-top:1px solid var(--line);margin:4px 0}
 
 /* ---------- narrower screens ---------- */
@@ -416,7 +417,9 @@ body.rail-hidden .rail:not(.open){display:none}
   .desk{grid-template-columns:minmax(0,1fr)}
   .dock{position:fixed;inset:auto 0 0 0;top:auto;height:auto;flex-direction:row;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));border-left:0;border-top:1px solid var(--line);z-index:45}
   .dock hr{display:none}
-  .dk{width:auto;flex:1;padding:6px 0}
+  .dock{justify-content:flex-start;align-items:stretch;overflow-x:auto;overflow-y:hidden;gap:0}
+  .dk{width:auto;min-width:60px;flex:none;padding:7px 6px 5px}
+  .dk span:not(.cnt){white-space:nowrap}
   .panel{right:0;left:0;top:auto;bottom:calc(64px + env(safe-area-inset-bottom,0px));height:72vh;width:auto;border-left:0;border-top:1px solid var(--gold);border-radius:14px 14px 0 0}
   .reader{padding-bottom:120px}
   .pgrip{display:none}
