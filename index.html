@@ -314,8 +314,13 @@ function renderPlan(){
   $("progtxt").textContent = t<1 ? `Starts ${new Date(planStart(p)+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long"})}` : t>total ? `Finished · ${total} ${p.weekly?"weeks":"days"}` : `${p.weekly?"Week":"Day"} ${t} of ${total}`;
   $("progpct").textContent = Math.round(done/total*100)+"%";
   $("progbar").style.width = Math.max(2,done/total*100)+"%";
-  $("days").innerHTML = p.days.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
-    return `<li><button class="day${fin?" done":""}${on?" on":""}" data-day="${d.day}" ${isT?'aria-current="date"':""}>
+  /* the list starts where you are: the first day not yet done (or today), and the days before it follow at the bottom, so
+     the plan menu above is never a long scroll away and day 1 comes round again after the last day */
+  const first=(p.days.find(d=>!dayDone(d))||p.days.find(d=>d.day===t)||p.days[0]).day;
+  const order=p.days.filter(d=>d.day>=first).concat(p.days.filter(d=>d.day<first));
+  $("days").innerHTML = order.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
+    const sep = d.day===p.days[0].day && first>p.days[0].day ? `<li class="days-sep lbl">Done · from ${p.weekly?"week":"day"} 1</li>` : "";
+    return sep+`<li><button class="day${fin?" done":""}${on?" on":""}" data-day="${d.day}" ${isT?'aria-current="date"':""}>
       <span class="n">${isT?(p.weekly?"This week":"Today"):(p.weekly?"Week ":"Day ")+d.day}</span>
       <span class="t">${esc(d.title)}${(d.readings.length>1||d.note)?`<small>${esc(d.readings.length>1?"with "+d.readings.slice(1).map(x=>x.ref).join(" · "):d.note)}</small>`:""}</span>
       <span class="ck" role="img" aria-label="${fin?"done":"not done"}">${fin?"✓":""}</span></button></li>`}).join("");
