@@ -179,7 +179,6 @@ a{color:var(--gold)}
 .brand small{font-family:var(--label);font-size:13px;font-weight:400;letter-spacing:.12em;color:var(--gold);margin-left:10px;text-transform:uppercase}
 .brand small a{color:inherit;text-decoration:none}
 .brand small a:hover{text-decoration:underline;text-underline-offset:3px}
-.flag{font-family:var(--label);font-size:13px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--rust);color:var(--rust);padding:2px 8px;border-radius:3px}
 .top .sp{flex:1}
 .today{font-family:var(--label);font-size:13px;color:var(--ink)}
 .helpbtn{font:600 16px/1 var(--label);width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer;margin-left:10px;flex:none}
@@ -474,7 +473,7 @@ body.rail-hidden .rail:not(.open){display:none}
 .u-w600{font-weight:600 !important}
 .u-faded{opacity:.5 !important}
 /* the public build on jayms.com (body.public-app): readers only */
-.public-app #viewsw,.public-app .flag{display:none}
+.public-app #viewsw{display:none}
 /* Help: owner-only entries hide on the site; reader versions show only there */
 .public-app .owner-only,body:not(.public-app) .public-only{display:none}
 .jst-player{width:100%;aspect-ratio:16/9;border:0;display:block;margin-top:8px}
