@@ -857,7 +857,7 @@
     return LEAFLET;
   }
   define("Maps", { id: "maps", label: "Maps", name: "Maps of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>' }, {
-    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; })]).then(function (r) { self.nm = r[0]; self.mp = r[2] || {}; }); },
+    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null]).then(function (r) { self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; }); },
     view: function () {
       var self = this, places = namesIn(this.nm, this.o.ref).filter(function (p) { return p.t === "Place"; });
       var pinned = places.filter(function (p) { return p.ll; });
@@ -870,6 +870,7 @@
           (p.ll && CFG.onlineMaps ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + "</div>"); }).join("");
       else h += none("No place is named in " + esc(this.o.ref) + ".");
       h += '<div class="lbl u-mt14">Bible maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>" + (ms.length ? box("witness", "", '<div class="item">' + ms.map(function (m) { return '<p class="u-m5"><button class="tt jst-xt" data-jst-pmap="' + esc(m.id) + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button></p>"; }).join("") + "</div>") : none("No Biblica map is tied to this passage."));
+      if (this.o.owner && (this.at || []).length) h += '<div class="lbl u-mt14">My atlases in Logos (' + this.at.length + ")</div>" + this.at.map(function (x) { return '<p class="u-m5">' + outlink(R.logos(x[0]), esc(x[1])) + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
       h += '<p class="ctx u-fs13">Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
       return { kick: "Maps \u00B7 " + places.length + " places", title: "Where this happens", body: h };
     },
@@ -1627,30 +1628,7 @@
       h += '<p class="ctx u-fs13">' + (have.T && have.B && on === "all" ? "Olive edge: Tyndale. Grey edge: Biblica. " : "") + srcs.map(function (k) { var x = NOTE_SRC[k]; return '<a href="' + x.url + '" target="_blank" rel="noopener">' + esc(x.name) + "</a> (" + x.licence + ")"; }).join(" and ") + ". A verse in a note opens in the reader.</p>";
       return h;
     },
-    /* maps for the passage: the Biblica Open Bible Maps tied to these verses, opened in place (tap the title), full screen on a tap;
-       and his Logos atlases */
-    mapsHTML: function () {
-      var st = this.st, ms = mapsFor(this.o.ref), at = (this.lib && this.lib.atlases) || [];
-      st.mapOpen = st.mapOpen || {};
-      var h = '<div class="lbl">Maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>";
-      h += ms.length ? ms.map(function (m) {
-        var open = st.mapOpen[m.id], url = MAPURL[m.id];
-        /* where outside images are blocked (claude.ai), a map opens in a new tab from the online map set instead */
-        if (!CFG.onlineMaps) return box("witness", "", '<div class="item">' + outlink(mapOnline(m), esc(m.t.replace(/^[^:]+:\s*/, ""))) + "</div>");
-        return box("witness", "", '<div class="item"><button class="tt jst-xt" data-jst-map="' + esc(m.id) + '" aria-expanded="' + !!open + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button>" +
-          (open ? (url ? '<img class="jst-mapimg" src="' + url + '" alt="' + esc(m.t) + '" data-jst-mapfull="' + esc(m.id) + '" title="Full screen" role="button" tabindex="0">' : '<p class="sub">Loading the map\u2026</p>') : "") + "</div>"); }).join("")
-        : none("No map in the Biblica set is tied to " + esc(this.o.ref) + ".");
-      h += '<p class="ctx u-fs13">Tap a title to open the map here, and the map for full screen. <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0).</p>';
-      if (this.o.owner && at.length) h += '<div class="lbl u-mt14">My atlases in Logos (' + at.length + ")</div>" + at.map(function (x) { return '<p class="u-m5">' + outlink(R.logos(x[0]), esc(x[1])) + "</p>"; }).join("");
-      return h;
-    },
     click: function (e) {
-      var mp = e.target.closest("[data-jst-map]"), mf = e.target.closest("[data-jst-mapfull]"), self = this;
-      if (mf) { e.stopPropagation(); mapViewer(MAPBY[mf.getAttribute("data-jst-mapfull")]); return; }
-      if (mp) { e.stopPropagation(); var id = mp.getAttribute("data-jst-map"), st = this.st; st.mapOpen = st.mapOpen || {};
-        st.mapOpen[id] = !st.mapOpen[id]; var keep = this.el.scrollTop; this.paint(); this.el.scrollTop = keep;
-        if (st.mapOpen[id] && !MAPURL[id]) mapURL(MAPBY[id]).then(function () { if (self.alive) { var k2 = self.el.scrollTop; self.paint(); self.el.scrollTop = k2; } });
-        return; }
       var sb = e.target.closest("[data-jst-nsrc]");
       if (sb) { e.stopPropagation(); this.st.src = sb.getAttribute("data-jst-nsrc"); this.paint(); return; }
       var tb = e.target.closest("[data-jst-stab]");
@@ -1659,13 +1637,12 @@
     },
     view: function () {
       var sh = this.sh || {}, segs = shelfBooks(this.o.ref), h = "", own = this.o.owner;
-      var TABS = own ? [["com", "Commentaries"], ["sb", "Study Bibles"], ["vault", "Books"], ["maps", "Maps"], ["other", "Others"]] : [["sb", "Study notes"], ["maps", "Maps"]];
+      var TABS = own ? [["com", "Commentaries"], ["sb", "Study Bibles"], ["vault", "Books"], ["other", "Others"]] : [["sb", "Study notes"]];   // maps live in the Maps panel
       var tab = TABS.some(function (t) { return t[0] === SHELF_TAB; }) ? SHELF_TAB : TABS[0][0];
       var tabs = '<div class="chips u-mb10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t[0] ? " on" : "") + '" data-jst-stab="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
       var kick = (own ? "My shelf" : "Shelf") + (segs.length ? " \u00B7 " + segs.map(function (s) { return bookLabel(s.book); }).join(", ") : "");
       if (tab === "sb") return { kick: kick, title: own ? "Study Bibles" : "Study notes", body: tabs + (own ? this.studyBiblesHTML() : "") + this.notesHTML() };
       if (tab === "vault") return { kick: kick, title: "Books in my vault", body: tabs + this.vaultHTML() };
-      if (tab === "maps") return { kick: kick, title: "Maps", body: tabs + this.mapsHTML() };
       if (tab === "other") return { kick: kick, title: "Others", body: tabs + this.dddHTML() + this.coursesHTML() + this.authorsHTML() };
       if (!segs.length) return { kick: kick, title: "Commentaries", body: tabs };
       h += tabs;
