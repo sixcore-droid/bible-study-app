@@ -289,7 +289,7 @@
   function rng(s) { return [s.c1, s.v1, s.c2, s.v2]; }
   var plain = function (x) { return String(x || "").replace(/\*\*|\*/g, "").replace(/\s+/g, " ").trim(); };
   var LIVE_SOURCES = {
-    council: function () { return getLive(CFG.toolData + "divine-council-alpha.json").then(function (D) {
+    council: function () { return getLive(CFG.toolData + "divine-council.json").then(function (D) {
       var grp = {}; (D.filters || []).forEach(function (f) { if (f.field === "group") (f.options || []).forEach(function (o) { grp[o.k] = o.n; }); });
       var CAT = { explicit: "Explicit", implied: "Implied", contested: "Contested" };
       (D.entries || []).forEach(function (e) {
@@ -297,14 +297,14 @@
         R.parse(e.bibleRef || e.title).forEach(function (s) { lvPut("council", s, [e.id].concat(rng(s))); });
       });
     }); },
-    gods: function () { return getLive(CFG.toolData + "gods-of-the-bible-alpha.json").then(function (D) {
+    gods: function () { return getLive(CFG.toolData + "gods-of-the-bible.json").then(function (D) {
       (D.entries || []).forEach(function (e) {
         LV.shared.gods[e.id] = { title: e.title, summary: plain(e.summary), plain: e.plain || "" };
         var seen = {};
         [e.bibleRef || ""].concat(e.refs || []).forEach(function (r) { R.parse(r).forEach(function (s) { var k = s.book + rng(s).join(","); if (!seen[k]) { seen[k] = 1; lvPut("gods", s, [e.id].concat(rng(s))); } }); });
       });
     }); },
-    facts: function () { return getLive(CFG.toolData + "fact-book-alpha.json").then(function (D) {
+    facts: function () { return getLive(CFG.toolData + "fact-book.json").then(function (D) {
       var card = D.card || {}, lab = card.labelField || "title", main = card.mainField || "summary";
       (D.entries || []).forEach(function (e) {
         var refs = e.refs || []; if (typeof refs === "string") refs = [refs];
@@ -313,13 +313,13 @@
         Object.keys(books).forEach(function (b) { (LV.facts[b] = LV.facts[b] || {})[e.id] = { title: st.name, about: st.about, kind: String(e.kind || "").replace(/^./, function (c) { return c.toUpperCase(); }), note: plain(e[main] || e.dictNote) }; });
       });
     }); },
-    words: function () { return getLive(CFG.toolData + "word-study-alpha.json").then(function (D) {
+    words: function () { return getLive(CFG.toolData + "word-study.json").then(function (D) {
       var by = {}; (D.entries || []).forEach(function (e) { by[String(e.strong).toUpperCase()] = e; });
       LV.ws = by;
       Object.keys(by).forEach(function (k) { var e = by[k];
         WORDS[k.toLowerCase()] = Object.assign(WORDS[k.toLowerCase()] || {}, { k: k.toLowerCase(), t: wordName(k, e.title), s: e.strong, gloss: e.gloss || "", count: (e.count || 0).toLocaleString("en-US"), def: e.def || "", spread: e.spread || "" }); });
     }); },
-    diffs: function () { return getLive(CFG.toolData + "translation-differences-alpha.json").then(function (D) {
+    diffs: function () { return getLive(CFG.toolData + "translation-differences.json").then(function (D) {
       var main = (D.card || {}).mainField || "summary";
       LV.diffs = (D.entries || []).map(function (e) { return { id: e.id, ref: e.bibleRef || e.title, lemma: e.lemma || "", lang: e.lang || "", family: e.family || "", gist: plain(e[main]), slug: e.id }; });
     }); },
@@ -855,7 +855,7 @@
         '<p class="ctx u-fs13">Family lines, STEPBible entries and "Also named here": <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (TIPNR, CC BY 4.0). Maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one to open it full screen.</p>' +
         (LV.ok.facts ? "" : '<p class="ctx u-fs13">' + liveNote() + "</p>") };
     }
-  }, { slug: "fact-book-alpha" }, function (d) {   // entries plus the people and places named; unknown (null) until names.json is in
+  }, { slug: "fact-book" }, function (d) {   // entries plus the people and places named; unknown (null) until names.json is in
     if (!d) return null; var f = (d.facts || []).length;
     return NAMESD ? f + namesIn(NAMESD, d.ref).length : (f || null); });
 
