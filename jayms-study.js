@@ -378,7 +378,9 @@
   var XREFN = {}, NOTEN = {};
   var NOTE_SRC = {
     T: { code: "T", name: "Tyndale Open Study Notes", short: "Tyndale", url: "https://tyndaleopenresources.com/", licence: "CC BY-SA 4.0" },
-    B: { code: "B", name: "Biblica Study Notes", short: "Biblica", url: "https://github.com/BibleAquifer/BiblicaStudyNotes", licence: "CC BY-SA 4.0" }
+    B: { code: "B", name: "Biblica Study Notes", short: "Biblica", url: "https://github.com/BibleAquifer/BiblicaStudyNotes", licence: "CC BY-SA 4.0" },
+    /* James's own Logos book, on his desk only: fsb/<book>.json (scripts/build-fsb.py from his BOOKS vault) never reaches the site */
+    F: { code: "F", name: "Faithlife Study Bible", short: "Faithlife", url: "logosres:FSB", licence: "in your Logos library", own: true }
   };
   /* a note's light markup to HTML: blank-line paragraphs, "- " list items, *emphasis*, {{Ref|label}} as a button that opens the verse */
   function noteHTML(t) {
@@ -526,7 +528,9 @@
     notes: function (ref) {
       var segs = data.segs(ref), books = [];
       segs.forEach(function (q) { if (books.indexOf(q.book) < 0) books.push(q.book); });
-      return Promise.all(books.map(function (b) { return bookFile("study", b, segs); })).then(function (files) {
+      var own = !global.JAYMS_PUBLIC;   // the Faithlife Study Bible's notes: James's desk only
+      return Promise.all(books.map(function (b) { return Promise.all([bookFile("study", b, segs), own ? bookFile("fsb", b, segs).catch(function () { return null; }) : null]); })).then(function (pairs) {
+        var files = pairs.map(function (p) { return { n: ((p[0] && p[0].n) || []).concat((p[1] && p[1].n) || []) }; });
         var out = [];
         segs.forEach(function (q) {
           ((files[books.indexOf(q.book)] || {}).n || []).forEach(function (n) {
@@ -1634,16 +1638,16 @@
       return h;
     },
     notesHTML: function () {
-      var st = this.st, c = this.cfg(), all = (this.notes || []).filter(function (n) { return c.sb.hidden.indexOf("open:" + n.src.code) < 0; });
+      var st = this.st, c = this.cfg(), own = this.o.owner, all = (this.notes || []).filter(function (n) { return c.sb.hidden.indexOf("open:" + n.src.code) < 0 && (own || !n.src.own); });
       var have = {}; all.forEach(function (n) { have[n.src.code] = (have[n.src.code] || 0) + 1; });
       var on = st.src || "all", list = all.filter(function (n) { return on === "all" || n.src.code === on; });
       var where = function (n) { var one = (R.book(n.book) || {}).chapters === 1, a = (one ? "" : n.c1 + ":") + n.v1; if (n.c2 === 999) return "Introduction to " + n.book; if (n.c1 === n.c2 && n.v1 === n.v2) return "Verse " + a; return (n.c1 === n.c2 ? "Verses " + a + "-" + n.v2 : a + " to " + n.c2 + ":" + n.v2); };
-      var h = '<div class="lbl u-mt14">Open study notes (' + all.length + ")</div>";
-      if (!all.length) return h + none("No open study note covers " + esc(this.o.ref) + ".");
+      var h = '<div class="lbl u-mt14">Study notes (' + all.length + ")</div>";
+      if (!all.length) return h + none("No study note covers " + esc(this.o.ref) + ".");
       var srcs = Object.keys(NOTE_SRC).filter(function (k) { return have[k]; });
-      if (srcs.length > 1) h += '<div class="chips"><button class="chip' + (on === "all" ? " on" : "") + '" data-jst-nsrc="all">Both</button>' + srcs.map(function (k) { return '<button class="chip' + (on === k ? " on" : "") + '" data-jst-nsrc="' + k + '">' + esc(NOTE_SRC[k].short) + " (" + have[k] + ")</button>"; }).join("") + "</div>";
-      h += list.map(function (n) { return box(n.src.code === "T" ? "explain" : "apparatus", "", '<div class="item"><span class="when">' + esc(where(n)) + '</span><div class="jst-note">' + noteHTML(n.text) + "</div></div>"); }).join("");
-      h += '<p class="ctx u-fs13">' + (have.T && have.B && on === "all" ? "Olive edge: Tyndale. Grey edge: Biblica. " : "") + srcs.map(function (k) { var x = NOTE_SRC[k]; return '<a href="' + x.url + '" target="_blank" rel="noopener">' + esc(x.name) + "</a> (" + x.licence + ")"; }).join(" and ") + ". A verse in a note opens in the reader.</p>";
+      if (srcs.length > 1) h += '<div class="chips"><button class="chip' + (on === "all" ? " on" : "") + '" data-jst-nsrc="all">' + (srcs.length > 2 ? "All" : "Both") + '</button>' + srcs.map(function (k) { return '<button class="chip' + (on === k ? " on" : "") + '" data-jst-nsrc="' + k + '">' + esc(NOTE_SRC[k].short) + " (" + have[k] + ")</button>"; }).join("") + "</div>";
+      h += list.map(function (n) { return box(n.src.code === "T" ? "explain" : n.src.code === "F" ? "wording" : "apparatus", "", '<div class="item"><span class="when">' + esc(where(n)) + '</span><div class="jst-note">' + noteHTML(n.text) + "</div></div>"); }).join("");
+      h += '<p class="ctx u-fs13">' + (on === "all" && srcs.length > 1 ? srcs.map(function (k) { return { T: "Olive edge: Tyndale.", B: "Grey edge: Biblica.", F: "Purple edge: Faithlife." }[k]; }).join(" ") + " " : "") + srcs.map(function (k) { var x = NOTE_SRC[k]; return '<a href="' + x.url + '" target="_blank" rel="noopener">' + esc(x.name) + "</a> (" + x.licence + ")"; }).join(" and ") + ". A verse in a note opens in the reader.</p>";
       return h;
     },
     click: function (e) {
