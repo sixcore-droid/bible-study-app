@@ -711,10 +711,27 @@ async function saveNote(rid){
   if(n.pub&&n.text.trim()) await ST.c("pub").save(rid,{text:n.text}); else if(ST.c("pub").peek(rid)) await ST.c("pub").remove(rid);
 }
 document.addEventListener("pointerdown",e=>{ const t=document.getElementById("text"); if(!t) return; const c=e.target.closest&&e.target.closest("#text .pcell[data-col]"); if(c) t.dataset.selcol=c.dataset.col; else if(!e.target.closest||!e.target.closest("#text")) delete t.dataset.selcol; });
+/* Help's menu: one tab per section (each <h2> in help.html), and under it a row for the section's parts (its <h3>s), which scroll to them */
+function helpTabs(b){
+  const SHORT={"How the Study Workstation works":"Start","How to use it":"Tour","Every button":"Buttons","Sources and websites":"Sources"};
+  const secs=[]; let cur=null;
+  [...b.childNodes].forEach(n=>{ if(n.nodeName==="H2"){ cur={name:n.dataset.tab||SHORT[n.textContent.trim()]||n.textContent.trim(), el:document.createElement("div")}; secs.push(cur) }
+    if(cur) cur.el.appendChild(n) });   // the file's opening comment is dropped
+  const nav=document.createElement("div"), sub=document.createElement("div"); nav.className="chips u-mb10"; sub.className="chips u-mb10";
+  b.innerHTML=""; b.append(nav, sub); secs.forEach(x=>{ x.el.hidden=true; b.appendChild(x.el) });
+  const show=i=>{ secs.forEach((x,j)=>x.el.hidden=j!==i);
+    nav.innerHTML=secs.map((x,j)=>`<button class="chip${j===i?" on":""}" data-h="${j}">${esc(x.name)}</button>`).join("");
+    const parts=[...secs[i].el.querySelectorAll("h3")].filter(h=>h.offsetParent!==null);
+    sub.hidden=parts.length<2; sub.innerHTML=parts.map((h,k)=>`<button class="chip" data-hs="${k}">${esc(h.textContent)}</button>`).join("");
+    sub.onclick=e=>{ const c=e.target.closest("[data-hs]"); if(c) parts[+c.dataset.hs].scrollIntoView({behavior:"smooth",block:"start"}) };
+    document.getElementById("helpview").scrollTop=0 };
+  nav.onclick=e=>{ const c=e.target.closest("[data-h]"); if(c) show(+c.dataset.h) };
+  show(0);
+}
 /* Help: the guide lives in help.html, loaded the first time it opens */
 (()=>{ const v=document.getElementById("helpview"), b=document.getElementById("helpbody"); let got=false;
   const close=()=>{ v.hidden=true; document.getElementById("helpbtn").focus() };
-  document.getElementById("helpbtn").onclick=()=>{ v.hidden=false; if(!got){ got=true; fetch("help.html").then(r=>r.ok?r.text():Promise.reject()).then(t=>{ b.innerHTML=t;
+  document.getElementById("helpbtn").onclick=()=>{ v.hidden=false; if(!got){ got=true; fetch("help.html").then(r=>r.ok?r.text():Promise.reject()).then(t=>{ b.innerHTML=t; helpTabs(b);
     /* which version this copy is (version.json, written by ws.sh snap): the desk, claude.ai and the site should all match */
     fetch("version.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(v=>{ if(v) b.insertAdjacentHTML("beforeend",`<p class="ctx u-fs13">Version ${esc(v.version)} · ${esc(v.date)}</p>`) }).catch(()=>{}) }).catch(()=>{ got=false; b.textContent="The guide didn't load. Try again." }) } document.getElementById("helpclose").focus() };
   document.getElementById("helpclose").onclick=close;
