@@ -390,10 +390,8 @@ function renderReader(){
   $("rkick").textContent = S.adhoc ? "Opened passage · not in today's plan" : `${isToday?(plan().weekly?"This week":"Today"):(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
   $("rtitle").textContent = r.ref;
   const lg = JaymsRef.refly(r.ref, S.ver);
-  /* under the title: Logos (James only), then STEPBible and the NET's notes for everyone */
-  $("rlogos").innerHTML = (S.view==="public" ? [] : lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`))
-    .concat(JST.studyLinks(r.ref).map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`)).join("");
-  $("rlogos").hidden = false;
+  $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
+  $("rlogos").hidden = S.view==="public";
   $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
   const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
   $("ver").innerHTML = opts(S.ver); $("ver2").innerHTML = opts(S.ver2);

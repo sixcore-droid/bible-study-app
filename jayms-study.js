@@ -2294,13 +2294,6 @@
   /* the tag in the line: the original word in English letters, short */
   function mkTag(s) { var w = (s.w || "").trim(); if (!w || w[0] === "(") return MK_FAM[s.family] || "note"; w = w.split(" (")[0]; return w.length > 26 ? w.slice(0, 24).replace(/\s+\S*$/, "") + "\u2026" : w; }
   api.marks = { tokens: mkTokens, find: mkFind, tag: mkTag, cat: MK_CAT, fam: MK_FAM };
-  /* the reader's links under the passage title, from the Tools panel's own list (one place for the addresses):
-     STEPBible and the NET Bible with its translators' notes */
-  api.studyLinks = function (ref) {
-    var q = data.segs(ref)[0]; if (!q) return [];
-    var want = { "STEPBible": "STEPBible", "NET Bible": "NET notes" };
-    return toolLinks(q).filter(function (t) { return want[t[0]]; }).map(function (t) { return { label: want[t[0]], url: t[2] }; });
-  };
 
   /* The panel for one mark: the versions cut to the words around it, then the tool's own explanation, in its own order.
      opts: mark (the mark), list (the marks shown in this chapter, in order, for ‹ ›), on.mark(id) to step. */

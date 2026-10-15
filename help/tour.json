@@ -147,9 +147,10 @@
      "text": "One tab for each of the day's readings, and one for each passage you open with Go. × closes an opened passage."
     },
     {
-     "sel": "#rlogos",
-     "name": "Open in Logos · STEPBible · NET notes",
-     "text": "Under the title: the passage in your Logos app (your desk only), on STEPBible, and in the NET Bible with all its translators' notes.",
+     "sel": "#rlogos a",
+     "name": "Open in Logos",
+     "text": "Opens the passage in your Logos app.",
+     "who": "owner",
      "at": "left"
     },
     {
