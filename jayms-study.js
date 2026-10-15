@@ -374,6 +374,7 @@
   }
 
   var SHELF = null;
+  var CORE = {}, CORE_IDS = {};            // the core stack (shelf.json core): by book, always shown, never hidden
   var SHELF_TAB = "com";                  // the Shelf tab James last picked: com | sb | other
   var XREFN = {}, NOTEN = {};
   var NOTE_SRC = {
@@ -442,7 +443,7 @@
     library: function () { return getJSON("shelf.json").then(function (d) { return { lib: (d && d.lib) || [], studyBibles: (d && d.studyBibles) || [], atlases: (d && d.atlases) || [] }; }); },
     /* James's Obsidian BOOKS vault, by author (scripts/build-vault-books.py); desk only, so the site gets null */
     vaultBooks: function () { return global.JAYMS_PUBLIC ? Promise.resolve(null) : getJSON("vault-books.json").catch(function () { return null; }); },
-    shelf: function () { return getJSON("shelf.json").then(function (d) { return (SHELF = (d && d.books) || {}); }); },
+    shelf: function () { return getJSON("shelf.json").then(function (d) { CORE = (d && d.core) || {}; CORE_IDS = {}; Object.keys(CORE).forEach(function (b) { CORE[b].forEach(function (x) { CORE_IDS[x.id] = 1; }); }); return (SHELF = (d && d.books) || {}); }); },
     /* everything the panels show for a passage, by reference: "Psalm 82", "Daniel 10:13, 20-21" */
     passage: function (ref) {
       var key = R.key(ref);
@@ -1535,10 +1536,10 @@
     var fix = function (x) { x = x || {}; return { order: x.order || [], hidden: x.hidden || [] }; };
     return { authors: a, com: fix(c.commentaries), sb: fix(c.studyBibles) };
   }
-  /* his own order first, then the fallback order; hidden ones out */
+  /* his own order first, then the fallback order; hidden ones out (hidden is by book, so a hidden one is gone from every passage), but never the core stack */
   function cfgSort(list, idOf, part, fallback) {
     var pos = function (x) { var i = part.order.indexOf(idOf(x)); return i < 0 ? 1e6 : i; };
-    return list.filter(function (x) { return part.hidden.indexOf(idOf(x)) < 0; }).sort(function (a, b) { return pos(a) - pos(b) || fallback(a, b); });
+    return list.filter(function (x) { return CORE_IDS[idOf(x)] || part.hidden.indexOf(idOf(x)) < 0; }).sort(function (a, b) { return pos(a) - pos(b) || fallback(a, b); });
   }
   /* "Barry, John D.; Bomar, David; ..." -> "John D. Barry, David Bomar and others" */
   function shortBy(by) {
@@ -1677,22 +1678,28 @@
         return box(mine(x) ? "witness" : "apparatus", "", '<div class="item"><span class="when">' + esc([x.series, x.year].filter(Boolean).join(" \u00B7 ")) + '</span><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(x.by) + "</span>" +
           outlink(logosRes(x.id, s), "Open") + "</div>");
       }; };
+      var notCore = function (x) { return !CORE_IDS[x.id]; };
       segs.forEach(function (s) {
-        var all = order(sh[s.book] || []), tr = all.filter(mine), rest = all.filter(function (x) { return !mine(x); });
+        /* the core stack: the same layers on every book; a volume split by chapters shows the part the passage is in */
+        var core = (CORE[s.book] || []).filter(function (x) { return !x.ch || (s.c1 <= x.ch[1] && (s.c2 || s.c1) >= x.ch[0]); });
+        var all = order(sh[s.book] || []).filter(notCore), tr = all.filter(mine), rest = all.filter(function (x) { return !mine(x); });
         if (segs.length > 1) h += '<div class="lbl">' + esc(bookLabel(s.book)) + "</div>";
+        if (core.length) h += '<div class="lbl">Core stack</div>' + core.map(function (x) {
+          return box("witness", "", '<div class="item"><span class="when">' + esc(x.layer) + '</span><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(shortBy(x.by)) + "</span>" +
+            outlink(x.at ? logosRes(x.id, s) : R.logos(x.id), "Open") + "</div>"); }).join("");
         if (tr.length) h += '<div class="lbl">My first picks</div>' + tr.map(card(s)).join("");
         if (rest.length) h += '<div class="lbl">' + (tr.length ? "The rest of the shelf" : "On " + esc(bookLabel(s.book))) + " (" + rest.length + ")</div>" + rest.map(card(s)).join("");
-        if (!all.length) h += none("You don't own a commentary on " + esc(bookLabel(s.book)) + " in Logos.");
+        if (!all.length && !core.length) h += none("You don't own a commentary on " + esc(bookLabel(s.book)) + " in Logos.");
       });
-      var s0 = segs[0], wide = order((sh[R.book(s0.book) && R.book(s0.book).order < 39 ? "_ot" : "_nt"] || []).concat(sh._bible || []));
+      var s0 = segs[0], wide = order((sh[R.book(s0.book) && R.book(s0.book).order < 39 ? "_ot" : "_nt"] || []).concat(sh._bible || [])).filter(notCore);
       if (wide.length) h += '<details class="jst-past"><summary class="lbl">Whole Bible and whole Testament (' + wide.length + ")</summary>" + wide.map(card(s0)).join("") + "</details>";
-      h += '<p class="ctx">Each link opens Logos at the start of the passage in that book. First picks: ranked in Config, or by your authors.' + (hidden ? " " + hidden + " hidden in Config." : "") + "</p>";
+      h += '<p class="ctx">Each link opens Logos at the start of the passage in that book (the topical books open at their start). Core stack: always shown. First picks: ranked in Config, or by your authors.' + (hidden ? " " + hidden + " hidden in Config." : "") + "</p>";
       return { kick: kick, title: "Commentaries", body: h };
     }
   }, { owner: false, config: null }, function (d) { return d && d.ref in NOTEN ? NOTEN[d.ref] : null; });
 
   // ------------------------------------------------------------------ ShelfConfig
-  /* Config for the shelf: rank and add authors, rank and hide commentaries (those on the open book), rank and hide study Bibles.
+  /* Config for the shelf: rank and add authors, rank and hide commentaries (every one he owns: a hidden one is gone from every book), rank and hide study Bibles.
      options: config() -> the saved settings (as shelfCfg reads them)
      sends:   shelfcfg ({key: "authors"|"commentaries"|"studyBibles", value}) */
   define("ShelfConfig", { id: "config", label: "Config", name: "Shelf settings", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>', owner: true }, {
@@ -1703,21 +1710,25 @@
         var keep = names.filter(function (nm) { return lib.some(function (x) { return byAuthor(nm, x[2]); }) || vba.some(function (a) { return byAuthor(nm, a.by); }); });
         if (keep.length < names.length) self.emit("shelfcfg", { key: "authors", value: { names: keep } });
       } }); },
-    rowHTML: function (i, n, label, sub, hidden, kind) {
-            return '<div class="askrow u-gap6 u-m3' + (hidden ? " u-faded" : "") + '"><span class="u-minw22">' + (hidden ? "" : (i + 1) + ".") + '</span><span class="u-flex1">' + esc(label) + (sub ? ' <span class="sub">' + esc(sub) + "</span>" : "") + "</span>" +
+    rowHTML: function (i, n, label, sub, hidden, kind, core) {
+            return '<div class="askrow u-gap6 u-m3' + (hidden ? " u-faded" : "") + '" data-jst-crow="' + esc((label + " " + sub).toLowerCase()) + '"><span class="u-minw22">' + (hidden ? "" : (i + 1) + ".") + '</span><span class="u-flex1">' + esc(label) + (sub ? ' <span class="sub">' + esc(sub) + "</span>" : "") + "</span>" +
         (hidden ? "" : '<button class="btn" data-jst-cmv="' + kind + "|" + i + '|-1"' + (i ? "" : " disabled") + ' aria-label="Move up">\u2191</button><button class="btn" data-jst-cmv="' + kind + "|" + i + '|1"' + (i < n - 1 ? "" : " disabled") + ' aria-label="Move down">\u2193</button>') +
-        '<button class="btn" data-jst-chide="' + kind + "|" + i + "|" + (hidden ? 1 : 0) + '">' + (kind === "authors" ? "\u00D7" : hidden ? "Show" : "Hide") + "</button></div>";
+        (core ? '<span class="sub">Core</span></div>' : '<button class="btn" data-jst-chide="' + kind + "|" + i + "|" + (hidden ? 1 : 0) + '">' + (kind === "authors" ? "\u00D7" : hidden ? "Show" : "Hide") + "</button></div>");
     },
     /* the list a section works on, in its current order: shown ones first (ranked), then hidden ones */
     lists: function () {
       var c = shelfCfg(this.o), sh = this.sh || {}, lib = this.lib || {}, q = data.segs(this.o.ref)[0];
       var names = c.authors, rank = function (by) { var r = authorRank(names, by); return r < 0 ? 999 : r; };
-      var com = q ? (sh[q.book] || []).concat(sh[R.book(q.book).order < 39 ? "_ot" : "_nt"] || [], sh._bible || []) : [];
+      var com = [], seen = {};
+      /* the core stack first, then every commentary on the shelf, each once */
+      [].concat.apply([], Object.keys(CORE).map(function (b) { return CORE[b]; }).concat(Object.keys(sh).map(function (b) { return sh[b]; })))
+        .forEach(function (x) { if (!seen[x.id]) { seen[x.id] = 1; com.push(x); } });
       var comShown = cfgSort(com, function (x) { return x.id; }, c.com, function (a, b) { return rank(a.by) - rank(b.by) || (b.year || 0) - (a.year || 0); });
       var sbAll = (lib.studyBibles || []).map(function (x) { return { id: x[0], t: x[1], by: x[2] }; }).concat(OPEN_SB.map(function (x) { return { id: x[0], t: x[1], by: "" }; }));
       var sbShown = cfgSort(sbAll, function (x) { return x.id; }, c.sb, function (a, b) { return rank(a.by) - rank(b.by) || String(a.t).localeCompare(b.t); });
-      return { c: c, book: q ? q.book : "", com: { shown: comShown, hidden: com.filter(function (x) { return c.com.hidden.indexOf(x.id) > -1; }) },
-               sb: { shown: sbShown, hidden: sbAll.filter(function (x) { return c.sb.hidden.indexOf(x.id) > -1; }) } };
+      var hid = function (part) { return function (x) { return !CORE_IDS[x.id] && part.hidden.indexOf(x.id) > -1; }; };
+      return { c: c, book: q ? q.book : "", com: { shown: comShown, hidden: com.filter(hid(c.com)) },
+               sb: { shown: sbShown, hidden: sbAll.filter(hid(c.sb)) } };
     },
     view: function () {
       var st = this.st, sec = st.sec || "authors", L2 = this.lists(), self = this, lib = (this.lib && this.lib.lib) || [];
@@ -1733,12 +1744,18 @@
         h += '<div class="ask"><label class="lbl">Add an author</label><input class="jst-in" data-jst-anew placeholder="Michael Heiser, or Heiser, Michael"><div class="askrow"><button class="btn" data-jst-aadd>Add</button><span class="jst-msg">' + esc(st.msg || "") + "</span></div></div>";
       } else {
         var part = sec === "com" ? L2.com : L2.sb;
-        h += '<p class="ctx">' + (sec === "com" ? "Commentaries on " + esc(bookLabel(L2.book) || "this book") + " and the whole Bible. The order you set here holds on every book." : "Your study Bibles, Logos and open. Hide one to drop it from the shelf.") + "</p>";
-        h += part.shown.map(function (x, i) { return self.rowHTML(i, part.shown.length, x.title || x.t, sec === "com" ? [x.series, x.year].filter(Boolean).join(" \u00B7 ") : shortBy(x.by), false, sec); }).join("");
+        h += '<p class="ctx">' + (sec === "com" ? "Every commentary you own (" + part.shown.length + "). Hide one and it's gone from every book. The order you set holds on every book. Core ones are always shown." : "Your study Bibles, Logos and open. Hide one to drop it from the shelf.") + "</p>";
+        h += '<input class="jst-in u-mb10" data-jst-cfind placeholder="Find a title or author">';
+        h += part.shown.map(function (x, i) { return self.rowHTML(i, part.shown.length, x.title || x.t, sec === "com" ? [x.series || shortBy(x.by), x.year].filter(Boolean).join(" \u00B7 ") : shortBy(x.by), false, sec, !!CORE_IDS[x.id]); }).join("");
         if (part.hidden.length) h += '<div class="lbl u-mt10">Hidden (' + part.hidden.length + ")</div>" + part.hidden.map(function (x, i) { return self.rowHTML(i, 0, x.title || x.t, "", true, sec); }).join("");
         if (st.msg) h += '<p class="jst-msg">' + esc(st.msg) + "</p>";
       }
       return { kick: "Config", title: "Shelf settings", body: h };
+    },
+    after: function () {
+      var f = this.el.querySelector("[data-jst-cfind]"), el = this.el, st = this.st; if (!f) return;
+      var run = function () { var q = f.value.trim().toLowerCase(); st.find = f.value; el.querySelectorAll("[data-jst-crow]").forEach(function (r) { r.hidden = !!q && r.getAttribute("data-jst-crow").indexOf(q) < 0; }); };
+      f.value = st.find || ""; f.addEventListener("input", run); if (st.find) run();
     },
     save: function (key, value, msg) { this.st.msg = msg || ""; this.emit("shelfcfg", { key: key, value: value }); this.paint(); },
     click: function (e) {
