@@ -59,7 +59,7 @@
               /* jayms.com's own data (posts, glossary terms): same-origin once the workstation is on jayms.com */
               siteData: "https://jayms.com/wp-json/wp/v2/",
               /* the public site's per-book files come in ten-chapter pieces (see bookFile) */
-              chunks: !!global.JAYMS_PUBLIC,
+              chunks: !!global.JAYMS_PUBLIC || !!(global.JAYMS_SETTINGS && global.JAYMS_SETTINGS.chunks),   // a downloaded copy reads the site's pieces too
               /* maps show in the panel where outside images are allowed (the site, its GitHub copy, James's Mac);
                  elsewhere (claude.ai's sandbox) a map title opens it in a new tab */
               onlineMaps: /(^|\.)jayms\.com$|\.github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname),

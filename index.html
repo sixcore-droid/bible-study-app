@@ -161,7 +161,11 @@ const L = k => (pd()&&pd()[k]) || [];
 function loadPanel(ref){ Promise.all([JST.data.passage(ref), JST.data.xref(ref), JST.data.notes(ref), JST.data.live(), S.view==="public"?null:JST.data.shelf()]).then(()=>{ renderDock() }) }
 /* James's study Project on claude.ai: "Ask in my Project" copies the question with the passage material and opens it beside the app
    (claude.ai can't be framed or driven from another page, so this is the route to the Project's own answers) */
-const STUDY_PROJECT = "https://claude.ai/project/019d9436-1dc6-7487-a80d-088b37cc8581";
+/* the owner's own places: James's by default; someone running their own copy sets theirs in setup/settings.json (setup/setup.py),
+   which their local server hands the page as window.JAYMS_SETTINGS */
+const MY = Object.assign({ notesVault:"Jayms", studyFolder:"02-BIBLE/Study Workstation", claudeProject:"https://claude.ai/project/019d9436-1dc6-7487-a80d-088b37cc8581",
+  ddd:"obsidian://open?vault=BOOKS&file="+encodeURIComponent("ZZZ-BOOKS/van der Toorn, Karel; Becking, Bob; van der Horst, Pieter W./Dictionary of Deities and Demons in the Bible") }, window.JAYMS_SETTINGS||{});
+const STUDY_PROJECT = MY.claudeProject;
 const QUICK = [
   "Walk me through this passage verse by verse",
   "What is the ANE background here?",
@@ -599,20 +603,20 @@ function panelOptions(id){
   if(id==="marks")   { const sp=hgSpots(); o.mark = sp.find(x=>x.id===S.mark) || null; o.list = sp.map(x=>x.id); }
   if(id==="word")    o.word = S.word;
   if(id==="verse")   { o.verse = S.vsel; o.scripture = scriptureFor; }
-  if(id==="vault")   o.vaultName = "Jayms";
+  if(id==="vault")   o.vaultName = MY.notesVault;
   if(id==="logos")   o.items = () => ST.c("logos").all();
-  if(id==="vocab")   Object.assign(o, { items:() => ST.c("vocab").all(), obsidian:{vault:"Jayms", path:"02-BIBLE/Study Workstation/Vocabulary.md"} });
+  if(id==="vocab")   Object.assign(o, { items:() => ST.c("vocab").all(), obsidian:{vault:MY.notesVault, path:MY.studyFolder+"/Vocabulary.md"} });
   if(id==="wrap")    { const rs = S.adhoc ? [S.adhoc] : READINGS;
                        Object.assign(o, { saveKey:wrapKey(), ask:SAMPLE, material:wrapMaterial, refs:rs.map(x=>x.ref), saved:()=>ST.c("wraps").peek(wrapKey()),
-                         title: S.adhoc ? S.adhoc.ref : `${plan().name} - Day ${S.day} - ${rs[0].ref}`, obsidian:{vault:"Jayms", folder:"02-BIBLE/Study Workstation/Wrap-ups"} }); }
+                         title: S.adhoc ? S.adhoc.ref : `${plan().name} - Day ${S.day} - ${rs[0].ref}`, obsidian:{vault:MY.notesVault, folder:MY.studyFolder+"/Wrap-ups"} }); }
   if(id==="xref"||id==="targum") o.version = S.ver;
   if(id==="shelf"||id==="config") Object.assign(o, { owner:S.view!=="public", config:shelfConfig,
-                       dddVault:"obsidian://open?vault=BOOKS&file="+encodeURIComponent("ZZZ-BOOKS/van der Toorn, Karel; Becking, Bob; van der Horst, Pieter W./Dictionary of Deities and Demons in the Bible") });
+                       dddVault:MY.ddd });
   if(id==="review")  Object.assign(o, { cards:()=>ST.c("vocab").all(), state:k=>ST.c("reviews").peek(k),
                        quizzes:()=>ST.c("wraps").all().filter(w=>w.parts&&w.parts.quiz).sort((a,b)=>b.at-a.at).map(w=>({title:w.title, refs:w.refs, quiz:w.parts.quiz, at:w.at})) });
   if(id==="planner") o.skipList = SKIP;
   if(id==="planner") o.mine = () => ST.c("plans").all().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  if(id==="ideas")   Object.assign(o, { items:() => ST.c("ideas").all(), obsidian:{vault:"Jayms", path:"02-BIBLE/Study Workstation/Post ideas.md"} });
+  if(id==="ideas")   Object.assign(o, { items:() => ST.c("ideas").all(), obsidian:{vault:MY.notesVault, path:MY.studyFolder+"/Post ideas.md"} });
   o.inVocab = k => !!ST.c("vocab").peek(k);
   if(id==="posts")   o.alsoRefs = S.adhoc ? [] : READINGS.filter(x=>x!==r).map(x=>x.ref);   // a passage opened with Go stands alone
   if(id==="claude")  Object.assign(o, { ask:SAMPLE, project:STUDY_PROJECT, context:contextFor, quick:QUICK, instructions:"claude-instructions.md",
@@ -811,12 +815,12 @@ const DIRTY = {};
 function markDirty(){ const rid=cur().id; DIRTY[rid]=true; ST.c("drafts").save(rid,{text:NOTES[rid].text,pub:NOTES[rid].pub}); renderReader() }
 /* The note's copy in the vault: one file per passage. "Open in Obsidian" is an obsidian://new link with the note as its
    content and overwrite on, so Obsidian itself writes (or updates) the file and opens it. No connection needed. */
-const OBS_FOLDER = "02-BIBLE/Study Workstation";
+const OBS_FOLDER = MY.studyFolder;
 function obsPath(ref){ return `${OBS_FOLDER}/${ref.replace(/:/g,".").replace(/[\\/?*"<>|]/g,"-")}.md` }
-function obsURI(path){ return "obsidian://open?vault=Jayms&file="+encodeURIComponent(path.replace(/\.md$/,"")) }
+function obsURI(path){ return "obsidian://open?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(path.replace(/\.md$/,"")) }
 function obsNewURI(r, n){
   const body = `---\npassage: "${r.ref}"\nplan: "${plan().name}"\nday: ${S.day}\npublic: ${!!n.pub}\nupdated: ${new Date(n.savedAt).toISOString()}\nsource: Study Workstation\ntags: [study-workstation]\n---\n\n# ${r.ref}\n\n${n.text}\n`;
-  return "obsidian://new?vault=Jayms&file="+encodeURIComponent(obsPath(r.ref).replace(/\.md$/,""))+"&content="+encodeURIComponent(body)+"&overwrite=true";
+  return "obsidian://new?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(obsPath(r.ref).replace(/\.md$/,""))+"&content="+encodeURIComponent(body)+"&overwrite=true";
 }
 async function commitNote(){ const rid=cur().id; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel() }
 $("note").oninput=e=>{const rid=cur().id; NOTES[rid].text=e.target.value; markDirty()};

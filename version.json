@@ -1,1 +1,1 @@
-{"version":"v186","date":"2026-10-15 15:02","note":"save point before the set-up kit"}
+{"version":"v187","date":"2026-10-15 15:08","note":"Set-up kit: setup/ in the public repo (setup.py asks for your Obsidian, Claude, Speechify, Podcast Index; finds Logos; serve.py runs your own desk) + Help 'Set up' tab; vault/project names via MY settings; refs.py shared parser"}

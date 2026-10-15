@@ -106,6 +106,33 @@
 
 
 
+<h2 id="setup" data-tab="Set up">Run your own copy</h2>
+<p>You can run this app on your own computer and plug in your own study tools. Each one is optional.</p>
+<h3>What it adds</h3>
+<ul>
+<li><b>Logos:</b> your commentaries and study Bibles on the Shelf, each opening in Logos at the passage.</li>
+<li><b>Obsidian:</b> your notes on each passage saved to your vault, and the notes you already have that mention it.</li>
+<li><b>Speechify:</b> the Read button reads the passage aloud.</li>
+<li><b>Claude:</b> ask about the passage in your own claude.ai Project.</li>
+</ul>
+<h3>Set it up</h3>
+<ol class="tourlist">
+<li><b>Get Python 3</b> On a Mac, type <code>python3</code> in Terminal and follow the prompt. On Windows, install it from python.org.</li>
+<li><b>Download</b> <a href="https://github.com/sixcore-droid/bible-study-app/archive/refs/heads/main.zip" target="_blank" rel="noopener">the app (zip)</a> and unzip it.</li>
+<li><b>Open a terminal in that folder</b> On a Mac, type <code>cd</code> and a space in Terminal, then drag the folder in and press Return. On Windows, right-click the folder and choose Open in Terminal.</li>
+<li><b>Answer the questions</b> Type <code>python3 setup/setup.py</code>. Press Enter to skip any you don't use. It finds Logos on its own.</li>
+<li><b>Start it</b> Type <code>python3 setup/serve.py</code>, then open <code>http://localhost:8940/</code> in Chrome or Safari. Leave the terminal open while you study.</li>
+</ol>
+<h3>What each one asks for</h3>
+<dl>
+<dt>Logos</dt><dd>Nothing to type. Open Logos once first so its library list is current. Bought more books? Run <code>python3 setup/setup.py --refresh</code>.</dd>
+<dt>Obsidian</dt><dd>The vault's name, as Obsidian shows it, and its folder (drag it in). Optional: a second vault of books, one folder per author, for the Shelf's Vault tab.</dd>
+<dt>Speechify</dt><dd>An API key from Speechify's developer page. It stays on your computer and only goes to Speechify.</dd>
+<dt>Claude</dt><dd>The link to a claude.ai Project you made for Bible study.</dd>
+<dt>Podcasts</dt><dd>Nothing needed. Your own Podcast Index key is optional.</dd>
+</dl>
+<h3>Keeping it current</h3>
+<p>Download the zip again for a newer version. Copy your <code>setup/settings.json</code> and <code>setup/mine</code> folder into it, then run <code>python3 setup/setup.py --refresh</code>. Your answers and keys never leave those two places. The full guide is in <code>setup/README.md</code>.</p>
 <h2 id="sources">Sources and websites</h2>
 <p>Everything this app draws on, with thanks.</p>
 <h3>Bible text</h3>
