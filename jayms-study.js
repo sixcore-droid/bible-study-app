@@ -1582,7 +1582,7 @@
      (DDD, his authors' books), one tab at a time. For readers: the open study notes and the maps. Order and hiding come from Config. */
   define("Shelf", { id: "shelf", label: "Shelf", name: "Study notes and my Logos shelf", icon: '<svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15 20l2-13 3 .5-2 12.5"/></svg>' }, {
     prepare: function () { var self = this, own = this.o.owner; return Promise.all([data.notes(this.o.ref), own ? data.shelf() : null, own ? data.library() : null, data.maps(), own ? data.vaultBooks() : null]).then(function (r) { self.notes = r[0]; self.sh = r[1]; self.lib = r[2]; self.vb = r[4]; }); },
-    /* the Books tab: books in his Obsidian BOOKS vault, for the authors Logos doesn't cover. Books about this Bible book first, then his authors in order */
+    /* the Vault tab: books in his Obsidian BOOKS vault, for the authors Logos doesn't cover. Books about this Bible book first, then his authors in order */
     vaultHTML: function () {
       var vb = this.vb, segs = data.segs(this.o.ref), q = segs[0], bk = q && q.book, names = this.cfg().authors, lib = (this.lib && this.lib.lib) || [];
       if (!vb || !vb.authors) return none("Your BOOKS vault list isn't built yet.");
@@ -1662,7 +1662,7 @@
     },
     view: function () {
       var sh = this.sh || {}, segs = shelfBooks(this.o.ref), h = "", own = this.o.owner;
-      var TABS = own ? [["com", "Commentaries"], ["sb", "Study Bibles"], ["vault", "Books"], ["other", "Others"]] : [["sb", "Study notes"]];   // maps live in the Maps panel
+      var TABS = own ? [["com", "Commentaries"], ["sb", "Study Bibles"], ["vault", "Vault"], ["other", "Others"]] : [["sb", "Study notes"]];   // maps live in the Maps panel
       var tab = TABS.some(function (t) { return t[0] === SHELF_TAB; }) ? SHELF_TAB : TABS[0][0];
       var tabs = '<div class="chips u-mb10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t[0] ? " on" : "") + '" data-jst-stab="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
       var kick = (own ? "My shelf" : "Shelf") + (segs.length ? " \u00B7 " + segs.map(function (s) { return bookLabel(s.book); }).join(", ") : "");
