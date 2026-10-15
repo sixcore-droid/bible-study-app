@@ -496,8 +496,11 @@ var USER_MOVED = false;   // once you scroll or type yourself, the restore never
 
 /* ===== DOCK + PANEL ===== */
 setTimeout(()=>JST.data.counts().then(()=>renderDock()),1500);   // after the first paint: what the dock buttons count from (people, places, maps, scrolls, art)
+/* the side buttons James has hidden in Config (Buttons tab); Scrolls is hidden until he shows it */
+const dockHidden = () => { const d=ST.c("shelfcfg").peek("dock"); return (d&&d.hidden) || ["scrolls"] };
 function renderDock(){
-  const list = TOOLS.filter(t=>!(t.owner && S.view==="public") && !(t.id==="marks" && S.app!=="hg"));
+  const off = dockHidden();
+  const list = TOOLS.filter(t=>!(t.owner && S.view==="public") && !(t.id==="marks" && S.app!=="hg") && !(t.id && off.includes(t.id)));
   $("dock").innerHTML = list.map(t=>{ if(t.sep) return "<hr>"; const n=toolCount(t.id);
     /* a number: how many for this passage; greyed: nothing for this passage; plain: always something there */
     return `<button class="dk${S.tool===t.id?" on":""}${n===0?" none":""}" data-t="${t.id}" aria-pressed="${S.tool===t.id}" title="${esc(t.name)}${n===0?" (nothing for this passage)":""}">${t.icon}<span>${t.label}</span>${n?`<span class="cnt">${n}</span>`:""}</button>`}).join("");
@@ -550,8 +553,9 @@ ST.c("logos").on(()=>{ renderDock(); if(S.tool==="logos" && PH) PH.refresh() });
 ST.c("vocab").on(()=>{ renderDock(); if(S.tool==="vocab" && PH) PH.refresh() });
 ST.c("reviews").on(()=>renderDock());
 /* shelf settings live in one place; the shelf and Config both redraw when they change */
-function shelfConfig(){ const c=ST.c("shelfcfg"); return { authors:c.peek("authors"), commentaries:c.peek("commentaries"), studyBibles:c.peek("studyBibles") } }
-ST.c("shelfcfg").on(()=>{ if((S.tool==="shelf"||S.tool==="config") && PH) PH.refresh() });
+function shelfConfig(){ const c=ST.c("shelfcfg"); return { authors:c.peek("authors"), commentaries:c.peek("commentaries"), studyBibles:c.peek("studyBibles"),
+  dock:{ hidden:dockHidden(), tools:TOOLS.filter(t=>t.id && t.id!=="config" && t.id!=="marks").map(t=>({id:t.id, label:t.label, name:t.name})) } } }
+ST.c("shelfcfg").on(()=>{ renderDock(); if((S.tool==="shelf"||S.tool==="config") && PH) PH.refresh() });
 ST.c("ideas").on(()=>{ renderDock(); if(S.tool==="ideas" && PH) PH.refresh() });
 /* Open any passage. A reading of the day switches to its tab; anything else opens as its own tab beside them.
    Returns an error message when the reference can't be read, so the box can say what went wrong. */

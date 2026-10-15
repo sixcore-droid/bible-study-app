@@ -1701,7 +1701,7 @@
   // ------------------------------------------------------------------ ShelfConfig
   /* Config for the shelf: rank and add authors, rank and hide commentaries (every one he owns: a hidden one is gone from every book), rank and hide study Bibles.
      options: config() -> the saved settings (as shelfCfg reads them)
-     sends:   shelfcfg ({key: "authors"|"commentaries"|"studyBibles", value}) */
+     sends:   shelfcfg ({key: "authors"|"commentaries"|"studyBibles"|"dock", value}) */
   define("ShelfConfig", { id: "config", label: "Config", name: "Shelf settings", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>', owner: true }, {
     prepare: function () { var self = this; return Promise.all([data.shelf(), data.library(), data.vaultBooks()]).then(function (r) { self.sh = r[0]; self.lib = r[1]; self.vb = r[2];
       /* an author with no book in Logos or the BOOKS vault doesn't belong on the list: a saved list drops them once both are loaded */
@@ -1732,7 +1732,7 @@
     },
     view: function () {
       var st = this.st, sec = st.sec || "authors", L2 = this.lists(), self = this, lib = (this.lib && this.lib.lib) || [];
-      var tabs = '<div class="chips u-mb10">' + [["authors", "Authors"], ["com", "Commentaries"], ["sb", "Study Bibles"]].map(function (t) { return '<button class="chip' + (sec === t[0] ? " on" : "") + '" data-jst-csec="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
+      var tabs = '<div class="chips u-mb10">' + [["authors", "Authors"], ["com", "Commentaries"], ["sb", "Study Bibles"], ["dock", "Buttons"]].map(function (t) { return '<button class="chip' + (sec === t[0] ? " on" : "") + '" data-jst-csec="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
       var h = tabs;
       if (sec === "authors") {
         var vba = (this.vb && this.vb.authors) || [];
@@ -1742,6 +1742,12 @@
         h += '<p class="ctx">Your authors, in order. Higher shows first on the shelf and lifts their commentaries and study Bibles.</p>';
         h += names.map(function (nm, i) { var n = count(nm); return self.rowHTML(i, names.length, nm, label(nm), false, "authors"); }).join("");
         h += '<div class="ask"><label class="lbl">Add an author</label><input class="jst-in" data-jst-anew placeholder="Michael Heiser, or Heiser, Michael"><div class="askrow"><button class="btn" data-jst-aadd>Add</button><span class="jst-msg">' + esc(st.msg || "") + "</span></div></div>";
+      } else if (sec === "dock") {
+        /* the side buttons: show or hide each one (Config itself always stays) */
+        var dk = (this.o.config && this.o.config().dock) || { tools: [], hidden: [] };
+        h += '<p class="ctx">The side buttons. Hide the ones you don\'t use.</p>';
+        h += dk.tools.map(function (t) { var off = dk.hidden.indexOf(t.id) > -1;
+          return '<div class="askrow u-gap6 u-m3' + (off ? " u-faded" : "") + '"><span class="u-flex1">' + esc(t.label) + ' <span class="sub">' + esc(t.name) + '</span></span><button class="btn" data-jst-dock="' + esc(t.id) + '">' + (off ? "Show" : "Hide") + "</button></div>"; }).join("");
       } else {
         var part = sec === "com" ? L2.com : L2.sb;
         h += '<p class="ctx">' + (sec === "com" ? "Every commentary you own (" + part.shown.length + "). Hide one and it's gone from every book. The order you set holds on every book. Core ones are always shown." : "Your study Bibles, Logos and open. Hide one to drop it from the shelf.") + "</p>";
@@ -1761,6 +1767,9 @@
     click: function (e) {
       var t = e.target, sc = t.closest("[data-jst-csec]"), mv = t.closest("[data-jst-cmv]"), hd = t.closest("[data-jst-chide]"), ad = t.closest("[data-jst-aadd]");
       if (sc) { e.stopPropagation(); this.st.sec = sc.getAttribute("data-jst-csec"); this.st.msg = ""; this.paint(); return; }
+      var dkb = t.closest("[data-jst-dock]");
+      if (dkb) { e.stopPropagation(); var id = dkb.getAttribute("data-jst-dock"), cur0 = ((this.o.config && this.o.config().dock) || {}).hidden || [], was = cur0.indexOf(id) > -1;
+        return this.save("dock", { hidden: was ? cur0.filter(function (x) { return x !== id; }) : cur0.concat([id]) }); }
       var L2 = this.lists(), c = L2.c;
       if (mv) { e.stopPropagation(); var p = mv.getAttribute("data-jst-cmv").split("|"), kind = p[0], i = +p[1], j = i + (+p[2]);
         if (kind === "authors") { var names = c.authors.slice(), x = names.splice(i, 1)[0]; names.splice(j, 0, x); return this.save("authors", { names: names }); }
