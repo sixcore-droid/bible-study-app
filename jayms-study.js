@@ -379,6 +379,7 @@
   var NOTE_SRC = {
     T: { code: "T", name: "Tyndale Open Study Notes", short: "Tyndale", url: "https://tyndaleopenresources.com/", licence: "CC BY-SA 4.0" },
     B: { code: "B", name: "Biblica Study Notes", short: "Biblica", url: "https://github.com/BibleAquifer/BiblicaStudyNotes", licence: "CC BY-SA 4.0" },
+    N: { code: "N", name: "NET Bible notes", short: "NET", url: "https://netbible.org/", licence: "Biblical Studies Press" },
     /* James's own Logos book, on his desk only: fsb/<book>.json (scripts/build-fsb.py from his BOOKS vault) never reaches the site */
     F: { code: "F", name: "Faithlife Study Bible", short: "Faithlife", url: "logosres:FSB", licence: "in your Logos library", own: true }
   };
@@ -529,8 +530,9 @@
       var segs = data.segs(ref), books = [];
       segs.forEach(function (q) { if (books.indexOf(q.book) < 0) books.push(q.book); });
       var own = !global.JAYMS_PUBLIC;   // the Faithlife Study Bible's notes: James's desk only
-      return Promise.all(books.map(function (b) { return Promise.all([bookFile("study", b, segs), own ? bookFile("fsb", b, segs).catch(function () { return null; }) : null]); })).then(function (pairs) {
-        var files = pairs.map(function (p) { return { n: ((p[0] && p[0].n) || []).concat((p[1] && p[1].n) || []) }; });
+      /* the NET's translators' notes for everyone (netnotes/<book>.json, scripts/fetch-net-notes.py) */
+      return Promise.all(books.map(function (b) { return Promise.all([bookFile("study", b, segs), bookFile("netnotes", b, segs).catch(function () { return null; }), own ? bookFile("fsb", b, segs).catch(function () { return null; }) : null]); })).then(function (sets) {
+        var files = sets.map(function (p) { return { n: [].concat.apply([], p.map(function (x) { return (x && x.n) || []; })) }; });
         var out = [];
         segs.forEach(function (q) {
           ((files[books.indexOf(q.book)] || {}).n || []).forEach(function (n) {
@@ -1646,8 +1648,8 @@
       if (!all.length) return h + none("No study note covers " + esc(this.o.ref) + ".");
       var srcs = Object.keys(NOTE_SRC).filter(function (k) { return have[k]; });
       if (srcs.length > 1) h += '<div class="chips"><button class="chip' + (on === "all" ? " on" : "") + '" data-jst-nsrc="all">' + (srcs.length > 2 ? "All" : "Both") + '</button>' + srcs.map(function (k) { return '<button class="chip' + (on === k ? " on" : "") + '" data-jst-nsrc="' + k + '">' + esc(NOTE_SRC[k].short) + " (" + have[k] + ")</button>"; }).join("") + "</div>";
-      h += list.map(function (n) { return box(n.src.code === "T" ? "explain" : n.src.code === "F" ? "wording" : "apparatus", "", '<div class="item"><span class="when">' + esc(where(n)) + '</span><div class="jst-note">' + noteHTML(n.text) + "</div></div>"); }).join("");
-      h += '<p class="ctx u-fs13">' + (on === "all" && srcs.length > 1 ? srcs.map(function (k) { return { T: "Olive edge: Tyndale.", B: "Grey edge: Biblica.", F: "Purple edge: Faithlife." }[k]; }).join(" ") + " " : "") + srcs.map(function (k) { var x = NOTE_SRC[k]; return '<a href="' + x.url + '" target="_blank" rel="noopener">' + esc(x.name) + "</a> (" + x.licence + ")"; }).join(" and ") + ". A verse in a note opens in the reader.</p>";
+      h += list.map(function (n) { return box({ T: "explain", F: "wording", N: "scripture" }[n.src.code] || "apparatus", "", '<div class="item"><span class="when">' + esc(where(n)) + '</span><div class="jst-note">' + noteHTML(n.text) + "</div></div>"); }).join("");
+      h += '<p class="ctx u-fs13">' + (on === "all" && srcs.length > 1 ? srcs.map(function (k) { return { T: "Olive edge: Tyndale.", B: "Grey edge: Biblica.", N: "Gold edge: NET.", F: "Purple edge: Faithlife." }[k]; }).join(" ") + " " : "") + srcs.map(function (k) { var x = NOTE_SRC[k]; return '<a href="' + x.url + '" target="_blank" rel="noopener">' + esc(x.name) + "</a> (" + x.licence + ")"; }).join(" and ") + ". A verse in a note opens in the reader.</p>";
       return h;
     },
     click: function (e) {
