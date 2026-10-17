@@ -72,7 +72,7 @@
   function config(o) { Object.assign(CFG, o || {}); return CFG; }
   /* Every link goes to the exact page, never a guess. Each pattern was checked against jayms.com:
      an entry has its own page at <tool>/<id>/; the Interleaved Bible opens a passage with #read=Book|Ref. */
-  var TOOL = { council: "divine-council-index", gods: "gods-of-the-bible", facts: "bible-entity-explorer", words: "bible-word-study-tool",
+  var TOOL = { council: "divine-council-index", gods: "gods-of-the-bible", awp: "ancient-world-passages", awi: "ancient-world-ideas", facts: "bible-entity-explorer", words: "bible-word-study-tool",
                diffs: "bible-translation-differences", ib: "bible-interactive-outline" };
   function entryURL(tool, id) { return id ? CFG.site + TOOL[tool] + "/" + encodeURIComponent(String(id).toLowerCase()) + "/" : ""; }
   function ibBookKey(book) { return bookRow(book).ib; }
@@ -426,7 +426,14 @@
     /* what the dock buttons count from, loaded once after the first paint (small files; the panels load their own full data) */
     counts: function () { return Promise.all([data.names(), data.maps().catch(function () {}), data.dss().catch(function () {}),
       getJSON("art-refs.json").then(function (d) { ARTREFS = d || []; }).catch(function () { ARTREFS = []; }),
-      getJSON("relics.json").then(function (d) { RELREFS = ((d && d.relics) || []).map(function (x) { return x.refs; }); }).catch(function () { RELREFS = []; })]); },
+      getJSON("relics.json").then(function (d) { RELREFS = ((d && d.relics) || []).map(function (x) { return x.refs; }); }).catch(function () { RELREFS = []; }),
+      data.ancient()]); },
+    /* The Ancient World Behind the Text (jayms.com tools, read live like the Council and Gods): its passages and its ideas */
+    ancient: function () {
+      return cache.__aw || (cache.__aw = Promise.all([getLive(CFG.toolData + "ancient-world-passages.json"), getLive(CFG.toolData + "ancient-world-ideas.json")]).then(function (r) {
+        AWP = (r[0] && r[0].entries) || []; AWI = {}; ((r[1] && r[1].entries) || []).forEach(function (e) { AWI[e.id] = e; }); return true;
+      }).catch(function () { AWP = AWP || []; AWI = AWI || {}; cache.__aw = null; return false; }));
+    },
     bibleproject: function () { return getJSON("bibleproject.json"); },
     lsbAudio: function () { return getJSON("lsb-audio.json"); },
     /* Michael S. Heiser Foundation articles by the chapters they cite (scripts/fetch-heiser.py) */
@@ -772,9 +779,44 @@
     }
   }, {}, function (d) { return d ? (d.gods || []).length : null; });
 
+  // ------------------------------------------------------------------ Ancient world
+  /* The Ancient World Behind the Text: the tool's notes on the passage being read (what a first reader knew without being told),
+     each with the ideas behind it. Tap an idea for its card: what it meant then, the bridge to today, where the analogy breaks. */
+  function awFor(ref) { return (AWP || []).filter(function (e) { return e.bibleRef && refsHit([e.bibleRef], ref); }); }
+  define("Ancient", { id: "ancient", label: "Ancient", name: "The ancient world behind the text", icon: '<svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10M9.5 21V10M14.5 21V10M19 21V10M3 10h18L12 3z"/></svg>' }, {
+    prepare: function () { return data.ancient(); },
+    view: function () {
+      var st = this.st, kick = "The Ancient World Behind the Text";
+      if (st.idea && AWI[st.idea]) {
+        var e = AWI[st.idea], f = function (k, v, t) { return e[k] ? box(v, t, "<p>" + md(e[k]) + "</p>") : ""; };
+        var h = '<button class="btn u-mb10" data-jst-awback>Back</button><div class="item"><span class="sub">' + esc(e.summary) + "</span></div>";   // the title is the panel's own
+        h += (e.plain ? '<div class="box plain"><p class="u-m0">' + md(e.plain) + "</p></div>" : "") + f("then", "explain", "What it meant then") + f("bridge", "witness", "The bridge to today") +
+             f("changes", "explain", "What it changes in the reading") + f("not", "not", "Where the analogy breaks") + f("dissent", "open", "Where scholars disagree");
+        return { kick: kick, title: e.title, body: h + outlink(entryURL("awi", e.id), "Full entry") };
+      }
+      var list = awFor(this.o.ref);
+      if (!list.length) return { kick: kick, title: "The world behind this passage", body: none("The Ancient World tool has no note on " + esc(this.o.ref) + " yet. It covers the New Testament.") + outlink(CFG.site + TOOL.awp + "/", "Open the tool") };
+      var h = list.map(function (e) {
+        var ideas = (e._ideas || []).filter(function (id) { return AWI[id]; });
+        return '<div class="item u-mt14"><span class="when">' + esc(e.bibleRef) + '</span><span class="tt">' + esc(e.title.replace(/^[^,]*,\s*/, "")) + '</span><span class="sub">' + esc(e.summary) + "</span></div>" +
+          (e.plain ? '<div class="box plain"><h3>What is going on here</h3><p class="u-m0">' + md(e.plain) + "</p></div>" : "") +
+          (ideas.length ? '<div class="lbl">The ancient world behind it</div><div class="chips u-mb10">' + ideas.map(function (id) { return '<button class="chip" data-jst-awi="' + esc(id) + '">' + esc(AWI[id].title) + "</button>"; }).join("") + "</div>" : "") +
+          (e.note ? '<details class="jst-past"><summary class="lbl">Also in this passage</summary>' + box("explain", "", "<p>" + md(e.note) + "</p>") + "</details>" : "") +
+          outlink(entryURL("awp", e.id), "Full entry");
+      }).join("");
+      return { kick: kick + " \u00B7 " + list.length + " for this passage", title: "The world behind this passage", body: h };
+    },
+    click: function (e) {
+      var i = e.target.closest("[data-jst-awi]"), b = e.target.closest("[data-jst-awback]");
+      if (i) { e.stopPropagation(); this.st.idea = i.getAttribute("data-jst-awi"); this.el.scrollTop = 0; this.paint(); return; }
+      if (b) { e.stopPropagation(); this.st.idea = null; this.paint(); return; }
+      Panel.prototype.click.call(this, e);
+    }
+  }, {}, function (d) { return d && AWP ? awFor(d.ref).length : null; });
+
   // ------------------------------------------------------------------ Fact Book
   /* STEPBible's records for the people and places named in the passage, in the order they first appear */
-  var NAMESD = null, DSSD = null, ARTREFS = null, RELREFS = null;   // loaded by data.counts(), so the dock buttons can count without opening their panels
+  var NAMESD = null, DSSD = null, ARTREFS = null, RELREFS = null, AWP = null, AWI = null;   // loaded by data.counts(), so the dock buttons can count without opening their panels
   function refsHit(refs, ref) { var segs = data.segs(ref); return refs.some(function (r) { return R.parse(r).some(function (a) { return segs.some(function (q) { return R.overlap(a, q); }); }); }); }
   /* the manuscripts holding any verse of the passage, most verses first (the Scrolls panel and its button) */
   function dssList(D, ref) {
