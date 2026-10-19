@@ -970,8 +970,8 @@
     /* keep the box the shape of the frame, and inside the map */
     function shape(cx, cy, w) {
       var asp = Math.max(.2, host.clientHeight / Math.max(1, host.clientWidth));
-      w = Math.min(A.w * 1.05, Math.max(A.w / 160, w)); var hh = w * asp;
-      cx = Math.min(A.w, Math.max(0, cx)); cy = Math.min(A.h, Math.max(0, cy));
+      w = Math.min(A.w, A.h / asp, Math.max(A.w / 300, w)); var hh = w * asp;   // never wider or taller than the drawn map
+      cx = Math.min(A.w - w / 2, Math.max(w / 2, cx)); cy = Math.min(A.h - hh / 2, Math.max(hh / 2, cy));   // and never past its edge
       vb = { x: cx - w / 2, y: cy - hh / 2, w: w, h: hh };
     }
     var anim = null;
