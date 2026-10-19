@@ -909,62 +909,257 @@
     return NAMESD ? f + namesIn(NAMESD, d.ref).length : (f || null); });
 
   // ------------------------------------------------------------------ Maps
-  /* Every place named in the passage (STEPBible's positions) pinned on the Digital Atlas of the Roman Empire, an ancient-world base
-     map (ancient names, terrain, Roman roads; dh.gu.se, CC BY), then the Biblica Bible maps for the passage and for each place.
-     Leaflet draws the map; it loads from cdnjs the first time the panel opens. Where outside images are blocked (claude.ai) the
-     panel lists the places and maps without the drawn map. */
-  var LEAFLET = null;
-  function leaflet() {
-    if (LEAFLET) return LEAFLET;
-    LEAFLET = new Promise(function (ok, no) {
-      var css = document.createElement("link"); css.rel = "stylesheet"; css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"; document.head.appendChild(css);
-      var sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"; sc.onload = function () { ok(global.L); }; sc.onerror = no; document.head.appendChild(sc);
+  /* A drawn atlas: Natural Earth coastlines, lakes and rivers (atlas.json, scripts/build-atlas.py) on parchment, so it needs no
+     outside tiles and draws the same on the desk, claude.ai and the site. Tabs: the places named in this passage (STEPBible's
+     positions, gold marks), and the journeys the text narrates (Abraham, the Exodus, Paul's three journeys and his voyage, the
+     seven churches), each stop numbered with the verse that names it. The journey whose chapters you are reading opens first.
+     Below: each place's Biblica maps and the passage's own Biblica maps. atlasMount() is the map on its own, for any panel. */
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function atlasMount(host, A, o) {
+    /* o: {marks: [{x, y, n, k: "place"|"stop", num, color, i}], legs: [{x1, y1, x2, y2, m: "land"|"sea"}], color, onPick(i)} */
+    var svg = document.createElementNS(SVGNS, "svg"), vb = { x: 0, y: 0, w: A.w, h: A.h }, marks = [], labs = [], self = {};
+    svg.setAttribute("class", "jst-atlas-svg"); svg.setAttribute("role", "img"); svg.setAttribute("aria-label", o.label || "Map");
+    var defs = '<defs><marker id="jst-ar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto"><path d="M1 1L9 5L1 9z" fill="' + (o.color || "#7a2e2e") + '"/></marker></defs>';
+    var h = defs + '<rect class="sea" x="-4000" y="-4000" width="' + (A.w + 8000) + '" height="' + (A.h + 8000) + '"/>' +
+      '<path class="land" d="' + A.land + '"/><path class="lake" d="' + A.lakes + '"/><path class="river" d="' + A.rivers + '"/><g class="labs"></g><g class="legs"></g><g class="marks"></g>';
+    svg.innerHTML = h; host.appendChild(svg);
+    var gL = svg.querySelector(".labs"), gLegs = svg.querySelector(".legs"), gM = svg.querySelector(".marks");
+    A.labels.forEach(function (l) {
+      var t = document.createElementNS(SVGNS, "text"); t.setAttribute("class", "lab " + l[3]); t.setAttribute("x", l[1]); t.setAttribute("y", l[2]);
+      t.textContent = l[0]; t._z = l[4]; gL.appendChild(t); labs.push(t); });
+    (o.legs || []).forEach(function (g, i) {
+      var p = document.createElementNS(SVGNS, "path"), mx = (g.x1 + g.x2) / 2, my = (g.y1 + g.y2) / 2;
+      p.setAttribute("d", "M" + g.x1 + " " + g.y1 + "L" + mx + " " + my + "L" + g.x2 + " " + g.y2);
+      p.setAttribute("class", "leg by-" + g.m); p.setAttribute("stroke", o.color || "#7a2e2e"); p.setAttribute("marker-mid", "url(#jst-ar)"); p._i = i + 1;
+      gLegs.appendChild(p); });
+    /* stops that come back to the same spot sit beside the earlier mark, not on top of it */
+    var at = {}, many = {};
+    (o.marks || []).forEach(function (m) { var key = Math.round(m.x) + "," + Math.round(m.y); many[key] = (many[key] || 0) + 1; });
+    (o.marks || []).forEach(function (m) {
+      var key = Math.round(m.x) + "," + Math.round(m.y), nth = at[key] = (at[key] || 0) + 1;
+      var g = document.createElementNS(SVGNS, "g"); g.setAttribute("class", "amk " + m.k); g.setAttribute("data-i", m.i); g.setAttribute("tabindex", "0");
+      g.setAttribute("role", "button"); g.setAttribute("aria-label", (m.num ? m.num + ". " : "") + m.n);
+      var dx = (nth - 1) * 17, r = m.k === "stop" ? 9 : 6;
+      g.innerHTML = '<circle cx="' + dx + '" cy="0" r="' + r + '"' + (m.k === "stop" ? ' fill="' + (o.color || "#7a2e2e") + '"' : "") + "/>" +
+        (m.num ? '<text class="num" x="' + dx + '" y="3.6">' + m.num + "</text>" : "") +
+        (nth === 1 ? '<text class="nm" x="' + (r + 4 + (many[key] - 1) * 17) + '" y="4">' + esc(m.n) + "</text>" : "");
+      g._x = m.x; g._y = m.y; g._i = m.i; g._dx = dx; gM.appendChild(g); marks.push(g); });
+
+    function px() { return vb.w / Math.max(1, host.clientWidth); }   // map units per screen pixel
+    function draw() {
+      var s = px(), level = Math.log2(A.w / vb.w) + 1;
+      svg.setAttribute("viewBox", vb.x + " " + vb.y + " " + vb.w + " " + vb.h);
+      svg.style.setProperty("--s", s);
+      gL.setAttribute("font-size", 12 * s);
+      labs.forEach(function (t) { t.style.display = level >= t._z ? "" : "none"; });
+      gLegs.setAttribute("stroke-width", 2.6 * s);
+      gLegs.querySelectorAll(".by-land").forEach(function (p) { p.setAttribute("stroke-dasharray", 7 * s + " " + 5 * s); });
+      svg.querySelector(".land").setAttribute("stroke-width", .9 * s);
+      svg.querySelector(".lake").setAttribute("stroke-width", .7 * s);
+      svg.querySelector(".river").setAttribute("stroke-width", 1.1 * s);
+      marks.forEach(function (g) { g.setAttribute("transform", "translate(" + g._x + " " + g._y + ") scale(" + s + ")"); });
+      /* a name shows only where it has room; the picked mark's name always shows, the rest come back as you zoom in */
+      var boxes = [];
+      marks.forEach(function (g) { g._sx = (g._x - vb.x) / s; g._sy = (g._y - vb.y) / s; if (g.style.display !== "none") boxes.push([g._sx - 10, g._sy - 10, g._sx + 10 + (g._dx || 0), g._sy + 10, g]); });
+      marks.slice().sort(function (a, b) { return (b.classList.contains("on") ? 1 : 0) - (a.classList.contains("on") ? 1 : 0); }).forEach(function (g) {
+        var t = g.querySelector(".nm"); if (!t || g.style.display === "none") return;
+        var nx = +t.getAttribute("x"), bx = [g._sx + nx - 2, g._sy - 9, g._sx + nx + 4 + t.textContent.length * 7.4, g._sy + 9];
+        var hit = boxes.some(function (o) { return (!o[4] || o[4]._x !== g._x || o[4]._y !== g._y) && bx[0] < o[2] && o[0] < bx[2] && bx[1] < o[3] && o[1] < bx[3]; });
+        t.style.display = hit && !g.classList.contains("on") ? "none" : ""; if (!hit || g.classList.contains("on")) boxes.push(bx); });
+    }
+    /* keep the box the shape of the frame, and inside the map */
+    function shape(cx, cy, w) {
+      var asp = Math.max(.2, host.clientHeight / Math.max(1, host.clientWidth));
+      w = Math.min(A.w * 1.05, Math.max(A.w / 160, w)); var hh = w * asp;
+      cx = Math.min(A.w, Math.max(0, cx)); cy = Math.min(A.h, Math.max(0, cy));
+      vb = { x: cx - w / 2, y: cy - hh / 2, w: w, h: hh };
+    }
+    var anim = null;
+    function go(cx, cy, w, ms) {
+      if (anim) cancelAnimationFrame(anim);
+      var a = { cx: vb.x + vb.w / 2, cy: vb.y + vb.h / 2, w: vb.w }, t0 = 0;
+      if (!ms || document.hidden) { shape(cx, cy, w); draw(); return; }
+      function step(t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / ms), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        shape(a.cx + (cx - a.cx) * e, a.cy + (cy - a.cy) * e, Math.exp(Math.log(a.w) + (Math.log(w) - Math.log(a.w)) * e)); draw();
+        if (k < 1) anim = requestAnimationFrame(step); }
+      anim = requestAnimationFrame(step);
+    }
+    self.fit = function (pts, ms, minW) {
+      if (!pts || !pts.length) { go(A.w * .55, A.h * .5, A.w * .9, ms); return; }
+      var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      pts.forEach(function (p) { x0 = Math.min(x0, p.x); y0 = Math.min(y0, p.y); x1 = Math.max(x1, p.x); y1 = Math.max(y1, p.y); });
+      var cw = Math.max(1, host.clientWidth), asp = host.clientHeight / cw, w = Math.max(x1 - x0, (y1 - y0) / asp, 90) * 1.3 + 40;
+      if (minW) w = Math.max(w, minW);
+      w *= cw / Math.max(1, cw - 56);   // keep the marks clear of the zoom buttons on the right
+      go((x0 + x1) / 2 + 28 * w / cw, (y0 + y1) / 2, w, ms);
+    };
+    self.zoom = function (f, cx, cy) {
+      cx = cx == null ? vb.x + vb.w / 2 : cx; cy = cy == null ? vb.y + vb.h / 2 : cy;
+      var w = vb.w / f, k = w / vb.w;   // keep the point under the cursor still
+      go(cx + (vb.x + vb.w / 2 - cx) * k, cy + (vb.y + vb.h / 2 - cy) * k, w, 180);
+    };
+    /* show only the first n legs and stops (Play), or all (n = null) */
+    self.upTo = function (n) {
+      gLegs.querySelectorAll(".leg").forEach(function (p) { p.style.display = n == null || p._i < n ? "" : "none"; });
+      marks.forEach(function (g) { g.style.display = n == null || g._i <= n ? "" : "none"; }); draw();
+    };
+    self.pick = function (i) { marks.forEach(function (g) { g.classList.toggle("on", g._i === i); }); draw(); };
+    self.resize = function () { shape(vb.x + vb.w / 2, vb.y + vb.h / 2, vb.w); draw(); };
+    function unit(e) { var r = svg.getBoundingClientRect(); return { x: vb.x + (e.clientX - r.left) * px(), y: vb.y + (e.clientY - r.top) * px() }; }
+
+    /* drag to move, two fingers to pinch, Ctrl/Cmd + wheel to zoom (a plain wheel scrolls the panel) */
+    var ptr = {}, last = null, moved = 0;
+    svg.addEventListener("pointerdown", function (e) { ptr[e.pointerId] = { x: e.clientX, y: e.clientY }; moved = 0; last = null; });
+    svg.addEventListener("pointermove", function (e) {
+      if (!ptr[e.pointerId]) return;
+      var ids = Object.keys(ptr), p = ptr[e.pointerId], dx = e.clientX - p.x, dy = e.clientY - p.y;
+      if (ids.length === 1) { moved += Math.abs(dx) + Math.abs(dy); if (moved > 6 && !svg.hasPointerCapture(e.pointerId)) try { svg.setPointerCapture(e.pointerId); } catch (x) {}   // capture only once it is a drag, so a tap still reaches the mark
+        var s = px(); vb.x -= dx * s; vb.y -= dy * s; shape(vb.x + vb.w / 2, vb.y + vb.h / 2, vb.w); draw(); }
+      ptr[e.pointerId] = { x: e.clientX, y: e.clientY };
+      if (ids.length === 2) { var a = ptr[ids[0]], b = ptr[ids[1]], d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (last) { var m = unit({ clientX: (a.x + b.x) / 2, clientY: (a.y + b.y) / 2 }), k = last / d, w = vb.w * k;
+          shape(m.x + (vb.x + vb.w / 2 - m.x) * k, m.y + (vb.y + vb.h / 2 - m.y) * k, w); draw(); }
+        last = d; moved = 99; }
     });
-    return LEAFLET;
+    function up(e) { delete ptr[e.pointerId]; last = null; }
+    svg.addEventListener("pointerup", up); svg.addEventListener("pointercancel", up);
+    svg.addEventListener("click", function (e) {
+      var g = e.target.closest(".amk"); if (!g || moved > 6) return;
+      e.stopPropagation(); if (o.onPick) o.onPick(+g.getAttribute("data-i"));
+    });
+    svg.addEventListener("keydown", function (e) { var g = e.target.closest && e.target.closest(".amk"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); if (o.onPick) o.onPick(+g.getAttribute("data-i")); } });
+    svg.addEventListener("dblclick", function (e) { var u = unit(e); self.zoom(2, u.x, u.y); });
+    var hintT = 0;
+    svg.addEventListener("wheel", function (e) {
+      if (!(e.ctrlKey || e.metaKey)) { if (o.onHint && Date.now() - hintT > 1500) { hintT = Date.now(); o.onHint(); } return; }
+      e.preventDefault(); var u = unit(e), k = Math.exp(-e.deltaY * .0022), w = vb.w / k, f = w / vb.w;
+      shape(u.x + (vb.x + vb.w / 2 - u.x) * f, u.y + (vb.y + vb.h / 2 - u.y) * f, w); draw();
+    }, { passive: false });
+    var ro = global.ResizeObserver ? new ResizeObserver(function () { self.resize(); }) : null;
+    if (ro) ro.observe(host);
+    function esc_(e) { if (e.key === "Escape" && host.classList.contains("jst-atlas-big")) { e.stopPropagation(); host.classList.remove("jst-atlas-big"); } }
+    document.addEventListener("keydown", esc_, true);   // Escape leaves the phone's full-screen map before it closes the panel
+    self.destroy = function () { if (anim) cancelAnimationFrame(anim); if (ro) ro.disconnect(); document.removeEventListener("keydown", esc_, true); svg.remove(); };
+    shape(A.w / 2, A.h / 2, A.w); draw();
+    return self;
   }
+  function atlasXY(A, ll) { var p = A.proj; return { x: (ll[1] - p.lon0) * p.c * p.k, y: (p.lat1 - ll[0]) * p.k }; }
+  function atlasRouteFor(A, ref) {
+    var segs = data.segs(ref);
+    return (A.routes || []).filter(function (r) { return r.ranges.some(function (x) { return R.parse(x).some(function (a) { return segs.some(function (b) { return overlap(a, b); }); }); }); })[0];
+  }
+
   define("Maps", { id: "maps", label: "Maps", name: "Maps of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>' }, {
-    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null]).then(function (r) { self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; }); },
+    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json")]).then(function (r) { self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
+    places: function () { return namesIn(this.nm, this.o.ref).filter(function (p) { return p.t === "Place"; }); },
+    route: function () { var A = this.A, t = this.st.tab; return A && t && t !== "here" ? A.routes.filter(function (r) { return r.id === t; })[0] : null; },
     view: function () {
-      var self = this, places = namesIn(this.nm, this.o.ref).filter(function (p) { return p.t === "Place"; });
-      var pinned = places.filter(function (p) { return p.ll; });
-      var ms = mapsFor(this.o.ref), h = "";
-      if (pinned.length && CFG.onlineMaps) h += '<div class="jst-leaf" data-jst-leaf></div><p class="ctx u-fs13">Tap a pin for the place. Base map: <a href="https://dh.gu.se/dare/" target="_blank" rel="noopener">Digital Atlas of the Roman Empire</a> (CC BY); positions: STEPBible.</p>';
-      if (places.length) h += '<div class="lbl u-mt14">Places in ' + esc(this.o.ref) + " (" + places.length + ")</div>" + places.map(function (p) {
-        var on = (self.mp[p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
-        return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") +
-          (on.length ? '<div class="chips">' + on.map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>" : "") +
-          (p.ll && CFG.onlineMaps ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + "</div>"); }).join("");
-      else h += none("No place is named in " + esc(this.o.ref) + ".");
+      var self = this, A = this.A, places = this.places(), pinned = places.filter(function (p) { return p.ll; });
+      if (A && !this.st.tab) { var auto = atlasRouteFor(A, this.o.ref); this.st.tab = auto ? auto.id : "here"; }
+      var rt = this.route(), ms = mapsFor(this.o.ref), h = "";
+      if (A) {
+        h += '<div class="chips jst-atlas-tabs"><button class="chip' + (!rt ? " on" : "") + '" data-jst-atab="here">Places here' + (pinned.length ? " (" + pinned.length + ")" : "") + "</button>" +
+          A.routes.map(function (r) { return '<button class="chip' + (rt === r ? " on" : "") + '" data-jst-atab="' + r.id + '"><i data-jst-c="' + r.color + '"></i>' + esc(r.name.replace(/:.*$/, "")) + "</button>"; }).join("") + "</div>";
+        h += '<div class="jst-atlas" data-jst-atlas><div class="jst-atlas-ctl"><button data-jst-az="in" aria-label="Zoom in">+</button><button data-jst-az="out" aria-label="Zoom out">−</button><button data-jst-az="fit" aria-label="Fit">⤢</button><button data-jst-az="full" aria-label="Full screen">⛶</button></div><div class="jst-atlas-hint">Hold Ctrl or ⌘ and scroll to zoom</div></div>';
+        h += '<div class="jst-atlas-pick" data-jst-apick></div>';
+        if (rt) {
+          h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.kick) + " · " + rt.stops.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
+            (rt.note ? '<p class="sub u-m4-8 u-fs15">' + esc(rt.note) + "</p>" : "") +
+            '<button class="btn u-mt6" data-jst-aplay>' + (this._play ? "Stop" : "Play the journey") + '</button><ol class="jst-atlas-stops">' +
+            rt.stops.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + '</button><button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol></div>");
+        } else if (!pinned.length) h += none("No place in " + esc(this.o.ref) + " has a known position. Pick a journey above.");
+      }
+      if (!rt) {
+        if (places.length) h += '<div class="lbl u-mt14">Places in ' + esc(this.o.ref) + " (" + places.length + ")</div>" + places.map(function (p) {
+          var on = (self.mp[p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
+          return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") +
+            (on.length ? '<div class="chips">' + on.map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>" : "") +
+            (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + "</div>"); }).join("");
+        else if (!A) h += none("No place is named in " + esc(this.o.ref) + ".");
+      }
       h += '<div class="lbl u-mt14">Bible maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>" + (ms.length ? box("witness", "", '<div class="item">' + ms.map(function (m) { return '<p class="u-m5"><button class="tt jst-xt" data-jst-pmap="' + esc(m.id) + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button></p>"; }).join("") + "</div>") : none("No Biblica map is tied to this passage."));
       if (this.o.owner && (this.at || []).length) h += '<div class="lbl u-mt14">My atlases in Logos (' + this.at.length + ")</div>" + this.at.map(function (x) { return '<p class="u-m5">' + outlink(R.logos(x[0]), esc(x[1])) + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
-      h += '<p class="ctx u-fs13">Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
-      return { kick: "Maps \u00B7 " + places.length + " places", title: "Where this happens", body: h };
+      h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Positions: <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> and <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
+      return { kick: "Maps · " + (rt ? rt.stops.length + " stops" : places.length + " places"), title: rt ? rt.name : "Where this happens", body: h };
     },
     after: function () {
-      var self = this, box_ = this.el.querySelector("[data-jst-leaf]");
-      if (!box_) return;
-      var pinned = namesIn(this.nm, this.o.ref).filter(function (p) { return p.t === "Place" && p.ll; });
-      leaflet().then(function (L) {
-        if (!self.alive || !box_.isConnected) return;
-        var map = L.map(box_, { scrollWheelZoom: false, attributionControl: false, maxZoom: 11 });
-        L.tileLayer("https://dh.gu.se/tiles/imperium/{z}/{x}/{y}.png", { maxZoom: 11 }).addTo(map);
-        self._pins = {};
-        var pts = pinned.map(function (p) {
-          var mk = L.circleMarker(p.ll, { radius: 7, color: "#5a3c10", weight: 2, fillColor: "#d4a85c", fillOpacity: .95 }).addTo(map)
-            .bindPopup("<b>" + esc(p.n) + "</b>" + (p.b ? "<br>" + esc(p.b) : ""));
-          self._pins[p.id] = mk; return p.ll; });
-        if (pts.length === 1) map.setView(pts[0], 8); else map.fitBounds(pts, { padding: [28, 28], maxZoom: 9 });
-        self._map = map;
-      }).catch(function () { box_.outerHTML = '<p class="ctx">The map didn\'t load here.</p>'; });
+      var self = this, A = this.A, host = this.el.querySelector("[data-jst-atlas]");
+      this.el.querySelectorAll("[data-jst-c]").forEach(function (e) { e.style.background = e.getAttribute("data-jst-c"); });   // route colours
+      this.stopPlay(true);
+      if (this._atlas) { this._atlas.destroy(); this._atlas = null; }
+      if (!A || !host) return;
+      var rt = this.route(), marks, legs = [], pts;
+      if (rt) {
+        marks = rt.stops.map(function (s, i) { return { x: s.x, y: s.y, n: s.n, k: "stop", num: i + 1, i: i + 1 }; });
+        for (var i = 1; i < rt.stops.length; i++) { var a = rt.stops[i - 1], b = rt.stops[i]; if (a.x !== b.x || a.y !== b.y) legs.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, m: b.m }); else legs.push({ x1: a.x, y1: a.y, x2: a.x, y2: a.y, m: "land" }); }
+        this._items = rt.stops;
+      } else {
+        this._items = this.places().filter(function (p) { return p.ll; });
+        marks = this._items.map(function (p, i) { var q = atlasXY(A, p.ll); return { x: q.x, y: q.y, n: p.n, k: "place", i: i + 1 }; });
+      }
+      pts = marks;
+      var hint = host.querySelector(".jst-atlas-hint");
+      this._atlas = atlasMount(host, A, { marks: marks, legs: legs, color: rt && rt.color, label: rt ? rt.name : "Places in " + this.o.ref,
+        onPick: function (i) { self.pickItem(i, true); },
+        onHint: function () { hint.classList.add("on"); clearTimeout(self._ht); self._ht = setTimeout(function () { hint.classList.remove("on"); }, 1400); } });
+      this._pts = pts; this._atlas.fit(pts);
+      if (this.st.pick) this.pickItem(this.st.pick, false);
+    },
+    /* show one stop or place under the map: its name, the verse (in the first version the text has), and a link to open it */
+    pickItem: function (i, fly) {
+      var self = this, it = (this._items || [])[i - 1], box_ = this.el.querySelector("[data-jst-apick]"), rt = this.route();
+      if (!it || !box_) return;
+      this.st.pick = i; this._atlas.pick(i);
+      if (fly) { var q = rt ? it : atlasXY(this.A, it.ll); this._atlas.fit([q], 500, 560); }
+      this.el.querySelectorAll("[data-jst-astop]").forEach(function (b) { b.classList.toggle("on", +b.getAttribute("data-jst-astop") === i); });
+      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + "</span>" + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + "</div>"; return; }
+      box_.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Stop ' + i + " of " + rt.stops.length + '</div><span class="tt">' + esc(it.n) + '</span><p class="u-m4-8 u-fs15" data-jst-averse>…</p><button class="jst-ref" data-jst-go="' + esc(it.ref) + '">' + esc(it.ref) + "</button></div>";
+      data.text(it.ref).then(function (rows) {
+        var p = box_.querySelector("[data-jst-averse]"); if (!p || self.st.pick !== i) return;
+        var t = rows && rows[0] && rows[0].texts, ver = t && (t.LSB ? "LSB" : Object.keys(t)[0]);
+        p.innerHTML = ver ? esc(String(t[ver]).replace(/<[^>]+>/g, "")) + ' <span class="sub">(' + ver + ")</span>" : "";
+      });
+    },
+    play: function () {
+      var self = this, rt = this.route(); if (!rt || !this._atlas) return;
+      var n = 1, btn = this.el.querySelector("[data-jst-aplay]");
+      this._play = true; if (btn) btn.textContent = "Stop";
+      this._atlas.upTo(1);
+      (function step() {
+        if (!self._play) return;
+        self._atlas.upTo(n); self.pickItem(n, false);
+        var a = rt.stops[Math.max(0, n - 2)], b = rt.stops[n - 1];
+        self._atlas.fit([a, b], 900, 420);
+        if (n >= rt.stops.length) { self._pt = setTimeout(function () { self.stopPlay(); self._atlas.fit(self._pts, 900); }, 1600); return; }
+        n++; self._pt = setTimeout(step, 1900);
+      })();
+    },
+    stopPlay: function (quiet) {
+      clearTimeout(this._pt); this._play = false;
+      if (quiet) return;
+      if (this._atlas) this._atlas.upTo(null);
+      var btn = this.el.querySelector("[data-jst-aplay]"); if (btn) btn.textContent = "Play the journey";
     },
     click: function (e) {
+      var t = e.target.closest("[data-jst-atab]");
+      if (t) { e.stopPropagation(); this.stopPlay(true); this.st.tab = t.getAttribute("data-jst-atab"); this.st.pick = 0; this.paint(); return; }
+      var z = e.target.closest("[data-jst-az]");
+      if (z && this._atlas) { e.stopPropagation(); var k = z.getAttribute("data-jst-az"), host = this.el.querySelector("[data-jst-atlas]");
+        if (k === "in") this._atlas.zoom(1.6); else if (k === "out") this._atlas.zoom(1 / 1.6); else if (k === "fit") this._atlas.fit(this._pts, 400);
+        else if (k === "full") { if (document.fullscreenElement) document.exitFullscreen(); else if (host.requestFullscreen) host.requestFullscreen().catch(function () { host.classList.toggle("jst-atlas-big"); }); else host.classList.toggle("jst-atlas-big"); }
+        return; }
+      var pl = e.target.closest("[data-jst-aplay]");
+      if (pl) { e.stopPropagation(); if (this._play) this.stopPlay(); else this.play(); return; }
+      var s = e.target.closest("[data-jst-astop]");
+      if (s) { e.stopPropagation(); this.stopPlay(); this.pickItem(+s.getAttribute("data-jst-astop"), true); var mp = this.el.querySelector("[data-jst-atlas]"); if (mp && mp.scrollIntoView) mp.scrollIntoView({ block: "nearest", behavior: "smooth" }); return; }
       var m = e.target.closest("[data-jst-pmap]");
       if (m) { e.stopPropagation(); mapViewer(MAPBY[m.getAttribute("data-jst-pmap")]); return; }
       var f = e.target.closest("[data-jst-fly]");
-      if (f && this._map) { e.stopPropagation(); var mk = this._pins[f.getAttribute("data-jst-fly")]; if (mk) { this._map.setView(mk.getLatLng(), 9); mk.openPopup(); this.el.closest(".pbody, #pbody") && (this.el.parentNode.scrollTop = 0); } return; }
+      if (f && this._atlas) { e.stopPropagation(); var id = f.getAttribute("data-jst-fly"), i = (this._items || []).map(function (p) { return p.id; }).indexOf(id);
+        if (i > -1) { this.pickItem(i + 1, true); var mp2 = this.el.querySelector("[data-jst-atlas]"); if (mp2 && mp2.scrollIntoView) mp2.scrollIntoView({ block: "nearest", behavior: "smooth" }); } return; }
       Panel.prototype.click.call(this, e);
     },
-    destroy: function () { if (this._map) { try { this._map.remove(); } catch (e) {} this._map = null; } Panel.prototype.destroy.call(this); }
+    destroy: function () { this.stopPlay(true); clearTimeout(this._ht); if (this._atlas) { this._atlas.destroy(); this._atlas = null; } Panel.prototype.destroy.call(this); }
   }, {}, function (d) {   // places named plus Bible maps for the verses
     if (!d || !NAMESD || !MAPIDX) return null;
     return namesIn(NAMESD, d.ref).filter(function (p) { return p.t === "Place"; }).length + mapsFor(d.ref).length; });
