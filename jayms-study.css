@@ -343,6 +343,7 @@ mark.hit.now{background:var(--gold);color:var(--paper-deep)}
 .v.sel{background:var(--paper-deeper)}
 .vn{font-family:var(--label);font-size:.8em;color:var(--gold);margin-right:6px;padding:0 2px;border-radius:3px;text-decoration:none;white-space:nowrap}
 .vn:hover{background:var(--gold);color:var(--paper)}
+.nonums .vn{display:none}   /* Hide numbers: verse numbers off the page (and out of anything reading it aloud) */
 .sup{font-style:italic;font-size:15px;display:block;margin-bottom:4px}
 .red{color:#e7a08f}
 .sc{font-variant:small-caps;letter-spacing:.03em}

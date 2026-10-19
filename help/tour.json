@@ -164,6 +164,11 @@
      "text": "Shows two versions side by side, paragraph by paragraph."
     },
     {
+     "sel": "#numbtn",
+     "name": "Hide numbers / Show numbers",
+     "text": "Takes the verse numbers off the page, so the text reads straight through (and Speechify skips them)."
+    },
+    {
      "sel": "#ver",
      "name": "Version",
      "text": "Which translation you read in: LSB, ESV, NET, NLT, NASB, CSB, BSB, KJV, MSG or Brenton's Septuagint."
