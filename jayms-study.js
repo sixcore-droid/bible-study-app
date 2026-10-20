@@ -1480,7 +1480,7 @@
       (c.lat != null && c.lat >= 6 && c.lat <= 50 && c.lon >= -12 && c.lon <= 62 ? ' <button class="jst-ref" data-jst-digfly="' + n + '">Show on the map</button>' : c.lat != null ? ' <span class="sub u-fs13">Off this map (' + Math.abs(c.lat).toFixed(1) + "\u00B0" + (c.lat < 0 ? "S" : "N") + ", " + Math.abs(c.lon).toFixed(1) + "\u00B0" + (c.lon < 0 ? "W" : "E") + ")</span>" : ' <span class="sub u-fs13">No site to pin</span>') + "</div>" +
       row("The claim", c.claim) + row("What the text says", c.text) + row("Who", c.who) + row("Digging", c.digging) +
       '<div class="lbl u-mt10">Published, peer-reviewed</div>' + li(c.published_peer) + '<div class="lbl u-mt10">Press, broadcasts and books</div>' + li(c.published_press) +
-      row("The case for", c.for) + row("The case against", c.against) +
+      row("The case for", c.for) + row("The case against", c.against) + row("What couldn't be checked", c.notes) +
       (c.sources && c.sources.length ? '<div class="lbl u-mt10">Sources</div><ul class="jst-dig-src">' + c.sources.filter(function (x) { return !/wikipedia\.org/i.test(x.url || ""); }).map(function (x) { return "<li>" + outlink(x.url, esc(x.title)) + "</li>"; }).join("") + "</ul>" : "") + "</div>";
   }
   /* the Atlas page's search: topics, journeys, kingdoms and places, best matches first */
