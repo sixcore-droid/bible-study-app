@@ -1095,6 +1095,8 @@
     "Judea": "#c79a3e", "New Kingdom of Egypt": "#c9844f", "Moab": "#b98a5a", "Edom": "#a35d4a", "Ammon": "#7d9a6b", "Aram-Damascus": "#5f8b8f" };
   var KPAL = ["#c98b6b", "#8fae7e", "#b79bc9", "#7fa6c2", "#d4b26a", "#c27a8e", "#86b3a8", "#a99a72", "#b5866a", "#8d9fd1"];
   function kColor(n) { if (KCOL[n]) return KCOL[n]; var h = 0; for (var i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) >>> 0; return KPAL[h % KPAL.length]; }
+  function chgFC(A) { return { type: "FeatureCollection", features: (A.changes || []).map(function (c) { return { type: "Feature", geometry: { type: "Point", coordinates: [c[3], c[2]] }, properties: { n: c[0], x: c[4], src: c[5] } }; }) }; }
+  var EOX_ATTR = 'Satellite: <a href="https://s2maps.eu" target="_blank" rel="noopener">Sentinel-2 cloudless 2016 by EOX IT Services GmbH</a> (contains modified Copernicus Sentinel data 2016 &amp; 2017)';
   function atlasGL(ml, host, A, o) {
     var self = { gl: true }, abs = function (p) { return new URL(CFG.base + p, location.href).href; }, prefs = atlasPrefs();
     var holder = document.createElement("div"); holder.className = "jst-atlas-gl"; host.insertBefore(holder, host.firstChild);
@@ -1130,7 +1132,7 @@
         holy: { type: "vector", url: "pmtiles://" + abs("atlas-tiles/base-holyland.pmtiles") },
         dem: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-region.pmtiles"), encoding: "terrarium", tileSize: 512, attribution: "Relief: Mapterhorn (Copernicus GLO-30)" },
         dem2: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-levant.pmtiles"), encoding: "terrarium", tileSize: 512 },
-        labels: { type: "geojson", data: labels }, kpoly: { type: "geojson", data: fc([]) }, kreg: { type: "geojson", data: fc([]) }, klab: { type: "geojson", data: fc([]) }, alts: { type: "geojson", data: fc([]) }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
+        labels: { type: "geojson", data: labels }, chg: { type: "geojson", data: chgFC(A) }, kpoly: { type: "geojson", data: fc([]) }, kreg: { type: "geojson", data: fc([]) }, klab: { type: "geojson", data: fc([]) }, alts: { type: "geojson", data: fc([]) }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
       },
       layers: [{ id: "sea", type: "background", paint: { "background-color": SEA } }]
         .concat(base("region"), base("paul", 8), base("holy", 10))
@@ -1170,6 +1172,9 @@
             paint: { "line-color": color, "line-width": 2.6, "line-dasharray": ["case", ["==", ["get", "m"], "land"], ["literal", [3, 2]], ["literal", [1, 0]]] } },
           { id: "arrows", type: "symbol", source: "legs", layout: { "symbol-placement": "line-center", "icon-image": "jst-arrow", "icon-size": .6, "icon-rotation-alignment": "map", "icon-allow-overlap": true, "icon-ignore-placement": true },
             paint: { "icon-color": color } },
+          { id: "chg-dot", type: "circle", source: "chg", paint: { "circle-radius": 5, "circle-color": "#fffaf0", "circle-stroke-color": "#9a3b26", "circle-stroke-width": 2 } },
+          { id: "chg-name", type: "symbol", source: "chg", minzoom: 7, layout: { "text-field": ["get", "n"], "text-font": ["Noto Sans Italic"], "text-size": 12, "text-variable-anchor": ["right", "left", "top"], "text-radial-offset": .9 },
+            paint: { "text-color": "#7a2e1e", "text-halo-color": "rgba(250,244,226,.95)", "text-halo-width": 1.6 } },
           /* the other proposed sites for the picked place: a dotted line out to each, a small open ring and its name with its score */
           { id: "alt-line", type: "line", source: "alts", filter: ["==", ["geometry-type"], "LineString"], paint: { "line-color": "#7d5a2e", "line-width": 1.3, "line-dasharray": [1, 2.5] } },
           { id: "alt-dot", type: "circle", source: "alts", filter: ["==", ["geometry-type"], "Point"], paint: { "circle-radius": 4.5, "circle-color": "rgba(250,244,226,.9)", "circle-stroke-color": "#7d5a2e", "circle-stroke-width": 1.4 } },
@@ -1221,6 +1226,7 @@
     yin.value = yr; ynote.textContent = o.yearNote || "";
     function yfilter(y) { return ["all", ["<=", ["get", "f"], y], [">=", ["get", "t"], y]]; }
     self.year = function (y) { yr = Math.max(-2500, Math.min(400, Math.round(y))); yin.value = yr; ylab.textContent = yearLabel(yr);
+      var tl = host.querySelector(".jst-atlas-wipe .then"); if (tl) tl.textContent = "Then \u00B7 " + yearLabel(yr);
       when(function () { ["k-fill", "k-line", "k-reg"].forEach(function (id) { map.setFilter(id, yfilter(yr)); });
         map.setFilter("k-label", ["all", yfilter(yr), ["<", ["get", "a"], 1000]]); map.setFilter("k-label-key", ["all", yfilter(yr), [">=", ["get", "a"], 1000]]); }); };
     yin.addEventListener("input", function () { ynote.textContent = ""; self.year(+yin.value); });
@@ -1240,6 +1246,8 @@
     map.on("click", function (e) {
       var f = map.queryRenderedFeatures(e.point, { layers: ["stop-dot", "place-pin", "mark-name"] })[0];
       if (f && o.onPick) { o.onPick(f.properties.i); return; }
+      var ch = map.queryRenderedFeatures(e.point, { layers: ["chg-dot", "chg-name"] })[0];
+      if (ch && o.onChange) { o.onChange(ch.properties); return; }
       var k = prefs.kingdoms && map.queryRenderedFeatures(e.point, { layers: ["k-fill", "k-reg"] })[0];
       if (k && o.onKingdom) o.onKingdom(k.properties, yr);
     });
@@ -1266,7 +1274,46 @@
       map.setFilter("stop-dot", n == null ? ["==", ["get", "k"], "stop"] : ["all", ["==", ["get", "k"], "stop"], ["<=", ["get", "i"], n]]);
       map.setFilter("mark-name", n == null ? ["==", ["get", "first"], true] : ["all", ["==", ["get", "first"], true], ["<=", ["get", "i"], n]]); }); };
     self.pick = function (i) { when(function () { map.setFilter("picked", ["all", ["==", ["get", "i"], i], ["==", ["get", "nth"], 0]]); }); };
-    self.resize = function () { map.resize(); };
+    self.resize = function () { map.resize(); if (now) now.resize(); };
+    /* THEN | NOW: a second map (2016 Sentinel-2 satellite, today's borders and towns, the same pins) laid over this one and kept in
+       step; a divider shows the ancient map left of it and today right of it. */
+    var now = null, h2 = null, wipe = null, wx = .5, syncing = false, s1, s2;
+    function setWipe(f) { wx = Math.max(.04, Math.min(.96, f)); var w = holder.clientWidth; if (h2) h2.style.clipPath = "inset(0 0 0 " + Math.round(w * wx) + "px)"; if (wipe) wipe.style.left = Math.round(w * wx) + "px"; }
+    function tie(a, b) { return function () { if (syncing) return; syncing = true; b.jumpTo({ center: a.getCenter(), zoom: a.getZoom() }); syncing = false; }; }
+    self.compare = function () {
+      if (now) { map.off("move", s1); now.off("move", s2); now.remove(); h2.remove(); wipe.remove(); now = h2 = wipe = null; host.classList.remove("jst-atlas-cmp"); return false; }
+      if (!ready) return false;
+      h2 = document.createElement("div"); h2.className = "jst-atlas-gl jst-atlas-now"; holder.parentNode.insertBefore(h2, holder.nextSibling);
+      var mk = map.getSource("marks").serialize().data;
+      now = new ml.Map({ container: h2, center: map.getCenter(), zoom: map.getZoom(), minZoom: 2, maxZoom: 14, maxBounds: [[-30, -5], [80, 60]], renderWorldCopies: false,
+        attributionControl: { compact: true }, cooperativeGestures: true, dragRotate: false, touchPitch: false,
+        style: { version: 8, glyphs: abs("vendor/fonts/") + "{fontstack}/{range}.pbf",
+          sources: { sat: { type: "raster", tiles: ["https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{z}/{y}/{x}.jpg"], tileSize: 256, maxzoom: 15, attribution: EOX_ATTR },
+            region: { type: "vector", url: "pmtiles://" + abs("atlas-tiles/base-region.pmtiles"), attribution: "\u00A9 OpenStreetMap \u00B7 Protomaps" },
+            marks: { type: "geojson", data: mk }, chg: { type: "geojson", data: chgFC(A) } },
+          layers: [
+            { id: "sat", type: "raster", source: "sat" },
+            { id: "b", type: "line", source: "region", "source-layer": "boundaries", filter: ["==", ["get", "kind"], "country"], paint: { "line-color": "#ffd27a", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.2, 9, 2.4], "line-dasharray": [3, 2] } },
+            { id: "c", type: "symbol", source: "region", "source-layer": "places", filter: ["==", ["get", "kind"], "country"], layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Medium"], "text-size": 12, "text-transform": "uppercase", "text-letter-spacing": .12 }, paint: { "text-color": "#fff", "text-halo-color": "rgba(0,0,0,.75)", "text-halo-width": 1.6 } },
+            { id: "t", type: "symbol", source: "region", "source-layer": "places", minzoom: 4, filter: ["all", ["==", ["get", "kind"], "locality"], ["<=", ["get", "min_zoom"], ["+", ["zoom"], 0]]], layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Italic"], "text-size": 11.5 }, paint: { "text-color": "#fff", "text-halo-color": "rgba(0,0,0,.75)", "text-halo-width": 1.4 } },
+            { id: "chg-dot", type: "circle", source: "chg", paint: { "circle-radius": 5, "circle-color": "#fff", "circle-stroke-color": "#e0603c", "circle-stroke-width": 2 } },
+            { id: "m", type: "circle", source: "marks", paint: { "circle-radius": 6, "circle-color": "#e8c46a", "circle-stroke-color": "#fff", "circle-stroke-width": 1.8 } },
+            { id: "mn", type: "symbol", source: "marks", filter: ["==", ["get", "first"], true], layout: { "text-field": ["get", "n"], "text-font": ["Noto Sans Medium"], "text-size": 13, "text-variable-anchor": ["left", "right", "top", "bottom"], "text-radial-offset": 1 }, paint: { "text-color": "#fff", "text-halo-color": "rgba(0,0,0,.8)", "text-halo-width": 1.8 } }
+          ] } });
+      now.touchZoomRotate.disableRotation();
+      map.on("move", s1 = tie(map, now)); now.on("move", s2 = tie(now, map));
+      wipe = document.createElement("div"); wipe.className = "jst-atlas-wipe"; wipe.setAttribute("role", "slider"); wipe.setAttribute("tabindex", "0"); wipe.setAttribute("aria-label", "Then and now divider");
+      wipe.innerHTML = '<span class="then">Then \u00B7 ' + yearLabel(yr) + '</span><i></i><span class="now">Now \u00B7 2016 satellite</span>';
+      holder.parentNode.insertBefore(wipe, h2.nextSibling);
+      var drag = false;
+      wipe.addEventListener("pointerdown", function (e) { drag = true; try { wipe.setPointerCapture(e.pointerId); } catch (x) {} e.stopPropagation(); e.preventDefault(); });
+      wipe.addEventListener("pointermove", function (e) { if (!drag) return; var r = holder.getBoundingClientRect(); setWipe((e.clientX - r.left) / r.width); });
+      wipe.addEventListener("pointerup", function () { drag = false; });
+      wipe.addEventListener("keydown", function (e) { if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); setWipe(wx + (e.key === "ArrowLeft" ? -.05 : .05)); } });
+      wipe.addEventListener("click", function (e) { e.stopPropagation(); });
+      host.classList.add("jst-atlas-cmp"); setWipe(wx);
+      return true;
+    };
     self.alts = function (list) { when(function () {
       var f = [];
       (list || []).forEach(function (a) { f.push(pt(a.ll, { n: a.n, s: a.s })); if (a.from) f.push({ type: "Feature", geometry: { type: "LineString", coordinates: [[a.from[1], a.from[0]], [a.ll[1], a.ll[0]]] }, properties: {} }); });
@@ -1283,11 +1330,11 @@
       menu.addEventListener("click", function (e) { e.stopPropagation(); });
       host.appendChild(menu);
     };
-    var ro = global.ResizeObserver ? new ResizeObserver(function () { map.resize(); if (!touched && lastFit && ready) self.fit.apply(null, lastFit); }) : null;   // keep the passage in frame when the panel changes width, until the reader moves the map
+    var ro = global.ResizeObserver ? new ResizeObserver(function () { map.resize(); if (now) { now.resize(); setWipe(wx); } if (!touched && lastFit && ready) self.fit.apply(null, lastFit); }) : null;   // keep the passage in frame when the panel changes width, until the reader moves the map
     if (ro) ro.observe(host);
     function esc_(e) { if (e.key === "Escape" && host.classList.contains("jst-atlas-big")) { e.stopPropagation(); host.classList.remove("jst-atlas-big"); } }
     document.addEventListener("keydown", esc_, true);
-    self.destroy = function () { if (ro) ro.disconnect(); document.removeEventListener("keydown", esc_, true); if (menu) menu.remove(); ybar.remove(); try { map.remove(); } catch (e) {} holder.remove(); };
+    self.destroy = function () { if (now) self.compare(); if (ro) ro.disconnect(); document.removeEventListener("keydown", esc_, true); if (menu) menu.remove(); ybar.remove(); try { map.remove(); } catch (e) {} holder.remove(); };
     self.loaded = new Promise(function (ok, no) { map.on("load", ok); map.on("error", function (e) { if (global.console) console.warn("Atlas map:", e && e.error); if (!ready && !/does not exist in the map's style/.test(String(e && e.error && e.error.message))) no(e && e.error); }) });   // a query made too early is not a failed map
     return self;
   }
@@ -1295,8 +1342,8 @@
   /* one controller whatever draws the map: calls made before MapLibre is up are replayed on it, or on the drawn map if it fails */
   function atlasMount(host, A, o) {
     var self = {}, impl = null, last = {};
-    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers", "alts", "year"].forEach(function (k) {
-      self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers" && k !== "alts") last[k] = a; if (impl && impl[k]) impl[k].apply(impl, a); };
+    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers", "alts", "year", "compare"].forEach(function (k) {
+      self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers" && k !== "alts" && k !== "compare") last[k] = a; if (impl && impl[k]) impl[k].apply(impl, a); };
     });
     var dead = false;
     function svg() { if (dead) return; impl = atlasSVG(host, A, o); host.classList.add("jst-atlas-flat"); Object.keys(last).forEach(function (k) { if (impl[k]) impl[k].apply(impl, last[k]); }); }
@@ -1350,7 +1397,7 @@
       if (A) {
         h += '<div class="chips jst-atlas-tabs"><button class="chip' + (!rt ? " on" : "") + '" data-jst-atab="here">Places here' + (pinned.length ? " (" + pinned.length + ")" : "") + "</button>" +
           A.routes.map(function (r) { return '<button class="chip' + (rt === r ? " on" : "") + '" data-jst-atab="' + r.id + '"><i data-jst-c="' + r.color + '"></i>' + esc(r.name.replace(/:.*$/, "")) + "</button>"; }).join("") + "</div>";
-        h += '<div class="jst-atlas" data-jst-atlas><div class="jst-atlas-ctl"><button data-jst-az="in" aria-label="Zoom in">+</button><button data-jst-az="out" aria-label="Zoom out">−</button><button data-jst-az="fit" aria-label="Fit">⤢</button><button data-jst-az="full" aria-label="Full screen">⛶</button><button data-jst-az="layers" aria-label="Layers" title="Layers">☰</button></div><div class="jst-atlas-hint">Hold Ctrl or ⌘ and scroll to zoom</div></div>';
+        h += '<div class="jst-atlas" data-jst-atlas><div class="jst-atlas-ctl"><button data-jst-az="in" aria-label="Zoom in">+</button><button data-jst-az="out" aria-label="Zoom out">−</button><button data-jst-az="fit" aria-label="Fit">⤢</button><button data-jst-az="full" aria-label="Full screen">⛶</button><button data-jst-az="layers" aria-label="Layers" title="Layers">☰</button><button data-jst-az="swipe" aria-label="Then and now" title="Then and now: drag the divider between the ancient map and today">\u21C6</button></div><div class="jst-atlas-hint">Hold Ctrl or ⌘ and scroll to zoom</div></div>';
         h += '<div class="jst-atlas-pick" data-jst-apick></div>';
         if (rt) {
           h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.kick) + " · " + rt.stops.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
@@ -1392,6 +1439,8 @@
       var py = passageYear(this.K, this.o.ref);
       this._atlas = atlasMount(host, A, { marks: marks, legs: legs, color: rt && rt.color, label: rt ? rt.name : "Places in " + this.o.ref,
         year: py ? py.y : null, yearNote: py ? (py.note || this.o.ref + ": " + yearLabel(py.y)) : "No date for " + this.o.ref,
+        onChange: function (c) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
+          b.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Then and now</div><span class="tt">' + esc(c.n) + '</span><p class="u-fs15 u-m4-8">' + esc(c.x) + '</p><p class="sub u-fs13">Source: ' + esc(c.src) + "</p></div>"; },
         onKingdom: function (k, y) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
           b.innerHTML = '<div class="jst-atlas-card"><div class="lbl">In ' + esc(yearLabel(y)) + '</div><span class="tt">' + esc(k.n) + '</span><p class="u-fs14 u-m4-8">' +
             (k.why ? esc(k.why) + " Its area: OpenBible.info, drawn as bands from likely to possible." : "This border: " + esc(yearLabel(k.f)) + " to " + esc(yearLabel(k.t)) + ", from Cliopatria (Seshat), one reading of borders historians still argue over.") +
@@ -1444,7 +1493,7 @@
       if (t) { e.stopPropagation(); this.stopPlay(true); this.st.tab = t.getAttribute("data-jst-atab"); this.st.pick = 0; this.paint(); return; }
       var z = e.target.closest("[data-jst-az]");
       if (z && this._atlas) { e.stopPropagation(); var k = z.getAttribute("data-jst-az"), host = this.el.querySelector("[data-jst-atlas]");
-        if (k === "layers") this._atlas.toggleLayers(); else if (k === "in") this._atlas.zoom(1.6); else if (k === "out") this._atlas.zoom(1 / 1.6); else if (k === "fit") this._atlas.fit(this._pts, 400);
+        if (k === "swipe") { this._atlas.compare(); z.classList.toggle("on"); } else if (k === "layers") this._atlas.toggleLayers(); else if (k === "in") this._atlas.zoom(1.6); else if (k === "out") this._atlas.zoom(1 / 1.6); else if (k === "fit") this._atlas.fit(this._pts, 400);
         else if (k === "full") { if (document.fullscreenElement) document.exitFullscreen(); else if (host.requestFullscreen) host.requestFullscreen().catch(function () { host.classList.toggle("jst-atlas-big"); }); else host.classList.toggle("jst-atlas-big"); }
         return; }
       var pl = e.target.closest("[data-jst-aplay]");
