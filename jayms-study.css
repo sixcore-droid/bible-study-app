@@ -144,6 +144,13 @@ a.btn{text-decoration:none;display:inline-block}
 .jst-atlas-about{line-height:1.6}
 .jst-atlas-tabs .chip i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:0}
 .jst-atlas{position:relative;aspect-ratio:1/1;max-height:72vh;min-height:280px;width:100%;border-radius:8px;border:1px solid #8a7650;overflow:hidden;margin:4px 0 8px;background:#c4d6d6;touch-action:none;user-select:none}
+/* full screen: the map on the left, its column (the picked card, the journey, the places) on the right */
+.jst-atlas-wrap:fullscreen,.jst-atlas-wrap.jst-atlas-big{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,440px);height:100vh;height:100dvh;background:var(--paper-deep,#1a1c20);color:var(--ink)}
+.jst-atlas-wrap.jst-atlas-big{position:fixed;inset:0;z-index:100000}
+#panel:has(.jst-atlas-wrap.jst-atlas-big){z-index:100000}
+.jst-atlas-wrap:fullscreen .jst-atlas,.jst-atlas-wrap.jst-atlas-big .jst-atlas{height:100%;max-height:none;aspect-ratio:auto;border-radius:0;border:0;margin:0}
+.jst-atlas-wrap:fullscreen .jst-atlas-side,.jst-atlas-wrap.jst-atlas-big .jst-atlas-side{overflow:auto;padding:16px 18px;border-left:1px solid var(--line)}
+@media (max-width:760px){.jst-atlas-wrap:fullscreen,.jst-atlas-wrap.jst-atlas-big{grid-template-columns:1fr;grid-template-rows:60vh 1fr}.jst-atlas-wrap:fullscreen .jst-atlas-side,.jst-atlas-wrap.jst-atlas-big .jst-atlas-side{border-left:0;border-top:1px solid var(--line)}}
 .jst-atlas:fullscreen,.jst-atlas.jst-atlas-big{height:100vh;height:100dvh;max-height:none;aspect-ratio:auto;border-radius:0;border:0;margin:0}
 .jst-atlas.jst-atlas-big{position:fixed;inset:0;z-index:100000}
 #panel:has(.jst-atlas-big){z-index:100000}   /* the sticky panel is its own layer: lift it over the top bar */
