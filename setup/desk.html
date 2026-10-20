@@ -89,6 +89,9 @@
       <div class="seg" id="numsw" role="group" aria-label="Verse numbers">
         <button id="numbtn" title="Hide or show the verse numbers (a reader like Speechify then skips them)"></button>
       </div>
+      <div class="seg" id="mapsw" role="group" aria-label="Map">
+        <button id="mapbtn" title="Open the map of the places in these verses">Map this passage</button>
+      </div>
       <div class="vpick">
         <select id="ver" class="versel" aria-label="Version"></select>
         <span id="ver2wrap"><span class="lbl">beside</span> <select id="ver2" class="versel" aria-label="Second version"></select></span>
@@ -406,6 +409,9 @@ function renderReader(){
   $("ver2wrap").hidden = !S.par;
   /* one toggle each: the button names what a tap switches to, not what's on screen */
   $("layoutbtn").textContent = S.layout==="verse" ? "Reading view" : "Verse by verse";
+  /* the button never hides: dimmed when these verses name no place with a known site, and it still opens the map */
+  if (window.JaymsStudy && JaymsStudy.placesIn) JaymsStudy.placesIn(r.ref).then(list=>{ const n=(list||[]).filter(p=>p.ll).length;
+    $("mapbtn").classList.toggle("empty", !n); $("mapbtn").title = n ? `Map the ${n} place${n>1?"s":""} named in ${r.ref}` : `No place with a known site is named in ${r.ref}; the map still opens` });
   $("numbtn").textContent = S.nums ? "Hide numbers" : "Show numbers"; $("text").classList.toggle("nonums", !S.nums);   // gone from the page, so a read-aloud tool skips them too
   $("parbtn").textContent = S.par ? "One version" : "Parallel";
   const vers = S.par ? [S.ver,S.ver2] : [S.ver];
@@ -870,6 +876,7 @@ $("ver").onchange=e=>{ const was=S.ver; S.ver=e.target.value; if(S.ver===S.ver2)
 $("ver2").onchange=e=>{ const was=S.ver2; S.ver2=e.target.value; if(S.ver2===S.ver){ S.ver=was; store.set("ver",S.ver) } store.set("ver2",S.ver2); renderReader() };
 $("layoutbtn").onclick=()=>{S.layout=S.layout==="verse"?"read":"verse";store.set("layout",S.layout);renderReader()};
 $("numbtn").onclick=()=>{S.nums=!S.nums;store.set("nums",S.nums);renderReader()};
+$("mapbtn").onclick=()=>{ if(S.tool!=="maps") openTool("maps") };
 $("parbtn").onclick=()=>{S.par=S.par?0:1;store.set("par",S.par);renderReader()};
 $("smaller").onclick=()=>{S.size=Math.max(16,S.size-1);store.set("size",S.size);renderReader()};
 /* « » the chapter before or after the one on screen (across books too); it opens like a passage from the Go box */

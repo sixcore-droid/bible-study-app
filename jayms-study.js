@@ -424,7 +424,7 @@
     dss: function () { return getJSON("dss.json").then(function (d) { DSSD = d; return d; }); },
     hg: function () { return getJSON("hebrew-greek.json"); },   // the Hebrew & Greek mode's marks (scripts/build-hebrew-greek.py)
     /* what the dock buttons count from, loaded once after the first paint (small files; the panels load their own full data) */
-    counts: function () { return Promise.all([data.names(), data.maps().catch(function () {}), data.dss().catch(function () {}),
+    counts: function () { return Promise.all([data.names(), data.places(), data.maps().catch(function () {}), data.dss().catch(function () {}),
       getJSON("art-refs.json").then(function (d) { ARTREFS = d || []; }).catch(function () { ARTREFS = []; }),
       getJSON("relics.json").then(function (d) { RELREFS = ((d && d.relics) || []).map(function (x) { return x.refs; }); }).catch(function () { RELREFS = []; }),
       data.ancient()]); },
@@ -439,6 +439,7 @@
     /* Michael S. Heiser Foundation articles by the chapters they cite (scripts/fetch-heiser.py) */
     /* STEPBible's people and places (scripts/build-names.py): family lines and map positions for the Fact Book panel */
     names: function () { return getJSON("names.json").then(function (d) { NAMESD = d; return d; }).catch(function () { return null; }); },
+    places: function () { return getJSON("places.json").then(function (d) { PLACESD = d; return d; }).catch(function () { return null; }); },   // the shared place list (scripts/build-places.py)
     heiser: function () { return getJSON("heiser.json").catch(function () { return null; }); },
     /* a podcast's episodes through the relay, kept in the browser for 12 hours: {episodes:[{t, link, date, dur, audio, desc}]} */
     podcast: function (feed) {
@@ -816,7 +817,7 @@
 
   // ------------------------------------------------------------------ Fact Book
   /* STEPBible's records for the people and places named in the passage, in the order they first appear */
-  var NAMESD = null, DSSD = null, ARTREFS = null, RELREFS = null, AWP = null, AWI = null;   // loaded by data.counts(), so the dock buttons can count without opening their panels
+  var NAMESD = null, PLACESD = null, DSSD = null, ARTREFS = null, RELREFS = null, AWP = null, AWI = null;   // loaded by data.counts(), so the dock buttons can count without opening their panels
   function refsHit(refs, ref) { var segs = data.segs(ref); return refs.some(function (r) { return R.parse(r).some(function (a) { return segs.some(function (q) { return R.overlap(a, q); }); }); }); }
   /* the manuscripts holding any verse of the passage, most verses first (the Scrolls panel and its button) */
   function dssList(D, ref) {
@@ -828,6 +829,22 @@
     });
     return order.map(function (k) { return by[k]; }).sort(function (a, b) { return b.vs.length - a.vs.length; });
   }
+  /* the places a passage names, from the shared place list's verse index: [{id, n, ll, tier, s, alt, ...}] in order of first mention.
+     n drops OpenBible's disambiguating number ("Bethel 1" -> "Bethel"). */
+  function placesIn(pd, ref) {
+    if (!pd) return [];
+    var out = [], seen = {};
+    data.segs(ref).forEach(function (q) {
+      for (var c = q.c1; c <= (q.c2 || q.c1); c++) (((pd.ix[q.book] || {})[c]) || []).forEach(function (row) {
+        var lo = c === q.c1 ? q.v1 : 1, hi = c === (q.c2 || q.c1) ? q.v2 : 999;
+        if (!row.slice(1).some(function (v) { return v >= lo && v <= hi; }) || seen[row[0]]) return;
+        seen[row[0]] = 1; var p = pd.places[row[0]]; if (p) out.push(Object.assign({ id: row[0] }, p, { n: p.n.replace(/\s+\d+$/, "") }));
+      });
+    });
+    return out;
+  }
+  api.placesIn = function (ref) { return data.places().then(function (pd) { return placesIn(pd, ref); }); };
+  var TIER = { secure: "Secure identification", likely: "Likely identification", contested: "Contested identification", unlocated: "No proposed site" };
   function namesIn(nm, ref) {
     if (!nm) return [];
     var out = [], seen = {};
@@ -937,7 +954,7 @@
     (o.marks || []).forEach(function (m) { var key = Math.round(m.x) + "," + Math.round(m.y); many[key] = (many[key] || 0) + 1; });
     (o.marks || []).forEach(function (m) {
       var key = Math.round(m.x) + "," + Math.round(m.y), nth = at[key] = (at[key] || 0) + 1;
-      var g = document.createElementNS(SVGNS, "g"); g.setAttribute("class", "amk " + m.k); g.setAttribute("data-i", m.i); g.setAttribute("tabindex", "0");
+      var g = document.createElementNS(SVGNS, "g"); g.setAttribute("class", "amk " + m.k + (m.tier ? " tier-" + m.tier : "")); g.setAttribute("data-i", m.i); g.setAttribute("tabindex", "0");
       g.setAttribute("role", "button"); g.setAttribute("aria-label", (m.num ? m.num + ". " : "") + m.n);
       var dx = (nth - 1) * 17, r = m.k === "stop" ? 9 : 6;
       g.innerHTML = '<circle cx="' + dx + '" cy="0" r="' + r + '"' + (m.k === "stop" ? ' fill="' + (o.color || "#7a2e2e") + '"' : "") + "/>" +
@@ -1089,7 +1106,7 @@
     var at = {};
     var marks = fc((o.marks || []).filter(function (m) { return m.ll; }).map(function (m) {
       var key = m.ll[0].toFixed(3) + "," + m.ll[1].toFixed(3), nth = at[key] = (at[key] || 0) + 1;
-      return pt(m.ll, { i: m.i, n: m.n, k: m.k, num: m.num ? String(m.num) : "", nth: nth - 1, first: nth === 1 }); }));
+      return pt(m.ll, { i: m.i, n: m.n, k: m.k, tier: m.tier || "", num: m.num ? String(m.num) : "", nth: nth - 1, first: nth === 1 }); }));
     var legs = fc((o.legs || []).filter(function (g) { return g.ll1 && g.ll2; }).map(function (g, i) {
       return { type: "Feature", geometry: { type: "LineString", coordinates: [[g.ll1[1], g.ll1[0]], [g.ll2[1], g.ll2[0]]] }, properties: { i: i + 1, m: g.m } }; }));
     var color = o.color || "#7a2e2e";
@@ -1101,7 +1118,7 @@
         holy: { type: "vector", url: "pmtiles://" + abs("atlas-tiles/base-holyland.pmtiles") },
         dem: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-region.pmtiles"), encoding: "terrarium", tileSize: 512, attribution: "Relief: Mapterhorn (Copernicus GLO-30)" },
         dem2: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-levant.pmtiles"), encoding: "terrarium", tileSize: 512 },
-        labels: { type: "geojson", data: labels }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
+        labels: { type: "geojson", data: labels }, alts: { type: "geojson", data: fc([]) }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
       },
       layers: [{ id: "sea", type: "background", paint: { "background-color": SEA } }]
         .concat(base("region"), base("paul", 8), base("holy", 10))
@@ -1131,7 +1148,15 @@
             paint: { "line-color": color, "line-width": 2.6, "line-dasharray": ["case", ["==", ["get", "m"], "land"], ["literal", [3, 2]], ["literal", [1, 0]]] } },
           { id: "arrows", type: "symbol", source: "legs", layout: { "symbol-placement": "line-center", "icon-image": "jst-arrow", "icon-size": .6, "icon-rotation-alignment": "map", "icon-allow-overlap": true, "icon-ignore-placement": true },
             paint: { "icon-color": color } },
-          { id: "place-dot", type: "circle", source: "marks", filter: ["==", ["get", "k"], "place"], paint: { "circle-radius": 6.5, "circle-color": "#c9a24c", "circle-stroke-color": "#5a3c10", "circle-stroke-width": 1.6 } },
+          /* the other proposed sites for the picked place: a dotted line out to each, a small open ring and its name with its score */
+          { id: "alt-line", type: "line", source: "alts", filter: ["==", ["geometry-type"], "LineString"], paint: { "line-color": "#7d5a2e", "line-width": 1.3, "line-dasharray": [1, 2.5] } },
+          { id: "alt-dot", type: "circle", source: "alts", filter: ["==", ["geometry-type"], "Point"], paint: { "circle-radius": 4.5, "circle-color": "rgba(250,244,226,.9)", "circle-stroke-color": "#7d5a2e", "circle-stroke-width": 1.4 } },
+          { id: "alt-name", type: "symbol", source: "alts", filter: ["==", ["geometry-type"], "Point"],
+            layout: { "text-field": ["concat", ["get", "n"], " (", ["to-string", ["get", "s"]], ")"], "text-font": ["Noto Sans Italic"], "text-size": 11.5, "text-variable-anchor": ["left", "right", "top", "bottom"], "text-radial-offset": .8 },
+            paint: { "text-color": "#5a4630", "text-halo-color": "rgba(250,244,226,.95)", "text-halo-width": 1.5 } },
+          /* a place's pin says how sure scholars are of the site: solid = secure, open = likely, dashed ring = contested */
+          { id: "place-pin", type: "symbol", source: "marks", filter: ["==", ["get", "k"], "place"],
+            layout: { "icon-image": ["concat", "jst-pin-", ["get", "tier"]], "icon-allow-overlap": true, "icon-ignore-placement": true } },
           { id: "stop-dot", type: "symbol", source: "marks", filter: ["==", ["get", "k"], "stop"],
             layout: { "icon-image": "jst-dot", "icon-size": .62, "icon-allow-overlap": true, "icon-ignore-placement": true, "icon-offset": ["interpolate", ["linear"], ["get", "nth"], 0, ["literal", [0, 0]], 4, ["literal", [140, 0]]],   // a return visit sits beside the earlier mark
               "text-field": ["get", "num"], "text-font": ["Noto Sans Medium"], "text-size": 10.5, "text-allow-overlap": true, "text-ignore-placement": true,
@@ -1151,6 +1176,13 @@
     function sdf(id, draw) { var c = document.createElement("canvas"); c.width = c.height = 48; var x = c.getContext("2d"); x.fillStyle = "#000"; draw(x); map.addImage(id, x.getImageData(0, 0, 48, 48), { sdf: true }); }
     map.on("styleimagemissing", function (e) {
       if (e.id === "jst-dot") sdf("jst-dot", function (x) { x.beginPath(); x.arc(24, 24, 20, 0, 7); x.fill(); });
+      if (/^jst-pin-/.test(e.id)) {   // drawn at twice the size for sharp edges on retina screens
+        var t = e.id.slice(8), c = document.createElement("canvas"); c.width = c.height = 36; var x = c.getContext("2d");
+        x.beginPath(); x.arc(18, 18, 12, 0, 7); x.fillStyle = t === "secure" ? "#c9a24c" : "rgba(250,244,226,.95)"; x.fill();
+        x.lineWidth = t === "secure" ? 3 : 4.4; x.strokeStyle = t === "contested" ? "#9a3b26" : t === "likely" ? "#b0852f" : "#5a3c10";
+        if (t === "contested") x.setLineDash([5, 4]); x.stroke();
+        map.addImage(e.id, x.getImageData(0, 0, 36, 36), { pixelRatio: 2 });
+      }
       if (e.id === "jst-arrow") sdf("jst-arrow", function (x) { x.beginPath(); x.moveTo(10, 10); x.lineTo(40, 24); x.lineTo(10, 38); x.closePath(); x.fill(); });
     });
     function applyPrefs() {
@@ -1161,10 +1193,10 @@
       queue.forEach(function (f) { f(); }); queue = []; });
     function when(f) { if (ready) f(); else queue.push(f); }
     map.on("click", function (e) {
-      var f = map.queryRenderedFeatures(e.point, { layers: ["stop-dot", "place-dot", "mark-name"] })[0];
+      var f = map.queryRenderedFeatures(e.point, { layers: ["stop-dot", "place-pin", "mark-name"] })[0];
       if (f && o.onPick) o.onPick(f.properties.i);
     });
-    map.on("mousemove", function (e) { map.getCanvas().style.cursor = map.queryRenderedFeatures(e.point, { layers: ["stop-dot", "place-dot"] }).length ? "pointer" : ""; });
+    map.on("mousemove", function (e) { map.getCanvas().style.cursor = map.queryRenderedFeatures(e.point, { layers: ["stop-dot", "place-pin"] }).length ? "pointer" : ""; });
 
     function lls(pts) { return (pts || []).map(function (p) { return p.ll; }).filter(Boolean); }
     self.fit = function (pts, ms, minW) {
@@ -1184,6 +1216,12 @@
       map.setFilter("mark-name", n == null ? ["==", ["get", "first"], true] : ["all", ["==", ["get", "first"], true], ["<=", ["get", "i"], n]]); }); };
     self.pick = function (i) { when(function () { map.setFilter("picked", ["all", ["==", ["get", "i"], i], ["==", ["get", "nth"], 0]]); }); };
     self.resize = function () { map.resize(); };
+    self.alts = function (list) { when(function () {
+      var f = [];
+      (list || []).forEach(function (a) { f.push(pt(a.ll, { n: a.n, s: a.s })); if (a.from) f.push({ type: "Feature", geometry: { type: "LineString", coordinates: [[a.from[1], a.from[0]], [a.ll[1], a.ll[0]]] }, properties: {} }); });
+      map.getSource("alts").setData(fc(f));
+      if (list && list.length) { var b = new ml.LngLatBounds(); list.forEach(function (a) { b.extend([a.ll[1], a.ll[0]]); if (a.from) b.extend([a.from[1], a.from[0]]); }); map.fitBounds(b, { padding: 70, maxZoom: 9, duration: 600 }); }
+    }); };
     /* the layer switches: a small list over the map, remembered on this device */
     var menu = null;
     self.toggleLayers = function (btn) {
@@ -1206,8 +1244,8 @@
   /* one controller whatever draws the map: calls made before MapLibre is up are replayed on it, or on the drawn map if it fails */
   function atlasMount(host, A, o) {
     var self = {}, impl = null, last = {};
-    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers"].forEach(function (k) {
-      self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers") last[k] = a; if (impl && impl[k]) impl[k].apply(impl, a); };
+    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers", "alts"].forEach(function (k) {
+      self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers" && k !== "alts") last[k] = a; if (impl && impl[k]) impl[k].apply(impl, a); };
     });
     var dead = false;
     function svg() { if (dead) return; impl = atlasSVG(host, A, o); host.classList.add("jst-atlas-flat"); Object.keys(last).forEach(function (k) { impl[k].apply(impl, last[k]); }); }
@@ -1241,9 +1279,18 @@
     var out = at.map(function (x) { return outlink(pg[x[0]] ? "logosres:" + x[0] + ";ref=Page.p_" + encodeURIComponent(pg[x[0]]) : atlasSearch(x, place), esc(atlasShort(x))); });
     return out.length ? '<div class="jst-atlas-links"><span class="lbl">' + esc(place) + " in Logos</span> " + out.join(" ") + "</div>" : "";
   }
+  /* the other sites proposed for a place, strongest first, with OpenBible's score: the honest answer to "where was it?" */
+  function placeRivals(p, full) {
+    if (!p.alt || !p.alt.length) return p.tier === "unlocated" ? '<p class="sub u-fs14">No site has been proposed with any confidence.</p>' : "";
+    var top = p.alt.filter(function (a) { return a[3] > 0; });
+    if (!top.length) return "";
+    return '<p class="u-fs14 u-m4-8">' + (full ? "Best-supported site scores " + p.s + " (500+ is high confidence). " : "") + "Other proposed sites: " +
+      top.slice(0, full ? 5 : 3).map(function (a) { return esc(a[0]) + " (" + a[3] + ")"; }).join(", ") + "</p>";
+  }
   define("Maps", { id: "maps", label: "Maps", name: "Maps of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>' }, {
-    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json"), this.o.owner ? getJSON("atlas-pages.json").catch(function () { return null; }) : null]).then(function (r) { if (r[5] && r[5].pages) ATLAS_PAGES = r[5].pages; self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
-    places: function () { return namesIn(this.nm, this.o.ref).filter(function (p) { return p.t === "Place"; }); },
+    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json"), this.o.owner ? getJSON("atlas-pages.json").catch(function () { return null; }) : null, data.places()]).then(function (r) { if (r[5] && r[5].pages) ATLAS_PAGES = r[5].pages; self.pd = r[6]; self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
+    /* the passage's places from the shared list, with STEPBible's one-line description and its name (the Biblica map index uses it) */
+    places: function () { var nm = this.nm; return placesIn(this.pd, this.o.ref).map(function (p) { var st = nm && p.step && nm.p[p.step[0]]; return Object.assign(p, { b: st && st.b, sn: st && st.n }); }); },
     route: function () { var A = this.A, t = this.st.tab; return A && t && t !== "here" ? A.routes.filter(function (r) { return r.id === t; })[0] : null; },
     view: function () {
       var self = this, A = this.A, places = this.places(), pinned = places.filter(function (p) { return p.ll; });
@@ -1263,15 +1310,15 @@
       }
       if (!rt) {
         if (places.length) h += '<div class="lbl u-mt14">Places in ' + esc(this.o.ref) + " (" + places.length + ")</div>" + places.map(function (p) {
-          var on = (self.mp[p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
-          return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") +
+          var on = (self.mp[p.sn || p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
+          return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + placeRivals(p) +
             (on.length ? '<div class="chips">' + on.map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>" : "") +
             (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.owner ? atlasLinks(self.at || [], p.n) : "") + "</div>"); }).join("");
         else if (!A) h += none("No place is named in " + esc(this.o.ref) + ".");
       }
       h += '<div class="lbl u-mt14">Bible maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>" + (ms.length ? box("witness", "", '<div class="item">' + ms.map(function (m) { return '<p class="u-m5"><button class="tt jst-xt" data-jst-pmap="' + esc(m.id) + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button></p>"; }).join("") + "</div>") : none("No Biblica map is tied to this passage."));
       if (this.o.owner && (this.at || []).length) h += '<div class="lbl u-mt14">My atlases in Logos (' + this.at.length + ")</div>" + '<p class="ctx u-fs13">Each one searches that atlas for ' + esc(this.o.ref) + ': pick a result to open the page.</p>' + this.at.map(function (x) { return '<p class="u-m5">' + outlink(atlasForRef(x, self.o.ref), esc(x[1])) + ((x[6] || "").indexOf("b") > -1 ? '<span class="sub u-fs13"> \u00B7 ' + esc(self.o.ref) + "</span>" : "") + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
-      h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Positions: <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> and <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
+      h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Places, sites and how sure scholars are: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0; a score of 500 or more is high confidence); <a href="https://pleiades.stoa.org/" target="_blank" rel="noopener">Pleiades</a> and <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
       return { kick: "Maps · " + (rt ? rt.stops.length + " stops" : places.length + " places"), title: rt ? rt.name : "Where this happens", body: h };
     },
     after: function () {
@@ -1287,7 +1334,7 @@
         this._items = rt.stops;
       } else {
         this._items = this.places().filter(function (p) { return p.ll; });
-        marks = this._items.map(function (p, i) { var q = atlasXY(A, p.ll); return { x: q.x, y: q.y, ll: p.ll, n: p.n, k: "place", i: i + 1 }; });
+        marks = this._items.map(function (p, i) { var q = atlasXY(A, p.ll); return { x: q.x, y: q.y, ll: p.ll, n: p.n, k: "place", tier: p.tier, i: i + 1 }; });
       }
       pts = marks;
       var hint = host.querySelector(".jst-atlas-hint");
@@ -1305,7 +1352,9 @@
       if (fly) { var q = rt ? it : atlasXY(this.A, it.ll); this._atlas.fit([q], 500, 560); }
       this.el.querySelectorAll("[data-jst-astop]").forEach(function (b) { b.classList.toggle("on", +b.getAttribute("data-jst-astop") === i); });
       var al = this.o.owner ? this.at || [] : [];
-      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + "</span>" + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + atlasLinks(al, it.n) + "</div>"; return; }
+      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + atlasLinks(al, it.n) + "</div>";
+        this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []); return; }
+      this._atlas.alts([]);
       box_.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Stop ' + i + " of " + rt.stops.length + '</div><span class="tt">' + esc(it.n) + '</span><p class="u-m4-8 u-fs15" data-jst-averse>…</p><button class="jst-ref" data-jst-go="' + esc(it.ref) + '">' + esc(it.ref) + "</button>" + atlasLinks(al, it.n) + "</div>";
       data.text(it.ref).then(function (rows) {
         var p = box_.querySelector("[data-jst-averse]"); if (!p || self.st.pick !== i) return;
@@ -1354,8 +1403,8 @@
     },
     destroy: function () { this.stopPlay(true); clearTimeout(this._ht); if (this._atlas) { this._atlas.destroy(); this._atlas = null; } Panel.prototype.destroy.call(this); }
   }, {}, function (d) {   // places named plus Bible maps for the verses
-    if (!d || !NAMESD || !MAPIDX) return null;
-    return namesIn(NAMESD, d.ref).filter(function (p) { return p.t === "Place"; }).length + mapsFor(d.ref).length; });
+    if (!d || !PLACESD || !MAPIDX) return null;
+    return placesIn(PLACESD, d.ref).filter(function (p) { return p.ll; }).length + mapsFor(d.ref).length; });
 
   // ------------------------------------------------------------------ Family
   /* A family tree for anyone named in the passage (STEPBible's TIPNR links): grandparents, parents, the person with their

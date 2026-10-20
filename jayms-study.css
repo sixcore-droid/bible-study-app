@@ -173,6 +173,13 @@ a.btn{text-decoration:none;display:inline-block}
 .jst-atlas-ctl button:hover{background:#fff}
 .jst-atlas-hint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:rgba(26,28,32,.85);color:#f6efdc;font:13px var(--read);padding:6px 12px;border-radius:6px;opacity:0;transition:opacity .25s;pointer-events:none}
 .jst-atlas-hint.on{opacity:1}
+#mapbtn.empty{opacity:.55}
+.jst-tier{display:inline-block;font:12px/1 var(--label);letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:4px;border:1px solid var(--line);color:var(--ink);vertical-align:3px;margin-left:6px}
+.jst-tier.secure{border-color:var(--gold)}
+.jst-tier.likely{border-style:solid;border-color:#b0852f}
+.jst-tier.contested{border:1px dashed var(--rust)}
+.jst-atlas-svg .amk.place.tier-likely circle{fill:#faf4e2;stroke:#b0852f;stroke-width:2.2}
+.jst-atlas-svg .amk.place.tier-contested circle{fill:#faf4e2;stroke:#9a3b26;stroke-width:2.2;stroke-dasharray:3 2.5}
 .jst-atlas-links{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:8px 0 0;font-size:14px}
 .jst-atlas-links .lbl{margin:0}
 .jst-atlas-card{border-left:3px solid var(--gold);background:var(--paper-deep);border-radius:6px;padding:10px 14px;margin:0 0 10px}
