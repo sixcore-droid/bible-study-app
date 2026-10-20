@@ -2308,6 +2308,201 @@
     }
    ],
    "checked": "2026-10-20"
+  },
+  {
+   "id": "pentecost",
+   "name": "The crowd at Pentecost",
+   "kind": "gather",
+   "to": "jerusalem",
+   "ref": "Acts 2:9-11",
+   "year": 33,
+   "aliases": [
+    "pentecost",
+    "acts 2",
+    "shavuot",
+    "tongues",
+    "parthians",
+    "medes",
+    "elamites",
+    "cretans",
+    "arabs",
+    "proselytes",
+    "every nation under heaven"
+   ],
+   "intro": "Pentecost was the Feast of Weeks, one of the three feasts when Jewish men went up to Jerusalem, and Luke says the city was full of devout Jews \"from every nation under heaven\" (Acts 2:5). Then the crowd lists itself: fifteen peoples and lands, running roughly east to west from Parthia to Rome, with Cretans and Arabs added at the end. Most were Jews whose families had lived abroad since the exile, and Luke adds proselytes, Gentiles who had become Jews. Each line runs from the homeland to Jerusalem to show where the crowd came from; it isn't the road anyone took. Some of them went home with the message, and Peter's first letter is written to believers in Pontus, Cappadocia and Asia (1 Peter 1:1).",
+   "nations": [
+    {
+     "n": "Parthians",
+     "id": null,
+     "ll": [
+      33.0947,
+      44.5812
+     ],
+     "ref": "Acts 2:9",
+     "then": "The Parthian Empire, Rome's rival in the east. The pin is its capital, Ctesiphon on the Tigris (Pleiades 893976).",
+     "today": "Iran and Iraq"
+    },
+    {
+     "n": "Medes",
+     "id": "media",
+     "ll": [
+      34.8065,
+      48.51625
+     ],
+     "ref": "Acts 2:9",
+     "then": "Media, the highlands around Ecbatana, by then a province of Parthia.",
+     "today": "north-western Iran"
+    },
+    {
+     "n": "Elamites",
+     "id": "elam",
+     "ll": [
+      32.18922,
+      48.25778
+     ],
+     "ref": "Acts 2:9",
+     "then": "Elam, the old kingdom around Susa at the head of the Persian Gulf.",
+     "today": "south-western Iran"
+    },
+    {
+     "n": "Mesopotamia",
+     "id": "mesopotamia",
+     "ll": [
+      36.86444,
+      39.03278
+     ],
+     "ref": "Acts 2:9",
+     "then": "The land between the Tigris and the Euphrates, home of the Babylonian Jews since the exile.",
+     "today": "Iraq, north-eastern Syria and south-eastern Turkey"
+    },
+    {
+     "n": "Judea",
+     "id": "judea-1",
+     "ll": [
+      31.77667,
+      35.23417
+     ],
+     "ref": "Acts 2:9",
+     "then": "Jerusalem's own district, so no line.",
+     "today": "Israel and the West Bank"
+    },
+    {
+     "n": "Cappadocia",
+     "id": "cappadocia",
+     "ll": [
+      38.67056,
+      34.83917
+     ],
+     "ref": "Acts 2:9",
+     "then": "A Roman province on the central plateau of Asia Minor.",
+     "today": "central Turkey"
+    },
+    {
+     "n": "Pontus",
+     "id": "pontus",
+     "ll": [
+      40.68,
+      37.83
+     ],
+     "ref": "Acts 2:9",
+     "then": "The Black Sea coast of Asia Minor; Aquila came from here (Acts 18:2).",
+     "today": "northern Turkey"
+    },
+    {
+     "n": "Asia",
+     "id": "asia",
+     "ll": [
+      38.4,
+      28.3
+     ],
+     "ref": "Acts 2:9",
+     "then": "The Roman province of Asia, the west coast of Asia Minor, with Ephesus as its great city.",
+     "today": "western Turkey"
+    },
+    {
+     "n": "Phrygia",
+     "id": "phrygia",
+     "ll": [
+      39.0,
+      31.0
+     ],
+     "ref": "Acts 2:10",
+     "then": "The inland plateau west of Cappadocia.",
+     "today": "west-central Turkey"
+    },
+    {
+     "n": "Pamphylia",
+     "id": "pamphylia",
+     "ll": [
+      37.0,
+      31.0
+     ],
+     "ref": "Acts 2:10",
+     "then": "The coastal plain on the south coast of Asia Minor, where Perga stands.",
+     "today": "southern Turkey, around Antalya"
+    },
+    {
+     "n": "Egypt",
+     "id": "egypt",
+     "ll": [
+      30.12944,
+      31.3075
+     ],
+     "ref": "Acts 2:10",
+     "then": "Egypt, with the largest Jewish community outside Judea, at Alexandria.",
+     "today": "Egypt"
+    },
+    {
+     "n": "The district of Libya around Cyrene",
+     "id": "cyrene",
+     "ll": [
+      32.82095,
+      21.85123
+     ],
+     "ref": "Acts 2:10",
+     "then": "Cyrenaica on the North African coast; Simon who carried the cross was from Cyrene (Mark 15:21).",
+     "today": "eastern Libya"
+    },
+    {
+     "n": "Visitors from Rome",
+     "id": "rome",
+     "ll": [
+      41.8922,
+      12.4852
+     ],
+     "ref": "Acts 2:10",
+     "then": "Jews and proselytes from the capital, where a Jewish community had lived since the second century BC.",
+     "today": "Italy"
+    },
+    {
+     "n": "Cretans",
+     "id": "crete",
+     "ll": [
+      35.30972,
+      24.89333
+     ],
+     "ref": "Acts 2:11",
+     "then": "The island of Crete.",
+     "today": "Crete, Greece"
+    },
+    {
+     "n": "Arabs",
+     "id": "arabia-2",
+     "ll": [
+      30.07,
+      35.35
+     ],
+     "ref": "Acts 2:11",
+     "then": "Most likely the Nabatean kingdom east and south of Judea, with its capital at Petra.",
+     "today": "Jordan, the Negev and north-western Saudi Arabia"
+    }
+   ],
+   "to_ll": [
+    31.77667,
+    35.23417
+   ],
+   "claims": [],
+   "checked": ""
   }
  ]
 }
