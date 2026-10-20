@@ -1235,12 +1235,14 @@
   function atlasShort(x) { return ATLAS_SHORT[x[0]] || x[1]; }
   function atlasSearch(x, q) { return "logos4:Search;kind=BasicSearch;q=" + encodeURIComponent(q) + ";in=" + encodeURIComponent("raw:Single|ResourceId=LLS:" + String(x[0]).toUpperCase()); }
   function atlasForRef(x, ref) { return (x[6] || "").indexOf("b") > -1 && ref ? atlasSearch(x, "<Bible ~ " + ref + ">") : R.logos(x[0]); }
-  function atlasLinks(at, place) {   // one short line: the place searched in every atlas
-    var out = at.map(function (x) { return outlink(atlasSearch(x, place), esc(atlasShort(x))); });
+  var ATLAS_PAGES = {};   // atlas-pages.json: {place: {atlas id: page}}, read off Logos's own search results (scheduled task atlas-page-index)
+  function atlasLinks(at, place) {   // one short line: the page in each atlas where it treats the place, or a search there when no page is known
+    var pg = ATLAS_PAGES[place] || ATLAS_PAGES[String(place).replace(/_/g, " ")] || {};
+    var out = at.map(function (x) { return outlink(pg[x[0]] ? "logosres:" + x[0] + ";ref=Page.p_" + encodeURIComponent(pg[x[0]]) : atlasSearch(x, place), esc(atlasShort(x))); });
     return out.length ? '<div class="jst-atlas-links"><span class="lbl">' + esc(place) + " in Logos</span> " + out.join(" ") + "</div>" : "";
   }
   define("Maps", { id: "maps", label: "Maps", name: "Maps of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>' }, {
-    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json")]).then(function (r) { self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
+    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json"), this.o.owner ? getJSON("atlas-pages.json").catch(function () { return null; }) : null]).then(function (r) { if (r[5] && r[5].pages) ATLAS_PAGES = r[5].pages; self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
     places: function () { return namesIn(this.nm, this.o.ref).filter(function (p) { return p.t === "Place"; }); },
     route: function () { var A = this.A, t = this.st.tab; return A && t && t !== "here" ? A.routes.filter(function (r) { return r.id === t; })[0] : null; },
     view: function () {

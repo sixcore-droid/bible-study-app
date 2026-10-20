@@ -1,1 +1,1 @@
-{"version":"v203","date":"2026-10-20 12:23","note":"Maps: atlas links run a Logos search inside each atlas (passage as a reference search, places by name); passage/place jumps don't exist in atlases"}
+{"version":"v204","date":"2026-10-20 12:40","note":"Maps: atlas place links jump to the saved page when atlas-pages.json has one (tonight's run fills it), search otherwise; atlas-page-places.json = the 150 places"}
