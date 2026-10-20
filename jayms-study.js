@@ -1148,7 +1148,7 @@
     ATLAS_GL.catch(function () { ATLAS_GL = null; });
     return ATLAS_GL;
   }
-  var ATLAS_LAYERS = [["kingdoms", "Kingdoms by year", true], ["relief", "Mountains and valleys", true], ["cover", "Desert, farmland and forest", true], ["ancient", "Ancient names", true], ["modern", "Modern countries and cities", false]];
+  var ATLAS_LAYERS = [["kingdoms", "Kingdoms by year", true], ["roads", "Roman roads (from 200 BC on the slider)", true], ["relief", "Mountains and valleys", true], ["cover", "Desert, farmland and forest", true], ["ancient", "Ancient names", true], ["modern", "Modern countries and cities", false]];
   function atlasPrefs() { var p = {}; try { p = JSON.parse(localStorage.getItem("ws.atlasLayers") || "{}"); } catch (e) {} ATLAS_LAYERS.forEach(function (l) { if (!(l[0] in p)) p[l[0]] = l[2]; }); return p; }
   function atlasSavePrefs(p) { try { localStorage.setItem("ws.atlasLayers", JSON.stringify(p)); } catch (e) {} }
 
@@ -1201,7 +1201,7 @@
         holy: { type: "vector", url: "pmtiles://" + abs("atlas-tiles/base-holyland.pmtiles") },
         dem: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-region.pmtiles"), encoding: "terrarium", tileSize: 512, attribution: "Relief: Mapterhorn (Copernicus GLO-30)" },
         dem2: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-levant.pmtiles"), encoding: "terrarium", tileSize: 512 },
-        labels: { type: "geojson", data: labels }, chg: { type: "geojson", data: chgFC(A) }, kpoly: { type: "geojson", data: fc([]) }, kreg: { type: "geojson", data: fc([]) }, klab: { type: "geojson", data: fc([]) }, alts: { type: "geojson", data: fc([]) }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
+        labels: { type: "geojson", data: labels }, chg: { type: "geojson", data: chgFC(A) }, kpoly: { type: "geojson", data: fc([]) }, roads: { type: "geojson", data: fc([]) }, kreg: { type: "geojson", data: fc([]) }, klab: { type: "geojson", data: fc([]) }, alts: { type: "geojson", data: fc([]) }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
       },
       layers: [{ id: "sea", type: "background", paint: { "background-color": SEA } }]
         .concat(base("region"), base("paul", 8), base("holy", 10))
@@ -1219,6 +1219,13 @@
           { id: "k-label-key", type: "symbol", source: "klab", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999],   // Israel, Judah and the empires that ruled them: always named
             layout: { "text-field": ["upcase", ["get", "l"]], "text-font": ["Noto Sans Medium"], "text-size": ["interpolate", ["linear"], ["zoom"], 3, 10.5, 8, 14], "text-letter-spacing": .12, "text-max-width": 9, "text-allow-overlap": true },
             paint: { "text-color": ["get", "d"], "text-halo-color": "rgba(250,244,226,.95)", "text-halo-width": 2 } },
+          /* Roman roads (roads.json, Itiner-e, CC BY 4.0): solid = certain, dashed = conjectured, dotted = hypothetical, the dataset's own grades */
+          { id: "road-certain", type: "line", source: "roads", metadata: { layer: "roads" }, filter: ["==", ["get", "c"], "certain"], layout: { "line-cap": "round" },
+            paint: { "line-color": "#7a3b1e", "line-opacity": .85, "line-width": ["interpolate", ["linear"], ["zoom"], 4, ["match", ["get", "t"], "main", 1.4, .7], 10, ["match", ["get", "t"], "main", 3, 1.6]] } },
+          { id: "road-conj", type: "line", source: "roads", metadata: { layer: "roads" }, filter: ["==", ["get", "c"], "conjectured"],
+            paint: { "line-color": "#7a3b1e", "line-opacity": .75, "line-dasharray": [3, 1.6], "line-width": ["interpolate", ["linear"], ["zoom"], 4, ["match", ["get", "t"], "main", 1.2, .6], 10, ["match", ["get", "t"], "main", 2.6, 1.4]] } },
+          { id: "road-hyp", type: "line", source: "roads", metadata: { layer: "roads" }, filter: ["==", ["get", "c"], "hypothetical"], layout: { "line-cap": "round" },
+            paint: { "line-color": "#7a3b1e", "line-opacity": .7, "line-dasharray": [.1, 2.2], "line-width": ["interpolate", ["linear"], ["zoom"], 4, 1.2, 10, 2.4] } },
           { id: "modern-border", type: "line", source: "region", "source-layer": "boundaries", metadata: { layer: "modern" }, filter: ["==", ["get", "kind"], "country"],
             paint: { "line-color": "#8c2f52", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.4, 9, 2.6], "line-dasharray": [3, 2] } },
           { id: "modern-country", type: "symbol", source: "region", "source-layer": "places", metadata: { layer: "modern" }, filter: ["==", ["get", "kind"], "country"],
@@ -1284,7 +1291,7 @@
     });
     function applyPrefs() {
       (map.getStyle().layers || []).forEach(function (l) { var g = l.metadata && l.metadata.layer; if (!g) return;
-        var on = prefs[g] && !(prefs.kingdoms && /^ancient-region-/.test(l.id));   // with kingdoms on, the kingdoms name the land; the fixed region names would say it twice
+        var on = prefs[g] && !(prefs.kingdoms && /^ancient-region-/.test(l.id)) && !(g === "roads" && yr < -200);   // Rome's roads only once there is a Rome to build them   // with kingdoms on, the kingdoms name the land; the fixed region names would say it twice
         map.setLayoutProperty(l.id, "visibility", on ? "visible" : "none"); });
     }
     var ready = false, queue = [];   // calls made before the map loads wait here
@@ -1298,6 +1305,7 @@
     self.year = function (y) { yr = Math.max(-2500, Math.min(400, Math.round(y))); yin.value = yr; ylab.textContent = yearLabel(yr);
       var tl = host.querySelector(".jst-atlas-wipe .then"); if (tl) tl.textContent = "Then \u00B7 " + yearLabel(yr);
       when(function () { ["k-fill", "k-line", "k-reg"].forEach(function (id) { map.setFilter(id, yfilter(yr)); });
+        applyPrefs();
         map.setFilter("k-label", ["all", yfilter(yr), ["<", ["get", "a"], 1000]]); map.setFilter("k-label-key", ["all", yfilter(yr), [">=", ["get", "a"], 1000]]); }); };
     yin.addEventListener("input", function () { ynote.textContent = ""; self.year(+yin.value); });
     ybar.addEventListener("click", function (e) { var b = e.target.closest("[data-ystep]"); if (b) { e.stopPropagation(); ynote.textContent = ""; self.year(yr + +b.getAttribute("data-ystep")); } });
@@ -1305,6 +1313,7 @@
     function showYearBar() { ybar.style.display = prefs.kingdoms ? "" : "none"; }
     showYearBar(); self.year(yr);
     map.on("load", function () { ready = true; applyPrefs();
+      getJSON("roads.json").then(function (Rd) { if (Rd && map.getSource("roads")) map.getSource("roads").setData(Rd); });   // 3 MB, fetched once
       getJSON("kingdoms.json").then(function (K) {   // 5 MB: fetched once, the first time a map opens, then cached
         if (!K || !map.getSource("kpoly")) return;
         var col = function (f) { var n = f.properties.n, c = kColor(n); f.properties.c = c; f.properties.d = c; f.properties.l = n.replace(/^(Kingdom|Kingdoms) of (the )?/, ""); if (KCOL[n]) f.properties.a = 1000 + (f.properties.a || 0); return f; };   // the Bible's own kingdoms get first claim on label space
@@ -1316,6 +1325,8 @@
     map.on("click", function (e) {
       var f = map.queryRenderedFeatures(e.point, { layers: ["stop-dot", "place-pin", "mark-name"] })[0];
       if (f && o.onPick) { o.onPick(f.properties.i); return; }
+      var rd = prefs.roads && map.queryRenderedFeatures([[e.point.x - 4, e.point.y - 4], [e.point.x + 4, e.point.y + 4]], { layers: ["road-certain", "road-conj", "road-hyp"] })[0];
+      if (rd && o.onRoad) { o.onRoad(rd.properties); return; }
       var ch = map.queryRenderedFeatures(e.point, { layers: ["chg-dot", "chg-name"] })[0];
       if (ch && o.onChange) { o.onChange(ch.properties); return; }
       var k = prefs.kingdoms && map.queryRenderedFeatures(e.point, { layers: ["k-fill", "k-reg"] })[0];
@@ -1549,7 +1560,7 @@
       if (!atlas) {
         h += '<div class="lbl u-mt14">Bible maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>" + (ms.length ? box("witness", "", '<div class="item">' + ms.map(function (m) { return '<p class="u-m5"><button class="tt jst-xt" data-jst-pmap="' + esc(m.id) + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button></p>"; }).join("") + "</div>") : none("No Biblica map is tied to this passage."));
         if (this.o.owner && (this.at || []).length) h += '<div class="lbl u-mt14">My atlases in Logos (' + this.at.length + ")</div>" + '<p class="ctx u-fs13">Each one searches that atlas for ' + esc(this.o.ref) + ': pick a result to open the page.</p>' + this.at.map(function (x) { return '<p class="u-m5">' + outlink(atlasForRef(x, self.o.ref), esc(x[1])) + ((x[6] || "").indexOf("b") > -1 ? '<span class="sub u-fs13"> \u00B7 ' + esc(self.o.ref) + "</span>" : "") + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
-        h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Kingdoms by year: <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener">Cliopatria</a> (Seshat, CC BY 4.0) and OpenBible.info. Places, sites and how sure scholars are: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0; a score of 500 or more is high confidence); <a href="https://pleiades.stoa.org/" target="_blank" rel="noopener">Pleiades</a> and <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen. Place photos: public domain, CC0, CC BY and CC BY-SA only, each licence checked on its Wikimedia Commons file page and credited under the photo; tap a photo for its file page.</p>';
+        h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Roman roads: <a href="https://zenodo.org/records/17122148" target="_blank" rel="noopener">Itiner-e</a> (CC BY 4.0). Kingdoms by year: <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener">Cliopatria</a> (Seshat, CC BY 4.0) and OpenBible.info. Places, sites and how sure scholars are: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0; a score of 500 or more is high confidence); <a href="https://pleiades.stoa.org/" target="_blank" rel="noopener">Pleiades</a> and <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen. Place photos: public domain, CC0, CC BY and CC BY-SA only, each licence checked on its Wikimedia Commons file page and credited under the photo; tap a photo for its file page.</p>';
       }
       var title = sel ? this.selTitle(sel) : rt ? rt.name : "Where this happens";
       return { kick: (atlas ? "Atlas" : "Maps") + " \u00B7 " + (rt ? realStops(rt).length + " stops" : sel ? { p: "place", k: "kingdom", t: "topic" }[sel.kind] : places.length + " places"), title: title, body: h };
@@ -1632,10 +1643,13 @@
       var hint = host.querySelector(".jst-atlas-hint");
       var py = sel ? null : passageYear(this.K, this.o.ref);
       if (kyear != null) py = { y: kyear, note: sel.id };
+      if (this.o.atlas && rt) { var ry = passageYear(this.K, rt.ranges[0]); if (ry) py = { y: ry.y, note: rt.name + ": " + yearLabel(ry.y) }; }   // the Atlas page: a journey opens on its own date
       if (sel && sel.kind === "t" && this._topicRoute) { var ty = passageYear(this.K, this._topicRoute.ranges[0]); if (ty) py = { y: ty.y, note: this._topicRoute.name + ": " + yearLabel(ty.y) }; }
       if (sel && !py) py = { y: this._atlas && this._atlas.yr || -1000, note: " " };   // a place has no date of its own: keep the slider where it is
       this._atlas = atlasMount(host, A, { marks: marks, legs: legs, color: (rt && rt.color) || (this._topicRoute && sel && sel.kind === "t" && this._topicRoute.color), label: rt ? rt.name : "Places in " + this.o.ref,
         year: py ? py.y : null, yearNote: py ? (py.note || this.o.ref + ": " + yearLabel(py.y)) : "No date for " + this.o.ref,
+        onRoad: function (r) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
+          b.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Roman road</div><span class="tt">' + esc((r.n || "Unnamed road").replace(/-/g, " to ")) + '</span><p class="u-fs15 u-m4-8">' + (r.t === "main" ? "A main road" : "A secondary road") + "; the line is " + esc(r.c) + ' (' + ({ certain: "its course is known", conjectured: "its course is worked out from the evidence but not traced on the ground", hypothetical: "a likely link, not traced" }[r.c] || "") + ').</p><p class="sub u-fs13">Itiner-e (de Soto, Pa\u017eout, Brughmans et al., Scientific Data 2025, CC BY 4.0): the roads of the Roman Empire about AD 150. It does not show which roads existed earlier, so at earlier dates on the slider treat it as the later network. Only 2.7% of the road lines are certain.</p></div>'; },
         onChange: function (c) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
           b.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Then and now</div><span class="tt">' + esc(c.n) + '</span><p class="u-fs15 u-m4-8">' + esc(c.x) + '</p><p class="sub u-fs13">Source: ' + esc(c.src) + "</p></div>"; },
         onKingdom: function (k, y) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
