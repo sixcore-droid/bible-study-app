@@ -1,0 +1,2313 @@
+{
+ "_about": "Atlas topics (scripts/topics.py + sources/topics/*.json, built by scripts/build-topics.py).",
+ "topics": [
+  {
+   "id": "ark",
+   "name": "The Ark of the Covenant",
+   "aliases": [
+    "ark",
+    "ark of god",
+    "ark of the testimony",
+    "ark of the lord"
+   ],
+   "route": "ark",
+   "intro": "The ark was the gold-covered chest that held the tablets of the covenant, made at Sinai (Exodus 25) and carried before Israel until Solomon set it in the Most Holy Place (1 Kings 8). The Philistines took it and sent it back (1 Samuel 4-6), and David brought it up to Jerusalem. After that the Bible goes quiet. The last clear mention is Josiah telling the Levites to put it in the temple (2 Chronicles 35:3), Jeremiah says it won't be missed or made again (Jeremiah 3:16), and when Babylon strips the temple in 586 BC the list of what was taken doesn't name it (2 Kings 25:13-17). Every claim below starts in that silence.",
+   "claims": [
+    {
+     "id": "kiriath-jearim",
+     "name": "Kiriath-jearim (Deir el-Azar, Abu Ghosh)",
+     "lat": 31.814238,
+     "lon": 35.102772,
+     "kind": "rested",
+     "claim": "The Bible says the ark rested here for twenty years before David moved it. Since 2017 a Tel Aviv University and Collège de France team has argued the hilltop held a monumental 8th century BC compound, possibly a temple for the ark built under Jeroboam II of Israel. Press headlines turned this into 'the ark may have been found', which the team never claimed.",
+     "text": "1 Samuel 7:1-2: the men of Kirjath-jearim brought the ark 'into the house of Abinadab in the hill' and 'the ark abode in Kirjathjearim ... twenty years'. 2 Samuel 6 and 1 Chronicles 13 continue the story of David moving it (not quoted here).",
+     "who": "Shmunis Family Excavations, a joint Tel Aviv University and Collège de France project directed by Israel Finkelstein (Tel Aviv University), Thomas Römer and Christophe Nicolle (Collège de France), funded by Sana and Vlad Shmunis. The summit belongs to the Convent of the Ark of the Covenant (Sisters of St. Joseph of the Apparition).",
+     "digging": "Gabriel Barkay salvage excavation 1995-1996. Shmunis excavations: two four-week seasons, August 2017 and August 2019, on the slopes (not the convent summit, which could not be dug), plus a seismic-geodetic study (2017) and ground penetrating radar. Final report published 2025 (TAU Monograph 45; Penn State UP open access, on MUSE February 2026). I found no announcement of any field season after 2019. None now, as checked 2026-10-20. A lecture on 17 August 2026 by Anselm Hagedorn argues for a different identification (Tel Moza), but that is a lecture, not a dig.",
+     "published_peer": [
+      "Finkelstein, Römer, Nicolle, Dunseth, Kleiman, Mas and Porat, 'Excavations at Kiriath-jearim near Jerusalem, 2017: Preliminary Report', Semitica 60 (2018).",
+      "Finkelstein, Römer, Nicolle, Dunseth, Kleiman, Mas, Porat and Walzer, 'Excavations at Kiriath-jearim, 2019: Preliminary Report', Tel Aviv 48.1 (2021) 47-72, doi 10.1080/03344355.2021.1904680.",
+      "Finkelstein and Römer, 'The Historical and Archaeological Background behind the Old Israel Ark Narrative', Biblica 101.2 (2020) 161-185.",
+      "Finkelstein and Römer (eds.), Kiriath-jearim: The Shmunis Family Excavations (Tel Aviv University Monograph Series 45 / Penn State University Press, 2025).",
+      "Yigal Levin, 'Kiriath-jearim: In Judah or in Benjamin?' (Hebrew), Be-Ma'abe ha-Har 11.2 (2021) 143-168. A search index also lists an English paper of the same title in Israel Exploration Journal 71 (2021) 43-63; I could not open it to confirm the author or pages."
+     ],
+     "published_press": [
+      "Tel Aviv University Institute for Advanced Studies web item on Römer's conclusions (undated).",
+      "Widely syndicated 2019 headlines that the ark 'may have been found' (not opened; the excavators' own publications make no such claim).",
+      "Danny Herman, licensed guide, blog critique (c. 2019-2021)."
+     ],
+     "for": "The identification of Deir el-Azar with biblical Kiriath-jearim is treated as secure by the excavators on the basis of the tribal border lists (Joshua 15:8-10; 18:14-16) among other arguments. The hill has an artificial-looking flat platform about 150 by 110 m, and seismic work found fills up to six metres deep, which the team reads as a monumental podium. They date its walls by OSL and pottery to the early Iron IIB (first half of the 8th century BC) and argue, in Biblica 2020, that the older ark narrative (1 Samuel 4:1-7:1) reflects the ideology of Jeroboam II, whose kingdom dominated Judah after Joash defeated Amaziah (2 Kings 14:11-13). On that reading the site really did house an ark shrine, and the biblical tradition that the ark rested here preserves a real cult place.",
+     "against": "No ark, no ark furniture and no temple building were found; the summit itself, where any shrine stood, lies under the convent and was not excavated, and the excavators say even a summit dig might not give significant results because of erosion and fill. The Jeroboam II temple is an interpretation of retaining walls, not a found sanctuary. Yigal Levin challenges the excavators' reading of the site's character and purpose in Iron II and re-examines its tribal setting. Anselm Hagedorn (Osnabrück, Protestant theology) argues the biblical town was not Deir el-Azar at all but Tel Moza. From the other side, readers who take 1 Samuel at face value object that the team's own dating puts the platform about two centuries after David, so it cannot be the place 1 Samuel 7 describes; the TAU Institute for Advanced Studies summary of the team's view says the site was built about two centuries after David's reign, against 1 Samuel 7, and Finkelstein and Römer read the ark story as 8th to 7th century political literature. Danny Herman, a guide who accepts the biblical account, calls conclusions drawn from a small section of retaining wall too speculative, and suggests the 8th century platform could commemorate an earlier ark site rather than disprove it.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "1 Samuel 7:1-2; 2 Kings 25:13-17; 1 Kings 14:25-26; 2 Chronicles 35:3; 2 Chronicles 36:10, 18; Jeremiah 3:16 (KJV, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=1+Samuel+7%3A1-2%3B2+Kings+25%3A13-17%3B1+Kings+14%3A25-26%3B2+Chronicles+35%3A3%3B2+Chronicles+36%3A10%2C18%3BJeremiah+3%3A16%3BDeuteronomy+34%3A1&version=KJV"
+      },
+      {
+       "title": "Kiriath-jearim: The Shmunis Family Excavations, eds. Finkelstein and Römer, TAU Monograph Series 45 (2025), information sheet and contents",
+       "url": "https://en-humanities.tau.ac.il/sites/humanities_en.tau.ac.il/files/media_server/ArchaeologyInstitute/Publications/Monographs/More%20Information%20Page%20KJ.pdf"
+      },
+      {
+       "title": "Finkelstein, Römer and Nicolle, 'Introduction', Kiriath-jearim: The Shmunis Family Excavations (Eisenbrauns / Penn State UP sample chapter)",
+       "url": "https://www.eisenbrauns.org/sample_chapter/Finkelstein_Introduction.pdf"
+      },
+      {
+       "title": "Kiriath-jearim: The Shmunis Family Excavations (Penn State University Press 2025, open access, Project MUSE)",
+       "url": "https://muse.jhu.edu/book/135621"
+      },
+      {
+       "title": "Finkelstein et al., 'Excavations at Kiriath-jearim, 2019: Preliminary Report', Tel Aviv 48.1 (2021) 47-72 (BGU research portal record)",
+       "url": "https://cris.bgu.ac.il/en/publications/excavations-at-kiriath-jearim-2019-preliminary-report-3/"
+      },
+      {
+       "title": "Digitorient (Collège de France team blog): Semitica 60 (2018) with the 2017 preliminary report",
+       "url": "https://digitorient.com/blog/category/mission-archeologique-de-kiriath-jearim/"
+      },
+      {
+       "title": "Collège de France, 'Kiriath-Jearim Archaeological Mission' (13 Dec 2016)",
+       "url": "https://www.college-de-france.fr/en/news/kiriath-jearim-archaeological-mission"
+      },
+      {
+       "title": "Finkelstein and Römer, 'The Historical and Archaeological Background behind the Old Israel Ark Narrative', Biblica 101.2 (2020) 161-185 (University of Pretoria repository)",
+       "url": "https://repository.up.ac.za/items/72fbd018-9079-49dd-9b84-a9190092dc52/full"
+      },
+      {
+       "title": "Tel Aviv University Institute for Advanced Studies, 'Prof. Thomas Römer with new conclusions about the Ark of Covenant'",
+       "url": "https://ias.tau.ac.il/news/Romer_Finkelstein"
+      },
+      {
+       "title": "Yigal Levin, 'Kiriath-jearim: In Judah or in Benjamin?' (Hebrew, English abstract), Be-Ma'abe ha-Har 11.2 (2021) 143-168 (research portal record)",
+       "url": "https://cris.iucc.ac.il/en/publications/%D7%A7%D7%A8%D7%99%D7%AA-%D7%99%D7%A2%D7%A8%D7%99%D7%9D-%D7%91%D7%99%D7%94%D7%95%D7%A8%D7%94-%D7%90%D7%95-%D7%91%D7%91%D7%A0%D7%99%D7%9E%D7%99%D7%9F/"
+      },
+      {
+       "title": "TAU Institute for Advanced Studies, lecture by Anselm C. Hagedorn, 'Moza and Kiriath-Jearim: a new proposal' (17 Aug 2026)",
+       "url": "https://ias.tau.ac.il/events/Lecture_Anselm_Hagedorn_17_8_26"
+      },
+      {
+       "title": "Danny Herman (licensed guide), 'Evidence of the Ark Found at Kiryat Yaarim?' (blog, c. 2019-2021)",
+       "url": "https://dannythedigger.com/1-2019-evidence-of-the-ark-found-at-kiryat-yaarim/"
+      },
+      {
+       "title": "Pleiades place record 687947: Kiriath Ye'arim / Kariathiareim",
+       "url": "https://pleiades.stoa.org/places/687947"
+      }
+     ]
+    },
+    {
+     "id": "temple-mount-hidden-chamber",
+     "name": "Under the Temple Mount, Jerusalem (Chamber of the Wood)",
+     "lat": 31.7782502,
+     "lon": 35.2353407,
+     "kind": "hidden",
+     "claim": "The ark never left the Temple Mount: King Josiah (or Solomon) hid it in an underground chamber, and it is still there under the Haram al-Sharif. This is the main rabbinic tradition and is held today by some Temple movement rabbis.",
+     "text": "Mishnah Shekalim 6:1-2: the households of Rabban Gamliel and Rabbi Hananya bowed at a fourteenth place, 'facing the wood depository', because of a tradition 'that the Ark was sequestered there'; a priest who noticed an odd flagstone died before he could finish telling of it. Yoma 52b: Josiah buried the ark, with the jar of manna, the anointing oil, Aaron's staff and the Philistines' chest, citing 2 Chronicles 35:3. Yoma 53b-54a: Rabbi Yehuda ben Lakish says 'the Ark was buried in its place' (from 1 Kings 8:8, 'they are there unto this day'), and 'the Rabbis say' it was buried in the Chamber of the Woodshed; this is set against Rabbi Eliezer and Rabbi Shimon ben Yohai, who say it went to Babylon. Mishnah Yoma 5:2: in the Second Temple there was only a stone, the even shetiyah, where the ark had been. Note: the pin placed here is the Pleiades point for the Second Temple, a general marker; the Mishnah's chamber has no known location.",
+     "who": "Rabbinic tradition (Mishnah, Tosefta as cited in Yoma 54a, Babylonian Talmud). In modern times Rabbi Yehuda Meir Getz, rabbi of the Western Wall (died 1995), and Rabbi Chaim Richman (Temple Institute), who told The Jewish Press in 2020 'We basically know where the ark is located'.",
+     "digging": "No excavation of the platform interior is known; the Islamic Waqf administers the compound and limits access (Temple Mount Sifting Project), and a BAR editorial sidebar (undated) said not even a non-invasive archaeological survey had been done since 1967. The 1981 Getz tunnel (separate entry) is the only known attempt aimed at the ark, and it was sealed. In October 1999 Waqf earthworks removed about 10,000 tons of fill, now sifted off-site by the Temple Mount Sifting Project; that is salvage of dumped soil, not a search for the ark. None now, as checked 2026-10-20; I found no 2025-2026 report of any excavation on the platform.",
+     "published_peer": [],
+     "published_press": [
+      "The Jewish Press, Tzvi Fishman, 13 March 2020 (Richman, Adiel Getz).",
+      "Aish.com, Avi Abrams (undated).",
+      "Temple Mount Sifting Project website (background on the 1999 earthworks)."
+     ],
+     "for": "This is the oldest documented Jewish tradition on the question, recorded in the Mishnah and attributed to the households of Rabban Gamliel and Rabbi Hananya the deputy High Priest, and it names a specific spot (the wood chamber) and a specific family custom of bowing there. 2 Chronicles 35:3 shows Josiah giving orders about the ark late in the monarchy, which the Talmud reads as a hiding order, and 2 Kings 25:13-17 lists the temple items carried to Babylon without the ark. 1 Kings 8:8 says the poles are 'there unto this day'. Because the platform has never been excavated, the claim has never been tested and cannot be ruled out.",
+     "against": "The same Talmud passage records the opposite view held by Rabbi Eliezer and Rabbi Shimon ben Yohai (exile to Babylon), and the Talmud itself refutes the 'to this day means forever' argument from 1 Kings 8:8 with counter-examples (Judges 1:21; 1 Chronicles 4:42-43). The Mishnah stories are pious legend with no physical evidence. Jeremiah 3:16 speaks of a time when the ark will not 'come to mind', which many read as the ark already being gone. Within the believing Jewish world, the Lubavitcher Rebbe answered Rabbi Getz in 1976 that excavation was not permitted because it was 'a matter of Kodeshim', and Getz's own family says he kept the dig from the prime minister. Practically, no excavation is possible under the status quo, so the claim is untestable.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Mishnah Shekalim 6:1-2 (William Davidson Edition, Sefaria)",
+       "url": "https://www.sefaria.org/Mishnah_Shekalim.6.1-2"
+      },
+      {
+       "title": "Babylonian Talmud Yoma 52b (Josiah hid the ark; William Davidson Edition, Sefaria)",
+       "url": "https://www.sefaria.org/Yoma.52b.10-13"
+      },
+      {
+       "title": "Babylonian Talmud Yoma 53b-54a (exiled to Babylon vs. hidden in its place; William Davidson Edition, Sefaria)",
+       "url": "https://www.sefaria.org/Yoma.53b.13-54a.9"
+      },
+      {
+       "title": "Mishnah Yoma 5:2 (after the ark was taken, the foundation stone; Sefaria)",
+       "url": "https://www.sefaria.org/Mishnah_Yoma.5.2"
+      },
+      {
+       "title": "1 Samuel 7:1-2; 2 Kings 25:13-17; 1 Kings 14:25-26; 2 Chronicles 35:3; 2 Chronicles 36:10, 18; Jeremiah 3:16 (KJV, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=1+Samuel+7%3A1-2%3B2+Kings+25%3A13-17%3B1+Kings+14%3A25-26%3B2+Chronicles+35%3A3%3B2+Chronicles+36%3A10%2C18%3BJeremiah+3%3A16%3BDeuteronomy+34%3A1&version=KJV"
+      },
+      {
+       "title": "2 Kings 24:13; Ezra 1:7-11; 1 Kings 8:8-9 (KJV, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=2+Kings+24%3A13%3BEzra+1%3A7-11%3B1+Kings+8%3A8-9&version=KJV"
+      },
+      {
+       "title": "Tzvi Fishman, 'Where Is The Aron Today? Three Experts Weigh In', The Jewish Press (13 Mar 2020)",
+       "url": "https://jewishpress.com/?p=63561"
+      },
+      {
+       "title": "Avi Abrams, 'The Lost Ark of the Covenant: Exploring the Secret Tunnels of Jerusalem', Aish.com (undated)",
+       "url": "https://aish.com/the-lost-ark-of-the-covenant-exploring-the-secret-tunnels-of-jerusalem/"
+      },
+      {
+       "title": "Biblical Archaeology Review sidebar, 'Why Has Israel's Antiquities Authority Failed to Survey the Temple Mount?' (BAS Library, undated)",
+       "url": "https://library.biblicalarchaeology.org/?p=9840"
+      },
+      {
+       "title": "Temple Mount Sifting Project, About",
+       "url": "https://www.tmsifting.org/en/about/"
+      },
+      {
+       "title": "Pleiades place record 973646718: Second Temple, Jerusalem",
+       "url": "https://pleiades.stoa.org/places/973646718"
+      }
+     ]
+    },
+    {
+     "id": "warrens-gate-1981",
+     "name": "Warren's Gate tunnel, Western Wall Tunnels, Jerusalem",
+     "lat": null,
+     "lon": null,
+     "kind": "dig",
+     "claim": "In July 1981 the rabbi of the Western Wall, Yehuda Getz, broke into a sealed gate under the Temple Mount and dug eastward toward the Holy of Holies hoping to reach the ark, until the government sealed it.",
+     "text": "No ancient text names this gate as the ark's location; the motive came from the rabbinic tradition that the ark is hidden under the Mount (Mishnah Shekalim 6:1-2; Yoma 53b-54a).",
+     "who": "Rabbi Yehuda Meir Getz (rabbi of the Western Wall, died 1995), with workers from the Western Wall tunnel project. His grandson Rabbi Adiel Getz is the main source for the inside account (Jewish Press, 2020).",
+     "digging": "July 1981: workers broke through the gate, drained a water-filled cistern and cleared a passage; clashes followed underground, and Prime Minister Menachem Begin ordered it sealed; it was closed with concrete. The Jewish Press article calls the gate 'Wilson's Gate', which appears to be an error for Warren's Gate (Wilson's Arch is a different feature); Aish.com and other accounts say Warren's Gate. A claim that in 1983 Getz and Rabbi Shlomo Goren said they saw the ark appears only in Wikipedia-derived text I could not trace to a primary source, so it is not included as fact. None now, as checked 2026-10-20: the passage remains sealed and unexplored.",
+     "published_peer": [],
+     "published_press": [
+      "The Jewish Press, 13 March 2020.",
+      "Aish.com (undated).",
+      "Emek Shaveh / Jerusalem Map, 'The Western Wall Tunnels' (states Begin ordered the tunnel sealed)."
+     ],
+     "for": "The gate is a real Second Temple period entrance that led into the Mount close to the area of the Holy of Holies, so a tunnel behind it is the most direct route anyone has had toward the place the rabbinic tradition points to. Getz's workers reported hollow sounds beyond a wall before work stopped. It was stopped for political reasons, not because anything was disproved.",
+     "against": "Nothing was found, and no archaeologist published any data. The Aish author concedes 'we don't know whether or not the Ark ... was in that particular shaft'. The Lubavitcher Rebbe had refused Getz permission in 1976, and the dig was unlicensed and secret even from the prime minister by Getz's family's own account. The tunnel's direction and the theory behind it rest on a tradition that the Talmud itself disputes.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Tzvi Fishman, 'Where Is The Aron Today? Three Experts Weigh In', The Jewish Press (13 Mar 2020)",
+       "url": "https://jewishpress.com/?p=63561"
+      },
+      {
+       "title": "Avi Abrams, 'The Lost Ark of the Covenant: Exploring the Secret Tunnels of Jerusalem', Aish.com (undated)",
+       "url": "https://aish.com/the-lost-ark-of-the-covenant-exploring-the-secret-tunnels-of-jerusalem/"
+      },
+      {
+       "title": "Jerusalem Map (Emek Shaveh intermap), 'The Western Wall Tunnels'",
+       "url": "https://intermap.emekshaveh.org/en/?p=77"
+      },
+      {
+       "title": "Mishnah Shekalim 6:1-2 (William Davidson Edition, Sefaria)",
+       "url": "https://www.sefaria.org/Mishnah_Shekalim.6.1-2"
+      },
+      {
+       "title": "Babylonian Talmud Yoma 53b-54a (exiled to Babylon vs. hidden in its place; William Davidson Edition, Sefaria)",
+       "url": "https://www.sefaria.org/Yoma.53b.13-54a.9"
+      }
+     ]
+    },
+    {
+     "id": "mount-nebo-jeremiah-cave",
+     "name": "Mount Nebo, Jordan (Jeremiah's cave)",
+     "lat": 31.7674174,
+     "lon": 35.7251345,
+     "kind": "hidden",
+     "claim": "Before the Babylonian destruction, the prophet Jeremiah carried the tabernacle, the ark and the incense altar to the mountain Moses climbed (Nebo) and sealed them in a cave, to stay hidden until God gathers his people again.",
+     "text": "2 Maccabees 2:4-8 (KJV Apocrypha): Jeremiah, 'being warned of God, commanded the tabernacle and the ark to go with him, as he went forth into the mountain, where Moses climbed up', found 'an hollow cave' and put in 'the tabernacle, and the ark, and the altar of incense, and so stopped the door'; followers could not find it again, and Jeremiah said 'that place ... shall be unknown until the time that God gather his people again together'. The mountain is identified by Deuteronomy 34:1: 'the mountain of Nebo, to the top of Pisgah'. 2 Maccabees cites this as 'found in the records' (2:1, 4), i.e. an earlier written source it does not name. The pin is the Pleiades point for Mount Nebo; the text gives no cave location.",
+     "who": "The author of 2 Maccabees (Hellenistic Jewish work; the letter in chapters 1-2 is addressed to Jews in Egypt). 2 Maccabees is canonical for Catholic and Orthodox Christians and apocryphal for Jews and Protestants. Later searchers include Antonia Futterer (1920s) and Tom Crotser (1981, separate entry), and an Adventist lay group (Ron Spear and others) that entered a cave near the Franciscan monastery in June 1982.",
+     "digging": "No licensed excavation has ever targeted the ark here. Futterer explored a cave in the 1920s. Crotser broke into a chamber in 1981 without a permit. In June 1982 an Adventist lay group (Spear, Newhart and others) distracted a guard and was lowered into a chamber about 300 feet from the Franciscan monastery; they found no tunnel. Jordanian authorities cancelled Andrews University's licensed Madaba Plains Project in 1982 and 1983, partly because of unauthorized ark-hunting near Nebo (Spectrum). None now, as checked 2026-10-20 (I found no current ark-related dig).",
+     "published_peer": [],
+     "published_press": [
+      "Spectrum 13 (1982-1983), Patti Hansen Tompkins, 'Adventist Raiders of the Lost Ark'.",
+      "Biblical Archaeology Review, May/June 1983, on Crotser and Futterer."
+     ],
+     "for": "This is the only ancient text that actually narrates where the ark went, and it says it draws on earlier written records (2:1, 4). Jeremiah was in Jerusalem at the fall of the city, and Nebo is within reach east of the Jordan. For Catholic and Orthodox Christians it is Scripture. The text also explains why no one has found it: the place was meant to stay unknown until God reveals it (2:7-8).",
+     "against": "2 Maccabees presents this as a quoted tradition inside a festal letter, mixed with the legend of the hidden fire (2:1, 10), and the Jewish and Protestant traditions do not treat the book as Scripture. Jeremiah 3:16 has Jeremiah himself saying the ark will no longer be remembered. The Talmud, which knew other traditions, does not mention Nebo and puts the ark under the Temple or in Babylon. No licensed archaeologist has found any trace, and the text itself says the site cannot be found by searching. David McCreery, director of ACOR in Amman, noted in 1982 that ark-hunters 'arrive and depart on a fairly regular basis'.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "2 Maccabees 2:1-8 (KJV Apocrypha, eBible.org)",
+       "url": "https://ebible.org/eng-kjv/2MA02.htm"
+      },
+      {
+       "title": "2 Maccabees 2:1-8 (NRSVUE, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=2+Maccabees+2%3A1-8&version=NRSVUE"
+      },
+      {
+       "title": "Deuteronomy 34:1; Revelation 11:19 (KJV, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=Deuteronomy+34%3A1%3BRevelation+11%3A19&version=KJV"
+      },
+      {
+       "title": "1 Samuel 7:1-2; 2 Kings 25:13-17; 1 Kings 14:25-26; 2 Chronicles 35:3; 2 Chronicles 36:10, 18; Jeremiah 3:16 (KJV, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=1+Samuel+7%3A1-2%3B2+Kings+25%3A13-17%3B1+Kings+14%3A25-26%3B2+Chronicles+35%3A3%3B2+Chronicles+36%3A10%2C18%3BJeremiah+3%3A16%3BDeuteronomy+34%3A1&version=KJV"
+      },
+      {
+       "title": "Patti Hansen Tompkins, 'Adventist Raiders of the Lost Ark', Spectrum 13 (1982-1983) (Andrews University archive PDF)",
+       "url": "https://www.andrews.edu/library/car/cardigital/Periodicals/Spectrum/1982-1983_Vol_13/22253181.READER_054.pdf"
+      },
+      {
+       "title": "'Tom Crotser Has Found the Ark of the Covenant, Or Has He?', Biblical Archaeology Review (May/June 1983), BAS Library (paywalled; opening and footnote read)",
+       "url": "https://library.biblicalarchaeology.org/article/tom-crotser-has-found-the-ark-of-the-covenant-or-has-he/"
+      },
+      {
+       "title": "BAS Library image caption: Antonia Frederick Futterer (BAR 9:3, 1983)",
+       "url": "https://library.biblicalarchaeology.org/images/bsba090306700ljpg/"
+      },
+      {
+       "title": "Pleiades place record 563265622: Mount Nebo",
+       "url": "https://pleiades.stoa.org/places/563265622"
+      }
+     ]
+    },
+    {
+     "id": "mount-pisgah-crotser-1981",
+     "name": "Mount Pisgah cave, Nebo ridge, Jordan (Tom Crotser)",
+     "lat": null,
+     "lon": null,
+     "kind": "dig",
+     "claim": "In 1981 Tom Crotser of Winfield, Kansas said he broke through a wall inside a cave on Mount Pisgah and saw the gold-covered ark, and took colour photographs of it.",
+     "text": "Based on 2 Maccabees 2:4-8 and Deuteronomy 34:1 (Nebo / Pisgah). Earlier, Antonia Frederick Futterer, an American explorer, searched Nebo for the ark in the 1920s; his 1927 pamphlet described a cave corridor with 'hieroglyphics' ending at two doors, and his sketches guided Crotser (BAR 1983).",
+     "who": "Tom Crotser, Institute for Restoring Ancient History International (Winfield, Kansas), November 1981 (BAR gives the date of the cave entry as Halloween, 31 October 1981). Crotser also claimed to have found the Tower of Babel and Noah's Ark. Newspaper accounts said he wanted the ark to help restore the Temple before a Second Coming he predicted for September or October 1988.",
+     "digging": "1981: Crotser entered the cave without a permit and broke through a wall into a chamber. David McCreery (director, American Center of Oriental Research, Amman) said neither he nor the director-general of the Jordanian Department of Antiquities (Dr. Hadidi) had heard of the group and that it was 'illegal to excavate without a permit'. April 11, 1982: Adventist archaeologist Siegfried Horn spent an hour and a half with Crotser examining the evidence. None now, as checked 2026-10-20. Exact cave location was never published, so no coordinates are given.",
+     "published_peer": [],
+     "published_press": [
+      "Biblical Archaeology Review, May/June 1983, 'Tom Crotser Has Found the Ark of the Covenant, Or Has He?' (subtitle: a false report of an ark sighting led to the cancellation of an American excavation).",
+      "Spectrum 13 (1982-1983), 'Adventist Raiders of the Lost Ark'."
+     ],
+     "for": "Crotser said he had eyewitnesses and colour photographs, and the location fits 2 Maccabees and Deuteronomy 34:1. Some sympathetic Adventists who interviewed his team in 1981 concluded it did not appear to be a hoax.",
+     "against": "Siegfried Horn, a respected Adventist archaeologist who shared the group's belief in the Bible and was paid by fellow Adventists to check the claim, concluded that what the Kansas group had found 'was not an ancient artifact and therefore could not be the Ark of the Covenant'. The work was illegal under Jordanian law. Crotser's record of other claimed finds undercut his credibility, and BAR reported that the affair contributed to the cancellation of a legitimate American excavation (Andrews University's project, per Spectrum). No object was ever produced.",
+     "status": "rejected",
+     "sources": [
+      {
+       "title": "'Tom Crotser Has Found the Ark of the Covenant, Or Has He?', Biblical Archaeology Review (May/June 1983), BAS Library (paywalled; opening and footnote read)",
+       "url": "https://library.biblicalarchaeology.org/article/tom-crotser-has-found-the-ark-of-the-covenant-or-has-he/"
+      },
+      {
+       "title": "BAS Library image caption: 'Mt. Pisgah viewed from Mt. Nebo' (BAR 9:3, 1983)",
+       "url": "https://library.biblicalarchaeology.org/images/bsba090306600ljpg"
+      },
+      {
+       "title": "BAS Library image caption: Siegfried Horn's sketch of the Nebo summit and the box Crotser found (BAR 9:3, 1983)",
+       "url": "https://library.biblicalarchaeology.org/images/bsba090306900ljpg/"
+      },
+      {
+       "title": "BAS Library image caption: Antonia Frederick Futterer (BAR 9:3, 1983)",
+       "url": "https://library.biblicalarchaeology.org/images/bsba090306700ljpg/"
+      },
+      {
+       "title": "Patti Hansen Tompkins, 'Adventist Raiders of the Lost Ark', Spectrum 13 (1982-1983) (Andrews University archive PDF)",
+       "url": "https://www.andrews.edu/library/car/cardigital/Periodicals/Spectrum/1982-1983_Vol_13/22253181.READER_054.pdf"
+      },
+      {
+       "title": "2 Maccabees 2:1-8 (KJV Apocrypha, eBible.org)",
+       "url": "https://ebible.org/eng-kjv/2MA02.htm"
+      }
+     ]
+    },
+    {
+     "id": "axum-mary-of-zion",
+     "name": "Axum (Aksum), Ethiopia: Church of Our Lady Mary of Zion / Chapel of the Tablet",
+     "lat": 14.1295237,
+     "lon": 38.7193084,
+     "kind": "claimed-now",
+     "claim": "The Ethiopian Orthodox Church holds that the original ark (or the tablets of the law) was brought from Jerusalem by Menelik I, son of Solomon and the Queen of Sheba, and is kept today in the Chapel of the Tablet beside the Church of Our Lady Mary of Zion in Axum, guarded by a single monk.",
+     "text": "Kebra Nagast (tr. Budge 1922), chapter 48 and the chapters around it: Azaryas, son of the high priest Zadok, has a carpenter make wooden boards of the ark's size; an angel opens the sanctuary doors; Azaryas and his companions take 'Zion, the Tabernacle of the Law of God' and leave the boards covered with its covering in its place; later Zadok finds 'nothing except the wooden boards'. In the Kebra Nagast the ark goes with Menelik to Ethiopia. The Bible does not say this; 1 Kings 10 and 2 Chronicles 9 tell of the Queen of Sheba's visit without any son or ark (not quoted here).",
+     "who": "Ethiopian Orthodox Tewahedo Church; the guardian monk (appointed for life by his predecessor) is the only person allowed to see the object. Patriarch Abune Paulos said in Rome in June 2009 that he had seen it and that the world would soon see it; the promised announcement did not happen.",
+     "digging": "No excavation of the church or chapel is allowed and no scholar has examined the object. Separately, in spring 2008 a University of Hamburg team under Helmut Ziegert dug at Axum-Dungur and announced (press release, 7 May 2008) a 10th century BC 'palace of the Queen of Sheba' with an altar where the ark 'could have been kept for a time'; I found no peer-reviewed publication of this, and the claim was not about finding the ark. Axum suffered a massacre of hundreds of civilians on 28-29 November 2020 during the Tigray war (Amnesty International; AP), including at the church compound. None now, as checked 2026-10-20.",
+     "published_peer": [
+      "Pierluigi Piovanelli, 'The Apocryphal Legitimation of a Solomonic Dynasty in the Kebra Nagast: A Reappraisal', Aethiopica 16 (2013) 7-44 (reads the Kebra Nagast as an early 14th century work for the Solomonic elite)."
+     ],
+     "published_press": [
+      "Stuart Munro-Hay, The Quest for the Ark of the Covenant (I.B. Tauris, 2005), book (via Publishers Weekly review).",
+      "Graham Hancock, The Sign and the Seal (Crown, 1992), book.",
+      "Live Science, 7 Dec 2018, on Edward Ullendorff (quoting Tudor Parfitt and a 1992 Los Angeles Times interview I could not open).",
+      "PBS, Wonders of the African World, essay by Roderick Grierson.",
+      "Israel National News, 25 and 27 June 2009 (Abune Paulos).",
+      "University of Hamburg press release 48/2008 (Dungur).",
+      "Milton C. Fisher, Bible and Spade 8.3 (1995)."
+     ],
+     "for": "Ethiopia has a continuous, nationally central tradition: every Ethiopian Orthodox church has a tabot (altar tablet) understood as a replica of the ark, and the Axum church has claimed the ark itself since at least the 16th century (Munro-Hay, per PW). The Hebrew Bible never records the ark's fate, so a removal before 586 BC cannot be ruled out from Scripture. The custodians say the object exists and the patriarch said he saw it. Milton Fisher, an OT professor who lived in Ethiopia twelve years, wrote that he could not easily dismiss the Ethiopian traditions and testimony.",
+     "against": "No outsider has been allowed to examine it, so the claim cannot be tested. The only scholar known to have seen the object, Edward Ullendorff (SOAS), who saw it as a British officer in 1941, told the Los Angeles Times in 1992 it was of 'middle-to late-medieval construction', and told Tudor Parfitt it was like the model arks in other Ethiopian churches. The Kebra Nagast is late: Budge's preface notes the colophons place the Arabic translation between AD 1314 and 1344 and the Ethiopic one after that, and Piovanelli reads it as early 14th century dynastic propaganda. Grierson notes the earliest report of the ark in Ethiopia dates to the late 12th century, and that the clergy speak of a tablet, not a box. Munro-Hay concluded the church never held the ark but an altar stone. Bible-believing critics also reject it: Milton Fisher (Philadelphia Theological Seminary) criticised Hancock's 'imaginative stringing of the beads'; Ephraim Isaac (as quoted by Brian King, 1999) asked for the tradition to be respected but warned against 'wild guesses' about the object. The 2009 promise to show it was withdrawn.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Kebra Nagast, tr. E. A. Wallis Budge (Medici Society, 1922), full text scan, chapter 48 'How they carried away Zion' and the chapters around it (Internet Archive)",
+       "url": "https://archive.org/details/kebranagast"
+      },
+      {
+       "title": "Roderick Grierson, 'Retelling the Story', PBS Wonders of the African World, episode 'The Holy Land'",
+       "url": "https://www.pbs.org/wonders/Episodes/Epi4/4_retel1.htm"
+      },
+      {
+       "title": "Owen Jarus, 'Sorry Indiana Jones, the Ark of the Covenant Is Not Inside This Ethiopian Church', Live Science (7 Dec 2018)",
+       "url": "https://www.livescience.com/64256-ark-of-the-covenant-location.html"
+      },
+      {
+       "title": "Pierluigi Piovanelli, 'The Apocryphal Legitimation of a Solomonic Dynasty in the Kebra Nagast: A Reappraisal', Aethiopica 16 (2013) 7-44",
+       "url": "https://journals.sub.uni-hamburg.de/aethiopica/article/view/698"
+      },
+      {
+       "title": "Publishers Weekly review of Stuart Munro-Hay, The Quest for the Ark of the Covenant (I.B. Tauris, 2005)",
+       "url": "https://publishersweekly.com/978-1-85043-668-3"
+      },
+      {
+       "title": "Israel National News, 'Building said to house the Ark' (25 Jun 2009)",
+       "url": "https://www.israelnationalnews.com/news/132067"
+      },
+      {
+       "title": "Israel National News, follow-up on the cancelled ark announcement (27 Jun 2009)",
+       "url": "https://www.israelnationalnews.com/news/132079"
+      },
+      {
+       "title": "University of Hamburg press release 48/2008, Ziegert team at Axum-Dungur (7 May 2008, German)",
+       "url": "https://www.uni-hamburg.de/newsroom/presse/2008/pm48.html"
+      },
+      {
+       "title": "Todd Bolen, 'Report of Queen of Sheba Palace', BiblePlaces Blog (8 May 2008)",
+       "url": "https://www.bibleplaces.com/blog/2008/05/report-of-queen-of-sheba-palace/"
+      },
+      {
+       "title": "Amnesty International, 'Ethiopia: Eritrean troops' massacre of hundreds of Axum civilians may amount to crime against humanity' (26 Feb 2021)",
+       "url": "https://www.amnesty.org/en/latest/news/2021/02/ethiopia-eritrean-troops-massacre-of-hundreds-of-axum-civilians-may-amount-to-crime-against-humanity/"
+      },
+      {
+       "title": "Cara Anna (AP), 'Witnesses recall massacre in Ethiopian city said to be home to Ark of Covenant', Times of Israel (21 Feb 2021)",
+       "url": "https://www.timesofisrael.com/witnesses-recall-massacre-in-ethiopian-city-said-to-be-home-to-ark-of-covenant/"
+      },
+      {
+       "title": "Milton C. Fisher, 'The Ark of the Covenant: Alive and Well in Ethiopia? A Critique', Bible and Spade 8.3 (Summer 1995) (Galaxie abstract page)",
+       "url": "https://www.galaxie.com/article/bspade08-3-01"
+      },
+      {
+       "title": "Brian D. King, 'Is the Ark of the Covenant in Ethiopia?' (1999), Kulanu archive (quotes Ephraim Isaac)",
+       "url": "https://kulanu.org/archive/?p=3789"
+      },
+      {
+       "title": "OpenStreetMap way 188465648: Church of Our Lady Mary of Zion, Aksum",
+       "url": "https://www.openstreetmap.org/way/188465648"
+      },
+      {
+       "title": "Pleiades place record 39303: A(u)xoume (Aksum)",
+       "url": "https://pleiades.stoa.org/places/39303"
+      }
+     ]
+    },
+    {
+     "id": "tana-qirqos",
+     "name": "Tana Qirqos island, Lake Tana, Ethiopia",
+     "lat": null,
+     "lon": null,
+     "kind": "rested",
+     "claim": "The ark rested on the island monastery of Tana Qirqos for centuries before it was taken to Axum. Graham Hancock's The Sign and the Seal (1992) made this a waystation on his proposed route Jerusalem, Elephantine, Tana Qirqos, Axum.",
+     "text": "No biblical or ancient text. The source is the oral tradition of the island's monks.",
+     "who": "Monks of Tana Qirqos (Ethiopian Orthodox; the island is closed to women per the Comboni report). Graham Hancock, The Sign and the Seal: The Quest for the Lost Ark of the Covenant (1992; Crown in the US per library catalogue entries seen in search results, not opened). The BASE Institute (Fox News / The Sun, 2018) repeated the Nile-to-Lake-Tana route.",
+     "digging": "No excavation for the ark known. Hancock visited and reported sacrificial stones with blood-collecting holes (as summarised by Manera on grahamhancock.com, 2021). None now, as checked 2026-10-20. Coordinates left null: two OpenStreetMap records for Tana Qirqos (an islet and a place of worship) are about 8 km apart, so I could not fix the site reliably.",
+     "published_peer": [],
+     "published_press": [
+      "Graham Hancock, The Sign and the Seal (1992), book.",
+      "Comboni Missionaries UK, 25 Aug 2021 (monks believe the ark was kept there).",
+      "Manfred Manera, grahamhancock.com, 20 Aug 2021.",
+      "Fox News / The Sun, 3 Dec 2018 (BASE Institute)."
+     ],
+     "for": "The monks have a long-held local tradition that the ark was kept there (the Comboni writers report it as the place where 'the Arc of the Covenant was preserved'), and visitors report old sacrificial installations of a Judaic type. Hancock argues the Lake Tana area was reachable from Elephantine by river routes, and that a stay here explains the gap between a 7th century BC removal from Jerusalem and the medieval Axum tradition.",
+     "against": "The tradition is undocumented before modern visitors and is itself dependent on the Axum claim, which is late (see Axum entry). Hancock's chain of reasoning was criticised by Milton Fisher (a Christian OT scholar who lived in Ethiopia) as a 'stringing of the beads', and Bezalel Porten treated the Elephantine link as possibly 'overly speculative'. Manera, writing on Hancock's own site, calls the Axum claim possibly 'just another clever deception'. No physical evidence ties any object on the island to the ark.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Comboni Missionaries UK, 'Ethiopia: The sacred waters of Lake Tana' (25 Aug 2021)",
+       "url": "https://combonimissionaries.co.uk/index.php/2021/08/25/ethiopia-the-sacred-waters-of-lake-tana/"
+      },
+      {
+       "title": "Manfred Manera, 'In Ethiopia following Hancock's footsteps', grahamhancock.com (20 Aug 2021)",
+       "url": "https://grahamhancock.com/maneram1/"
+      },
+      {
+       "title": "Jon Rogers (The Sun), 'Ark of the Covenant may be hidden in Africa, biblical scholars believe', Fox News (3 Dec 2018)",
+       "url": "https://www.foxnews.com/science/ark-of-the-covenant-may-be-hidden-in-africa-biblical-scholars-believe"
+      },
+      {
+       "title": "Milton C. Fisher, 'The Ark of the Covenant: Alive and Well in Ethiopia? A Critique', Bible and Spade 8.3 (Summer 1995) (Galaxie abstract page)",
+       "url": "https://www.galaxie.com/article/bspade08-3-01"
+      },
+      {
+       "title": "Bezalel Porten, 'Did the Ark Stop at Elephantine?', Biblical Archaeology Review 21.3 (May/June 1995), excerpt at Center for Online Judaic Studies",
+       "url": "https://cojs.org/?p=5407"
+      },
+      {
+       "title": "Hebrew University research portal record: Porten, 'Did the Ark Stop at Elephantine?', BAR 21.3 (1995) 54-67, 76-77",
+       "url": "https://cris.huji.ac.il/en/publications/did-the-ark-stop-at-elephantine/"
+      }
+     ]
+    },
+    {
+     "id": "elephantine",
+     "name": "Elephantine Island, Aswan, Egypt (Jewish temple)",
+     "lat": 24.09,
+     "lon": 32.889,
+     "kind": "rested",
+     "claim": "Priests removed the ark from Solomon's Temple under King Manasseh (7th century BC) and housed it in the Jewish temple at Elephantine for about two centuries before it moved on to Ethiopia.",
+     "text": "No ancient text says the ark was at Elephantine. The Elephantine papyri (5th century BC Aramaic documents) show a Jewish temple there where sacrifices were offered (per Porten). The Bible records no removal under Manasseh.",
+     "who": "Graham Hancock, The Sign and the Seal (1992). Assessed by Bezalel Porten (Hebrew University), 'Did the Ark Stop at Elephantine?', BAR 21.3 (1995).",
+     "digging": "The island has long been excavated for its own sake (temple remains and papyri), but no excavation has looked for or found any trace of the ark. None now for the ark, as checked 2026-10-20.",
+     "published_peer": [],
+     "published_press": [
+      "Bezalel Porten, BAR 21.3 (1995) 54-67, 76-77 (popular journal, not peer-reviewed; full text paywalled, I read only the opening).",
+      "Graham Hancock, The Sign and the Seal (1992), book."
+     ],
+     "for": "A real Jewish temple with animal sacrifice stood at Elephantine in the 6th and 5th centuries BC, outside Jerusalem, which is unusual and needs explaining. Porten, a leading Elephantine specialist, thought the contention 'bears looking at'. A removal under an idolatrous king like Manasseh would explain why the Bible never narrates the ark's loss.",
+     "against": "None of the sources I read cites any text or object linking the ark to Elephantine; Hancock's case is inference from the temple's existence. 2 Chronicles 35:3 has Josiah, Manasseh's grandson, giving orders about the ark in Jerusalem, which cuts against an earlier removal. Porten warned the idea may prove 'incorrect, or overly speculative'. The chain only matters as a bridge to the Ethiopian claim, which is itself late.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Bezalel Porten, 'Did the Ark Stop at Elephantine?', Biblical Archaeology Review 21.3 (May/June 1995), excerpt at Center for Online Judaic Studies",
+       "url": "https://cojs.org/?p=5407"
+      },
+      {
+       "title": "Hebrew University research portal record: Porten, 'Did the Ark Stop at Elephantine?', BAR 21.3 (1995) 54-67, 76-77",
+       "url": "https://cris.huji.ac.il/en/publications/did-the-ark-stop-at-elephantine/"
+      },
+      {
+       "title": "BAS Library: 'Did the Ark Stop at Elephantine?' (paywalled; opening and notes read)",
+       "url": "https://library.biblicalarchaeology.org/article/did-the-ark-stop-at-elephantine/"
+      },
+      {
+       "title": "Brian D. King, 'Is the Ark of the Covenant in Ethiopia?' (1999), Kulanu archive (quotes Ephraim Isaac)",
+       "url": "https://kulanu.org/archive/?p=3789"
+      },
+      {
+       "title": "1 Samuel 7:1-2; 2 Kings 25:13-17; 1 Kings 14:25-26; 2 Chronicles 35:3; 2 Chronicles 36:10, 18; Jeremiah 3:16 (KJV, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=1+Samuel+7%3A1-2%3B2+Kings+25%3A13-17%3B1+Kings+14%3A25-26%3B2+Chronicles+35%3A3%3B2+Chronicles+36%3A10%2C18%3BJeremiah+3%3A16%3BDeuteronomy+34%3A1&version=KJV"
+      },
+      {
+       "title": "Pleiades place record 786021: Elephantine",
+       "url": "https://pleiades.stoa.org/places/786021"
+      }
+     ]
+    },
+    {
+     "id": "garden-tomb-jeremiahs-grotto",
+     "name": "\"Jeremiah's Grotto\" / Garden Tomb area, Jerusalem (Ron Wyatt)",
+     "lat": 31.784021,
+     "lon": 35.2302044,
+     "kind": "dig",
+     "claim": "Ron Wyatt, an American amateur explorer, said that in 1982 he reached a chamber in the cliff below the Garden Tomb / Gordon's Calvary area and saw the ark, and that Christ's blood had dripped through a crack onto the mercy seat; he later said a blood sample showed 24 chromosomes.",
+     "text": "No ancient text places the ark here. Wyatt combined the crucifixion accounts with the idea that the ark was hidden in a cave near Jerusalem.",
+     "who": "Ron Wyatt and his supporters (Wyatt Archaeological Research). The Garden Tomb (Jerusalem) Association owns the site. A specific day in January 1982 circulates in pro-Wyatt material; I could confirm only the year 1982 (La Vista, 2020).",
+     "digging": "Wyatt dug on the privately owned Garden Tomb grounds several times, the last in summer 1991, watched by Association staff who entered his shaft. After his death, Wyatt's followers funded excavations under Israel Antiquities Authority supervision, which Gordon Franz reports as four seasons (2005-2007 and 2011) led by Yehiel Zelinger; I could not open an IAA report to confirm the details. Herold Follett's team found only an empty rock-cut room. None now, as checked 2026-10-20.",
+     "published_peer": [],
+     "published_press": [
+      "Garden Tomb Association (London) statement, reproduced by La Vista Church of Christ (2020) and others.",
+      "Armstrong Institute of Biblical Archaeology, Christopher Eames, 27 Apr 2023.",
+      "Gordon Franz, Life and Land, 2 Nov 2012.",
+      "Jonathan Gray's 1997 book promoting the claim (mentioned by Eames; not opened)."
+     ],
+     "for": "Supporters point to Wyatt's sincerity, to the cave system and cisterns under the area, and to the theological appeal of the ark lying beneath the place they believe Christ died. They hold that the ark is hidden by divine intent and will be revealed in God's time, which explains the absence of evidence.",
+     "against": "The site owners, the Garden Tomb Association, who are themselves Christians committed to the site's devotional use, stated that they 'totally refute the claim of Wyatt' and that nothing was found to support it. The Israel Antiquities Authority said Wyatt never had an excavation licence, and IAA official Joe Zias said he only had rubble cleared from a cistern. Christian critics who share the claim's biblical starting point reject it: the Armstrong Institute (2023) found no photos, video or blood report ever produced; Gordon Franz notes Wyatt published none of his 92 claimed discoveries in peer-reviewed form; Dr. Bernard Brandstater, who dug there, said 'Our digging yielded absolutely no results'. The 24-chromosome claim has no lab report.",
+     "status": "rejected",
+     "sources": [
+      {
+       "title": "La Vista Church of Christ, 'Has the Ark of the Covenant been Found?' (28 Jan 2020), quoting the Garden Tomb Association statement",
+       "url": "https://www.lavistachurchofchrist.org/cms/has-the-ark-of-the-covenant-been-found/"
+      },
+      {
+       "title": "Christopher Eames, 'Has the Ark of the Covenant Really Been Found?', Armstrong Institute of Biblical Archaeology (27 Apr 2023)",
+       "url": "https://armstronginstitute.org/801-has-the-ark-of-the-covenant-really-been-found/print"
+      },
+      {
+       "title": "Gordon Franz, 'Where Are Bob Cornuke's Peer-Reviewed Scientific Publications?', Life and Land (2 Nov 2012)",
+       "url": "https://www.lifeandland.org/?p=1224"
+      },
+      {
+       "title": "OpenStreetMap node 329348517: Garden Tomb, Conrad Schick St, Jerusalem",
+       "url": "https://www.openstreetmap.org/node/329348517"
+      }
+     ]
+    },
+    {
+     "id": "babylon-586",
+     "name": "Babylon (taken in the conquest of 597/586 BC)",
+     "lat": 32.53729695,
+     "lon": 44.42497815,
+     "kind": "taken",
+     "claim": "Nebuchadnezzar's army took or destroyed the ark with the other temple treasures when Jerusalem fell (597 and 586 BC), so it went to Babylon or was broken up for its gold.",
+     "text": "2 Kings 24:13 (597 BC): Nebuchadnezzar 'carried out thence all the treasures of the house of the Lord ... and cut in pieces all the vessels of gold which Solomon king of Israel had made'. 2 Kings 25:13-17 (586 BC) lists the bronze pillars, bases, sea, pots, shovels, firepans and bowls, with no ark. 2 Chronicles 36:10, 18: 'the goodly vessels' and 'all the vessels of the house of God, great and small ... he brought to Babylon'. Ezra 1:7-11 lists 5,400 returned vessels, with no ark. 2 Esdras (4 Ezra) 10:22: 'the ark of our covenant is spoiled'. Babylonian Talmud Yoma 53b: Rabbi Eliezer says 'The Ark was exiled to Babylonia' (2 Chronicles 36:10) and Rabbi Shimon ben Yohai agrees (Isaiah 39:6), against Rabbi Yehuda ben Lakish (hidden in its place). Mishnah Yoma 5:2 begins 'After the Ark was taken'. Revelation 11:19 places 'the ark of his testament' in the heavenly temple.",
+     "who": "Rabbi Eliezer and Rabbi Shimon ben Yohai (Talmud, Yoma 53b); the author of 4 Ezra (2 Esdras 3-14). The pin is the Pleiades point for the city of Babylon.",
+     "digging": "I found no dig at Babylon aimed at the ark. None now for the ark, as checked 2026-10-20.",
+     "published_peer": [],
+     "published_press": [
+      "Gary Byers, Associates for Biblical Research, 2008 (lists Babylon among proposed fates and concludes no one knows)."
+     ],
+     "for": "This is the simplest reading of the biblical evidence: the Babylonians looted and cut up the temple's gold (2 Kings 24:13), 2 Chronicles says 'all the vessels ... great and small' went to Babylon, and the ark is never heard of again in the narrative. Jeremiah 3:16 expects a future without the ark. The Second Temple had no ark (Mishnah Yoma 5:2). A first-century Jewish apocalypse (4 Ezra 10:22) says the ark was 'spoiled'. Respected Talmudic sages held it went to Babylon.",
+     "against": "None of the detailed inventories (2 Kings 25:13-17; Ezra 1:9-11) names the ark, which is strange for the most important object in the temple if it was carried off; that silence is what the hiding traditions (Talmud, 2 Maccabees) build on. The Talmud records Rabbi Yehuda ben Lakish and 'the Rabbis' saying it was hidden instead. 4 Ezra is a visionary lament, not a report. So the Babylon view is a reasonable inference, not a documented event.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "2 Kings 24:13; Ezra 1:7-11; 1 Kings 8:8-9 (KJV, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=2+Kings+24%3A13%3BEzra+1%3A7-11%3B1+Kings+8%3A8-9&version=KJV"
+      },
+      {
+       "title": "1 Samuel 7:1-2; 2 Kings 25:13-17; 1 Kings 14:25-26; 2 Chronicles 35:3; 2 Chronicles 36:10, 18; Jeremiah 3:16 (KJV, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=1+Samuel+7%3A1-2%3B2+Kings+25%3A13-17%3B1+Kings+14%3A25-26%3B2+Chronicles+35%3A3%3B2+Chronicles+36%3A10%2C18%3BJeremiah+3%3A16%3BDeuteronomy+34%3A1&version=KJV"
+      },
+      {
+       "title": "2 Esdras (4 Ezra) 10:21-23 (KJV Apocrypha, eBible.org)",
+       "url": "https://ebible.org/eng-kjv/2ES10.htm"
+      },
+      {
+       "title": "Babylonian Talmud Yoma 53b-54a (exiled to Babylon vs. hidden in its place; William Davidson Edition, Sefaria)",
+       "url": "https://www.sefaria.org/Yoma.53b.13-54a.9"
+      },
+      {
+       "title": "Mishnah Yoma 5:2 (after the ark was taken, the foundation stone; Sefaria)",
+       "url": "https://www.sefaria.org/Mishnah_Yoma.5.2"
+      },
+      {
+       "title": "Deuteronomy 34:1; Revelation 11:19 (KJV, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=Deuteronomy+34%3A1%3BRevelation+11%3A19&version=KJV"
+      },
+      {
+       "title": "Gary Byers, 'The Lost Ark of the Covenant: Still Lost', Associates for Biblical Research (5 May 2008)",
+       "url": "https://biblearchaeology.org/?p=71320"
+      },
+      {
+       "title": "Pleiades place record 893951: Babylon",
+       "url": "https://pleiades.stoa.org/places/893951"
+      }
+     ]
+    },
+    {
+     "id": "egypt-shishak",
+     "name": "Egypt (Shishak's raid on Jerusalem in Rehoboam's fifth year)",
+     "lat": null,
+     "lon": null,
+     "kind": "taken",
+     "claim": "Pharaoh Shishak (Shoshenq I) carried the ark off with the temple treasures in Rehoboam's fifth year. This is the premise of the film Raiders of the Lost Ark, which places it at Tanis; that version is fiction.",
+     "text": "1 Kings 14:25-26: Shishak 'took away the treasures of the house of the Lord, and the treasures of the king's house; he even took away all: and he took away all the shields of gold which Solomon had made'. The ark is not mentioned. 2 Chronicles 35:3 has the ark still in Jerusalem under Josiah, centuries later.",
+     "who": "No scholar I found argues this seriously. Rabbi Amichai Lau-Lavie (Substack, 2023) raised it as a possibility, linking it to Raiders of the Lost Ark. Gary Byers (ABR, 2008) lists 'Egypt (Tanis)' among proposed fates only as one of many suggestions.",
+     "digging": "No one has dug in Egypt for the ark on this theory. None now, as checked 2026-10-20. Coordinates null: the texts name no place in Egypt, and Tanis comes only from the film.",
+     "published_peer": [],
+     "published_press": [
+      "Amichai Lau-Lavie, Substack, 2 Apr 2023 (speculative aside).",
+      "Gary Byers, ABR, 2008 (list of proposed fates)."
+     ],
+     "for": "1 Kings 14:26 says Shishak 'took away all' the temple treasures, and the phrase could be read broadly.",
+     "against": "The same verse specifies treasures and gold shields, not the ark, and the Chronicler places the ark in Jerusalem in Josiah's reign (2 Chronicles 35:3), long after Shishak. No ancient Jewish, Christian or Egyptian source says the ark went to Egypt. The Tanis version comes from the film Raiders of the Lost Ark. Biblical scholars across the spectrum do not hold it.",
+     "status": "rejected",
+     "sources": [
+      {
+       "title": "1 Samuel 7:1-2; 2 Kings 25:13-17; 1 Kings 14:25-26; 2 Chronicles 35:3; 2 Chronicles 36:10, 18; Jeremiah 3:16 (KJV, Bible Gateway)",
+       "url": "https://www.biblegateway.com/passage/?search=1+Samuel+7%3A1-2%3B2+Kings+25%3A13-17%3B1+Kings+14%3A25-26%3B2+Chronicles+35%3A3%3B2+Chronicles+36%3A10%2C18%3BJeremiah+3%3A16%3BDeuteronomy+34%3A1&version=KJV"
+      },
+      {
+       "title": "Amichai Lau-Lavie, 'Pharaoh Takes Jerusalem', Substack (2 Apr 2023)",
+       "url": "https://amichailaulavie.substack.com/p/pharaoh-takes-jerusalem"
+      },
+      {
+       "title": "Gary Byers, 'The Lost Ark of the Covenant: Still Lost', Associates for Biblical Research (5 May 2008)",
+       "url": "https://biblearchaeology.org/?p=71320"
+      }
+     ]
+    },
+    {
+     "id": "lemba-ngoma-lungundu",
+     "name": "Lemba ngoma lungundu, Zimbabwe Museum of Human Sciences, Harare",
+     "lat": -17.8323163,
+     "lon": 31.0388235,
+     "kind": "claimed-now",
+     "claim": "Tudor Parfitt argued in 2008 that the ngoma lungundu, a sacred drum of the Lemba people of southern Africa, is the closest descendant of the ark, and that an object he found in 2007 in a Harare museum storeroom is a later rebuild of it.",
+     "text": "No biblical or ancient text. The source is Lemba oral tradition that the ngoma ('the drum that thunders') was carried from the north (Yemen in their tradition), was carried on poles, could not touch the ground, and once exploded and was rebuilt.",
+     "who": "Tudor Parfitt (SOAS, University of London; later Florida International University). Book: The Lost Ark of the Covenant: Solving the 2,500 Year Old Mystery of the Fabled Biblical Ark (HarperCollins, 2008). The object is held by the Zimbabwe Museum of Human Sciences, Harare.",
+     "digging": "No excavation; the object was found in a museum storeroom in 2007. A splinter from the top was radiocarbon dated to about AD 1300-1350 (reports vary: 1350 in RNS 2008; about 1300 and 'nearly 700 years old' in AP and BBC). Zimbabwean authorities were reluctant to allow dating of the whole object (AP). It went on public display in Harare around 2010. I did not find the radiocarbon result in a peer-reviewed publication. None now, as checked 2026-10-20.",
+     "published_peer": [
+      "Thomas, Parfitt et al., 'Y chromosomes traveling south: the Cohen modal haplotype and the origins of the Lemba', American Journal of Human Genetics 66.2 (2000) 674-686 (genetics of the Lemba, not the ngoma; citation from search index, not opened)."
+     ],
+     "published_press": [
+      "Tudor Parfitt, The Lost Ark of the Covenant (2008), book.",
+      "Religion News Service, 19 Mar 2008.",
+      "BBC News, 10 Mar 2010 (via HNN).",
+      "Associated Press (via Fox News; page dated 17 Nov 2014, but it describes the display opening 'this year' and quotes officials of c. 2010; date uncertain).",
+      "Gary Byers, ABR, 5 May 2008 (review)."
+     ],
+     "for": "Parfitt lists parallels: both the ark and the ngoma were God's dwelling place, carried on poles, not allowed to touch the ground, and associated with death, fire, smoke and noise. The Lemba's priestly Buba clan carries a high frequency of the Y-chromosome type associated with Jewish priests (Thomas et al. 2000). Lemba tradition says the drum exploded and was rebuilt, which Parfitt uses to explain why the surviving object dates to the 14th century rather than the Iron Age. Parfitt himself frames it as a descendant ('ark-junior'), not the original.",
+     "against": "The date is about two thousand years too late for Solomon's ark, and the object is a round drum, not a gold-covered box. Gary Byers of the Associates for Biblical Research, a Bible-believing organisation, called the link 'speculative at best' and said the two objects are 'so different that they just cannot be confused'. Hershel Shanks (BAR) said 'Many scholars regard his claims with a very jaundiced eye'. Zimbabwean historian Rob Burrett said Parfitt was 'on the wrong track' because wooden drums are integral to African culture; Ken Mufuka called him a 'charlatan'. Genetic ancestry does not show that an object travelled with the people.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Religion News Service, 'Indiana Jones would be proud' (19 Mar 2008), Baptist News Global",
+       "url": "https://baptistnews.com/article/indianajoneswouldbeproud/"
+      },
+      {
+       "title": "BBC News, 'Lost Jewish tribe found in Zimbabwe' (10 Mar 2010), republished by History News Network",
+       "url": "https://www.historynewsnetwork.org/article/124258"
+      },
+      {
+       "title": "Associated Press, 'Lost ark or African treasure? A British scholar's relic theory stirs Zimbabwean passions', Fox News (page dated 17 Nov 2014)",
+       "url": "https://www.foxnews.com/world/lost-ark-or-african-treasure-a-british-scholars-relic-theory-stirs-zimbabwean-passions.print"
+      },
+      {
+       "title": "Gary Byers, 'The Lost Ark of the Covenant: Still Lost', Associates for Biblical Research (5 May 2008)",
+       "url": "https://biblearchaeology.org/?p=71320"
+      },
+      {
+       "title": "OpenStreetMap relation 8153277: Zimbabwe Museum of Human Sciences, Harare",
+       "url": "https://www.openstreetmap.org/relation/8153277"
+      }
+     ]
+    },
+    {
+     "id": "hill-of-tara",
+     "name": "Hill of Tara, County Meath, Ireland (Rath of the Synods)",
+     "lat": 53.5802573,
+     "lon": -6.6117614,
+     "kind": "dig",
+     "claim": "British Israelites believed the ark was buried at Tara, and dug the Rath of the Synods from 1899 to 1902 to find it.",
+     "text": "No biblical or ancient text. Mairead Carew says the belief came from British-Israel mythology 'discussed at length' in their journal, The Covenant People (Irish Times, 1998).",
+     "who": "British-Israel Association of London (founder Edward Wheeler Bird); diggers led by Charles Groom (Groome) and Walton Adams; landowner Gustavus Villiers Briscoe allowed and funded the work. Opposed by Arthur Griffith, Maud Gonne, W. B. Yeats, George Moore and Douglas Hyde.",
+     "digging": "1899-1902 at the Rath of the Synods (first approaches 1875, no action until 1899; Irish Times says media pressure ended the digging in 1903, other sources say 1902). The digging destroyed much of the rath's original shape; reports of dynamite are anecdotal. Finds reported by a local man, John Dillon, include bones, a gold bracelet and Roman coins; no ark. Griffith and Gonne inspected the damage on Christmas Day 1900; Hyde, Yeats and Moore wrote to The Times in June 1902; on 13 July 1902 Gonne lit Briscoe's coronation bonfire in protest. Mairead Carew calls it the first press campaign to protect a national monument. The Mound of the Hostages was properly excavated in the 1950s, with burials but no ark. None now for the ark, as checked 2026-10-20.",
+     "published_peer": [
+      "Mairead Carew, Tara and the Ark of the Covenant (Discovery Programme / Royal Irish Academy, 2003), a scholarly monograph (I could not open the RIA page; details from two reviews)."
+     ],
+     "published_press": [
+      "The Irish Times, 30 May 1998.",
+      "Brehon Academy, 15 Mar 2025.",
+      "Newgrange.com review of Carew."
+     ],
+     "for": "Within British-Israel belief, the Hebrew line passed to Britain and Ireland, so Tara, the seat of the high kings, was the obvious place for Israel's treasure. That is the only case made.",
+     "against": "There is no ancient source linking the ark to Ireland, and the theory rests on a 19th century ideology that biblical scholars and historians of all persuasions reject. The excavation found ordinary archaeological material, no ark, and badly damaged one of Ireland's most important monuments. It ended under public protest.",
+     "status": "rejected",
+     "sources": [
+      {
+       "title": "The Irish Times, 'Demolishing the myths at Tara' (30 May 1998)",
+       "url": "https://irishtimes.com/news/demolishing-the-myths-at-tara-1.158532"
+      },
+      {
+       "title": "Brehon Academy, 'Raiders of the Lost Ark: British Israelites and the Quest for the Ark of the Covenant' (15 Mar 2025)",
+       "url": "https://brehonacademy.org/raiders-of-the-lost-ark-british-israelites-and-the-quest-for-the-ark-of-the-covenant/"
+      },
+      {
+       "title": "Newgrange.com review page: Mairead Carew, Tara and the Ark of the Covenant (Royal Irish Academy / Discovery Programme)",
+       "url": "https://www.newgrange.com/tara-ark-of-the-covenant.htm"
+      },
+      {
+       "title": "OpenStreetMap way 76678795: Raith na Seanadh (Rath of the Synods), Hill of Tara",
+       "url": "https://www.openstreetmap.org/way/76678795"
+      }
+     ]
+    },
+    {
+     "id": "qumran-cave-of-the-column",
+     "name": "Qumran area, Judean Desert (Vendyl Jones, 'Cave of the Column')",
+     "lat": null,
+     "lon": null,
+     "kind": "dig",
+     "claim": "Vendyl Jones, a former Baptist pastor turned Noahide, believed the Copper Scroll from Qumran points to hiding places of temple treasures, including the ark, and that a tunnel from the Temple Mount ran some 18 miles to the Judean Desert. In 2005 he said he expected to find the ark by Tisha B'Av.",
+     "text": "The Copper Scroll (3Q15) lists hiding places of treasure; Jones read a 'cave of the column with two openings facing east' as his target (per JRB). It does not name the ark. He also drew on 2 Maccabees 2:4-8 and the Talmud's tunnel tradition (Israel National News, 2005).",
+     "who": "Vendyl Jones (died December 2010, aged 80), Vendyl Jones Research Institutes; licensed for a time through archaeologist Pessah Bar-Adon (died 1985), then working with Joseph Patrich, with whom he split.",
+     "digging": "Excavations from 1977, sporadic. 1988: a juglet of balsam oil found during work with Patrich. April-May 1992: a dig announced as finding about 900 pounds (other reports 1,300) of reddish material Jones and chemist Marvin Antelman called the temple incense; the JRB says this dig was at a cave north of the Cave of the Column and was done without a licence, and the IAA shut it down; JNS describes the cave as south of Qumran and says the permit was revoked after a press conference. 2005: Jones announced the ark would be found by 14 August 2005 by drilling a borehole and dropping a pin-camera, then walked it back on his website. No ark was produced. In 2026 Project Qumran is planning laboratory tests on surviving incense samples (JNS, July 2026); that is lab work, not a dig. None now for the ark, as checked 2026-10-20. Coordinates null: the cave locations were never published precisely and the two 2026 sources disagree on which cave was dug.",
+     "published_peer": [],
+     "published_press": [
+      "Yosef Lindell, Jewish Review of Books, Summer 2026.",
+      "Steve Linde, JNS, 10 Jul 2026 (Project Qumran digital book).",
+      "Israel National News, 20 May 2005 and 27 Dec 2010 (obituary).",
+      "Barth's Notes blog, 6 Aug 2005 (quoting Jones's walk-back)."
+     ],
+     "for": "The Copper Scroll is a genuine ancient document listing hidden treasure, and the Qumran caves really did hide ancient deposits. Jones's team did find ancient material (the 1988 balsam oil juglet). Tests at the Weizmann Institute and Bar-Ilan were reported by supporters to support the incense identification (INN obituary).",
+     "against": "The Copper Scroll does not mention the ark, and scholars question whether it lists real temple treasure at all (Daniel Browning, 1996, per JRB). IAA archaeologists regarded the 1992 material as 'ordinary red dirt'; Zohar Amar called the chemical work 'research in the service of an idea'; Jacob Neusner called the quest 'absolutely crackpot'. Jones repeatedly announced he was close to the ark and never produced it, and his 2005 deadline passed. The ark claim itself was never tested.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Yosef Lindell, 'Vendyl Jones and the Temple Incense', Jewish Review of Books (Summer 2026)",
+       "url": "https://jewishreviewofbooks.com/jewish-history/20026/vendyl-jones-and-the-temple-incense/"
+      },
+      {
+       "title": "Steve Linde, 'Digital book revisits controversial Qumran discovery linked to Temple incense', JNS (10 Jul 2026)",
+       "url": "https://www.jns.org/feature/digital-book-revisits-controversial-qumran-discovery-linked-to-temple-incense"
+      },
+      {
+       "title": "Israel National News, Vendyl Jones on finding the ark by Tisha B'Av (20 May 2005)",
+       "url": "https://www.israelnationalnews.com/news/82226"
+      },
+      {
+       "title": "Israel National News, Vendyl Jones obituary (27 Dec 2010)",
+       "url": "https://www.israelnationalnews.com/news/141371"
+      },
+      {
+       "title": "Barth's Notes, 'The Ark-Eologists' (6 Aug 2005), quoting Jones's website walk-back",
+       "url": "https://barthsnotes.com/2005/08/06/the-ark-eologists/"
+      },
+      {
+       "title": "2 Maccabees 2:1-8 (KJV Apocrypha, eBible.org)",
+       "url": "https://ebible.org/eng-kjv/2MA02.htm"
+      },
+      {
+       "title": "Pleiades place record 688011: Qumran",
+       "url": "https://pleiades.stoa.org/places/688011"
+      }
+     ]
+    }
+   ],
+   "checked": "2026-10-20"
+  },
+  {
+   "id": "noahs-ark",
+   "name": "Noah's Ark",
+   "aliases": [
+    "noah",
+    "noahs ark",
+    "flood",
+    "ararat",
+    "durupinar",
+    "mount judi"
+   ],
+   "route": null,
+   "intro": "Genesis 8:4 says the ark came to rest on the mountains of Ararat, plural. Ararat is the Hebrew name for Urartu, the kingdom around Lake Van in what is now eastern Turkey, Armenia and north-west Iran, so the text names a region, not a peak; the single mountain called Ararat today got that name much later. Older Jewish and Syriac tradition put the landing further south (the Targums say the mountains of Qardu), at the mountain now called Cudi Dag, which is also where the Quran puts it (11:44). The claims below are the places people have searched.",
+   "claims": [
+    {
+     "id": "durupinar-formation",
+     "name": "Durupınar formation (Doğubayazıt, Türkiye)",
+     "lat": 39.4405713,
+     "lon": 44.234789,
+     "coord_source": "OpenStreetMap way 144047151, tagged 'Durupınar sitesi', Üzengili, Doğubayazıt, Ağrı (centroid from Nominatim, checked 2026-10-20). Not from an excavation report.",
+     "kind": "dig",
+     "claim": "A boat-shaped mound about 157 m long, about 29 to 30 km south of the Ararat summit, is the buried remains of Noah's ark. Its backers say 2026 radar and core drilling found no bedrock inside, a hard layer that broke a drill bit, and organic-rich layers.",
+     "text": "Genesis 8:4 says the ark rested 'upon the mountains of Ararat' (plural): a region, not one named peak. Encyclopaedia Judaica identifies biblical Ararat with Urartu, the kingdom centred on Lake Van, and notes the Bible names no specific mountain. 2 Kings 19:37 and Jeremiah 51:27 use Ararat for a land and a kingdom.",
+     "who": "Spotted on aerial photos in 1959 by Turkish Army Captain İlhan Durupınar. Promoted from 1977 by Ron Wyatt; studied by David Fasold from 1985 (nine trips; book 'The Ark of Noah', 1988). Since about 2021 promoted by Noah's Ark Scans (founder Andrew Jones, a software developer and not an archaeologist). 2022 to 2023: Ağrı İbrahim Çeçen University and Istanbul Technical University sampling team (Vice Rector Prof. Faruk Kaya). 2026: field program led by Prof. Dr. Cenker Atila (Archaeology, Sivas Cumhuriyet University) with about 20 scientists and students from five countries, supported by Noah's Ark Scans; radar by Dr. Khosrow Bakhtar (Bakhtar Research and Engineering).",
+     "digging": "1960: US-sponsored survey (Vandeman, Brandenberger) found no sign of human work. 1985 to 1988: Wyatt and Fasold radar; 1987 radar by Tom Fenner could not reproduce earlier records; 1987 to 1988 magnetometer, radar, seismic and core drilling (Baumgardner), four holes to about 10 m, mudflow clay over basalt or bedrock, no wood. 2022 to 2023: about 30 soil and rock samples tested at ITU, dated 3,500 to 5,000 years, with Kaya saying the dating cannot show a ship is there. 2024: Noah's Ark Scans soil survey (88 samples, 22 sites) claimed about three times more organic matter inside. 2026: fieldwork 29 June to 11 September under Turkish permits (Atila says from two ministries; ministries not named); GPS, 2D/3D modelling, GPR, resistivity, dry percussion core drilling to up to 18 m inside and outside the outline (Fox News reports about 20 m in places); a bit broke at about 4 to 5 m in one hole inside the formation. Lab work through winter 2026 to 2027; full data targeted for May 2027; a book 'Durupınar Formasyonu 2026 Yılı Araştırmaları' and three papers promised. ACTIVE NOW.",
+     "published_peer": [
+      "Collins, L. G. and Fasold, D. F. (1996), 'Bogus Noah's Ark from Turkey exposed as a common geologic structure', Journal of Geoscience Education 44: 439-444. Concludes the formation is a natural doubly plunging syncline; 'iron brackets' are goethite and limonite; 'anchor stones' are local andesite; no fossil wood or elemental carbon found.",
+      "No peer-reviewed paper from the 2022 to 2026 work had been published as of 2026-10-20."
+     ],
+     "published_press": [
+      "GlobeNewswire paid release, 'Core Drilling Begins at Durupinar Noah's Ark Site, Drill Bit Shatters on Possible Layer of Petrified Wood', Doğubayazıt, 23 Sep 2026 (read via Yahoo Finance and Manila Times reprints; globenewswire.com blocked access).",
+      "Noah's Ark Scans Substack post, 23 Sep 2026 (fundraising).",
+      "Jerusalem Post, 3 Oct 2026; Fox News, 2 Oct 2026; Newsweek, 30 Sep 2026; Religion Unplugged, 7 Oct 2026.",
+      "Habertürk and İstiklal (İHA), 28 Jul 2026, on the Atila-led program.",
+      "Arkeolojik Haber (DHA), 31 Oct 2023, and Habertürk (DHA), 7 Dec 2022, on the AİÇÜ and ITU sampling.",
+      "Christian Post on Answers in Genesis (12 Oct 2021) and on Huff and Johnston (April 2026).",
+      "Wyatt videos and Fasold's 1988 book (not peer reviewed)."
+     ],
+     "for": "The length (about 157 to 164 m) matches 300 cubits if a long (Egyptian) cubit of about 52 cm is used. The project says 2026 holes inside the outline hit soil, sediment, organic-rich layers and cavities, not bedrock or a solid limestone block, and that a layer 'harder than limestone' broke a percussion bit; it proposes petrified or mineralised wood, to be tested by a third-party lab. Its radar (BakhtarRadar, GPR, ERT) shows linear features, right angles, layering and possible voids that it reads as corridors, compartments and decks. 2024 soil sampling claimed about three times more organic matter inside than outside. The 2026 work is a permitted program under a Turkish state university archaeologist, not an amateur dig, and the team says it has not claimed an intact wooden ship and will issue a statement only after lab work.",
+     "against": "The only peer-reviewed study (Collins and Fasold 1996) calls it a natural syncline, and Fasold, its main early champion, co-wrote that paper and repudiated the site in sworn testimony in 1997. Earlier 'petrified wood', 'iron brackets' and 'anchor stones' were identified as basalt, goethite or limonite, and local andesite; Wyatt's prize wood sample was never sectioned. A fossiliferous limestone bed crosses the site. Critics who believe in Noah and the ark reject it: Andrew Snelling (Answers in Genesis, young-earth geologist) argues the radar 'tunnels' and 'cabins' may reflect jointing, layering and dissolution channels in limestone, and that a site in a deep valley on Ararat's southern slopes conflicts with Genesis 8:4; Ken Ham concludes 'both the location and the geology discount' it; Wesley Huff calls the claims 'not legit', notes the team has no trained archaeologists and that 'it looks like a boat' is not evidence; Jeremiah Johnston says it is 'not the spot of Noah's ark'. Turkish geologist Murat Avcı reads it as a landslide block shaped by natural processes. A broken drill bit shows hardness, not wood; proof needs recovered wood cell structure. The 2023 ITU dating showed human activity in the area, not a ship. All 2026 claims are from the project and its press, with lab results pending.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Genesis 8:4 (LSB)",
+       "url": "https://read.lsbible.org/?q=Genesis+8:4"
+      },
+      {
+       "title": "Encyclopaedia Judaica, 'Ararat' (Frymer and Sperling), Jewish Virtual Library",
+       "url": "https://jewishvirtuallibrary.org/jsource/judaica/ejud_0002_0002_0_01234.html"
+      },
+      {
+       "title": "Collins and Fasold 1996, hosted by Lorence Collins, CSUN",
+       "url": "https://www.csun.edu/~vcgeo005/bogus.html"
+      },
+      {
+       "title": "GlobeNewswire release, 23 Sep 2026 (original URL, blocked to fetch)",
+       "url": "https://www.globenewswire.com/news-release/2026/09/23/3367545/0/en/core-drilling-begins-at-durupinar-noah-s-ark-site-drill-bit-shatters-on-possible-layer-of-petrified-wood.html"
+      },
+      {
+       "title": "Same release, Yahoo Finance reprint",
+       "url": "https://finance.yahoo.com/technology/articles/core-drilling-begins-durupinar-noahs-130500761.html"
+      },
+      {
+       "title": "Same release, Manila Times reprint",
+       "url": "https://www.manilatimes.net/2026/09/23/tmt-newswire/globenewswire/core-drilling-begins-at-durupinar-noahs-ark-site-drill-bit-shatters-on-possible-layer-of-petrified-wood/2431335"
+      },
+      {
+       "title": "Noah's Ark Scans, 'Core Drilling Begins at Noah's Ark Site', 23 Sep 2026",
+       "url": "https://noahsarkscans.substack.com/p/core-drilling-begins-at-noahs-ark"
+      },
+      {
+       "title": "Jerusalem Post, 3 Oct 2026",
+       "url": "https://www.jpost.com/archaeology/article-910413"
+      },
+      {
+       "title": "Living Passages, 'Durupınar Noah's Ark' (tour operator blog)",
+       "url": "https://livingpassages.com/durupinar-noahs-ark/"
+      },
+      {
+       "title": "Fox News, 2 Oct 2026",
+       "url": "https://www.foxnews.com/travel/noahs-ark-mystery-enters-new-phase-researchers-probe-deep-beneath-site"
+      },
+      {
+       "title": "Newsweek, 30 Sep 2026",
+       "url": "https://www.newsweek.com/what-1996-study-said-about-noahs-ark-site-12507519"
+      },
+      {
+       "title": "Religion Unplugged, 7 Oct 2026",
+       "url": "https://religionunplugged.com/news/2026/10/7/why-people-keep-looking-for-noahs-ark-in-turkey"
+      },
+      {
+       "title": "Habertürk, 28 Jul 2026 (Atila program, permits)",
+       "url": "https://www.haberturk.com/nuh-un-gemisi-nin-sirri-nihayet-cozuluyor-arastirma-basladi-3901701"
+      },
+      {
+       "title": "İstiklal, 28 Jul 2026",
+       "url": "https://www.istiklal.com.tr/kultur-sanat/dunyanin-kilitlendigi-arastirma-durupinar-hz-nuhun-gemisi-mi-1100432h"
+      },
+      {
+       "title": "Arkeolojik Haber, 31 Oct 2023 (AİÇÜ and ITU results)",
+       "url": "https://www.arkeolojikhaber.com/haber-according-to-the-noahs-ark-report-of-the-mount-ararat-committee-the-flood-occurred-5-thousand-years-ago-38242/"
+      },
+      {
+       "title": "Habertürk, 7 Dec 2022 (AİÇÜ and ITU team formed)",
+       "url": "https://www.haberturk.com/nuh-un-gemisi-nin-olduguna-inanilan-alanda-arastirma-baslatildi-3545290"
+      },
+      {
+       "title": "Hürriyet Daily News, 11 Apr 2025",
+       "url": "https://www.hurriyetdailynews.com/amp/us-based-team-to-launch-excavation-in-eastern-turkiye-207920"
+      },
+      {
+       "title": "Andrew Snelling, 'Special Report: Amazing Ark Exposé', Creation 14:4 (1992), AiG reprint",
+       "url": "https://answersingenesis.org/creationism/arguments-to-avoid/special-report-amazing-ark-expose/"
+      },
+      {
+       "title": "Ken Ham (Answers in Genesis), 21 Nov 2025, citing Snelling",
+       "url": "https://answersingenesis.org/noahs-ark/noahs-ark-back-in-news-has-it-really-been-found/"
+      },
+      {
+       "title": "Christian Post, Answers in Genesis skeptical, 12 Oct 2021",
+       "url": "https://www.christianpost.com/world/answers-in-genesis-skeptical-about-noahs-ark-discovery-claim.html"
+      },
+      {
+       "title": "Christian Post, Wesley Huff and Jeremiah Johnston, April 2026",
+       "url": "https://www.christianpost.com/news/wesley-huff-jeremiah-johnston-dispute-viral-noahs-ark-claim.html"
+      }
+     ],
+     "notes": "Not verified: the 1987 national-park designation (stated only by the Living Passages blog; no Turkish decree found); the names of the two permitting ministries; whether Wesley Huff stated his own belief in a historical Noah in the article opened (the Christian Post piece does not say). The GlobeNewswire original could not be fetched (HTTP 403); its text was read in two syndicated copies that carry the GlobeNewswire dateline."
+    },
+    {
+     "id": "mount-ararat-summit-tradition",
+     "name": "Mount Ararat summit and ice cap (Ağrı Dağı)",
+     "lat": 39.7019346,
+     "lon": 44.2983964,
+     "coord_source": "OpenStreetMap node 130065410, 'Ağrı Dağı' / 'Mount Ararat', natural=volcano, ele 5137.",
+     "kind": "tradition",
+     "claim": "The ark lies on or under the ice of the 5,137 m peak now called Mount Ararat.",
+     "text": "Genesis 8:4: 'the mountains of Ararat', a region (Urartu), not a named peak. Encyclopaedia Judaica: 'the Bible does not mention any specific mountain'; one tradition identifies it with Mount Massis, which is why that peak is called Mount Ararat.",
+     "who": "Later Armenian and European tradition; modern searchers from the 1950s on (see separate entries for Navarra, SEARCH, NAMI). Wesley Huff dates the peak's name 'Mount Ararat' to about the 13th century (stated in Christian Post; not independently checked).",
+     "digging": "Searches restricted: the area was closed to foreigners until 1982 (AP, 2004). In 2004 Turkey declined a US expedition (Daniel McGivern) on security grounds. No permitted ice-cap search found for 2025 to 2026: none now.",
+     "published_peer": [
+      "Taylor, R. E. and Berger, R. (1980), 'The date of Noah's Ark', Antiquity 54(210): 34-36 (abstract read; full text paywalled)."
+     ],
+     "published_press": [
+      "AP via NBC News, 26 Apr 2004; Honolulu Star-Bulletin, 3 Sep 2004.",
+      "Christian Post, April 2026 (Huff)."
+     ],
+     "for": "It is the highest mountain in the old Urartu region, so it is the natural reading for people who take 'mountains of Ararat' to mean its highest point; a long tradition attaches the ark to it; repeated wood finds near its glaciers (see Navarra entry) kept the search alive.",
+     "against": "Scripture names a region, not this peak, and the peak's naming is late. Every wood sample dated so far is medieval. Geologists quoted by AP said a ship could not have landed at that altitude. The Islamic encyclopedia author Hikmet Tanyu (TDV, 1993) argues the peak is too high, steep and barren and that searches there lack religious or scientific basis. Answers in Genesis (Ham, citing Snelling) also notes Ararat is a volcano that last erupted in 1840.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Genesis 8:4 (LSB)",
+       "url": "https://read.lsbible.org/?q=Genesis+8:4"
+      },
+      {
+       "title": "Encyclopaedia Judaica, 'Ararat' (Frymer and Sperling), Jewish Virtual Library",
+       "url": "https://jewishvirtuallibrary.org/jsource/judaica/ejud_0002_0002_0_01234.html"
+      },
+      {
+       "title": "2 Kings 19:37 (LSB)",
+       "url": "https://read.lsbible.org/?q=2+Kings+19:37"
+      },
+      {
+       "title": "Jeremiah 51:27 (LSB)",
+       "url": "https://read.lsbible.org/?q=Jeremiah+51:27"
+      },
+      {
+       "title": "AP via NBC News, 26 Apr 2004",
+       "url": "https://www.nbcnews.com/id/wbna4838007"
+      },
+      {
+       "title": "Honolulu Star-Bulletin, 3 Sep 2004",
+       "url": "https://archives.starbulletin.com/2004/09/03/news/story9.html"
+      },
+      {
+       "title": "TDV İslâm Ansiklopedisi, 'Cûdî Dağı' (Tanyu, 1993)",
+       "url": "https://islamansiklopedisi.org.tr/cudi-dagi"
+      },
+      {
+       "title": "Christian Post, April 2026",
+       "url": "https://www.christianpost.com/news/wesley-huff-jeremiah-johnston-dispute-viral-noahs-ark-claim.html"
+      },
+      {
+       "title": "Ken Ham (AiG), 21 Nov 2025",
+       "url": "https://answersingenesis.org/noahs-ark/noahs-ark-back-in-news-has-it-really-been-found/"
+      }
+     ]
+    },
+    {
+     "id": "navarra-search-wood",
+     "name": "Navarra and SEARCH wood, Ararat glacier (about 13,000 to 13,500 ft)",
+     "lat": null,
+     "lon": null,
+     "coord_source": "None published for the find spot in the sources opened; left null.",
+     "kind": "dig",
+     "claim": "Hand-hewn timber recovered from glacier ice high on Mount Ararat by Fernand Navarra (1955) and the SEARCH Foundation (1969) is wood from Noah's ark, dated about 4,000 to 5,000 years old.",
+     "text": "Genesis 8:4 (mountains of Ararat). No text names a find spot.",
+     "who": "Fernand Navarra, French industrialist, 1955 (wood at about 13,500 ft) and with SEARCH (Scientific Exploration and Archaeological Research Foundation) in 1969 (four plank-like pieces found 31 July and 2 August 1969 at about 13,000 ft in a glacial spillway).",
+     "digging": "1955 and 1969 surface recovery from ice; no current work: none now.",
+     "published_peer": [
+      "Taylor and Berger (1980), Antiquity 54: 34-36, on the date of the wood (abstract only read)."
+     ],
+     "published_press": [
+      "Christianity Today, 12 Sep 1969.",
+      "Bible and Spade 6:3 (Summer 1977), 'Ararat Ark Wood Dated at A.D. 700'.",
+      "Navarra, 'Noah's Ark: I Touched It' (1974, book)."
+     ],
+     "for": "The wood is worked timber at an altitude far above the tree line, which needs explaining; Christianity Today (1969) reported that carbon tests had dated Navarra's 1955 timber to about 4,000 years; SEARCH itself did not claim it was the ark, which counts for its honesty about the find.",
+     "against": "Radiocarbon dating repeatedly gave early medieval dates: UCLA (Rainer Berger) about AD 700; UC Riverside (R. E. Taylor) 1,210 plus or minus 90 years; England's National Physical Laboratory 1,190 plus or minus 90 years (early 1960s); two 1969 samples about AD 630 to 650 (per talkorigins summary). Berger suggested the wood may come from a later shrine commemorating the landing. Even in 1969 the Arctic Institute's dating source admitted glaciological problems, and W. F. Albright rejected the idea that the ark lies under the glacier.",
+     "status": "rejected",
+     "sources": [
+      {
+       "title": "Christianity Today, 'Wood on Mount Ararat Intrigues Explorers', 12 Sep 1969",
+       "url": "https://www.christianitytoday.com/ct/1969/september-12/wood-on-mount-ararat-intrigues-explorers.html"
+      },
+      {
+       "title": "Bible and Spade 6:3 (1977), via Galaxie",
+       "url": "https://www.galaxie.com/article/bsp06-3-04"
+      },
+      {
+       "title": "Taylor and Berger 1980, Antiquity (Cambridge)",
+       "url": "https://www.cambridge.org/core/journals/antiquity/article/date-of-noahs-ark/2D0BA47C12949A055DD314EE975A02DD"
+      },
+      {
+       "title": "TalkOrigins CH504.2 (summary of the dates)",
+       "url": "https://talkorigins.org/indexcc/CH/CH504_2.html"
+      }
+     ],
+     "notes": "The 1969 dates of AD 630 and 650 come only from the TalkOrigins summary, which cites LaHaye and Morris (1976); the lab reports themselves were not opened."
+    },
+    {
+     "id": "nami-2010-ararat",
+     "name": "Noah's Ark Ministries International (NAMI) structure, Mount Ararat, 2010",
+     "lat": null,
+     "lon": null,
+     "coord_source": "NAMI kept the location secret; none published. Left null.",
+     "kind": "claimed",
+     "claim": "A Hong Kong evangelical group announced on 25 April 2010 that it had found a wooden, compartmented structure high on Mount Ararat, with wood about 4,800 years old, and declared '99% certainty' it was Noah's ark.",
+     "text": "Genesis 8:4 (mountains of Ararat).",
+     "who": "Noah's Ark Ministries International (Hong Kong), with Turkish guide 'Parasut'. Randall Price (Liberty University) was archaeologist on the team in 2008.",
+     "digging": "2008 to 2009 visits; announcement 2010. No published excavation; none now.",
+     "published_peer": [],
+     "published_press": [
+      "Catholic News Agency / EWTN, 4 to 5 May 2010.",
+      "Todd Bolen, BiblePlaces blog, 28 Apr 2010.",
+      "Randall Price and Don Patton, critique, Associates for Biblical Research, 29 Nov 2010."
+     ],
+     "for": "NAMI said it had samples, photos of interior rooms, and support from Turkish academics and local officials.",
+     "against": "Randall Price, a believing archaeologist who had worked with the team, wrote in a leaked email (he confirmed writing it) that local Kurdish workers hauled old timbers from the Black Sea area to a cave on the mountain, and cited cobwebs in the rafters as impossible in those conditions; he called it 'apparently a fake'. ICR president John Morris, a team consultant, declined to attend the launch, saying there was not yet good evidence. The location was never disclosed and no data were published for testing.",
+     "status": "rejected",
+     "sources": [
+      {
+       "title": "EWTN News, 4 May 2010",
+       "url": "https://www.ewtnnews.com/world/us/noahs-ark-discovery-could-be-hoax-critic-says"
+      },
+      {
+       "title": "BiblePlaces Blog, 28 Apr 2010",
+       "url": "https://bibleplaces.com/blog/2010/04/28"
+      },
+      {
+       "title": "Associates for Biblical Research, Price critique, 29 Nov 2010",
+       "url": "https://biblearchaeology.org/noahs-ark-update-from-randall-price/"
+      }
+     ],
+     "notes": "The hoax is an allegation by Price, not a proven finding; NAMI's claimed altitude (often reported as about 4,000 m) was not confirmed in a source opened, so it is omitted."
+    },
+    {
+     "id": "ararat-anomaly",
+     "name": "'Ararat anomaly' on the northwest ice cap",
+     "lat": null,
+     "lon": null,
+     "coord_source": "No coordinate in the source opened (Taylor, University of Richmond); left null.",
+     "kind": "claimed",
+     "claim": "US spy imagery from as early as 1973 shows a ship-shaped object in the ice cap of Mount Ararat.",
+     "text": "Genesis 8:4.",
+     "who": "Porcher L. Taylor III (University of Richmond), who pressed for declassification; in 1995 the Defense Intelligence Agency released 1949 US Air Force aerial photos (per LiveScience and Space.com reporting).",
+     "digging": "Imagery analysis only; no ground survey found; none now.",
+     "published_peer": [],
+     "published_press": [
+      "Porcher L. Taylor, 'Imaging the Ararat Anomaly', University of Richmond repository (marked withdrawn)."
+     ],
+     "for": "Multiple independent image sets (aerial, satellite) show an elongated feature, and imagery specialists have thought it worth study.",
+     "against": "No ground check, no sample, and the feature sits on a glaciated volcano where ice and rock ridges produce such shapes; Taylor himself only argues that better commercial imagery could settle it.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "University of Richmond, Taylor, 'Imaging the Ararat Anomaly'",
+       "url": "https://scholarship.richmond.edu/spcs-faculty-publications/47/"
+      }
+     ],
+     "notes": "The 1995 DIA release of 1949 photos is reported in search summaries of LiveScience and Space.com articles that were not themselves opened; treat as unverified."
+    },
+    {
+     "id": "mount-judi-cudi",
+     "name": "Mount Judi (Cudi Dağı, Şırnak, Türkiye)",
+     "lat": 37.377528,
+     "lon": 42.4543142,
+     "coord_source": "OpenStreetMap node 1921992648, 'Cudi Dağı' / 'Mount Judi', natural=peak, ele 2114, Şırnak. Matches the 2,114 m summit height given by TDV İslâm Ansiklopedisi.",
+     "kind": "tradition",
+     "claim": "The ark landed on Cudi Dağı in southeast Türkiye, about 32 km northeast of Cizre, as the Quran and older Aramaic and Syriac tradition say.",
+     "text": "Quran 11:44: 'The Ark rested on Mount Judi' (al-Judi). Targum Onkelos Genesis 8:4 renders Ararat as 'the mountains of Qardu' (ṭurei Qardu); Encyclopaedia Judaica says the Aramaic and Syriac translations name Ture Kardu, the mountains of Kurdistan (Jebel Judi), southeast of Lake Van. Josephus, Antiquities 1.3.6, quotes Berossus the Chaldean that part of the ship is still 'in Armenia, at the mountain of the Cordyaeans' (generally taken as the Gordyene or Qardu region, but that equation is an inference).",
+     "who": "Jewish Aramaic (Targum), Syriac and Islamic tradition. Modern: Şırnak University (Prof. Dr. İbrahim Baz, Faculty of Theology) survey team of 12 (10 archaeologists, 2 theologians), June 2025.",
+     "digging": "June 2025: surface survey approved by Şırnak Governorship at Yoğurtçular (Heştan) village, the 'Sefine' area of Cudi Dağı, and Finik Castle on Gabar Dağı; three of seven churches named in historical sources located. Excavation needs separate Ministry of Culture and Tourism approval, not granted as of that report. No excavation found for 2026: none now.",
+     "published_peer": [
+      "Encyclopaedia Judaica, 'Ararat' (reference work).",
+      "TDV İslâm Ansiklopedisi, 'Cûdî Dağı', vol. 8 (1993), Hikmet Tanyu (reference work)."
+     ],
+     "published_press": [
+      "Haberler.com (Turkish), 4 Jun 2025, on the Şırnak University survey."
+     ],
+     "for": "The tradition is older than the Ararat-peak tradition: it is in the Targum, the Syriac Bible tradition, Berossus as quoted by Josephus, and the Quran. The mountain is within the wider Urartu and Ararat region named in Genesis. Tanyu argues its caves, flatter summit and food sources make a landing and descent more plausible than on Ağrı Dağı, and Islamic commentators (Ibn Abbas, Ka'b al-Ahbar) place al-Judi in the Jazira near Mosul.",
+     "against": "No physical evidence of a ship has been reported; the 2025 work was a surface survey of later Christian remains, not a find. 'Mountain of the Cordyaeans' and 'Qardu' identify a region, and linking them to this exact summit is tradition. Tanyu himself notes another mountain named Cûdî in Arabia. A botanist's claim that old olive trees at Cizre prove the site (reported in Turkish press) is not peer reviewed.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Quran 11:44 (Quran.com)",
+       "url": "https://quran.com/11/44"
+      },
+      {
+       "title": "Targum Onkelos, Genesis 8:4 (Sefaria)",
+       "url": "https://www.sefaria.org/Onkelos_Genesis.8.4"
+      },
+      {
+       "title": "Josephus, Antiquities 1.3.6, Whiston translation (Project Gutenberg)",
+       "url": "https://www.gutenberg.org/files/2848/2848-h/2848-h.htm"
+      },
+      {
+       "title": "Encyclopaedia Judaica, 'Ararat' (Frymer and Sperling), Jewish Virtual Library",
+       "url": "https://jewishvirtuallibrary.org/jsource/judaica/ejud_0002_0002_0_01234.html"
+      },
+      {
+       "title": "TDV İslâm Ansiklopedisi, 'Cûdî Dağı'",
+       "url": "https://islamansiklopedisi.org.tr/cudi-dagi"
+      },
+      {
+       "title": "Haberler.com, 4 Jun 2025, Şırnak survey",
+       "url": "https://www.haberler.com/guncel/sirnak-ta-hz-nuh-un-gemisi-icin-yuzey-arastirmasi-yapildi-18709166-haberi/"
+      }
+     ],
+     "notes": "Josephus also cites Nicolaus of Damascus for a mountain 'over Minyas, called Baris' in Armenia; that is a separate tradition and is not placed on the map."
+    },
+    {
+     "id": "mount-suleiman-iran",
+     "name": "Takht-e Suleiman (Mount Suleiman), Elburz range, Iran",
+     "lat": null,
+     "lon": null,
+     "coord_source": "BASE Institute did not publish GPS coordinates (Franz asked them to); left null.",
+     "kind": "claimed",
+     "claim": "A dark, plank-like rock formation found by the BASE Institute in 2005 to 2006 near the summit of Mount Suleiman in Iran may be the petrified remains of the ark.",
+     "text": "Genesis 8:4 (mountains of Ararat); Genesis 11:2 (people journeyed 'from the east', read by BASE as pointing to a landing east of Shinar).",
+     "who": "Bob Cornuke and the BASE Institute, 2005 to 2006.",
+     "digging": "2005 to 2006 surface visits; samples reportedly sent for analysis with no published results found; none now.",
+     "published_peer": [],
+     "published_press": [
+      "Gordon Franz, Life and Land, critique (revised 2006 to 2009)."
+     ],
+     "for": "BASE photographed rock with a timber-like, layered look at high altitude and argues Genesis 11:2 places the landing east of Mesopotamia.",
+     "against": "Gordon Franz (a Bible-believing archaeologist) argues the site is about 300 miles east of Lake Urmia, outside the land of Ararat/Urartu, in ancient Media, and that no ancient writer puts the landing in Iran; he says BASE misquoted David Rohl; a geologist he consulted noted the area has dark diabase dikes and sills that could match the photos. No data or coordinates have been published for testing.",
+     "status": "rejected",
+     "sources": [
+      {
+       "title": "Gordon Franz, 'Did the BASE Institute Discover Noah's Ark in Iran?', Life and Land",
+       "url": "https://www.lifeandland.org/2009/04/did-the-base-institute-discover-noah%e2%80%99s-ark-in-iran/"
+      }
+     ],
+     "notes": "The Deseret News 2006 story appeared in search results but was not opened; the claim description relies on Franz and search summaries."
+    }
+   ],
+   "checked": "2026-10-20"
+  },
+  {
+   "id": "mount-sinai",
+   "name": "Mount Sinai",
+   "aliases": [
+    "sinai",
+    "horeb",
+    "mountain of god",
+    "jebel musa",
+    "jabal al-lawz",
+    "har karkom"
+   ],
+   "route": "exodus",
+   "intro": "The mountain where God gave the law is called both Sinai and Horeb (Exodus 19; Deuteronomy 5:2), the mountain of God (Exodus 3:1). The text gives the stages of the journey from Egypt (Numbers 33) but nothing a surveyor could use, and Paul's Mount Sinai in Arabia (Galatians 4:25) has been read both ways, since Arabia in his day took in the Sinai peninsula. The traditional peak, Jebel Musa, goes back to fourth-century monks; the main alternatives are in Saudi Arabia and the Negev. OpenBible's data scores Jebel Musa highest, but short of the line it uses for a secure identification.",
+   "claims": [
+    {
+     "id": "jebel-musa",
+     "name": "Jebel Musa (Mount Moses), above St Catherine's Monastery, South Sinai, Egypt",
+     "lat": 28.5388088,
+     "lon": 33.9751845,
+     "coord_source": "OpenStreetMap node 329996453, 'جبل موسى' / 'Mount Sinai', natural=peak, ele 2285.",
+     "kind": "tradition",
+     "claim": "The traditional Mount Sinai, where Moses received the law, is Jebel Musa in the granite massif of southern Sinai, with St Catherine's Monastery at the site of the burning bush.",
+     "text": "Scripture calls it both Sinai and Horeb, 'the mountain of God' (Exodus 3:1; 1 Kings 19:8). Moses first reaches it while pasturing Jethro's flock, Jethro being 'the priest of Midian' (Exodus 3:1). Deuteronomy 1:2: 'eleven days' journey from Horeb by the way of Mount Seir to Kadesh-barnea'. Exodus 19:18: the mountain 'all in smoke' because Yahweh 'descended upon it in fire'. Galatians 4:25: 'Mount Sinai in Arabia'. Exodus 18:27: Jethro leaves Moses and goes 'into his own land'. Egeria (late 4th century; the monastery dates her visit to about 380) climbed the mountain with resident monks, saw a small church on the summit and 'the cave where holy Moses was', a church at the Bush, and was shown Horeb and Elijah's cave and the place 'where the calf was made'.",
+     "who": "Monastic tradition from the 3rd to 4th centuries (the monastery dates Sinai monasticism to the 3rd century; Empress Helen is said to have supported it in the 4th); Justinian built the basilica and fortress walls in the 6th century. Modern proponents listed by BAS include Edward Robinson (1838), Samuel Bartlett (1879), J. Simons (1959); Ras Safsafa (part of the massif) by E. H. Palmer. James Hoffmeier supports the southern Sinai location (per Answers in Genesis).",
+     "digging": "No archaeological excavation aimed at the Exodus was found for 2025 to 2026. Egypt's 'Great Transfiguration' tourism project (launched 2021) is building around St Catherine; on 28 May 2025 the Ismailia Court of Appeal ruled the monastery's surrounding lands are state property under oversight of the antiquities and environment ministries, leaving the monks religious use of the churches. None now (construction and legal dispute only).",
+     "published_peer": [
+      "No peer-reviewed find links Jebel Musa to the Exodus. BAS: no Exodus-related remains from the traditional date (about 1200 BCE) have been found in the Sinai Peninsula."
+     ],
+     "published_press": [
+      "Egeria, travel account (4th century), McClure and Feltoe translation (1919).",
+      "EIPR Q&A on the 2025 ruling, 23 Jun 2025; Greek City Times, 2 Jun 2025."
+     ],
+     "for": "It has the oldest continuous site tradition of any candidate (4th century, attested by an eyewitness pilgrim), a great plain below the massif where a large group could camp, and it lies in the peninsula the Israelites crossed after leaving Egypt. Hoffmeier and many 19th and 20th century geographers accepted it.",
+     "against": "The tradition is at least 1,500 years after the events and arose with Byzantine monasticism; Anati says it 'is not corroborated by biblical accounts'. Turpin (Answers in Genesis, a fellow believer) notes it is about 225 miles from Midian and about 160 miles from Kadesh-barnea, which strains the 11-day journey of Deuteronomy 1:2, and its main support is 'Christian tradition from the fourth century AD'. No Late Bronze Age Israelite remains have been found there.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Exodus 3:1 (LSB)",
+       "url": "https://read.lsbible.org/?q=Exodus+3:1"
+      },
+      {
+       "title": "1 Kings 19:8 (LSB)",
+       "url": "https://read.lsbible.org/?q=1+Kings+19:8"
+      },
+      {
+       "title": "Deuteronomy 1:2 (LSB)",
+       "url": "https://read.lsbible.org/?q=Deuteronomy+1:2"
+      },
+      {
+       "title": "Galatians 4:25 (LSB)",
+       "url": "https://read.lsbible.org/?q=Galatians+4:25"
+      },
+      {
+       "title": "Egeria, 'The Pilgrimage of Etheria', trans. McClure and Feltoe (1919), CCEL",
+       "url": "https://www.ccel.org/m/mcclure/etheria/etheria.htm"
+      },
+      {
+       "title": "Holy Monastery of Sinai, History",
+       "url": "https://www.sinaimonastery.com/index.php/en/history"
+      },
+      {
+       "title": "Robin Ngo, 'Searching for Biblical Mt. Sinai', Bible History Daily (BAS), 2014, updated 11 Mar 2025",
+       "url": "https://www.biblicalarchaeology.org/daily/biblical-topics/exodus/searching-for-biblical-mt-sinai/"
+      },
+      {
+       "title": "BAS Library sidebar, 'Proposed Locations of Mt. Sinai'",
+       "url": "https://library.biblicalarchaeology.org/sidebar/proposed-locations-of-mt-sinai/"
+      },
+      {
+       "title": "Simon Turpin, 'Searching for Sinai', Answers in Genesis, 9 Nov 2022",
+       "url": "https://answersingenesis.org/archaeology/searching-for-sinai/"
+      },
+      {
+       "title": "Emmanuel Anati, 'Where Is Mount Sinai?', Bible and Interpretation, Oct 2003",
+       "url": "https://bibleinterp.arizona.edu/node/3557"
+      },
+      {
+       "title": "EIPR, Q&A on the St Catherine ownership ruling, 23 Jun 2025",
+       "url": "https://www.eipr.org/en/node/5039"
+      },
+      {
+       "title": "Greek City Times, 2 Jun 2025",
+       "url": "https://greekcitytimes.com/2025/06/02/egypt-moves-to-integrate-st-catherine-monastery-into-massive-spiritual-disneyland-project-in-sinai"
+      }
+     ],
+     "notes": "Hoffmeier's own book was not opened; his position is taken from Turpin (AiG 2022). The UNESCO World Heritage page could not be fetched (HTTP 403)."
+    },
+    {
+     "id": "jebel-al-lawz",
+     "name": "Jabal al-Lawz (Midian, Tabuk province, Saudi Arabia)",
+     "lat": 28.6547008,
+     "lon": 35.3052287,
+     "coord_source": "OpenStreetMap node 1237951644, 'جبل اللوز', natural=peak, Tabuk. Saudipedia gives height about 2,549 m, northeast of al-Bad'.",
+     "kind": "claimed",
+     "claim": "Mount Sinai is Jabal al-Lawz in ancient Midian: its summit is blackened by the fire of Exodus 19:18, a split rock nearby is the rock of Horeb, and an altar with cattle petroglyphs is the golden calf altar.",
+     "text": "Scripture calls it both Sinai and Horeb, 'the mountain of God' (Exodus 3:1; 1 Kings 19:8). Moses first reaches it while pasturing Jethro's flock, Jethro being 'the priest of Midian' (Exodus 3:1). Deuteronomy 1:2: 'eleven days' journey from Horeb by the way of Mount Seir to Kadesh-barnea'. Exodus 19:18: the mountain 'all in smoke' because Yahweh 'descended upon it in fire'. Galatians 4:25: 'Mount Sinai in Arabia'. Exodus 18:27: Jethro leaves Moses and goes 'into his own land'.",
+     "who": "Ron Wyatt (first proposed it; entered Saudi Arabia illegally, arrested and expelled 1984 per Franz; Wyatt and Fasold arrested for illegal excavation in 1986 per Bible Review); Bob Cornuke and Larry Williams (illegal 1988 trip; 'The Mountain of Moses', 1990); Lennart Möller ('The Exodus Case'); Joel Richardson ('Mount Sinai in Arabia') and Ryan Mauro (tours from 2019 to 2020).",
+     "digging": "No permitted excavation found. Saudi Arabia opened to tourist visas in 2019 and Christian tour groups (Living Passages, Richardson, Mauro) began visiting; the area lies within NEOM. Saudi archaeologists published 'Al-Bid: History and Archaeology' (2002), which dated the 'altar' and 'pillar' remains to the Nabataean and Roman periods. Saudi officials have not endorsed the identification and did not comment on the tours (NYT via Boston Globe, 2023). None now.",
+     "published_peer": [
+      "None supporting the identification. The Saudi 2002 volume 'Al-Bid: History and Archaeology' (state publication, not opened directly; cited by Eames 2024 and quoted in the NYT 2023: 'No historical or archaeological evidence support these stories')."
+     ],
+     "published_press": [
+      "Cornuke and Halbrook, 'In Search of the Mountain of God' (2000); Cornuke and Williams (1990); Möller, 'The Exodus Case'; Richardson, 'Mount Sinai in Arabia' (books).",
+      "CBN, 17 Oct 2019 (tours).",
+      "New York Times via Boston Globe, 24 Jun 2023."
+     ],
+     "for": "Exodus links Horeb with Midian and Jethro (Exodus 3:1), and Paul places Sinai 'in Arabia' (Galatians 4:25). Jabal al-Lawz is the highest peak in the Midian range. Proponents point to a dark summit, a split rock, a large altar-like stone heap with cattle petroglyphs, pillars and stone markers, and a route crossing the Gulf of Aqaba at Nuweiba.",
+     "against": "Critics who share belief in a real Exodus reject it. Gordon Franz (ABR): Paul's 'Arabia' in the first century included the Sinai Peninsula; Exodus 18:27 and Numbers 10:30 have Jethro and Hobab return to Midian, so Sinai was outside it; the 'Cave of Moses' is a first-century AD Nabataean tomb and the 'altar and 12 pillars' yield only Nabataean pottery; the cattle petroglyphs are Neolithic and found at about 50 sites in the area. Bryant Wood (ABR): about 150 miles from Kadesh-barnea, too far for 11 days. Christopher Eames (Armstrong Institute, 2024): the dark peak is actually neighbouring Jabal Maqla, coloured by contact-metamorphic volcanic rock (and fire does not blacken granite); split rocks are common from frost and wind; the remains are 'over a millennium too late'. Allen Kerkeslager (Bible Review), who himself favours an Arabian Sinai, says the cairns resemble tumuli found across northwest Arabia and the pair produced no scientific evidence. Proponents' finds have not been verified by trained archaeologists (Turpin, AiG).",
+     "status": "rejected",
+     "sources": [
+      {
+       "title": "Exodus 3:1 (LSB)",
+       "url": "https://read.lsbible.org/?q=Exodus+3:1"
+      },
+      {
+       "title": "Deuteronomy 1:2 (LSB)",
+       "url": "https://read.lsbible.org/?q=Deuteronomy+1:2"
+      },
+      {
+       "title": "Galatians 4:25 (LSB)",
+       "url": "https://read.lsbible.org/?q=Galatians+4:25"
+      },
+      {
+       "title": "Exodus 19:18 (LSB)",
+       "url": "https://read.lsbible.org/?q=Exodus+19:18"
+      },
+      {
+       "title": "Exodus 18:27 (LSB)",
+       "url": "https://read.lsbible.org/?q=Exodus+18:27"
+      },
+      {
+       "title": "Exodus 17:6 (LSB)",
+       "url": "https://read.lsbible.org/?q=Exodus+17:6"
+      },
+      {
+       "title": "Gordon Franz, 'Mount Sinai Is NOT Jebel al-Lawz in Saudi Arabia', ABR, 3 Oct 2007",
+       "url": "https://biblearchaeology.org/?p=69205"
+      },
+      {
+       "title": "Bryant G. Wood, 'Thoughts on Jebel al-Lawz as the Location of Mount Sinai', ABR, 17 May 2006",
+       "url": "https://biblearchaeology.org/?p=71330"
+      },
+      {
+       "title": "Christopher Eames, 'Where Is Mount Sinai? Part 1: Not in Saudi Arabia', Armstrong Institute, 12 Jun 2024",
+       "url": "https://armstronginstitute.org/1059-where-is-mount-sinai-part-1-not-in-saudi-arabia/print"
+      },
+      {
+       "title": "BAS Library, 'Did Amateur Archaeologists Find the Real Mt. Sinai?' (sidebar to Kerkeslager, Bible Review 16:2)",
+       "url": "https://library.biblicalarchaeology.org/sidebar/did-amateur-archaeologists-find-the-real-mt-sinai/"
+      },
+      {
+       "title": "Boston Globe (NYT), 24 Jun 2023",
+       "url": "https://www.bostonglobe.com/2023/06/24/world/saudi-arabia-wants-tourists-it-didnt-expect-christians"
+      },
+      {
+       "title": "CBN, 17 Oct 2019",
+       "url": "https://cbn.com/news/news/saudi-arabia-allow-access-ancient-biblical-sites-including-real-mount-sinai"
+      },
+      {
+       "title": "Saudipedia, 'Jabal al-Lawz'",
+       "url": "https://saudipedia.com/en/jabal-al-lawz"
+      },
+      {
+       "title": "Trent and Johnson (1967), Geologic Map of the Jabal al Lawz Quadrangle, MI-13 (GEOLIS record)",
+       "url": "https://gbank.gsj.jp/ld/resource/geolis/90020402"
+      },
+      {
+       "title": "Simon Turpin, 'Searching for Sinai', Answers in Genesis, 9 Nov 2022",
+       "url": "https://answersingenesis.org/archaeology/searching-for-sinai/"
+      },
+      {
+       "title": "Robin Ngo, 'Searching for Biblical Mt. Sinai', Bible History Daily (BAS), 2014, updated 11 Mar 2025",
+       "url": "https://www.biblicalarchaeology.org/daily/biblical-topics/exodus/searching-for-biblical-mt-sinai/"
+      }
+     ],
+     "notes": "Not verified directly: the rock type of the dark summit (the 1967 geologic map exists but its sheet was not opened; the hornfels explanation is from Eames 2024); the 2002 'Al-Bid' volume itself; Lennart Möller's book was not opened. The status 'rejected' applies to the Jabal al-Lawz features; the wider Midian hypothesis is a separate entry."
+    },
+    {
+     "id": "midian-hypothesis",
+     "name": "Midian in northwest Arabia (general hypothesis; e.g. Hala-'l Badr)",
+     "lat": null,
+     "lon": null,
+     "coord_source": "A region, not a point; no published coordinate for Hala-'l Badr found in sources opened. Left null.",
+     "kind": "claimed",
+     "claim": "Sinai lay east of the Gulf of Aqaba in Midian, the land of Jethro, though not necessarily at Jabal al-Lawz; Colin Humphreys proposes Hala-'l Badr in the Hisma, reading the smoke and quaking as volcanic.",
+     "text": "Scripture calls it both Sinai and Horeb, 'the mountain of God' (Exodus 3:1; 1 Kings 19:8). Moses first reaches it while pasturing Jethro's flock, Jethro being 'the priest of Midian' (Exodus 3:1). Deuteronomy 1:2: 'eleven days' journey from Horeb by the way of Mount Seir to Kadesh-barnea'. Exodus 19:18: the mountain 'all in smoke' because Yahweh 'descended upon it in fire'. Galatians 4:25: 'Mount Sinai in Arabia'. Exodus 18:27: Jethro leaves Moses and goes 'into his own land'.",
+     "who": "Charles Beke (1878), Alfred Lucas (Jebel Baghir, 1938), Frank Moore Cross (1983), listed by BAS; Colin Humphreys (Hala-'l Badr; summarised by Turpin, AiG 2022); Hershel Shanks proposed re-examining it (BAR 2014); Allen Kerkeslager (Bible Review 2000).",
+     "digging": "No excavation targeting Sinai found; none now.",
+     "published_peer": [
+      "None found presenting excavation evidence. Midianite painted pottery of the 12th century BCE reached the Egyptian temple at Timna but has not been found in Sinai (BAS, Bible History Daily)."
+     ],
+     "published_press": [
+      "Humphreys, 'The Miracles of Exodus' (book; not opened).",
+      "Shanks, BAR March/April 2014 (summarised in Bible History Daily)."
+     ],
+     "for": "Exodus ties Horeb to Jethro the priest of Midian; Galatians 4:25 says Arabia; northwest Arabia was thriving in the 12th century BCE (Midianite pottery); Turpin notes Hebrew 'ahar' in Exodus 3:1 means 'beyond', which fits a mountain east of Moses' grazing land.",
+     "against": "Exodus 18:27 has Jethro leave Sinai for 'his own land', suggesting Sinai was outside Midian (Franz). A Midian site is far from Kadesh-barnea for an 11-day journey (Wood); Duane Garrett's reply that 11 days is a minimum 'may not persuade everyone' (Turpin). Many read the fire and smoke as theophany, not volcano.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Exodus 3:1 (LSB)",
+       "url": "https://read.lsbible.org/?q=Exodus+3:1"
+      },
+      {
+       "title": "Deuteronomy 1:2 (LSB)",
+       "url": "https://read.lsbible.org/?q=Deuteronomy+1:2"
+      },
+      {
+       "title": "Galatians 4:25 (LSB)",
+       "url": "https://read.lsbible.org/?q=Galatians+4:25"
+      },
+      {
+       "title": "Exodus 18:27 (LSB)",
+       "url": "https://read.lsbible.org/?q=Exodus+18:27"
+      },
+      {
+       "title": "Robin Ngo, 'Searching for Biblical Mt. Sinai', Bible History Daily (BAS), 2014, updated 11 Mar 2025",
+       "url": "https://www.biblicalarchaeology.org/daily/biblical-topics/exodus/searching-for-biblical-mt-sinai/"
+      },
+      {
+       "title": "BAS Library sidebar, 'Proposed Locations of Mt. Sinai'",
+       "url": "https://library.biblicalarchaeology.org/sidebar/proposed-locations-of-mt-sinai/"
+      },
+      {
+       "title": "Simon Turpin, 'Searching for Sinai', Answers in Genesis, 9 Nov 2022",
+       "url": "https://answersingenesis.org/archaeology/searching-for-sinai/"
+      },
+      {
+       "title": "Bryant G. Wood, 'Thoughts on Jebel al-Lawz as the Location of Mount Sinai', ABR, 17 May 2006",
+       "url": "https://biblearchaeology.org/?p=71330"
+      },
+      {
+       "title": "Gordon Franz, ABR, 2007",
+       "url": "https://biblearchaeology.org/?p=69205"
+      }
+     ]
+    },
+    {
+     "id": "har-karkom",
+     "name": "Har Karkom (Mount Karkom), Negev, Israel",
+     "lat": 30.2882815,
+     "lon": 34.7429683,
+     "coord_source": "OpenStreetMap node 278473112, 'פסגת הר כרכום' / 'Mt. Karkom peak', natural=peak, ele 837 (the ridge is OSM way 484421532).",
+     "kind": "dig",
+     "claim": "Har Karkom, a plateau ridge in the western Negev near the Egyptian border, is the biblical Mount Sinai, shown by an unparalleled concentration of Bronze Age cult sites and rock art, but the events behind the Exodus belong to the late third millennium BCE, not the 13th century.",
+     "text": "Scripture calls it both Sinai and Horeb, 'the mountain of God' (Exodus 3:1; 1 Kings 19:8). Moses first reaches it while pasturing Jethro's flock, Jethro being 'the priest of Midian' (Exodus 3:1). Deuteronomy 1:2: 'eleven days' journey from Horeb by the way of Mount Seir to Kadesh-barnea'. Exodus 19:18: the mountain 'all in smoke' because Yahweh 'descended upon it in fire'. Galatians 4:25: 'Mount Sinai in Arabia'. Exodus 18:27: Jethro leaves Moses and goes 'into his own land'. Anati compares 12 standing stones near site HK/52 with Exodus 24:4 and a summit rock shelter with Exodus 33:21-22.",
+     "who": "Emmanuel Anati (Centro Camuno di Studi Preistorici, Italy), who first visited in 1954 and began surveying in 1980 in cooperation with the Israel Department of Antiquities and the Archaeological Survey of Israel. Claude Jarvis (1938) proposed it earlier (BAS).",
+     "digging": "Surveys from 1980 over some 22 field years: about 1,300 sites, about 40,000 rock engravings, over 100 geoglyphs (1990s aerial survey). The site's own expedition page still shows 'EXPEDITION 2016?' and asks for funds. Ben-Gurion University (Ifat Shapira, Yuval Goren) was dating Negev engravings by manganese measurement as of 2020. The area is an IDF training zone, open on weekends and opened for the December solstice light effect. No Anati expedition found for 2025 to 2026: none now confirmed.",
+     "published_peer": [
+      "Anati, 'The Mountain of God' (Rizzoli, 1986, book).",
+      "Anati, 'Has Mt. Sinai Been Found?', BAR 11:4 (1985), and Finkelstein, 'Raider of the Lost Mountain', BAR 14:4 (1988) (magazine exchange, not peer-reviewed journals; neither opened directly)."
+     ],
+     "published_press": [
+      "Anati, Bible and Interpretation, Oct 2003.",
+      "Times of Israel, 25 Nov 2020.",
+      "Bible History Daily (BAS), 2014/2025, on the 2013 colloquium in Israel."
+     ],
+     "for": "Anati reports a dense Bronze Age cult complex (4300 to 2000 BCE) with shrines, altars, stone circles, pillars and engravings he reads as tablets and as a staff and serpent; it lies between the lands he identifies as Midian and Amalek, and a trail to Ain Kudeirat (Kadesh) fits 11 days. He argues no candidate has Late Bronze camp remains, so that test disqualifies all. It was the centre of a 2013 scholars' colloquium.",
+     "against": "The cult activity is at least 800 years earlier than the traditional Exodus date, and the site was largely unused about 1950 to 1050 BCE; Anati answers by redating the events, which most chronologies, conservative (1446 BCE) and critical, reject. Israel Finkelstein called the approach a 19th-century vestige and said such installations occur across the Negev and Sinai. IAA research head Gideon Avni said the signs resemble those at many sites and there is no proof the site is unique; Times of Israel says the theory was 'roundly rejected'. Simon Turpin (AiG): 'Mount Har Karkom cannot be Mount Sinai.'",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Exodus 3:1 (LSB)",
+       "url": "https://read.lsbible.org/?q=Exodus+3:1"
+      },
+      {
+       "title": "Deuteronomy 1:2 (LSB)",
+       "url": "https://read.lsbible.org/?q=Deuteronomy+1:2"
+      },
+      {
+       "title": "Emmanuel Anati, 'Where Is Mount Sinai?', Bible and Interpretation, Oct 2003",
+       "url": "https://bibleinterp.arizona.edu/node/3557"
+      },
+      {
+       "title": "Har Karkom project, survey page",
+       "url": "https://www.harkarkom.com/HKsurvey.php"
+      },
+      {
+       "title": "Times of Israel, 25 Nov 2020",
+       "url": "https://www.timesofisrael.com/ancient-rock-etchings-on-remote-negev-plateau-evoke-the-bible-draw-new-interest/"
+      },
+      {
+       "title": "Robin Ngo, 'Searching for Biblical Mt. Sinai', Bible History Daily (BAS), 2014, updated 11 Mar 2025",
+       "url": "https://www.biblicalarchaeology.org/daily/biblical-topics/exodus/searching-for-biblical-mt-sinai/"
+      },
+      {
+       "title": "BAS Library sidebar, 'Proposed Locations of Mt. Sinai'",
+       "url": "https://library.biblicalarchaeology.org/sidebar/proposed-locations-of-mt-sinai/"
+      },
+      {
+       "title": "Simon Turpin, 'Searching for Sinai', Answers in Genesis, 9 Nov 2022",
+       "url": "https://answersingenesis.org/archaeology/searching-for-sinai/"
+      }
+     ],
+     "notes": "Finkelstein's BAR article was not opened; his points are from search summaries plus the Times of Israel and BAS coverage. Whether Anati (born about 1930) is still active in 2026 was not verified."
+    },
+    {
+     "id": "jebel-sin-bishar",
+     "name": "Jebel Sin Bishar (Gabal Sin Bishr), west-central Sinai",
+     "lat": null,
+     "lon": null,
+     "coord_source": "No OpenStreetMap record or published coordinate found in sources opened; left null.",
+     "kind": "claimed",
+     "claim": "Mount Sinai is Jebel Sin Bishar near the Gulf of Suez, the only Sinai mountain that keeps the name 'Sin'.",
+     "text": "Scripture calls it both Sinai and Horeb, 'the mountain of God' (Exodus 3:1; 1 Kings 19:8). Moses first reaches it while pasturing Jethro's flock, Jethro being 'the priest of Midian' (Exodus 3:1). Deuteronomy 1:2: 'eleven days' journey from Horeb by the way of Mount Seir to Kadesh-barnea'. Exodus 19:18: the mountain 'all in smoke' because Yahweh 'descended upon it in fire'. Galatians 4:25: 'Mount Sinai in Arabia'. Exodus 18:27: Jethro leaves Moses and goes 'into his own land'.",
+     "who": "Menashe Har-El, biblical geographer (Tel Aviv University), 'The Sinai Journeys' (BAS lists 1968).",
+     "digging": "No excavation found; none now.",
+     "published_peer": [
+      "Har-El's book (not opened)."
+     ],
+     "published_press": [],
+     "for": "Har-El argues it keeps the toponym 'Sinai' in 'Sin', is away from Egyptian mining areas and the coastal road, and fits a three-day journey into the wilderness (Exodus 5:3).",
+     "against": "Turpin (AiG): Exodus 5:3 does not say the three days led to Sinai; the site is too far from Midian and only about 30 miles from the crossing, which makes the month-long journey before Sinai hard to explain.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "BAS Library sidebar, 'Proposed Locations of Mt. Sinai'",
+       "url": "https://library.biblicalarchaeology.org/sidebar/proposed-locations-of-mt-sinai/"
+      },
+      {
+       "title": "Simon Turpin, 'Searching for Sinai', Answers in Genesis, 9 Nov 2022",
+       "url": "https://answersingenesis.org/archaeology/searching-for-sinai/"
+      }
+     ],
+     "notes": "Mentioned by sources mainly in passing."
+    },
+    {
+     "id": "jebel-serbal",
+     "name": "Jebel Serbal, South Sinai",
+     "lat": 28.6506214,
+     "lon": 33.6452506,
+     "coord_source": "OpenStreetMap node 768030972, 'جبل سربال' / 'Gebel Serbal', natural=peak, ele 2040.",
+     "kind": "claimed",
+     "claim": "Mount Sinai is Jebel Serbal, near the Feiran oasis, rather than Jebel Musa.",
+     "text": "Scripture calls it both Sinai and Horeb, 'the mountain of God' (Exodus 3:1; 1 Kings 19:8). Moses first reaches it while pasturing Jethro's flock, Jethro being 'the priest of Midian' (Exodus 3:1). Deuteronomy 1:2: 'eleven days' journey from Horeb by the way of Mount Seir to Kadesh-barnea'. Exodus 19:18: the mountain 'all in smoke' because Yahweh 'descended upon it in fire'. Galatians 4:25: 'Mount Sinai in Arabia'. Exodus 18:27: Jethro leaves Moses and goes 'into his own land'.",
+     "who": "John L. Burckhardt and W. M. F. Petrie (1906), per BAS list.",
+     "digging": "None found; none now.",
+     "published_peer": [],
+     "published_press": [],
+     "for": "Listed by BAS as a 19th to early 20th century alternative within the southern Sinai tradition.",
+     "against": "No modern proponent, critique or published evidence for it was found in the sources opened.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "BAS Library sidebar, 'Proposed Locations of Mt. Sinai'",
+       "url": "https://library.biblicalarchaeology.org/sidebar/proposed-locations-of-mt-sinai/"
+      }
+     ],
+     "notes": "Mentioned only in passing in the sources opened; the arguments for it were not read."
+    },
+    {
+     "id": "jebel-helal-north-sinai",
+     "name": "Jebel Helal and northern Sinai near Kadesh-barnea",
+     "lat": 30.653333,
+     "lon": 34.027222,
+     "coord_source": "OpenStreetMap node 768030484, 'جبل الحلال', natural=peak, North Sinai. Applies to Jebel Helal only; the 'northern Sinai' view in general has no single point.",
+     "kind": "claimed",
+     "claim": "Mount Sinai lies in northern Sinai, within reach of Kadesh-barnea, with Jebel Helal one proposed peak.",
+     "text": "Scripture calls it both Sinai and Horeb, 'the mountain of God' (Exodus 3:1; 1 Kings 19:8). Moses first reaches it while pasturing Jethro's flock, Jethro being 'the priest of Midian' (Exodus 3:1). Deuteronomy 1:2: 'eleven days' journey from Horeb by the way of Mount Seir to Kadesh-barnea'. Exodus 19:18: the mountain 'all in smoke' because Yahweh 'descended upon it in fire'. Galatians 4:25: 'Mount Sinai in Arabia'. Exodus 18:27: Jethro leaves Moses and goes 'into his own land'.",
+     "who": "Gressmann, Wellhausen and Stade (Jebel Helal, per BAS list); Bryant G. Wood (ABR, 2006) argues for the northern Sinai about 60 miles from Kadesh-barnea without naming a peak in the source opened.",
+     "digging": "None found; none now.",
+     "published_peer": [],
+     "published_press": [
+      "Wood, ABR, 17 May 2006."
+     ],
+     "for": "Fits the 11-day journey to Kadesh-barnea (Deuteronomy 1:2) and travel times from Egypt (Wood).",
+     "against": "No critique specific to Jebel Helal was found in the sources opened. BAS notes that no Exodus-related remains have been found anywhere in the Sinai Peninsula.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Deuteronomy 1:2 (LSB)",
+       "url": "https://read.lsbible.org/?q=Deuteronomy+1:2"
+      },
+      {
+       "title": "BAS Library sidebar, 'Proposed Locations of Mt. Sinai'",
+       "url": "https://library.biblicalarchaeology.org/sidebar/proposed-locations-of-mt-sinai/"
+      },
+      {
+       "title": "Bryant G. Wood, 'Thoughts on Jebel al-Lawz as the Location of Mount Sinai', ABR, 17 May 2006",
+       "url": "https://biblearchaeology.org/?p=71330"
+      },
+      {
+       "title": "Robin Ngo, 'Searching for Biblical Mt. Sinai', Bible History Daily (BAS), 2014, updated 11 Mar 2025",
+       "url": "https://www.biblicalarchaeology.org/daily/biblical-topics/exodus/searching-for-biblical-mt-sinai/"
+      }
+     ],
+     "notes": "Mentioned only in passing in the sources opened."
+    }
+   ],
+   "checked": "2026-10-20"
+  },
+  {
+   "id": "sodom",
+   "name": "Sodom and the cities of the plain",
+   "aliases": [
+    "sodom",
+    "gomorrah",
+    "cities of the plain",
+    "zoar",
+    "tall el-hammam",
+    "bab edh-dhra"
+   ],
+   "route": "abraham",
+   "intro": "Genesis puts Sodom and the other cities of the plain in the well-watered circle of the Jordan that Lot could see from near Bethel (Genesis 13:10-12), and places the battle of the kings in the valley of Siddim, \"that is, the Salt Sea\" (Genesis 14:3). That leaves two broad candidates: the plain north of the Dead Sea, where the view from Bethel points, and the south end, where Early Bronze Age towns were destroyed and burned. Both have serious defenders, and both have a dating problem.",
+   "claims": [
+    {
+     "id": "tall-el-hammam-sodom",
+     "name": "Tall el-Hammam",
+     "lat": 31.8405,
+     "lon": 35.6742,
+     "coord_source": "OpenStreetMap way 656094631, tagged historic=archaeological_site, name 'Tall el Hammam' (centroid as returned by Nominatim). The 2021 Scientific Reports paper (Fig. 4 caption) gives 31 deg 50.483 N, 35 deg 40.029 E (31.8414, 35.6672) as the centre of its Google Earth base image; the two points are about 650 m apart.",
+     "kind": "dig",
+     "claim": "The large Middle Bronze Age city at Tall el-Hammam, in the Jordan Valley northeast of the Dead Sea, is biblical Sodom, and its fiery destruction layer is the destruction of Genesis 19.",
+     "text": "Lot 'saw all the valley of the Jordan, that it was well watered everywhere' and 'lived in the cities of the valley and moved his tents as far as Sodom' (Genesis 13:10-12). The kings of Sodom, Gomorrah, Admah, Zeboiim and Bela (Zoar) gathered 'to the valley of Siddim (that is, the Salt Sea)' (Genesis 14:2-3). 'Yahweh rained on Sodom and Gomorrah brimstone and fire ... and He overthrew those cities, and all the valley' (Genesis 19:24-25); Abraham saw 'the smoke of the land went up like the smoke of a furnace' (Genesis 19:28). Scripture names no site and gives no absolute date.",
+     "who": "Steven Collins, director and chief archaeologist of the Tall el-Hammam Excavation Project (TeHEP), a joint project of Trinity Southwest University (Albuquerque) and Veritas International University under the Department of Antiquities of Jordan. Collins has argued the identification since the 2000s, including Biblical Archaeology Review (March/April 2013, 'Where Is Sodom?' with the sidebar 'North vs. South') and the book Discovering the City of Sodom (Howard Books, 2013, with Latayne C. Scott). Phillip J. Silvia (TeHEP Director of Scientific Analysis) is a co-author of the airburst papers.",
+     "digging": "Season 1 ran 9 Dec 2005 to 10 Jan 2006 (project site); annual seasons followed (Eisenbrauns says excavation began 2005-2006 and continued annually; Sci.News in 2021 said fifteen consecutive seasons since 2006). The project's own site advertises a field school for 29 January to 9 February 2023 and a 2023 dig schedule; it lists nothing later. No 2024, 2025 or 2026 season could be verified. Status now: not verified.",
+     "published_peer": [
+      "Collins, Kobs and Luddeni, The Tall al-Hammam Excavations, Volume 1 (Eisenbrauns, 2015): ceramics of seven seasons (2005-2011) and artifacts of eight seasons (2005-2012). An excavation report; the publisher's page does not mention Sodom.",
+      "The airburst paper and its retraction are listed under the separate 'tall-el-hammam-airburst' entry."
+     ],
+     "published_press": [
+      "Biblical Archaeology Review 39:2 (2013), 'Where Is Sodom?' with sidebar 'North vs. South: Why the Southern Location Doesn't Work' (popular magazine, not peer reviewed).",
+      "Collins and Scott, Discovering the City of Sodom (Howard Books, 2013), a trade book.",
+      "Collins's replies to critics in TSU's in-house Biblical Research Bulletin, e.g. 'A Response to Bryant G. Wood's Critique of Collins' Northern Sodom Theory' (BRB VII.7, 2007) and 'Tall el-Hammam Is Sodom: Billington's Heshbon Identification Suffers from Numerous Fatal Flaws' (BRB XII.1, 2012), as listed on the TeHEP site."
+     ],
+     "for": "Collins argues that nothing in the Bible points south and everything points to the area north of the Dead Sea: Genesis 13 has Lot look from the Bethel and Ai area over the 'valley of the Jordan' (the kikkar), which he takes as the circular plain north of the Dead Sea; most nineteenth century explorer-scholars (Conder, Tristram, Grove) put the cities there; Genesis 19:1 places the angels in the 'gate of Sodom' and TeHEP has excavated a major gate complex, with nothing similar in the south; Tall el-Hammam is about 100 acres, the largest Bronze Age site in the Jordan rift, against about 12 acres at Bab edh-Dhra, and is surrounded by satellite towns; Lot would have had no reason to pass the well-watered northern plain for the Lisan area. The final Middle Bronze Age stratum is a heavy ash and destruction layer, followed by centuries of regional abandonment. On chronology Collins replies that 'the Bronze Age patriarchal numbers cannot be equated in any way with our modern concept of absolute dating.'",
+     "against": "Chronology: the destruction-layer pottery dates to about 1650-1600 BC, which conventional biblical chronology puts only about two centuries before the Exodus (Christianity Today, 2014). Eugene Merrill (Dallas Theological Seminary, Artifax, Autumn 2012) argues the best manuscripts and sound hermeneutics demand an overthrow of Sodom at 2081 BC, which removes Tall el-Hammam from consideration; Todd Bolen summarises Merrill as saying the identification requires one to deny all biblical dates before the judges. Bryant Wood (Associates for Biblical Research, Bible and Spade 20:3, 2007) puts the biblical date at 2067 BC on a 430-year sojourn (Exodus 12:40), against 1852 BC on Collins's shortened 215-year sojourn. Simon Turpin (Answers in Genesis UK) says the identification would require revising the Exodus date. Geography: Wood argues Genesis 10:19 runs the border of Canaan south toward the cities, the Valley of Siddim (Genesis 14:3) is the southern basin, Ezekiel 16:46 places Sodom south of Jerusalem, Josephus, Eusebius and the Madaba Map put Zoar south of the Dead Sea, and the bitumen and sulphur fit the south; Bill Schlegel (Satellite Bible Atlas) argues the Genesis wording does not fit Tall el-Hammam. Stratigraphy: Wood said in 2007 that a site-wide destruction at the right date had not been demonstrated. Bolen adds that if the theory is right the Bible would be unreliable on times and places, the reverse of Collins's apologetic claim. James Hoffmeier (Trinity Evangelical Divinity School, emeritus) said dramatic claims by an archaeologist without credentials raise suspicions. Clyde Billington (Artifax) argued Tall el-Hammam is another site (Collins's reply title names Heshbon). These critics largely share Collins's belief in a historical Sodom; their objection is that his site breaks the biblical numbers.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Genesis 13:10-12; 14:2-3; 19:24-28 (LSB)",
+       "url": "https://read.lsbible.org/?q=Genesis+13:10-12"
+      },
+      {
+       "title": "Tall el-Hammam Excavation Project, official site (home, field school 2023, season list, reports list)",
+       "url": "https://www.tallelhammam.com/"
+      },
+      {
+       "title": "TeHEP, Be a Dig Volunteer (season list from 2005)",
+       "url": "https://www.tallelhammam.com/be-a-dig-volunteer"
+      },
+      {
+       "title": "TeHEP, Field School (29 Jan to 9 Feb 2023)",
+       "url": "https://www.tallelhammam.com/tehep-field-school-2022"
+      },
+      {
+       "title": "TeHEP, Reports and Publications (Biblical Research Bulletin list)",
+       "url": "https://www.tallelhammam.com/reports-%26-publications"
+      },
+      {
+       "title": "Eisenbrauns: The Tall al-Hammam Excavations, Volume 1 (2015)",
+       "url": "https://www.eisenbrauns.org/books/titles/978-1-57506-369-0.html"
+      },
+      {
+       "title": "BAR sidebar: North vs. South: Why the Southern Location Doesn't Work",
+       "url": "https://library.biblicalarchaeology.org/sidebar/north-vs-south-why-the-southern-location-doesnt-work/"
+      },
+      {
+       "title": "Gordon Govier, Searching for Sodom, Christianity Today, 18 Feb 2014",
+       "url": "https://christianitytoday.com/ct/2014/february-web-only/searching-for-sodom.html"
+      },
+      {
+       "title": "Bryant G. Wood, Locating Sodom: A Critique of the Northern Proposal (Bible and Spade, Summer 2007)",
+       "url": "https://biblearchaeology.org/?p=69917"
+      },
+      {
+       "title": "Todd Bolen, Arguments Against Locating Sodom at Tall al-Hammam (BiblePlaces, 26 Feb 2013)",
+       "url": "https://www.bibleplaces.com/blog/2013/02/arguments-against-locating-sodom-at/"
+      },
+      {
+       "title": "Bolen, same piece republished by Biblical Archaeology Society",
+       "url": "https://www.biblicalarchaeology.org/daily/biblical-sites-places/biblical-archaeology-sites/arguments-against-locating-sodom-at-tall-el-hammam/"
+      },
+      {
+       "title": "Jerry Pattengale, After scientists debate meltdown of biblical Sodom, Religion News Service, 20 Apr 2022",
+       "url": "https://religionnews.com/2022/04/20/after-scientists-debate-meltdown-of-biblical-sodom/"
+      },
+      {
+       "title": "Sci.News, Tunguska-Sized Impact Destroyed Jordan Valley City (29 Sep 2021)",
+       "url": "https://www.sci.news/archaeology/tall-el-hammam-10116.html"
+      },
+      {
+       "title": "OpenStreetMap way 656094631 (Tall el Hammam)",
+       "url": "https://www.openstreetmap.org/way/656094631"
+      }
+     ]
+    },
+    {
+     "id": "tall-el-hammam-airburst",
+     "name": "Tall el-Hammam (airburst)",
+     "lat": 31.8405,
+     "lon": 35.6742,
+     "coord_source": "Same site as tall-el-hammam-sodom: OpenStreetMap way 656094631.",
+     "kind": "claimed",
+     "claim": "A Tunguska-class cosmic airburst destroyed Tall el-Hammam about 1650 BC, and this event may lie behind the Sodom account in Genesis.",
+     "text": "'Yahweh rained on Sodom and Gomorrah brimstone and fire from Yahweh out of heaven' (Genesis 19:24); 'the smoke of the land went up like the smoke of a furnace' (Genesis 19:28). The text describes fire from heaven; it does not describe an airburst, and it names no site.",
+     "who": "Ted E. Bunch, Malcolm A. LeCompte, James P. Kennett, Allen West (Comet Research Group) and others, with Phillip J. Silvia (Trinity Southwest University), 21 authors. Published Scientific Reports, 20 September 2021. An expanded version (LeCompte, Collins, Silvia, Kletetschka, Witwer, Hermes, Moore, Wolbach and others) appeared in 2025 in Airbursts and Cratering Impacts (ScienceOpen).",
+     "digging": "No separate dig; samples come from TeHEP excavations at Tall el-Hammam (see tall-el-hammam-sodom). No current fieldwork verified.",
+     "published_peer": [
+      "Bunch et al., 'A Tunguska sized airburst destroyed Tall el-Hammam a Middle Bronze Age city in the Jordan Valley near the Dead Sea', Scientific Reports 11:18632 (20 Sep 2021), doi 10.1038/s41598-021-97778-3. RETRACTED 24 April 2025.",
+      "Author Correction, Scientific Reports 12:3265 (22 Feb 2022): figure panels across dozens of figures had been 'manipulated to remove the features irrelevant to the scientific content' (tape measures, labels, fingers); the authors called this 'inappropriate' and supplied originals.",
+      "Author Correction, Scientific Reports 13:8280 (22 May 2023): the paper had wrongly presented Mark Boslough's Sandia simulation (Fig. 53) as a model of Tunguska; it was a much larger hypothetical 15-megaton event. The subsection 'Comparison of TeH to the Tunguska airburst' was removed.",
+      "Jaret and Harris, 'No mineralogic or geochemical evidence of impact at Tall el-Hammam', Scientific Reports 12:5189 (25 Mar 2022), Matters Arising.",
+      "Boslough and Bruno, 'Misunderstandings about the Tunguska event, shock wave physics, and airbursts have resulted in misinterpretations of evidence at Tall el-Hammam', Scientific Reports 15:13869 (22 Apr 2025), Matters Arising.",
+      "Retraction Note, Scientific Reports (2025), doi 10.1038/s41598-025-99265-5: the editors 'no longer have confidence that the conclusions presented are reliable.'",
+      "LeCompte et al., 'A Tunguska Sized Airburst Destroyed Tall el-Hammam ... (Expanded)', Airbursts and Cratering Impacts (ScienceOpen, 2025), doi 10.14293/ACI.2025.0003. Whether this journal is editorially independent of the authors' group was not verified.",
+      "Editor's note (2023): Scientific Reports told readers it was looking into concerns about the paper, two years before the retraction (reported by Retraction Watch, 23 April 2025)."
+     ],
+     "published_press": [
+      "Sci.News report (29 Sep 2021) quoting James Kennett that there is 'no scientific proof that this destroyed city is indeed the Sodom of the Old Testament.'",
+      "Religion News Service (20 Apr 2022) on the debate, quoting Collins that the findings are 'sure evidence'."
+     ],
+     "for": "The 2021 paper reported a city-wide, roughly 1.5 m carbon-and-ash-rich destruction layer containing shocked quartz (about 5-10 GPa), melted pottery and mudbrick, diamond-like carbon, soot, iron- and silicon-rich spherules, carbonate spherules from melted plaster, and melted platinum, iridium, nickel, gold, silver, zircon, chromite and quartz; heating experiments implied temperatures above 2000 C. It argued the blast levelled more than 12 m of a multi-storey palace and a 4 m mudbrick rampart, fragmented human skeletons, and dumped about 4 wt% salt that caused a 300-600 year abandonment of about 120 settlements. The 2025 expanded version adds EBSD and TEM evidence it says shows planar deformation features and high-pressure phases diagnostic of shock, plus a directional debris pattern. Eleven of the authors (including LeCompte, Kennett, West and Silvia) formally disagree with the retraction.",
+     "against": "Jaret and Harris (American Museum of Natural History; Fernbank Science Center) argue the paper did not follow established criteria for shocked minerals and that its melt and high-temperature evidence means little in archaeological debris from a people with ceramic and smelting technology; much of the 'melt glass' is remelted pottery. Boslough (University of New Mexico) and Bruno (Indiana University) show the Tunguska comparisons rest on misquoted and exaggerated sources (for example the '>80 million trees' figure) and that a Tunguska-sized airburst cannot produce the claimed ground temperatures or winds at the distances required. The image manipulation correction (2022) and the Tunguska correction (2023) preceded the 2025 retraction, which cites Jaret and Harris and Boslough and Bruno. Critics also noted that eight of the 21 authors founded the Comet Research Group (Science Integrity Digest, as reported by RNS). Christian critics who reject the Tall el-Hammam identification on chronological grounds (Wood, Merrill, Turpin) reject the airburst as an explanation of Sodom for the same reason: wrong date.",
+     "status": "rejected",
+     "sources": [
+      {
+       "title": "Bunch et al. 2021, Scientific Reports (PMC record, now marked retracted)",
+       "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC8452666&format=json&resultType=core"
+      },
+      {
+       "title": "Author Correction (image manipulation), Scientific Reports, 22 Feb 2022",
+       "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8864031/fullTextXML"
+      },
+      {
+       "title": "Author Correction (Tunguska/Fig. 53), Scientific Reports, 22 May 2023",
+       "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10203283/fullTextXML"
+      },
+      {
+       "title": "Retraction Note, Scientific Reports, 2025",
+       "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12022329/fullTextXML"
+      },
+      {
+       "title": "Jaret and Harris 2022, Scientific Reports",
+       "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8956582/fullTextXML"
+      },
+      {
+       "title": "Boslough and Bruno 2025, Scientific Reports",
+       "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12015480/fullTextXML"
+      },
+      {
+       "title": "Crossref record: LeCompte et al. 2025 (Expanded), Airbursts and Cratering Impacts",
+       "url": "https://api.crossref.org/works/10.14293/ACI.2025.0003"
+      },
+      {
+       "title": "Europe PMC search listing the 2021 paper, corrections, critiques and retraction",
+       "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Tall%20el-Hammam%22&format=json&resultType=lite"
+      },
+      {
+       "title": "Sci.News, 29 Sep 2021",
+       "url": "https://www.sci.news/archaeology/tall-el-hammam-10116.html"
+      },
+      {
+       "title": "Religion News Service, 20 Apr 2022",
+       "url": "https://religionnews.com/2022/04/20/after-scientists-debate-meltdown-of-biblical-sodom/"
+      },
+      {
+       "title": "Retraction Watch, 'Sodom comet paper to be retracted two years after editor's note acknowledging concerns' (23 April 2025)",
+       "url": "https://retractionwatch.com/2025/04/23/sodom-comet-paper-to-be-retracted-two-years-after-editors-note-acknowledging-concerns"
+      }
+     ]
+    },
+    {
+     "id": "bab-edh-dhra-sodom",
+     "name": "Bab edh-Dhra",
+     "lat": 31.2544,
+     "lon": 35.534,
+     "coord_source": "OpenStreetMap node 3637064328, tagged historic=archaeological_site, name:en 'Bab edh-Dhra'.",
+     "kind": "claimed",
+     "claim": "The Early Bronze Age walled town of Bab edh-Dhra, on the Lisan peninsula southeast of the Dead Sea, is Sodom, destroyed by fire at the end of Early Bronze III.",
+     "text": "The five cities are Sodom, Gomorrah, Admah, Zeboiim and Bela (Zoar), allied in 'the valley of Siddim (that is, the Salt Sea)' (Genesis 14:2-3). Lot fled to Zoar (Genesis 19). Fire and brimstone fell from heaven and the smoke rose 'like the smoke of a furnace' (Genesis 19:24-28).",
+     "who": "Excavated by Walter Rast and Thomas Schaub (Expedition to the Dead Sea Plain, founded 1973); cemetery excavated earlier by Paul Lapp (1965-1967). The identification with Sodom is argued by Bryant G. Wood (Associates for Biblical Research), Bible and Spade 1999 and 2007. Rast and Schaub themselves suggested, per the BAR sidebar, that the visible ruins may have inspired the story; Rast's 1987 chapter 'Bab edh-Dhra and the Origin of the Sodom Saga' (in Archaeology and Biblical Interpretation, ed. Perdue, Toombs and Johnson) was not opened.",
+     "digging": "Surveyed 1973; town site and region excavated in a series of seasons 1975-1990 (ASOR tribute). Publications: Bab edh-Dhra: Excavations in the Cemetery Directed by Paul Lapp (1989) and Bab edh-Dhra: Excavations at the Town Site 1975-1981 (2003, reissued 2021). The EDSP, now co-directed by Meredith S. Chesson and Morag M. Kersel, reported publication work for 2022-2023 (Archaeology in Jordan 4, 2024). No new fieldwork in 2025-2026 was verified; current work found is publication of old excavations.",
+     "published_peer": [
+      "Rast and Schaub (and team), Bab edh-Dhra: Excavations at the Town Site (1975-1981), Eisenbrauns 2003; reissued Penn State University Press 2021 (excavation report, cited via ASOR).",
+      "Chesson, Kersel et al., 'Expedition to the Dead Sea Plain (EDSP): Publication Efforts of EDSP Excavations at Bab adh-Dhra and Numayra', Archaeology in Jordan 4: 2022-2023 (ACOR, 2024), 116-118."
+     ],
+     "published_press": [
+      "Bryant G. Wood, 'The Discovery of the Sin Cities of Sodom and Gomorrah', Bible and Spade 12:3 (Summer 1999); ABR ministry magazine.",
+      "Bryant G. Wood, 'Locating Sodom: A Critique of the Northern Proposal', Bible and Spade 20:3 (Summer 2007)."
+     ],
+     "for": "Wood argues: Bab edh-Dhra and Numeira were the only inhabited towns in the region from about 3300 to 900 BC; Bab edh-Dhra's charnel houses were burned at the end of the town's life, and in charnel house A22 the fire started in the roof and burned inward, which he reads as fire falling from above (Genesis 19:24); Numeira was buried in ash up to 0.40 m deep with burned roofs and skeletons; both sit on the eastern fault line, so an earthquake could have forced bitumen and petroleum to the surface and ignited it; seeds point to a late spring or early summer destruction; the southern location fits Genesis 10:19, the Valley of Siddim, Ezekiel 16:46 and the ancient placement of Zoar. On date, he notes the excavators put the end of EB III at about 2350 BC (Rast) or 2300 BC (Schaub), against his biblical date of about 2070 BC, and argues EB III has no firm Egyptian synchronisms so the gap may close.",
+     "against": "The excavators' own dates leave a gap of roughly 230-280 years from Wood's biblical date (Wood concedes this; BiblePlaces says more than 200 years). Later work separates the two destructions: one summary puts Numeira about 2600 BC and Bab edh-Dhra about 2350 BC (as reported in secondary sources; not verified in the primary report). James Hoffmeier says Rast and Schaub's association of these sites with Sodom and Gomorrah was 'evaluated by the discipline and rejected.' Collins argues the sites are too small (about 12 acres), that nothing in the text points south, and that their destruction is far too early. Answers in Genesis and Wood both reject Tall el-Hammam, but that does not make the southern case: Kris Udd's dissertation and Nate Wilson's critique (linked by BiblePlaces) question whether the sites can be identified as Sodom at all. Wood's own survey found that Safi, Feifa and Khanazir, the other proposed 'cities', turned out to be a cemetery, an Iron Age fort and EB IV tombs, so only two of five cities have candidates.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Genesis 14:2-3 (LSB)",
+       "url": "https://read.lsbible.org/?q=Genesis+14:2-3"
+      },
+      {
+       "title": "Bryant G. Wood, The Discovery of the Sin Cities of Sodom and Gomorrah (ABR)",
+       "url": "https://biblearchaeology.org/?p=69327"
+      },
+      {
+       "title": "Bryant G. Wood, Locating Sodom: A Critique of the Northern Proposal (ABR)",
+       "url": "https://biblearchaeology.org/?p=69917"
+      },
+      {
+       "title": "ASOR tribute to Thomas and Marilyn Schaub (2020)",
+       "url": "https://www.asor.org/news/2020/03/schaub-tribute"
+      },
+      {
+       "title": "ACOR: EDSP publication efforts, Archaeology in Jordan 4 (2024)",
+       "url": "https://publications.acorjordan.org/?p=71920"
+      },
+      {
+       "title": "BiblePlaces: Numeira",
+       "url": "https://www.bibleplaces.com/numeira/"
+      },
+      {
+       "title": "Religion News Service, 20 Apr 2022 (Hoffmeier quote)",
+       "url": "https://religionnews.com/2022/04/20/after-scientists-debate-meltdown-of-biblical-sodom/"
+      },
+      {
+       "title": "BAR sidebar: North vs. South (Collins's case against the southern sites)",
+       "url": "https://library.biblicalarchaeology.org/sidebar/north-vs-south-why-the-southern-location-doesnt-work/"
+      },
+      {
+       "title": "OpenStreetMap node 3637064328 (Bab edh-Dhra)",
+       "url": "https://www.openstreetmap.org/node/3637064328"
+      }
+     ]
+    },
+    {
+     "id": "numeira-gomorrah",
+     "name": "Numeira",
+     "lat": 31.1314,
+     "lon": 35.5289,
+     "coord_source": "OpenStreetMap way 1046568433, tagged historic=archaeological_site, name 'Numeira' (centroid as returned by Nominatim).",
+     "kind": "claimed",
+     "claim": "Numeira, a short-lived Early Bronze III town south of Bab edh-Dhra, is Gomorrah, burned at the same time as Sodom.",
+     "text": "'Yahweh rained on Sodom and Gomorrah brimstone and fire' (Genesis 19:24). Gomorrah is named with Sodom throughout Genesis 14 and 19; its location is not given beyond the valley of the Jordan and the valley of Siddim.",
+     "who": "Excavated by Rast and Schaub's Expedition to the Dead Sea Plain (BiblePlaces gives 1977-1983; Wood cites Michael Coogan's report on the 1981 season). Identified as Gomorrah by Bryant G. Wood (ABR).",
+     "digging": "Excavated 1977-1983 (BiblePlaces). Current activity is publication of the old excavations by the EDSP under Chesson and Kersel (report covering 2022-2023). No 2025-2026 fieldwork verified.",
+     "published_peer": [
+      "Chesson, Kersel et al., Archaeology in Jordan 4: 2022-2023 (ACOR, 2024), 116-118 (publication progress on Bab adh-Dhra and Numayra)."
+     ],
+     "published_press": [
+      "Wood, 'The Discovery of the Sin Cities of Sodom and Gomorrah', Bible and Spade (1999)."
+     ],
+     "for": "Occupied only in EB III, for less than about a century (Wood); ceramic evidence suggests its people buried their dead at Bab edh-Dhra, so the two were linked; it ended in a fire that left ash up to 0.40 m deep, burned roofs and skeletons, and was never reoccupied. BiblePlaces notes two destructions, which some read as the raid of Genesis 14 followed by the judgment of Genesis 19, and that the name may preserve 'Gomorrah'.",
+     "against": "Same date gap as Bab edh-Dhra (end of EB III, about 2300 BC by most scholars, against about 2070 BC biblical): more than 200 years. Secondary sources report that later work places Numeira's end well before Bab edh-Dhra's (about 2600 versus 2350 BC), which would break the picture of a single simultaneous judgment; Kris Udd proposed lowering both dates, but this is a minority view. The primary excavation report giving these dates was not opened.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Genesis 19:24-28 (LSB)",
+       "url": "https://read.lsbible.org/?q=Genesis+19:24-28"
+      },
+      {
+       "title": "BiblePlaces: Numeira",
+       "url": "https://www.bibleplaces.com/numeira/"
+      },
+      {
+       "title": "Bryant G. Wood, The Discovery of the Sin Cities of Sodom and Gomorrah (ABR)",
+       "url": "https://biblearchaeology.org/?p=69327"
+      },
+      {
+       "title": "ACOR: EDSP publication efforts (2024)",
+       "url": "https://publications.acorjordan.org/?p=71920"
+      },
+      {
+       "title": "OpenStreetMap way 1046568433 (Numeira)",
+       "url": "https://www.openstreetmap.org/way/1046568433"
+      }
+     ]
+    },
+    {
+     "id": "southern-basin-submerged",
+     "name": "Under the southern Dead Sea",
+     "lat": null,
+     "lon": null,
+     "coord_source": "No specific site is named, so no coordinate is given.",
+     "kind": "claimed",
+     "claim": "Sodom and the other cities lay in the shallow southern basin of the Dead Sea, south of the Lisan peninsula, and are now under water or salt flats.",
+     "text": "The kings met 'in the valley of Siddim (that is, the Salt Sea)' (Genesis 14:3), which some read as saying the valley later became part of the sea.",
+     "who": "W. F. Albright suggested Sodom and Gomorrah might lie underwater south of the Lisan peninsula (as reported in the BAR 'North vs. South' sidebar). David Neev and K. O. Emery, The Destruction of Sodom, Gomorrah, and Jericho (Oxford University Press, 1995), discuss the region's geology; whether they argue for a submerged site was not verified.",
+     "digging": "None. No excavation is possible or has been reported.",
+     "published_peer": [
+      "Neev and Emery, The Destruction of Sodom, Gomorrah, and Jericho: Geological, Climatological, and Archaeological Background (OUP, 1995). Contents on this point not verified."
+     ],
+     "published_press": [],
+     "for": "Genesis 14:3 equates the valley of Siddim with the Salt Sea; the southern basin is the traditional area, with Zoar placed south of the Dead Sea by Josephus, Eusebius and the Madaba Map (per Wood); the region is tectonically active.",
+     "against": "No physical evidence has been produced. Wood notes that Bab edh-Dhra and Numeira were the only inhabited towns in the region in the relevant period, which favours dry-land sites over a submerged one. Collins rejects all southern locations on textual grounds.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Genesis 14:2-3 (LSB)",
+       "url": "https://read.lsbible.org/?q=Genesis+14:2-3"
+      },
+      {
+       "title": "BAR sidebar: North vs. South (reports Albright's suggestion)",
+       "url": "https://library.biblicalarchaeology.org/sidebar/north-vs-south-why-the-southern-location-doesnt-work/"
+      },
+      {
+       "title": "Oxford Academic: The Destruction of Sodom, Gomorrah, and Jericho (title page only)",
+       "url": "https://academic.oup.com/book/40670"
+      },
+      {
+       "title": "Bryant G. Wood, The Discovery of the Sin Cities of Sodom and Gomorrah (ABR)",
+       "url": "https://biblearchaeology.org/?p=69327"
+      }
+     ]
+    },
+    {
+     "id": "wyatt-ash-cities",
+     "name": "Ron Wyatt's 'ash cities'",
+     "lat": null,
+     "lon": null,
+     "coord_source": "Described only as near the foot of Masada on the west side of the Dead Sea; no published coordinate tied to the claimed site was found.",
+     "kind": "claimed",
+     "claim": "Ron Wyatt claimed to have found Sodom, Gomorrah, Zoar, Zeboiim and Admah as ash-covered city shapes near Masada, with balls of nearly pure sulphur ('brimstone') in the ash.",
+     "text": "'brimstone and fire from Yahweh out of heaven' (Genesis 19:24). The text gives no description of the ruins.",
+     "who": "Ron Wyatt (died 1999), amateur, anaesthetist by profession; promoted in the video 'Discovered: Sodom and Gomorrah!' (Wyatt Archaeological Research, 1992) and by the Wyatt Museum.",
+     "digging": "No licensed excavation. None now.",
+     "published_peer": [],
+     "published_press": [
+      "Wyatt Archaeological Research video (1992), reviewed in Biblical Archaeology Review 24:5 (1998); the review was not opened (site unreachable)."
+     ],
+     "for": "Wyatt pointed to the city-like shapes of the formations, layers he called ash, and sulphur nodules, which he said were too pure to be volcanic. The Wyatt Museum site was down (HTTP 500) when checked, so his current published argument could not be read.",
+     "against": "Geologist Steve Austin (Institute for Creation Research), reviewing photos and samples for ABR, concluded the features are natural formations in the Lisan Marl (sinkholes, arches, erosion forms) with no sign of human modification; the Israel Antiquities Authority sees no ancient artifacts or structures there (ABR newsletter, Gary Byers, 15 Feb 2002, as reposted). A church summary reports lab results showing an evaporite (gypsum-type) deposit, not burned buildings, but names no lab. Critics on all sides, including creationist organisations who share his belief in a literal Sodom, reject the claim.",
+     "status": "rejected",
+     "sources": [
+      {
+       "title": "Repost of ABR staff commentary 'Ron Wyatt's Sodom' (Gary Byers, 2002) and other critiques",
+       "url": "https://ldolphin.org/wyatt.html"
+      },
+      {
+       "title": "Douglas Jacoby, Bogus claims in archaeology: Ron Wyatt (2013)",
+       "url": "https://douglasjacoby.com/bogus-claims-in-archaeology-ron-wyatt"
+      },
+      {
+       "title": "La Vista Church of Christ, Has the Ark of the Covenant been Found? (lab result summary, uncited)",
+       "url": "https://www.lavistachurchofchrist.org/cms/has-the-ark-of-the-covenant-been-found/"
+      }
+     ]
+    }
+   ],
+   "checked": "2026-10-20"
+  },
+  {
+   "id": "mount-ebal",
+   "name": "Joshua's altar on Mount Ebal",
+   "aliases": [
+    "ebal",
+    "mount ebal",
+    "joshua's altar",
+    "curse tablet",
+    "gerizim"
+   ],
+   "route": "conquest",
+   "intro": "Moses tells Israel to set up plastered stones and an altar on Mount Ebal once they have crossed the Jordan, and to read the blessings and the curses from Gerizim and Ebal (Deuteronomy 11:29; 27). Joshua does it (Joshua 8:30-35). In the 1980s Adam Zertal dug a stone structure on the mountain that he read as that altar, and in 2022 a small folded lead tablet sifted from his spoil heaps was announced as a curse text. Both readings are argued over.",
+   "claims": [
+    {
+     "id": "ebal-zertal-altar",
+     "name": "Mount Ebal structure (el-Burnat)",
+     "lat": 32.2396,
+     "lon": 35.2876,
+     "coord_source": "OpenStreetMap node 4974025556, tagged historic=archaeological_site, name 'mizbeah Har Eival' (Mount Ebal altar), on the northeast side of Mount Ebal above Nablus. Not checked against Zertal's published grid reference.",
+     "kind": "dig",
+     "claim": "The Iron Age I stone structure that Adam Zertal excavated on the northeast slope of Mount Ebal is the altar Joshua built there (Joshua 8:30-31), or at least an early Israelite altar.",
+     "text": "Moses commands: 'you shall set the blessing on Mount Gerizim and the curse on Mount Ebal' (Deuteronomy 11:29); 'you shall set up on Mount Ebal, these stones ... and coat them with lime. Moreover, you shall build there an altar to Yahweh your God, an altar of stones; you shall not wield an iron tool on them' (Deuteronomy 27:4-5), with burnt offerings and peace offerings and the law written on the stones (27:6-8). 'Then Joshua built an altar to Yahweh, the God of Israel, on Mount Ebal ... an altar of uncut stones' and wrote a copy of the law on the stones, then read 'the blessing and the curse' with half the people in front of Gerizim and half in front of Ebal (Joshua 8:30-35).",
+     "who": "Adam Zertal (University of Haifa) found the site in 1980 during the Manasseh Hill Country Survey and excavated it 1982-1989 (dates per Stripling et al. 2023 and Hawkins 2007). Supporters of a cultic reading include Michael Coogan (BAR) and Ralph K. Hawkins (dissertation, Andrews University 2007; book, Eisenbrauns 2012). The leading early opponent was Aharon Kempinski. Scott Stripling (ABR) argues that a smaller, earlier round installation beneath the rectangular structure is a Late Bronze Age altar.",
+     "digging": "Zertal excavated 1982-1989. No new stratigraphic excavation since. In December 2019 an ABR team led by Stripling wet-sifted Zertal's dump piles. In June 2023, per Emek Shaveh, about 80 cubic metres of soil were removed from the site under army escort and taken to Shavei Shomron for sifting, a project Emek Shaveh says was approved by the Civil Administration's Staff Officer for Archaeology but not licensed by the Palestinian Department of Antiquities, which it says holds licensing authority in Area B. No 2025-2026 fieldwork was verified.",
+     "published_peer": [
+      "Zertal, 'An Early Iron Age Cultic Site on Mount Ebal: Excavation Seasons 1982-1987', Tel Aviv 13-14 (1986-1987) (cited in BAR; not opened).",
+      "Ralph K. Hawkins, The Iron Age I Structure on Mount Ebal: Excavation and Interpretation, PhD dissertation, Andrews University, 2007; published Eisenbrauns 2012. Concludes the site fits the criteria for a cultic site.",
+      "Aren M. Maeir, review of Hawkins 2012, BAR July/August 2013 (review text paywalled; position not read)."
+     ],
+     "published_press": [
+      "Zertal, 'Has Joshua's Altar Been Found on Mt. Ebal?', BAR 11:1.",
+      "Kempinski, 'Joshua's Altar: An Iron Age I Watchtower', BAR 12:1; Zertal, 'How Can Kempinski Be So Wrong?', BAR 12:1.",
+      "Coogan, 'Two Early Israelite Cult Sites Now Questioned', BAR (concludes Ebal is a cult site)."
+     ],
+     "for": "The main structure is a nearly square stone construction of about 24.5 by 29.5 feet, with unhewn fieldstone walls about 5 feet thick and 9 feet high laid on bedrock, with no floor and no entrance, deliberately filled with stones, earth and ash; animal bones in the fill matched, in Zertal's view, the sacrifices of Leviticus 1; a 23-foot inclined 'ramp' fits Exodus 20:26 (no steps to the altar); two corners align north-south within less than one degree; there is little domestic pottery. Two Egyptian scarabs of Ramesses II help date the founding, and Iron Age I pottery (about 1200-1000 BC) the use. The site is on Ebal, the mountain the text names, and Hawkins concluded it 'appears to fit the criteria for a cultic site.'",
+     "against": "Aharon Kempinski read three Iron Age I phases: pits and silos, then a farmhouse, then the house filled in as the base of a watchtower; the 'ramp' is a collapsed wall and the nearby walls are house walls. Emek Shaveh (2021) states Zertal's theory was rejected by most archaeologists, and that other views see a lookout tower or an altar that is not Joshua's; it names no scholars. Even scholars who accept a cultic site do not thereby accept 'Joshua's altar': Joshua 8:31-32 describes an altar of uncut stones with the law written on plastered stones, and no inscription was found in situ. The Iron Age I date is also later than the early-date (15th century BC) conquest that many conservative critics hold, which is why Stripling now points to the earlier round installation instead.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Deuteronomy 11:29 (LSB)",
+       "url": "https://read.lsbible.org/?q=Deuteronomy+11:29"
+      },
+      {
+       "title": "Deuteronomy 27:4-8 (LSB)",
+       "url": "https://read.lsbible.org/?q=Deuteronomy+27:4-8"
+      },
+      {
+       "title": "Joshua 8:30-35 (LSB)",
+       "url": "https://read.lsbible.org/?q=Joshua+8:30-35"
+      },
+      {
+       "title": "BAR sidebar: The Mt. Ebal Site (Zertal vs Kempinski; dimensions, scarabs)",
+       "url": "https://library.biblicalarchaeology.org/sidebar/the-mt-ebal-site/"
+      },
+      {
+       "title": "BAR: Aren Maeir reviews the Joshua's altar debate (Hawkins 2012), July/August 2013",
+       "url": "https://library.biblicalarchaeology.org/department/reviews-the-joshuas-altar-debate/"
+      },
+      {
+       "title": "Ralph K. Hawkins, The Iron Age I Structure on Mount Ebal (Andrews University dissertation, 2007)",
+       "url": "https://digitalcommons.andrews.edu/dissertations/64/"
+      },
+      {
+       "title": "Emek Shaveh, Response to the Destruction of Antiquities at Mount Ebal/el-Burnat (17 Feb 2021)",
+       "url": "https://emekshaveh.org/en/?p=1766"
+      },
+      {
+       "title": "Emek Shaveh, Settlers backed by army and Civil Administration lead illegal excavation in Area B (12 Jul 2023)",
+       "url": "https://emekshaveh.org/en/mt-ebal-ii/"
+      },
+      {
+       "title": "Stripling et al. 2023, Heritage Science (archaeological context section)",
+       "url": "https://heritagesciencejournal.springeropen.com/articles/10.1186/s40494-023-00920-9"
+      },
+      {
+       "title": "OpenStreetMap node 4974025556 (Mount Ebal altar site)",
+       "url": "https://www.openstreetmap.org/node/4974025556"
+      }
+     ]
+    },
+    {
+     "id": "ebal-curse-tablet",
+     "name": "Mount Ebal lead 'curse tablet'",
+     "lat": 32.2396,
+     "lon": 35.2876,
+     "coord_source": "Findspot is the east dump pile beside Zertal's excavation at el-Burnat; coordinate is the site point, OpenStreetMap node 4974025556. The object was found in sifted dump, not in situ.",
+     "kind": "claimed",
+     "claim": "A tiny folded lead tablet sifted from Zertal's Mount Ebal dump carries a Late Bronze Age proto-alphabetic curse naming the God YHW, the earliest Hebrew inscription, tying the site to the curses of Deuteronomy 27 and Joshua 8.",
+     "text": "'the curse on Mount Ebal' (Deuteronomy 11:29); Joshua 'read all the words of the law, the blessing and the curse' (Joshua 8:34); writing on stones at Ebal (Deuteronomy 27:8; Joshua 8:32). Scripture mentions writing on stones, not on lead.",
+     "who": "Found December 2019 by wet-sifting specialist Frankie Snyder in an Associates for Biblical Research team led by Scott Stripling. Announced at a press release datelined Houston, 24 March 2022. Peer-reviewed paper: Stripling (The Bible Seminary, Katy), Gershon Galil (University of Haifa), Ivana Kumpova, Jaroslav Valach, Daniel Vavrik (Institute of Theoretical and Applied Mechanics, Czech Academy of Sciences), Pieter Gert van der Veen (Johannes Gutenberg University Mainz), Heritage Science, online 12 May 2023.",
+     "digging": "No excavation; the object came from sifting Zertal's 1980s dump (December 2019). A further sifting operation took place in June 2023 (see ebal-zertal-altar). The authors said a later article would publish the exterior text; no such peer-reviewed article was found. No 2025-2026 work verified.",
+     "published_peer": [
+      "Stripling, Galil, Kumpova, Valach, van der Veen, Vavrik, '\"You are Cursed by the God YHW:\" an early Hebrew inscription from Mt. Ebal', Heritage Science 11 (2023), doi 10.1186/s40494-023-00920-9.",
+      "Maeir and Rollston, 'The So-Called Mount Ebal Curse Tablet: A Critical Response', Israel Exploration Journal 73:2 (2023) (reported by ToI, ABR, Armstrong; not opened).",
+      "Mazar, 'The Lead Object from Mount Ebal as a Fishing-Net Sinker', Israel Exploration Journal 73:2 (2023) (reported; not opened).",
+      "Yahalom-Mack, 'The Source of the Lead of the Mount Ebal \"Tablet\"', Israel Exploration Journal 73:2 (2023) (reported; not opened).",
+      "Mark S. Haughwout (Indian Bible College, Flagstaff), 'Mt. Ebal curse tablet? A refutation of the claims regarding the so called Mt. Ebal curse tablet', Heritage Science 12:70 (2024), doi 10.1186/s40494-023-01130-z."
+     ],
+     "published_press": [
+      "ABR press release via RNS distribution, 24 March 2022: claimed 40 letters, a curse invoking YHW, peer-reviewed article 'in process'.",
+      "Gershon Galil, The Mount Ebal Inscription (Megillat Sefer Press, 2024), reported to present the exterior 'Outer A' text as 46 letters in 13 words; the book page could not be opened (HTTP 500), so this is unverified.",
+      "Raz Kletter (University of Helsinki), 'The Mt. Ebal Tablet: The First Ancient Postmodern Inscription?', The Bible and Interpretation, February 2024 (online essay).",
+      "Christopher Eames, Armstrong Institute, 26 March 2024 (popular summary that reports van der Veen calling Galil's reading a 'fantasy reading')."
+     ],
+     "for": "X-ray tomography at Telc (Czech Academy of Sciences) showed, according to the authors, writing on both exterior and interior. Galil read the interior ('Inner B') as 48 letters in 14 word sets: 'You are cursed by the god YHW, cursed. You will die, cursed ... Cursed you are by YHW', with 'arur ('cursed') six times, in a chiastic pattern, dated to Late Bronze II (about 1400-1200 BC, no later than about 1250 BC). The lead came from Lavrion in Greece, a mine in use in the Late Bronze Age (analysis by Naama Yahalom-Mack). The dump came from structures Zertal dated to LB II and Iron I. Stripling says he is 'confident that there is writing on the tablet', that known net sinkers have rope grooves this object lacks, and that the rarity of such finds reflects how rarely dumps are wet-sifted; ABR (Bryan Windle) notes Mazar does not explain how a net sinker reached a mountain far from water in a cultic context.",
+     "against": "Maeir and Rollston: the published images 'fail to demonstrate any discernible letters', photos and drawings do not match, and the marks are 'random scratches, striations, pitting and indentations'; most conclusions lack an empirical basis. Amihai Mazar sees no clear letters and identifies a lead fishing-net sinker. Yahalom-Mack (who did the lead analysis) says Lavrion was worked from the fourth millennium BC to the Roman period, so the lead source cannot securely date the object. Haughwout (a Bible college scholar, i.e. a critic sharing the authors' starting beliefs) concludes there is insufficient epigraphic evidence that writing exists at all; if four letters exist they might read 'depths'; it could be a clasp, a weight or a Roman lead tessera; a dump-pile find cannot be dated by context. Kletter argues Galil 'did not restore an ancient inscription, but created a new' one, picking marks that fit and dropping those that do not; the 'letters' vary hugely in size and face every direction. Even within the team, van der Veen published more conservative drawings than Galil and reportedly called Galil's reading a 'fantasy reading'; the paper itself notes that Galil alone holds all 48 letters to be clear. The letter count moved from 40 (2022 press release) to 48 (2023 paper). Political context affecting access: the site is in Area B; Maeir told ToI there is 'political background noise' around the claim; Emek Shaveh says the 2019 and 2023 soil removals were unlicensed by the Palestinian antiquities authority.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Stripling et al. 2023, Heritage Science",
+       "url": "https://heritagesciencejournal.springeropen.com/articles/10.1186/s40494-023-00920-9"
+      },
+      {
+       "title": "Haughwout 2024, Heritage Science",
+       "url": "https://heritagesciencejournal.springeropen.com/articles/10.1186/s40494-023-01130-z"
+      },
+      {
+       "title": "Crossref search confirming both Heritage Science papers",
+       "url": "https://api.crossref.org/works?query.bibliographic=Stripling%20Galil%20Kumpova%20Valach%20Mt%20Ebal%20Heritage%20Science&rows=5"
+      },
+      {
+       "title": "ABR press release via RNS, 24 Mar 2022",
+       "url": "https://religionnews.com/2022/03/24/ancient-curse-inscription-deciphered-from-tablet-discovered-during-archaeological-wet-sift-on-mt-ebal/"
+      },
+      {
+       "title": "Gavriel Fiske, New academic articles heap fresh doubt on Mount Ebal curse tablet interpretation, Times of Israel, 7 Dec 2023",
+       "url": "https://www.timesofisrael.com/new-academic-articles-heap-fresh-doubt-on-mount-ebal-curse-tablet-interpretation/"
+      },
+      {
+       "title": "Bryan Windle, New Study Questions the Identification of the Mt. Ebal Lead Curse Tablet (ABR, 4 Dec 2023)",
+       "url": "https://biblearchaeology.org/new-study-questions-the-identification-of-the-mt-ebal-lead-curse-tablet/"
+      },
+      {
+       "title": "Christopher Eames, Latest Round in Mount Ebal Saga (Armstrong Institute, 26 Mar 2024)",
+       "url": "https://armstronginstitute.org/993-latest-round-in-mount-ebal-saga-curse-tablet-hit-by-one-two-three-punch-but-is-it-a-knockout"
+      },
+      {
+       "title": "Raz Kletter, The Mt. Ebal Tablet: The First Ancient Postmodern Inscription? (Bible and Interpretation, Feb 2024)",
+       "url": "https://bibleinterp.arizona.edu/sites/bibleinterp.arizona.edu/files/docs/Version%203.pdf"
+      },
+      {
+       "title": "Etgar Lefkovits, Scholars expound on Mount Ebal curse tablet, JNS, 12 May 2023",
+       "url": "https://www.jns.org/scholars-expound-on-mount-ebal-curse-tablet-with-oldest-hebrew-text/"
+      },
+      {
+       "title": "Emek Shaveh, Mt Ebal II (12 Jul 2023)",
+       "url": "https://emekshaveh.org/en/mt-ebal-ii/"
+      }
+     ]
+    },
+    {
+     "id": "ebal-site-access",
+     "name": "Mount Ebal site: access and damage",
+     "lat": 32.2396,
+     "lon": 35.2876,
+     "coord_source": "OpenStreetMap node 4974025556 (Mount Ebal altar site).",
+     "kind": "tradition",
+     "claim": "The site venerated by many Jews and Christians as 'Joshua's altar' lies in Area B of the West Bank, and its condition and access are contested, which limits any new work.",
+     "text": "Joshua 8:30-35; Deuteronomy 27:4-8 (see ebal-zertal-altar).",
+     "who": "Palestinian Authority (civil control in Area B); Israeli Civil Administration and its Staff Officer for Archaeology; Samaria Regional Council; Israeli NGOs Emek Shaveh and Shomrim al HaNetzach.",
+     "digging": "No licensed excavation verified since Zertal. February 2021: a Palestinian contractor paving a road from Asira ash-Shamaliya to Nablus damaged an outer wall (the contractor and the mayor called it a mistake; Emek Shaveh blamed lack of Palestinian antiquities supervision). January 2023: Defense Minister Yoav Gallant said he ordered frequent IDF patrols. September 2023: JNS, citing Channel 12, reported PA road paving for 32 housing units on the site; the Civil Administration confiscated a vehicle and opened an investigation. Nothing on 2025-2026 verified.",
+     "published_peer": [],
+     "published_press": [
+      "Emek Shaveh statement, 17 Feb 2021.",
+      "JNS, 4 Sep 2023, 'PA building neighborhood on Joshua's altar site'."
+     ],
+     "for": "Not a scholarly claim; recorded here because access governs whether further digging is possible.",
+     "against": "Emek Shaveh argues the damage stories are used in a campaign to bring Area B sites under Israeli control and that Zertal's identification lacks research support; settler groups and Israeli officials describe the damage as deliberate or as a threat to Jewish heritage. Accounts conflict on intent and extent.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Emek Shaveh, Response to the Destruction of Antiquities at Mount Ebal/el-Burnat (17 Feb 2021)",
+       "url": "https://emekshaveh.org/en/?p=1766"
+      },
+      {
+       "title": "JNS, PA building neighborhood on Joshua's altar site (4 Sep 2023)",
+       "url": "https://www.jns.org/israel-news/pa-building-neighborhood-on-joshuas-altar-site"
+      },
+      {
+       "title": "Emek Shaveh, Mt Ebal II (12 Jul 2023)",
+       "url": "https://emekshaveh.org/en/mt-ebal-ii/"
+      }
+     ]
+    }
+   ],
+   "checked": "2026-10-20"
+  },
+  {
+   "id": "bethsaida",
+   "name": "Bethsaida",
+   "aliases": [
+    "bethsaida",
+    "julias",
+    "el-araj",
+    "et-tell"
+   ],
+   "route": "jesus-galilee",
+   "intro": "Bethsaida was the home town of Peter, Andrew and Philip (John 1:44), near where Jesus fed the five thousand (Luke 9:10) and healed a blind man (Mark 8:22). Josephus says Philip the tetrarch rebuilt it as a city and named it Julias. Two sites near the north shore of the Sea of Galilee are dug as Bethsaida by rival teams, and much of the argument turns on where the shoreline was in the first century.",
+   "claims": [
+    {
+     "id": "et-tell-bethsaida",
+     "name": "et-Tell",
+     "lat": 32.9104,
+     "lon": 35.6306,
+     "coord_source": "OpenStreetMap way 734139729, tagged historic=archaeological_site, archaeological_site=city, name:en 'Bethsaida', name:he 'Tel Beit Tsaida' (centroid as returned by Nominatim).",
+     "kind": "dig",
+     "claim": "The 20-acre mound of et-Tell, about 1.5 km north of the Sea of Galilee near the Jordan inflow, is New Testament Bethsaida, renamed Julias by Herod Philip, and earlier was the Iron Age capital of Geshur.",
+     "text": "Jesus sent the disciples by boat 'to the other side to Bethsaida' (Mark 6:45); 'they came to Bethsaida' and a blind man was brought (Mark 8:22); 'He slipped away by Himself to a city called Bethsaida' (Luke 9:10); 'Philip was from Bethsaida, the city of Andrew and Peter' (John 1:44); 'Philip, who was from Bethsaida of Galilee' (John 12:21). Mark arrives by boat; Luke calls it a city; John places it 'of Galilee'. None gives a precise location.",
+     "who": "Rami Arav, director of the Bethsaida Excavations Project since 1987; the consortium was housed at the University of Nebraska Omaha (founded 1990, publishing since 1991). The Nelson Glueck School of Biblical Archaeology (HUC-JIR, Jerusalem) now describes the consortium as 'formerly associated with the University of Nebraska and now under the auspices of the NGSBA'.",
+     "digging": "Arav began work in 1987 (BAS; ToI 2017); seasonal excavation through the following decades (Arav in 2017: 'under seasonal archaeological excavations for the past 30 years'). The NGSBA page says 'Excavations at the site are still underway', but it is undated. No 2025 or 2026 et-Tell season report could be found or verified.",
+     "published_peer": [
+      "R. Steven Notley, 'Et-Tell Is Not Bethsaida', Near Eastern Archaeology 70.4 (2007), 220-230 (cited; not opened).",
+      "Rami Arav, 'Bethsaida: A Response to Steven Notley', Near Eastern Archaeology 74 (2011), 92-100, with Notley's reply and Arav's rejoinder, 74:2 (2011), 103-104 (cited; not opened)."
+     ],
+     "published_press": [
+      "Rami Arav, 'Bethsaida Controversy', The Bible and Interpretation, August 2017 (online essay).",
+      "Arav, 'Searching for Bethsaida: The Case for Et-Tell', BAR 46:2 (2020) (cited in the companion el-Araj article; not opened).",
+      "NGSBA project page (site summary by the excavation's institutional home)."
+     ],
+     "for": "Arav and the NGSBA summary: the tel was founded in the Early Bronze Age, with major Iron Age fortifications; in the 9th century BC a 6 m wall and the largest Iron Age city gate excavated in Israel (inner gatehouse 35 by 17.5 m) with a basalt gate altar and a stele of a horned bull, and a palace; this is taken as the capital of Geshur (2 Samuel 3:3; 14:32), destroyed by Tiglath-pileser III in 734 BC. Geomorphology shows the plain below was once part of the lake and silted up, so the town, originally on the shore, ended up about 1.5 km inland, a process the NGSBA page says continued until the Hellenistic period, while Arav in 2017 places the shoreline's withdrawal in a 4th century AD geological event. Hellenistic and Roman courtyard houses yielded net weights, iron anchors, needles and fishhooks (a fishing economy), a cellar with wine amphorae, limestone vessels typical of Jewish settlement, and early 1st century AD a 20 by 6 m building with limestone ashlars and two bronze incense shovels, which Arav identifies as the temple Philip built for Julia Livia when he refounded the town as Julias about AD 30 (Josephus, Antiquities 18). Arav says the place-name committee of Israel's Prime Minister's office confirmed et-Tell as Bethsaida.",
+     "against": "Notley argues et-Tell is too far from the lake (about 1.5 miles) and too high to be the fishing village from which Peter, Andrew and Philip came and to which boats sailed (Mark 6:45). The el-Araj team points to an unexplained drop in material culture at et-Tell at the start of the early Roman period and says twenty years of work there are 'far from conclusive' for first century Bethsaida. Jodi Magness, an archaeologist and National Geographic grantee, told National Geographic that 'the Roman period remains are very poor, and therefore the site does not look like an urban center.' The NGSBA summary itself says only 'very fragmentary remains of the foundations' survive of the proposed temple and offers it as 'Perhaps' Philip's temple.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Mark 6:45 (LSB)",
+       "url": "https://read.lsbible.org/?q=Mark+6:45"
+      },
+      {
+       "title": "Mark 8:22 (LSB)",
+       "url": "https://read.lsbible.org/?q=Mark+8:22"
+      },
+      {
+       "title": "Luke 9:10 (LSB)",
+       "url": "https://read.lsbible.org/?q=Luke+9:10"
+      },
+      {
+       "title": "John 1:44 (LSB)",
+       "url": "https://read.lsbible.org/?q=John+1:44"
+      },
+      {
+       "title": "John 12:21 (LSB)",
+       "url": "https://read.lsbible.org/?q=John+12:21"
+      },
+      {
+       "title": "Nelson Glueck School of Biblical Archaeology: Bethsaida (et-Tell)",
+       "url": "https://ngsba.org/excavations/bethsaida/"
+      },
+      {
+       "title": "Rami Arav, Bethsaida Controversy (Bible and Interpretation, Aug 2017)",
+       "url": "https://bibleinterp.arizona.edu/sites/bibleinterp.arizona.edu/files/docs/Bethsaidacontroversy.pdf"
+      },
+      {
+       "title": "Samuel DeWitt Pfister, Where Is Biblical Bethsaida? (BAS, 2017, updated 4 Nov 2025)",
+       "url": "https://www.biblicalarchaeology.org/daily/news/where-is-biblical-bethsaida/"
+      },
+      {
+       "title": "Kristin Romey, National Geographic, 7 Aug 2017 (Magness quote)",
+       "url": "https://www.nationalgeographic.com/history/article/jesus-bible-apostles-bethsaida-israel-archaeology"
+      },
+      {
+       "title": "Amanda Borschel-Dan, Times of Israel, 7 Aug 2017",
+       "url": "https://www.timesofisrael.com/sites-vie-to-be-seen-as-christianitys-lost-city-of-bethsaida/"
+      },
+      {
+       "title": "Notley and Aviam, Searching for Bethsaida: The Case for El-Araj (BAR, Spring 2020; footnotes cite Notley 2007 and Arav BAR 46:2)",
+       "url": "https://library.biblicalarchaeology.org/article/searching-for-bethsaida-the-case-for-el-araj/"
+      },
+      {
+       "title": "Gordon Franz, Text and Tell: The Excavations at Bethsaida (rev. 2007)",
+       "url": "https://www.lifeandland.org/?p=139"
+      },
+      {
+       "title": "OpenStreetMap way 734139729 (Bethsaida, et-Tell)",
+       "url": "https://www.openstreetmap.org/way/734139729"
+      }
+     ]
+    },
+    {
+     "id": "el-araj-bethsaida",
+     "name": "el-Araj (Beit HaBek)",
+     "lat": 32.8929,
+     "lon": 35.6196,
+     "coord_source": "OpenStreetMap node 10173119077, tagged historic=archaeological_site, archaeological_site=church, name 'El Araj', website elarajexcavations.com.",
+     "kind": "dig",
+     "claim": "The lakeshore site of el-Araj, about 2 km from et-Tell, is first century Bethsaida (Julias), and its Byzantine basilica is the Church of the Apostles built over the house of Peter and Andrew.",
+     "text": "Bethsaida is reached by boat (Mark 6:45), is 'the city of Andrew and Peter' and Philip's home (John 1:44), and is 'of Galilee' (John 12:21). Scripture says nothing about a church; that tradition is later (Willibald, 8th century).",
+     "who": "Mordechai Aviam (Kinneret Academic College), archaeological director, and R. Steven Notley (then Nyack College; now Pillar College, New Jersey), academic director, with Dina Shalem; the El Araj Excavation Project, now presented as 'Bethsaida-Julias' under the Center for the Study of Ancient Judaism and Christian Origins (CSAJCO). Supporters named in the 2022 press release include Museum of the Bible and the Lanier Theological Library Foundation.",
+     "digging": "Survey from 2014 and excavation since 2016. Roman bathhouse found in early seasons (BAS says 2016 work; Notley and Aviam date it to 2017); monastery and basilica announced July 2019; donor inscription (Inscription 3) announced August 2022. A July 2025 wildfire exposed Roman structures; a second 2025 session was planned for October. 2026 is the tenth season: summer sessions in July 2026 (Lanier Center reports, posted September 2026, describing Herodian lamps, chalk vessels, a Roman domestic tabun, fresco fragments and a Doric capital fragment) and a fall session scheduled 9-23 October 2026 (results not yet verified). Active now.",
+     "published_peer": [
+      "L. Di Segni, J. Ashkenazi, M. Aviam and R. S. Notley, 'The Greek Inscriptions from \"The Church of St. Peter\" at Bethsaida (el-Araj)', Liber Annuus 73 (2023), 141-160 (cited via the Hebrew University CMHL corpus entry).",
+      "Notley, 'Et-Tell Is Not Bethsaida', Near Eastern Archaeology 70.4 (2007) (cited; not opened)."
+     ],
+     "published_press": [
+      "CSAJCO press release, 10 August 2022 (Newswire): Constantine inscription.",
+      "Notley and Aviam, 'Searching for Bethsaida: The Case for El-Araj', BAR Spring 2020.",
+      "Times of Israel, 30 Aug 2025 (Rossella Tercatin), on the wildfire and 2025 season.",
+      "Lanier Center for Archaeology, 2026 season reports (Substack, Sept 2026)."
+     ],
+     "for": "The site sits on the lakeshore near the Jordan estuary, where Josephus puts Julias, which suits a fishing village reached by boat; the excavators say their finds show the first century lake was lower than once thought, close to its modern level, so el-Araj was on the shore. Finds: a Jewish fishing village of the 1st century BC to 1st century AD with net weights; a Roman bathhouse with mosaic fragments and a silver Nero coin of AD 65-66, which they read as Philip's upgrade of the village to a polis; a Roman residence and coins; in 2026 Herodian lamps and chalk vessels, indicators of a Second Temple Jewish population. In 2019 a monastery and a basilica (about 88 by 52 feet) with ornate mosaics were found, matching the pilgrim Willibald's 725 report of a church over Peter's house at Bethsaida. Inscription 3 in the diaconicon asks Peter, 'chief of the apostles and holder of the heavenly keys', to intercede for the donor Constantine and his children George and Theophano; Notley called this 'our strongest indicator that Peter had a special association with the basilica.' Earlier, Mendel Nun and Bargil Pixner favoured el-Araj (Pixner as the fishing quarter of a two-part Bethsaida).",
+     "against": "Arav (2017) says he dug el-Araj in 1987 and found, under the Byzantine layer, only beach deposits barren of pottery, and that ground-penetrating radar along the shore showed no habitation layer, so the Roman remains are small; he proposes the bathhouse belonged to a camp of Agrippa II's mercenaries, notes that Roman bathhouses do not appear in Jewish towns of the region before the late Roman period, calls the conclusions 'extremely premature', and argues el-Araj was a Byzantine-period Bethsaida (perhaps 'New Bethsaida') after the shore moved south. He adds that Capernaum's excavators Corbo and Loffreda thought Willibald's church description fits Capernaum, and that Byzantine pilgrims 'cared very little about authenticities'. Arav also told ToI the Roman layer 'is not enough to identify a place with Bethsaida.' Lake level is disputed: BAS (2023) reports groundwater flooding the lowest levels; Franz reports Mendel Nun's view that ancient lake levels were lower, so more of the site was dry land than once assumed, while Arav's 1987 square found only beach deposits under the Byzantine level. Where the 1st century shoreline lay is the crux, and no peer-reviewed lake-level study was verified here. Even the sympathetic BAS writer (2019) called the Church of the Apostles reasoning close to tautological, since it assumes el-Araj is Bethsaida; the Peter inscription is dated by letter forms to the second half of the 6th century or later, so it shows Byzantine belief, not 1st century identity.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "Mark 6:45 (LSB)",
+       "url": "https://read.lsbible.org/?q=Mark+6:45"
+      },
+      {
+       "title": "John 1:44 (LSB)",
+       "url": "https://read.lsbible.org/?q=John+1:44"
+      },
+      {
+       "title": "Bethsaida-Julias (El Araj Excavation Project) site",
+       "url": "https://www.bethsaida-julias.com/"
+      },
+      {
+       "title": "Rossella Tercatin, Ruins revealed by wildfire boost Galilean site's claim, Times of Israel, 30 Aug 2025",
+       "url": "https://www.timesofisrael.com/ruins-revealed-by-wildfire-boost-galilean-sites-claim-as-new-testaments-bethsaida/"
+      },
+      {
+       "title": "Lanier Center for Archaeology, Bethsaida-Julias 2026 Season Part 2 (Sept 2026)",
+       "url": "https://laniercenterforarchaeology.substack.com/p/bethsaida-julius-excavation-project-c8d"
+      },
+      {
+       "title": "CSAJCO press release, 10 Aug 2022",
+       "url": "https://www.newswire.com/news/new-inscription-with-petition-for-intercession-by-apostle-peter-21792135"
+      },
+      {
+       "title": "CMHL corpus: al-Araj, Bethsaida, Church of the Apostles, Inscription 3",
+       "url": "https://dig.corps-cmhl.huji.ac.il/node/21652"
+      },
+      {
+       "title": "Nathan Steinmeyer, Digging in El-Araj (BAS, 20 Jan 2023)",
+       "url": "https://www.biblicalarchaeology.org/daily/bas-onsite/digging-in-el-araj/"
+      },
+      {
+       "title": "Samuel DeWitt Pfister, Archaeologists say they may have found the Church of the Apostles at el-Araj (BAS, 7 Aug 2019)",
+       "url": "https://www.biblicalarchaeology.org/uncategorized/archaeologists-say-they-may-have-found-the-church-of-the-apostles-at-el-araj/"
+      },
+      {
+       "title": "Samuel DeWitt Pfister, Where Is Biblical Bethsaida? (BAS)",
+       "url": "https://www.biblicalarchaeology.org/daily/news/where-is-biblical-bethsaida/"
+      },
+      {
+       "title": "Notley and Aviam, Searching for Bethsaida: The Case for El-Araj (BAR, Spring 2020)",
+       "url": "https://library.biblicalarchaeology.org/article/searching-for-bethsaida-the-case-for-el-araj/"
+      },
+      {
+       "title": "Rami Arav, Bethsaida Controversy (Aug 2017)",
+       "url": "https://bibleinterp.arizona.edu/sites/bibleinterp.arizona.edu/files/docs/Bethsaidacontroversy.pdf"
+      },
+      {
+       "title": "Times of Israel, 7 Aug 2017 (Arav and el-Araj team statements)",
+       "url": "https://www.timesofisrael.com/sites-vie-to-be-seen-as-christianitys-lost-city-of-bethsaida/"
+      },
+      {
+       "title": "National Geographic, 7 Aug 2017",
+       "url": "https://www.nationalgeographic.com/history/article/jesus-bible-apostles-bethsaida-israel-archaeology"
+      },
+      {
+       "title": "Gordon Franz, Text and Tell (Nun, Pixner, Arav's 1987 el-Araj square)",
+       "url": "https://www.lifeandland.org/?p=139"
+      },
+      {
+       "title": "OpenStreetMap node 10173119077 (El Araj)",
+       "url": "https://www.openstreetmap.org/node/10173119077"
+      }
+     ]
+    },
+    {
+     "id": "el-araj-church-of-apostles",
+     "name": "el-Araj basilica",
+     "lat": 32.8929,
+     "lon": 35.6196,
+     "coord_source": "OpenStreetMap node 10173119077 (El Araj, tagged archaeological_site=church).",
+     "kind": "tradition",
+     "claim": "The Byzantine basilica at el-Araj is the Church of the Apostles that Willibald saw in 725, built over the house of Peter and Andrew.",
+     "text": "John 1:44 calls Bethsaida 'the city of Andrew and Peter'. Mark 1:21, 29 places 'the house of Simon and Andrew' in Capernaum, entered from the synagogue there; Scripture does not say they had a house in Bethsaida.",
+     "who": "Aviam and Notley (El Araj Excavation Project); inscriptions edited by Leah Di Segni and Jacob Ashkenazi.",
+     "digging": "Basilica and monastery announced July 2019; three mosaic inscriptions published in Liber Annuus 73 (2023); excavation beneath the church floor in 2025 exposed Roman walls. Active (2026 season).",
+     "published_peer": [
+      "Di Segni, Ashkenazi, Aviam and Notley, Liber Annuus 73 (2023), 141-160."
+     ],
+     "published_press": [
+      "CSAJCO press release, 10 Aug 2022.",
+      "BAS Bible History Daily, 7 Aug 2019."
+     ],
+     "for": "A lavish basilica with mosaics, a marble chancel screen fragment and gold glass tesserae; a sacristy inscription invoking Peter as chief of the apostles and keeper of the heavenly keys; Willibald's account of a church on Peter's house at Bethsaida; the 2025 excavators say the church builders respected earlier Roman walls beneath it.",
+     "against": "Arav notes Corbo and Loffreda held that Willibald's description fits Capernaum and was confused in copying. The inscription dates to the second half of the 6th century or later and shows only that Byzantine Christians linked this church to Peter. The BAS writer in 2019 called the identification near-tautological because it presupposes el-Araj is Bethsaida. Mark 1:21, 29 places the brothers' house at Capernaum, so a church 'on Peter's house' in Bethsaida sits awkwardly with the Gospel text.",
+     "status": "contested",
+     "sources": [
+      {
+       "title": "John 1:44 (LSB)",
+       "url": "https://read.lsbible.org/?q=John+1:44"
+      },
+      {
+       "title": "Mark 1:21-29 (LSB)",
+       "url": "https://read.lsbible.org/?q=Mark+1:21-29"
+      },
+      {
+       "title": "CMHL corpus: Inscription 3",
+       "url": "https://dig.corps-cmhl.huji.ac.il/node/21652"
+      },
+      {
+       "title": "CSAJCO press release, 10 Aug 2022",
+       "url": "https://www.newswire.com/news/new-inscription-with-petition-for-intercession-by-apostle-peter-21792135"
+      },
+      {
+       "title": "BAS, 7 Aug 2019",
+       "url": "https://www.biblicalarchaeology.org/uncategorized/archaeologists-say-they-may-have-found-the-church-of-the-apostles-at-el-araj/"
+      },
+      {
+       "title": "Rami Arav, Bethsaida Controversy (Aug 2017)",
+       "url": "https://bibleinterp.arizona.edu/sites/bibleinterp.arizona.edu/files/docs/Bethsaidacontroversy.pdf"
+      },
+      {
+       "title": "Times of Israel, 30 Aug 2025",
+       "url": "https://www.timesofisrael.com/ruins-revealed-by-wildfire-boost-galilean-sites-claim-as-new-testaments-bethsaida/"
+      }
+     ]
+    },
+    {
+     "id": "el-mesadiyye-bethsaida",
+     "name": "el-Mesadiyye",
+     "lat": null,
+     "lon": null,
+     "coord_source": "No OpenStreetMap record or published coordinate tied to the named site was found; left null.",
+     "kind": "claimed",
+     "claim": "The former Bedouin village site of el-Mesadiyye, near the lake about 2 km from the Jordan's mouth, is Bethsaida Julias.",
+     "text": "See Mark 6:45; Luke 9:10; John 1:44; 12:21.",
+     "who": "Proposed by Gottlieb Schumacher (1888), who made el-Mesadiyye Bethsaida Julias and el-Araj the fishing village.",
+     "digging": "Surveys only: Dan Urman and Mendel Nun (1974) reported some early Roman pottery; Jim Strange (1982) found no conclusive early Roman pottery; Yosef Stepansky (1990) reported Hellenistic, Roman and Byzantine remains (all per Franz). No excavation; none now.",
+     "published_peer": [],
+     "published_press": [
+      "Gordon Franz, 'Text and Tell: The Excavations at Bethsaida', Archaeology in the Biblical World (1995), revised 2007."
+     ],
+     "for": "Schumacher judged et-Tell too far inland; el-Mesadiyye lies near the shore and survey has reported Roman-period material.",
+     "against": "Times of Israel (2017) says it 'has not yet produced promising finds'; ToI (2025) says arguments for it have lost ground in recent years. Neither the et-Tell nor the el-Araj team supports it.",
+     "status": "unresolved",
+     "sources": [
+      {
+       "title": "Gordon Franz, Text and Tell: The Excavations at Bethsaida",
+       "url": "https://www.lifeandland.org/?p=139"
+      },
+      {
+       "title": "Times of Israel, 7 Aug 2017",
+       "url": "https://www.timesofisrael.com/sites-vie-to-be-seen-as-christianitys-lost-city-of-bethsaida/"
+      },
+      {
+       "title": "Times of Israel, 30 Aug 2025",
+       "url": "https://www.timesofisrael.com/ruins-revealed-by-wildfire-boost-galilean-sites-claim-as-new-testaments-bethsaida/"
+      }
+     ]
+    }
+   ],
+   "checked": "2026-10-20"
+  }
+ ]
+}

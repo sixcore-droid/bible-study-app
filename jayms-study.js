@@ -1463,6 +1463,12 @@
     return '<p class="u-fs14 u-m4-8">' + (full ? "Best-supported site scores " + p.s + " (500+ is high confidence). " : "") + "Other proposed sites: " +
       top.slice(0, full ? 5 : 3).map(function (a) { return esc(a[0]) + " (" + a[3] + ")"; }).join(", ") + "</p>";
   }
+  /* public-domain photos of a place (place-photos.json, scripts/build-photos.py: each licence re-checked at its source) */
+  var PHOTOS = {};
+  function photoStrip(id) {
+    var ph = (PHOTOS[id] || []).slice(0, 4); if (!ph.length || !CFG.onlineMaps) return "";
+    return '<div class="jst-photos">' + ph.map(function (p) { return '<figure><a href="' + esc(p.page) + '" target="_blank" rel="noopener" title="' + esc(p.what + " \u00B7 " + p.lic) + '"><img src="' + esc(p.thumb) + '" alt="' + esc(p.what) + '" loading="lazy" referrerpolicy="no-referrer"></a><figcaption>' + esc(p.what) + (p.artist ? " \u00B7 " + esc(p.artist) : "") + " \u00B7 " + esc(p.lic) + "</figcaption></figure>"; }).join("") + "</div>";
+  }
   /* every verse that names a place, from the shared list's verse index (built once) */
   var PLACEREFS = null;
   function placeRefs(pd, id) {
@@ -1484,7 +1490,7 @@
       (c.sources && c.sources.length ? '<div class="lbl u-mt10">Sources</div><ul class="jst-dig-src">' + c.sources.filter(function (x) { return !/wikipedia\.org/i.test(x.url || ""); }).map(function (x) { return "<li>" + outlink(x.url, esc(x.title)) + "</li>"; }).join("") + "</ul>" : "") + "</div>";
   }
   /* the Atlas page's search: topics, journeys, kingdoms and places, best matches first */
-  function atlasSearch(self, q) {
+  function atlasFind(self, q) {
     q = q.trim().toLowerCase(); if (q.length < 2) return "";
     var wb = new RegExp("(^|[^a-z])" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));   // a match at the start of a word ranks above one inside a word
     var score = function (name, extra) { var n = name.toLowerCase(), best = n === q ? 0 : n.indexOf(q) === 0 ? 1 : wb.test(n) ? 1.5 : n.indexOf(q) > -1 ? 2.5 : 9;
@@ -1502,7 +1508,7 @@
     return '<ul class="jst-atlas-results">' + out.map(function (x) { return '<li><button data-jst-asel="' + (x.kind === "r" ? x.id : x.kind + ":" + x.id) + '"><b>' + esc(x.name) + "</b><span>" + esc(x.sub) + "</span></button></li>"; }).join("") + "</ul>";
   }
   define("Maps", { id: "maps", label: "Maps", name: "Maps of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>' }, {
-    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json"), this.o.owner ? getJSON("atlas-pages.json").catch(function () { return null; }) : null, data.places(), getJSON("kingdoms.json").catch(function () { return null; }), getJSON("topics.json").catch(function () { return null; })]).then(function (r) { self.T = r[8]; if (r[5] && r[5].pages) ATLAS_PAGES = r[5].pages; self.pd = r[6]; self.K = r[7]; self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
+    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json"), this.o.owner ? getJSON("atlas-pages.json").catch(function () { return null; }) : null, data.places(), getJSON("kingdoms.json").catch(function () { return null; }), getJSON("topics.json").catch(function () { return null; }), getJSON("place-photos.json").catch(function () { return null; })]).then(function (r) { self.T = r[8]; if (r[9] && r[9].photos) PHOTOS = r[9].photos; if (r[5] && r[5].pages) ATLAS_PAGES = r[5].pages; self.pd = r[6]; self.K = r[7]; self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
     /* the passage's places from the shared list, with STEPBible's one-line description and its name (the Biblica map index uses it) */
     places: function () { var nm = this.nm; return placesIn(this.pd, this.o.ref).map(function (p) { var st = nm && p.step && nm.p[p.step[0]]; return Object.assign(p, { b: st && st.b, sn: st && st.n }); }); },
     route: function () { var A = this.A, t = this.st.tab; return A && t && t !== "here" && !/^[ptk]:/.test(t) ? A.routes.filter(function (r) { return r.id === t; })[0] : null; },
@@ -1534,7 +1540,7 @@
       if (!rt && !sel) {
         if (places.length) h += '<div class="lbl u-mt14">Places in ' + esc(this.o.ref) + " (" + places.length + ")</div>" + places.map(function (p) {
           var on = (self.mp[p.sn || p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
-          return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + placeRivals(p) +
+          return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + placeRivals(p) + photoStrip(p.id) +
             (on.length ? '<div class="chips">' + on.map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>" : "") +
             (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.owner ? atlasLinks(self.at || [], p.n) : "") + "</div>"); }).join("");
         else if (!A) h += none("No place is named in " + esc(this.o.ref) + ".");
@@ -1543,7 +1549,7 @@
       if (!atlas) {
         h += '<div class="lbl u-mt14">Bible maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>" + (ms.length ? box("witness", "", '<div class="item">' + ms.map(function (m) { return '<p class="u-m5"><button class="tt jst-xt" data-jst-pmap="' + esc(m.id) + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button></p>"; }).join("") + "</div>") : none("No Biblica map is tied to this passage."));
         if (this.o.owner && (this.at || []).length) h += '<div class="lbl u-mt14">My atlases in Logos (' + this.at.length + ")</div>" + '<p class="ctx u-fs13">Each one searches that atlas for ' + esc(this.o.ref) + ': pick a result to open the page.</p>' + this.at.map(function (x) { return '<p class="u-m5">' + outlink(atlasForRef(x, self.o.ref), esc(x[1])) + ((x[6] || "").indexOf("b") > -1 ? '<span class="sub u-fs13"> \u00B7 ' + esc(self.o.ref) + "</span>" : "") + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
-        h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Kingdoms by year: <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener">Cliopatria</a> (Seshat, CC BY 4.0) and OpenBible.info. Places, sites and how sure scholars are: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0; a score of 500 or more is high confidence); <a href="https://pleiades.stoa.org/" target="_blank" rel="noopener">Pleiades</a> and <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
+        h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Kingdoms by year: <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener">Cliopatria</a> (Seshat, CC BY 4.0) and OpenBible.info. Places, sites and how sure scholars are: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0; a score of 500 or more is high confidence); <a href="https://pleiades.stoa.org/" target="_blank" rel="noopener">Pleiades</a> and <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen. Place photos: public domain or CC0 only, each checked on its Wikimedia Commons file page; tap one for the file and its licence.</p>';
       }
       var title = sel ? this.selTitle(sel) : rt ? rt.name : "Where this happens";
       return { kick: (atlas ? "Atlas" : "Maps") + " \u00B7 " + (rt ? realStops(rt).length + " stops" : sel ? { p: "place", k: "kingdom", t: "topic" }[sel.kind] : places.length + " places"), title: title, body: h };
@@ -1560,7 +1566,7 @@
       if (sel.kind === "p") {
         var p = this.pd && this.pd.places[sel.id]; if (!p) return none("That place isn't in the list.");
         var nm = p.n.replace(/\s+\d+$/, ""), st = this.nm && p.step && this.nm.p[p.step[0]], refs = placeRefs(this.pd, sel.id);
-        return box("witness", "", '<div class="item"><span class="tt">' + esc(nm) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (st && st.b ? '<p class="u-m4-8 u-fs15">' + esc(st.b) + "</p>" : "") + placeRivals(p, true) +
+        return box("witness", "", '<div class="item"><span class="tt">' + esc(nm) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (st && st.b ? '<p class="u-m4-8 u-fs15">' + esc(st.b) + "</p>" : "") + placeRivals(p, true) + photoStrip(sel.id) +
           (refs.length ? '<div class="lbl u-mt14">Named in ' + refs.length + " verse" + (refs.length > 1 ? "s" : "") + '</div><p class="u-fs15 jst-atlas-refs">' + refs.slice(0, 40).map(function (r) { return '<button class="jst-ref" data-jst-go="' + esc(r) + '">' + esc(r) + "</button>"; }).join(" ") + (refs.length > 40 ? " and " + (refs.length - 40) + " more" : "") + "</p>" : "") +
           atlasLinks(al, nm) + "</div>");
       }
@@ -1589,8 +1595,8 @@
       if (!A || !host) return;
       var rt = this.route(), sel = this.sel(), marks, legs = [], pts, kyear = null, kfit = null, self2 = this;
       var srch = this.el.querySelector("[data-jst-asearch]"), res = this.el.querySelector("[data-jst-aresults]");
-      if (srch) { srch.value = this.st.q || ""; res.innerHTML = atlasSearch(this, srch.value);
-        srch.addEventListener("input", function () { self.st.q = srch.value; res.innerHTML = atlasSearch(self, srch.value); });
+      if (srch) { srch.value = this.st.q || ""; res.innerHTML = atlasFind(this, srch.value);
+        srch.addEventListener("input", function () { self.st.q = srch.value; res.innerHTML = atlasFind(self, srch.value); });
         this.el.querySelector("[data-jst-asearchf]").addEventListener("submit", function (e) { e.preventDefault(); var b = res.querySelector("[data-jst-asel]"); if (b) b.click(); });
         if (this.o.focusSearch) { srch.focus(); this.o.focusSearch = false; } }
       if (sel && sel.kind === "p") {
@@ -1656,7 +1662,7 @@
       if (fly) { var q = rt ? it : atlasXY(this.A, it.ll); this._atlas.fit([q], 500, 560); }
       this.el.querySelectorAll("[data-jst-astop]").forEach(function (b) { b.classList.toggle("on", +b.getAttribute("data-jst-astop") === i); });
       var al = this.o.owner ? this.at || [] : [];
-      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + atlasLinks(al, it.n) + "</div>";
+      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + photoStrip(it.id) + atlasLinks(al, it.n) + "</div>";
         this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []);
         var others = (this._items || []).filter(function (p) { return p !== it && p.ll; });
         if (others.length && CFG.onlineMaps) box_.querySelector(".jst-atlas-card").insertAdjacentHTML("beforeend", '<div class="lbl u-mt14">Height from ' + esc(it.n) + ' to</div><div class="chips">' + others.slice(0, 12).map(function (p) { return '<button class="chip" data-jst-prof2="' + esc(p.id) + '">' + esc(p.n) + "</button>"; }).join("") + '</div><div data-jst-aprof2></div>');
