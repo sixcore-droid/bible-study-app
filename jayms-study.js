@@ -1335,7 +1335,7 @@
         var b = new ml.LngLatBounds([a[0][1], a[0][0]], [a[0][1], a[0][0]]); a.forEach(function (p) { b.extend([p[1], p[0]]); });
         var maxZoom = 11.5;
         if (minW) { var deg = minW / (A.proj.c * A.proj.k); maxZoom = Math.log2(360 / deg * w / 512); }   // minW is in the drawn map's units
-        map.fitBounds(b, { padding: { top: 60, bottom: 56, left: 50, right: 78 }, maxZoom: Math.min(maxZoom, a.length === 1 ? 8.5 : 11.5), duration: ms || 0 });
+        map.fitBounds(b, { padding: { top: 60, bottom: 96, left: 50, right: 78 }, maxZoom: Math.min(maxZoom, a.length === 1 ? 8.5 : 11.5), duration: ms || 0 });
       });
     };
     self.zoom = function (f) { when(function () { map.easeTo({ zoom: map.getZoom() + Math.log2(f), duration: 250 }); }); };
@@ -1477,7 +1477,7 @@
     var li = function (a) { return a && a.length ? "<ul>" + a.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "<p>None.</p>"; };
     var row = function (k, v) { return v ? '<div class="lbl u-mt10">' + k + '</div><p class="u-fs15">' + esc(v) + "</p>" : ""; };
     return '<div class="jst-dig" data-jst-dig="' + n + '"><div class="jst-dig-head"><span class="tt">' + esc(c.name) + '</span> <span class="jst-dig-st ' + esc(c.status) + '">' + esc(c.status) + "</span>" +
-      (c.lat != null ? ' <button class="jst-ref" data-jst-digfly="' + n + '">Show on the map</button>' : "") + "</div>" +
+      (c.lat != null && c.lat >= 6 && c.lat <= 50 && c.lon >= -12 && c.lon <= 62 ? ' <button class="jst-ref" data-jst-digfly="' + n + '">Show on the map</button>' : c.lat != null ? ' <span class="sub u-fs13">Off this map (' + Math.abs(c.lat).toFixed(1) + "\u00B0" + (c.lat < 0 ? "S" : "N") + ", " + Math.abs(c.lon).toFixed(1) + "\u00B0" + (c.lon < 0 ? "W" : "E") + ")</span>" : ' <span class="sub u-fs13">No site to pin</span>') + "</div>" +
       row("The claim", c.claim) + row("What the text says", c.text) + row("Who", c.who) + row("Digging", c.digging) +
       '<div class="lbl u-mt10">Published, peer-reviewed</div>' + li(c.published_peer) + '<div class="lbl u-mt10">Press, broadcasts and books</div>' + li(c.published_press) +
       row("The case for", c.for) + row("The case against", c.against) +
@@ -1604,10 +1604,11 @@
           kfit = [[bb[0], bb[1]], [bb[2], bb[3]]].map(function (ll) { var q = atlasXY(A, ll); return { x: q.x, y: q.y, ll: ll }; }); }
       } else if (sel && sel.kind === "t") {
         var tp = this.topic(sel.id), rtt = tp && tp.route && A.routes.filter(function (r) { return r.id === tp.route; })[0], rsT = rtt ? realStops(rtt) : [];
-        var claims = ((tp && tp.claims) || []).filter(function (c) { return c.lat != null; });
+        var onMap = function (c) { return c.lat != null && c.lat >= 6 && c.lat <= 50 && c.lon >= -12 && c.lon <= 62; };   // the map's own area
+        var claims = ((tp && tp.claims) || []).filter(onMap);
         this._items = rsT.concat(claims.map(function (c) { return Object.assign({ claim: true, ll: [c.lat, c.lon], n: c.name }, c); }));
         marks = rsT.map(function (st, i) { return { x: st.x, y: st.y, ll: st.ll, n: st.n, k: "stop", num: i + 1, i: i + 1 }; })
-          .concat(claims.map(function (c, j) { var q = atlasXY(A, [c.lat, c.lon]); return { x: q.x, y: q.y, ll: [c.lat, c.lon], n: c.name, k: "place", tier: DIG_PIN[c.status] || "contested", i: rsT.length + j + 1 }; }));
+          .concat(claims.map(function (c, j) { var q = atlasXY(A, [c.lat, c.lon]); return { x: q.x, y: q.y, ll: [c.lat, c.lon], n: c.name.split(/ \(|:|, | \//)[0].replace(/^"|"$/g, ""), k: "place", tier: DIG_PIN[c.status] || "contested", i: rsT.length + j + 1 }; }));
         if (rtt) { var dn = 0; for (var ti = 1; ti < rtt.stops.length; ti++) { var ta = rtt.stops[ti - 1], tb = rtt.stops[ti]; if (!ta.via) dn++; legs.push({ x1: ta.x, y1: ta.y, x2: tb.x, y2: tb.y, ll1: ta.ll, ll2: tb.ll, m: tb.m, i: dn }); } }
         this._topicRoute = rtt;
       } else if (rt) {
