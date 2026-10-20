@@ -1226,19 +1226,18 @@
     return (A.routes || []).filter(function (r) { return r.ranges.some(function (x) { return R.parse(x).some(function (a) { return segs.some(function (b) { return overlap(a, b); }); }); }); })[0];
   }
 
-  /* James's Logos atlases (shelf.json: [id, title, by, year, kind, books, flags]; flags "b" = indexed by Bible passage, "k" = by
-     Factbook topic, which is how an atlas finds a place). A passage link opens the atlas where it treats that passage; a place link
-     opens it at that place (Factbook key bk.%<Name>_Place). An atlas indexed by neither just opens. */
+  /* James's Logos atlases (shelf.json: [id, title, by, year, kind, books, flags]; flag "b" = the atlas carries Bible references).
+     An atlas can't be opened AT a passage or a place (checked in Logos 20 Oct 2026: Bible refs send it to its front pages, Factbook
+     place keys only work where the atlas happens to have that article), so each link runs a Logos search inside that one atlas:
+     the passage as a reference search (<Bible ~ Acts 9>), a place by name. The results list every section with its page, one click
+     to open. logos4:Search;kind=BasicSearch;q=…;in=raw:Single|ResourceId=LLS:… was checked against Logos's own search history. */
   var ATLAS_SHORT = { barbourbibatlascomp: "Atlas & Companion", ltmtbbltls: "Ultimate Atlas", hlmnchrtsmaps: "Holman Charts", stdbibatlas: "Standard Atlas", vptlblhst2nd: "Lion Atlas", hlmnbblat: "Holman Atlas" };
   function atlasShort(x) { return ATLAS_SHORT[x[0]] || x[1]; }
-  function atlasPlaceKey(name) { return "bk.%" + String(name).replace(/\s*\(.*?\)\s*/g, "").replace(/[^A-Za-z0-9]+/g, " ").trim().split(" ").map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join("") + "_Place"; }
-  function atlasAtRef(x, seg) { return (x[6] || "").indexOf("b") > -1 && seg ? R.logos(x[0], seg) : R.logos(x[0]); }
-  function atlasAtPlace(x, name) { return "logosres:" + x[0] + ";ref=" + encodeURIComponent(atlasPlaceKey(name)); }
-  function atlasLinks(at, ref, place) {   // one short line of links: the passage in every atlas that has it, then the place
-    var seg = ref && R.parse(ref)[0], out = [];
-    if (seg) at.filter(function (x) { return (x[6] || "").indexOf("b") > -1; }).forEach(function (x) { out.push(outlink(atlasAtRef(x, seg), esc(atlasShort(x)))); });
-    if (place) at.filter(function (x) { return (x[6] || "").indexOf("k") > -1; }).forEach(function (x) { out.push(outlink(atlasAtPlace(x, place), esc(atlasShort(x)) + (seg ? " \u00B7 " + esc(place) : ""))); });
-    return out.length ? '<div class="jst-atlas-links"><span class="lbl">In Logos</span> ' + out.join(" ") + "</div>" : "";
+  function atlasSearch(x, q) { return "logos4:Search;kind=BasicSearch;q=" + encodeURIComponent(q) + ";in=" + encodeURIComponent("raw:Single|ResourceId=LLS:" + String(x[0]).toUpperCase()); }
+  function atlasForRef(x, ref) { return (x[6] || "").indexOf("b") > -1 && ref ? atlasSearch(x, "<Bible ~ " + ref + ">") : R.logos(x[0]); }
+  function atlasLinks(at, place) {   // one short line: the place searched in every atlas
+    var out = at.map(function (x) { return outlink(atlasSearch(x, place), esc(atlasShort(x))); });
+    return out.length ? '<div class="jst-atlas-links"><span class="lbl">' + esc(place) + " in Logos</span> " + out.join(" ") + "</div>" : "";
   }
   define("Maps", { id: "maps", label: "Maps", name: "Maps of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>' }, {
     prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json")]).then(function (r) { self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
@@ -1265,11 +1264,11 @@
           var on = (self.mp[p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
           return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") +
             (on.length ? '<div class="chips">' + on.map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>" : "") +
-            (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.owner ? atlasLinks(self.at || [], null, p.n) : "") + "</div>"); }).join("");
+            (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.owner ? atlasLinks(self.at || [], p.n) : "") + "</div>"); }).join("");
         else if (!A) h += none("No place is named in " + esc(this.o.ref) + ".");
       }
       h += '<div class="lbl u-mt14">Bible maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>" + (ms.length ? box("witness", "", '<div class="item">' + ms.map(function (m) { return '<p class="u-m5"><button class="tt jst-xt" data-jst-pmap="' + esc(m.id) + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button></p>"; }).join("") + "</div>") : none("No Biblica map is tied to this passage."));
-      if (this.o.owner && (this.at || []).length) h += '<div class="lbl u-mt14">My atlases in Logos (' + this.at.length + ")</div>" + this.at.map(function (x) { var seg = data.segs(self.o.ref)[0]; return '<p class="u-m5">' + outlink(atlasAtRef(x, seg), esc(x[1])) + ((x[6] || "").indexOf("b") > -1 ? '<span class="sub u-fs13"> at ' + esc(self.o.ref) + "</span>" : "") + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
+      if (this.o.owner && (this.at || []).length) h += '<div class="lbl u-mt14">My atlases in Logos (' + this.at.length + ")</div>" + '<p class="ctx u-fs13">Each one searches that atlas for ' + esc(this.o.ref) + ': pick a result to open the page.</p>' + this.at.map(function (x) { return '<p class="u-m5">' + outlink(atlasForRef(x, self.o.ref), esc(x[1])) + ((x[6] || "").indexOf("b") > -1 ? '<span class="sub u-fs13"> \u00B7 ' + esc(self.o.ref) + "</span>" : "") + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
       h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Positions: <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> and <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
       return { kick: "Maps · " + (rt ? rt.stops.length + " stops" : places.length + " places"), title: rt ? rt.name : "Where this happens", body: h };
     },
@@ -1304,8 +1303,8 @@
       if (fly) { var q = rt ? it : atlasXY(this.A, it.ll); this._atlas.fit([q], 500, 560); }
       this.el.querySelectorAll("[data-jst-astop]").forEach(function (b) { b.classList.toggle("on", +b.getAttribute("data-jst-astop") === i); });
       var al = this.o.owner ? this.at || [] : [];
-      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + "</span>" + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + atlasLinks(al, null, it.n) + "</div>"; return; }
-      box_.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Stop ' + i + " of " + rt.stops.length + '</div><span class="tt">' + esc(it.n) + '</span><p class="u-m4-8 u-fs15" data-jst-averse>…</p><button class="jst-ref" data-jst-go="' + esc(it.ref) + '">' + esc(it.ref) + "</button>" + atlasLinks(al, it.ref, it.n) + "</div>";
+      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + "</span>" + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + atlasLinks(al, it.n) + "</div>"; return; }
+      box_.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Stop ' + i + " of " + rt.stops.length + '</div><span class="tt">' + esc(it.n) + '</span><p class="u-m4-8 u-fs15" data-jst-averse>…</p><button class="jst-ref" data-jst-go="' + esc(it.ref) + '">' + esc(it.ref) + "</button>" + atlasLinks(al, it.n) + "</div>";
       data.text(it.ref).then(function (rows) {
         var p = box_.querySelector("[data-jst-averse]"); if (!p || self.st.pick !== i) return;
         var t = rows && rows[0] && rows[0].texts, ver = t && (t.LSB ? "LSB" : Object.keys(t)[0]);
