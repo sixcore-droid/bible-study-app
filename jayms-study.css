@@ -136,6 +136,12 @@ a.btn{text-decoration:none;display:inline-block}
 .jst-mapthumb{display:block;width:100%;max-height:220px;object-fit:contain;background:var(--paper);border-radius:6px;margin:0 0 8px}
 .wc-sfx{cursor:default;opacity:.85}
 .jst-atlas-tabs{margin:0 0 10px}
+.jst-atlas-tabs{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.jst-atlas-pickj{display:flex;align-items:center;gap:8px;flex:1;min-width:220px}
+.jst-atlas-pickj .lbl{margin:0}
+.jst-atlas-pickj select{flex:1;min-width:0;font:15px var(--read);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:7px 12px}
+.jst-atlas-pickj.on select{border-color:var(--gold);color:var(--gold)}
+.jst-atlas-about{line-height:1.6}
 .jst-atlas-tabs .chip i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:0}
 .jst-atlas{position:relative;aspect-ratio:1/1;max-height:72vh;min-height:280px;width:100%;border-radius:8px;border:1px solid #8a7650;overflow:hidden;margin:4px 0 8px;background:#c4d6d6;touch-action:none;user-select:none}
 .jst-atlas:fullscreen,.jst-atlas.jst-atlas-big{height:100vh;height:100dvh;max-height:none;aspect-ratio:auto;border-radius:0;border:0;margin:0}

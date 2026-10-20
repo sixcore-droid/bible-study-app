@@ -947,7 +947,7 @@
     (o.legs || []).forEach(function (g, i) {
       var p = document.createElementNS(SVGNS, "path"), mx = (g.x1 + g.x2) / 2, my = (g.y1 + g.y2) / 2;
       p.setAttribute("d", "M" + g.x1 + " " + g.y1 + "L" + mx + " " + my + "L" + g.x2 + " " + g.y2);
-      p.setAttribute("class", "leg by-" + g.m); p.setAttribute("stroke", o.color || "#7a2e2e"); p.setAttribute("marker-mid", "url(#jst-ar)"); p._i = i + 1;
+      p.setAttribute("class", "leg by-" + g.m); p.setAttribute("stroke", o.color || "#7a2e2e"); p.setAttribute("marker-mid", "url(#jst-ar)"); p._i = g.i || i + 1;
       gLegs.appendChild(p); });
     /* stops that come back to the same spot sit beside the earlier mark, not on top of it */
     var at = {}, many = {};
@@ -1060,6 +1060,7 @@
     shape(A.w / 2, A.h / 2, A.w); draw();
     return self;
   }
+  function realStops(rt) { return rt.stops.filter(function (s) { return !s.via; }); }   // stops, not the unnumbered bends in the road
   function atlasXY(A, ll) { var p = A.proj; return { x: (ll[1] - p.lon0) * p.c * p.k, y: (p.lat1 - ll[0]) * p.k, ll: ll }; }
 
   /* The atlas on MapLibre (vendor/maplibre, kept in the repo so the desk works offline) reading map files from atlas-tiles/
@@ -1122,7 +1123,7 @@
       var key = m.ll[0].toFixed(3) + "," + m.ll[1].toFixed(3), nth = at[key] = (at[key] || 0) + 1;
       return pt(m.ll, { i: m.i, n: m.n, k: m.k, tier: m.tier || "", num: m.num ? String(m.num) : "", nth: nth - 1, first: nth === 1 }); }));
     var legs = fc((o.legs || []).filter(function (g) { return g.ll1 && g.ll2; }).map(function (g, i) {
-      return { type: "Feature", geometry: { type: "LineString", coordinates: [[g.ll1[1], g.ll1[0]], [g.ll2[1], g.ll2[0]]] }, properties: { i: i + 1, m: g.m } }; }));
+      return { type: "Feature", geometry: { type: "LineString", coordinates: [[g.ll1[1], g.ll1[0]], [g.ll2[1], g.ll2[0]]] }, properties: { i: g.i || i + 1, m: g.m } }; }));
     var color = o.color || "#7a2e2e";
     var style = {
       version: 8, glyphs: abs("vendor/fonts/") + "{fontstack}/{range}.pbf",   // added after URL() so the braces stay unencoded
@@ -1403,15 +1404,18 @@
       if (A && !this.st.tab) { var auto = atlasRouteFor(A, this.o.ref); this.st.tab = auto ? auto.id : "here"; }
       var rt = this.route(), ms = mapsFor(this.o.ref), h = "";
       if (A) {
-        h += '<div class="chips jst-atlas-tabs"><button class="chip' + (!rt ? " on" : "") + '" data-jst-atab="here">Places here' + (pinned.length ? " (" + pinned.length + ")" : "") + "</button>" +
-          A.routes.map(function (r) { return '<button class="chip' + (rt === r ? " on" : "") + '" data-jst-atab="' + r.id + '"><i data-jst-c="' + r.color + '"></i>' + esc(r.name.replace(/:.*$/, "")) + "</button>"; }).join("") + "</div>";
+        /* Places here, or one of the journeys (grouped Old and New Testament) */
+        var grp = function (g, label) { return '<optgroup label="' + label + '">' + A.routes.filter(function (r) { return (r.group || "nt") === g; }).map(function (r) { return '<option value="' + r.id + '"' + (rt === r ? " selected" : "") + ">" + esc(r.name) + "</option>"; }).join("") + "</optgroup>"; };
+        h += '<div class="jst-atlas-tabs"><button class="chip' + (!rt ? " on" : "") + '" data-jst-atab="here">Places here' + (pinned.length ? " (" + pinned.length + ")" : "") + "</button>" +
+          '<label class="jst-atlas-pickj' + (rt ? " on" : "") + '"><span class="lbl">Journey</span><select data-jst-aj aria-label="Journey"><option value="">' + (rt ? "Places here" : "Choose a journey") + "</option>" + grp("ot", "Old Testament") + grp("nt", "New Testament") + "</select></label></div>";
         h += '<div class="jst-atlas" data-jst-atlas><div class="jst-atlas-ctl"><button data-jst-az="in" aria-label="Zoom in">+</button><button data-jst-az="out" aria-label="Zoom out">−</button><button data-jst-az="fit" aria-label="Fit">⤢</button><button data-jst-az="full" aria-label="Full screen">⛶</button><button data-jst-az="layers" aria-label="Layers" title="Layers">☰</button><button data-jst-az="swipe" aria-label="Then and now" title="Then and now: drag the divider between the ancient map and today">\u21C6</button></div><div class="jst-atlas-hint">Hold Ctrl or ⌘ and scroll to zoom</div></div>';
         h += '<div class="jst-atlas-pick" data-jst-apick></div>';
         if (rt) {
-          h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.kick) + " · " + rt.stops.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
-            (rt.note ? '<p class="sub u-m4-8 u-fs15">' + esc(rt.note) + "</p>" : "") +
+          var rs = realStops(rt);
+          h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.ranges[0].replace(/-/, "\u2013")) + " \u00B7 " + rs.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
+            (rt.about ? '<p class="u-m4-8 u-fs16 jst-atlas-about">' + esc(rt.about) + "</p>" : "") +
             '<button class="btn u-mt6" data-jst-aplay>' + (this._play ? "Stop" : "Play the journey") + '</button><ol class="jst-atlas-stops">' +
-            rt.stops.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + '</button><button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol></div>");
+            rs.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + '</button><button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol></div>");
         } else if (!pinned.length) h += none("No place in " + esc(this.o.ref) + " has a known position. Pick a journey above.");
       }
       if (!rt) {
@@ -1425,19 +1429,24 @@
       h += '<div class="lbl u-mt14">Bible maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>" + (ms.length ? box("witness", "", '<div class="item">' + ms.map(function (m) { return '<p class="u-m5"><button class="tt jst-xt" data-jst-pmap="' + esc(m.id) + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button></p>"; }).join("") + "</div>") : none("No Biblica map is tied to this passage."));
       if (this.o.owner && (this.at || []).length) h += '<div class="lbl u-mt14">My atlases in Logos (' + this.at.length + ")</div>" + '<p class="ctx u-fs13">Each one searches that atlas for ' + esc(this.o.ref) + ': pick a result to open the page.</p>' + this.at.map(function (x) { return '<p class="u-m5">' + outlink(atlasForRef(x, self.o.ref), esc(x[1])) + ((x[6] || "").indexOf("b") > -1 ? '<span class="sub u-fs13"> \u00B7 ' + esc(self.o.ref) + "</span>" : "") + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
       h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Kingdoms by year: <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener">Cliopatria</a> (Seshat, CC BY 4.0) and OpenBible.info. Places, sites and how sure scholars are: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0; a score of 500 or more is high confidence); <a href="https://pleiades.stoa.org/" target="_blank" rel="noopener">Pleiades</a> and <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
-      return { kick: "Maps · " + (rt ? rt.stops.length + " stops" : places.length + " places"), title: rt ? rt.name : "Where this happens", body: h };
+      return { kick: "Maps · " + (rt ? realStops(rt).length + " stops" : places.length + " places"), title: rt ? rt.name : "Where this happens", body: h };
     },
     after: function () {
       var self = this, A = this.A, host = this.el.querySelector("[data-jst-atlas]");
       this.el.querySelectorAll("[data-jst-c]").forEach(function (e) { e.style.background = e.getAttribute("data-jst-c"); });   // route colours
       this.stopPlay(true);
+      var pj = this.el.querySelector("[data-jst-aj]");
+      if (pj) pj.addEventListener("change", function () { self.st.tab = pj.value || "here"; self.st.pick = 0; self.paint(); });
       if (this._atlas) { this._atlas.destroy(); this._atlas = null; }
       if (!A || !host) return;
       var rt = this.route(), marks, legs = [], pts;
       if (rt) {
-        marks = rt.stops.map(function (s, i) { return { x: s.x, y: s.y, ll: s.ll, n: s.n, k: "stop", num: i + 1, i: i + 1 }; });
-        for (var i = 1; i < rt.stops.length; i++) { var a = rt.stops[i - 1], b = rt.stops[i]; if (a.x !== b.x || a.y !== b.y) legs.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, ll1: a.ll, ll2: b.ll, m: b.m }); else legs.push({ x1: a.x, y1: a.y, x2: a.x, y2: a.y, ll1: a.ll, ll2: a.ll, m: "land" }); }
-        this._items = rt.stops;
+        var rs2 = realStops(rt), done = 0;
+        marks = rs2.map(function (s, i) { return { x: s.x, y: s.y, ll: s.ll, n: s.n, k: "stop", num: i + 1, i: i + 1 }; });
+        /* legs run through the unnumbered bends too; a leg's i = the stops already reached, so Play shows it when the next stop comes */
+        for (var i = 1; i < rt.stops.length; i++) { var a = rt.stops[i - 1], b = rt.stops[i]; if (!a.via) done++;
+          legs.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, ll1: a.ll, ll2: b.ll, m: b.m, i: done }); }
+        this._items = rs2;
       } else {
         this._items = this.places().filter(function (p) { return p.ll; });
         marks = this._items.map(function (p, i) { var q = atlasXY(A, p.ll); return { x: q.x, y: q.y, ll: p.ll, n: p.n, k: "place", tier: p.tier, i: i + 1 }; });
@@ -1469,7 +1478,7 @@
       if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + atlasLinks(al, it.n) + "</div>";
         this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []); return; }
       this._atlas.alts([]);
-      box_.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Stop ' + i + " of " + rt.stops.length + '</div><span class="tt">' + esc(it.n) + '</span><p class="u-m4-8 u-fs15" data-jst-averse>…</p><button class="jst-ref" data-jst-go="' + esc(it.ref) + '">' + esc(it.ref) + "</button>" + atlasLinks(al, it.n) + "</div>";
+      box_.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Stop ' + i + " of " + realStops(rt).length + '</div><span class="tt">' + esc(it.n) + '</span><p class="u-m4-8 u-fs15" data-jst-averse>…</p><button class="jst-ref" data-jst-go="' + esc(it.ref) + '">' + esc(it.ref) + "</button>" + atlasLinks(al, it.n) + "</div>";
       data.text(it.ref).then(function (rows) {
         var p = box_.querySelector("[data-jst-averse]"); if (!p || self.st.pick !== i) return;
         var t = rows && rows[0] && rows[0].texts, ver = t && (t.LSB ? "LSB" : Object.keys(t)[0]);
@@ -1484,9 +1493,9 @@
       (function step() {
         if (!self._play) return;
         self._atlas.upTo(n); self.pickItem(n, false);
-        var a = rt.stops[Math.max(0, n - 2)], b = rt.stops[n - 1];
+        var rs = realStops(rt), a = rs[Math.max(0, n - 2)], b = rs[n - 1];
         self._atlas.fit([a, b], 900, 420);
-        if (n >= rt.stops.length) { self._pt = setTimeout(function () { self.stopPlay(); self._atlas.fit(self._pts, 900); }, 1600); return; }
+        if (n >= rs.length) { self._pt = setTimeout(function () { self.stopPlay(); self._atlas.fit(self._pts, 900); }, 1600); return; }
         n++; self._pt = setTimeout(step, 1900);
       })();
     },
