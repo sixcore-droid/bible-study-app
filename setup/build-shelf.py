@@ -97,14 +97,15 @@ SKIP = ("text.monograph.commentary", "text.monograph.bible", "text.serial.magazi
 # Bibles whose own notes make them study Bibles in practice (the NET's translators' notes live inside the Bible resource)
 NOTED_BIBLES = {"LLS:NETBIBLE2ED": "The NET Bible, Second Edition (translators' notes)"}
 lib, sb, atlases = [], [], []
-for rid, title, authors, typ, date, subjects in db.execute("select ResourceId, Title, Authors, Type, PublicationDate, Subjects from Records where Type like 'text.%'"):
+for rid, title, authors, typ, date, subjects, traits in db.execute("select ResourceId, Title, Authors, Type, PublicationDate, Subjects, Traits from Records where Type like 'text.%'"):
     if rid in NOTED_BIBLES: title, typ = NOTED_BIBLES[rid], "text.monograph.study.bible"
     if typ.startswith(SKIP) and typ != "text.monograph.study.bible": continue
     yr = re.search(r"\d{4}", date or "")
     by = "; ".join(a.strip() for a in (authors or "").split("\t") if a.strip())
     row = [rid.replace("LLS:", "").lower(), title, by, int(yr.group()) if yr else None, KIND.get(typ, ""), covers(subjects)]
     if typ == "text.monograph.study.bible": sb.append(row)
-    elif typ == "text.monograph.atlas": atlases.append(row)
+    elif typ == "text.monograph.atlas":   # + what the atlas is indexed by: "b" Bible passages, "k" Factbook topics (places)
+        tr = (traits or "").split("\t"); atlases.append(row + [("b" if "supports-bible" in tr else "") + ("k" if "supports-bk" in tr else "")])
     elif by: lib.append(row)
 
 # ---- the core stack (James, 15 Oct 2026): the same layers on every book, always shown on the Shelf and never hidden by Config.

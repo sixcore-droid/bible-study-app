@@ -173,6 +173,8 @@ a.btn{text-decoration:none;display:inline-block}
 .jst-atlas-ctl button:hover{background:#fff}
 .jst-atlas-hint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:rgba(26,28,32,.85);color:#f6efdc;font:13px var(--read);padding:6px 12px;border-radius:6px;opacity:0;transition:opacity .25s;pointer-events:none}
 .jst-atlas-hint.on{opacity:1}
+.jst-atlas-links{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:8px 0 0;font-size:14px}
+.jst-atlas-links .lbl{margin:0}
 .jst-atlas-card{border-left:3px solid var(--gold);background:var(--paper-deep);border-radius:6px;padding:10px 14px;margin:0 0 10px}
 .jst-atlas-stops{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:2px}
 .jst-atlas-stops li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:4px 6px;border-radius:6px}
