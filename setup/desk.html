@@ -12,6 +12,7 @@
   <div class="viewsw" id="appsw" role="group" aria-label="Which app">
     <button data-app="study" aria-pressed="true">Bible Study</button>
     <button data-app="hg" aria-pressed="false">Hebrew &amp; Greek</button>
+    <button data-app="atlas" aria-pressed="false" id="atlasbtn" title="The atlas on its own: the map full size, and a search for places, journeys, kingdoms and topics">Atlas</button>
   </div>
   <form class="goto" id="goform" role="search" autocomplete="off">
     <input id="goref" list="gobooks" placeholder="Go to a passage: Mark 13:14" aria-label="Go to a passage" spellcheck="false">
@@ -348,7 +349,7 @@ function renderPlan(){
   /* the options under the plan: Bible Study's, or the Hebrew & Greek mode's */
   ["addpsalm","hidelists"].forEach(id=>$(id).closest("label").hidden=hg);
   document.querySelectorAll(".hgopt").forEach(l=>l.hidden=!hg);
-  document.querySelectorAll("#appsw button").forEach(b=>{ const on=b.dataset.app===S.app; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on) });
+  document.querySelectorAll("#appsw button").forEach(b=>{ const on = S.atlasOn ? b.dataset.app==="atlas" : b.dataset.app===S.app; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on) });
   document.body.classList.toggle("hg-noorig", hg && !S.hgOrig);
   $("planname").textContent = p.name; $("plandesc").textContent = p.description||"";
   const t = todayNum(p), total=p.days.length, done=p.days.filter(dayDone).length;
@@ -956,8 +957,24 @@ function hgSwitch(app){
   if(app==="hg") hgLoad();
   rememberOpen(); render();
 }
+/* ===== ATLAS =====
+   The Maps panel on a page of its own (no reader): the map full size, its column on the right with a search for places, journeys,
+   kingdoms and topics. Same component as the side panel (jayms-study.js, option atlas:true). Opening a verse from it goes back
+   to Bible Study at that passage. */
+S.atlasOn = store.get("atlasOn", false);
+let AP = null;
+function atlasOn(on){
+  S.atlasOn = on; store.set("atlasOn", on); document.body.classList.toggle("app-atlas", on);
+  let sec = $("atlasview"); if(!sec){ sec=document.createElement("section"); sec.id="atlasview"; sec.className="atlasview"; $("desk").after(sec) }
+  if(AP){ AP.destroy(); AP=null }
+  if(on){ const o = panelOptions("maps");
+    o.atlas = true; o.focusSearch = true;
+    o.on = Object.assign({}, HANDLERS, { meta: ()=>{}, passage: d => { atlasOn(false); HANDLERS.passage(d) } });
+    AP = new JST.panels.maps(sec, o) }
+  document.querySelectorAll("#appsw button").forEach(b=>{ const x = on ? b.dataset.app==="atlas" : b.dataset.app===S.app; b.classList.toggle("on",x); b.setAttribute("aria-pressed",x) });
+}
 document.addEventListener("click",e=>{
-  const ap=e.target.closest("#appsw [data-app]"); if(ap){ hgSwitch(ap.dataset.app); return }
+  const ap=e.target.closest("#appsw [data-app]"); if(ap){ if(ap.dataset.app==="atlas"){ if(!S.atlasOn) atlasOn(true); return } if(S.atlasOn) atlasOn(false); hgSwitch(ap.dataset.app); return }
   const mk=e.target.closest("#text [data-mark]"); if(mk){ e.preventDefault(); HANDLERS.mark(mk.dataset.mark) }
 });
 document.addEventListener("change",e=>{
@@ -989,6 +1006,7 @@ $("hgorig").checked=S.hgOrig; document.querySelectorAll("[data-hgcat]").forEach(
     if(S.app==="hg") hgLoad();
     restoreOpen();
     render();
+    if(S.atlasOn) atlasOn(true);
   }catch(e){
     $("rtitle").textContent="Reading plans didn't load";
     $("rwhy").textContent="The plan files (plans/index.json) couldn't be read. Reload the page to try again.";

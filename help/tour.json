@@ -29,8 +29,14 @@
     },
     {
      "sel": "#appsw",
-     "name": "Bible Study / Hebrew & Greek",
-     "text": "Switches between the two apps. Hebrew & Greek reads John, Genesis and Psalms with the places the original shapes the English marked."
+     "name": "Bible Study / Hebrew & Greek / Atlas",
+     "text": "Switches between the three. Hebrew & Greek reads John, Genesis and Psalms with the places the original shapes the English marked. Atlas is the map on its own."
+    },
+    {
+     "sel": "#atlasbtn",
+     "name": "Atlas",
+     "text": "The map full size with no reader, and a search: a place, a journey, a kingdom, or a topic like the Ark (where it went, and every place it is claimed to be today, with the case for and against). Opening a verse goes back to Bible Study at that passage.",
+     "at": "bottom"
     },
     {
      "sel": "#goref",
