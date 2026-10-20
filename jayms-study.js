@@ -1272,7 +1272,9 @@
     self.upTo = function (n) { when(function () {
       map.setFilter("legs", n == null ? null : ["<", ["get", "i"], n]); map.setFilter("arrows", n == null ? null : ["<", ["get", "i"], n]);
       map.setFilter("stop-dot", n == null ? ["==", ["get", "k"], "stop"] : ["all", ["==", ["get", "k"], "stop"], ["<=", ["get", "i"], n]]);
-      map.setFilter("mark-name", n == null ? ["==", ["get", "first"], true] : ["all", ["==", ["get", "first"], true], ["<=", ["get", "i"], n]]); }); };
+      map.setFilter("mark-name", n == null ? ["==", ["get", "first"], true] : ["all", ["==", ["get", "first"], true], ["<=", ["get", "i"], n]]);
+      if (now && now.isStyleLoaded()) { now.setFilter("legs", n == null ? null : ["<", ["get", "i"], n]); now.setFilter("legs-edge", n == null ? null : ["<", ["get", "i"], n]);
+        ["stop-dot", "stop-num"].forEach(function (id) { now.setFilter(id, n == null ? ["==", ["get", "k"], "stop"] : ["all", ["==", ["get", "k"], "stop"], ["<=", ["get", "i"], n]]); }); } }); };
     self.pick = function (i) { when(function () { map.setFilter("picked", ["all", ["==", ["get", "i"], i], ["==", ["get", "nth"], 0]]); }); };
     self.resize = function () { map.resize(); if (now) now.resize(); };
     /* THEN | NOW: a second map (2016 Sentinel-2 satellite, today's borders and towns, the same pins) laid over this one and kept in
@@ -1284,20 +1286,26 @@
       if (now) { map.off("move", s1); now.off("move", s2); now.remove(); h2.remove(); wipe.remove(); now = h2 = wipe = null; host.classList.remove("jst-atlas-cmp"); return false; }
       if (!ready) return false;
       h2 = document.createElement("div"); h2.className = "jst-atlas-gl jst-atlas-now"; holder.parentNode.insertBefore(h2, holder.nextSibling);
-      var mk = map.getSource("marks").serialize().data;
+      var mk = map.getSource("marks").serialize().data, lg = map.getSource("legs").serialize().data;
       now = new ml.Map({ container: h2, center: map.getCenter(), zoom: map.getZoom(), minZoom: 2, maxZoom: 14, maxBounds: [[-30, -5], [80, 60]], renderWorldCopies: false,
         attributionControl: { compact: true }, cooperativeGestures: true, dragRotate: false, touchPitch: false,
         style: { version: 8, glyphs: abs("vendor/fonts/") + "{fontstack}/{range}.pbf",
           sources: { sat: { type: "raster", tiles: ["https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{z}/{y}/{x}.jpg"], tileSize: 256, maxzoom: 15, attribution: EOX_ATTR },
             region: { type: "vector", url: "pmtiles://" + abs("atlas-tiles/base-region.pmtiles"), attribution: "\u00A9 OpenStreetMap \u00B7 Protomaps" },
-            marks: { type: "geojson", data: mk }, chg: { type: "geojson", data: chgFC(A) } },
+            marks: { type: "geojson", data: mk }, legs: { type: "geojson", data: lg }, chg: { type: "geojson", data: chgFC(A) } },
           layers: [
             { id: "sat", type: "raster", source: "sat" },
             { id: "b", type: "line", source: "region", "source-layer": "boundaries", filter: ["==", ["get", "kind"], "country"], paint: { "line-color": "#ffd27a", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.2, 9, 2.4], "line-dasharray": [3, 2] } },
             { id: "c", type: "symbol", source: "region", "source-layer": "places", filter: ["==", ["get", "kind"], "country"], layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Medium"], "text-size": 12, "text-transform": "uppercase", "text-letter-spacing": .12 }, paint: { "text-color": "#fff", "text-halo-color": "rgba(0,0,0,.75)", "text-halo-width": 1.6 } },
             { id: "t", type: "symbol", source: "region", "source-layer": "places", minzoom: 4, filter: ["all", ["==", ["get", "kind"], "locality"], ["<=", ["get", "min_zoom"], ["+", ["zoom"], 0]]], layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Italic"], "text-size": 11.5 }, paint: { "text-color": "#fff", "text-halo-color": "rgba(0,0,0,.75)", "text-halo-width": 1.4 } },
             { id: "chg-dot", type: "circle", source: "chg", paint: { "circle-radius": 5, "circle-color": "#fff", "circle-stroke-color": "#e0603c", "circle-stroke-width": 2 } },
-            { id: "m", type: "circle", source: "marks", paint: { "circle-radius": 6, "circle-color": "#e8c46a", "circle-stroke-color": "#fff", "circle-stroke-width": 1.8 } },
+            /* the journey drawn the same way as on the ancient side, white-edged so it reads on the photograph */
+            { id: "legs-edge", type: "line", source: "legs", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "rgba(255,255,255,.85)", "line-width": 5 } },
+            { id: "legs", type: "line", source: "legs", layout: { "line-cap": "round", "line-join": "round" },
+              paint: { "line-color": color, "line-width": 2.8, "line-dasharray": ["case", ["==", ["get", "m"], "land"], ["literal", [3, 2]], ["literal", [1, 0]]] } },
+            { id: "m", type: "circle", source: "marks", filter: ["==", ["get", "k"], "place"], paint: { "circle-radius": 6, "circle-color": "#e8c46a", "circle-stroke-color": "#fff", "circle-stroke-width": 1.8 } },
+            { id: "stop-dot", type: "circle", source: "marks", filter: ["==", ["get", "k"], "stop"], paint: { "circle-radius": 10, "circle-color": color, "circle-stroke-color": "#fff", "circle-stroke-width": 2, "circle-translate": [0, 0] } },
+            { id: "stop-num", type: "symbol", source: "marks", filter: ["==", ["get", "k"], "stop"], layout: { "text-field": ["get", "num"], "text-font": ["Noto Sans Medium"], "text-size": 10.5, "text-allow-overlap": true, "text-ignore-placement": true }, paint: { "text-color": "#fff" } },
             { id: "mn", type: "symbol", source: "marks", filter: ["==", ["get", "first"], true], layout: { "text-field": ["get", "n"], "text-font": ["Noto Sans Medium"], "text-size": 13, "text-variable-anchor": ["left", "right", "top", "bottom"], "text-radial-offset": 1 }, paint: { "text-color": "#fff", "text-halo-color": "rgba(0,0,0,.8)", "text-halo-width": 1.8 } }
           ] } });
       now.touchZoomRotate.disableRotation();
