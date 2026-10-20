@@ -186,6 +186,8 @@ a.btn{text-decoration:none;display:inline-block}
 .jst-atlas-ctl{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:6px;z-index:2}
 .jst-atlas-ctl button{width:36px;height:36px;border-radius:6px;border:1px solid #8a7650;background:#fbf6e8;color:#2b2418;font:18px/1 var(--read);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.2)}
 .jst-atlas-ctl button:hover{background:#fff}
+.jst-atlas{container-type:inline-size}
+@container (max-width:520px){.jst-atlas-year{padding:4px 8px;gap:6px}.jst-atlas-year span{display:none}.jst-atlas-year b{min-width:0;font-size:13px}.jst-atlas-year button{width:26px;height:26px}}
 .jst-atlas-year{position:absolute;left:10px;bottom:10px;right:60px;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;background:rgba(251,246,232,.94);color:#2b2418;border:1px solid #8a7650;border-radius:8px;padding:6px 10px;box-shadow:0 1px 4px rgba(0,0,0,.2);font:14px var(--read)}
 .jst-atlas-year input{flex:1;min-width:120px;accent-color:#8a5a2b}
 .jst-atlas-year button{width:30px;height:30px;border-radius:6px;border:1px solid #8a7650;background:#fffaf0;color:#2b2418;font:18px/1 var(--read);cursor:pointer}
@@ -210,6 +212,12 @@ a.btn{text-decoration:none;display:inline-block}
 .jst-atlas-stops .jst-xt.on{color:var(--gold)}
 .jst-atlas-stops b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;color:#fff;font:700 12px var(--label);flex:none}
 .jst-atlas-leg{margin-left:auto;font:13px var(--label);color:var(--ink);white-space:nowrap}
+.jst-prof{display:block;width:100%;height:auto;background:#f6efdc;border:1px solid #8a7650;border-radius:6px;margin:6px 0 2px}
+.jst-prof .fill{fill-opacity:.25}
+.jst-prof .ln{fill:none;stroke-width:2}
+.jst-prof .ax{font:13px var(--label);fill:#2b2418}
+.jst-prof .tick{stroke:#8a7650;stroke-width:.6;stroke-dasharray:2 3}
+.jst-prof .sea0{stroke:#41646d;stroke-width:1;stroke-dasharray:4 3}
 .jst-atlas-travel{line-height:1.55}
 .jst-atlas-stops .jst-ref{font-size:14px;white-space:nowrap}
 .jst-fam{display:flex;flex-direction:column;gap:12px;margin:6px 0 10px}

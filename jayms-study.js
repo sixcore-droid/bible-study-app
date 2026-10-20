@@ -1068,6 +1068,66 @@
     else t += "ORBIS, the travel model behind the day counts, doesn't include these towns, so there is no day count.";
     return t + "</p>";
   }
+  /* Heights, read in the browser from the relief files (atlas-tiles/relief-*.pmtiles, Mapterhorn terrarium WebP tiles: metres =
+     R*256 + G + B/256 - 32768). The Levant file (zoom 10, about 150 m a pixel) is used inside its box, the region file (zoom 7,
+     about 1 km a pixel) everywhere else. Tiles are decoded once and kept. */
+  var ELEV = { files: {}, tiles: {} };
+  var LEVANT = [29.0, 33.8, 33.6, 37.2];
+  function elevAt(lat, lon) {
+    var lev = lat >= LEVANT[0] && lat <= LEVANT[2] && lon >= LEVANT[1] && lon <= LEVANT[3], file = lev ? "relief-levant" : "relief-region", z = lev ? 10 : 7;
+    return atlasLib().then(function () {
+      var pm = ELEV.files[file] || (ELEV.files[file] = new global.pmtiles.PMTiles(new URL(CFG.base + "atlas-tiles/" + file + ".pmtiles", location.href).href));
+      var n = Math.pow(2, z), fx = (lon + 180) / 360 * n, r = lat * Math.PI / 180, fy = (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * n;
+      var tx = Math.floor(fx), ty = Math.floor(fy), key = file + "/" + z + "/" + tx + "/" + ty;
+      var t = ELEV.tiles[key] || (ELEV.tiles[key] = pm.getZxy(z, tx, ty).then(function (res) {
+        if (!res || !res.data) return null;
+        return createImageBitmap(new Blob([res.data], { type: "image/webp" })).then(function (bm) {
+          var c = document.createElement("canvas"); c.width = bm.width; c.height = bm.height; var x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(bm, 0, 0);
+          return { w: bm.width, h: bm.height, px: x.getImageData(0, 0, bm.width, bm.height).data };
+        });
+      }));
+      return t.then(function (T) {
+        if (!T) return null;
+        var px = Math.min(T.w - 1, Math.floor((fx - tx) * T.w)), py = Math.min(T.h - 1, Math.floor((fy - ty) * T.h)), i = (py * T.w + px) * 4;
+        return Math.round(T.px[i] * 256 + T.px[i + 1] + T.px[i + 2] / 256 - 32768);
+      });
+    });
+  }
+  /* a height profile along a line of points [{ll, n?, sea?}]: about 300 samples, sea legs held at sea level */
+  function profileOf(pts) {
+    var segs = [], total = 0;
+    for (var i = 1; i < pts.length; i++) { var a = pts[i - 1].ll, b = pts[i].ll, d = atlasKm(a, b); segs.push({ a: a, b: b, d: d, sea: !!pts[i].sea, from: total }); total += d; }
+    var step = Math.max(.25, total / 300), samples = [], marks = [{ k: 0, n: pts[0].n }];
+    segs.forEach(function (sg, si) {
+      var m = Math.max(1, Math.ceil(sg.d / step));
+      for (var j = 0; j <= m; j++) { if (j === 0 && si > 0) continue; var f = j / m; samples.push({ k: sg.from + sg.d * f, ll: [sg.a[0] + (sg.b[0] - sg.a[0]) * f, sg.a[1] + (sg.b[1] - sg.a[1]) * f], sea: sg.sea && j > 0 && j < m }); }
+      if (pts[si + 1].n) marks.push({ k: sg.from + sg.d, n: pts[si + 1].n });
+    });
+    return Promise.all(samples.map(function (p) { return p.sea ? Promise.resolve(0) : elevAt(p.ll[0], p.ll[1]); })).then(function (h) {
+      samples.forEach(function (p, i) { p.h = h[i] == null ? null : Math.max(-450, h[i]); });
+      return { total: total, samples: samples, marks: marks };
+    });
+  }
+  function atlasKm(a, b) { var p1 = a[0] * Math.PI / 180, p2 = b[0] * Math.PI / 180, dp = p2 - p1, dl = (b[1] - a[1]) * Math.PI / 180;
+    return 12742 * Math.asin(Math.sqrt(Math.sin(dp / 2) * Math.sin(dp / 2) + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) * Math.sin(dl / 2))); }
+  /* the chart: distance along, height up, sea level marked, each stop ticked; under it the highest, lowest and total climb */
+  function profileSVG(P, color, width) {
+    var S = P.samples.filter(function (p) { return p.h != null; }); if (S.length < 2) return "";
+    var W = Math.max(300, Math.round(width || 640)), H = Math.round(Math.max(150, Math.min(220, W * .32))), L = 52, B = 24, T = 16, lo = Math.min(0, Math.min.apply(null, S.map(function (p) { return p.h; }))), hi = Math.max(50, Math.max.apply(null, S.map(function (p) { return p.h; })));   // drawn at the slot's own width so the lettering stays readable
+    var X = function (k) { return L + (W - L - 8) * k / (P.total || 1); }, Y = function (h) { return T + (H - T - B) * (1 - (h - lo) / ((hi - lo) || 1)); };
+    var line = S.map(function (p, i) { return (i ? "L" : "M") + X(p.k).toFixed(1) + " " + Y(p.h).toFixed(1); }).join("");
+    var climb = 0, fall = 0, ref = S[0].h;   // count a rise or fall once it passes 20 m, so ripples in the height data don't pile up
+    for (var i = 1; i < S.length; i++) { var d = S[i].h - ref; if (d >= 20) { climb += d; ref = S[i].h; } else if (d <= -20) { fall -= d; ref = S[i].h; } }
+    var top = S.reduce(function (a, b) { return b.h > a.h ? b : a; }), bot = S.reduce(function (a, b) { return b.h < a.h ? b : a; });
+    var near = function (p) { return P.marks.reduce(function (a, m) { return Math.abs(m.k - p.k) < Math.abs(a.k - p.k) ? m : a; }).n; };
+    var g = '<svg class="jst-prof" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Height profile">' +
+      (lo < 0 ? '<line x1="' + L + '" x2="' + (W - 8) + '" y1="' + Y(0) + '" y2="' + Y(0) + '" class="sea0"/><text x="' + (W - 10) + '" y="' + (Y(0) - 4) + '" class="ax" text-anchor="end">sea level</text>' : "") +
+      '<path d="' + line + "L" + X(S[S.length - 1].k) + " " + (H - B) + "L" + X(S[0].k) + " " + (H - B) + 'Z" class="fill" fill="' + color + '"/><path d="' + line + '" class="ln" stroke="' + color + '"/>' +
+      '<text x="' + (L - 6) + '" y="' + (Y(hi) + 4) + '" class="ax" text-anchor="end">' + Math.round(hi) + ' m</text><text x="' + (L - 6) + '" y="' + (Y(lo) + 4) + '" class="ax" text-anchor="end">' + Math.round(lo) + " m</text>" +
+      P.marks.map(function (m, i) { return '<line x1="' + X(m.k) + '" x2="' + X(m.k) + '" y1="' + T + '" y2="' + (H - B) + '" class="tick"/><text x="' + X(m.k) + '" y="' + (H - 6) + '" class="ax" text-anchor="' + (i === 0 ? "start" : i === P.marks.length - 1 ? "end" : "middle") + '">' + (P.marks.length > 8 ? i + 1 : esc(m.n)) + "</text>"; }).join("") + "</svg>";
+    return g + '<p class="u-fs14 u-m4-8">Highest ' + Math.round(top.h).toLocaleString() + " m near " + esc(near(top)) + "; lowest " + Math.round(bot.h).toLocaleString() + " m near " + esc(near(bot)) +
+      ". About " + Math.round(climb / 10) * 10 + " m of climbing and " + Math.round(fall / 10) * 10 + " m of descent along the line, " + Math.round(P.total).toLocaleString() + " km. Straight lines between the stops, so a real road's switchbacks add more; heights from Mapterhorn (Copernicus GLO-30).</p>";
+  }
   function realStops(rt) { return rt.stops.filter(function (s) { return !s.via; }); }   // stops, not the unnumbered bends in the road
   function atlasXY(A, ll) { var p = A.proj; return { x: (ll[1] - p.lon0) * p.c * p.k, y: (p.lat1 - ll[0]) * p.k, ll: ll }; }
 
@@ -1150,7 +1210,7 @@
           { id: "relief", type: "hillshade", source: "dem", maxzoom: 9.5, metadata: { layer: "relief" }, paint: { "hillshade-exaggeration": .55, "hillshade-shadow-color": "#5a4630", "hillshade-highlight-color": "#fffaf0", "hillshade-accent-color": "#6e5a40" } },
           { id: "relief2", type: "hillshade", source: "dem2", minzoom: 9.5, metadata: { layer: "relief" }, paint: { "hillshade-exaggeration": .55, "hillshade-shadow-color": "#5a4630", "hillshade-highlight-color": "#fffaf0", "hillshade-accent-color": "#6e5a40" } },
           /* kingdoms in the slider's year (filters set by self.year): Cliopatria borders, then OpenBible's regions as stacked bands */
-          { id: "k-fill", type: "fill", source: "kpoly", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999], paint: { "fill-color": ["get", "c"], "fill-opacity": .2 } },
+          { id: "k-fill", type: "fill", source: "kpoly", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999], paint: { "fill-color": ["get", "c"], "fill-opacity": ["interpolate", ["linear"], ["zoom"], 5, .2, 9, .06] } },   // fades close up so the land and names read
           { id: "k-line", type: "line", source: "kpoly", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999], paint: { "line-color": ["get", "c"], "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1, 9, 2.2], "line-opacity": .9 } },
           { id: "k-reg", type: "fill", source: "kreg", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999], paint: { "fill-color": ["get", "c"], "fill-opacity": .09 } },
           { id: "k-label", type: "symbol", source: "klab", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999],
@@ -1162,12 +1222,12 @@
           { id: "modern-border", type: "line", source: "region", "source-layer": "boundaries", metadata: { layer: "modern" }, filter: ["==", ["get", "kind"], "country"],
             paint: { "line-color": "#8c2f52", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.4, 9, 2.6], "line-dasharray": [3, 2] } },
           { id: "modern-country", type: "symbol", source: "region", "source-layer": "places", metadata: { layer: "modern" }, filter: ["==", ["get", "kind"], "country"],
-            layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Medium"], "text-size": 12, "text-transform": "uppercase", "text-letter-spacing": .12 },
-            paint: { "text-color": "#7d2d48", "text-halo-color": "rgba(255,250,240,.85)", "text-halo-width": 1.6 } },
+            layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Medium"], "text-size": 14, "text-transform": "uppercase", "text-letter-spacing": .12 },
+            paint: { "text-color": "#5c1f36", "text-halo-color": "#fffaf0", "text-halo-width": 2.4 } },
           { id: "modern-city", type: "symbol", source: "region", "source-layer": "places", metadata: { layer: "modern" }, minzoom: 4,
             filter: ["all", ["==", ["get", "kind"], "locality"], ["<=", ["get", "min_zoom"], ["+", ["zoom"], 0]]],
-            layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Italic"], "text-size": 11, "icon-optional": true },
-            paint: { "text-color": "#7d2d48", "text-halo-color": "rgba(255,250,240,.85)", "text-halo-width": 1.4 } },
+            layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Medium"], "text-size": ["interpolate", ["linear"], ["zoom"], 4, 12.5, 9, 15], "icon-optional": true },
+            paint: { "text-color": "#5c1f36", "text-halo-color": "#fffaf0", "text-halo-width": 2.4 } },
         ]).concat([1, 2, 3, 4, 5, 6, 7].reduce(function (out, lv) {   // label level 1 = the whole map in view; each level is about one zoom step
           return out.concat([
             { id: "ancient-sea-" + lv, type: "symbol", source: "labels", minzoom: lv + 1.5, metadata: { layer: "ancient" }, filter: ["all", ["!=", ["get", "k"], "region"], ["==", ["get", "z"], lv]],
@@ -1293,7 +1353,7 @@
     function tie(a, b) { return function () { if (syncing) return; syncing = true; b.jumpTo({ center: a.getCenter(), zoom: a.getZoom() }); syncing = false; }; }
     self.compare = function () {
       if (now) { map.off("move", s1); now.off("move", s2); now.remove(); h2.remove(); wipe.remove(); now = h2 = wipe = null; host.classList.remove("jst-atlas-cmp"); return false; }
-      if (!ready) return false;
+      if (!ready) { queue.push(function () { if (!now) self.compare(); }); return true; }   // asked before the map loaded: do it when it has
       h2 = document.createElement("div"); h2.className = "jst-atlas-gl jst-atlas-now"; holder.parentNode.insertBefore(h2, holder.nextSibling);
       var mk = map.getSource("marks").serialize().data, lg = map.getSource("legs").serialize().data;
       now = new ml.Map({ container: h2, center: map.getCenter(), zoom: map.getZoom(), minZoom: 2, maxZoom: 14, maxBounds: [[-30, -5], [80, 60]], renderWorldCopies: false,
@@ -1305,8 +1365,8 @@
           layers: [
             { id: "sat", type: "raster", source: "sat" },
             { id: "b", type: "line", source: "region", "source-layer": "boundaries", filter: ["==", ["get", "kind"], "country"], paint: { "line-color": "#ffd27a", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.2, 9, 2.4], "line-dasharray": [3, 2] } },
-            { id: "c", type: "symbol", source: "region", "source-layer": "places", filter: ["==", ["get", "kind"], "country"], layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Medium"], "text-size": 12, "text-transform": "uppercase", "text-letter-spacing": .12 }, paint: { "text-color": "#fff", "text-halo-color": "rgba(0,0,0,.75)", "text-halo-width": 1.6 } },
-            { id: "t", type: "symbol", source: "region", "source-layer": "places", minzoom: 4, filter: ["all", ["==", ["get", "kind"], "locality"], ["<=", ["get", "min_zoom"], ["+", ["zoom"], 0]]], layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Italic"], "text-size": 11.5 }, paint: { "text-color": "#fff", "text-halo-color": "rgba(0,0,0,.75)", "text-halo-width": 1.4 } },
+            { id: "c", type: "symbol", source: "region", "source-layer": "places", filter: ["==", ["get", "kind"], "country"], layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Medium"], "text-size": 14, "text-transform": "uppercase", "text-letter-spacing": .12 }, paint: { "text-color": "#fff", "text-halo-color": "#1a1206", "text-halo-width": 2.6, "text-halo-blur": .5 } },
+            { id: "t", type: "symbol", source: "region", "source-layer": "places", minzoom: 4, filter: ["all", ["==", ["get", "kind"], "locality"], ["<=", ["get", "min_zoom"], ["+", ["zoom"], 0]]], layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Medium"], "text-size": ["interpolate", ["linear"], ["zoom"], 4, 12.5, 9, 15] }, paint: { "text-color": "#fff", "text-halo-color": "#1a1206", "text-halo-width": 2.6, "text-halo-blur": .5 } },
             { id: "chg-dot", type: "circle", source: "chg", paint: { "circle-radius": 5, "circle-color": "#fff", "circle-stroke-color": "#e0603c", "circle-stroke-width": 2 } },
             /* the journey drawn the same way as on the ancient side, white-edged so it reads on the photograph */
             { id: "legs-edge", type: "line", source: "legs", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "rgba(255,255,255,.85)", "line-width": 5 } },
@@ -1315,7 +1375,7 @@
             { id: "m", type: "circle", source: "marks", filter: ["==", ["get", "k"], "place"], paint: { "circle-radius": 6, "circle-color": "#e8c46a", "circle-stroke-color": "#fff", "circle-stroke-width": 1.8 } },
             { id: "stop-dot", type: "circle", source: "marks", filter: ["==", ["get", "k"], "stop"], paint: { "circle-radius": 10, "circle-color": color, "circle-stroke-color": "#fff", "circle-stroke-width": 2, "circle-translate": [0, 0] } },
             { id: "stop-num", type: "symbol", source: "marks", filter: ["==", ["get", "k"], "stop"], layout: { "text-field": ["get", "num"], "text-font": ["Noto Sans Medium"], "text-size": 10.5, "text-allow-overlap": true, "text-ignore-placement": true }, paint: { "text-color": "#fff" } },
-            { id: "mn", type: "symbol", source: "marks", filter: ["==", ["get", "first"], true], layout: { "text-field": ["get", "n"], "text-font": ["Noto Sans Medium"], "text-size": 13, "text-variable-anchor": ["left", "right", "top", "bottom"], "text-radial-offset": 1 }, paint: { "text-color": "#fff", "text-halo-color": "rgba(0,0,0,.8)", "text-halo-width": 1.8 } }
+            { id: "mn", type: "symbol", source: "marks", filter: ["==", ["get", "first"], true], layout: { "text-field": ["get", "n"], "text-font": ["Noto Sans Medium"], "text-size": 14, "text-variable-anchor": ["left", "right", "top", "bottom"], "text-radial-offset": 1 }, paint: { "text-color": "#fff", "text-halo-color": "#1a1206", "text-halo-width": 2.8, "text-halo-blur": .5 } }
           ] } });
       now.touchZoomRotate.disableRotation();
       map.on("move", s1 = tie(map, now)); now.on("move", s2 = tie(now, map));
@@ -1360,7 +1420,7 @@
   function atlasMount(host, A, o) {
     var self = {}, impl = null, last = {};
     ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers", "alts", "year", "compare"].forEach(function (k) {
-      self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers" && k !== "alts" && k !== "compare") last[k] = a; if (impl && impl[k]) impl[k].apply(impl, a); };
+      self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers" && k !== "alts" && k !== "compare") last[k] = a; if (impl && impl[k]) return impl[k].apply(impl, a); };
     });
     var dead = false;
     function svg() { if (dead) return; impl = atlasSVG(host, A, o); host.classList.add("jst-atlas-flat"); Object.keys(last).forEach(function (k) { if (impl[k]) impl[k].apply(impl, last[k]); }); }
@@ -1421,7 +1481,7 @@
         if (rt) {
           var rs = realStops(rt);
           h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.ranges[0].replace(/-/, "\u2013")) + " \u00B7 " + rs.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
-            (rt.about ? '<p class="u-m4-8 u-fs16 jst-atlas-about">' + esc(rt.about) + "</p>" : "") + travelLine(rt) +
+            (rt.about ? '<p class="u-m4-8 u-fs16 jst-atlas-about">' + esc(rt.about) + "</p>" : "") + travelLine(rt) + '<div class="lbl u-mt14">Height along the way</div><div data-jst-aprof><p class="sub u-fs14">Reading the heights\u2026</p></div>' +
             '<button class="btn u-mt6" data-jst-aplay>' + (this._play ? "Stop" : "Play the journey") + '</button><ol class="jst-atlas-stops">' +
             rs.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + "</button>" + (s.km ? '<span class="jst-atlas-leg">' + s.km.toLocaleString() + " km" + (s.d ? " \u00B7 " + (s.d < 1 ? "under a day" : s.d.toFixed(s.d < 10 ? 1 : 0) + " days") : "") + "</span>" : "") + '<button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol></div>");
         } else if (!pinned.length) h += none("No place in " + esc(this.o.ref) + " has a known position. Pick a journey above.");
@@ -1473,6 +1533,8 @@
         onPick: function (i) { self.pickItem(i, true); },
         onHint: function () { hint.classList.add("on"); clearTimeout(self._ht); self._ht = setTimeout(function () { hint.classList.remove("on"); }, 1400); } });
       this._pts = pts; this._atlas.fit(pts);
+      var pslot = this.el.querySelector("[data-jst-aprof]");
+      if (rt && pslot && CFG.onlineMaps) profileOf(rt.stops.map(function (s) { return { ll: s.ll, n: s.via ? null : s.n, sea: s.m === "sea" }; })).then(function (P) { if (pslot.isConnected) pslot.innerHTML = profileSVG(P, rt.color, pslot.clientWidth) || '<p class="sub u-fs14">No heights here.</p>'; }, function () { pslot.innerHTML = '<p class="sub u-fs14">The heights didn\'t load here.</p>'; });
       if (this.st.pick) this.pickItem(this.st.pick, false);
     },
     /* show one stop or place under the map: its name, the verse (in the first version the text has), and a link to open it */
@@ -1484,7 +1546,10 @@
       this.el.querySelectorAll("[data-jst-astop]").forEach(function (b) { b.classList.toggle("on", +b.getAttribute("data-jst-astop") === i); });
       var al = this.o.owner ? this.at || [] : [];
       if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + atlasLinks(al, it.n) + "</div>";
-        this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []); return; }
+        this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []);
+        var others = (this._items || []).filter(function (p) { return p !== it && p.ll; });
+        if (others.length && CFG.onlineMaps) box_.querySelector(".jst-atlas-card").insertAdjacentHTML("beforeend", '<div class="lbl u-mt14">Height from ' + esc(it.n) + ' to</div><div class="chips">' + others.slice(0, 12).map(function (p) { return '<button class="chip" data-jst-prof2="' + esc(p.id) + '">' + esc(p.n) + "</button>"; }).join("") + '</div><div data-jst-aprof2></div>');
+        return; }
       this._atlas.alts([]);
       box_.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Stop ' + i + " of " + realStops(rt).length + '</div><span class="tt">' + esc(it.n) + '</span><p class="u-m4-8 u-fs15" data-jst-averse>…</p><button class="jst-ref" data-jst-go="' + esc(it.ref) + '">' + esc(it.ref) + "</button>" + atlasLinks(al, it.n) + "</div>";
       data.text(it.ref).then(function (rows) {
@@ -1518,9 +1583,12 @@
       if (t) { e.stopPropagation(); this.stopPlay(true); this.st.tab = t.getAttribute("data-jst-atab"); this.st.pick = 0; this.paint(); return; }
       var z = e.target.closest("[data-jst-az]");
       if (z && this._atlas) { e.stopPropagation(); var k = z.getAttribute("data-jst-az"), host = this.el.querySelector("[data-jst-atlas]");
-        if (k === "swipe") { this._atlas.compare(); z.classList.toggle("on"); } else if (k === "layers") this._atlas.toggleLayers(); else if (k === "in") this._atlas.zoom(1.6); else if (k === "out") this._atlas.zoom(1 / 1.6); else if (k === "fit") this._atlas.fit(this._pts, 400);
+        if (k === "swipe") { z.classList.toggle("on", !!this._atlas.compare()); } else if (k === "layers") this._atlas.toggleLayers(); else if (k === "in") this._atlas.zoom(1.6); else if (k === "out") this._atlas.zoom(1 / 1.6); else if (k === "fit") this._atlas.fit(this._pts, 400);
         else if (k === "full") { if (document.fullscreenElement) document.exitFullscreen(); else if (host.requestFullscreen) host.requestFullscreen().catch(function () { host.classList.toggle("jst-atlas-big"); }); else host.classList.toggle("jst-atlas-big"); }
         return; }
+      var p2 = e.target.closest("[data-jst-prof2]");
+      if (p2) { e.stopPropagation(); var from = (this._items || [])[this.st.pick - 1], to = (this._items || []).filter(function (p) { return p.id === p2.getAttribute("data-jst-prof2"); })[0], slot = this.el.querySelector("[data-jst-aprof2]");
+        if (from && to && slot) { slot.innerHTML = '<p class="sub u-fs14">Reading the heights\u2026</p>'; profileOf([{ ll: from.ll, n: from.n }, { ll: to.ll, n: to.n }]).then(function (P) { slot.innerHTML = profileSVG(P, "#8a5a2b", slot.clientWidth); }); } return; }
       var pl = e.target.closest("[data-jst-aplay]");
       if (pl) { e.stopPropagation(); if (this._play) this.stopPlay(); else this.play(); return; }
       var s = e.target.closest("[data-jst-astop]");
