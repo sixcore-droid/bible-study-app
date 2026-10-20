@@ -1,1 +1,1 @@
-{"version":"v226","date":"2026-10-20 17:05","note":"Photos: public-domain/CC0 place photos (195 checked at source, 434 places), credits with no Wikipedia names; FIX: Atlas search had reused the name atlasSearch and broke every Logos atlas link since v222; check.py now fails on duplicate function names"}
+{"version":"v227","date":"2026-10-20 17:19","note":"Photos: CC BY and CC BY-SA added with credit (photographer, licence linked); 1,320 photos checked at source, 1,191 places"}
