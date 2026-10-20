@@ -209,6 +209,8 @@ a.btn{text-decoration:none;display:inline-block}
 .jst-atlas-stops .jst-xt{display:flex;align-items:center;gap:10px;font:16px var(--read);color:var(--ink)}
 .jst-atlas-stops .jst-xt.on{color:var(--gold)}
 .jst-atlas-stops b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;color:#fff;font:700 12px var(--label);flex:none}
+.jst-atlas-leg{margin-left:auto;font:13px var(--label);color:var(--ink);white-space:nowrap}
+.jst-atlas-travel{line-height:1.55}
 .jst-atlas-stops .jst-ref{font-size:14px;white-space:nowrap}
 .jst-fam{display:flex;flex-direction:column;gap:12px;margin:6px 0 10px}
 .jst-famrow{border-left:3px solid var(--line);padding-left:12px}

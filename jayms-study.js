@@ -1060,6 +1060,14 @@
     shape(A.w / 2, A.h / 2, A.w); draw();
     return self;
   }
+  /* how far and how long: straight-line km for every leg; ORBIS days for the New Testament legs it covers (scripts/travel.py) */
+  function travelLine(rt) {
+    var t = '<p class="u-fs15 u-m4-8 jst-atlas-travel">About ' + (rt.km || 0).toLocaleString() + " km from stop to stop in straight lines; the roads were longer. ";
+    if (rt.group !== "nt") t += "No day count: ORBIS, the travel model behind the day counts, covers the Roman world around AD 200.";
+    else if (rt.days) t += "<a href=\"https://orbis.stanford.edu/\" target=\"_blank\" rel=\"noopener\">ORBIS</a> puts the " + rt.legs_days + " of " + rt.legs + " legs it covers at about " + rt.days + " days of travel: 30 km a day on its roads, its own sailing times at sea. The figures leave out stays, storms and the time of year, so the real journeys took longer." + (rt.legs_days < rt.legs ? " The other legs reach places ORBIS doesn't include." : "");
+    else t += "ORBIS, the travel model behind the day counts, doesn't include these towns, so there is no day count.";
+    return t + "</p>";
+  }
   function realStops(rt) { return rt.stops.filter(function (s) { return !s.via; }); }   // stops, not the unnumbered bends in the road
   function atlasXY(A, ll) { var p = A.proj; return { x: (ll[1] - p.lon0) * p.c * p.k, y: (p.lat1 - ll[0]) * p.k, ll: ll }; }
 
@@ -1413,9 +1421,9 @@
         if (rt) {
           var rs = realStops(rt);
           h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.ranges[0].replace(/-/, "\u2013")) + " \u00B7 " + rs.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
-            (rt.about ? '<p class="u-m4-8 u-fs16 jst-atlas-about">' + esc(rt.about) + "</p>" : "") +
+            (rt.about ? '<p class="u-m4-8 u-fs16 jst-atlas-about">' + esc(rt.about) + "</p>" : "") + travelLine(rt) +
             '<button class="btn u-mt6" data-jst-aplay>' + (this._play ? "Stop" : "Play the journey") + '</button><ol class="jst-atlas-stops">' +
-            rs.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + '</button><button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol></div>");
+            rs.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + "</button>" + (s.km ? '<span class="jst-atlas-leg">' + s.km.toLocaleString() + " km" + (s.d ? " \u00B7 " + (s.d < 1 ? "under a day" : s.d.toFixed(s.d < 10 ? 1 : 0) + " days") : "") + "</span>" : "") + '<button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol></div>");
         } else if (!pinned.length) h += none("No place in " + esc(this.o.ref) + " has a known position. Pick a journey above.");
       }
       if (!rt) {
