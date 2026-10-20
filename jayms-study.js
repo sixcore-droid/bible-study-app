@@ -1079,10 +1079,22 @@
     ATLAS_GL.catch(function () { ATLAS_GL = null; });
     return ATLAS_GL;
   }
-  var ATLAS_LAYERS = [["relief", "Mountains and valleys", true], ["cover", "Desert, farmland and forest", true], ["ancient", "Ancient names", true], ["modern", "Modern countries and cities", false]];
+  var ATLAS_LAYERS = [["kingdoms", "Kingdoms by year", true], ["relief", "Mountains and valleys", true], ["cover", "Desert, farmland and forest", true], ["ancient", "Ancient names", true], ["modern", "Modern countries and cities", false]];
   function atlasPrefs() { var p = {}; try { p = JSON.parse(localStorage.getItem("ws.atlasLayers") || "{}"); } catch (e) {} ATLAS_LAYERS.forEach(function (l) { if (!(l[0] in p)) p[l[0]] = l[2]; }); return p; }
   function atlasSavePrefs(p) { try { localStorage.setItem("ws.atlasLayers", JSON.stringify(p)); } catch (e) {} }
 
+  /* kingdoms.json (scripts/build-kingdoms.py): borders by year. Year numbers: BC negative. */
+  function yearLabel(y) { return y < 0 ? -y + " BC" : "AD " + y; }
+  function passageYear(K, ref) {
+    var q = data.segs(ref)[0]; if (!K || !q) return null;
+    var row = (K.years || []).filter(function (r) { return r[0] === q.book && q.c1 >= r[1] && q.c1 <= r[2]; })[0];
+    return row ? { y: row[3], note: row[4] } : null;
+  }
+  var KCOL = { "Kingdom of Israel": "#6f97bf", "Kingdom of Judah": "#c79a3e", "Philistia": "#9d7bb5", "Neo-Assyrian Empire": "#b0573f", "Assyria": "#b0573f",
+    "Neo-Babylonian Empire": "#8f6d3a", "Babylonia": "#8f6d3a", "Achaemenid Empire": "#6c8f5a", "Roman Empire": "#8c4a6b", "Roman Republic": "#8c4a6b",
+    "Judea": "#c79a3e", "New Kingdom of Egypt": "#c9844f", "Moab": "#b98a5a", "Edom": "#a35d4a", "Ammon": "#7d9a6b", "Aram-Damascus": "#5f8b8f" };
+  var KPAL = ["#c98b6b", "#8fae7e", "#b79bc9", "#7fa6c2", "#d4b26a", "#c27a8e", "#86b3a8", "#a99a72", "#b5866a", "#8d9fd1"];
+  function kColor(n) { if (KCOL[n]) return KCOL[n]; var h = 0; for (var i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) >>> 0; return KPAL[h % KPAL.length]; }
   function atlasGL(ml, host, A, o) {
     var self = { gl: true }, abs = function (p) { return new URL(CFG.base + p, location.href).href; }, prefs = atlasPrefs();
     var holder = document.createElement("div"); holder.className = "jst-atlas-gl"; host.insertBefore(holder, host.firstChild);
@@ -1118,7 +1130,7 @@
         holy: { type: "vector", url: "pmtiles://" + abs("atlas-tiles/base-holyland.pmtiles") },
         dem: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-region.pmtiles"), encoding: "terrarium", tileSize: 512, attribution: "Relief: Mapterhorn (Copernicus GLO-30)" },
         dem2: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-levant.pmtiles"), encoding: "terrarium", tileSize: 512 },
-        labels: { type: "geojson", data: labels }, alts: { type: "geojson", data: fc([]) }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
+        labels: { type: "geojson", data: labels }, kpoly: { type: "geojson", data: fc([]) }, kreg: { type: "geojson", data: fc([]) }, klab: { type: "geojson", data: fc([]) }, alts: { type: "geojson", data: fc([]) }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
       },
       layers: [{ id: "sea", type: "background", paint: { "background-color": SEA } }]
         .concat(base("region"), base("paul", 8), base("holy", 10))
@@ -1126,6 +1138,16 @@
           { id: "ne-river", type: "line", source: "rivers", maxzoom: 8, layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#7f9ea6", "line-width": ["interpolate", ["linear"], ["zoom"], 3, .6, 8, 1.4] } },
           { id: "relief", type: "hillshade", source: "dem", maxzoom: 9.5, metadata: { layer: "relief" }, paint: { "hillshade-exaggeration": .55, "hillshade-shadow-color": "#5a4630", "hillshade-highlight-color": "#fffaf0", "hillshade-accent-color": "#6e5a40" } },
           { id: "relief2", type: "hillshade", source: "dem2", minzoom: 9.5, metadata: { layer: "relief" }, paint: { "hillshade-exaggeration": .55, "hillshade-shadow-color": "#5a4630", "hillshade-highlight-color": "#fffaf0", "hillshade-accent-color": "#6e5a40" } },
+          /* kingdoms in the slider's year (filters set by self.year): Cliopatria borders, then OpenBible's regions as stacked bands */
+          { id: "k-fill", type: "fill", source: "kpoly", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999], paint: { "fill-color": ["get", "c"], "fill-opacity": .2 } },
+          { id: "k-line", type: "line", source: "kpoly", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999], paint: { "line-color": ["get", "c"], "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1, 9, 2.2], "line-opacity": .9 } },
+          { id: "k-reg", type: "fill", source: "kreg", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999], paint: { "fill-color": ["get", "c"], "fill-opacity": .09 } },
+          { id: "k-label", type: "symbol", source: "klab", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999],
+            layout: { "text-field": ["upcase", ["get", "l"]], "text-font": ["Noto Sans Medium"], "text-size": ["interpolate", ["linear"], ["zoom"], 3, 10, 8, 13], "text-letter-spacing": .12, "text-max-width": 9, "symbol-sort-key": ["-", 0, ["get", "a"]] },
+            paint: { "text-color": ["get", "d"], "text-halo-color": "rgba(250,244,226,.9)", "text-halo-width": 1.6 } },
+          { id: "k-label-key", type: "symbol", source: "klab", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999],   // Israel, Judah and the empires that ruled them: always named
+            layout: { "text-field": ["upcase", ["get", "l"]], "text-font": ["Noto Sans Medium"], "text-size": ["interpolate", ["linear"], ["zoom"], 3, 10.5, 8, 14], "text-letter-spacing": .12, "text-max-width": 9, "text-allow-overlap": true },
+            paint: { "text-color": ["get", "d"], "text-halo-color": "rgba(250,244,226,.95)", "text-halo-width": 2 } },
           { id: "modern-border", type: "line", source: "region", "source-layer": "boundaries", metadata: { layer: "modern" }, filter: ["==", ["get", "kind"], "country"],
             paint: { "line-color": "#8c2f52", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.4, 9, 2.6], "line-dasharray": [3, 2] } },
           { id: "modern-country", type: "symbol", source: "region", "source-layer": "places", metadata: { layer: "modern" }, filter: ["==", ["get", "kind"], "country"],
@@ -1186,20 +1208,49 @@
       if (e.id === "jst-arrow") sdf("jst-arrow", function (x) { x.beginPath(); x.moveTo(10, 10); x.lineTo(40, 24); x.lineTo(10, 38); x.closePath(); x.fill(); });
     });
     function applyPrefs() {
-      (map.getStyle().layers || []).forEach(function (l) { var g = l.metadata && l.metadata.layer; if (g) map.setLayoutProperty(l.id, "visibility", prefs[g] ? "visible" : "none"); });
+      (map.getStyle().layers || []).forEach(function (l) { var g = l.metadata && l.metadata.layer; if (!g) return;
+        var on = prefs[g] && !(prefs.kingdoms && /^ancient-region-/.test(l.id));   // with kingdoms on, the kingdoms name the land; the fixed region names would say it twice
+        map.setLayoutProperty(l.id, "visibility", on ? "visible" : "none"); });
     }
-    var ready = false, queue = [];
-    map.on("load", function () { ready = true; applyPrefs(); var at = holder.querySelector(".maplibregl-compact-show"); if (at) at.classList.remove("maplibregl-compact-show");   // credits start folded (the i button opens them)
+    var ready = false, queue = [];   // calls made before the map loads wait here
+    /* the year bar: a slider from 2500 BC to AD 400, opening on the passage's own year */
+    var yr = o.year != null ? o.year : -1000, ybar = document.createElement("div"); ybar.className = "jst-atlas-year";
+    ybar.innerHTML = '<button data-ystep="-10" aria-label="Ten years earlier">\u2039</button><input type="range" min="-2500" max="400" step="10" aria-label="Year"><button data-ystep="10" aria-label="Ten years later">\u203A</button><b></b><span></span>';
+    host.appendChild(ybar);
+    var yin = ybar.querySelector("input"), ylab = ybar.querySelector("b"), ynote = ybar.querySelector("span");
+    yin.value = yr; ynote.textContent = o.yearNote || "";
+    function yfilter(y) { return ["all", ["<=", ["get", "f"], y], [">=", ["get", "t"], y]]; }
+    self.year = function (y) { yr = Math.max(-2500, Math.min(400, Math.round(y))); yin.value = yr; ylab.textContent = yearLabel(yr);
+      when(function () { ["k-fill", "k-line", "k-reg"].forEach(function (id) { map.setFilter(id, yfilter(yr)); });
+        map.setFilter("k-label", ["all", yfilter(yr), ["<", ["get", "a"], 1000]]); map.setFilter("k-label-key", ["all", yfilter(yr), [">=", ["get", "a"], 1000]]); }); };
+    yin.addEventListener("input", function () { ynote.textContent = ""; self.year(+yin.value); });
+    ybar.addEventListener("click", function (e) { var b = e.target.closest("[data-ystep]"); if (b) { e.stopPropagation(); ynote.textContent = ""; self.year(yr + +b.getAttribute("data-ystep")); } });
+    ybar.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
+    function showYearBar() { ybar.style.display = prefs.kingdoms ? "" : "none"; }
+    showYearBar(); self.year(yr);
+    map.on("load", function () { ready = true; applyPrefs();
+      getJSON("kingdoms.json").then(function (K) {   // 5 MB: fetched once, the first time a map opens, then cached
+        if (!K || !map.getSource("kpoly")) return;
+        var col = function (f) { var n = f.properties.n, c = kColor(n); f.properties.c = c; f.properties.d = c; f.properties.l = n.replace(/^(Kingdom|Kingdoms) of (the )?/, ""); if (KCOL[n]) f.properties.a = 1000 + (f.properties.a || 0); return f; };   // the Bible's own kingdoms get first claim on label space
+        map.getSource("kpoly").setData(fc(K.polities.features.map(col))); map.getSource("kreg").setData(fc(K.regions.features.map(col)));
+        map.getSource("klab").setData(fc(K.labels.features.map(col))); self.year(yr);
+      }); var at = holder.querySelector(".maplibregl-compact-show"); if (at) at.classList.remove("maplibregl-compact-show");   // credits start folded (the i button opens them)
       queue.forEach(function (f) { f(); }); queue = []; });
     function when(f) { if (ready) f(); else queue.push(f); }
     map.on("click", function (e) {
       var f = map.queryRenderedFeatures(e.point, { layers: ["stop-dot", "place-pin", "mark-name"] })[0];
-      if (f && o.onPick) o.onPick(f.properties.i);
+      if (f && o.onPick) { o.onPick(f.properties.i); return; }
+      var k = prefs.kingdoms && map.queryRenderedFeatures(e.point, { layers: ["k-fill", "k-reg"] })[0];
+      if (k && o.onKingdom) o.onKingdom(k.properties, yr);
     });
     map.on("mousemove", function (e) { map.getCanvas().style.cursor = map.queryRenderedFeatures(e.point, { layers: ["stop-dot", "place-pin"] }).length ? "pointer" : ""; });
 
     function lls(pts) { return (pts || []).map(function (p) { return p.ll; }).filter(Boolean); }
+    var touched = false, lastFit = null;
+    map.on("dragstart", function (e) { if (e.originalEvent) touched = true; });
+    map.on("zoomstart", function (e) { if (e.originalEvent) touched = true; });
     self.fit = function (pts, ms, minW) {
+      lastFit = [pts, 0, minW];
       when(function () {
         var a = lls(pts), w = holder.clientWidth || 400;
         if (!a.length) { map.fitBounds([[-12, 6], [62, 50]], { duration: ms || 0 }); return; }
@@ -1228,27 +1279,27 @@
       if (menu) { menu.remove(); menu = null; return; }
       menu = document.createElement("div"); menu.className = "jst-atlas-menu";
       menu.innerHTML = '<div class="lbl">Layers</div>' + ATLAS_LAYERS.map(function (l) { return '<label><input type="checkbox" data-l="' + l[0] + '"' + (prefs[l[0]] ? " checked" : "") + "> " + esc(l[1]) + "</label>"; }).join("");
-      menu.addEventListener("change", function (e) { var k = e.target.getAttribute("data-l"); prefs[k] = e.target.checked; atlasSavePrefs(prefs); when(applyPrefs); });
+      menu.addEventListener("change", function (e) { var k = e.target.getAttribute("data-l"); prefs[k] = e.target.checked; atlasSavePrefs(prefs); when(applyPrefs); showYearBar(); });
       menu.addEventListener("click", function (e) { e.stopPropagation(); });
       host.appendChild(menu);
     };
-    var ro = global.ResizeObserver ? new ResizeObserver(function () { map.resize(); }) : null;
+    var ro = global.ResizeObserver ? new ResizeObserver(function () { map.resize(); if (!touched && lastFit && ready) self.fit.apply(null, lastFit); }) : null;   // keep the passage in frame when the panel changes width, until the reader moves the map
     if (ro) ro.observe(host);
     function esc_(e) { if (e.key === "Escape" && host.classList.contains("jst-atlas-big")) { e.stopPropagation(); host.classList.remove("jst-atlas-big"); } }
     document.addEventListener("keydown", esc_, true);
-    self.destroy = function () { if (ro) ro.disconnect(); document.removeEventListener("keydown", esc_, true); if (menu) menu.remove(); try { map.remove(); } catch (e) {} holder.remove(); };
-    self.loaded = new Promise(function (ok, no) { map.on("load", ok); map.on("error", function (e) { if (global.console) console.warn("Atlas map:", e && e.error); if (!ready) no(e && e.error); }); });
+    self.destroy = function () { if (ro) ro.disconnect(); document.removeEventListener("keydown", esc_, true); if (menu) menu.remove(); ybar.remove(); try { map.remove(); } catch (e) {} holder.remove(); };
+    self.loaded = new Promise(function (ok, no) { map.on("load", ok); map.on("error", function (e) { if (global.console) console.warn("Atlas map:", e && e.error); if (!ready && !/does not exist in the map's style/.test(String(e && e.error && e.error.message))) no(e && e.error); }) });   // a query made too early is not a failed map
     return self;
   }
 
   /* one controller whatever draws the map: calls made before MapLibre is up are replayed on it, or on the drawn map if it fails */
   function atlasMount(host, A, o) {
     var self = {}, impl = null, last = {};
-    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers", "alts"].forEach(function (k) {
+    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers", "alts", "year"].forEach(function (k) {
       self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers" && k !== "alts") last[k] = a; if (impl && impl[k]) impl[k].apply(impl, a); };
     });
     var dead = false;
-    function svg() { if (dead) return; impl = atlasSVG(host, A, o); host.classList.add("jst-atlas-flat"); Object.keys(last).forEach(function (k) { impl[k].apply(impl, last[k]); }); }
+    function svg() { if (dead) return; impl = atlasSVG(host, A, o); host.classList.add("jst-atlas-flat"); Object.keys(last).forEach(function (k) { if (impl[k]) impl[k].apply(impl, last[k]); }); }
     if (!CFG.onlineMaps || !global.WebGLRenderingContext) svg();
     else atlasLib().then(function (ml) {
       if (dead) return;
@@ -1288,7 +1339,7 @@
       top.slice(0, full ? 5 : 3).map(function (a) { return esc(a[0]) + " (" + a[3] + ")"; }).join(", ") + "</p>";
   }
   define("Maps", { id: "maps", label: "Maps", name: "Maps of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>' }, {
-    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json"), this.o.owner ? getJSON("atlas-pages.json").catch(function () { return null; }) : null, data.places()]).then(function (r) { if (r[5] && r[5].pages) ATLAS_PAGES = r[5].pages; self.pd = r[6]; self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
+    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json"), this.o.owner ? getJSON("atlas-pages.json").catch(function () { return null; }) : null, data.places(), getJSON("kingdoms.json").catch(function () { return null; })]).then(function (r) { if (r[5] && r[5].pages) ATLAS_PAGES = r[5].pages; self.pd = r[6]; self.K = r[7]; self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
     /* the passage's places from the shared list, with STEPBible's one-line description and its name (the Biblica map index uses it) */
     places: function () { var nm = this.nm; return placesIn(this.pd, this.o.ref).map(function (p) { var st = nm && p.step && nm.p[p.step[0]]; return Object.assign(p, { b: st && st.b, sn: st && st.n }); }); },
     route: function () { var A = this.A, t = this.st.tab; return A && t && t !== "here" ? A.routes.filter(function (r) { return r.id === t; })[0] : null; },
@@ -1318,7 +1369,7 @@
       }
       h += '<div class="lbl u-mt14">Bible maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>" + (ms.length ? box("witness", "", '<div class="item">' + ms.map(function (m) { return '<p class="u-m5"><button class="tt jst-xt" data-jst-pmap="' + esc(m.id) + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button></p>"; }).join("") + "</div>") : none("No Biblica map is tied to this passage."));
       if (this.o.owner && (this.at || []).length) h += '<div class="lbl u-mt14">My atlases in Logos (' + this.at.length + ")</div>" + '<p class="ctx u-fs13">Each one searches that atlas for ' + esc(this.o.ref) + ': pick a result to open the page.</p>' + this.at.map(function (x) { return '<p class="u-m5">' + outlink(atlasForRef(x, self.o.ref), esc(x[1])) + ((x[6] || "").indexOf("b") > -1 ? '<span class="sub u-fs13"> \u00B7 ' + esc(self.o.ref) + "</span>" : "") + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
-      h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Places, sites and how sure scholars are: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0; a score of 500 or more is high confidence); <a href="https://pleiades.stoa.org/" target="_blank" rel="noopener">Pleiades</a> and <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
+      h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Kingdoms by year: <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener">Cliopatria</a> (Seshat, CC BY 4.0) and OpenBible.info. Places, sites and how sure scholars are: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0; a score of 500 or more is high confidence); <a href="https://pleiades.stoa.org/" target="_blank" rel="noopener">Pleiades</a> and <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen.</p>';
       return { kick: "Maps · " + (rt ? rt.stops.length + " stops" : places.length + " places"), title: rt ? rt.name : "Where this happens", body: h };
     },
     after: function () {
@@ -1338,7 +1389,13 @@
       }
       pts = marks;
       var hint = host.querySelector(".jst-atlas-hint");
+      var py = passageYear(this.K, this.o.ref);
       this._atlas = atlasMount(host, A, { marks: marks, legs: legs, color: rt && rt.color, label: rt ? rt.name : "Places in " + this.o.ref,
+        year: py ? py.y : null, yearNote: py ? (py.note || this.o.ref + ": " + yearLabel(py.y)) : "No date for " + this.o.ref,
+        onKingdom: function (k, y) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
+          b.innerHTML = '<div class="jst-atlas-card"><div class="lbl">In ' + esc(yearLabel(y)) + '</div><span class="tt">' + esc(k.n) + '</span><p class="u-fs14 u-m4-8">' +
+            (k.why ? esc(k.why) + " Its area: OpenBible.info, drawn as bands from likely to possible." : "This border: " + esc(yearLabel(k.f)) + " to " + esc(yearLabel(k.t)) + ", from Cliopatria (Seshat), one reading of borders historians still argue over.") +
+            "</p>" + (k.w ? outlink("https://en.wikipedia.org/wiki/" + encodeURIComponent(String(k.w).replace(/ /g, "_")), "Wikipedia") : "") + "</div>"; },
         onPick: function (i) { self.pickItem(i, true); },
         onHint: function () { hint.classList.add("on"); clearTimeout(self._ht); self._ht = setTimeout(function () { hint.classList.remove("on"); }, 1400); } });
       this._pts = pts; this._atlas.fit(pts);

@@ -171,6 +171,12 @@ a.btn{text-decoration:none;display:inline-block}
 .jst-atlas-ctl{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:6px;z-index:2}
 .jst-atlas-ctl button{width:36px;height:36px;border-radius:6px;border:1px solid #8a7650;background:#fbf6e8;color:#2b2418;font:18px/1 var(--read);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.2)}
 .jst-atlas-ctl button:hover{background:#fff}
+.jst-atlas-year{position:absolute;left:10px;bottom:10px;right:60px;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;background:rgba(251,246,232,.94);color:#2b2418;border:1px solid #8a7650;border-radius:8px;padding:6px 10px;box-shadow:0 1px 4px rgba(0,0,0,.2);font:14px var(--read)}
+.jst-atlas-year input{flex:1;min-width:120px;accent-color:#8a5a2b}
+.jst-atlas-year button{width:30px;height:30px;border-radius:6px;border:1px solid #8a7650;background:#fffaf0;color:#2b2418;font:18px/1 var(--read);cursor:pointer}
+.jst-atlas-year b{font:600 15px var(--read);min-width:66px}
+.jst-atlas-year span{flex-basis:100%;font-size:13px}
+.jst-atlas-year span:empty{display:none}
 .jst-atlas-hint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:rgba(26,28,32,.85);color:#f6efdc;font:13px var(--read);padding:6px 12px;border-radius:6px;opacity:0;transition:opacity .25s;pointer-events:none}
 .jst-atlas-hint.on{opacity:1}
 #mapbtn.empty{opacity:.55}
