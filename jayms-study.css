@@ -142,6 +142,15 @@ a.btn{text-decoration:none;display:inline-block}
 .jst-atlas.jst-atlas-big{position:fixed;inset:0;z-index:100000}
 #panel:has(.jst-atlas-big){z-index:100000}   /* the sticky panel is its own layer: lift it over the top bar */
 .jst-atlas-svg{display:block;width:100%;height:100%;cursor:grab}
+.jst-atlas .jst-atlas-gl{position:absolute;inset:0}   /* beats maplibre-gl.css position:relative */
+.jst-atlas-gl .maplibregl-ctrl-attrib{font:11px var(--read);background:rgba(251,246,232,.85);color:#2b2418}
+.jst-atlas-gl .maplibregl-ctrl-attrib a{color:#2b2418}
+.jst-atlas-gl .maplibregl-cooperative-gesture-screen{font:15px/1.4 var(--read)}
+.jst-atlas-flat [data-jst-az=layers]{display:none}
+.jst-atlas-menu{position:absolute;top:10px;right:56px;z-index:3;background:#fbf6e8;color:#2b2418;border:1px solid #8a7650;border-radius:8px;padding:10px 14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.25);font:15px var(--read)}
+.jst-atlas-menu .lbl{color:#2b2418}
+.jst-atlas-menu label{display:flex;align-items:center;gap:8px;cursor:pointer;white-space:nowrap}
+.jst-atlas-menu input{width:18px;height:18px;accent-color:#8a5a2b}
 .jst-atlas-svg:active{cursor:grabbing}
 .jst-atlas-svg .sea{fill:#c4d6d6}
 .jst-atlas-svg .land{fill:#f1e6c8;stroke:#8a7650;stroke-linejoin:round}

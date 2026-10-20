@@ -915,7 +915,7 @@
      seven churches), each stop numbered with the verse that names it. The journey whose chapters you are reading opens first.
      Below: each place's Biblica maps and the passage's own Biblica maps. atlasMount() is the map on its own, for any panel. */
   var SVGNS = "http://www.w3.org/2000/svg";
-  function atlasMount(host, A, o) {
+  function atlasSVG(host, A, o) {   // the drawn map: the fallback where MapLibre can't run
     /* o: {marks: [{x, y, n, k: "place"|"stop", num, color, i}], legs: [{x1, y1, x2, y2, m: "land"|"sea"}], color, onPick(i)} */
     var svg = document.createElementNS(SVGNS, "svg"), vb = { x: 0, y: 0, w: A.w, h: A.h }, marks = [], labs = [], self = {};
     svg.setAttribute("class", "jst-atlas-svg"); svg.setAttribute("role", "img"); svg.setAttribute("aria-label", o.label || "Map");
@@ -1043,7 +1043,184 @@
     shape(A.w / 2, A.h / 2, A.w); draw();
     return self;
   }
-  function atlasXY(A, ll) { var p = A.proj; return { x: (ll[1] - p.lon0) * p.c * p.k, y: (p.lat1 - ll[0]) * p.k }; }
+  function atlasXY(A, ll) { var p = A.proj; return { x: (ll[1] - p.lon0) * p.c * p.k, y: (p.lat1 - ll[0]) * p.k, ll: ll }; }
+
+  /* The atlas on MapLibre (vendor/maplibre, kept in the repo so the desk works offline) reading map files from atlas-tiles/
+     (scripts/fetch-atlas-tiles.sh): Protomaps land, sea, rivers and land cover in three detail levels (the whole region to
+     zoom 8, Paul's world to 10, the Holy Land to 13), Mapterhorn relief (Copernicus GLO-30), and the modern borders as a layer
+     you can switch on. Where MapLibre or the files can't load (claude.ai), atlasMount falls back to the drawn map (atlasSVG). */
+  var ATLAS_GL = null;
+  function atlasLib() {
+    if (ATLAS_GL) return ATLAS_GL;
+    var base = new URL(CFG.base + "vendor/maplibre/", location.href).href;
+    ATLAS_GL = new Promise(function (ok, no) {
+      if (!document.querySelector("link[data-ml]")) { var css = document.createElement("link"); css.rel = "stylesheet"; css.href = base + "maplibre-gl.css"; css.setAttribute("data-ml", ""); document.head.appendChild(css); }
+      var sc = document.createElement("script"); sc.src = base + "pmtiles.js"; sc.onerror = no;
+      sc.onload = function () { import(base + "maplibre-gl.mjs").then(function (m) { var ml = m.default || m; ml.addProtocol("pmtiles", new global.pmtiles.Protocol().tile); ok(ml); }, no); };
+      document.head.appendChild(sc);
+    });
+    ATLAS_GL.catch(function () { ATLAS_GL = null; });
+    return ATLAS_GL;
+  }
+  var ATLAS_LAYERS = [["relief", "Mountains and valleys", true], ["cover", "Desert, farmland and forest", true], ["ancient", "Ancient names", true], ["modern", "Modern countries and cities", false]];
+  function atlasPrefs() { var p = {}; try { p = JSON.parse(localStorage.getItem("ws.atlasLayers") || "{}"); } catch (e) {} ATLAS_LAYERS.forEach(function (l) { if (!(l[0] in p)) p[l[0]] = l[2]; }); return p; }
+  function atlasSavePrefs(p) { try { localStorage.setItem("ws.atlasLayers", JSON.stringify(p)); } catch (e) {} }
+
+  function atlasGL(ml, host, A, o) {
+    var self = { gl: true }, abs = function (p) { return new URL(CFG.base + p, location.href).href; }, prefs = atlasPrefs();
+    var holder = document.createElement("div"); holder.className = "jst-atlas-gl"; host.insertBefore(holder, host.firstChild);
+    var SEA = "#b7cdd1", LAND = "#efe5c9", INK = "#2b2418";
+    function base(src, minz, maxz) {
+      var z = function (l) { if (minz) l.minzoom = minz; if (maxz) l.maxzoom = maxz; return l; };
+      return [
+        z({ id: src + "-earth", type: "fill", source: src, "source-layer": "earth", paint: { "fill-color": LAND } }),
+        z({ id: src + "-cover", type: "fill", source: src, "source-layer": "landcover", metadata: { layer: "cover" },
+          paint: { "fill-color": ["match", ["get", "kind"], "forest", "#cdd3a4", "grassland", "#dfdcb2", "scrub", "#e3d9b0", "farmland", "#e1dcb5", "barren", "#f3e4bf", "glacier", "#fbfbf6", "#efe5c9"], "fill-opacity": .75 } }),
+        z({ id: src + "-water", type: "fill", source: src, "source-layer": "water", filter: ["in", ["geometry-type"], ["literal", ["Polygon", "MultiPolygon"]]], paint: { "fill-color": SEA } }),
+        z({ id: src + "-coast", type: "line", source: src, "source-layer": "water", filter: ["in", ["geometry-type"], ["literal", ["Polygon", "MultiPolygon"]]], paint: { "line-color": "#8a7650", "line-width": ["interpolate", ["linear"], ["zoom"], 3, .4, 10, 1] } }),
+        z({ id: src + "-river", type: "line", source: src, "source-layer": "water", filter: ["all", ["in", ["geometry-type"], ["literal", ["LineString", "MultiLineString"]]], ["==", ["get", "kind"], "river"]],
+          paint: { "line-color": "#7f9ea6", "line-width": ["interpolate", ["linear"], ["zoom"], 4, .5, 9, 1.4, 13, 2.5] } })
+      ];
+    }
+    var label = function (t, lat, lon, k, z) { return { type: "Feature", geometry: { type: "Point", coordinates: [lon, lat] }, properties: { t: t, k: k, z: z } }; };
+    var labels = { type: "FeatureCollection", features: A.labels.filter(function (l) { return l.length > 5; }).map(function (l) { return label(l[0], l[5], l[6], l[3], l[4]); }) };
+    var fc = function (a) { return { type: "FeatureCollection", features: a }; };
+    var pt = function (ll, p) { return { type: "Feature", geometry: { type: "Point", coordinates: [ll[1], ll[0]] }, properties: p }; };
+    var at = {};
+    var marks = fc((o.marks || []).filter(function (m) { return m.ll; }).map(function (m) {
+      var key = m.ll[0].toFixed(3) + "," + m.ll[1].toFixed(3), nth = at[key] = (at[key] || 0) + 1;
+      return pt(m.ll, { i: m.i, n: m.n, k: m.k, num: m.num ? String(m.num) : "", nth: nth - 1, first: nth === 1 }); }));
+    var legs = fc((o.legs || []).filter(function (g) { return g.ll1 && g.ll2; }).map(function (g, i) {
+      return { type: "Feature", geometry: { type: "LineString", coordinates: [[g.ll1[1], g.ll1[0]], [g.ll2[1], g.ll2[0]]] }, properties: { i: i + 1, m: g.m } }; }));
+    var color = o.color || "#7a2e2e";
+    var style = {
+      version: 8, glyphs: abs("vendor/fonts/") + "{fontstack}/{range}.pbf",   // added after URL() so the braces stay unencoded
+      sources: {
+        region: { type: "vector", url: "pmtiles://" + abs("atlas-tiles/base-region.pmtiles"), attribution: "© OpenStreetMap · Protomaps" },
+        paul: { type: "vector", url: "pmtiles://" + abs("atlas-tiles/base-paul.pmtiles") },
+        holy: { type: "vector", url: "pmtiles://" + abs("atlas-tiles/base-holyland.pmtiles") },
+        dem: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-region.pmtiles"), encoding: "terrarium", tileSize: 512, attribution: "Relief: Mapterhorn (Copernicus GLO-30)" },
+        dem2: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-levant.pmtiles"), encoding: "terrarium", tileSize: 512 },
+        labels: { type: "geojson", data: labels }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
+      },
+      layers: [{ id: "sea", type: "background", paint: { "background-color": SEA } }]
+        .concat(base("region"), base("paul", 8), base("holy", 10))
+        .concat([
+          { id: "ne-river", type: "line", source: "rivers", maxzoom: 8, layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#7f9ea6", "line-width": ["interpolate", ["linear"], ["zoom"], 3, .6, 8, 1.4] } },
+          { id: "relief", type: "hillshade", source: "dem", maxzoom: 9.5, metadata: { layer: "relief" }, paint: { "hillshade-exaggeration": .55, "hillshade-shadow-color": "#5a4630", "hillshade-highlight-color": "#fffaf0", "hillshade-accent-color": "#6e5a40" } },
+          { id: "relief2", type: "hillshade", source: "dem2", minzoom: 9.5, metadata: { layer: "relief" }, paint: { "hillshade-exaggeration": .55, "hillshade-shadow-color": "#5a4630", "hillshade-highlight-color": "#fffaf0", "hillshade-accent-color": "#6e5a40" } },
+          { id: "modern-border", type: "line", source: "region", "source-layer": "boundaries", metadata: { layer: "modern" }, filter: ["==", ["get", "kind"], "country"],
+            paint: { "line-color": "#8c2f52", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.4, 9, 2.6], "line-dasharray": [3, 2] } },
+          { id: "modern-country", type: "symbol", source: "region", "source-layer": "places", metadata: { layer: "modern" }, filter: ["==", ["get", "kind"], "country"],
+            layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Medium"], "text-size": 12, "text-transform": "uppercase", "text-letter-spacing": .12 },
+            paint: { "text-color": "#7d2d48", "text-halo-color": "rgba(255,250,240,.85)", "text-halo-width": 1.6 } },
+          { id: "modern-city", type: "symbol", source: "region", "source-layer": "places", metadata: { layer: "modern" }, minzoom: 4,
+            filter: ["all", ["==", ["get", "kind"], "locality"], ["<=", ["get", "min_zoom"], ["+", ["zoom"], 0]]],
+            layout: { "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Italic"], "text-size": 11, "icon-optional": true },
+            paint: { "text-color": "#7d2d48", "text-halo-color": "rgba(255,250,240,.85)", "text-halo-width": 1.4 } },
+        ]).concat([1, 2, 3, 4, 5, 6, 7].reduce(function (out, lv) {   // label level 1 = the whole map in view; each level is about one zoom step
+          return out.concat([
+            { id: "ancient-sea-" + lv, type: "symbol", source: "labels", minzoom: lv + 1.5, metadata: { layer: "ancient" }, filter: ["all", ["!=", ["get", "k"], "region"], ["==", ["get", "z"], lv]],
+              layout: { "text-field": ["get", "t"], "text-font": ["Noto Sans Italic"], "text-size": ["match", ["get", "k"], "sea", 14, 12] },
+              paint: { "text-color": "#41646d", "text-halo-color": "rgba(196,214,214,.8)", "text-halo-width": 1.2 } },
+            { id: "ancient-region-" + lv, type: "symbol", source: "labels", minzoom: lv + 1.5, metadata: { layer: "ancient" }, filter: ["all", ["==", ["get", "k"], "region"], ["==", ["get", "z"], lv]],
+              layout: { "text-field": ["get", "t"], "text-font": ["Noto Sans Medium"], "text-size": 11.5, "text-letter-spacing": .22 },
+              paint: { "text-color": "#6b5a3a", "text-halo-color": "rgba(241,230,200,.9)", "text-halo-width": 1.6 } }]);
+        }, [])).concat([
+          { id: "legs", type: "line", source: "legs", layout: { "line-cap": "round", "line-join": "round" },
+            paint: { "line-color": color, "line-width": 2.6, "line-dasharray": ["case", ["==", ["get", "m"], "land"], ["literal", [3, 2]], ["literal", [1, 0]]] } },
+          { id: "arrows", type: "symbol", source: "legs", layout: { "symbol-placement": "line-center", "icon-image": "jst-arrow", "icon-size": .6, "icon-rotation-alignment": "map", "icon-allow-overlap": true, "icon-ignore-placement": true },
+            paint: { "icon-color": color } },
+          { id: "place-dot", type: "circle", source: "marks", filter: ["==", ["get", "k"], "place"], paint: { "circle-radius": 6.5, "circle-color": "#c9a24c", "circle-stroke-color": "#5a3c10", "circle-stroke-width": 1.6 } },
+          { id: "stop-dot", type: "symbol", source: "marks", filter: ["==", ["get", "k"], "stop"],
+            layout: { "icon-image": "jst-dot", "icon-size": .62, "icon-allow-overlap": true, "icon-ignore-placement": true, "icon-offset": ["interpolate", ["linear"], ["get", "nth"], 0, ["literal", [0, 0]], 4, ["literal", [140, 0]]],   // a return visit sits beside the earlier mark
+              "text-field": ["get", "num"], "text-font": ["Noto Sans Medium"], "text-size": 10.5, "text-allow-overlap": true, "text-ignore-placement": true,
+              "text-offset": ["interpolate", ["linear"], ["get", "nth"], 0, ["literal", [0, 0]], 4, ["literal", [6.7, 0]]], "symbol-sort-key": ["get", "i"] },
+            paint: { "icon-color": color, "icon-halo-color": "#fffaf0", "icon-halo-width": 2, "text-color": "#ffffff" } },
+          { id: "picked", type: "circle", source: "marks", filter: ["==", ["get", "i"], -1], paint: { "circle-radius": 12, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#1a1c20", "circle-stroke-width": 3 } },
+          { id: "mark-name", type: "symbol", source: "marks", filter: ["==", ["get", "first"], true],
+            layout: { "text-field": ["get", "n"], "text-font": ["Noto Sans Medium"], "text-size": 13, "text-variable-anchor": ["left", "right", "top", "bottom"], "text-radial-offset": 1.05, "text-justify": "auto", "symbol-sort-key": ["get", "i"] },
+            paint: { "text-color": INK, "text-halo-color": "rgba(250,244,226,.95)", "text-halo-width": 1.8 } }
+        ])
+    };
+    var map = new ml.Map({ container: holder, style: style, bounds: [[-12, 6], [62, 50]], maxBounds: [[-30, -5], [80, 60]], minZoom: 2, maxZoom: 14,
+      attributionControl: { compact: true }, cooperativeGestures: true, dragRotate: false, pitchWithRotate: false, touchPitch: false, renderWorldCopies: false });
+    map.touchZoomRotate.disableRotation();
+    self.map = map; holder.jstMap = map;   // reachable from the console for checking
+    /* the stop circle and the leg arrow, drawn once as SDF images so the route's colour tints them */
+    function sdf(id, draw) { var c = document.createElement("canvas"); c.width = c.height = 48; var x = c.getContext("2d"); x.fillStyle = "#000"; draw(x); map.addImage(id, x.getImageData(0, 0, 48, 48), { sdf: true }); }
+    map.on("styleimagemissing", function (e) {
+      if (e.id === "jst-dot") sdf("jst-dot", function (x) { x.beginPath(); x.arc(24, 24, 20, 0, 7); x.fill(); });
+      if (e.id === "jst-arrow") sdf("jst-arrow", function (x) { x.beginPath(); x.moveTo(10, 10); x.lineTo(40, 24); x.lineTo(10, 38); x.closePath(); x.fill(); });
+    });
+    function applyPrefs() {
+      (map.getStyle().layers || []).forEach(function (l) { var g = l.metadata && l.metadata.layer; if (g) map.setLayoutProperty(l.id, "visibility", prefs[g] ? "visible" : "none"); });
+    }
+    var ready = false, queue = [];
+    map.on("load", function () { ready = true; applyPrefs(); var at = holder.querySelector(".maplibregl-compact-show"); if (at) at.classList.remove("maplibregl-compact-show");   // credits start folded (the i button opens them)
+      queue.forEach(function (f) { f(); }); queue = []; });
+    function when(f) { if (ready) f(); else queue.push(f); }
+    map.on("click", function (e) {
+      var f = map.queryRenderedFeatures(e.point, { layers: ["stop-dot", "place-dot", "mark-name"] })[0];
+      if (f && o.onPick) o.onPick(f.properties.i);
+    });
+    map.on("mousemove", function (e) { map.getCanvas().style.cursor = map.queryRenderedFeatures(e.point, { layers: ["stop-dot", "place-dot"] }).length ? "pointer" : ""; });
+
+    function lls(pts) { return (pts || []).map(function (p) { return p.ll; }).filter(Boolean); }
+    self.fit = function (pts, ms, minW) {
+      when(function () {
+        var a = lls(pts), w = holder.clientWidth || 400;
+        if (!a.length) { map.fitBounds([[-12, 6], [62, 50]], { duration: ms || 0 }); return; }
+        var b = new ml.LngLatBounds([a[0][1], a[0][0]], [a[0][1], a[0][0]]); a.forEach(function (p) { b.extend([p[1], p[0]]); });
+        var maxZoom = 11.5;
+        if (minW) { var deg = minW / (A.proj.c * A.proj.k); maxZoom = Math.log2(360 / deg * w / 512); }   // minW is in the drawn map's units
+        map.fitBounds(b, { padding: { top: 60, bottom: 56, left: 50, right: 78 }, maxZoom: Math.min(maxZoom, a.length === 1 ? 8.5 : 11.5), duration: ms || 0 });
+      });
+    };
+    self.zoom = function (f) { when(function () { map.easeTo({ zoom: map.getZoom() + Math.log2(f), duration: 250 }); }); };
+    self.upTo = function (n) { when(function () {
+      map.setFilter("legs", n == null ? null : ["<", ["get", "i"], n]); map.setFilter("arrows", n == null ? null : ["<", ["get", "i"], n]);
+      map.setFilter("stop-dot", n == null ? ["==", ["get", "k"], "stop"] : ["all", ["==", ["get", "k"], "stop"], ["<=", ["get", "i"], n]]);
+      map.setFilter("mark-name", n == null ? ["==", ["get", "first"], true] : ["all", ["==", ["get", "first"], true], ["<=", ["get", "i"], n]]); }); };
+    self.pick = function (i) { when(function () { map.setFilter("picked", ["all", ["==", ["get", "i"], i], ["==", ["get", "nth"], 0]]); }); };
+    self.resize = function () { map.resize(); };
+    /* the layer switches: a small list over the map, remembered on this device */
+    var menu = null;
+    self.toggleLayers = function (btn) {
+      if (menu) { menu.remove(); menu = null; return; }
+      menu = document.createElement("div"); menu.className = "jst-atlas-menu";
+      menu.innerHTML = '<div class="lbl">Layers</div>' + ATLAS_LAYERS.map(function (l) { return '<label><input type="checkbox" data-l="' + l[0] + '"' + (prefs[l[0]] ? " checked" : "") + "> " + esc(l[1]) + "</label>"; }).join("");
+      menu.addEventListener("change", function (e) { var k = e.target.getAttribute("data-l"); prefs[k] = e.target.checked; atlasSavePrefs(prefs); when(applyPrefs); });
+      menu.addEventListener("click", function (e) { e.stopPropagation(); });
+      host.appendChild(menu);
+    };
+    var ro = global.ResizeObserver ? new ResizeObserver(function () { map.resize(); }) : null;
+    if (ro) ro.observe(host);
+    function esc_(e) { if (e.key === "Escape" && host.classList.contains("jst-atlas-big")) { e.stopPropagation(); host.classList.remove("jst-atlas-big"); } }
+    document.addEventListener("keydown", esc_, true);
+    self.destroy = function () { if (ro) ro.disconnect(); document.removeEventListener("keydown", esc_, true); if (menu) menu.remove(); try { map.remove(); } catch (e) {} holder.remove(); };
+    self.loaded = new Promise(function (ok, no) { map.on("load", ok); map.on("error", function (e) { if (global.console) console.warn("Atlas map:", e && e.error); if (!ready) no(e && e.error); }); });
+    return self;
+  }
+
+  /* one controller whatever draws the map: calls made before MapLibre is up are replayed on it, or on the drawn map if it fails */
+  function atlasMount(host, A, o) {
+    var self = {}, impl = null, last = {};
+    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers"].forEach(function (k) {
+      self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers") last[k] = a; if (impl && impl[k]) impl[k].apply(impl, a); };
+    });
+    var dead = false;
+    function svg() { if (dead) return; impl = atlasSVG(host, A, o); host.classList.add("jst-atlas-flat"); Object.keys(last).forEach(function (k) { impl[k].apply(impl, last[k]); }); }
+    if (!CFG.onlineMaps || !global.WebGLRenderingContext) svg();
+    else atlasLib().then(function (ml) {
+      if (dead) return;
+      var g = atlasGL(ml, host, A, o); impl = g;
+      Object.keys(last).forEach(function (k) { g[k].apply(g, last[k]); });
+      g.loaded.catch(function (e) { if (global.console) console.warn("Atlas: MapLibre failed, drawing the flat map instead.", e); if (dead) return; g.destroy(); impl = null; svg(); });
+    }, svg);
+    self.destroy = function () { dead = true; if (impl) impl.destroy(); };
+    return self;
+  }
   function atlasRouteFor(A, ref) {
     var segs = data.segs(ref);
     return (A.routes || []).filter(function (r) { return r.ranges.some(function (x) { return R.parse(x).some(function (a) { return segs.some(function (b) { return overlap(a, b); }); }); }); })[0];
@@ -1060,7 +1237,7 @@
       if (A) {
         h += '<div class="chips jst-atlas-tabs"><button class="chip' + (!rt ? " on" : "") + '" data-jst-atab="here">Places here' + (pinned.length ? " (" + pinned.length + ")" : "") + "</button>" +
           A.routes.map(function (r) { return '<button class="chip' + (rt === r ? " on" : "") + '" data-jst-atab="' + r.id + '"><i data-jst-c="' + r.color + '"></i>' + esc(r.name.replace(/:.*$/, "")) + "</button>"; }).join("") + "</div>";
-        h += '<div class="jst-atlas" data-jst-atlas><div class="jst-atlas-ctl"><button data-jst-az="in" aria-label="Zoom in">+</button><button data-jst-az="out" aria-label="Zoom out">−</button><button data-jst-az="fit" aria-label="Fit">⤢</button><button data-jst-az="full" aria-label="Full screen">⛶</button></div><div class="jst-atlas-hint">Hold Ctrl or ⌘ and scroll to zoom</div></div>';
+        h += '<div class="jst-atlas" data-jst-atlas><div class="jst-atlas-ctl"><button data-jst-az="in" aria-label="Zoom in">+</button><button data-jst-az="out" aria-label="Zoom out">−</button><button data-jst-az="fit" aria-label="Fit">⤢</button><button data-jst-az="full" aria-label="Full screen">⛶</button><button data-jst-az="layers" aria-label="Layers" title="Layers">☰</button></div><div class="jst-atlas-hint">Hold Ctrl or ⌘ and scroll to zoom</div></div>';
         h += '<div class="jst-atlas-pick" data-jst-apick></div>';
         if (rt) {
           h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.kick) + " · " + rt.stops.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
@@ -1090,12 +1267,12 @@
       if (!A || !host) return;
       var rt = this.route(), marks, legs = [], pts;
       if (rt) {
-        marks = rt.stops.map(function (s, i) { return { x: s.x, y: s.y, n: s.n, k: "stop", num: i + 1, i: i + 1 }; });
-        for (var i = 1; i < rt.stops.length; i++) { var a = rt.stops[i - 1], b = rt.stops[i]; if (a.x !== b.x || a.y !== b.y) legs.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, m: b.m }); else legs.push({ x1: a.x, y1: a.y, x2: a.x, y2: a.y, m: "land" }); }
+        marks = rt.stops.map(function (s, i) { return { x: s.x, y: s.y, ll: s.ll, n: s.n, k: "stop", num: i + 1, i: i + 1 }; });
+        for (var i = 1; i < rt.stops.length; i++) { var a = rt.stops[i - 1], b = rt.stops[i]; if (a.x !== b.x || a.y !== b.y) legs.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, ll1: a.ll, ll2: b.ll, m: b.m }); else legs.push({ x1: a.x, y1: a.y, x2: a.x, y2: a.y, ll1: a.ll, ll2: a.ll, m: "land" }); }
         this._items = rt.stops;
       } else {
         this._items = this.places().filter(function (p) { return p.ll; });
-        marks = this._items.map(function (p, i) { var q = atlasXY(A, p.ll); return { x: q.x, y: q.y, n: p.n, k: "place", i: i + 1 }; });
+        marks = this._items.map(function (p, i) { var q = atlasXY(A, p.ll); return { x: q.x, y: q.y, ll: p.ll, n: p.n, k: "place", i: i + 1 }; });
       }
       pts = marks;
       var hint = host.querySelector(".jst-atlas-hint");
@@ -1145,7 +1322,7 @@
       if (t) { e.stopPropagation(); this.stopPlay(true); this.st.tab = t.getAttribute("data-jst-atab"); this.st.pick = 0; this.paint(); return; }
       var z = e.target.closest("[data-jst-az]");
       if (z && this._atlas) { e.stopPropagation(); var k = z.getAttribute("data-jst-az"), host = this.el.querySelector("[data-jst-atlas]");
-        if (k === "in") this._atlas.zoom(1.6); else if (k === "out") this._atlas.zoom(1 / 1.6); else if (k === "fit") this._atlas.fit(this._pts, 400);
+        if (k === "layers") this._atlas.toggleLayers(); else if (k === "in") this._atlas.zoom(1.6); else if (k === "out") this._atlas.zoom(1 / 1.6); else if (k === "fit") this._atlas.fit(this._pts, 400);
         else if (k === "full") { if (document.fullscreenElement) document.exitFullscreen(); else if (host.requestFullscreen) host.requestFullscreen().catch(function () { host.classList.toggle("jst-atlas-big"); }); else host.classList.toggle("jst-atlas-big"); }
         return; }
       var pl = e.target.closest("[data-jst-aplay]");
