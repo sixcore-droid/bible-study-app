@@ -1551,11 +1551,13 @@
       var hits = function (refs) { return refs.some(function (r) { return R.parse(r).some(function (a) { return segs.some(function (q) { return R.overlap(a, q); }); }); }); };
       return Promise.all([
         getJSON("art.json").then(function (d) { self.scenes = ((d && d.subjects) || []).filter(function (x) { return x.works.length && hits(x.refs); }); }).catch(function () { self.scenes = []; }),
-        getJSON("relics.json").then(function (d) { self.relics = ((d && d.relics) || []).filter(function (x) { return hits(x.refs); }); }).catch(function () { self.relics = []; })
+        getJSON("relics.json").then(function (d) { self.relics = ((d && d.relics) || []).filter(function (x) { return hits(x.refs); }); }).catch(function () { self.relics = []; }),
+        this.o.owner ? data.library().then(function (l) { self.at = l.atlases || []; }).catch(function () { self.at = []; }) : null
       ]);
     },
     view: function () {
       if (!CFG.onlineMaps) return { kick: "Art", title: "Art of this passage", body: none("Pictures from other sites can't show here. Open the app on jayms.com or your desk.") };
+      var self = this;
       var sc = (this.scenes || []).filter(function (x) { return !x.near; }), near = (this.scenes || []).filter(function (x) { return x.near; }), rel = this.relics || [], shown = 0;
       var bk = this.bk;
       var scene = function (x) {   /* the verses in the book you're reading come first; the Gospel parallels after, three at most */
@@ -1572,8 +1574,8 @@
       /* the objects in the story (a shofar for Joshua 6, a lepton for the widow's mite), then inscriptions and finds that bear on it */
       var card = function (x) {
         return box("witness", "", '<div class="item">' + (x.img ? '<img class="jst-relic" src="' + esc(x.img) + '" alt="' + esc(x.t) + '" referrerpolicy="no-referrer" data-jst-art data-full="' + esc(x.img.replace(/\/\d+px-/, "/1280px-")) + '" data-t="' + esc(x.t) + '" role="button" tabindex="0">' : "") +
-          (x.museum ? '<span class="when">' + esc(x.museum) + "</span>" : "") + '<span class="tt">' + esc(x.t) + '</span><p class="u-m4-8 u-fs15">' + esc(x.x) + "</p>" +
-          '<p class="sub u-fs13">' + esc(x.refs.join(" \u00B7 ")) + "</p>" + outlink(x.url, "Read more") + "</div>"); };
+          (x.museum ? '<span class="when">' + esc(x.museum) + "</span>" : "") + '<span class="tt">' + esc(x.t) + "</span>" + (x.x ? '<p class="u-m4-8 u-fs15">' + esc(x.x) + "</p>" : "") +
+          '<p class="sub u-fs13">' + esc(x.refs.join(" \u00B7 ")) + "</p>" + (self.o.owner ? atlasLinks(self.at || [], x.t.replace(/\s*\(.*\)$/, "")) : "") + "</div>"); };   // no Wikipedia (James): his own atlases instead
       var objs = rel.filter(function (x) { return x.kind === "object"; }), finds = rel.filter(function (x) { return x.kind !== "object"; });
       if (objs.length) h += '<div class="lbl u-mt14">Objects in the story (' + objs.length + ")</div>" + objs.map(card).join("");
       if (finds.length) h += '<div class="lbl u-mt14">Relics and inscriptions (' + finds.length + ")</div>" + finds.map(card).join("");
@@ -1589,7 +1591,7 @@
         ["Index of Medieval Art", "https://theindex.princeton.edu/", ""]
       ].map(function (m) { return outlink(m[1], m[0]) + (m[2] ? ' <span class="sub">' + esc(m[2]) + "</span>" : ""); }).join(" \u00B7 ") +
         '</p><p class="ctx u-fs13">The Index of Medieval Art has no search link: search it for ' + esc(key) + " once it opens.</p>";
-      h += '<p class="ctx u-fs13">Paintings: works museums have tagged with the scene’s <a href="https://iconclass.org/" target="_blank" rel="noopener">Iconclass</a> subject, from Wikidata, and Wikimedia Commons scene collections; photos on Wikimedia Commons (each Source link has the details). Objects and relics: photos and articles from Wikipedia (CC BY-SA). Tap a picture for full screen.</p>';
+      h += '<p class="ctx u-fs13">Paintings: works museums have tagged with the scene’s <a href="https://iconclass.org/" target="_blank" rel="noopener">Iconclass</a> subject, from Wikidata, and Wikimedia Commons scene collections; photos on Wikimedia Commons (each Source link has the details). Objects and relics: photos from Wikimedia Commons (licence per file). Tap a picture for full screen.</p>';
       var all = sc.concat(near), nw = all.reduce(function (n, x) { return n + x.works.length; }, 0);
       return { kick: "Art · " + (all.length ? all.length + " scene" + (all.length > 1 ? "s" : "") + ", " + nw + " works" : "no scenes") + (rel.length ? ", " + rel.length + " objects and relics" : ""), title: "Art and relics", body: h };
     },
