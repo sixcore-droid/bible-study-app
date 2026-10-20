@@ -1,1 +1,1 @@
-{"version":"v208","date":"2026-10-20 14:01","note":"C: kingdoms by year \u2014 year slider over Cliopatria borders + OpenBible region bands, opens on the passage's date, tap a kingdom for name/years/source; map refits on resize"}
+{"version":"v209","date":"2026-10-20 14:01","note":"Maps: Wikipedia link removed from the kingdom card (James: Wikipedia is a hard no); kingdoms.json no longer carries Cliopatria's Wikipedia field; the card offers his Logos atlases instead"}

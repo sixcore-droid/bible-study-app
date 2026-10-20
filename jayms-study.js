@@ -1395,7 +1395,7 @@
         onKingdom: function (k, y) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
           b.innerHTML = '<div class="jst-atlas-card"><div class="lbl">In ' + esc(yearLabel(y)) + '</div><span class="tt">' + esc(k.n) + '</span><p class="u-fs14 u-m4-8">' +
             (k.why ? esc(k.why) + " Its area: OpenBible.info, drawn as bands from likely to possible." : "This border: " + esc(yearLabel(k.f)) + " to " + esc(yearLabel(k.t)) + ", from Cliopatria (Seshat), one reading of borders historians still argue over.") +
-            "</p>" + (k.w ? outlink("https://en.wikipedia.org/wiki/" + encodeURIComponent(String(k.w).replace(/ /g, "_")), "Wikipedia") : "") + "</div>"; },
+            "</p>" + (self.o.owner ? atlasLinks(self.at || [], k.n.replace(/^(Kingdom|Kingdoms) of (the )?/, "")) : "") + "</div>"; },   // no Wikipedia, ever (James): his own atlases instead
         onPick: function (i) { self.pickItem(i, true); },
         onHint: function () { hint.classList.add("on"); clearTimeout(self._ht); self._ht = setTimeout(function () { hint.classList.remove("on"); }, 1400); } });
       this._pts = pts; this._atlas.fit(pts);
