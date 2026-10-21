@@ -648,4 +648,3 @@ body.hg-noorig .mtag{display:none}
 .jst-atlas-grip:hover i,.jst-atlas-grip:focus-visible i{background:var(--gold)}
 .jst-atlas-wrap:fullscreen .jst-atlas-grip,.jst-atlas-wrap.jst-atlas-big .jst-atlas-grip{display:none}
 .jst-atlas-wrap:fullscreen .jst-atlas.jst-atlas-sized,.jst-atlas-wrap.jst-atlas-big .jst-atlas.jst-atlas-sized{height:100%!important}
-.jst-atlas{scroll-margin-top:72px}   /* a stop tapped in the list scrolls back to the map, clear of the top bar */

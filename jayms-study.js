@@ -1805,7 +1805,7 @@
       if (sp) { e.stopPropagation(); this.stopPlay(); if (this._atlas) this._atlas.fit(this._pts, 900); return; }
       var s = e.target.closest("[data-jst-astop]");
       if (s && this._resumeN) { e.stopPropagation(); var si = +s.getAttribute("data-jst-astop"); this._atlas.upTo(si); this.pickItem(si, false); this._resumeN = si; return; }   // paused: look at any stop; Resume goes on from there
-      if (s) { e.stopPropagation(); this.stopPlay(); this.pickItem(+s.getAttribute("data-jst-astop"), true); var mp = this.el.querySelector("[data-jst-atlas]"); if (mp && mp.scrollIntoView) mp.scrollIntoView({ block: "start", behavior: "smooth" }); return; }   // back up to the map
+      if (s) { e.stopPropagation(); this.stopPlay(); this.pickItem(+s.getAttribute("data-jst-astop"), true); return; }   // the page stays where it is scrolled (James)
       var m = e.target.closest("[data-jst-pmap]");
       if (m) { e.stopPropagation(); mapViewer(MAPBY[m.getAttribute("data-jst-pmap")]); return; }
       var f = e.target.closest("[data-jst-fly]");

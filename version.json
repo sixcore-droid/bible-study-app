@@ -1,1 +1,1 @@
-{"version":"v237","date":"2026-10-21 12:21","note":"Map height: drag bar under the map in the panel (remembered); stop list taps scroll back to the map; height profile moved under the stops"}
+{"version":"v238","date":"2026-10-21 12:26","note":"Tapping a stop no longer moves the page: it stays where it is scrolled"}
