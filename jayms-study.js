@@ -1533,6 +1533,20 @@
   var DIG_PIN = { confirmed: "secure", probable: "likely", contested: "contested", unresolved: "contested", rejected: "rejected" };
   var MEDIA_ICON = { play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z"/></svg>', pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>',
     stop: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5h9v9h-9z"/></svg>', north: '<svg viewBox="0 0 16 16" aria-hidden="true"><path class="n" d="M8 1l3.2 7H4.8z"/><path class="s" d="M4.8 8h6.4L8 15z"/></svg>' };
+  /* a dig card's sources: a Bible passage is just its reference, opening in the reader (James: no "KJV, Bible Gateway");
+     a book the reader doesn't have (2 Maccabees, 2 Esdras) keeps its link out, shown as the reference alone; the same passage twice shows once */
+  function digSources(list) {
+    var seen = {};
+    return (list || []).filter(function (x) { return !/wikipedia\.org/i.test(x.url || ""); }).map(function (x) {
+      var m = /^(.*?\d+:\d+[^()]*?)\s*\(([^)]*)\)\s*$/.exec(x.title || ""), bible = m && /LSB|KJV|NRSV|ESV|NIV|NASB|Bible Gateway|eBible|Apocrypha/i.test(m[2]);
+      if (!bible) return "<li>" + outlink(x.url, esc(x.title)) + "</li>";
+      var ref = m[1].trim(); if (seen[ref]) return ""; seen[ref] = 1;
+      var rs = R.parse(ref);
+      if (!rs.length) return "<li>" + outlink(x.url, esc(ref)) + "</li>";
+      return "<li>" + rs.map(function (r) { var t = r.book + " " + r.c1 + ":" + r.v1 + (r.c2 !== r.c1 ? "\u2013" + r.c2 + ":" + r.v2 : r.v2 !== r.v1 ? "\u2013" + r.v2 : "");
+        return '<button class="jst-ref" data-jst-go="' + esc(t.replace("\u2013", "-")) + '">' + esc(t) + "</button>"; }).join(" ") + "</li>";
+    }).join("");
+  }
   function digCard(c, n) {
     var li = function (a) { return a && a.length ? "<ul>" + a.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "<p>None.</p>"; };
     var row = function (k, v) { return v ? '<div class="lbl u-mt10">' + k + '</div><p class="u-fs15">' + esc(v) + "</p>" : ""; };
@@ -1541,7 +1555,7 @@
       row("The claim", c.claim) + row("What the text says", c.text) + row("Who", c.who) + row("Digging", c.digging) +
       '<div class="lbl u-mt10">Published, peer-reviewed</div>' + li(c.published_peer) + '<div class="lbl u-mt10">Press, broadcasts and books</div>' + li(c.published_press) +
       row("The case for", c.for) + row("The case against", c.against) + row("What couldn't be checked", c.notes) +
-      (c.sources && c.sources.length ? '<div class="lbl u-mt10">Sources</div><ul class="jst-dig-src">' + c.sources.filter(function (x) { return !/wikipedia\.org/i.test(x.url || ""); }).map(function (x) { return "<li>" + outlink(x.url, esc(x.title)) + "</li>"; }).join("") + "</ul>" : "") + "</div>";
+      (c.sources && c.sources.length ? '<div class="lbl u-mt10">Sources</div><ul class="jst-dig-src">' + digSources(c.sources) + "</ul>" : "") + "</div>";
   }
   /* the Atlas page's search: topics, journeys, kingdoms and places, best matches first */
   function atlasFind(self, q) {
