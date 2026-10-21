@@ -1568,7 +1568,7 @@
           var rs = realStops(rt);
           h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.ranges[0].replace(/-/, "\u2013")) + " \u00B7 " + rs.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
             (rt.about ? '<p class="u-m4-8 u-fs16 jst-atlas-about">' + esc(rt.about) + "</p>" : "") + travelLine(rt) + '<div class="lbl u-mt14">Height along the way</div><div data-jst-aprof><p class="sub u-fs14">Reading the heights\u2026</p></div>' +
-            '<button class="btn u-mt6" data-jst-aplay>' + (this._play ? "Stop" : "Play the journey") + '</button> <button class="chip u-mt6' + (atlasPrefs().northup ? " on" : "") + '" data-jst-anorth aria-pressed="' + !!atlasPrefs().northup + '">Keep north at the top</button><ol class="jst-atlas-stops">' +
+            '<button class="btn u-mt6" data-jst-aplay>' + (this._play ? "Pause" : this._resumeN ? "Resume" : "Play the journey") + '</button> <button class="btn u-mt6" data-jst-astopplay' + (this._play || this._resumeN ? "" : " hidden") + ">Stop</button> " + '<button class="chip u-mt6' + (atlasPrefs().northup ? " on" : "") + '" data-jst-anorth aria-pressed="' + !!atlasPrefs().northup + '">Keep north at the top</button><ol class="jst-atlas-stops">' +
             rs.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + "</button>" + (s.km ? '<span class="jst-atlas-leg">' + s.km.toLocaleString() + " km" + (s.d ? " \u00B7 " + (s.d < 1 ? "under a day" : s.d.toFixed(s.d < 10 ? 1 : 0) + " days") : "") + "</span>" : "") + '<button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol></div>");
         } else if (!pinned.length) h += none("No place in " + esc(this.o.ref) + " has a known position. Pick a journey" + (atlas ? " or search." : " above."));
       }
@@ -1725,9 +1725,9 @@
     },
     play: function () {
       var self = this, rt = this.route(); if (!rt || !this._atlas) return;
-      var n = 1, btn = this.el.querySelector("[data-jst-aplay]");
-      this._play = true; if (btn) btn.textContent = "Stop";
-      this._atlas.upTo(1);
+      var n = this._resumeN || 1;   // Resume carries on from the stop where Pause left it
+      this._resumeN = 0; this._playN = n; this._play = true; this.playBtns();
+      this._atlas.upTo(n);
       var inLev = rt.stops.every(function (s) { return s.ll[0] >= LEVANT[0] && s.ll[0] <= LEVANT[2] && s.ll[1] >= LEVANT[1] && s.ll[1] <= LEVANT[3]; });
       this._atlas.tilt(true, inLev);
       (function step() {
@@ -1736,15 +1736,24 @@
         var rs = realStops(rt), a = rs[Math.max(0, n - 2)], b = rs[n - 1];
         self._atlas.fit([a, b], 900, 420);
         if (n >= rs.length) { self._pt = setTimeout(function () { self.stopPlay(); self._atlas.fit(self._pts, 900); }, 1600); return; }
-        n++; self._pt = setTimeout(step, 1900);
+        n++; self._playN = n; self._pt = setTimeout(step, 1900);
       })();
     },
+    /* Pause: keep the map where it is (tilted, the route drawn so far) and remember the next stop */
+    pausePlay: function () {
+      clearTimeout(this._pt); this._play = false; this._resumeN = this._playN || 1; this.playBtns();
+    },
+    playBtns: function () {
+      var b = this.el.querySelector("[data-jst-aplay]"), x = this.el.querySelector("[data-jst-astopplay]");
+      if (b) b.textContent = this._play ? "Pause" : this._resumeN ? "Resume" : "Play the journey";
+      if (x) x.hidden = !(this._play || this._resumeN);
+    },
     stopPlay: function (quiet) {
-      clearTimeout(this._pt); this._play = false;
+      clearTimeout(this._pt); this._play = false; this._resumeN = 0; this._playN = 0;
       if (this._atlas) this._atlas.tilt(false);
       if (quiet) return;
       if (this._atlas) { this._atlas.tilt(false); this._atlas.upTo(null); }
-      var btn = this.el.querySelector("[data-jst-aplay]"); if (btn) btn.textContent = "Play the journey";
+      this.playBtns();
     },
     click: function (e) {
       var t = e.target.closest("[data-jst-atab]");
@@ -1766,8 +1775,11 @@
       var nb = e.target.closest("[data-jst-anorth]");
       if (nb) { e.stopPropagation(); var pf = atlasPrefs(); pf.northup = !pf.northup; atlasSavePrefs(pf); nb.classList.toggle("on", pf.northup); nb.setAttribute("aria-pressed", pf.northup); return; }   // Play reads it at each leg
       var pl = e.target.closest("[data-jst-aplay]");
-      if (pl) { e.stopPropagation(); if (this._play) this.stopPlay(); else this.play(); return; }
+      if (pl) { e.stopPropagation(); if (this._play) this.pausePlay(); else this.play(); return; }
+      var sp = e.target.closest("[data-jst-astopplay]");
+      if (sp) { e.stopPropagation(); this.stopPlay(); if (this._atlas) this._atlas.fit(this._pts, 900); return; }
       var s = e.target.closest("[data-jst-astop]");
+      if (s && this._resumeN) { e.stopPropagation(); var si = +s.getAttribute("data-jst-astop"); this._atlas.upTo(si); this.pickItem(si, false); this._resumeN = si; return; }   // paused: look at any stop; Resume goes on from there
       if (s) { e.stopPropagation(); this.stopPlay(); this.pickItem(+s.getAttribute("data-jst-astop"), true); var mp = this.el.querySelector("[data-jst-atlas]"); if (mp && mp.scrollIntoView) mp.scrollIntoView({ block: "nearest", behavior: "smooth" }); return; }
       var m = e.target.closest("[data-jst-pmap]");
       if (m) { e.stopPropagation(); mapViewer(MAPBY[m.getAttribute("data-jst-pmap")]); return; }
