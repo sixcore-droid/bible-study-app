@@ -1378,6 +1378,11 @@
         map.fitBounds(b, fo);
       });
     };
+    /* the view as it stands, to put back after the panel redraws (a verse tapped mid-journey); with an argument, go there */
+    self.camera = function (c) {
+      if (!c) return ready ? { center: map.getCenter().toArray(), zoom: map.getZoom(), bearing: map.getBearing(), pitch: map.getPitch() } : null;
+      touched = true; when(function () { map.jumpTo(c); });
+    };
     /* 3D hills for Play: the Levant's 30 m heights when the journey stays inside it, the region's coarser ones otherwise */
     var tilted = false;
     self.tilt = function (on, levant) { when(function () {
@@ -1470,8 +1475,9 @@
   /* one controller whatever draws the map: calls made before MapLibre is up are replayed on it, or on the drawn map if it fails */
   function atlasMount(host, A, o) {
     var self = {}, impl = null, last = {};
-    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers", "alts", "year", "compare", "tilt"].forEach(function (k) {
-      self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers" && k !== "alts" && k !== "compare" && k !== "tilt") last[k] = a; if (impl && impl[k]) return impl[k].apply(impl, a); };
+    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers", "alts", "year", "compare", "tilt", "camera"].forEach(function (k) {
+      self[k] = function () { var a = arguments; if (k === "camera" && !a.length) return impl && impl.camera ? impl.camera() : null;   // a read, never replayed
+        if (k !== "zoom" && k !== "toggleLayers" && k !== "alts" && k !== "compare" && k !== "tilt") last[k] = a; if (impl && impl[k]) return impl[k].apply(impl, a); };
     });
     var dead = false;
     function svg() { if (dead) return; impl = atlasSVG(host, A, o); host.classList.add("jst-atlas-flat"); Object.keys(last).forEach(function (k) { if (impl[k]) impl[k].apply(impl, last[k]); }); }
@@ -1547,6 +1553,7 @@
   /* dig cards: one claimed place with the case for and against (the Passage Map scope's structure); statuses in this order */
   var DIG_STATUS = ["confirmed", "probable", "contested", "unresolved", "rejected"];
   var DIG_PIN = { confirmed: "secure", probable: "likely", contested: "contested", unresolved: "contested", rejected: "rejected" };
+  var ATLAS_KEEP = null;   // {tab, cam, pick}: the Maps panel's last journey view (keepView)
   var MEDIA_ICON = { play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z"/></svg>', pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>',
     stop: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5h9v9h-9z"/></svg>', north: '<svg viewBox="0 0 16 16" aria-hidden="true"><path class="n" d="M8 1l3.2 7H4.8z"/><path class="s" d="M4.8 8h6.4L8 15z"/></svg>' };
   /* a dig card's sources: a Bible passage is just its reference, opening in the reader (James: no "KJV, Bible Gateway");
@@ -1682,7 +1689,7 @@
       if (pj) pj.addEventListener("change", function () { self.st.tab = pj.value || "here"; self.st.pick = 0; self.paint(); });
       this.playBtns();
       this.gripMap();
-      if (this._atlas) { this._atlas.destroy(); this._atlas = null; }
+      if (this._atlas) { this.keepView(); this._atlas.destroy(); this._atlas = null; }
       if (!A || !host) return;
       var rt = this.route(), sel = this.sel(), marks, legs = [], pts, kyear = null, kfit = null, self2 = this;
       var srch = this.el.querySelector("[data-jst-asearch]"), res = this.el.querySelector("[data-jst-aresults]");
@@ -1756,7 +1763,9 @@
             "</p>" + (self.o.logos !== false ? atlasLinks(self.at || [], k.n.replace(/^(Kingdom|Kingdoms) of (the )?/, "")) : "") + "</div>"; },   // no Wikipedia, ever (James): his own atlases instead
         onPick: function (i) { self.pickItem(i, true); },
         onHint: function () { hint.classList.add("on"); clearTimeout(self._ht); self._ht = setTimeout(function () { hint.classList.remove("on"); }, 1400); } });
-      this._pts = pts; this._atlas.fit(pts);
+      this._pts = pts;
+      var kv = ATLAS_KEEP && rt && ATLAS_KEEP.tab === rt.id && ATLAS_KEEP.cam ? ATLAS_KEEP : null;   // the same journey as before the redraw: stay where you were
+      if (kv) { this._atlas.camera(kv.cam); if (kv.pick && !this.st.pick) this.st.pick = kv.pick; } else this._atlas.fit(pts);
       if (sel && sel.kind === "p" && this._items[0]) { var it0 = this._items[0]; this._atlas.alts(it0.alt ? it0.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it0.ll }; }) : []); }
       var pslot = this.el.querySelector("[data-jst-aprof]");
       if (rt && pslot && CFG.onlineMaps) profileOf(rt.stops.map(function (s) { return { ll: s.ll, n: s.via ? null : s.n, sea: s.m === "sea" }; })).then(function (P) { if (pslot.isConnected) pslot.innerHTML = profileSVG(P, rt.color, pslot.clientWidth) || '<p class="sub u-fs14">No heights here.</p>'; }, function () { pslot.innerHTML = '<p class="sub u-fs14">The heights didn\'t load here.</p>'; });
@@ -1818,6 +1827,8 @@
       g.addEventListener("dblclick", function () { set(0, true); });
       g.addEventListener("keydown", function (e) { if (e.key === "ArrowUp" || e.key === "ArrowDown") { e.preventDefault(); set(m.getBoundingClientRect().height + (e.key === "ArrowUp" ? -40 : 40), true); } });
     },
+    /* remember the view and the stop while a journey is open, so tapping a verse (which redraws the panel for the new passage) doesn't move the map */
+    keepView: function () { var rt = this.route(), c = this._atlas && this._atlas.camera(); ATLAS_KEEP = rt && c ? { tab: rt.id, cam: c, pick: this.st.pick } : null; },
     /* the journey's player, right beside the journey list: play/pause, stop, and keep north up (remembered on this device) */
     mediaBtns: function () {
       var nu = !!atlasPrefs().northup;
@@ -1876,7 +1887,7 @@
         if (i > -1) { this.pickItem(i + 1, true, true); var mp2 = this.el.querySelector("[data-jst-atlas]"); if (mp2 && mp2.scrollIntoView) mp2.scrollIntoView({ block: "nearest", behavior: "smooth" }); } return; }
       Panel.prototype.click.call(this, e);
     },
-    destroy: function () { this.stopPlay(true); clearTimeout(this._ht); if (this._atlas) { this._atlas.destroy(); this._atlas = null; } Panel.prototype.destroy.call(this); }
+    destroy: function () { this.stopPlay(true); clearTimeout(this._ht); if (this._atlas) { this.keepView(); this._atlas.destroy(); this._atlas = null; } Panel.prototype.destroy.call(this); }
   }, {}, function (d) {   // places named plus Bible maps for the verses
     if (!d || !PLACESD || !MAPIDX) return null;
     return placesIn(PLACESD, d.ref).filter(function (p) { return p.ll; }).length + mapsFor(d.ref).length; });
