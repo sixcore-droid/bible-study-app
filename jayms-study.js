@@ -1562,16 +1562,16 @@
           '<label class="jst-atlas-pickj' + (rt ? " on" : "") + '"><span class="lbl">Journey</span><select data-jst-aj aria-label="Journey"><option value="">' + (rt ? "Places here" : "Choose a journey") + "</option>" + grp("ot", "Old Testament") + grp("nt", "New Testament") + "</select></label>" + (rt ? this.mediaBtns() : "") + "</div>";
         var map = '<div class="jst-atlas" data-jst-atlas><div class="jst-atlas-ctl"><button data-jst-az="in" aria-label="Zoom in">+</button><button data-jst-az="out" aria-label="Zoom out">\u2212</button><button data-jst-az="fit" aria-label="Fit">\u2922</button>' + (atlas ? "" : '<button data-jst-az="full" aria-label="Full screen">\u26F6</button>') + '<button data-jst-az="layers" aria-label="Layers" title="Layers">\u2630</button><button data-jst-az="swipe" aria-label="Then and now" title="Then and now: drag the divider between the ancient map and today">\u21C6</button></div><div class="jst-atlas-hint">Hold Ctrl or \u2318 and scroll to zoom</div></div>';
         if (!atlas) h += tabs;
-        h += '<div class="jst-atlas-wrap' + (atlas ? " jst-atlas-page" : "") + '" data-jst-awrap>' + map + '<div class="jst-atlas-side">';   // full screen and the Atlas page: the map, and this column beside it
+        h += '<div class="jst-atlas-wrap' + (atlas ? " jst-atlas-page" : "") + '" data-jst-awrap>' + map + (atlas ? "" : '<div class="jst-atlas-grip" data-jst-agrip role="separator" aria-orientation="horizontal" aria-label="Map height: drag, or use the arrow keys" title="Drag to make the map taller or shorter (double-click to reset)" tabindex="0"><i></i></div>') + '<div class="jst-atlas-side">';   // full screen and the Atlas page: the map, and this column beside it
         if (atlas) h += '<form class="jst-atlas-search" data-jst-asearchf role="search"><input type="search" data-jst-asearch placeholder="Search: a place, journey, kingdom or topic (try Ark)" aria-label="Search the atlas" autocomplete="off" spellcheck="false"></form><div data-jst-aresults></div>' + tabs;
         h += '<div class="jst-atlas-pick" data-jst-apick></div>';
         if (sel) h += this.selBox(sel);
         else if (rt) {
           var rs = realStops(rt);
           h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.ranges[0].replace(/-/, "\u2013")) + " \u00B7 " + rs.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
-            (rt.about ? '<p class="u-m4-8 u-fs16 jst-atlas-about">' + esc(rt.about) + "</p>" : "") + travelLine(rt) + '<div class="lbl u-mt14">Height along the way</div><div data-jst-aprof><p class="sub u-fs14">Reading the heights\u2026</p></div>' +
-            '<ol class="jst-atlas-stops">' +
-            rs.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + "</button>" + (s.km ? '<span class="jst-atlas-leg">' + s.km.toLocaleString() + " km" + (s.d ? " \u00B7 " + (s.d < 1 ? "under a day" : s.d.toFixed(s.d < 10 ? 1 : 0) + " days") : "") + "</span>" : "") + '<button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol></div>");
+            (rt.about ? '<p class="u-m4-8 u-fs16 jst-atlas-about">' + esc(rt.about) + "</p>" : "") + travelLine(rt) + '<ol class="jst-atlas-stops">' +
+            rs.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + "</button>" + (s.km ? '<span class="jst-atlas-leg">' + s.km.toLocaleString() + " km" + (s.d ? " \u00B7 " + (s.d < 1 ? "under a day" : s.d.toFixed(s.d < 10 ? 1 : 0) + " days") : "") + "</span>" : "") + '<button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol>" +
+            '<div class="lbl u-mt14">Height along the way</div><div data-jst-aprof><p class="sub u-fs14">Reading the heights\u2026</p></div></div>');   // the stops first, the heights under them
         } else if (!pinned.length) h += none("No place in " + esc(this.o.ref) + " has a known position. Pick a journey" + (atlas ? " or search." : " above."));
       }
       if (!rt && !sel) {
@@ -1631,6 +1631,7 @@
       var pj = this.el.querySelector("[data-jst-aj]");
       if (pj) pj.addEventListener("change", function () { self.st.tab = pj.value || "here"; self.st.pick = 0; self.paint(); });
       this.playBtns();
+      this.gripMap();
       if (this._atlas) { this._atlas.destroy(); this._atlas = null; }
       if (!A || !host) return;
       var rt = this.route(), sel = this.sel(), marks, legs = [], pts, kyear = null, kfit = null, self2 = this;
@@ -1742,6 +1743,20 @@
         n++; self._playN = n; self._pt = setTimeout(step, 1900);
       })();
     },
+    /* the map's height in the panel: drag the bar under it (or arrow keys); remembered on this device, double-click to reset */
+    gripMap: function () {
+      var g = this.el.querySelector("[data-jst-agrip]"), m = this.el.querySelector("[data-jst-atlas]"); if (!g || !m) return;
+      var set = function (h, save) { if (!h) { m.style.height = ""; m.classList.remove("jst-atlas-sized"); } else { h = Math.max(220, Math.min(Math.round(h), Math.round(innerHeight * .92))); m.style.height = h + "px"; m.classList.add("jst-atlas-sized"); }
+        if (save) try { if (h) localStorage.setItem("ws.atlasH", h); else localStorage.removeItem("ws.atlasH"); } catch (e) {} };
+      var saved = 0; try { saved = +localStorage.getItem("ws.atlasH") || 0; } catch (e) {}
+      if (saved) set(saved);
+      var y0 = 0, h0 = 0, drag = false;
+      g.addEventListener("pointerdown", function (e) { drag = true; y0 = e.clientY; h0 = m.getBoundingClientRect().height; try { g.setPointerCapture(e.pointerId); } catch (x) {} e.preventDefault(); });
+      g.addEventListener("pointermove", function (e) { if (drag) set(h0 + e.clientY - y0); });
+      g.addEventListener("pointerup", function () { if (!drag) return; drag = false; set(m.getBoundingClientRect().height, true); });
+      g.addEventListener("dblclick", function () { set(0, true); });
+      g.addEventListener("keydown", function (e) { if (e.key === "ArrowUp" || e.key === "ArrowDown") { e.preventDefault(); set(m.getBoundingClientRect().height + (e.key === "ArrowUp" ? -40 : 40), true); } });
+    },
     /* the journey's player, right beside the journey list: play/pause, stop, and keep north up (remembered on this device) */
     mediaBtns: function () {
       var nu = !!atlasPrefs().northup;
@@ -1790,7 +1805,7 @@
       if (sp) { e.stopPropagation(); this.stopPlay(); if (this._atlas) this._atlas.fit(this._pts, 900); return; }
       var s = e.target.closest("[data-jst-astop]");
       if (s && this._resumeN) { e.stopPropagation(); var si = +s.getAttribute("data-jst-astop"); this._atlas.upTo(si); this.pickItem(si, false); this._resumeN = si; return; }   // paused: look at any stop; Resume goes on from there
-      if (s) { e.stopPropagation(); this.stopPlay(); this.pickItem(+s.getAttribute("data-jst-astop"), true); var mp = this.el.querySelector("[data-jst-atlas]"); if (mp && mp.scrollIntoView) mp.scrollIntoView({ block: "nearest", behavior: "smooth" }); return; }
+      if (s) { e.stopPropagation(); this.stopPlay(); this.pickItem(+s.getAttribute("data-jst-astop"), true); var mp = this.el.querySelector("[data-jst-atlas]"); if (mp && mp.scrollIntoView) mp.scrollIntoView({ block: "start", behavior: "smooth" }); return; }   // back up to the map
       var m = e.target.closest("[data-jst-pmap]");
       if (m) { e.stopPropagation(); mapViewer(MAPBY[m.getAttribute("data-jst-pmap")]); return; }
       var f = e.target.closest("[data-jst-fly]");

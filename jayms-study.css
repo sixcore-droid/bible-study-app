@@ -641,3 +641,11 @@ body.hg-noorig .mtag{display:none}
 .jst-atlas-media .jst-atlas-north .s{fill:var(--ink)}
 .jst-atlas-media .jst-atlas-north.on{background:var(--gold);border-color:var(--gold)}
 .jst-atlas-media .jst-atlas-north.on .s{fill:var(--paper)}
+/* the bar under the map in the panel: drag it to change the map's height */
+.jst-atlas.jst-atlas-sized{aspect-ratio:auto;max-height:none}
+.jst-atlas-grip{height:14px;margin:-4px 0 8px;cursor:ns-resize;display:flex;align-items:center;justify-content:center;touch-action:none}
+.jst-atlas-grip i{width:56px;height:5px;border-radius:3px;background:var(--line)}
+.jst-atlas-grip:hover i,.jst-atlas-grip:focus-visible i{background:var(--gold)}
+.jst-atlas-wrap:fullscreen .jst-atlas-grip,.jst-atlas-wrap.jst-atlas-big .jst-atlas-grip{display:none}
+.jst-atlas-wrap:fullscreen .jst-atlas.jst-atlas-sized,.jst-atlas-wrap.jst-atlas-big .jst-atlas.jst-atlas-sized{height:100%!important}
+.jst-atlas{scroll-margin-top:72px}   /* a stop tapped in the list scrolls back to the map, clear of the top bar */
