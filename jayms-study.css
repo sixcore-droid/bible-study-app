@@ -651,3 +651,11 @@ body.hg-noorig .mtag{display:none}
 .jst-tier.area{border:1px dotted #8a7650}
 .jst-tier.region{border-color:#8a7650}
 .jst-atlas-svg .amk.place.tier-area circle{fill:#faf4e2;stroke:#8a7650;stroke-width:2.2;stroke-dasharray:1.5 2}.jst-atlas-svg .amk.place.tier-region circle{fill:#faf4e2;stroke:#8a7650;stroke-width:1.6}
+/* place photos: big enough to see; one photo fills the column; credits once at the end of the card */
+.jst-photos{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.jst-photos.one{grid-template-columns:1fr}
+.jst-photo{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.jst-photos img{aspect-ratio:3/2}
+.jst-photos figcaption{font-size:14px;margin-top:4px}
+.jst-photo-credits{font-size:12px;line-height:1.4;margin:10px 0 0;color:var(--ink)}
+.jst-photo-credits a{color:inherit}

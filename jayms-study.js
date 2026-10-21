@@ -1520,9 +1520,16 @@
   }
   /* public-domain photos of a place (place-photos.json, scripts/build-photos.py: each licence re-checked at its source) */
   var PHOTOS = {};
+  /* a place's photos (place-photos.json, Wikimedia Commons, re-checked open licences): big enough to see, captioned with what they
+     show; a tap opens the photo full size in the app's own viewer (as the art does). The credits CC BY needs sit once at the end of the card. */
+  function photoFull(p) { return String(p.thumb).replace(/\?.*$/, "").replace("/thumb/", "/").replace(/\/\d+px-[^/]+$/, "").replace("//thumb.wikimedia.org/", "//upload.wikimedia.org/"); }   // the original file
   function photoStrip(id) {
     var ph = (PHOTOS[id] || []).slice(0, 4); if (!ph.length || !CFG.onlineMaps) return "";
-    return '<div class="jst-photos">' + ph.map(function (p) { return '<figure><a href="' + esc(p.page) + '" target="_blank" rel="noopener" title="' + esc(p.what + " \u00B7 " + p.lic) + '"><img src="' + esc(p.thumb) + '" alt="' + esc(p.what) + '" loading="lazy" referrerpolicy="no-referrer"></a><figcaption>' + esc(p.what) + (p.artist ? " \u00B7 Photo: " + esc(p.artist) : "") + " \u00B7 " + (p.licurl ? '<a href="' + esc(p.licurl) + '" target="_blank" rel="noopener">' + esc(p.lic) + "</a>" : esc(p.lic)) + "</figcaption></figure>"; }).join("") + "</div>";   // the credit CC BY / BY-SA needs: who, the licence, a link to it
+    return '<div class="jst-photos' + (ph.length === 1 ? " one" : "") + '">' + ph.map(function (p) { return '<figure><button class="jst-photo" data-jst-photo="' + esc(photoFull(p)) + '" data-t="' + esc(p.what) + '" aria-label="' + esc(p.what) + ', full size"><img src="' + esc(String(p.thumb).replace(/\?.*$/, "")) + '" alt="' + esc(p.what) + '" loading="lazy" referrerpolicy="no-referrer"></button><figcaption>' + esc(p.what) + "</figcaption></figure>"; }).join("") + "</div>";
+  }
+  function photoCredits(id) {
+    var ph = (PHOTOS[id] || []).slice(0, 4); if (!ph.length || !CFG.onlineMaps) return "";
+    return '<p class="jst-photo-credits">Photos: ' + ph.map(function (p) { return (p.artist ? esc(p.artist) + ", " : "") + (p.licurl ? '<a href="' + esc(p.licurl) + '" target="_blank" rel="noopener">' + esc(p.lic) + "</a>" : esc(p.lic)) + ' (<a href="' + esc(p.page) + '" target="_blank" rel="noopener">source</a>)'; }).join("; ") + ". Wikimedia Commons.</p>";
   }
   /* every verse that names a place, from the shared list's verse index (built once) */
   var PLACEREFS = null;
@@ -1616,7 +1623,7 @@
           var on = (self.mp[p.sn || p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
           return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + tierNote(p) + placeRivals(p) + photoStrip(p.id) +
             (on.length ? '<div class="chips">' + on.map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>" : "") +
-            (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.owner ? atlasLinks(self.at || [], p.n) : "") + "</div>"); }).join("");
+            (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.owner ? atlasLinks(self.at || [], p.n) : "") + photoCredits(p.id) + "</div>"); }).join("");
         else if (!A) h += none("No place is named in " + esc(this.o.ref) + ".");
       }
       if (A) h += "</div></div>";   // end of the side column and the wrap
@@ -1642,7 +1649,7 @@
         var nm = p.n.replace(/\s+\d+$/, ""), st = this.nm && p.step && this.nm.p[p.step[0]], refs = placeRefs(this.pd, sel.id);
         return box("witness", "", '<div class="item"><span class="tt">' + esc(nm) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (st && st.b ? '<p class="u-m4-8 u-fs15">' + esc(st.b) + "</p>" : "") + tierNote(p) + placeRivals(p, true) + photoStrip(sel.id) +
           (refs.length ? '<div class="lbl u-mt14">Named in ' + refs.length + " verse" + (refs.length > 1 ? "s" : "") + '</div><p class="u-fs15 jst-atlas-refs">' + refs.slice(0, 40).map(function (r) { return '<button class="jst-ref" data-jst-go="' + esc(r) + '">' + esc(r) + "</button>"; }).join(" ") + (refs.length > 40 ? " and " + (refs.length - 40) + " more" : "") + "</p>" : "") +
-          atlasLinks(al, nm) + "</div>");
+          atlasLinks(al, nm) + photoCredits(sel.id) + "</div>");
       }
       if (sel.kind === "k") {
         var rows = ((this.K && this.K.polities.features) || []).filter(function (f) { return f.properties.n === sel.id; }).map(function (f) { return f.properties; });
@@ -1761,7 +1768,7 @@
       if (fly) { var q = rt ? it : atlasXY(this.A, it.ll); this._atlas.fit([q], 500, 560); }
       this.el.querySelectorAll("[data-jst-astop]").forEach(function (b) { b.classList.toggle("on", +b.getAttribute("data-jst-astop") === i); });
       var al = this.o.owner ? this.at || [] : [];
-      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + tierNote(it) + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + photoStrip(it.id) + atlasLinks(al, it.n) + "</div>";
+      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + tierNote(it) + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + photoStrip(it.id) + atlasLinks(al, it.n) + photoCredits(it.id) + "</div>";
         this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []);
         var others = (this._items || []).filter(function (p) { return p !== it && p.ll; });
         if (others.length && CFG.onlineMaps) box_.querySelector(".jst-atlas-card").insertAdjacentHTML("beforeend", '<div class="lbl u-mt14">Height from ' + esc(it.n) + ' to</div><div class="chips">' + others.slice(0, 12).map(function (p) { return '<button class="chip" data-jst-prof2="' + esc(p.id) + '">' + esc(p.n) + "</button>"; }).join("") + '</div><div data-jst-aprof2></div>');
@@ -1853,6 +1860,8 @@
       var s = e.target.closest("[data-jst-astop]");
       if (s && this._resumeN) { e.stopPropagation(); var si = +s.getAttribute("data-jst-astop"); this._atlas.upTo(si); this.pickItem(si, false); this._resumeN = si; return; }   // paused: look at any stop; Resume goes on from there
       if (s) { e.stopPropagation(); this.stopPlay(); this.pickItem(+s.getAttribute("data-jst-astop"), true); return; }   // the page stays where it is scrolled (James)
+      var ph = e.target.closest("[data-jst-photo]");
+      if (ph) { e.stopPropagation(); mapViewer({ id: "photo-" + ph.getAttribute("data-jst-photo"), t: ph.getAttribute("data-t"), img: ph.getAttribute("data-jst-photo") }); return; }   // full size in the app, as the art opens
       var m = e.target.closest("[data-jst-pmap]");
       if (m) { e.stopPropagation(); mapViewer(MAPBY[m.getAttribute("data-jst-pmap")]); return; }
       var f = e.target.closest("[data-jst-fly]");
