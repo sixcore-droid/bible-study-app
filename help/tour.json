@@ -180,11 +180,6 @@
      "text": "Takes the verse numbers off the page, so the text reads straight through (and Speechify skips them)."
     },
     {
-     "sel": "#mapbtn",
-     "name": "Map this passage",
-     "text": "Opens the map of the places these verses name, each pin showing how sure scholars are of the site: solid for secure, open for likely, a dashed ring for contested. Dimmed when the verses name no place with a known site."
-    },
-    {
      "sel": "#ver",
      "name": "Version",
      "text": "Which translation you read in: LSB, ESV, NET, NLT, NASB, CSB, BSB, KJV, MSG or Brenton's Septuagint."

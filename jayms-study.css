@@ -222,7 +222,6 @@ body.app-atlas #desk{display:none}
 .jst-atlas-year span:empty{display:none}
 .jst-atlas-hint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:rgba(26,28,32,.85);color:#f6efdc;font:13px var(--read);padding:6px 12px;border-radius:6px;opacity:0;transition:opacity .25s;pointer-events:none}
 .jst-atlas-hint.on{opacity:1}
-#mapbtn.empty{opacity:.55}
 .jst-tier{display:inline-block;font:12px/1 var(--label);letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:4px;border:1px solid var(--line);color:var(--ink);vertical-align:3px;margin-left:6px}
 .jst-tier.secure{border-color:var(--gold)}
 .jst-tier.likely{border-style:solid;border-color:#b0852f}
