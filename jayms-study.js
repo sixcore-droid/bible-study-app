@@ -1500,7 +1500,7 @@
   var ATLAS_SHORT = { barbourbibatlascomp: "Atlas & Companion", ltmtbbltls: "Ultimate Atlas", hlmnchrtsmaps: "Holman Charts", stdbibatlas: "Standard Atlas", vptlblhst2nd: "Lion Atlas", hlmnbblat: "Holman Atlas" };
   function atlasShort(x) { return ATLAS_SHORT[x[0]] || x[1]; }
   function atlasSearch(x, q) { return "logos4:Search;kind=BasicSearch;q=" + encodeURIComponent(q) + ";in=" + encodeURIComponent("raw:Single|ResourceId=LLS:" + String(x[0]).toUpperCase()); }
-  function atlasForRef(x, ref) { return (x[6] || "").indexOf("b") > -1 && ref ? atlasSearch(x, "<Bible ~ " + ref + ">") : R.logos(x[0]); }
+  function atlasForRef(x, ref) { return (x[6] || "").indexOf("b") > -1 && ref && !R.web() ? atlasSearch(x, "<Bible ~ " + ref + ">") : R.logos(x[0]); }   // web links (Read along) open the atlas itself
   var ATLAS_PAGES = {};   // atlas-pages.json: {place: {atlas id: page}}, read off Logos's own search results (scheduled task atlas-page-index)
   function atlasLinks(at, place) {   // one short line: the page in each atlas where it treats the place, or a search there when no page is known
     var pg = ATLAS_PAGES[place] || ATLAS_PAGES[String(place).replace(/_/g, " ")] || {};
@@ -1604,7 +1604,7 @@
       if (A) h += "</div></div>";   // end of the side column and the wrap
       if (!atlas) {
         h += '<div class="lbl u-mt14">Bible maps for ' + esc(this.o.ref) + " (" + ms.length + ")</div>" + (ms.length ? box("witness", "", '<div class="item">' + ms.map(function (m) { return '<p class="u-m5"><button class="tt jst-xt" data-jst-pmap="' + esc(m.id) + '">' + esc(m.t.replace(/^[^:]+:\s*/, "")) + "</button></p>"; }).join("") + "</div>") : none("No Biblica map is tied to this passage."));
-        if (this.o.owner && (this.at || []).length) h += '<div class="lbl u-mt14">My atlases in Logos (' + this.at.length + ")</div>" + '<p class="ctx u-fs13">Each one searches that atlas for ' + esc(this.o.ref) + ': pick a result to open the page.</p>' + this.at.map(function (x) { return '<p class="u-m5">' + outlink(atlasForRef(x, self.o.ref), esc(x[1])) + ((x[6] || "").indexOf("b") > -1 ? '<span class="sub u-fs13"> \u00B7 ' + esc(self.o.ref) + "</span>" : "") + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
+        if (this.o.logos !== false && (this.at || []).length) h += '<div class="lbl u-mt14">' + (this.o.owner ? "My atlases" : "Atlases") + " in Logos (" + this.at.length + ")</div>" + '<p class="ctx u-fs13">' + (R.web() ? "Each opens in Logos; if you don't own it, its page on logos.com." : "Each one searches that atlas for " + esc(this.o.ref) + ": pick a result to open the page.") + "</p>" + this.at.map(function (x) { return '<p class="u-m5">' + outlink(atlasForRef(x, self.o.ref), esc(x[1])) + ((x[6] || "").indexOf("b") > -1 ? '<span class="sub u-fs13"> \u00B7 ' + esc(self.o.ref) + "</span>" : "") + "</p>"; }).join("");   // (moved from the Shelf's old Maps tab)
         h += '<p class="ctx u-fs13">Coastlines, lakes and rivers: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (public domain). Roman roads: <a href="https://zenodo.org/records/17122148" target="_blank" rel="noopener">Itiner-e</a> (CC BY 4.0). Ancient sites: <a href="https://pleiades.stoa.org/" target="_blank" rel="noopener">Pleiades</a> (CC BY 3.0). Kingdoms by year: <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener">Cliopatria</a> (Seshat, CC BY 4.0) and OpenBible.info. Places, sites and how sure scholars are: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0; a score of 500 or more is high confidence); <a href="https://pleiades.stoa.org/" target="_blank" rel="noopener">Pleiades</a> and <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (CC BY). Bible maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one for full screen. Place photos: public domain, CC0, CC BY and CC BY-SA only, each licence checked on its Wikimedia Commons file page and credited under the photo; tap a photo for its file page.</p>';
       }
       var title = sel ? this.selTitle(sel) : rt ? rt.name : "Where this happens";
@@ -1936,7 +1936,7 @@
       return Promise.all([
         getJSON("art.json").then(function (d) { self.scenes = ((d && d.subjects) || []).filter(function (x) { return x.works.length && hits(x.refs); }); }).catch(function () { self.scenes = []; }),
         getJSON("relics.json").then(function (d) { self.relics = ((d && d.relics) || []).filter(function (x) { return hits(x.refs); }); }).catch(function () { self.relics = []; }),
-        this.o.owner ? data.library().then(function (l) { self.at = l.atlases || []; }).catch(function () { self.at = []; }) : null
+        this.o.logos !== false ? data.library().then(function (l) { self.at = l.atlases || []; }).catch(function () { self.at = []; }) : null
       ]);
     },
     view: function () {
@@ -2503,7 +2503,7 @@
   /* The shelf. For James: his Logos commentaries, his study Bibles (Logos plus the open Tyndale and Biblica notes), maps, and the rest
      (DDD, his authors' books), one tab at a time. For readers: the open study notes and the maps. Order and hiding come from Config. */
   define("Shelf", { id: "shelf", label: "Shelf", name: "Study notes and my Logos shelf", icon: '<svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15 20l2-13 3 .5-2 12.5"/></svg>' }, {
-    prepare: function () { var self = this, own = this.o.owner; return Promise.all([data.notes(this.o.ref), own ? data.shelf() : null, own ? data.library() : null, data.maps(), own ? data.vaultBooks() : null]).then(function (r) { self.notes = r[0]; self.sh = r[1]; self.lib = r[2]; self.vb = r[4]; }); },
+    prepare: function () { var self = this, own = this.o.owner, lg = this.o.logos !== false; return Promise.all([data.notes(this.o.ref), lg ? data.shelf() : null, lg ? data.library() : null, data.maps(), own ? data.vaultBooks() : null]).then(function (r) { self.notes = r[0]; self.sh = r[1]; self.lib = r[2]; self.vb = r[4]; }); },
     /* the Vault tab: books in his Obsidian BOOKS vault, for the authors Logos doesn't cover. Books about this Bible book first, then his authors in order */
     vaultHTML: function () {
       var vb = this.vb, segs = data.segs(this.o.ref), q = segs[0], bk = q && q.book, names = this.cfg().authors, lib = (this.lib && this.lib.lib) || [];
@@ -2536,7 +2536,7 @@
       var c = this.cfg(), sb = (this.lib && this.lib.studyBibles) || [], q = data.segs(this.o.ref)[0]; if (!sb.length || !q) return "";
       var names = c.authors;
       sb = cfgSort(sb, function (x) { return x[0]; }, c.sb, function (a, b) { var ra = authorRank(names, a[2]), rb = authorRank(names, b[2]); return (ra < 0 ? 99 : ra) - (rb < 0 ? 99 : rb) || String(a[1]).localeCompare(b[1]); });
-      return '<div class="lbl">My study Bibles in Logos (' + sb.length + ')</div><div class="box v-witness"><div class="item">' + sb.map(function (x) {
+      return '<div class="lbl">' + (this.o.owner ? "My study Bibles" : "Study Bibles") + " in Logos (" + sb.length + ')</div><div class="box v-witness"><div class="item">' + sb.map(function (x) {
         return '<p class="u-m6"><span class="tt u-fs17">' + esc(x[1]) + "</span><br>" + outlink(logosRes(x[0], q), "Open") + "</p>"; }).join("") + "</div></div>";
     },
     /* books by his authors: the ones about this book of the Bible first, then everything else they wrote that he owns */
@@ -2584,11 +2584,13 @@
     },
     view: function () {
       var sh = this.sh || {}, segs = shelfBooks(this.o.ref), h = "", own = this.o.owner;
-      var TABS = own ? [["com", "Commentaries"], ["sb", "Study Bibles"], ["vault", "Vault"], ["other", "Others"]] : [["sb", "Study notes"]];   // maps live in the Maps panel
+      var lg = this.o.logos !== false;   // Hide Logos: no Logos lists, just the open study notes (and, on the desk, the vault)
+      var TABS = own ? (lg ? [["com", "Commentaries"], ["sb", "Study Bibles"], ["vault", "Vault"], ["other", "Others"]] : [["sb", "Study notes"], ["vault", "Vault"]])
+                     : (lg ? [["com", "Commentaries"], ["sb", "Study notes"]] : [["sb", "Study notes"]]);   // maps live in the Maps panel
       var tab = TABS.some(function (t) { return t[0] === SHELF_TAB; }) ? SHELF_TAB : TABS[0][0];
       var tabs = '<div class="chips u-mb10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t[0] ? " on" : "") + '" data-jst-stab="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
       var kick = (own ? "My shelf" : "Shelf") + (segs.length ? " \u00B7 " + segs.map(function (s) { return bookLabel(s.book); }).join(", ") : "");
-      if (tab === "sb") return { kick: kick, title: own ? "Study Bibles" : "Study notes", body: tabs + (own ? this.studyBiblesHTML() : "") + this.notesHTML() };
+      if (tab === "sb") return { kick: kick, title: own && lg ? "Study Bibles" : "Study notes", body: tabs + (lg ? this.studyBiblesHTML() : "") + this.notesHTML() };
       if (tab === "vault") return { kick: kick, title: "Books in my vault", body: tabs + this.vaultHTML() };
       if (tab === "other") return { kick: kick, title: "Others", body: tabs + this.dddHTML() + this.coursesHTML() + this.authorsHTML() };
       if (!segs.length) return { kick: kick, title: "Commentaries", body: tabs };
@@ -2609,13 +2611,14 @@
         if (core.length) h += '<div class="lbl">Core stack</div>' + core.map(function (x) {
           return box("witness", "", '<div class="item"><span class="when">' + esc(x.layer) + '</span><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(shortBy(x.by)) + "</span>" +
             outlink(x.at ? logosRes(x.id, s) : R.logos(x.id), "Open") + "</div>"); }).join("");
-        if (tr.length) h += '<div class="lbl">My first picks</div>' + tr.map(card(s)).join("");
+        if (tr.length) h += '<div class="lbl">' + (own ? "My first picks" : "First picks") + "</div>" + tr.map(card(s)).join("");
         if (rest.length) h += '<div class="lbl">' + (tr.length ? "The rest of the shelf" : "On " + esc(bookLabel(s.book))) + " (" + rest.length + ")</div>" + rest.map(card(s)).join("");
-        if (!all.length && !core.length) h += none("You don't own a commentary on " + esc(bookLabel(s.book)) + " in Logos.");
+        if (!all.length && !core.length) h += none((own ? "You don't own" : "No") + " commentary on " + esc(bookLabel(s.book)) + " in Logos.");
       });
       var s0 = segs[0], wide = order((sh[R.book(s0.book) && R.book(s0.book).order < 39 ? "_ot" : "_nt"] || []).concat(sh._bible || [])).filter(notCore);
       if (wide.length) h += '<details class="jst-past"><summary class="lbl">Whole Bible and whole Testament (' + wide.length + ")</summary>" + wide.map(card(s0)).join("") + "</details>";
-      h += '<p class="ctx">Each link opens Logos at the start of the passage in that book (the topical books open at their start). Core stack: always shown. First picks: ranked in Config, or by your authors.' + (hidden ? " " + hidden + " hidden in Config." : "") + "</p>";
+      h += '<p class="ctx">' + (own ? "Each link opens Logos at the start of the passage in that book (the topical books open at their start). Core stack: always shown. First picks: ranked in Config, or by your authors."
+                                    : "Each link opens the book in Logos at this passage. If you don't own it, it opens the book's page on logos.com.") + (hidden ? " " + hidden + " hidden in Config." : "") + "</p>";
       return { kick: kick, title: "Commentaries", body: h };
     }
   }, { owner: false, config: null }, function (d) { return d && d.ref in NOTEN ? NOTEN[d.ref] : null; });

@@ -86,6 +86,9 @@
       <div class="seg" id="parsw" role="group" aria-label="Columns">
         <button id="parbtn" title="Switch between one version and two in parallel"></button>
       </div>
+      <div class="seg" id="logosw" role="group" aria-label="Logos links">
+        <button id="logobtn" title="Hide or show every link into Logos Bible Software"></button>
+      </div>
       <div class="seg" id="numsw" role="group" aria-label="Verse numbers">
         <button id="numbtn" title="Hide or show the verse numbers (a reader like Speechify then skips them)"></button>
       </div>
@@ -284,7 +287,7 @@ function initNote(id, force){
 }
 const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:false   /* the box is gone (6 Oct): "My OT Reading Plan" leaves the genealogies out instead */,
            app:store.get("app","study"), mark:null, hgShow:store.get("hgShow",{claim:true, emphasis:true, cosmetic:false}), hgOrig:store.get("hgOrig",true),   /* the Hebrew & Greek mode */
-           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true)};
+           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true), logos:store.get("logos",true)};
 /* public build: Read along only; no My desk switch, no prototype badge */
 if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
 /* a refresh brings back the panel that was open (null = none); a first visit keeps the default above */
@@ -393,6 +396,7 @@ function choosePlan(id){
 /* ===== READER ===== */
 function wordify(html){return html.replace(/\[w:(\w+)\](.*?)\[\/w\]/g,(m,k,t)=>`<span class="w${k===S.word&&S.tool==="word"?" on":""}" data-w="${k}" role="button" tabindex="0">${t}</span>`)}
 function renderReader(){
+  JaymsRef.setWeb(S.view==="public");   // Read along: Logos's web links, so a reader who doesn't own the book lands on its page
   const r = cur(); if(!r) return;
   $("rtabs").innerHTML = READINGS.map((x,i)=>`<button class="rtab${!S.adhoc&&i===S.reading?" on":""}${isDone(dk(x))?" done":""}" role="tab" aria-selected="${!S.adhoc&&i===S.reading}" data-r="${i}"><span class="ok"></span>${esc(x.ref)}</button>`).join("");
   const isToday = S.day===todayNum(plan());
@@ -402,7 +406,8 @@ function renderReader(){
   $("rtitle").textContent = r.ref;
   const lg = JaymsRef.refly(r.ref, S.ver);
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
-  $("rlogos").hidden = S.view==="public";
+  $("rlogos").hidden = !S.logos;
+  $("logobtn").textContent = S.logos ? "Hide Logos" : "Show Logos";
   $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
   const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
   $("ver").innerHTML = opts(S.ver); $("ver2").innerHTML = opts(S.ver2);
@@ -610,7 +615,7 @@ function restoreOpen(){
 }
 function panelOptions(id){
   const r = cur();
-  const o = { ref:r.ref, on:HANDLERS, owner:S.view!=="public" };   // owner:false in Read along hides vocab buttons, Logos links and James-only notes
+  const o = { ref:r.ref, on:HANDLERS, owner:S.view!=="public", logos:S.logos };   // logos: false = Hide Logos (no Logos links anywhere)   // owner:false in Read along hides vocab buttons, Logos links and James-only notes
   if(id==="marks")   { const sp=hgSpots(); o.mark = sp.find(x=>x.id===S.mark) || null; o.list = sp.map(x=>x.id); }
   if(id==="word")    o.word = S.word;
   if(id==="verse")   { o.verse = S.vsel; o.scripture = scriptureFor; }
@@ -646,6 +651,7 @@ function applyMeta(m){
 }
 let PH = null, PH_KEY = "";
 function renderPanel(){
+  JaymsRef.setWeb(S.view==="public");
   store.set("tool", S.tool);   // remembered for a refresh
   const desk=$("desk");
   document.body.classList.toggle("panel-open",!!S.tool);
@@ -659,7 +665,7 @@ function renderPanel(){
     return;
   }
   /* the same panel on the same passage keeps its own state (an open word, a typed question) */
-  const key = [S.tool, r.ref, S.view, (S.tool==="xref"||S.tool==="targum")?S.ver:"", S.tool==="word"?S.word:"", S.tool==="verse"?JSON.stringify(S.vsel):"", S.tool==="claude"?!!SAMPLE:"", S.tool==="marks"?S.mark+"|"+hgSpots().map(x=>x.id).join(","):""].join("|");
+  const key = [S.tool, r.ref, S.view, S.logos, (S.tool==="xref"||S.tool==="targum")?S.ver:"", S.tool==="word"?S.word:"", S.tool==="verse"?JSON.stringify(S.vsel):"", S.tool==="claude"?!!SAMPLE:"", S.tool==="marks"?S.mark+"|"+hgSpots().map(x=>x.id).join(","):""].join("|");
   if(PH && PH_KEY===key){ PH.refresh(); return }
   if(PH) PH.destroy();
   $("pbody").innerHTML = '<div id="pmount"></div>'; $("pbody").scrollTop = 0;
@@ -876,6 +882,7 @@ $("ver").onchange=e=>{ const was=S.ver; S.ver=e.target.value; if(S.ver===S.ver2)
 $("ver2").onchange=e=>{ const was=S.ver2; S.ver2=e.target.value; if(S.ver2===S.ver){ S.ver=was; store.set("ver",S.ver) } store.set("ver2",S.ver2); renderReader() };
 $("layoutbtn").onclick=()=>{S.layout=S.layout==="verse"?"read":"verse";store.set("layout",S.layout);renderReader()};
 $("numbtn").onclick=()=>{S.nums=!S.nums;store.set("nums",S.nums);renderReader()};
+$("logobtn").onclick=()=>{S.logos=!S.logos;store.set("logos",S.logos);renderReader();renderPanel()};
 $("mapbtn").onclick=()=>{ if(S.tool!=="maps") openTool("maps") };
 $("parbtn").onclick=()=>{S.par=S.par?0:1;store.set("par",S.par);renderReader()};
 $("smaller").onclick=()=>{S.size=Math.max(16,S.size-1);store.set("size",S.size);renderReader()};
