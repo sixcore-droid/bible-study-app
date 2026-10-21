@@ -1565,7 +1565,8 @@
       (extra || []).forEach(function (a) { a = a.toLowerCase(); best = Math.min(best, a === q ? 0 : a.indexOf(q) === 0 ? 1 : a.indexOf(q) > -1 ? 3 : 9); }); return best; };
     var out = [], add = function (kind, id, name, sub, sc) { if (sc < 9) out.push({ kind: kind, id: id, name: name, sub: sub, sc: sc }); };
     ((self.T && self.T.topics) || []).forEach(function (t) { add("t", t.id, t.name, "Topic \u00B7 " + (t.nations ? t.nations.length + " peoples, " + t.ref : (t.claims || []).length + " claimed places"), score(t.name, t.aliases)); });
-    (self.A.routes || []).forEach(function (r) { add("r", r.id, r.name, "Journey \u00B7 " + r.ranges[0], score(r.name, realStops(r).map(function (x) { return x.n; }).filter(function (n) { return n.toLowerCase() === q; }))); });
+    (self.A.routes || []).forEach(function (r) { var stop = realStops(r).some(function (x) { return x.n.toLowerCase() === q; });   // a journey through the place: listed, but after the place itself
+      add("r", r.id, r.name, "Journey \u00B7 " + r.ranges[0] + (stop ? " \u00B7 passes through it" : ""), Math.min(score(r.name), stop ? 2 : 9)); });
     var ks = {}; ((self.K && self.K.polities.features) || []).concat((self.K && self.K.regions.features) || []).forEach(function (f) { var p = f.properties, k = ks[p.n] || (ks[p.n] = { f: p.f, t: p.t }); k.f = Math.min(k.f, p.f); k.t = Math.max(k.t, p.t); });
     Object.keys(ks).forEach(function (n) { if (ks[n].t < -2500 || ks[n].f > 400) return; add("k", n, n, "Kingdom \u00B7 " + yearLabel(ks[n].f) + " to " + yearLabel(ks[n].t), score(n)); });
     Object.keys(self.pd.places).forEach(function (id) { var p = self.pd.places[id]; add("p", id, p.n.replace(/\s+\d+$/, ""), "Place \u00B7 " + TIER[p.tier] + (p.n.match(/\d+$/) ? " (" + p.n + ")" : ""), score(p.n.replace(/\s+\d+$/, ""))); });
