@@ -844,7 +844,9 @@
     return out;
   }
   api.placesIn = function (ref) { return data.places().then(function (pd) { return placesIn(pd, ref); }); };
-  var TIER = { secure: "Secure identification", likely: "Likely identification", contested: "Contested identification", unlocated: "No proposed site" };
+  var TIER = { secure: "Secure identification", likely: "Likely identification", contested: "Contested identification", unlocated: "No proposed site",
+    area: "Exact spot unknown", region: "Region" };   // area: known only as in or near somewhere (a gate "in Jerusalem"); region: the pin marks the middle
+  function tierNote(p) { return p.tier === "area" ? '<p class="u-fs14 u-m4-8">Known only as ' + esc(p.near || "in this area") + '; the pin marks that, not the spot.</p>' : p.tier === "region" ? '<p class="u-fs14 u-m4-8">A land or region; the pin marks its middle.</p>' : ""; }
   function namesIn(nm, ref) {
     if (!nm) return [];
     var out = [], seen = {};
@@ -1295,7 +1297,8 @@
       if (/^jst-pin-/.test(e.id)) {   // drawn at twice the size for sharp edges on retina screens
         var t = e.id.slice(8), c = document.createElement("canvas"); c.width = c.height = 36; var x = c.getContext("2d");
         x.beginPath(); x.arc(18, 18, 12, 0, 7); x.fillStyle = t === "secure" ? "#c9a24c" : "rgba(250,244,226,.95)"; x.fill();
-        x.lineWidth = t === "secure" ? 3 : 4.4; x.strokeStyle = t === "contested" ? "#9a3b26" : t === "likely" ? "#b0852f" : t === "rejected" ? "#7a7a7a" : "#5a3c10";
+        x.lineWidth = t === "secure" ? 3 : t === "region" ? 2.6 : 4.4; x.strokeStyle = t === "contested" ? "#9a3b26" : t === "likely" ? "#b0852f" : t === "rejected" ? "#7a7a7a" : t === "area" || t === "region" ? "#8a7650" : "#5a3c10";
+        if (t === "area") x.setLineDash([2.5, 3]);   // only the town or area is known: a dotted ring
         if (t === "rejected") { x.fillStyle = "rgba(220,220,220,.95)"; x.fill(); x.beginPath(); x.moveTo(10, 10); x.lineTo(26, 26); x.moveTo(26, 10); x.lineTo(10, 26); }
         if (t === "contested") x.setLineDash([5, 4]); x.stroke();
         map.addImage(e.id, x.getImageData(0, 0, 36, 36), { pixelRatio: 2 });
@@ -1611,7 +1614,7 @@
       if (!rt && !sel) {
         if (places.length) h += '<div class="lbl u-mt14">Places in ' + esc(this.o.ref) + " (" + places.length + ")</div>" + places.map(function (p) {
           var on = (self.mp[p.sn || p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
-          return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + placeRivals(p) + photoStrip(p.id) +
+          return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + tierNote(p) + placeRivals(p) + photoStrip(p.id) +
             (on.length ? '<div class="chips">' + on.map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>" : "") +
             (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.owner ? atlasLinks(self.at || [], p.n) : "") + "</div>"); }).join("");
         else if (!A) h += none("No place is named in " + esc(this.o.ref) + ".");
@@ -1637,7 +1640,7 @@
       if (sel.kind === "p") {
         var p = this.pd && this.pd.places[sel.id]; if (!p) return none("That place isn't in the list.");
         var nm = p.n.replace(/\s+\d+$/, ""), st = this.nm && p.step && this.nm.p[p.step[0]], refs = placeRefs(this.pd, sel.id);
-        return box("witness", "", '<div class="item"><span class="tt">' + esc(nm) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (st && st.b ? '<p class="u-m4-8 u-fs15">' + esc(st.b) + "</p>" : "") + placeRivals(p, true) + photoStrip(sel.id) +
+        return box("witness", "", '<div class="item"><span class="tt">' + esc(nm) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (st && st.b ? '<p class="u-m4-8 u-fs15">' + esc(st.b) + "</p>" : "") + tierNote(p) + placeRivals(p, true) + photoStrip(sel.id) +
           (refs.length ? '<div class="lbl u-mt14">Named in ' + refs.length + " verse" + (refs.length > 1 ? "s" : "") + '</div><p class="u-fs15 jst-atlas-refs">' + refs.slice(0, 40).map(function (r) { return '<button class="jst-ref" data-jst-go="' + esc(r) + '">' + esc(r) + "</button>"; }).join(" ") + (refs.length > 40 ? " and " + (refs.length - 40) + " more" : "") + "</p>" : "") +
           atlasLinks(al, nm) + "</div>");
       }
@@ -1758,7 +1761,7 @@
       if (fly) { var q = rt ? it : atlasXY(this.A, it.ll); this._atlas.fit([q], 500, 560); }
       this.el.querySelectorAll("[data-jst-astop]").forEach(function (b) { b.classList.toggle("on", +b.getAttribute("data-jst-astop") === i); });
       var al = this.o.owner ? this.at || [] : [];
-      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + photoStrip(it.id) + atlasLinks(al, it.n) + "</div>";
+      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + tierNote(it) + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + photoStrip(it.id) + atlasLinks(al, it.n) + "</div>";
         this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []);
         var others = (this._items || []).filter(function (p) { return p !== it && p.ll; });
         if (others.length && CFG.onlineMaps) box_.querySelector(".jst-atlas-card").insertAdjacentHTML("beforeend", '<div class="lbl u-mt14">Height from ' + esc(it.n) + ' to</div><div class="chips">' + others.slice(0, 12).map(function (p) { return '<button class="chip" data-jst-prof2="' + esc(p.id) + '">' + esc(p.n) + "</button>"; }).join("") + '</div><div data-jst-aprof2></div>');

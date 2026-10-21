@@ -648,3 +648,6 @@ body.hg-noorig .mtag{display:none}
 .jst-atlas-grip:hover i,.jst-atlas-grip:focus-visible i{background:var(--gold)}
 .jst-atlas-wrap:fullscreen .jst-atlas-grip,.jst-atlas-wrap.jst-atlas-big .jst-atlas-grip{display:none}
 .jst-atlas-wrap:fullscreen .jst-atlas.jst-atlas-sized,.jst-atlas-wrap.jst-atlas-big .jst-atlas.jst-atlas-sized{height:100%!important}
+.jst-tier.area{border:1px dotted #8a7650}
+.jst-tier.region{border-color:#8a7650}
+.jst-atlas-svg .amk.place.tier-area circle{fill:#faf4e2;stroke:#8a7650;stroke-width:2.2;stroke-dasharray:1.5 2}.jst-atlas-svg .amk.place.tier-region circle{fill:#faf4e2;stroke:#8a7650;stroke-width:1.6}
