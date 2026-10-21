@@ -1757,7 +1757,7 @@
       if (this.st.pick) this.pickItem(this.st.pick, false);
     },
     /* show one stop or place under the map: its name, the verse (in the first version the text has), and a link to open it */
-    pickItem: function (i, fly) {
+    pickItem: function (i, fly, quiet) {   // quiet: from a card's own "Show on the map", so no second card above the list
       var self = this, it = (this._items || [])[i - 1], box_ = this.el.querySelector("[data-jst-apick]"), rt = this.route();
       if (!it || !box_) return;
       this.st.pick = i; this._atlas.pick(i);
@@ -1768,6 +1768,7 @@
       if (fly) { var q = rt ? it : atlasXY(this.A, it.ll); this._atlas.fit([q], 500, 560); }
       this.el.querySelectorAll("[data-jst-astop]").forEach(function (b) { b.classList.toggle("on", +b.getAttribute("data-jst-astop") === i); });
       var al = this.o.owner ? this.at || [] : [];
+      if (!rt && quiet) { box_.innerHTML = ""; this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []); return; }
       if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + tierNote(it) + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + photoStrip(it.id) + atlasLinks(al, it.n) + photoCredits(it.id) + "</div>";
         this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []);
         var others = (this._items || []).filter(function (p) { return p !== it && p.ll; });
@@ -1866,7 +1867,7 @@
       if (m) { e.stopPropagation(); mapViewer(MAPBY[m.getAttribute("data-jst-pmap")]); return; }
       var f = e.target.closest("[data-jst-fly]");
       if (f && this._atlas) { e.stopPropagation(); var id = f.getAttribute("data-jst-fly"), i = (this._items || []).map(function (p) { return p.id; }).indexOf(id);
-        if (i > -1) { this.pickItem(i + 1, true); var mp2 = this.el.querySelector("[data-jst-atlas]"); if (mp2 && mp2.scrollIntoView) mp2.scrollIntoView({ block: "nearest", behavior: "smooth" }); } return; }
+        if (i > -1) { this.pickItem(i + 1, true, true); var mp2 = this.el.querySelector("[data-jst-atlas]"); if (mp2 && mp2.scrollIntoView) mp2.scrollIntoView({ block: "nearest", behavior: "smooth" }); } return; }
       Panel.prototype.click.call(this, e);
     },
     destroy: function () { this.stopPlay(true); clearTimeout(this._ht); if (this._atlas) { this._atlas.destroy(); this._atlas = null; } Panel.prototype.destroy.call(this); }
