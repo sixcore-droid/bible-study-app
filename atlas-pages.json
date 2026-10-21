@@ -1,0 +1,1497 @@
+{
+ "_about": "Pages in James's Logos atlases for each place, read off Logos search results (top relevant hit, sorted by Relevance) by the scheduled task atlas-page-index. Atlas ids: hlmnbblat, ltmtbbltls, hlmnchrtsmaps, barbourbibatlascomp, vptlblhst2nd. A place with {} was searched and nothing safe was found.",
+ "pages": {
+  "Ur": {
+   "hlmnbblat": "37",
+   "ltmtbbltls": "84",
+   "barbourbibatlascomp": "18",
+   "vptlblhst2nd": "23"
+  },
+  "Jerusalem": {
+   "hlmnchrtsmaps": "141",
+   "hlmnbblat": "110",
+   "ltmtbbltls": "148",
+   "vptlblhst2nd": "142",
+   "barbourbibatlascomp": "108"
+  },
+  "Haran": {
+   "hlmnbblat": "45",
+   "ltmtbbltls": "84",
+   "vptlblhst2nd": "25"
+  },
+  "Shechem": {
+   "hlmnbblat": "87",
+   "ltmtbbltls": "41",
+   "hlmnchrtsmaps": "48",
+   "barbourbibatlascomp": "36",
+   "vptlblhst2nd": "25"
+  },
+  "Bethel": {
+   "hlmnbblat": "120",
+   "ltmtbbltls": "38",
+   "hlmnchrtsmaps": "49",
+   "barbourbibatlascomp": "168",
+   "vptlblhst2nd": "45"
+  },
+  "Egypt": {
+   "hlmnbblat": "49",
+   "ltmtbbltls": "97",
+   "hlmnchrtsmaps": "66",
+   "barbourbibatlascomp": "22",
+   "vptlblhst2nd": "30"
+  },
+  "Hebron": {
+   "hlmnbblat": "78",
+   "ltmtbbltls": "19",
+   "hlmnchrtsmaps": "48",
+   "barbourbibatlascomp": "18",
+   "vptlblhst2nd": "25"
+  },
+  "Rameses": {
+   "hlmnbblat": "57",
+   "ltmtbbltls": "101",
+   "vptlblhst2nd": "31"
+  },
+  "Succoth": {
+   "hlmnbblat": "68"
+  },
+  "Etham": {
+   "hlmnbblat": "68"
+  },
+  "Pi-hahiroth": {
+   "hlmnbblat": "68",
+   "vptlblhst2nd": "34"
+  },
+  "Marah": {
+   "hlmnbblat": "69"
+  },
+  "Elim": {
+   "hlmnbblat": "69"
+  },
+  "Wilderness of Sin": {
+   "hlmnbblat": "69",
+   "ltmtbbltls": "99",
+   "barbourbibatlascomp": "26"
+  },
+  "Rephidim": {
+   "hlmnbblat": "69",
+   "ltmtbbltls": "102"
+  },
+  "Sinai": {
+   "hlmnbblat": "67",
+   "ltmtbbltls": "99",
+   "barbourbibatlascomp": "24",
+   "vptlblhst2nd": "36"
+  },
+  "Hazeroth": {},
+  "Kadesh": {
+   "hlmnbblat": "69",
+   "ltmtbbltls": "119",
+   "barbourbibatlascomp": "26",
+   "vptlblhst2nd": "42"
+  },
+  "Mount Hor": {
+   "hlmnbblat": "71",
+   "ltmtbbltls": "69",
+   "vptlblhst2nd": "43"
+  },
+  "Plains of Moab": {
+   "hlmnbblat": "74",
+   "ltmtbbltls": "46",
+   "vptlblhst2nd": "43"
+  },
+  "Nebo": {
+   "hlmnbblat": "74",
+   "ltmtbbltls": "68",
+   "barbourbibatlascomp": "28",
+   "vptlblhst2nd": "43"
+  },
+  "Antioch": {
+   "hlmnbblat": "244",
+   "ltmtbbltls": "343",
+   "barbourbibatlascomp": "154",
+   "vptlblhst2nd": "152"
+  },
+  "Seleucia": {
+   "hlmnbblat": "244",
+   "vptlblhst2nd": "152"
+  },
+  "Salamis": {
+   "hlmnbblat": "244",
+   "ltmtbbltls": "349",
+   "vptlblhst2nd": "152"
+  },
+  "Paphos": {
+   "hlmnbblat": "244",
+   "ltmtbbltls": "349",
+   "vptlblhst2nd": "152"
+  },
+  "Perga": {
+   "hlmnbblat": "244",
+   "barbourbibatlascomp": "154",
+   "vptlblhst2nd": "152"
+  },
+  "Antioch in Pisidia": {
+   "hlmnbblat": "246",
+   "ltmtbbltls": "344",
+   "hlmnchrtsmaps": "100",
+   "barbourbibatlascomp": "154",
+   "vptlblhst2nd": "152"
+  },
+  "Iconium": {
+   "hlmnbblat": "245",
+   "ltmtbbltls": "344",
+   "vptlblhst2nd": "153"
+  },
+  "Lystra": {
+   "hlmnbblat": "245",
+   "ltmtbbltls": "344",
+   "barbourbibatlascomp": "156",
+   "vptlblhst2nd": "153"
+  },
+  "Derbe": {
+   "hlmnbblat": "246",
+   "ltmtbbltls": "344",
+   "vptlblhst2nd": "153"
+  },
+  "Attalia": {
+   "hlmnbblat": "246",
+   "vptlblhst2nd": "153"
+  },
+  "Troas": {
+   "hlmnbblat": "247",
+   "ltmtbbltls": "350",
+   "vptlblhst2nd": "154"
+  },
+  "Samothracia": {
+   "hlmnbblat": "247",
+   "vptlblhst2nd": "154"
+  },
+  "Neapolis": {
+   "hlmnbblat": "247",
+   "vptlblhst2nd": "155"
+  },
+  "Philippi": {
+   "hlmnbblat": "247",
+   "vptlblhst2nd": "154"
+  },
+  "Amphipolis": {
+   "hlmnbblat": "247",
+   "ltmtbbltls": "350",
+   "vptlblhst2nd": "155"
+  },
+  "Apollonia": {
+   "hlmnbblat": "247",
+   "vptlblhst2nd": "155"
+  },
+  "Thessalonica": {
+   "hlmnbblat": "247",
+   "ltmtbbltls": "344",
+   "vptlblhst2nd": "155"
+  },
+  "Berea": {
+   "hlmnbblat": "247",
+   "ltmtbbltls": "344",
+   "vptlblhst2nd": "155"
+  },
+  "Athens": {
+   "hlmnbblat": "251",
+   "ltmtbbltls": "228",
+   "vptlblhst2nd": "156",
+   "barbourbibatlascomp": "156",
+   "hlmnchrtsmaps": "148"
+  },
+  "Corinth": {
+   "hlmnbblat": "252",
+   "ltmtbbltls": "345",
+   "vptlblhst2nd": "157",
+   "barbourbibatlascomp": "156"
+  },
+  "Cenchrea": {
+   "hlmnbblat": "252",
+   "ltmtbbltls": "350",
+   "vptlblhst2nd": "157"
+  },
+  "Ephesus": {
+   "hlmnbblat": "254",
+   "ltmtbbltls": "367",
+   "vptlblhst2nd": "170",
+   "barbourbibatlascomp": "158",
+   "hlmnchrtsmaps": "163"
+  },
+  "Caesarea": {
+   "hlmnbblat": "202",
+   "ltmtbbltls": "44",
+   "vptlblhst2nd": "130",
+   "barbourbibatlascomp": "152",
+   "hlmnchrtsmaps": "149"
+  },
+  "Assos": {
+   "hlmnbblat": "250",
+   "ltmtbbltls": "353",
+   "vptlblhst2nd": "160"
+  },
+  "Mitylene": {
+   "ltmtbbltls": "353",
+   "vptlblhst2nd": "160"
+  },
+  "Chios": {
+   "ltmtbbltls": "353",
+   "vptlblhst2nd": "160"
+  },
+  "Samos": {
+   "hlmnbblat": "250",
+   "ltmtbbltls": "353",
+   "vptlblhst2nd": "160"
+  },
+  "Miletus": {
+   "hlmnbblat": "250",
+   "vptlblhst2nd": "160"
+  },
+  "Cos": {
+   "hlmnbblat": "250",
+   "vptlblhst2nd": "161"
+  },
+  "Rhodes": {
+   "hlmnbblat": "250",
+   "vptlblhst2nd": "161"
+  },
+  "Patara": {
+   "hlmnbblat": "250",
+   "ltmtbbltls": "349",
+   "vptlblhst2nd": "161"
+  },
+  "Tyre": {
+   "hlmnbblat": "127",
+   "vptlblhst2nd": "106",
+   "barbourbibatlascomp": "122"
+  },
+  "Ptolemais": {
+   "hlmnbblat": "250",
+   "vptlblhst2nd": "161",
+   "barbourbibatlascomp": "128"
+  },
+  "Sidon": {
+   "hlmnbblat": "127",
+   "vptlblhst2nd": "141"
+  },
+  "Myra": {
+   "hlmnbblat": "256",
+   "ltmtbbltls": "349",
+   "vptlblhst2nd": "162"
+  },
+  "Cnidus": {
+   "ltmtbbltls": "350",
+   "vptlblhst2nd": "162"
+  },
+  "Salmone": {
+   "hlmnbblat": "256",
+   "ltmtbbltls": "350",
+   "vptlblhst2nd": "162"
+  },
+  "Fair Havens": {
+   "hlmnbblat": "256",
+   "ltmtbbltls": "350",
+   "vptlblhst2nd": "162"
+  },
+  "Cauda": {
+   "hlmnbblat": "256",
+   "ltmtbbltls": "350",
+   "vptlblhst2nd": "162"
+  },
+  "Malta": {
+   "hlmnbblat": "257",
+   "ltmtbbltls": "356",
+   "vptlblhst2nd": "163",
+   "barbourbibatlascomp": "160"
+  },
+  "Syracuse": {
+   "hlmnbblat": "257",
+   "ltmtbbltls": "350",
+   "vptlblhst2nd": "163"
+  },
+  "Rhegium": {
+   "hlmnbblat": "257",
+   "ltmtbbltls": "350",
+   "vptlblhst2nd": "163"
+  },
+  "Puteoli": {
+   "hlmnbblat": "257",
+   "ltmtbbltls": "356",
+   "vptlblhst2nd": "163"
+  },
+  "Forum of Appius": {
+   "hlmnbblat": "257",
+   "ltmtbbltls": "350",
+   "vptlblhst2nd": "163"
+  },
+  "Three Inns": {
+   "hlmnbblat": "257",
+   "ltmtbbltls": "356",
+   "vptlblhst2nd": "163"
+  },
+  "Rome": {
+   "hlmnbblat": "192",
+   "ltmtbbltls": "232",
+   "vptlblhst2nd": "163",
+   "barbourbibatlascomp": "160",
+   "hlmnchrtsmaps": "131"
+  },
+  "Patmos": {
+   "hlmnbblat": "265",
+   "ltmtbbltls": "365",
+   "vptlblhst2nd": "170",
+   "barbourbibatlascomp": "164"
+  },
+  "Smyrna": {
+   "hlmnbblat": "265",
+   "ltmtbbltls": "367",
+   "vptlblhst2nd": "170",
+   "barbourbibatlascomp": "164"
+  },
+  "Pergamum": {
+   "hlmnbblat": "266",
+   "ltmtbbltls": "367",
+   "vptlblhst2nd": "170",
+   "barbourbibatlascomp": "164"
+  },
+  "Thyatira": {
+   "hlmnbblat": "267",
+   "ltmtbbltls": "367",
+   "vptlblhst2nd": "172",
+   "barbourbibatlascomp": "164"
+  },
+  "Sardis": {
+   "hlmnbblat": "266",
+   "ltmtbbltls": "216",
+   "vptlblhst2nd": "172",
+   "barbourbibatlascomp": "164"
+  },
+  "Philadelphia": {
+   "hlmnbblat": "267",
+   "ltmtbbltls": "367",
+   "vptlblhst2nd": "173",
+   "barbourbibatlascomp": "164"
+  },
+  "Laodicea": {
+   "hlmnbblat": "267",
+   "ltmtbbltls": "367",
+   "vptlblhst2nd": "173",
+   "barbourbibatlascomp": "164"
+  },
+  "Babylon": {
+   "hlmnbblat": "161",
+   "ltmtbbltls": "206",
+   "vptlblhst2nd": "109"
+  },
+  "Philistia": {
+   "hlmnbblat": "15"
+  },
+  "Jordan": {
+   "hlmnbblat": "20",
+   "ltmtbbltls": "46",
+   "vptlblhst2nd": "44",
+   "barbourbibatlascomp": "170"
+  },
+  "Moab": {
+   "hlmnbblat": "73",
+   "ltmtbbltls": "66",
+   "vptlblhst2nd": "80",
+   "barbourbibatlascomp": "118"
+  },
+  "Canaan": {
+   "hlmnbblat": "43",
+   "ltmtbbltls": "117",
+   "vptlblhst2nd": "52",
+   "barbourbibatlascomp": "20",
+   "hlmnchrtsmaps": "114"
+  },
+  "Assyria": {
+   "hlmnbblat": "150",
+   "ltmtbbltls": "175",
+   "vptlblhst2nd": "86",
+   "barbourbibatlascomp": "88"
+  },
+  "Samaria": {
+   "hlmnbblat": "139",
+   "ltmtbbltls": "38",
+   "vptlblhst2nd": "149",
+   "barbourbibatlascomp": "169"
+  },
+  "Ammon": {
+   "hlmnbblat": "73",
+   "ltmtbbltls": "63",
+   "vptlblhst2nd": "80",
+   "barbourbibatlascomp": "66"
+  },
+  "Syria": {
+   "hlmnbblat": "8",
+   "vptlblhst2nd": "81"
+  },
+  "Edom": {
+   "hlmnbblat": "73",
+   "ltmtbbltls": "68",
+   "vptlblhst2nd": "42",
+   "barbourbibatlascomp": "82"
+  },
+  "Gilead": {
+   "hlmnbblat": "23",
+   "ltmtbbltls": "63",
+   "vptlblhst2nd": "81",
+   "barbourbibatlascomp": "169"
+  },
+  "Chaldea": {
+   "ltmtbbltls": "211"
+  },
+  "Galilee": {
+   "hlmnbblat": "219",
+   "ltmtbbltls": "52",
+   "vptlblhst2nd": "139",
+   "barbourbibatlascomp": "138"
+  },
+  "Dan": {
+   "hlmnbblat": "119",
+   "vptlblhst2nd": "78",
+   "barbourbibatlascomp": "80"
+  },
+  "Euphrates": {
+   "hlmnbblat": "5",
+   "vptlblhst2nd": "22"
+  },
+  "Jericho": {
+   "hlmnbblat": "205",
+   "ltmtbbltls": "32",
+   "vptlblhst2nd": "48",
+   "barbourbibatlascomp": "38",
+   "hlmnchrtsmaps": "156"
+  },
+  "Midian": {
+   "hlmnbblat": "67",
+   "vptlblhst2nd": "33"
+  },
+  "Lebanon": {
+   "hlmnbblat": "8",
+   "vptlblhst2nd": "80"
+  },
+  "Damascus": {
+   "hlmnbblat": "124",
+   "ltmtbbltls": "161",
+   "vptlblhst2nd": "81",
+   "barbourbibatlascomp": "80"
+  },
+  "Bethlehem": {
+   "hlmnbblat": "217",
+   "ltmtbbltls": "19",
+   "vptlblhst2nd": "136",
+   "barbourbibatlascomp": "136"
+  },
+  "Bashan": {
+   "hlmnbblat": "23",
+   "ltmtbbltls": "62",
+   "vptlblhst2nd": "81",
+   "barbourbibatlascomp": "28"
+  },
+  "Judea": {
+   "hlmnbblat": "226",
+   "ltmtbbltls": "17",
+   "barbourbibatlascomp": "106"
+  },
+  "Mizpah": {
+   "ltmtbbltls": "33"
+  },
+  "Sodom": {
+   "hlmnbblat": "46",
+   "ltmtbbltls": "30",
+   "vptlblhst2nd": "25",
+   "barbourbibatlascomp": "20"
+  },
+  "Gibeah": {
+   "hlmnbblat": "98",
+   "ltmtbbltls": "33",
+   "vptlblhst2nd": "62",
+   "barbourbibatlascomp": "56"
+  },
+  "Amalek": {},
+  "Cush": {
+   "hlmnbblat": "33",
+   "vptlblhst2nd": "15"
+  },
+  "Gibeon": {
+   "hlmnbblat": "102",
+   "ltmtbbltls": "32",
+   "vptlblhst2nd": "46",
+   "barbourbibatlascomp": "64",
+   "hlmnchrtsmaps": "48"
+  },
+  "Jezreel": {
+   "hlmnbblat": "16",
+   "ltmtbbltls": "50",
+   "vptlblhst2nd": "59",
+   "barbourbibatlascomp": "46"
+  },
+  "Gath": {
+   "hlmnbblat": "134",
+   "ltmtbbltls": "24",
+   "vptlblhst2nd": "63",
+   "barbourbibatlascomp": "58"
+  },
+  "Gilgal": {
+   "hlmnbblat": "97",
+   "ltmtbbltls": "117",
+   "vptlblhst2nd": "46",
+   "barbourbibatlascomp": "38",
+   "hlmnchrtsmaps": "48"
+  },
+  "Negeb": {
+   "hlmnbblat": "19",
+   "ltmtbbltls": "26",
+   "barbourbibatlascomp": "10"
+  },
+  "Nile": {
+   "hlmnbblat": "7",
+   "ltmtbbltls": "97",
+   "vptlblhst2nd": "28",
+   "hlmnchrtsmaps": "66"
+  },
+  "Heshbon": {
+   "hlmnbblat": "87",
+   "vptlblhst2nd": "49"
+  },
+  "Shiloh": {
+   "hlmnbblat": "96",
+   "ltmtbbltls": "38",
+   "vptlblhst2nd": "72"
+  },
+  "Holy Place": {
+   "hlmnbblat": "114",
+   "ltmtbbltls": "153",
+   "vptlblhst2nd": "133",
+   "hlmnchrtsmaps": "143"
+  },
+  "Ramoth": {
+   "hlmnbblat": "127",
+   "ltmtbbltls": "64",
+   "vptlblhst2nd": "56",
+   "barbourbibatlascomp": "84"
+  },
+  "Hamath": {
+   "hlmnbblat": "134",
+   "vptlblhst2nd": "81",
+   "barbourbibatlascomp": "86"
+  },
+  "Ai": {
+   "hlmnbblat": "78",
+   "ltmtbbltls": "118",
+   "vptlblhst2nd": "45",
+   "barbourbibatlascomp": "36",
+   "hlmnchrtsmaps": "48"
+  },
+  "Beersheba": {
+   "hlmnbblat": "19",
+   "ltmtbbltls": "27",
+   "vptlblhst2nd": "80",
+   "barbourbibatlascomp": "20"
+  },
+  "Persia": {
+   "hlmnbblat": "166",
+   "ltmtbbltls": "216",
+   "barbourbibatlascomp": "110"
+  },
+  "Nazareth": {
+   "hlmnbblat": "220",
+   "ltmtbbltls": "53",
+   "vptlblhst2nd": "137"
+  },
+  "Macedonia": {
+   "hlmnbblat": "247",
+   "ltmtbbltls": "344",
+   "vptlblhst2nd": "154",
+   "hlmnchrtsmaps": "130"
+  },
+  "Red Sea": {
+   "hlmnbblat": "65",
+   "ltmtbbltls": "98",
+   "vptlblhst2nd": "80",
+   "barbourbibatlascomp": "24"
+  },
+  "Seir": {
+   "hlmnbblat": "73",
+   "ltmtbbltls": "69",
+   "vptlblhst2nd": "80"
+  },
+  "Gomorrah": {
+   "hlmnbblat": "46",
+   "ltmtbbltls": "93",
+   "vptlblhst2nd": "25",
+   "barbourbibatlascomp": "20"
+  },
+  "Carmel": {
+   "hlmnbblat": "16",
+   "ltmtbbltls": "45",
+   "vptlblhst2nd": "50"
+  },
+  "Arnon": {
+   "hlmnbblat": "73",
+   "ltmtbbltls": "66",
+   "vptlblhst2nd": "80"
+  },
+  "Gaza": {
+   "hlmnbblat": "94",
+   "ltmtbbltls": "24",
+   "vptlblhst2nd": "80",
+   "barbourbibatlascomp": "50"
+  },
+  "Arabah": {
+   "hlmnbblat": "20",
+   "vptlblhst2nd": "80"
+  },
+  "Beth-shemesh": {
+   "hlmnbblat": "96",
+   "vptlblhst2nd": "64"
+  },
+  "Kiriath-jearim": {
+   "hlmnbblat": "79",
+   "ltmtbbltls": "32",
+   "vptlblhst2nd": "64",
+   "hlmnchrtsmaps": "48"
+  },
+  "Lachish": {
+   "hlmnbblat": "156",
+   "ltmtbbltls": "23",
+   "vptlblhst2nd": "92",
+   "hlmnchrtsmaps": "48"
+  },
+  "Media": {},
+  "Ashdod": {
+   "hlmnbblat": "96",
+   "ltmtbbltls": "24",
+   "vptlblhst2nd": "91",
+   "barbourbibatlascomp": "86"
+  },
+  "Hermon Mount": {
+   "hlmnbblat": "8",
+   "ltmtbbltls": "62",
+   "vptlblhst2nd": "144"
+  },
+  "Ekron": {
+   "hlmnbblat": "143",
+   "ltmtbbltls": "24",
+   "vptlblhst2nd": "80"
+  },
+  "Ramah": {
+   "hlmnbblat": "97",
+   "ltmtbbltls": "33",
+   "vptlblhst2nd": "61",
+   "barbourbibatlascomp": "56"
+  },
+  "Tarshish": {
+   "ltmtbbltls": "78",
+   "vptlblhst2nd": "77"
+  },
+  "Susa": {
+   "hlmnbblat": "173",
+   "ltmtbbltls": "218",
+   "vptlblhst2nd": "115",
+   "barbourbibatlascomp": "110"
+  },
+  "Asia": {},
+  "Shephelah": {
+   "hlmnbblat": "18",
+   "ltmtbbltls": "22"
+  },
+  "Arabia": {
+   "hlmnbblat": "11",
+   "vptlblhst2nd": "110"
+  },
+  "Nineveh": {
+   "hlmnbblat": "151",
+   "ltmtbbltls": "175",
+   "vptlblhst2nd": "99"
+  },
+  "Anathoth": {
+   "hlmnbblat": "157",
+   "ltmtbbltls": "30",
+   "vptlblhst2nd": "104"
+  },
+  "Jabesh": {
+   "hlmnbblat": "97",
+   "ltmtbbltls": "142",
+   "vptlblhst2nd": "62"
+  },
+  "Libnah": {
+   "hlmnbblat": "79",
+   "ltmtbbltls": "25",
+   "vptlblhst2nd": "46"
+  },
+  "Aroer": {
+   "hlmnbblat": "94"
+  },
+  "Topheth": {},
+  "Paddan": {
+   "hlmnbblat": "48"
+  },
+  "Geba": {
+   "hlmnbblat": "98"
+  },
+  "Gezer": {
+   "hlmnbblat": "27"
+  },
+  "Keilah": {
+   "hlmnbblat": "98"
+  },
+  "Sheba": {
+   "hlmnbblat": "108"
+  },
+  "Elam": {
+   "hlmnbblat": "150"
+  },
+  "Capernaum": {
+   "hlmnbblat": "221"
+  }
+ },
+ "notes": {
+  "Ur": {
+   "hlmnbblat": "The Table of Nations",
+   "ltmtbbltls": "The Patriarchs: Abraham to Joseph",
+   "barbourbibatlascomp": "Near East during the Time of the Patriarchs",
+   "vptlblhst2nd": "The Arameans and Chaldeans"
+  },
+  "Jerusalem": {
+   "hlmnchrtsmaps": "Jerusalem during the Time of David",
+   "hlmnbblat": "Jerusalem: City of David & Solomon",
+   "ltmtbbltls": "Jerusalem",
+   "vptlblhst2nd": "Jerusalem and Its Environs",
+   "barbourbibatlascomp": "Nehemiah Rebuilds Jerusalem's Walls"
+  },
+  "Haran": {
+   "hlmnbblat": "The Migrations of Abraham",
+   "ltmtbbltls": "The Patriarchs: Abraham to Joseph",
+   "vptlblhst2nd": "In Canaan"
+  },
+  "Shechem": {
+   "hlmnbblat": "West Manasseh (Josh. 17:1–13)",
+   "ltmtbbltls": "The Hill Country of Manasseh",
+   "hlmnchrtsmaps": "Cities of Joshua's Conquest",
+   "barbourbibatlascomp": "Israel Enters the Promised Land",
+   "vptlblhst2nd": "In Canaan"
+  },
+  "Bethel": {
+   "hlmnbblat": "Bethel",
+   "ltmtbbltls": "The Hill Country of Ephraim",
+   "hlmnchrtsmaps": "Cities of Joshua's Conquest",
+   "barbourbibatlascomp": "Additional Information: Key Cities in Israel",
+   "vptlblhst2nd": "Set-Back and Eventual Victory at Ai"
+  },
+  "Egypt": {
+   "hlmnbblat": "Joseph and the Entry into Egypt",
+   "ltmtbbltls": "The Egyptian Period",
+   "hlmnchrtsmaps": "The Ten Plagues of Egypt",
+   "barbourbibatlascomp": "Egypt in the Bible",
+   "vptlblhst2nd": "Joseph in Egypt"
+  },
+  "Hebron": {
+   "hlmnbblat": "Campaigns in the South",
+   "ltmtbbltls": "The Hill Country of Judah",
+   "hlmnchrtsmaps": "Cities of Joshua's Conquest",
+   "barbourbibatlascomp": "Near East during the Time of the Patriarchs",
+   "vptlblhst2nd": "In Canaan"
+  },
+  "Rameses": {
+   "hlmnbblat": "Nineteenth Dynasty and the Hittites",
+   "ltmtbbltls": "The Number Involved in the Exodus",
+   "vptlblhst2nd": "The Israelites Settle in Egypt"
+  },
+  "Succoth": {
+   "hlmnbblat": "The Exodus Route Described"
+  },
+  "Etham": {
+   "hlmnbblat": "The Exodus Route Described"
+  },
+  "Pi-hahiroth": {
+   "hlmnbblat": "The Exodus Route Described",
+   "vptlblhst2nd": "The Ten Plagues (Fifteenth or Thirteenth Century BC)"
+  },
+  "Marah": {
+   "hlmnbblat": "The Exodus Route Described"
+  },
+  "Elim": {
+   "hlmnbblat": "The Exodus Route Described"
+  },
+  "Wilderness of Sin": {
+   "hlmnbblat": "The Exodus Route Described",
+   "ltmtbbltls": "The Exodus from Egypt—ca. 1447 BC",
+   "barbourbibatlascomp": "Events in the Wilderness"
+  },
+  "Rephidim": {
+   "hlmnbblat": "The Exodus Route Described",
+   "ltmtbbltls": "The Number Involved in the Exodus (route map)"
+  },
+  "Sinai": {
+   "hlmnbblat": "Location of Mount Sinai and Possible Route Theories",
+   "ltmtbbltls": "The Wilderness Period—ca. 1447–1407 BC",
+   "barbourbibatlascomp": "The Exodus from Egypt",
+   "vptlblhst2nd": "The Exodus (Fifteenth or Thirteenth Century BC)"
+  },
+  "Kadesh": {
+   "hlmnbblat": "The Sojourn at Kadesh",
+   "ltmtbbltls": "Israelite Settlement",
+   "barbourbibatlascomp": "Events in the Wilderness",
+   "vptlblhst2nd": "The Return to Kadesh Barnea"
+  },
+  "Mount Hor": {
+   "hlmnbblat": "Events during the Sojourn at Kadesh-Barnea",
+   "ltmtbbltls": "Edom (map)",
+   "vptlblhst2nd": "Edom Refuses the Israelites Passage"
+  },
+  "Plains of Moab": {
+   "hlmnbblat": "Ammon",
+   "ltmtbbltls": "The Jordan Valley",
+   "vptlblhst2nd": "Deuteronomy"
+  },
+  "Nebo": {
+   "hlmnbblat": "Ammon",
+   "ltmtbbltls": "Moab and the Medeba Plateau",
+   "barbourbibatlascomp": "Journey to the Promised Land",
+   "vptlblhst2nd": "Edom Refuses the Israelites Passage"
+  },
+  "Antioch": {
+   "hlmnbblat": "The Church at Antioch",
+   "ltmtbbltls": "Paul the Apostle",
+   "barbourbibatlascomp": "Paul's First Missionary Journey",
+   "vptlblhst2nd": "Antioch on the Orontes"
+  },
+  "Seleucia": {
+   "hlmnbblat": "The Missionary Journeys (Seleucia Pieria)",
+   "vptlblhst2nd": "Antioch on the Orontes"
+  },
+  "Salamis": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle (First Missionary Journey)",
+   "vptlblhst2nd": "Cyprus"
+  },
+  "Paphos": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle (First Missionary Journey)",
+   "vptlblhst2nd": "Cyprus"
+  },
+  "Perga": {
+   "hlmnbblat": "The Missionary Journeys",
+   "barbourbibatlascomp": "Paul's First Missionary Journey",
+   "vptlblhst2nd": "Perga and Pisidian Antioch"
+  },
+  "Antioch in Pisidia": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle",
+   "hlmnchrtsmaps": "Ten Major Sermons in Acts",
+   "barbourbibatlascomp": "Paul's First Missionary Journey",
+   "vptlblhst2nd": "Perga and Pisidian Antioch"
+  },
+  "Iconium": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Iconium, Lystra and Derbe"
+  },
+  "Lystra": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle",
+   "barbourbibatlascomp": "Paul's Second Missionary Journey",
+   "vptlblhst2nd": "Iconium, Lystra and Derbe"
+  },
+  "Derbe": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Iconium, Lystra and Derbe"
+  },
+  "Attalia": {
+   "hlmnbblat": "The Missionary Journeys",
+   "vptlblhst2nd": "Iconium, Lystra and Derbe"
+  },
+  "Troas": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle (Second Missionary Journey)",
+   "vptlblhst2nd": "Alexandria Troas > Paul's Second Journey"
+  },
+  "Samothracia": {
+   "hlmnbblat": "The Missionary Journeys (as Samothrace)",
+   "vptlblhst2nd": "Alexandria Troas > Paul's Second Journey (as Samothrace)"
+  },
+  "Neapolis": {
+   "hlmnbblat": "The Missionary Journeys",
+   "vptlblhst2nd": "Philippi"
+  },
+  "Philippi": {
+   "hlmnbblat": "The Missionary Journeys",
+   "vptlblhst2nd": "Paul's Second Journey: Philippi and Thessalonica (AD 49)"
+  },
+  "Amphipolis": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle (Second Missionary Journey map)",
+   "vptlblhst2nd": "Thessalonica"
+  },
+  "Apollonia": {
+   "hlmnbblat": "The Missionary Journeys",
+   "vptlblhst2nd": "Thessalonica"
+  },
+  "Thessalonica": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Thessalonica"
+  },
+  "Berea": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Berea"
+  },
+  "Athens": {
+   "hlmnbblat": "Athens",
+   "ltmtbbltls": "Intertestamental History (Acropolis in Athens)",
+   "vptlblhst2nd": "Athens",
+   "barbourbibatlascomp": "Paul's Second Missionary Journey",
+   "hlmnchrtsmaps": "Athens of the First Century"
+  },
+  "Corinth": {
+   "hlmnbblat": "Corinth",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Corinth",
+   "barbourbibatlascomp": "Paul's Second Missionary Journey"
+  },
+  "Cenchrea": {
+   "hlmnbblat": "Corinth",
+   "ltmtbbltls": "Paul the Apostle (Second Missionary Journey map)",
+   "vptlblhst2nd": "Corinth"
+  },
+  "Ephesus": {
+   "hlmnbblat": "Ephesus",
+   "ltmtbbltls": "Revelation (Churches of the Revelation)",
+   "vptlblhst2nd": "Ephesus > The Seven Churches of Asia: Ephesus, Smyrna, Pergamum",
+   "barbourbibatlascomp": "Paul's Third Missionary Journey",
+   "hlmnchrtsmaps": "Temple of Artemis"
+  },
+  "Caesarea": {
+   "hlmnbblat": "Caesarea: Herod's Window on the World",
+   "ltmtbbltls": "The Plain of Sharon",
+   "vptlblhst2nd": "Herod Gains the Throne",
+   "barbourbibatlascomp": "Peter's Early Ministry and the Kingdom of Agrippa I",
+   "hlmnchrtsmaps": "Caesarea Maritima"
+  },
+  "Assos": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Miletus"
+  },
+  "Mitylene": {
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Miletus"
+  },
+  "Chios": {
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Miletus"
+  },
+  "Samos": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Miletus"
+  },
+  "Miletus": {
+   "hlmnbblat": "The Missionary Journeys",
+   "vptlblhst2nd": "Miletus"
+  },
+  "Cos": {
+   "hlmnbblat": "The Missionary Journeys",
+   "vptlblhst2nd": "And so to Jerusalem"
+  },
+  "Rhodes": {
+   "hlmnbblat": "The Missionary Journeys",
+   "vptlblhst2nd": "And so to Jerusalem"
+  },
+  "Patara": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "And so to Jerusalem"
+  },
+  "Tyre": {
+   "hlmnbblat": "The Phoenician Culture",
+   "vptlblhst2nd": "Tyre",
+   "barbourbibatlascomp": "Tyre's International Trade"
+  },
+  "Ptolemais": {
+   "hlmnbblat": "The Missionary Journeys",
+   "vptlblhst2nd": "And so to Jerusalem",
+   "barbourbibatlascomp": "The Ptolemaic and the Seleucid Empires (Early) — photo of Acco/Ptolemais"
+  },
+  "Sidon": {
+   "hlmnbblat": "The Phoenician Culture",
+   "vptlblhst2nd": "Jesus Leaves Galilee"
+  },
+  "Myra": {
+   "hlmnbblat": "Paul's Voyage to Rome (Acts 27:1–28:16)",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "En Route for Rome"
+  },
+  "Cnidus": {
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "En Route for Rome"
+  },
+  "Salmone": {
+   "hlmnbblat": "Paul's Voyage to Rome (Acts 27:1–28:16)",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "The Storm"
+  },
+  "Fair Havens": {
+   "hlmnbblat": "Paul's Voyage to Rome (Acts 27:1–28:16)",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "En Route for Rome"
+  },
+  "Cauda": {
+   "hlmnbblat": "Paul's Voyage to Rome (Acts 27:1–28:16)",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "The Storm"
+  },
+  "Malta": {
+   "hlmnbblat": "Paul's Voyage to Rome (Acts 27:1–28:16)",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Malta",
+   "barbourbibatlascomp": "Paul's Voyage to Rome"
+  },
+  "Syracuse": {
+   "hlmnbblat": "Paul's Voyage to Rome (Acts 27:1–28:16)",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Malta"
+  },
+  "Rhegium": {
+   "hlmnbblat": "Paul's Voyage to Rome (Acts 27:1–28:16)",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "In Rome at Last"
+  },
+  "Puteoli": {
+   "hlmnbblat": "Paul's Voyage to Rome (Acts 27:1–28:16)",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "In Rome at Last"
+  },
+  "Forum of Appius": {
+   "hlmnbblat": "Paul's Voyage to Rome (Acts 27:1–28:16)",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "In Rome at Last"
+  },
+  "Three Inns": {
+   "hlmnbblat": "Paul's Voyage to Rome (as Three Taverns)",
+   "ltmtbbltls": "Paul the Apostle (as Three Taverns)",
+   "vptlblhst2nd": "In Rome at Last (as the Three Taverns)"
+  },
+  "Rome": {
+   "hlmnbblat": "Rome Gains Control of the Italian Peninsula",
+   "ltmtbbltls": "The Roman Period, 63 BC–AD 70",
+   "vptlblhst2nd": "In Rome at Last",
+   "barbourbibatlascomp": "Paul's Voyage to Rome",
+   "hlmnchrtsmaps": "Paul's Journey to Rome"
+  },
+  "Patmos": {
+   "hlmnbblat": "Churches of the Revelation",
+   "ltmtbbltls": "Revelation",
+   "vptlblhst2nd": "John on Patmos",
+   "barbourbibatlascomp": "The Churches of Revelation"
+  },
+  "Smyrna": {
+   "hlmnbblat": "Smyrna",
+   "ltmtbbltls": "Revelation",
+   "vptlblhst2nd": "Smyrna",
+   "barbourbibatlascomp": "The Churches of Revelation"
+  },
+  "Pergamum": {
+   "hlmnbblat": "Pergamum",
+   "ltmtbbltls": "Revelation",
+   "vptlblhst2nd": "Pergamum",
+   "barbourbibatlascomp": "The Churches of Revelation"
+  },
+  "Thyatira": {
+   "hlmnbblat": "Thyatira, Philadelphia, and Laodicea",
+   "ltmtbbltls": "Revelation",
+   "vptlblhst2nd": "Thyatira",
+   "barbourbibatlascomp": "The Churches of Revelation"
+  },
+  "Sardis": {
+   "hlmnbblat": "Sardis",
+   "ltmtbbltls": "Cyrus",
+   "vptlblhst2nd": "Sardis",
+   "barbourbibatlascomp": "The Churches of Revelation"
+  },
+  "Philadelphia": {
+   "hlmnbblat": "Thyatira, Philadelphia, and Laodicea",
+   "ltmtbbltls": "Revelation (top hit p 49 is the Decapolis Philadelphia)",
+   "vptlblhst2nd": "Philadelphia",
+   "barbourbibatlascomp": "The Churches of Revelation"
+  },
+  "Laodicea": {
+   "hlmnbblat": "Thyatira, Philadelphia, and Laodicea",
+   "ltmtbbltls": "Revelation",
+   "vptlblhst2nd": "Laodicea",
+   "barbourbibatlascomp": "The Churches of Revelation"
+  },
+  "Babylon": {
+   "hlmnbblat": "Babylon: Heart of an Empire",
+   "ltmtbbltls": "Babylon",
+   "vptlblhst2nd": "Nebuchadnezzar's Babylon"
+  },
+  "Philistia": {
+   "hlmnbblat": "The Coastal Plain (Plain of Philistia)"
+  },
+  "Jordan": {
+   "hlmnbblat": "The Jordan Rift",
+   "ltmtbbltls": "The Jordan Valley",
+   "vptlblhst2nd": "Crossing the Jordan",
+   "barbourbibatlascomp": "Additional Information: Water in Israel (Jordan River)"
+  },
+  "Moab": {
+   "hlmnbblat": "Moab",
+   "ltmtbbltls": "Moab and the Medeba Plateau",
+   "vptlblhst2nd": "Moab",
+   "barbourbibatlascomp": "Prophecies against Moab"
+  },
+  "Canaan": {
+   "hlmnbblat": "Palestine in the Time of the Patriarchs",
+   "ltmtbbltls": "The Conquest of Canaan",
+   "vptlblhst2nd": "Climate Change? (The Climate of Canaan)",
+   "barbourbibatlascomp": "Canaan during the Time of the Patriarchs",
+   "hlmnchrtsmaps": "The Conquest of Canaan"
+  },
+  "Assyria": {
+   "hlmnbblat": "Assyria's Fall",
+   "ltmtbbltls": "Assyria",
+   "vptlblhst2nd": "Assyria: The Threat from the North (Mid-Ninth Century to 722 BC)",
+   "barbourbibatlascomp": "The Assyrian Empire during 2 Kings"
+  },
+  "Samaria": {
+   "hlmnbblat": "Fall of Samaria",
+   "ltmtbbltls": "The Central Regions (Israel/Samaria)",
+   "vptlblhst2nd": "Samaria",
+   "barbourbibatlascomp": "Additional Information: Key Cities in Israel"
+  },
+  "Ammon": {
+   "hlmnbblat": "Ammon",
+   "ltmtbbltls": "Gilead and Ammon",
+   "vptlblhst2nd": "Ammon",
+   "barbourbibatlascomp": "David Defeats the Ammonites and the Arameans"
+  },
+  "Syria": {
+   "hlmnbblat": "Syria and Lebanon",
+   "vptlblhst2nd": "Syria"
+  },
+  "Edom": {
+   "hlmnbblat": "Edom",
+   "ltmtbbltls": "Edom",
+   "vptlblhst2nd": "Edom Refuses the Israelites Passage",
+   "barbourbibatlascomp": "Moab, Edom, and Libnah Revolt"
+  },
+  "Gilead": {
+   "hlmnbblat": "Eastern Plateau (Transjordan)",
+   "ltmtbbltls": "Gilead and Ammon",
+   "vptlblhst2nd": "East of the Jordan",
+   "barbourbibatlascomp": "Additional Information: Key Cities in Israel"
+  },
+  "Chaldea": {
+   "ltmtbbltls": "Babylon (map)"
+  },
+  "Galilee": {
+   "hlmnbblat": "Galilee in Jesus' Days",
+   "ltmtbbltls": "Lower Galilee",
+   "vptlblhst2nd": "Jesus in Galilee",
+   "barbourbibatlascomp": "Jesus' Ministry in Galilee and Beyond"
+  },
+  "Dan": {
+   "hlmnbblat": "Dan (city; p 89 is the tribe's allotment)",
+   "vptlblhst2nd": "The High Place at Dan",
+   "barbourbibatlascomp": "Israel's Wars with Aram (city of Dan)"
+  },
+  "Euphrates": {
+   "hlmnbblat": "Tigris and Euphrates",
+   "vptlblhst2nd": "The Tigris and Euphrates"
+  },
+  "Jericho": {
+   "hlmnbblat": "Herodian Jericho",
+   "ltmtbbltls": "The Land of Benjamin",
+   "vptlblhst2nd": "Jericho: A Key Site",
+   "barbourbibatlascomp": "Israel's Battles for the Promised Land",
+   "hlmnchrtsmaps": "Herod's Winter Palace at Jericho"
+  },
+  "Midian": {
+   "hlmnbblat": "Location of Mount Sinai and Possible Route Theories",
+   "vptlblhst2nd": "Moses Flees to Midian"
+  },
+  "Lebanon": {
+   "hlmnbblat": "Syria and Lebanon",
+   "vptlblhst2nd": "Lebanon"
+  },
+  "Damascus": {
+   "hlmnbblat": "Aram-Damascus",
+   "ltmtbbltls": "The Divided Monarchy—ca. 931–586 BC",
+   "vptlblhst2nd": "Syria",
+   "barbourbibatlascomp": "Israel's Wars with Aram"
+  },
+  "Bethlehem": {
+   "hlmnbblat": "The Birth of Jesus and His Childhood",
+   "ltmtbbltls": "The Hill Country of Judah",
+   "vptlblhst2nd": "Jesus Is Born in Bethlehem",
+   "barbourbibatlascomp": "The Holy Land in the Time of Jesus"
+  },
+  "Bashan": {
+   "hlmnbblat": "Eastern Plateau (Transjordan)",
+   "ltmtbbltls": "Bashan",
+   "vptlblhst2nd": "East of the Jordan",
+   "barbourbibatlascomp": "Journey to the Promised Land"
+  },
+  "Judea": {
+   "hlmnbblat": "Jesus in Judea and Jerusalem",
+   "ltmtbbltls": "The Land of Israel (southern regions: Judah/Judea)",
+   "barbourbibatlascomp": "Judea during Nehemiah's Time"
+  },
+  "Mizpah": {
+   "ltmtbbltls": "The Land of Benjamin"
+  },
+  "Sodom": {
+   "hlmnbblat": "The Migrations of Abraham",
+   "ltmtbbltls": "The Wilderness of Judah",
+   "vptlblhst2nd": "In Canaan",
+   "barbourbibatlascomp": "Canaan during the Time of the Patriarchs"
+  },
+  "Gibeah": {
+   "hlmnbblat": "Saul and the Philistines",
+   "ltmtbbltls": "The Land of Benjamin",
+   "vptlblhst2nd": "The Reign of Saul",
+   "barbourbibatlascomp": "David and Saul: From Gibeah to the Stronghold"
+  },
+  "Cush": {
+   "hlmnbblat": "The Garden of Eden",
+   "vptlblhst2nd": "The Garden of Eden"
+  },
+  "Gibeon": {
+   "hlmnbblat": "David's Consolidation of Power (Great Pool at Gibeon)",
+   "ltmtbbltls": "The Land of Benjamin",
+   "vptlblhst2nd": "The Defeat of the Southern Kings",
+   "barbourbibatlascomp": "David Secures His Reign over Israel",
+   "hlmnchrtsmaps": "Cities of Joshua's Conquest"
+  },
+  "Jezreel": {
+   "hlmnbblat": "Jezreel Valley (Valley of Esdraelon)",
+   "ltmtbbltls": "The Jezreel Valley",
+   "vptlblhst2nd": "The Judges (Plain of Jezreel)",
+   "barbourbibatlascomp": "Gideon Defeats the Midianites"
+  },
+  "Gath": {
+   "hlmnbblat": "Recovery of Israel and Judah (first hit for Gath itself; top two are Moresheth-gath)",
+   "ltmtbbltls": "The Philistine Coastal Plain",
+   "vptlblhst2nd": "Saul Pursues David",
+   "barbourbibatlascomp": "David and Saul: From the Stronghold to Ziklag"
+  },
+  "Gilgal": {
+   "hlmnbblat": "The Rise of Saul",
+   "ltmtbbltls": "Joshua's Strategy",
+   "vptlblhst2nd": "The Defeat of the Southern Kings",
+   "barbourbibatlascomp": "Israel's Battles for the Promised Land",
+   "hlmnchrtsmaps": "Cities of Joshua's Conquest"
+  },
+  "Negeb": {
+   "hlmnbblat": "Negeb",
+   "ltmtbbltls": "The Biblical Negev",
+   "barbourbibatlascomp": "Geography of the Holy Land (as Negev)"
+  },
+  "Nile": {
+   "hlmnbblat": "The Gift of the Nile",
+   "ltmtbbltls": "The Egyptian Period",
+   "vptlblhst2nd": "The Gift of the Nile",
+   "hlmnchrtsmaps": "The Ten Plagues of Egypt"
+  },
+  "Heshbon": {
+   "hlmnbblat": "Reuben (Num. 32:27–38; Josh. 13:15–23)",
+   "vptlblhst2nd": "Transjordan"
+  },
+  "Shiloh": {
+   "hlmnbblat": "The Ark of the Covenant",
+   "ltmtbbltls": "The Hill Country of Ephraim",
+   "vptlblhst2nd": "A Man of Peace"
+  },
+  "Holy Place": {
+   "hlmnbblat": "Solomon's Temple",
+   "ltmtbbltls": "Solomon's Temple",
+   "vptlblhst2nd": "The Sanctuary",
+   "hlmnchrtsmaps": "Solomon's Temple—Cut-Away View"
+  },
+  "Ramoth": {
+   "hlmnbblat": "Omri and the Transjordan (Ramoth-gilead)",
+   "ltmtbbltls": "Gilead and Ammon (Ramoth-gilead)",
+   "vptlblhst2nd": "The Levites and 'Cities of Refuge'",
+   "barbourbibatlascomp": "Events during Jehu's Reign"
+  },
+  "Hamath": {
+   "hlmnbblat": "Recovery of Israel and Judah",
+   "vptlblhst2nd": "Syria",
+   "barbourbibatlascomp": "Resurgence during the Reigns of Jeroboam II and Azariah"
+  },
+  "Ai": {
+   "hlmnbblat": "Campaigns in Central Palestine",
+   "ltmtbbltls": "Joshua's Strategy",
+   "vptlblhst2nd": "Set-Back and Eventual Victory at Ai",
+   "barbourbibatlascomp": "Israel Enters the Promised Land",
+   "hlmnchrtsmaps": "Cities of Joshua's Conquest"
+  },
+  "Beersheba": {
+   "hlmnbblat": "Negeb (as Beer-sheba)",
+   "ltmtbbltls": "The Biblical Negev (plan of Beer-sheba)",
+   "vptlblhst2nd": "South to the Red Sea",
+   "barbourbibatlascomp": "Canaan during the Time of the Patriarchs"
+  },
+  "Persia": {
+   "hlmnbblat": "The Fall of Babylon (first hit, p 281, is the bibliography)",
+   "ltmtbbltls": "Cyrus",
+   "barbourbibatlascomp": "The Persian Empire during Esther's Time"
+  },
+  "Nazareth": {
+   "hlmnbblat": "Nazareth",
+   "ltmtbbltls": "Lower Galilee",
+   "vptlblhst2nd": "Return to Nazareth"
+  },
+  "Macedonia": {
+   "hlmnbblat": "The Missionary Journeys",
+   "ltmtbbltls": "Paul the Apostle",
+   "vptlblhst2nd": "Alexandria Troas > Paul's Second Journey: Philippi and Thessalonica (AD 49)",
+   "hlmnchrtsmaps": "Paul's Third Missionary Journey"
+  },
+  "Red Sea": {
+   "hlmnbblat": "Geography of the Sinai (first hit describing the sea itself)",
+   "ltmtbbltls": "The Exodus from Egypt—ca. 1447 BC",
+   "vptlblhst2nd": "South to the Red Sea",
+   "barbourbibatlascomp": "The Exodus from Egypt"
+  },
+  "Seir": {
+   "hlmnbblat": "Edom",
+   "ltmtbbltls": "Edom",
+   "vptlblhst2nd": "Edom"
+  },
+  "Gomorrah": {
+   "hlmnbblat": "The Migrations of Abraham",
+   "ltmtbbltls": "Patriarchal Period",
+   "vptlblhst2nd": "In Canaan",
+   "barbourbibatlascomp": "Canaan during the Time of the Patriarchs"
+  },
+  "Carmel": {
+   "hlmnbblat": "Jezreel Valley (Valley of Esdraelon)",
+   "ltmtbbltls": "Mount Carmel",
+   "vptlblhst2nd": "The Main Features"
+  },
+  "Arnon": {
+   "hlmnbblat": "Moab",
+   "ltmtbbltls": "Moab and the Medeba Plateau",
+   "vptlblhst2nd": "Moab"
+  },
+  "Gaza": {
+   "hlmnbblat": "The Philistine Menace (Philistine city section; top hit p 20 only passes through Gaza)",
+   "ltmtbbltls": "The Philistine Coastal Plain",
+   "vptlblhst2nd": "The Philistines",
+   "barbourbibatlascomp": "Samson's Deeds and Israel's Attack of Gibeah"
+  },
+  "Arabah": {
+   "hlmnbblat": "The Jordan Rift",
+   "vptlblhst2nd": "Edom"
+  },
+  "Beth-shemesh": {
+   "hlmnbblat": "Samson and the Philistines",
+   "vptlblhst2nd": "The Ark of the Covenant Comes to Jerusalem"
+  },
+  "Kiriath-jearim": {
+   "hlmnbblat": "Campaigns in the South",
+   "ltmtbbltls": "The Land of Benjamin",
+   "vptlblhst2nd": "The Ark of the Covenant Comes to Jerusalem",
+   "hlmnchrtsmaps": "Cities of Joshua's Conquest"
+  },
+  "Lachish": {
+   "hlmnbblat": "The End of Judah and Jerusalem",
+   "ltmtbbltls": "The Shephelah",
+   "vptlblhst2nd": "Sennacherib at Lachish",
+   "hlmnchrtsmaps": "Cities of Joshua's Conquest"
+  },
+  "Ashdod": {
+   "hlmnbblat": "The Ark of the Covenant",
+   "ltmtbbltls": "The Philistine Coastal Plain",
+   "vptlblhst2nd": "The Assyrian Threat under Sargon II",
+   "barbourbibatlascomp": "Resurgence during the Reigns of Jeroboam II and Azariah"
+  },
+  "Hermon Mount": {
+   "hlmnbblat": "Syria and Lebanon (photo: snow-capped Mt. Hermon)",
+   "ltmtbbltls": "Bashan",
+   "vptlblhst2nd": "The Transfiguration"
+  },
+  "Ekron": {
+   "hlmnbblat": "Assyrian Attacks on Judah",
+   "ltmtbbltls": "The Philistine Coastal Plain",
+   "vptlblhst2nd": "The Philistines"
+  },
+  "Ramah": {
+   "hlmnbblat": "The Rise of Saul",
+   "ltmtbbltls": "The Land of Benjamin",
+   "vptlblhst2nd": "Samuel",
+   "barbourbibatlascomp": "David and Saul: From Gibeah to the Stronghold"
+  },
+  "Tarshish": {
+   "ltmtbbltls": "The Days of Noah (Table of Nations map)",
+   "vptlblhst2nd": "Solomon the Foolish"
+  },
+  "Susa": {
+   "hlmnbblat": "Renewal under Ezra and Nehemiah",
+   "ltmtbbltls": "Cyrus",
+   "vptlblhst2nd": "Esther",
+   "barbourbibatlascomp": "The Persian Empire during Esther's Time"
+  },
+  "Shephelah": {
+   "hlmnbblat": "Shephelah",
+   "ltmtbbltls": "The Shephelah"
+  },
+  "Arabia": {
+   "hlmnbblat": "The King's Highway",
+   "vptlblhst2nd": "Nabonidus in Arabia"
+  },
+  "Nineveh": {
+   "hlmnbblat": "The Rival Powers and Assyria's Final Days",
+   "ltmtbbltls": "Assyria",
+   "vptlblhst2nd": "The Fall of Nineveh"
+  },
+  "Anathoth": {
+   "hlmnbblat": "Jeremiah",
+   "ltmtbbltls": "The Wilderness of Judah",
+   "vptlblhst2nd": "Jeremiah"
+  },
+  "Jabesh": {
+   "hlmnbblat": "The Rise of Saul",
+   "ltmtbbltls": "Solomon (map: The Kingdom of Saul and His Wars)",
+   "vptlblhst2nd": "Saul Becomes King"
+  },
+  "Libnah": {
+   "hlmnbblat": "Campaigns in the South",
+   "ltmtbbltls": "The Philistine Coastal Plain",
+   "vptlblhst2nd": "The Defeat of the Southern Kings"
+  },
+  "Aroer": {
+   "hlmnbblat": "The Judges and the Oppressors of Israel"
+  },
+  "Paddan": {
+   "hlmnbblat": "The Travels of Jacob"
+  },
+  "Geba": {
+   "hlmnbblat": "Saul and the Philistines"
+  },
+  "Gezer": {
+   "hlmnbblat": "The Agricultural Year (Gezer Calendar)"
+  },
+  "Keilah": {
+   "hlmnbblat": "Saul and David (top hit p 171 only lists it among Yehud capitals)"
+  },
+  "Sheba": {
+   "hlmnbblat": "Solomon's Economic Policies (queen of Sheba; top hits are Beer-sheba)"
+  },
+  "Elam": {
+   "hlmnbblat": "Threats to the Assyrian Empire"
+  },
+  "Capernaum": {
+   "hlmnbblat": "Capernaum and Bethsaida"
+  }
+ },
+ "checked": "2026-10-21"
+}

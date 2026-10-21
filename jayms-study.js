@@ -1507,7 +1507,8 @@
   var ATLAS_PAGES = {};   // atlas-pages.json: {place: {atlas id: page}}, read off Logos's own search results (scheduled task atlas-page-index)
   function atlasLinks(at, place) {   // one short line: the page in each atlas where it treats the place, or a search there when no page is known
     var pg = ATLAS_PAGES[place] || ATLAS_PAGES[String(place).replace(/_/g, " ")] || {};
-    var out = at.map(function (x) { return outlink(pg[x[0]] ? "logosres:" + x[0] + ";ref=Page.p_" + encodeURIComponent(pg[x[0]]) : atlasSearch(x, place), esc(atlasShort(x))); });
+    var out = at.map(function (x) { return outlink(R.web() ? "https://ref.ly/logosres/" + x[0] + (pg[x[0]] ? "?ref=Page.p+" + encodeURIComponent(pg[x[0]]) : "")   // the web: ref.ly opens the book (at the page when known) for an owner, its logos.com page for anyone else
+      : pg[x[0]] ? "logosres:" + x[0] + ";ref=Page.p_" + encodeURIComponent(pg[x[0]]) : atlasSearch(x, place), esc(atlasShort(x))); });
     return out.length ? '<div class="jst-atlas-links"><span class="lbl">' + esc(place) + " in Logos</span> " + out.join(" ") + "</div>" : "";
   }
   /* the other sites proposed for a place, strongest first, with OpenBible's score: the honest answer to "where was it?" */
@@ -1587,7 +1588,7 @@
     return '<ul class="jst-atlas-results">' + out.map(function (x) { return '<li><button data-jst-asel="' + (x.kind === "r" ? x.id : x.kind + ":" + x.id) + '"><b>' + esc(x.name) + "</b><span>" + esc(x.sub) + "</span></button></li>"; }).join("") + "</ul>";
   }
   define("Maps", { id: "maps", label: "Maps", name: "Maps of this passage", icon: '<svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>' }, {
-    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.owner ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json"), this.o.owner ? getJSON("atlas-pages.json").catch(function () { return null; }) : null, data.places(), getJSON("kingdoms.json").catch(function () { return null; }), getJSON("topics.json").catch(function () { return null; }), getJSON("place-photos.json").catch(function () { return null; })]).then(function (r) { self.T = r[8]; if (r[9] && r[9].photos) PHOTOS = r[9].photos; if (r[5] && r[5].pages) ATLAS_PAGES = r[5].pages; self.pd = r[6]; self.K = r[7]; self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
+    prepare: function () { var self = this; return Promise.all([data.names(), data.maps(), getJSON("map-places.json").catch(function () { return null; }), this.o.logos !== false ? data.library().catch(function () { return null; }) : null, getJSON("atlas.json"), this.o.logos !== false ? getJSON("atlas-pages.json").catch(function () { return null; }) : null, data.places(), getJSON("kingdoms.json").catch(function () { return null; }), getJSON("topics.json").catch(function () { return null; }), getJSON("place-photos.json").catch(function () { return null; })]).then(function (r) { self.T = r[8]; if (r[9] && r[9].photos) PHOTOS = r[9].photos; if (r[5] && r[5].pages) ATLAS_PAGES = r[5].pages; self.pd = r[6]; self.K = r[7]; self.nm = r[0]; self.mp = r[2] || {}; self.at = (r[3] && r[3].atlases) || []; self.A = r[4]; }); },
     /* the passage's places from the shared list, with STEPBible's one-line description and its name (the Biblica map index uses it) */
     places: function () { var nm = this.nm; return placesIn(this.pd, this.o.ref).map(function (p) { var st = nm && p.step && nm.p[p.step[0]]; return Object.assign(p, { b: st && st.b, sn: st && st.n }); }); },
     route: function () { var A = this.A, t = this.st.tab; return A && t && t !== "here" && !/^[ptk]:/.test(t) ? A.routes.filter(function (r) { return r.id === t; })[0] : null; },
@@ -1623,7 +1624,7 @@
           var on = (self.mp[p.sn || p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
           return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + tierNote(p) + placeRivals(p) + photoStrip(p.id) +
             (on.length ? '<div class="chips">' + on.map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>" : "") +
-            (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.owner ? atlasLinks(self.at || [], p.n) : "") + photoCredits(p.id) + "</div>"); }).join("");
+            (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.logos !== false ? atlasLinks(self.at || [], p.n) : "") + photoCredits(p.id) + "</div>"); }).join("");
         else if (!A) h += none("No place is named in " + esc(this.o.ref) + ".");
       }
       if (A) h += "</div></div>";   // end of the side column and the wrap
@@ -1643,7 +1644,7 @@
     topic: function (id) { return ((this.T && this.T.topics) || []).filter(function (t) { return t.id === id; })[0]; },
     /* the side box for a searched place, kingdom or topic */
     selBox: function (sel) {
-      var self = this, al = this.o.owner ? this.at || [] : [];
+      var self = this, al = this.o.logos !== false ? this.at || [] : [];
       if (sel.kind === "p") {
         var p = this.pd && this.pd.places[sel.id]; if (!p) return none("That place isn't in the list.");
         var nm = p.n.replace(/\s+\d+$/, ""), st = this.nm && p.step && this.nm.p[p.step[0]], refs = placeRefs(this.pd, sel.id);
@@ -1747,7 +1748,7 @@
         onKingdom: function (k, y) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
           b.innerHTML = '<div class="jst-atlas-card"><div class="lbl">In ' + esc(yearLabel(y)) + '</div><span class="tt">' + esc(k.n) + '</span><p class="u-fs14 u-m4-8">' +
             (k.why ? esc(k.why) + " Its area: OpenBible.info, drawn as bands from likely to possible." : "This border: " + esc(yearLabel(k.f)) + " to " + esc(yearLabel(k.t)) + ", from Cliopatria (Seshat), one reading of borders historians still argue over.") +
-            "</p>" + (self.o.owner ? atlasLinks(self.at || [], k.n.replace(/^(Kingdom|Kingdoms) of (the )?/, "")) : "") + "</div>"; },   // no Wikipedia, ever (James): his own atlases instead
+            "</p>" + (self.o.logos !== false ? atlasLinks(self.at || [], k.n.replace(/^(Kingdom|Kingdoms) of (the )?/, "")) : "") + "</div>"; },   // no Wikipedia, ever (James): his own atlases instead
         onPick: function (i) { self.pickItem(i, true); },
         onHint: function () { hint.classList.add("on"); clearTimeout(self._ht); self._ht = setTimeout(function () { hint.classList.remove("on"); }, 1400); } });
       this._pts = pts; this._atlas.fit(pts);
@@ -1767,7 +1768,7 @@
       if (sl && sl.kind === "p") { box_.innerHTML = ""; return; }
       if (fly) { var q = rt ? it : atlasXY(this.A, it.ll); this._atlas.fit([q], 500, 560); }
       this.el.querySelectorAll("[data-jst-astop]").forEach(function (b) { b.classList.toggle("on", +b.getAttribute("data-jst-astop") === i); });
-      var al = this.o.owner ? this.at || [] : [];
+      var al = this.o.logos !== false ? this.at || [] : [];
       if (!rt && quiet) { box_.innerHTML = ""; this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []); return; }
       if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + tierNote(it) + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + photoStrip(it.id) + atlasLinks(al, it.n) + photoCredits(it.id) + "</div>";
         this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []);
@@ -1987,7 +1988,7 @@
       var card = function (x) {
         return box("witness", "", '<div class="item">' + (x.img ? '<img class="jst-relic" src="' + esc(x.img) + '" alt="' + esc(x.t) + '" referrerpolicy="no-referrer" data-jst-art data-full="' + esc(x.img.replace(/\/\d+px-/, "/1280px-")) + '" data-t="' + esc(x.t) + '" role="button" tabindex="0">' : "") +
           (x.museum ? '<span class="when">' + esc(x.museum) + "</span>" : "") + '<span class="tt">' + esc(x.t) + "</span>" + (x.x ? '<p class="u-m4-8 u-fs15">' + esc(x.x) + "</p>" : "") +
-          '<p class="sub u-fs13">' + esc(x.refs.join(" \u00B7 ")) + "</p>" + (self.o.owner ? atlasLinks(self.at || [], x.t.replace(/\s*\(.*\)$/, "")) : "") + "</div>"); };   // no Wikipedia (James): his own atlases instead
+          '<p class="sub u-fs13">' + esc(x.refs.join(" \u00B7 ")) + "</p>" + (self.o.logos !== false ? atlasLinks(self.at || [], x.t.replace(/\s*\(.*\)$/, "")) : "") + "</div>"); };   // no Wikipedia (James): his own atlases instead
       var objs = rel.filter(function (x) { return x.kind === "object"; }), finds = rel.filter(function (x) { return x.kind !== "object"; });
       if (objs.length) h += '<div class="lbl u-mt14">Objects in the story (' + objs.length + ")</div>" + objs.map(card).join("");
       if (finds.length) h += '<div class="lbl u-mt14">Relics and inscriptions (' + finds.length + ")</div>" + finds.map(card).join("");
