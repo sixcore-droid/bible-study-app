@@ -1348,7 +1348,7 @@
         if (minW) { var deg = minW / (A.proj.c * A.proj.k); maxZoom = Math.log2(360 / deg * w / 512); }   // minW is in the drawn map's units
         var fo = { padding: { top: 60, bottom: 96, left: 50, right: 78 }, maxZoom: Math.min(maxZoom, a.length === 1 ? 8.5 : 11.5), duration: ms || 0 };
         if (tilted && a.length === 2) {   // Play in 3D: face the way the leg runs, tipped back so the hills stand up
-          var brg = Math.atan2((a[1][1] - a[0][1]) * Math.cos(a[0][0] * Math.PI / 180), a[1][0] - a[0][0]) * 180 / Math.PI;
+          var brg = atlasPrefs().northup ? 0 : Math.atan2((a[1][1] - a[0][1]) * Math.cos(a[0][0] * Math.PI / 180), a[1][0] - a[0][0]) * 180 / Math.PI;
           var cam = map.cameraForBounds(b, { padding: 90, maxZoom: 11, bearing: brg });   // the leg itself, not the flat map's minimum width
           if (cam) { map.easeTo({ center: cam.center, zoom: Math.min(cam.zoom - .3, 10.5), bearing: brg, pitch: 58, duration: ms || 0 }); return; }
         }
@@ -1568,7 +1568,7 @@
           var rs = realStops(rt);
           h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.ranges[0].replace(/-/, "\u2013")) + " \u00B7 " + rs.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
             (rt.about ? '<p class="u-m4-8 u-fs16 jst-atlas-about">' + esc(rt.about) + "</p>" : "") + travelLine(rt) + '<div class="lbl u-mt14">Height along the way</div><div data-jst-aprof><p class="sub u-fs14">Reading the heights\u2026</p></div>' +
-            '<button class="btn u-mt6" data-jst-aplay>' + (this._play ? "Stop" : "Play the journey") + '</button><ol class="jst-atlas-stops">' +
+            '<button class="btn u-mt6" data-jst-aplay>' + (this._play ? "Stop" : "Play the journey") + '</button> <button class="chip u-mt6' + (atlasPrefs().northup ? " on" : "") + '" data-jst-anorth aria-pressed="' + !!atlasPrefs().northup + '">Keep north at the top</button><ol class="jst-atlas-stops">' +
             rs.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + "</button>" + (s.km ? '<span class="jst-atlas-leg">' + s.km.toLocaleString() + " km" + (s.d ? " \u00B7 " + (s.d < 1 ? "under a day" : s.d.toFixed(s.d < 10 ? 1 : 0) + " days") : "") + "</span>" : "") + '<button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol></div>");
         } else if (!pinned.length) h += none("No place in " + esc(this.o.ref) + " has a known position. Pick a journey" + (atlas ? " or search." : " above."));
       }
@@ -1763,6 +1763,8 @@
       var p2 = e.target.closest("[data-jst-prof2]");
       if (p2) { e.stopPropagation(); var from = (this._items || [])[this.st.pick - 1], to = (this._items || []).filter(function (p) { return p.id === p2.getAttribute("data-jst-prof2"); })[0], slot = this.el.querySelector("[data-jst-aprof2]");
         if (from && to && slot) { slot.innerHTML = '<p class="sub u-fs14">Reading the heights\u2026</p>'; profileOf([{ ll: from.ll, n: from.n }, { ll: to.ll, n: to.n }]).then(function (P) { slot.innerHTML = profileSVG(P, "#8a5a2b", slot.clientWidth); }); } return; }
+      var nb = e.target.closest("[data-jst-anorth]");
+      if (nb) { e.stopPropagation(); var pf = atlasPrefs(); pf.northup = !pf.northup; atlasSavePrefs(pf); nb.classList.toggle("on", pf.northup); nb.setAttribute("aria-pressed", pf.northup); return; }   // Play reads it at each leg
       var pl = e.target.closest("[data-jst-aplay]");
       if (pl) { e.stopPropagation(); if (this._play) this.stopPlay(); else this.play(); return; }
       var s = e.target.closest("[data-jst-astop]");
