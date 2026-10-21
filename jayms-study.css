@@ -629,3 +629,15 @@ body.hg-noorig .mtag{display:none}
 .helpbox .tourlist li{font-size:17px;line-height:1.5;margin:5px 0}
 .helpbox .tourlist li::marker{font-family:var(--label);font-weight:600;color:var(--gold)}
 .helpbox .tourlist b{color:var(--ink-bright);margin-right:4px}
+/* the journey's player: small round icon buttons beside the journey list */
+.jst-atlas-media{display:inline-flex;gap:6px;align-items:center}
+.jst-atlas-media button{width:32px;height:32px;padding:0;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.jst-atlas-media button svg{width:14px;height:14px;fill:currentColor}
+.jst-atlas-media button:hover{border-color:var(--gold)}
+.jst-atlas-media button.on{border-color:var(--gold);color:var(--gold)}
+.jst-atlas-media button:disabled{opacity:.4;cursor:default}
+.jst-atlas-media .jst-atlas-north svg{width:16px;height:16px}
+.jst-atlas-media .jst-atlas-north .n{fill:var(--rust)}
+.jst-atlas-media .jst-atlas-north .s{fill:var(--ink)}
+.jst-atlas-media .jst-atlas-north.on{background:var(--gold);border-color:var(--gold)}
+.jst-atlas-media .jst-atlas-north.on .s{fill:var(--paper)}

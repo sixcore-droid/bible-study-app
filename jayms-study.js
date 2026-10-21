@@ -1432,7 +1432,7 @@
       if (menu) { menu.remove(); menu = null; return; }
       menu = document.createElement("div"); menu.className = "jst-atlas-menu";
       menu.innerHTML = '<div class="lbl">Layers</div>' + ATLAS_LAYERS.map(function (l) { return '<label><input type="checkbox" data-l="' + l[0] + '"' + (prefs[l[0]] ? " checked" : "") + "> " + esc(l[1]) + "</label>"; }).join("");
-      menu.addEventListener("change", function (e) { var k = e.target.getAttribute("data-l"); prefs[k] = e.target.checked; atlasSavePrefs(prefs); when(applyPrefs); showYearBar(); });
+      menu.addEventListener("change", function (e) { var k = e.target.getAttribute("data-l"); prefs[k] = e.target.checked; var cur = atlasPrefs(); cur[k] = prefs[k]; atlasSavePrefs(cur); when(applyPrefs); showYearBar(); });
       menu.addEventListener("click", function (e) { e.stopPropagation(); });
       host.appendChild(menu);
     };
@@ -1512,6 +1512,8 @@
   /* dig cards: one claimed place with the case for and against (the Passage Map scope's structure); statuses in this order */
   var DIG_STATUS = ["confirmed", "probable", "contested", "unresolved", "rejected"];
   var DIG_PIN = { confirmed: "secure", probable: "likely", contested: "contested", unresolved: "contested", rejected: "rejected" };
+  var MEDIA_ICON = { play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z"/></svg>', pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>',
+    stop: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5h9v9h-9z"/></svg>', north: '<svg viewBox="0 0 16 16" aria-hidden="true"><path class="n" d="M8 1l3.2 7H4.8z"/><path class="s" d="M4.8 8h6.4L8 15z"/></svg>' };
   function digCard(c, n) {
     var li = function (a) { return a && a.length ? "<ul>" + a.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "<p>None.</p>"; };
     var row = function (k, v) { return v ? '<div class="lbl u-mt10">' + k + '</div><p class="u-fs15">' + esc(v) + "</p>" : ""; };
@@ -1557,7 +1559,7 @@
         var grp = function (g, label) { return '<optgroup label="' + label + '">' + A.routes.filter(function (r) { return (r.group || "nt") === g; }).map(function (r) { return '<option value="' + r.id + '"' + (rt === r ? " selected" : "") + ">" + esc(r.name) + "</option>"; }).join("") + "</optgroup>"; };
         var tabs = '<div class="jst-atlas-tabs"><button class="chip' + (!rt && !sel ? " on" : "") + '" data-jst-atab="here">' + (atlas ? "Places in " + esc(this.o.ref) : "Places here") + (pinned.length ? " (" + pinned.length + ")" : "") + "</button>" +
           (gath ? '<button class="chip' + (sel && sel.id === gath.id ? " on" : "") + '" data-jst-atab="t:' + gath.id + '">' + esc(gath.name) + "</button>" : "") +
-          '<label class="jst-atlas-pickj' + (rt ? " on" : "") + '"><span class="lbl">Journey</span><select data-jst-aj aria-label="Journey"><option value="">' + (rt ? "Places here" : "Choose a journey") + "</option>" + grp("ot", "Old Testament") + grp("nt", "New Testament") + "</select></label></div>";
+          '<label class="jst-atlas-pickj' + (rt ? " on" : "") + '"><span class="lbl">Journey</span><select data-jst-aj aria-label="Journey"><option value="">' + (rt ? "Places here" : "Choose a journey") + "</option>" + grp("ot", "Old Testament") + grp("nt", "New Testament") + "</select></label>" + (rt ? this.mediaBtns() : "") + "</div>";
         var map = '<div class="jst-atlas" data-jst-atlas><div class="jst-atlas-ctl"><button data-jst-az="in" aria-label="Zoom in">+</button><button data-jst-az="out" aria-label="Zoom out">\u2212</button><button data-jst-az="fit" aria-label="Fit">\u2922</button>' + (atlas ? "" : '<button data-jst-az="full" aria-label="Full screen">\u26F6</button>') + '<button data-jst-az="layers" aria-label="Layers" title="Layers">\u2630</button><button data-jst-az="swipe" aria-label="Then and now" title="Then and now: drag the divider between the ancient map and today">\u21C6</button></div><div class="jst-atlas-hint">Hold Ctrl or \u2318 and scroll to zoom</div></div>';
         if (!atlas) h += tabs;
         h += '<div class="jst-atlas-wrap' + (atlas ? " jst-atlas-page" : "") + '" data-jst-awrap>' + map + '<div class="jst-atlas-side">';   // full screen and the Atlas page: the map, and this column beside it
@@ -1568,7 +1570,7 @@
           var rs = realStops(rt);
           h += box("witness", "", '<div class="item"><div class="lbl">' + esc(rt.ranges[0].replace(/-/, "\u2013")) + " \u00B7 " + rs.length + ' stops</div><span class="tt">' + esc(rt.name) + "</span>" +
             (rt.about ? '<p class="u-m4-8 u-fs16 jst-atlas-about">' + esc(rt.about) + "</p>" : "") + travelLine(rt) + '<div class="lbl u-mt14">Height along the way</div><div data-jst-aprof><p class="sub u-fs14">Reading the heights\u2026</p></div>' +
-            '<button class="btn u-mt6" data-jst-aplay>' + (this._play ? "Pause" : this._resumeN ? "Resume" : "Play the journey") + '</button> <button class="btn u-mt6" data-jst-astopplay' + (this._play || this._resumeN ? "" : " hidden") + ">Stop</button> " + '<button class="chip u-mt6' + (atlasPrefs().northup ? " on" : "") + '" data-jst-anorth aria-pressed="' + !!atlasPrefs().northup + '">Keep north at the top</button><ol class="jst-atlas-stops">' +
+            '<ol class="jst-atlas-stops">' +
             rs.map(function (s, i) { return '<li><button class="jst-xt" data-jst-astop="' + (i + 1) + '"><b data-jst-c="' + rt.color + '">' + (i + 1) + "</b>" + esc(s.n) + "</button>" + (s.km ? '<span class="jst-atlas-leg">' + s.km.toLocaleString() + " km" + (s.d ? " \u00B7 " + (s.d < 1 ? "under a day" : s.d.toFixed(s.d < 10 ? 1 : 0) + " days") : "") + "</span>" : "") + '<button class="jst-ref" data-jst-go="' + esc(s.ref) + '">' + esc(s.ref) + "</button></li>"; }).join("") + "</ol></div>");
         } else if (!pinned.length) h += none("No place in " + esc(this.o.ref) + " has a known position. Pick a journey" + (atlas ? " or search." : " above."));
       }
@@ -1628,6 +1630,7 @@
       this.stopPlay(true);
       var pj = this.el.querySelector("[data-jst-aj]");
       if (pj) pj.addEventListener("change", function () { self.st.tab = pj.value || "here"; self.st.pick = 0; self.paint(); });
+      this.playBtns();
       if (this._atlas) { this._atlas.destroy(); this._atlas = null; }
       if (!A || !host) return;
       var rt = this.route(), sel = this.sel(), marks, legs = [], pts, kyear = null, kfit = null, self2 = this;
@@ -1739,14 +1742,21 @@
         n++; self._playN = n; self._pt = setTimeout(step, 1900);
       })();
     },
+    /* the journey's player, right beside the journey list: play/pause, stop, and keep north up (remembered on this device) */
+    mediaBtns: function () {
+      var nu = !!atlasPrefs().northup;
+      return '<span class="jst-atlas-media"><button data-jst-aplay></button><button data-jst-astopplay aria-label="Stop" title="Stop">' + MEDIA_ICON.stop + "</button>" +
+        '<button class="jst-atlas-north' + (nu ? " on" : "") + '" data-jst-anorth aria-pressed="' + nu + '" aria-label="Keep north at the top" title="Keep north at the top">' + MEDIA_ICON.north + "</button></span>";
+    },
     /* Pause: keep the map where it is (tilted, the route drawn so far) and remember the next stop */
     pausePlay: function () {
       clearTimeout(this._pt); this._play = false; this._resumeN = this._playN || 1; this.playBtns();
     },
     playBtns: function () {
       var b = this.el.querySelector("[data-jst-aplay]"), x = this.el.querySelector("[data-jst-astopplay]");
-      if (b) b.textContent = this._play ? "Pause" : this._resumeN ? "Resume" : "Play the journey";
-      if (x) x.hidden = !(this._play || this._resumeN);
+      var lb = this._play ? "Pause" : this._resumeN ? "Resume" : "Play the journey";
+      if (b) { b.innerHTML = this._play ? MEDIA_ICON.pause : MEDIA_ICON.play; b.setAttribute("aria-label", lb); b.title = lb; b.classList.toggle("on", !!(this._play || this._resumeN)); }
+      if (x) x.disabled = !(this._play || this._resumeN);
     },
     stopPlay: function (quiet) {
       clearTimeout(this._pt); this._play = false; this._resumeN = 0; this._playN = 0;
@@ -1773,7 +1783,7 @@
       if (p2) { e.stopPropagation(); var from = (this._items || [])[this.st.pick - 1], to = (this._items || []).filter(function (p) { return p.id === p2.getAttribute("data-jst-prof2"); })[0], slot = this.el.querySelector("[data-jst-aprof2]");
         if (from && to && slot) { slot.innerHTML = '<p class="sub u-fs14">Reading the heights\u2026</p>'; profileOf([{ ll: from.ll, n: from.n }, { ll: to.ll, n: to.n }]).then(function (P) { slot.innerHTML = profileSVG(P, "#8a5a2b", slot.clientWidth); }); } return; }
       var nb = e.target.closest("[data-jst-anorth]");
-      if (nb) { e.stopPropagation(); var pf = atlasPrefs(); pf.northup = !pf.northup; atlasSavePrefs(pf); nb.classList.toggle("on", pf.northup); nb.setAttribute("aria-pressed", pf.northup); return; }   // Play reads it at each leg
+      if (nb) { e.stopPropagation(); var pf = atlasPrefs(); pf.northup = !pf.northup; atlasSavePrefs(pf); document.querySelectorAll("[data-jst-anorth]").forEach(function (b) { b.classList.toggle("on", pf.northup); b.setAttribute("aria-pressed", pf.northup); }); return; }   // the Maps panel and the Atlas page show one setting   // Play reads it at each leg
       var pl = e.target.closest("[data-jst-aplay]");
       if (pl) { e.stopPropagation(); if (this._play) this.pausePlay(); else this.play(); return; }
       var sp = e.target.closest("[data-jst-astopplay]");
