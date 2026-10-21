@@ -1532,6 +1532,11 @@
     var ph = (PHOTOS[id] || []).slice(0, 4); if (!ph.length || !CFG.onlineMaps) return "";
     return '<p class="jst-photo-credits">Photos: ' + ph.map(function (p) { return (p.artist ? esc(p.artist) + ", " : "") + (p.licurl ? '<a href="' + esc(p.licurl) + '" target="_blank" rel="noopener">' + esc(p.lic) + "</a>" : esc(p.lic)) + ' (<a href="' + esc(p.page) + '" target="_blank" rel="noopener">source</a>)'; }).join("; ") + ". Wikimedia Commons.</p>";
   }
+  /* the "Named in N verses" block, the same on every place card (passage list, search, pin) */
+  function placeVerses(pd, id) {
+    var refs = placeRefs(pd, id); if (!refs.length) return "";
+    return '<div class="lbl u-mt14">Named in ' + refs.length + " verse" + (refs.length > 1 ? "s" : "") + '</div><p class="u-fs15 jst-atlas-refs">' + refs.slice(0, 40).map(function (r) { return '<button class="jst-ref" data-jst-go="' + esc(r) + '">' + esc(r) + "</button>"; }).join(" ") + (refs.length > 40 ? " and " + (refs.length - 40) + " more" : "") + "</p>";
+  }
   /* every verse that names a place, from the shared list's verse index (built once) */
   var PLACEREFS = null;
   function placeRefs(pd, id) {
@@ -1624,7 +1629,7 @@
           var on = (self.mp[p.sn || p.n] || []).filter(function (i) { return MAPBY[i]; }).slice(0, 3);
           return box("witness", "", '<div class="item"><span class="tt">' + esc(p.n) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + tierNote(p) + placeRivals(p) + photoStrip(p.id) +
             (on.length ? '<div class="chips">' + on.map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")) + "</button>"; }).join("") + "</div>" : "") +
-            (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.logos !== false ? atlasLinks(self.at || [], p.n) : "") + photoCredits(p.id) + "</div>"); }).join("");
+            placeVerses(self.pd, p.id) + (p.ll && A ? '<button class="btn u-mt6" data-jst-fly="' + esc(p.id) + '">Show on the map</button>' : "") + (self.o.logos !== false ? atlasLinks(self.at || [], p.n) : "") + photoCredits(p.id) + "</div>"); }).join("");
         else if (!A) h += none("No place is named in " + esc(this.o.ref) + ".");
       }
       if (A) h += "</div></div>";   // end of the side column and the wrap
@@ -1649,7 +1654,7 @@
         var p = this.pd && this.pd.places[sel.id]; if (!p) return none("That place isn't in the list.");
         var nm = p.n.replace(/\s+\d+$/, ""), st = this.nm && p.step && this.nm.p[p.step[0]], refs = placeRefs(this.pd, sel.id);
         return box("witness", "", '<div class="item"><span class="tt">' + esc(nm) + '</span> <span class="jst-tier ' + p.tier + '">' + TIER[p.tier] + "</span>" + (st && st.b ? '<p class="u-m4-8 u-fs15">' + esc(st.b) + "</p>" : "") + tierNote(p) + placeRivals(p, true) + photoStrip(sel.id) +
-          (refs.length ? '<div class="lbl u-mt14">Named in ' + refs.length + " verse" + (refs.length > 1 ? "s" : "") + '</div><p class="u-fs15 jst-atlas-refs">' + refs.slice(0, 40).map(function (r) { return '<button class="jst-ref" data-jst-go="' + esc(r) + '">' + esc(r) + "</button>"; }).join(" ") + (refs.length > 40 ? " and " + (refs.length - 40) + " more" : "") + "</p>" : "") +
+          placeVerses(this.pd, sel.id) + (p.ll ? '<button class="btn u-mt6" data-jst-fly="' + esc(sel.id) + '">Show on the map</button>' : "") +
           atlasLinks(al, nm) + photoCredits(sel.id) + "</div>");
       }
       if (sel.kind === "k") {
@@ -1770,7 +1775,7 @@
       this.el.querySelectorAll("[data-jst-astop]").forEach(function (b) { b.classList.toggle("on", +b.getAttribute("data-jst-astop") === i); });
       var al = this.o.logos !== false ? this.at || [] : [];
       if (!rt && quiet) { box_.innerHTML = ""; this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []); return; }
-      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + tierNote(it) + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + photoStrip(it.id) + atlasLinks(al, it.n) + photoCredits(it.id) + "</div>";
+      if (!rt) { box_.innerHTML = '<div class="jst-atlas-card"><span class="tt">' + esc(it.n) + '</span> <span class="jst-tier ' + it.tier + '">' + TIER[it.tier] + "</span>" + tierNote(it) + (it.b ? '<p class="u-m4-8 u-fs15">' + esc(it.b) + "</p>" : "") + placeRivals(it, true) + photoStrip(it.id) + placeVerses(this.pd, it.id) + atlasLinks(al, it.n) + photoCredits(it.id) + "</div>";
         this._atlas.alts(it.alt && it.ll ? it.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it.ll }; }) : []);
         var others = (this._items || []).filter(function (p) { return p !== it && p.ll; });
         if (others.length && CFG.onlineMaps) box_.querySelector(".jst-atlas-card").insertAdjacentHTML("beforeend", '<div class="lbl u-mt14">Height from ' + esc(it.n) + ' to</div><div class="chips">' + others.slice(0, 12).map(function (p) { return '<button class="chip" data-jst-prof2="' + esc(p.id) + '">' + esc(p.n) + "</button>"; }).join("") + '</div><div data-jst-aprof2></div>');
