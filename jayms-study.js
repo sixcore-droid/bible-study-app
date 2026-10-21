@@ -1148,7 +1148,7 @@
     ATLAS_GL.catch(function () { ATLAS_GL = null; });
     return ATLAS_GL;
   }
-  var ATLAS_LAYERS = [["kingdoms", "Kingdoms by year", true], ["roads", "Roman roads (from 200 BC on the slider)", true], ["relief", "Mountains and valleys", true], ["cover", "Desert, farmland and forest", true], ["ancient", "Ancient names", true], ["modern", "Modern countries and cities", false]];
+  var ATLAS_LAYERS = [["kingdoms", "Kingdoms by year", true], ["roads", "Roman roads (from 200 BC on the slider)", true], ["relief", "Mountains and valleys", true], ["cover", "Desert, farmland and forest", true], ["ancient", "Ancient names", true], ["modern", "Modern countries and cities", false], ["tilt", "Tilt into 3D hills while a journey plays", true]];
   function atlasPrefs() { var p = {}; try { p = JSON.parse(localStorage.getItem("ws.atlasLayers") || "{}"); } catch (e) {} ATLAS_LAYERS.forEach(function (l) { if (!(l[0] in p)) p[l[0]] = l[2]; }); return p; }
   function atlasSavePrefs(p) { try { localStorage.setItem("ws.atlasLayers", JSON.stringify(p)); } catch (e) {} }
 
@@ -1346,9 +1346,26 @@
         var b = new ml.LngLatBounds([a[0][1], a[0][0]], [a[0][1], a[0][0]]); a.forEach(function (p) { b.extend([p[1], p[0]]); });
         var maxZoom = 11.5;
         if (minW) { var deg = minW / (A.proj.c * A.proj.k); maxZoom = Math.log2(360 / deg * w / 512); }   // minW is in the drawn map's units
-        map.fitBounds(b, { padding: { top: 60, bottom: 96, left: 50, right: 78 }, maxZoom: Math.min(maxZoom, a.length === 1 ? 8.5 : 11.5), duration: ms || 0 });
+        var fo = { padding: { top: 60, bottom: 96, left: 50, right: 78 }, maxZoom: Math.min(maxZoom, a.length === 1 ? 8.5 : 11.5), duration: ms || 0 };
+        if (tilted && a.length === 2) {   // Play in 3D: face the way the leg runs, tipped back so the hills stand up
+          var brg = Math.atan2((a[1][1] - a[0][1]) * Math.cos(a[0][0] * Math.PI / 180), a[1][0] - a[0][0]) * 180 / Math.PI;
+          var cam = map.cameraForBounds(b, { padding: 90, maxZoom: 11, bearing: brg });   // the leg itself, not the flat map's minimum width
+          if (cam) { map.easeTo({ center: cam.center, zoom: Math.min(cam.zoom - .3, 10.5), bearing: brg, pitch: 58, duration: ms || 0 }); return; }
+        }
+        if (map.getPitch() || map.getBearing()) { var c0 = map.cameraForBounds(b, { padding: fo.padding, maxZoom: fo.maxZoom, bearing: 0 }); if (c0) { map.easeTo({ center: c0.center, zoom: c0.zoom, bearing: 0, pitch: 0, duration: ms || 700 }); return; } }   // back down flat after Play
+        map.fitBounds(b, fo);
       });
     };
+    /* 3D hills for Play: the Levant's 30 m heights when the journey stays inside it, the region's coarser ones otherwise */
+    var tilted = false;
+    self.tilt = function (on, levant) { when(function () {
+      if (!on) { if (!tilted) return; tilted = false; map.setTerrain(null); map.easeTo({ pitch: 0, bearing: 0, duration: 700 }); return; }
+      if (!prefs.tilt || now) return;   // switched off in the layers, or comparing with today
+      var file = levant ? "relief-levant" : "relief-region", src = map.getSource("dem3d");
+      if (src && src._file !== file) { map.setTerrain(null); map.removeSource("dem3d"); src = null; }
+      if (!src) { map.addSource("dem3d", { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/" + file + ".pmtiles"), encoding: "terrarium", tileSize: 512 }); map.getSource("dem3d")._file = file; }
+      map.setTerrain({ source: "dem3d", exaggeration: levant ? 2 : 3 }); tilted = true;
+    }); };
     self.zoom = function (f) { when(function () { map.easeTo({ zoom: map.getZoom() + Math.log2(f), duration: 250 }); }); };
     self.upTo = function (n) { when(function () {
       map.setFilter("legs", n == null ? null : ["<", ["get", "i"], n]); map.setFilter("arrows", n == null ? null : ["<", ["get", "i"], n]);
@@ -1431,8 +1448,8 @@
   /* one controller whatever draws the map: calls made before MapLibre is up are replayed on it, or on the drawn map if it fails */
   function atlasMount(host, A, o) {
     var self = {}, impl = null, last = {};
-    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers", "alts", "year", "compare"].forEach(function (k) {
-      self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers" && k !== "alts" && k !== "compare") last[k] = a; if (impl && impl[k]) return impl[k].apply(impl, a); };
+    ["fit", "zoom", "upTo", "pick", "resize", "toggleLayers", "alts", "year", "compare", "tilt"].forEach(function (k) {
+      self[k] = function () { var a = arguments; if (k !== "zoom" && k !== "toggleLayers" && k !== "alts" && k !== "compare" && k !== "tilt") last[k] = a; if (impl && impl[k]) return impl[k].apply(impl, a); };
     });
     var dead = false;
     function svg() { if (dead) return; impl = atlasSVG(host, A, o); host.classList.add("jst-atlas-flat"); Object.keys(last).forEach(function (k) { if (impl[k]) impl[k].apply(impl, last[k]); }); }
@@ -1711,6 +1728,8 @@
       var n = 1, btn = this.el.querySelector("[data-jst-aplay]");
       this._play = true; if (btn) btn.textContent = "Stop";
       this._atlas.upTo(1);
+      var inLev = rt.stops.every(function (s) { return s.ll[0] >= LEVANT[0] && s.ll[0] <= LEVANT[2] && s.ll[1] >= LEVANT[1] && s.ll[1] <= LEVANT[3]; });
+      this._atlas.tilt(true, inLev);
       (function step() {
         if (!self._play) return;
         self._atlas.upTo(n); self.pickItem(n, false);
@@ -1722,8 +1741,9 @@
     },
     stopPlay: function (quiet) {
       clearTimeout(this._pt); this._play = false;
+      if (this._atlas) this._atlas.tilt(false);
       if (quiet) return;
-      if (this._atlas) this._atlas.upTo(null);
+      if (this._atlas) { this._atlas.tilt(false); this._atlas.upTo(null); }
       var btn = this.el.querySelector("[data-jst-aplay]"); if (btn) btn.textContent = "Play the journey";
     },
     click: function (e) {
