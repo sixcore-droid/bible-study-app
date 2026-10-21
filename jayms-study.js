@@ -1148,7 +1148,7 @@
     ATLAS_GL.catch(function () { ATLAS_GL = null; });
     return ATLAS_GL;
   }
-  var ATLAS_LAYERS = [["kingdoms", "Kingdoms by year", true], ["roads", "Roman roads (from 200 BC on the slider)", true], ["relief", "Mountains and valleys", true], ["cover", "Desert, farmland and forest", true], ["ancient", "Ancient names", true], ["modern", "Modern countries and cities", false], ["sites", "Ancient sites in use that year (zoom in)", true], ["tilt", "Tilt into 3D hills while a journey plays", true]];
+  var ATLAS_LAYERS = [["kingdoms", "Kingdoms by year", true], ["tribes", "Tribal lands, estimated (Joshua 13\u201319)", true], ["roads", "Roman roads (from 200 BC on the slider)", true], ["relief", "Mountains and valleys", true], ["cover", "Desert, farmland and forest", true], ["ancient", "Ancient names", true], ["modern", "Modern countries and cities", false], ["sites", "Ancient sites in use that year (zoom in)", true], ["tilt", "Tilt into 3D hills while a journey plays", true]];
   function atlasPrefs() { var p = {}; try { p = JSON.parse(localStorage.getItem("ws.atlasLayers") || "{}"); } catch (e) {} ATLAS_LAYERS.forEach(function (l) { if (!(l[0] in p)) p[l[0]] = l[2]; }); return p; }
   function atlasSavePrefs(p) { try { localStorage.setItem("ws.atlasLayers", JSON.stringify(p)); } catch (e) {} }
 
@@ -1201,7 +1201,7 @@
         holy: { type: "vector", url: "pmtiles://" + abs("atlas-tiles/base-holyland.pmtiles") },
         dem: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-region.pmtiles"), encoding: "terrarium", tileSize: 512, attribution: "Relief: Mapterhorn (Copernicus GLO-30)" },
         dem2: { type: "raster-dem", url: "pmtiles://" + abs("atlas-tiles/relief-levant.pmtiles"), encoding: "terrarium", tileSize: 512 },
-        labels: { type: "geojson", data: labels }, chg: { type: "geojson", data: chgFC(A) }, kpoly: { type: "geojson", data: fc([]) }, roads: { type: "geojson", data: fc([]) }, sites: { type: "geojson", data: fc([]) }, kreg: { type: "geojson", data: fc([]) }, klab: { type: "geojson", data: fc([]) }, alts: { type: "geojson", data: fc([]) }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
+        labels: { type: "geojson", data: labels }, chg: { type: "geojson", data: chgFC(A) }, kpoly: { type: "geojson", data: fc([]) }, roads: { type: "geojson", data: fc([]) }, tribes: { type: "geojson", data: fc([]) }, tribelab: { type: "geojson", data: fc([]) }, sites: { type: "geojson", data: fc([]) }, kreg: { type: "geojson", data: fc([]) }, klab: { type: "geojson", data: fc([]) }, alts: { type: "geojson", data: fc([]) }, rivers: { type: "geojson", data: abs("atlas-rivers.json"), maxzoom: 8 }, marks: { type: "geojson", data: marks }, legs: { type: "geojson", data: legs }
       },
       layers: [{ id: "sea", type: "background", paint: { "background-color": SEA } }]
         .concat(base("region"), base("paul", 8), base("holy", 10))
@@ -1219,6 +1219,12 @@
           { id: "k-label-key", type: "symbol", source: "klab", metadata: { layer: "kingdoms" }, filter: ["==", ["get", "f"], 99999],   // Israel, Judah and the empires that ruled them: always named
             layout: { "text-field": ["upcase", ["get", "l"]], "text-font": ["Noto Sans Medium"], "text-size": ["interpolate", ["linear"], ["zoom"], 3, 10.5, 8, 14], "text-letter-spacing": .12, "text-max-width": 9, "text-allow-overlap": true },
             paint: { "text-color": ["get", "d"], "text-halo-color": "rgba(250,244,226,.95)", "text-halo-width": 2 } },
+          /* tribal lands (tribes.json): estimated from Joshua's town lists, so a soft fill and a dotted edge, never a hard border */
+          { id: "tr-fill", type: "fill", source: "tribes", metadata: { layer: "tribes" }, filter: ["==", ["get", "f"], 99999], paint: { "fill-color": ["get", "c"], "fill-opacity": ["interpolate", ["linear"], ["zoom"], 6, .28, 10, .12] } },
+          { id: "tr-line", type: "line", source: "tribes", metadata: { layer: "tribes" }, filter: ["==", ["get", "f"], 99999], paint: { "line-color": ["get", "c"], "line-width": 1.6, "line-dasharray": [1, 1.5], "line-opacity": .9 } },
+          { id: "tr-label", type: "symbol", source: "tribelab", metadata: { layer: "tribes" }, filter: ["==", ["get", "f"], 99999],
+            layout: { "text-field": ["upcase", ["get", "n"]], "text-font": ["Noto Sans Medium"], "text-size": ["interpolate", ["linear"], ["zoom"], 6, 11, 9, 15], "text-letter-spacing": .14 },
+            paint: { "text-color": ["get", "c"], "text-halo-color": "rgba(250,244,226,.95)", "text-halo-width": 2 } },
           /* Roman roads (roads.json, Itiner-e, CC BY 4.0): solid = certain, dashed = conjectured, dotted = hypothetical, the dataset's own grades */
           { id: "road-certain", type: "line", source: "roads", metadata: { layer: "roads" }, filter: ["==", ["get", "c"], "certain"], layout: { "line-cap": "round" },
             paint: { "line-color": "#7a3b1e", "line-opacity": .85, "line-width": ["interpolate", ["linear"], ["zoom"], 4, ["match", ["get", "t"], "main", 1.4, .7], 10, ["match", ["get", "t"], "main", 3, 1.6]] } },
@@ -1228,10 +1234,10 @@
             paint: { "line-color": "#7a3b1e", "line-opacity": .7, "line-dasharray": [.1, 2.2], "line-width": ["interpolate", ["linear"], ["zoom"], 4, 1.2, 10, 2.4] } },
           /* ancient sites (sites.json, Pleiades, CC BY 3.0): only those in use in the slider's year, from zoom 6.5; names from zoom 9 */
           { id: "site-dot", type: "circle", source: "sites", minzoom: 6.5, metadata: { layer: "sites" }, filter: ["==", ["get", "f"], 99999],
-            paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 6.5, 2.2, 11, 4.5], "circle-color": ["match", ["get", "k"], "s", "#5b4a32", "f", "#7a2e2e", "r", "#2f5e6e", "b", "#5e4a6e", "p", "#2f4f8a", "#6b6b52"],
-              "circle-stroke-color": "#fffaf0", "circle-stroke-width": 1, "circle-opacity": .85 } },
+            paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 6.5, 3.4, 9, 5, 12, 7], "circle-color": ["match", ["get", "k"], "s", "#5b4a32", "f", "#7a2e2e", "r", "#2f5e6e", "b", "#5e4a6e", "p", "#2f4f8a", "#6b6b52"],
+              "circle-stroke-color": "#fffaf0", "circle-stroke-width": 1.4, "circle-opacity": .9 } },
           { id: "site-name", type: "symbol", source: "sites", minzoom: 9, metadata: { layer: "sites" }, filter: ["==", ["get", "f"], 99999],
-            layout: { "text-field": ["get", "n"], "text-font": ["Noto Sans Regular"], "text-size": 11, "text-variable-anchor": ["left", "right", "top"], "text-radial-offset": .7, "text-max-width": 10 },
+            layout: { "text-field": ["get", "n"], "text-font": ["Noto Sans Regular"], "text-size": 13, "text-variable-anchor": ["left", "right", "top"], "text-radial-offset": .9, "text-max-width": 10 },
             paint: { "text-color": "#3b3226", "text-halo-color": "rgba(250,244,226,.95)", "text-halo-width": 1.6 } },
           { id: "modern-border", type: "line", source: "region", "source-layer": "boundaries", metadata: { layer: "modern" }, filter: ["==", ["get", "kind"], "country"],
             paint: { "line-color": "#8c2f52", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.4, 9, 2.6], "line-dasharray": [3, 2] } },
@@ -1311,7 +1317,7 @@
     function yfilter(y) { return ["all", ["<=", ["get", "f"], y], [">=", ["get", "t"], y]]; }
     self.year = function (y) { yr = Math.max(-2500, Math.min(400, Math.round(y))); yin.value = yr; ylab.textContent = yearLabel(yr);
       var tl = host.querySelector(".jst-atlas-wipe .then"); if (tl) tl.textContent = "Then \u00B7 " + yearLabel(yr);
-      when(function () { ["k-fill", "k-line", "k-reg", "site-dot", "site-name"].forEach(function (id) { map.setFilter(id, yfilter(yr)); });
+      when(function () { ["k-fill", "k-line", "k-reg", "site-dot", "site-name", "tr-fill", "tr-line", "tr-label"].forEach(function (id) { map.setFilter(id, yfilter(yr)); });
         applyPrefs();
         map.setFilter("k-label", ["all", yfilter(yr), ["<", ["get", "a"], 1000]]); map.setFilter("k-label-key", ["all", yfilter(yr), [">=", ["get", "a"], 1000]]); }); };
     yin.addEventListener("input", function () { ynote.textContent = ""; self.year(+yin.value); });
@@ -1321,6 +1327,7 @@
     showYearBar(); self.year(yr);
     map.on("load", function () { ready = true; applyPrefs();
       getJSON("roads.json").then(function (Rd) { if (Rd && map.getSource("roads")) map.getSource("roads").setData(Rd); });   // 3 MB, fetched once
+      getJSON("tribes.json").then(function (T) { if (T && map.getSource("tribes")) { map.getSource("tribes").setData(T.areas); map.getSource("tribelab").setData(T.labels); } });
       getJSON("sites.json").then(function (St) { if (St && map.getSource("sites")) map.getSource("sites").setData(St); });   // 2 MB, fetched once
       getJSON("kingdoms.json").then(function (K) {   // 5 MB: fetched once, the first time a map opens, then cached
         if (!K || !map.getSource("kpoly")) return;
@@ -1337,6 +1344,8 @@
       if (rd && o.onRoad) { o.onRoad(rd.properties); return; }
       var ch = map.queryRenderedFeatures(e.point, { layers: ["chg-dot", "chg-name"] })[0];
       if (ch && o.onChange) { o.onChange(ch.properties); return; }
+      var tb = prefs.tribes && map.queryRenderedFeatures(e.point, { layers: ["tr-fill", "tr-label"] })[0];
+      if (tb && o.onTribe) { o.onTribe(tb.properties); return; }
       var st = prefs.sites && map.queryRenderedFeatures([[e.point.x - 5, e.point.y - 5], [e.point.x + 5, e.point.y + 5]], { layers: ["site-dot", "site-name"] })[0];
       if (st && o.onSite) { o.onSite(st.properties); return; }
       var k = prefs.kingdoms && map.queryRenderedFeatures(e.point, { layers: ["k-fill", "k-reg"] })[0];
@@ -1698,6 +1707,11 @@
         year: py ? py.y : null, yearNote: py ? (py.note || this.o.ref + ": " + yearLabel(py.y)) : "No date for " + this.o.ref,
         onRoad: function (r) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
           b.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Roman road</div><span class="tt">' + esc((r.n || "Unnamed road").replace(/-/g, " to ")) + '</span><p class="u-fs15 u-m4-8">' + (r.t === "main" ? "A main road" : "A secondary road") + "; the line is " + esc(r.c) + ' (' + ({ certain: "its course is known", conjectured: "its course is worked out from the evidence but not traced on the ground", hypothetical: "a likely link, not traced" }[r.c] || "") + ').</p><p class="sub u-fs13">Itiner-e (de Soto, Pa\u017eout, Brughmans et al., Scientific Data 2025, CC BY 4.0): the roads of the Roman Empire about AD 150. It does not show which roads existed earlier, so at earlier dates on the slider treat it as the later network. Only 2.7% of the road lines are certain.</p></div>'; },
+        onTribe: function (tb) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
+          var towns = typeof tb.towns === "string" ? JSON.parse(tb.towns) : tb.towns || [], refs = String(tb.r || "").split("; ");
+          b.innerHTML = '<div class="jst-atlas-card"><div class="lbl">Tribal land, estimated</div><span class="tt">' + esc(tb.n) + "</span> " + refs.map(function (r) { return '<button class="jst-ref" data-jst-go="' + esc(r) + '">' + esc(r) + "</button>"; }).join(" ") +
+            '<p class="u-fs15 u-m4-8">' + (tb.north ? "After failing to hold its first land, Dan took Laish in the far north and renamed it Dan." : "Drawn from the " + tb.k + " towns Joshua gives " + esc(tb.n.replace(/ \(.*\)/, "").replace(/^Dan$/, "Dan")) + " that have a known site: " + esc(towns.join(", ")) + (tb.k > towns.length ? " and more" : "") + ".") + "</p>" +
+            '<p class="sub u-fs13">Joshua gives border lines for some tribes and only town lists for others, so these areas are an estimate: each tribe gets the land nearer its own towns than any other tribe\u2019s, kept near its towns and to its side of the Jordan. A town named for two tribes marks their border. Levi received towns, not land (Joshua 13:14). Town sites: OpenBible.info.</p></div>'; },
         onSite: function (st) { var b = self.el.querySelector("[data-jst-apick]"); if (!b) return;
           var kind = { s: "Settlement", f: "Fort", r: "Temple, shrine or church", b: "Tombs or cemetery", p: "Harbour", a: "Archaeological site" }[st.k] || "Site";
           b.innerHTML = '<div class="jst-atlas-card"><div class="lbl">' + kind + '</div><span class="tt">' + esc(st.n) + '</span><p class="u-fs15 u-m4-8" data-jst-sabout></p><p class="u-fs14" data-jst-speriods>In use ' + esc(yearLabel(st.f)) + " to " + esc(yearLabel(st.t)) + '.</p><p class="sub u-fs13">' + outlink("https://pleiades.stoa.org/places/" + st.i, "Pleiades " + st.i) + " (CC BY 3.0)</p></div>";
