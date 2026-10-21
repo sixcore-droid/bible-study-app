@@ -1076,7 +1076,7 @@
   function elevAt(lat, lon) {
     var lev = lat >= LEVANT[0] && lat <= LEVANT[2] && lon >= LEVANT[1] && lon <= LEVANT[3], file = lev ? "relief-levant" : "relief-region", z = lev ? 10 : 7;
     return atlasLib().then(function () {
-      var pm = ELEV.files[file] || (ELEV.files[file] = new global.pmtiles.PMTiles(new URL(CFG.base + "atlas-tiles/" + file + ".pmtiles", location.href).href));
+      var pm = ELEV.files[file] || (ELEV.files[file] = new global.pmtiles.PMTiles(new URL(CFG.base + "atlas-tiles/" + file + ".pmtiles", document.baseURI).href));
       var n = Math.pow(2, z), fx = (lon + 180) / 360 * n, r = lat * Math.PI / 180, fy = (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * n;
       var tx = Math.floor(fx), ty = Math.floor(fy), key = file + "/" + z + "/" + tx + "/" + ty;
       var t = ELEV.tiles[key] || (ELEV.tiles[key] = pm.getZxy(z, tx, ty).then(function (res) {
@@ -1138,7 +1138,7 @@
   var ATLAS_GL = null;
   function atlasLib() {
     if (ATLAS_GL) return ATLAS_GL;
-    var base = new URL(CFG.base + "vendor/maplibre/", location.href).href;
+    var base = new URL(CFG.base + "vendor/maplibre/", document.baseURI).href;
     ATLAS_GL = new Promise(function (ok, no) {
       if (!document.querySelector("link[data-ml]")) { var css = document.createElement("link"); css.rel = "stylesheet"; css.href = base + "maplibre-gl.css"; css.setAttribute("data-ml", ""); document.head.appendChild(css); }
       var sc = document.createElement("script"); sc.src = base + "pmtiles.js"; sc.onerror = no;
@@ -1167,7 +1167,7 @@
   function chgFC(A) { return { type: "FeatureCollection", features: (A.changes || []).map(function (c) { return { type: "Feature", geometry: { type: "Point", coordinates: [c[3], c[2]] }, properties: { n: c[0], x: c[4], src: c[5] } }; }) }; }
   var EOX_ATTR = 'Satellite: <a href="https://s2maps.eu" target="_blank" rel="noopener">Sentinel-2 cloudless 2016 by EOX IT Services GmbH</a> (contains modified Copernicus Sentinel data 2016 &amp; 2017)';
   function atlasGL(ml, host, A, o) {
-    var self = { gl: true }, abs = function (p) { return new URL(CFG.base + p, location.href).href; }, prefs = atlasPrefs();
+    var self = { gl: true }, abs = function (p) { return new URL(CFG.base + p, document.baseURI)   /* baseURI: on jayms.com the page carries a <base> to GitHub Pages, where the map files are */.href; }, prefs = atlasPrefs();
     var holder = document.createElement("div"); holder.className = "jst-atlas-gl"; host.insertBefore(holder, host.firstChild);
     var SEA = "#b7cdd1", LAND = "#efe5c9", INK = "#2b2418";
     function base(src, minz, maxz) {
