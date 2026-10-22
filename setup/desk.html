@@ -301,7 +301,7 @@ function dayPosts(){const ids=new Set(); (S.adhoc?[S.adhoc]:READINGS).forEach(r=
 function xStore(){ return JaymsStore.forJaymsX(ST.c("threads")) }
 function initNote(id, force){
   if(NOTES[id] && !force) return;
-  const n=ST.c("notes").peek(id)||{}; NOTES[id]={text:n.text||"", pub:!!n.pub, savedAt:n.updatedAt||null, obsidian:n.obsidian||null};
+  const n=ST.c("notes").peek(id)||{}; NOTES[id]={text:n.text||"", pub:!!n.pub, savedAt:n.updatedAt||null, obsidian:n.obsidian||null, vaultAt:n.vaultAt||null};
   const dr=ST.c("drafts").peek(id); if(dr){ NOTES[id].text=dr.text; NOTES[id].pub=!!dr.pub; DIRTY[id]=true }
 }
 const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:false   /* the box is gone (6 Oct): "My OT Reading Plan" leaves the genealogies out instead */,
@@ -792,9 +792,17 @@ function wrapMaterial(){
 async function saveNote(rid){
   const n=NOTES[rid], ref=(READINGS.concat(S.adhoc?[S.adhoc]:[]).find(x=>x.id===rid)||{}).ref||rid;
   n.obsidian = n.obsidian || obsPath(ref);
-  await ST.c("notes").save(rid,{text:n.text, pub:n.pub, obsidian:n.obsidian});
+  await ST.c("notes").save(rid,{text:n.text, pub:n.pub, obsidian:n.obsidian, vaultAt:n.vaultAt||null});
   n.savedAt = ST.c("notes").peek(rid).updatedAt;
-  const w = await vaultWrite(n.obsidian, noteBody(ref, n, true), n.savedAt, false); n.inVault = !!(w && w.written);   // straight into the vault
+  /* straight into the vault, guarded: if the vault file changed since the app last saw it (an Obsidian edit), it is left alone
+     and this edit goes beside it as "<ref> (app copy <date>).md", so neither version is lost */
+  const w = await vaultWrite(n.obsidian, noteBody(ref, n, true), n.savedAt, false, n.vaultAt||0); n.inVault = !!(w && w.written);
+  if(w && w.written){ n.vaultAt = w.mtime; await ST.c("notes").save(rid,{text:n.text, pub:n.pub, obsidian:n.obsidian, vaultAt:n.vaultAt, updatedAt:n.savedAt}) }
+  else if(w && w.conflict){
+    const side = n.obsidian.replace(/\.md$/, ` (app copy ${new Date(n.savedAt).toISOString().slice(0,16).replace("T"," ").replace(":",".")}).md`);
+    await vaultWrite(side, noteBody(ref, n, true), n.savedAt, false);
+    $("obsmsg").textContent = "The Obsidian copy is newer, so it was left alone. This edit is saved beside it as an app copy.";
+  }
   if(n.pub&&n.text.trim()) await ST.c("pub").save(rid,{text:n.text}); else if(ST.c("pub").peek(rid)) await ST.c("pub").remove(rid);
 }
 document.addEventListener("pointerdown",e=>{ const t=document.getElementById("text"); if(!t) return; const c=e.target.closest&&e.target.closest("#text .pcell[data-col]"); if(c) t.dataset.selcol=c.dataset.col; else if(!e.target.closest||!e.target.closest("#text")) delete t.dataset.selcol; });
@@ -964,20 +972,39 @@ function noteBody(ref, n, withPlan){
 /* Saved notes go straight into the vault: the desk's own server writes the file (localhost only; the site and claude.ai can't).
    ifNewer: only when the vault has no copy or this one is newer, so an edit made in Obsidian is never overwritten by the catch-up. */
 const VAULT_WRITE = !PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
-function vaultWrite(path, content, updatedAt, ifNewer){
+function vaultWrite(path, content, updatedAt, ifNewer, baseAt){
   if(!VAULT_WRITE || !path) return Promise.resolve(null);
-  return fetch("/api/vault-note",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({path,content,updatedAt,ifNewer:!!ifNewer})})
+  const b = {path,content,updatedAt,ifNewer:!!ifNewer}; if(baseAt!==undefined) b.baseAt = baseAt;
+  return fetch("/api/vault-note",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)})
     .then(r=>r.ok?r.json():null).catch(()=>null);
 }
-/* at start-up: every saved note that isn't in the vault yet (or is newer here) is written there */
+/* at start-up, first: notes written or edited in Obsidian (02-BIBLE/Study Workstation) come into My notes when the vault copy is
+   newer than the app's, unless the passage has an unsaved edit open. vaultAt records the file time the app has seen. */
+async function vaultImport(){
+  if(!VAULT_WRITE) return;
+  const got = await fetch("/api/vault-notes").then(r=>r.ok?r.json():null).catch(()=>null);
+  for(const v of (got&&got.notes)||[]){
+    let id; try{ id = JaymsRef.key(v.passage) }catch(e){ continue }
+    if(!id || DIRTY[id] || !v.text.trim()) continue;
+    const mine = ST.c("notes").peek(id);
+    if(mine && (mine.updatedAt||0) >= v.mtime){ if(!mine.vaultAt && mine.text===v.text) await ST.c("notes").save(id, Object.assign({}, mine, {vaultAt:v.mtime})); continue }
+    await ST.c("notes").save(id, {text:v.text, pub:v.pub, obsidian:v.path, vaultAt:v.mtime, updatedAt:v.mtime});
+    if(v.pub) await ST.c("pub").save(id, {text:v.text}); else if(ST.c("pub").peek(id)) await ST.c("pub").remove(id);
+    if(NOTES[id]) initNote(id, true);
+  }
+  renderReader(); renderDock(); if(S.tool==="notes") renderPanel();
+}
+/* then: every saved note that isn't in the vault yet (or is newer here) is written there. A note the app has synced (vaultAt)
+   is only written when the vault file hasn't changed since, so an Obsidian edit is never overwritten. */
 function vaultCatchUp(){
   if(!VAULT_WRITE) return;
   ST.c("notes").all().filter(d=>d.text&&d.text.trim()&&d.obsidian).forEach(d=>{
     const ref=d.obsidian.replace(/^.*\//,"").replace(/\.md$/,"").replace(/\./g,":");
-    vaultWrite(d.obsidian, noteBody(ref, d, false), d.updatedAt||0, true);
+    if(d.vaultAt) vaultWrite(d.obsidian, noteBody(ref, d, false), d.updatedAt||0, true, d.vaultAt);
+    else vaultWrite(d.obsidian, noteBody(ref, d, false), d.updatedAt||0, true);
   });
 }
-setTimeout(vaultCatchUp, 4000);
+setTimeout(()=>vaultImport().catch(()=>{}).then(vaultCatchUp), 4000);
 setTimeout(()=>{ if(!S.planOn && !S.adhoc) noPlanEnsure() }, 1500);   // plan off at start-up: the passage on screen gets its tab
 function obsNewURI(r, n){
   const body = noteBody(r.ref, n, true);
