@@ -718,7 +718,7 @@ function panelOptions(id){
   if(id==="xref"||id==="targum") o.version = S.ver;
   if(id==="shelf"||id==="config") Object.assign(o, { owner:S.view!=="public", config:shelfConfig,
                        dddVault:MY.ddd });
-  if(id==="review")  Object.assign(o, { cards:()=>ST.c("vocab").all(), state:k=>ST.c("reviews").peek(k),
+  if(id==="review")  Object.assign(o, { cards:()=>ST.c("vocab").all(), state:k=>ST.c("reviews").peek(k), note:()=>{ const r=cur(); return r && NOTES[r.id] ? NOTES[r.id].text : "" },
                        quizzes:()=>ST.c("wraps").all().filter(w=>w.parts&&w.parts.quiz).sort((a,b)=>b.at-a.at).map(w=>({title:w.title, refs:w.refs, quiz:w.parts.quiz, at:w.at})) });
   if(id==="planner") o.skipList = SKIP;
   if(id==="planner") o.mine = () => ST.c("plans").all().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));

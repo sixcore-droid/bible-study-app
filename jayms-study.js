@@ -3264,40 +3264,111 @@
   function dueCards(cards, state, now) { return cards.filter(function (c) { var s2 = state(c.id); return !s2 || (s2.due || 0) <= now; }); }
   function reviewCount(cards, state) { return dueCards(cards, state, Date.now()).length; }
   define("Review", { id: "review", label: "Review", name: "Review what I kept", icon: '<svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8"/><path d="M4 4v4h4M12 8v4l3 2"/></svg>', owner: true }, {
-    view: function () {
+    prepare: function () { var self = this; return getJSON("vocab-course.json").then(function (c) { self.C = c; }).catch(function () { self.C = null; }); },
+    /* a card: the word on the front; the meaning, and "I knew it / Not yet", once it is turned */
+    card: function (k, word, when, back) {
+      var st = this.st;
+      return box("witness", "", '<div class="item"><span class="when">' + when + '</span><div class="big">' + esc(word) + "</div>" +
+        (st.show ? back + '<div class="askrow"><button class="btn fill" data-jst-rv="1">I knew it</button><button class="btn" data-jst-rv="0">Not yet</button>' + (/^[hg]\d/.test(k.replace(/^course:/, "")) ? '<button class="btn" data-jst-word="' + esc(k.replace(/^course:/, "")) + '">Word Study</button>' : "") + "</div>"
+                 : '<div class="askrow"><button class="btn fill" data-jst-rshow>Show the meaning</button></div>') + "</div>");
+    },
+    boxWhen: function (s2) { return s2 && s2.box ? "Box " + s2.box + " of 5" : "New card"; },
+    /* The word course: the most-used words, ten at a time; a set is learned when every word in it has reached box 2 (known twice,
+       a day apart), and then the next ten open. Each session adds the open chapter's one or two commonest words not yet learned. */
+    courseHTML: function () {
+      var o = this.o, st = this.st, C = this.C, state = o.state || function () { return null; }, now = Date.now();
+      if (!C) return none("The word course didn't load.");
+      var q = data.segs(o.ref)[0], nt = q && R.book(q.book).order >= 39, lang = st.lang || (nt ? "Greek" : "Hebrew"), list = C[lang] || [];
+      var known = function (k) { var s2 = state("course:" + k); return !!(s2 && s2.box >= 2); };
+      var n = 0; while ((n + 1) * 10 <= list.length && list.slice(n * 10, n * 10 + 10).every(function (w) { return known(w[0]); })) n++;
+      var set = list.slice(n * 10, n * 10 + 10), inCourse = {}; list.slice(0, n * 10 + 10).forEach(function (w) { inCourse[w[0]] = 1; });
+      /* the open chapter's words: the commonest ones not already in the course so far */
+      var ch = L(this, "words").filter(function (w) { var k = String(w.k || "").toLowerCase(); return k && k.charAt(0) === (lang === "Greek" ? "g" : "h") && !inCourse[k] && !known(k); })
+        .sort(function (a, b) { return (parseInt(String(b.count).replace(/\D/g, ""), 10) || 0) - (parseInt(String(a.count).replace(/\D/g, ""), 10) || 0); }).slice(0, 2)
+        .map(function (w) { return [String(w.k).toLowerCase(), w.t, w.gloss || "", w.def || "", w.count, true]; });
+      var queue = set.concat(ch), due = queue.filter(function (w) { var s2 = state("course:" + w[0]); return !s2 || (s2.due || 0) <= now; });
+      var c = due.filter(function (w) { return "course:" + w[0] === st.cur; })[0] || due[0];
+      var h = '<div class="chips u-mb10">' + ["Hebrew", "Greek"].map(function (l) { return '<button class="chip' + (l === lang ? " on" : "") + '" data-jst-rlang="' + l + '">' + l + "</button>"; }).join("") + "</div>";
+      var got = set.filter(function (w) { return known(w[0]); }).length;
+      h += '<div class="lbl">' + lang + " \u00B7 set " + (n + 1) + " \u00B7 words " + (n * 10 + 1) + "\u2013" + (n * 10 + set.length) + " \u00B7 " + got + " of " + set.length + " known</div>";
+      h += '<div class="chips u-mb10">' + set.map(function (w) { return '<span class="chip' + (known(w[0]) ? " on" : "") + '" title="' + esc(w[2]) + '">' + (known(w[0]) ? "\u2713 " : "") + esc(w[1]) + "</span>"; }).join("") + "</div>";
+      if (ch.length) h += '<p class="ctx">Plus from ' + esc(o.ref) + ": " + ch.map(function (w) { return "<b>" + esc(w[1]) + "</b>"; }).join(" and ") + ".</p>";
+      if (!c) {
+        var next = queue.map(function (w) { return (state("course:" + w[0]) || {}).due || 0; }).filter(Boolean).sort()[0];
+        h += none("Nothing due in this set. Next card " + (next ? new Date(next).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "short" }) : "soon") + ". The next ten open when you know all of these (knew it twice, a day apart).");
+      } else {
+        st.cur = "course:" + c[0];
+        var back = '<p class="u-fs18 u-m10-4">' + esc(c[2] || "(no meaning saved)") + "</p>" + (c[3] ? '<p class="u-fs15">' + esc(c[3]) + "</p>" : "") + '<p class="sub">Used ' + esc(String(c[4])) + " times" + (c[5] ? " \u00B7 in " + esc(o.ref) : "") + "</p>";
+        h += this.card(st.cur, c[1], (c[5] ? "From " + esc(o.ref) + " \u00B7 " : "") + this.boxWhen(state(st.cur)) + " \u00B7 " + due.length + " due", back);
+      }
+      return h + '<p class="ctx u-fs13">The most-used words first, ten at a time, from the Word Study data. A word is learned once you have known it twice, a day apart; then the next ten open.</p>';
+    },
+    deckHTML: function () {
       var o = this.o, st = this.st, cards = o.cards ? o.cards() : [], state = o.state || function () { return null; };
       var due = dueCards(cards, state, Date.now()), c = due.filter(function (x) { return x.id === st.cur; })[0] || due[0], h = "";
-      h += '<div class="lbl">Vocabulary \u00B7 ' + due.length + " due of " + cards.length + "</div>";
-      if (!cards.length) h += none("The deck is empty. Words you add with \"+ Vocab\" come up here.");
-      else if (!c) {
-        var next = cards.map(function (x) { return (state(x.id) || {}).due || 0; }).filter(Boolean).sort()[0];
-        h += none("Nothing due. Next card " + (next ? new Date(next).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "short" }) : "soon") + ".");
-      } else {
-        st.cur = c.id;
-        var s2 = state(c.id) || { box: 0 }, refs = c.refs || (c.ref ? [c.ref] : []);
-        var back = st.show ? '<p class="u-fs18 u-m10-4">' + esc(c.gloss || "(no gloss saved)") + '</p><p class="sub">' + esc(c.strong || "") + (refs.length ? " \u00B7 " + esc(refs.join(", ")) : "") + "</p>" +
-          '<div class="askrow"><button class="btn fill" data-jst-rv="1">I knew it</button><button class="btn" data-jst-rv="0">Not yet</button>' + (c.k ? '<button class="btn" data-jst-word="' + esc(c.k) + '">Word Study</button>' : "") + "</div>"
-          : '<div class="askrow"><button class="btn fill" data-jst-rshow>Show the meaning</button></div>';
-        h += box("witness", "", '<div class="item"><span class="when">' + (s2.box ? "Box " + s2.box + " of 5" : "New card") + "</span><div class=\"big\">" + esc(c.word) + "</div>" + back + "</div>");
+      h += '<div class="lbl">My deck \u00B7 ' + due.length + " due of " + cards.length + "</div>";
+      if (!cards.length) return h + none("The deck is empty. Words you add with \"+ Vocab\" come up here.");
+      if (!c) { var next = cards.map(function (x) { return (state(x.id) || {}).due || 0; }).filter(Boolean).sort()[0];
+        return h + none("Nothing due. Next card " + (next ? new Date(next).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "short" }) : "soon") + "."); }
+      st.cur = c.id;
+      var refs = c.refs || (c.ref ? [c.ref] : []);
+      return h + this.card(c.id, c.word, this.boxWhen(state(c.id)), '<p class="u-fs18 u-m10-4">' + esc(c.gloss || "(no gloss saved)") + '</p><p class="sub">' + esc(c.strong || "") + (refs.length ? " \u00B7 " + esc(refs.join(", ")) : "") + "</p>");
+    },
+    /* the quiz in this chapter's note (a "Quiz" heading, numbered questions, an "Answer key"), one question at a time to answer */
+    quizHTML: function () {
+      var o = this.o, st = this.st, note = String((o.note && o.note()) || ""), h = "";
+      var m = /^#{1,6}\s*Quiz\b[^\n]*\n([\s\S]*?)(?=\n#{1,2}\s(?!Answer)|(?![\s\S]))/im.exec(note), qz = [];
+      if (m) {
+        var parts = m[1].split(/^#{1,6}\s*Answer key[^\n]*$/im), qs = parts[0], ans = {};
+        (parts[1] || "").replace(/^\s*(\d+)\.\s+(.+)$/gm, function (x, n, a) { ans[n] = a; return x; });
+        var cur = null;
+        qs.split("\n").forEach(function (L) {
+          var mq = /^\s{0,3}(\d+)\.\s+(.+)$/.exec(L), mo = /^\s+([a-e])\)\s+(.+)$/.exec(L);
+          if (mq && !/^\s{2,}/.test(L)) { cur = { n: mq[1], q: mq[2], o: [] }; qz.push(cur); }
+          else if (mo && cur) cur.o.push(mo[1] + ") " + mo[2]);
+        });
+        qz.forEach(function (x) { x.a = ans[x.n] || ""; });
+        st.qnums = qz.map(function (x) { return x.n; });
       }
-      var qs = o.quizzes ? o.quizzes() : [];
-      h += '<div class="lbl u-mt14">Quizzes from past days (' + qs.length + ")</div>";
-      h += qs.length ? qs.map(function (q) {
-        var parts = String(q.quiz).split(/\n##\s*Answer key/i);
-        return box("apparatus", "", '<div class="item"><span class="when">' + new Date(q.at).toLocaleDateString(undefined, { day: "numeric", month: "short" }) + " \u00B7 " + esc((q.refs || []).join(", ")) + '</span><span class="tt">' + esc(q.title) + '</span><details class="jst-past"><summary class="lbl">Take it</summary><div class="ans">' + esc(parts[0]) + "</div>" + (parts[1] ? '<details class="jst-past"><summary class="lbl">Answer key</summary><div class="ans">' + esc(parts[1]) + "</div></details>" : "") + "</details></div>");
-      }).join("") : none("Quizzes come from the wrap-up. Make one at the end of a day and it shows here.");
-      return { kick: "Review \u00B7 " + due.length + " card" + (due.length === 1 ? "" : "s") + " due", title: "Review what I kept", body: h };
+      h += '<div class="lbl">Quiz yourself on ' + esc(o.ref) + (qz.length ? " (" + qz.length + ")" : "") + "</div>";
+      if (!qz.length) h += none("Your note on " + esc(o.ref) + " has no quiz. A note with a \"Quiz\" heading, numbered questions and an \"Answer key\" shows here.");
+      else {
+        st.open = st.open || {};
+        h += qz.map(function (x) {
+          return box("apparatus", "", '<div class="item"><p class="u-m0"><b>' + esc(x.n) + ".</b> " + md(x.q) + "</p>" + (x.o.length ? '<p class="u-m4-8 u-fs15">' + x.o.map(esc).join("<br>") + "</p>" : "") +
+            (st.open[x.n] ? '<p class="u-m4-8"><b>Answer:</b> ' + md(x.a || "Not in the answer key.") + "</p>" : '<div class="askrow"><button class="btn" data-jst-qa="' + esc(x.n) + '">Show the answer</button></div>') + "</div>");
+        }).join("") + '<div class="askrow"><button class="btn" data-jst-qa="all">' + (qz.every(function (x) { return st.open[x.n]; }) ? "Hide the answers" : "Show all the answers") + "</button></div>";
+      }
+      var qs2 = o.quizzes ? o.quizzes() : [];
+      if (qs2.length) h += '<div class="lbl u-mt14">Quizzes from past days (' + qs2.length + ")</div>" + qs2.map(function (q) {
+        var p2 = String(q.quiz).split(/\n##\s*Answer key/i);
+        return box("apparatus", "", '<div class="item"><span class="when">' + new Date(q.at).toLocaleDateString(undefined, { day: "numeric", month: "short" }) + " \u00B7 " + esc((q.refs || []).join(", ")) + '</span><span class="tt">' + esc(q.title) + "</span>" + mdBlock(p2[0]) +
+          (p2[1] ? '<details class="jst-past"><summary class="lbl">Answer key</summary>' + mdBlock(p2[1]) + "</details>" : "") + "</div>");
+      }).join("");
+      return h;
+    },
+    view: function () {
+      var st = this.st, tab = st.tab || "course", T = [["course", "Word course"], ["deck", "My deck"], ["quiz", "Quiz"]];
+      var h = '<div class="chips u-mb10">' + T.map(function (t) { return '<button class="chip' + (t[0] === tab ? " on" : "") + '" data-jst-rtab="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
+      h += tab === "deck" ? this.deckHTML() : tab === "quiz" ? this.quizHTML() : this.courseHTML();
+      return { kick: "Review \u00B7 " + { course: "word course", deck: "my deck", quiz: "quiz" }[tab], title: "Review what I kept", body: h };
     },
     click: function (e) {
-      var t = e.target, sh = t.closest("[data-jst-rshow]"), rv = t.closest("[data-jst-rv]");
-      if (sh) { e.stopPropagation(); this.st.show = true; this.paint(); return; }
-      if (rv) { e.stopPropagation(); var k = this.st.cur, knew = rv.getAttribute("data-jst-rv") === "1", s2 = (this.o.state && this.o.state(k)) || { box: 0 };
+      var t = e.target, st = this.st, sh = t.closest("[data-jst-rshow]"), rv = t.closest("[data-jst-rv]"), tb = t.closest("[data-jst-rtab]"), lg = t.closest("[data-jst-rlang]"), qa = t.closest("[data-jst-qa]");
+      if (tb) { e.stopPropagation(); st.tab = tb.getAttribute("data-jst-rtab"); st.show = false; st.cur = null; this.paint(); return; }
+      if (lg) { e.stopPropagation(); st.lang = lg.getAttribute("data-jst-rlang"); st.show = false; st.cur = null; this.paint(); return; }
+      if (qa) { e.stopPropagation(); var n = qa.getAttribute("data-jst-qa"); st.open = st.open || {};
+        if (n === "all") { var nums = st.qnums || [], open = !nums.every(function (k) { return st.open[k]; }); nums.forEach(function (k) { st.open[k] = open; }); }
+        else st.open[n] = true;
+        this.paint(); return; }
+      if (sh) { e.stopPropagation(); st.show = true; this.paint(); return; }
+      if (rv) { e.stopPropagation(); var k = st.cur, knew = rv.getAttribute("data-jst-rv") === "1", s2 = (this.o.state && this.o.state(k)) || { box: 0 };
         var box2 = knew ? Math.min(5, (s2.box || 0) + 1) : 1, at = Date.now(), d = new Date(); d.setHours(4, 0, 0, 0); d.setDate(d.getDate() + BOX_DAYS[box2 - 1]);
-        this.st.show = false; this.st.cur = null;
+        st.show = false; st.cur = null;
         this.emit("review", { k: k, knew: knew, box: box2, due: d.getTime(), at: at }); this.paint(); return; }
       Panel.prototype.click.call(this, e);
     }
-  }, { cards: null, state: null, quizzes: null });
+  }, { cards: null, state: null, quizzes: null, note: null });
   api.reviewCount = reviewCount;
 
   // ------------------------------------------------------------------ LogosQueue
