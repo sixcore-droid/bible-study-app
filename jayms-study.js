@@ -2119,8 +2119,11 @@
         return '<p class="u-m8">' + outlink(t[2], esc(t[0])) + '<br><span class="u-fs15">' + esc(t[1]) + "</span></p>"; }).join("") + "</div>");
       h += OTHER_LINKS.map(function (g) { return '<div class="lbl u-mt14">Other links \u00B7 ' + esc(g[0]) + "</div>" + box("apparatus", "", '<div class="item">' + g[1].map(function (t) {
         return '<p class="u-m8">' + outlink(t[2], esc(t[0])) + '<br><span class="u-fs15">' + esc(t[1]) + "</span></p>"; }).join("") + "</div>"); }).join("");
-      h += '<div class="lbl u-mt14">Texts outside the Bible (' + lib.length + ")</div>" + (lib.length ? lib.map(function (c) { return box("witness", "", '<div class="item"><span class="when">' + esc(c.when) + '</span><span class="tt">' + esc(c.t) + '</span><span class="sub">' + esc(c.trad) + '</span><p class="u-m8-0 u-fs15">' + esc(c.why) + "</p></div>"); }).join("")
-        : none("No text outside the Bible is tied to " + esc(this.o.ref) + " yet.")) + outlink(CFG.corpus, "Open the Corpus Atlas");
+      /* texts outside the Bible: the same kind of box as the tools above, the Corpus Atlas first, then any text tied to this passage */
+      h += '<div class="lbl u-mt14">Texts outside the Bible (' + lib.length + ")</div>" + box("witness", "", '<div class="item">' +
+        '<p class="u-m8">' + outlink(CFG.corpus, "The Corpus Atlas") + '<br><span class="u-fs15">Every ancient text in the research corpus, from Sumerian tablets on, placed in time: what we have, where it came from and when it was written</span></p>' +
+        (lib.length ? lib.map(function (c) { return '<p class="u-m8"><b>' + esc(c.t) + '</b><br><span class="sub">' + esc([c.when, c.trad].filter(Boolean).join(" \u00B7 ")) + '</span><br><span class="u-fs15">' + esc(c.why) + "</span></p>"; }).join("")
+          : '<p class="u-m8 u-fs15">None is tied to ' + esc(this.o.ref) + " yet.</p>") + "</div>");
       return { kick: "Tools \u00B7 free study sites at this passage", title: "Free tools", body: h };
     }
   }, {}, function (d) { return d && (d.library || []).length || null; });   // the free tools are always there: never shown as empty
