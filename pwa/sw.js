@@ -6,8 +6,8 @@
        while a fresh copy is fetched behind it (so a new build arrives on the next visit).
      - jayms.com's live data (posts, glossary): fresh when online, the last copy when not.
      - Everything else (YouTube, BibleProject, podcasts, Claude): straight to the network, untouched.
-   scripts/build-public.py fills in v272 on every build; a new version replaces the old app copy. */
-const VERSION = "v272";
+   scripts/build-public.py fills in v273 on every build; a new version replaces the old app copy. */
+const VERSION = "v273";
 const GH = "https://sixcore-droid.github.io/bible-study-app/";
 const PAGE = "/bible-study-app/";
 const SHELL = "bsa-shell-" + VERSION, DATA = "bsa-data", LIVE = "bsa-live";
