@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v266">
+<link rel="stylesheet" href="jayms-study.css?v=v267">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -151,10 +151,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v266"></script>
-<script src="jayms-store.js?v=v266"></script>
-<script src="x-discuss.js?v=v266"></script>
-<script src="jayms-study.js?v=v266"></script>
+<script src="jayms-ref.js?v=v267"></script>
+<script src="jayms-store.js?v=v267"></script>
+<script src="x-discuss.js?v=v267"></script>
+<script src="jayms-study.js?v=v267"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -498,7 +498,7 @@ function renderReader(){
   $("saved").classList.toggle("dirty",dirty);
   $("saved").textContent = dirty ? "Not saved yet" : (n.text && n.savedAt) ? "Saved " + new Date(n.savedAt).toLocaleString([], {month:"short", day:"numeric", year:"numeric", hour:"numeric", minute:"2-digit"}) : "";
   $("obsrow").hidden = !n.text.trim() || !n.savedAt || dirty;
-  if(!$("obsrow").hidden){ const path = obsPath(r.ref); n.obsidian = path; $("obspath").textContent = "Obsidian: " + path; $("obsopen").href = obsNewURI(r, n); }
+  if(!$("obsrow").hidden){ const path = obsPath(r.ref); n.obsidian = path; $("obspath").textContent = (n.inVault ? "Saved in Obsidian: " : "Obsidian: ") + path; $("obsopen").href = obsNewURI(r, n); }
   document.documentElement.style.setProperty("--reader-size",S.size+"px");
   /* after a refresh, return to where the page was scrolled, once this reading's text is on screen */
   if(PENDING_SCROLL && r.rows){
@@ -736,6 +736,7 @@ async function saveNote(rid){
   n.obsidian = n.obsidian || obsPath(ref);
   await ST.c("notes").save(rid,{text:n.text, pub:n.pub, obsidian:n.obsidian});
   n.savedAt = ST.c("notes").peek(rid).updatedAt;
+  const w = await vaultWrite(n.obsidian, noteBody(ref, n, true), n.savedAt, false); n.inVault = !!(w && w.written);   // straight into the vault
   if(n.pub&&n.text.trim()) await ST.c("pub").save(rid,{text:n.text}); else if(ST.c("pub").peek(rid)) await ST.c("pub").remove(rid);
 }
 document.addEventListener("pointerdown",e=>{ const t=document.getElementById("text"); if(!t) return; const c=e.target.closest&&e.target.closest("#text .pcell[data-col]"); if(c) t.dataset.selcol=c.dataset.col; else if(!e.target.closest||!e.target.closest("#text")) delete t.dataset.selcol; });
@@ -893,8 +894,29 @@ function markDirty(){ const rid=cur().id; DIRTY[rid]=true; ST.c("drafts").save(r
 const OBS_FOLDER = MY.studyFolder;
 function obsPath(ref){ return `${OBS_FOLDER}/${ref.replace(/:/g,".").replace(/[\\/?*"<>|]/g,"-")}.md` }
 function obsURI(path){ return "obsidian://open?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(path.replace(/\.md$/,"")) }
+/* the note as a Markdown file: the same body whether the desk server writes it or Obsidian does (Open in Obsidian) */
+function noteBody(ref, n, withPlan){
+  return `---\npassage: "${ref}"\n${withPlan?`plan: "${plan().name}"\nday: ${S.day}\n`:""}public: ${!!n.pub}\nupdated: ${new Date(n.savedAt||n.updatedAt||Date.now()).toISOString()}\nsource: Study Workstation\ntags: [study-workstation]\n---\n\n# ${ref}\n\n${n.text}\n`;
+}
+/* Saved notes go straight into the vault: the desk's own server writes the file (localhost only; the site and claude.ai can't).
+   ifNewer: only when the vault has no copy or this one is newer, so an edit made in Obsidian is never overwritten by the catch-up. */
+const VAULT_WRITE = !PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+function vaultWrite(path, content, updatedAt, ifNewer){
+  if(!VAULT_WRITE || !path) return Promise.resolve(null);
+  return fetch("/api/vault-note",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({path,content,updatedAt,ifNewer:!!ifNewer})})
+    .then(r=>r.ok?r.json():null).catch(()=>null);
+}
+/* at start-up: every saved note that isn't in the vault yet (or is newer here) is written there */
+function vaultCatchUp(){
+  if(!VAULT_WRITE) return;
+  ST.c("notes").all().filter(d=>d.text&&d.text.trim()&&d.obsidian).forEach(d=>{
+    const ref=d.obsidian.replace(/^.*\//,"").replace(/\.md$/,"").replace(/\./g,":");
+    vaultWrite(d.obsidian, noteBody(ref, d, false), d.updatedAt||0, true);
+  });
+}
+setTimeout(vaultCatchUp, 4000);
 function obsNewURI(r, n){
-  const body = `---\npassage: "${r.ref}"\nplan: "${plan().name}"\nday: ${S.day}\npublic: ${!!n.pub}\nupdated: ${new Date(n.savedAt).toISOString()}\nsource: Study Workstation\ntags: [study-workstation]\n---\n\n# ${r.ref}\n\n${n.text}\n`;
+  const body = noteBody(r.ref, n, true);
   return "obsidian://new?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(obsPath(r.ref).replace(/\.md$/,""))+"&content="+encodeURIComponent(body)+"&overwrite=true";
 }
 async function commitNote(){ const rid=cur().id; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel() }

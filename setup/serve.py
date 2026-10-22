@@ -19,6 +19,22 @@ class H(http.server.SimpleHTTPRequestHandler):
     def send(self, code, body, ctype):
         if isinstance(body, str): body = body.encode("utf-8")
         self.send_response(code); self.send_header("Content-Type", ctype); self.send_header("Content-Length", str(len(body))); self.end_headers(); self.wfile.write(body)
+    def vault_note(self, root, folder):
+        """POST /api/vault-note {path, content, updatedAt, ifNewer}: the note's copy in the Obsidian vault, written by this server, so a
+        saved note is in the vault with no Open in Obsidian click. Only .md files inside the study folder. ifNewer: write only when the
+        vault has no copy or the app's copy is newer (the start-up catch-up never overwrites an edit made in Obsidian)."""
+        try:
+            n = int(self.headers.get("Content-Length") or 0); d = json.loads(self.rfile.read(n) or b"{}")
+            rel = str(d.get("path", "")).replace("\\", "/")
+            if not root or not os.path.isdir(root): return self.json_out(409, {"error": "no vault folder"})
+            if not rel.startswith(folder.rstrip("/") + "/") or not rel.endswith(".md") or ".." in rel.split("/"): return self.json_out(400, {"error": "not in the study folder"})
+            f = os.path.join(root, rel)
+            if d.get("ifNewer") and os.path.exists(f) and os.path.getmtime(f) * 1000 >= float(d.get("updatedAt") or 0): return self.json_out(200, {"written": False, "path": rel})
+            os.makedirs(os.path.dirname(f), exist_ok=True)
+            with open(f, "w", encoding="utf-8") as fh: fh.write(str(d.get("content", "")))
+            return self.json_out(200, {"written": True, "path": rel})
+        except Exception as e:
+            return self.json_out(500, {"error": str(e)[:200]})
     def json_out(self, code, obj): self.send(code, json.dumps(obj, ensure_ascii=False, separators=(",", ":")), "application/json; charset=utf-8")
     def page(self):
         s = settings()
@@ -94,6 +110,10 @@ class H(http.server.SimpleHTTPRequestHandler):
                     self.send_response(206); self.send_header("Content-Type", self.guess_type(f)); self.send_header("Content-Range", "bytes %d-%d/%d" % (a, b, size))
                     self.send_header("Content-Length", str(len(body))); self.send_header("Accept-Ranges", "bytes"); self.end_headers(); self.wfile.write(body); return
         return super().do_GET()
+    def do_POST(self):
+        s = settings()
+        if urllib.parse.urlparse(self.path).path == "/api/vault-note": return self.vault_note(os.path.expanduser(s.get("notesVaultPath") or ""), s.get("studyFolder") or "Bible Study")
+        self.send_response(404); self.end_headers()
     def end_headers(self): self.send_header("Cache-Control", "no-store"); super().end_headers()
     def log_message(self, *a): pass
 

@@ -499,7 +499,7 @@ function renderReader(){
   $("saved").classList.toggle("dirty",dirty);
   $("saved").textContent = dirty ? "Not saved yet" : (n.text && n.savedAt) ? "Saved " + new Date(n.savedAt).toLocaleString([], {month:"short", day:"numeric", year:"numeric", hour:"numeric", minute:"2-digit"}) : "";
   $("obsrow").hidden = !n.text.trim() || !n.savedAt || dirty;
-  if(!$("obsrow").hidden){ const path = obsPath(r.ref); n.obsidian = path; $("obspath").textContent = "Obsidian: " + path; $("obsopen").href = obsNewURI(r, n); }
+  if(!$("obsrow").hidden){ const path = obsPath(r.ref); n.obsidian = path; $("obspath").textContent = (n.inVault ? "Saved in Obsidian: " : "Obsidian: ") + path; $("obsopen").href = obsNewURI(r, n); }
   document.documentElement.style.setProperty("--reader-size",S.size+"px");
   /* after a refresh, return to where the page was scrolled, once this reading's text is on screen */
   if(PENDING_SCROLL && r.rows){
@@ -737,6 +737,7 @@ async function saveNote(rid){
   n.obsidian = n.obsidian || obsPath(ref);
   await ST.c("notes").save(rid,{text:n.text, pub:n.pub, obsidian:n.obsidian});
   n.savedAt = ST.c("notes").peek(rid).updatedAt;
+  const w = await vaultWrite(n.obsidian, noteBody(ref, n, true), n.savedAt, false); n.inVault = !!(w && w.written);   // straight into the vault
   if(n.pub&&n.text.trim()) await ST.c("pub").save(rid,{text:n.text}); else if(ST.c("pub").peek(rid)) await ST.c("pub").remove(rid);
 }
 document.addEventListener("pointerdown",e=>{ const t=document.getElementById("text"); if(!t) return; const c=e.target.closest&&e.target.closest("#text .pcell[data-col]"); if(c) t.dataset.selcol=c.dataset.col; else if(!e.target.closest||!e.target.closest("#text")) delete t.dataset.selcol; });
@@ -894,8 +895,29 @@ function markDirty(){ const rid=cur().id; DIRTY[rid]=true; ST.c("drafts").save(r
 const OBS_FOLDER = MY.studyFolder;
 function obsPath(ref){ return `${OBS_FOLDER}/${ref.replace(/:/g,".").replace(/[\\/?*"<>|]/g,"-")}.md` }
 function obsURI(path){ return "obsidian://open?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(path.replace(/\.md$/,"")) }
+/* the note as a Markdown file: the same body whether the desk server writes it or Obsidian does (Open in Obsidian) */
+function noteBody(ref, n, withPlan){
+  return `---\npassage: "${ref}"\n${withPlan?`plan: "${plan().name}"\nday: ${S.day}\n`:""}public: ${!!n.pub}\nupdated: ${new Date(n.savedAt||n.updatedAt||Date.now()).toISOString()}\nsource: Study Workstation\ntags: [study-workstation]\n---\n\n# ${ref}\n\n${n.text}\n`;
+}
+/* Saved notes go straight into the vault: the desk's own server writes the file (localhost only; the site and claude.ai can't).
+   ifNewer: only when the vault has no copy or this one is newer, so an edit made in Obsidian is never overwritten by the catch-up. */
+const VAULT_WRITE = !PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+function vaultWrite(path, content, updatedAt, ifNewer){
+  if(!VAULT_WRITE || !path) return Promise.resolve(null);
+  return fetch("/api/vault-note",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({path,content,updatedAt,ifNewer:!!ifNewer})})
+    .then(r=>r.ok?r.json():null).catch(()=>null);
+}
+/* at start-up: every saved note that isn't in the vault yet (or is newer here) is written there */
+function vaultCatchUp(){
+  if(!VAULT_WRITE) return;
+  ST.c("notes").all().filter(d=>d.text&&d.text.trim()&&d.obsidian).forEach(d=>{
+    const ref=d.obsidian.replace(/^.*\//,"").replace(/\.md$/,"").replace(/\./g,":");
+    vaultWrite(d.obsidian, noteBody(ref, d, false), d.updatedAt||0, true);
+  });
+}
+setTimeout(vaultCatchUp, 4000);
 function obsNewURI(r, n){
-  const body = `---\npassage: "${r.ref}"\nplan: "${plan().name}"\nday: ${S.day}\npublic: ${!!n.pub}\nupdated: ${new Date(n.savedAt).toISOString()}\nsource: Study Workstation\ntags: [study-workstation]\n---\n\n# ${r.ref}\n\n${n.text}\n`;
+  const body = noteBody(r.ref, n, true);
   return "obsidian://new?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(obsPath(r.ref).replace(/\.md$/,""))+"&content="+encodeURIComponent(body)+"&overwrite=true";
 }
 async function commitNote(){ const rid=cur().id; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel() }

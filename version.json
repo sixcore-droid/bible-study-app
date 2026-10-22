@@ -1,1 +1,1 @@
-{"version":"v266","date":"2026-10-22 11:08","note":"save point before notes auto-save to Obsidian"}
+{"version":"v267","date":"2026-10-22 11:09","note":"Notes save straight into the Obsidian vault (desk server /api/vault-note, study folder only); start-up catch-up writes saved notes missing from the vault, never over a newer Obsidian edit; kit server does the same with the user's vault"}
