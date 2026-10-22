@@ -223,11 +223,11 @@
    "intro": "When you've read it.",
    "app": "study",
    "clip": "#markdone",
-   "clipTo": "#mynotes",
+   "clipTo": "#note",
    "pad": [
     20,
     240,
-    20,
+    70,
     30
    ],
    "at": "right",
@@ -259,6 +259,11 @@
      "sel": "#notesave",
      "name": "Save note",
      "text": "Saves the note (Cmd+S works too)."
+    },
+    {
+     "sel": "#notetog",
+     "name": "Close",
+     "text": "Folds the notes bar down to its header, or brings it back. Drag its top edge to make it taller or shorter."
     }
    ],
    "tall": 2600

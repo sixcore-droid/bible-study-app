@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v264">
+<link rel="stylesheet" href="jayms-study.css?v=v265">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -120,14 +120,18 @@
       <button class="btn fill" id="markdone">Done</button>
       <button class="btn" id="nextread">Next →</button>
     </div>
-    <div class="notes" id="mynotes">
+    <div class="notes notedock" id="mynotes">
+      <div class="ngrip" id="ngrip" role="separator" aria-orientation="horizontal" aria-label="Drag to make the notes taller or shorter" tabindex="0" title="Drag to resize · double-click to reset"></div>
       <div class="notehead">
         <label class="lbl" for="note" id="notelbl">My notes</label>
-        <label class="pubtog" for="notepub"><input type="checkbox" id="notepub"> Public</label>
+        <span class="noteright"><label class="pubtog" for="notepub"><input type="checkbox" id="notepub"> Public</label>
+        <button class="sz" id="notetog" aria-controls="notebody"></button></span>
       </div>
+      <div class="notebody" id="notebody">
       <textarea id="note"></textarea>
       <div class="saverow"><button class="btn fill" id="notesave">Save note</button><span class="saved" id="saved"></span></div>
       <div class="saverow" id="obsrow" hidden><span class="saved" id="obspath"></span><a class="btn" id="obsopen" target="_blank" rel="noopener" href="#">Open in Obsidian</a><button class="btn" id="obscopy">Copy link</button><span class="saved" id="obsmsg"></span></div>
+      </div>
     </div>
     <div class="notes pubnote" id="pubnote" hidden></div>
   </main>
@@ -147,10 +151,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v264"></script>
-<script src="jayms-store.js?v=v264"></script>
-<script src="x-discuss.js?v=v264"></script>
-<script src="jayms-study.js?v=v264"></script>
+<script src="jayms-ref.js?v=v265"></script>
+<script src="jayms-store.js?v=v265"></script>
+<script src="x-discuss.js?v=v265"></script>
+<script src="jayms-study.js?v=v265"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -867,6 +871,18 @@ $("gobooks").innerHTML = JaymsRef.books.map(b=>`<option value="${b.name} ">`).jo
 $("goform").onsubmit=e=>{ e.preventDefault(); const v=$("goref").value.trim(); if(!v) return;
   const err=openPassage(v); $("gomsg").textContent=err; if(!err){ $("goref").value=""; $("goref").blur(); } };
 $("goref").oninput=()=>{ $("gomsg").textContent="" };
+/* My notes as a bar docked to the bottom of the reader: open or closed, and its height dragged from its top edge (both remembered) */
+(()=>{ const box=$("mynotes"), ta=$("note"), g=$("ngrip");
+  const setOpen=open=>{ box.classList.toggle("closed",!open); $("notetog").textContent=open?"Close":"Open"; $("notetog").setAttribute("aria-expanded",open); store.set("noteOpen",open) };
+  const setH=h=>{ if(h){ ta.style.height=h+"px" } else ta.style.height=""; };
+  setOpen(store.get("noteOpen",true)); setH(store.get("noteH",0));
+  $("notetog").onclick=()=>setOpen(box.classList.contains("closed"));
+  let y0=0,h0=0; const move=e=>{ const h=Math.max(80,Math.min(window.innerHeight*0.7,h0+(y0-e.clientY))); setH(h) };
+  const up=()=>{ document.body.classList.remove("dragging"); document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up); store.set("noteH",ta.offsetHeight) };
+  g.addEventListener("pointerdown",e=>{ e.preventDefault(); if(box.classList.contains("closed")) setOpen(true); y0=e.clientY; h0=ta.offsetHeight; document.body.classList.add("dragging"); document.addEventListener("pointermove",move); document.addEventListener("pointerup",up) });
+  g.addEventListener("dblclick",()=>{ setH(0); store.set("noteH",0) });
+  g.addEventListener("keydown",e=>{ if(e.key==="ArrowUp"||e.key==="ArrowDown"){ e.preventDefault(); setH(ta.offsetHeight+(e.key==="ArrowUp"?24:-24)); store.set("noteH",ta.offsetHeight) } });
+})();
 $("markdone").onclick=()=>{const id=dk(cur()); if(isDone(id)) ST.c("done").remove(id); else ST.c("done").save(id,{done:true, at:Date.now()}); renderPlan(); renderReader()};
 $("nextread").onclick=()=>{if(S.reading<READINGS.length-1){S.reading++; rememberOpen(); S.vsel=null; renderReader(); renderPanel(); readerTop()}};
 /* Notes save when you press Save (or Cmd/Ctrl+S). Until then the change is held as a draft and marked "Not saved yet". */
