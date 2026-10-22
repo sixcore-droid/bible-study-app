@@ -72,7 +72,7 @@
   function config(o) { Object.assign(CFG, o || {}); return CFG; }
   /* Every link goes to the exact page, never a guess. Each pattern was checked against jayms.com:
      an entry has its own page at <tool>/<id>/; the Interleaved Bible opens a passage with #read=Book|Ref. */
-  var TOOL = { council: "divine-council-index", gods: "gods-of-the-bible", awp: "ancient-world-passages", awi: "ancient-world-ideas", facts: "bible-entity-explorer", words: "bible-word-study-tool",
+  var TOOL = { eor: "echoes-of-revelation", council: "divine-council-index", gods: "gods-of-the-bible", awp: "ancient-world-passages", awi: "ancient-world-ideas", facts: "bible-entity-explorer", words: "bible-word-study-tool",
                diffs: "bible-translation-differences", ib: "bible-interactive-outline" };
   function entryURL(tool, id) { return id ? CFG.site + TOOL[tool] + "/" + encodeURIComponent(String(id).toLowerCase()) + "/" : ""; }
   function ibBookKey(book) { return bookRow(book).ib; }
@@ -478,6 +478,8 @@
       getJSON("art-refs.json").then(function (d) { ARTREFS = d || []; }).catch(function () { ARTREFS = []; }),
       getJSON("relics.json").then(function (d) { RELREFS = ((d && d.relics) || []).map(function (x) { return x.refs; }); }).catch(function () { RELREFS = []; }),
       data.ancient()]); },
+    /* Echoes of Revelation (a jayms.com tool, read live): each Revelation verse with the Old Testament passages it echoes */
+    echoes: function () { return cache.__eor || (cache.__eor = getLive(CFG.toolData + "echoes.json").then(function (d) { return (d && d.entries) || []; }).catch(function () { cache.__eor = null; return []; })); },
     /* The Ancient World Behind the Text (jayms.com tools, read live like the Council and Gods): its passages and its ideas */
     ancient: function () {
       return cache.__aw || (cache.__aw = Promise.all([getLive(CFG.toolData + "ancient-world-passages.json"), getLive(CFG.toolData + "ancient-world-ideas.json")]).then(function (r) {
@@ -2632,7 +2634,21 @@
         var out = []; fs.forEach(function (f, i) { ((f && f.n) || []).forEach(function (n) {
           if (segs.some(function (q) { return R.overlap({ book: books[i], c1: n[0], v1: n[1], c2: n[2], v2: n[3] }, q); })) out.push({ book: books[i], c1: n[0], v1: n[1], c2: n[2], v2: n[3], text: n[5] }); }); });
         return out; });
-      return Promise.all([data.xref(this.o.ref), cs]).then(function (r) { self.x = r[0]; self.cs = r[1]; });
+      /* Echoes of Revelation that touch this passage: from Revelation's side or from the Old Testament passage it echoes */
+      var eor = data.echoes().then(function (E) { return E.filter(function (e) { return [e.bibleRef].concat(e.otRef || []).some(function (r) { return R.parse(r).some(function (a) { return segs.some(function (q) { return R.overlap(a, q); }); }); }); }); });
+      return Promise.all([data.xref(this.o.ref), cs, eor]).then(function (r) { self.x = r[0]; self.cs = r[1]; self.eor = r[2]; });
+    },
+    /* the Echoes of Revelation tab: each echo with both passages, then what matches, what differs and what John does with it */
+    eorHTML: function () {
+      var go = function (r) { return '<button class="jst-ref" data-jst-go="' + esc(r) + '" title="Open ' + esc(r) + '">' + esc(r) + "</button>"; };
+      return '<p class="ctx">Revelation never quotes the Old Testament outright, yet no New Testament book uses it more. The echoes that touch ' + esc(this.o.ref) + ".</p>" +
+        (this.eor || []).map(function (e) {
+          var part = function (k, v, t) { return e[k] ? box(v, t, "<p>" + md(e[k]) + "</p>") : ""; };
+          return box("scripture", "", '<div class="item"><span class="when">' + go(e.bibleRef) + " \u2190 " + (e.otRef || []).map(go).join(", ") + '</span><span class="tt">' + esc(e.title.replace(/^[^,]*,\s*/, "")) + '</span><span class="sub">' + esc(e.summary) + "</span>" +
+            (e.plain ? '<div class="box plain u-mt8"><p class="u-m0">' + md(e.plain) + "</p></div>" : "") +
+            '<details class="jst-past"><summary class="lbl">What matches, what differs, what John does</summary>' + part("same", "wording", "What matches") + part("differs", "explain", "Why it doesn't match exactly") + part("turn", "explain", "What John does with it") + part("not", "not", "What this echo is not") + "</details>" +
+            outlink(entryURL("eor", e.id), "jayms Echoes of Revelation") + "</div>");
+        }).join("");
     },
     /* the Connecting Scripture tab: each note under the verses it is on */
     csHTML: function () {
@@ -2645,8 +2661,12 @@
     view: function () {
       var self = this, st = this.st, all = this.x || [], q = data.segs(this.o.ref)[0];
       if (!q) return { kick: "Cross-references", title: this.o.ref, body: none("Open a passage first.") };
-      var csn = (this.cs || []).length, tabs = csn ? '<div class="chips u-mb10"><button class="chip' + (st.tab !== "cs" ? " on" : "") + '" data-jst-xtab="">Cross-references (' + all.length + ')</button><button class="chip' + (st.tab === "cs" ? " on" : "") + '" data-jst-xtab="cs">Connecting Scripture (' + csn + ")</button></div>" : "";
-      if (csn && st.tab === "cs") return { kick: "Cross-references \u00B7 Connecting Scripture", title: "How the NT uses the OT here", body: tabs + this.csHTML() };
+      var csn = (this.cs || []).length, en = (this.eor || []).length;
+      var T = [["", "Cross-references", all.length]].concat(csn ? [["cs", "Connecting Scripture", csn]] : [], en ? [["eor", "Echoes of Revelation", en]] : []);
+      if (!T.some(function (x) { return x[0] === (st.tab || ""); })) st.tab = "";
+      var tabs = T.length > 1 ? '<div class="chips u-mb10">' + T.map(function (x) { return '<button class="chip' + ((st.tab || "") === x[0] ? " on" : "") + '" data-jst-xtab="' + x[0] + '">' + x[1] + " (" + x[2] + ")</button>"; }).join("") + "</div>" : "";
+      if (st.tab === "cs") return { kick: "Cross-references \u00B7 Connecting Scripture", title: "How the NT uses the OT here", body: tabs + this.csHTML() };
+      if (st.tab === "eor") return { kick: "Cross-references \u00B7 Echoes of Revelation", title: "Echoes of Revelation", body: tabs + this.eorHTML() };
       var here = R.book(q.book), pos = function (x) { return x.order * 1e6 + x.c * 1e3 + x.v; }, me = here.order * 1e6 + q.c1 * 1e3 + q.v1;
       /* which verse of the passage each one is for ("1 Samuel 31:6"); the verse chips narrow the list to one verse */
       var full = function (lab) { return q.book + " " + (String(lab).indexOf(":") > -1 ? lab : q.c1 + ":" + lab); };
