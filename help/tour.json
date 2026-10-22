@@ -55,10 +55,9 @@
      "who": "owner"
     },
     {
-     "sel": "#today",
-     "name": "Today's date",
-     "text": "Today's date, month/day/year; the reading plan's Today follows it.",
-     "optional": true
+     "sel": "#setbtn",
+     "name": "Settings",
+     "text": "Turns Logos links and verse numbers on or off."
     },
     {
      "sel": "#aboutbtn",
@@ -168,16 +167,6 @@
      "sel": "#parbtn",
      "name": "Parallel / One version",
      "text": "Shows two versions side by side, paragraph by paragraph."
-    },
-    {
-     "sel": "#logobtn",
-     "name": "Hide Logos / Show Logos",
-     "text": "Turns every link into Logos Bible Software off or on."
-    },
-    {
-     "sel": "#numbtn",
-     "name": "Hide numbers / Show numbers",
-     "text": "Takes the verse numbers off the page, so the text reads straight through (and Speechify skips them)."
     },
     {
      "sel": "#ver",

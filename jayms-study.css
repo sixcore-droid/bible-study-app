@@ -352,6 +352,8 @@ mark.hit.now{background:var(--gold);color:var(--paper-deep)}
 .planlist button.on{border-color:var(--gold);color:var(--ink-bright)}
 .planlist button.on .sub{color:var(--gold);font-size:13px;margin-left:6px}
 .planlist button.build{border-style:dashed}
+.bpgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}   /* The Bible picker: books, chapters and verses in even columns */
+.bpgrid .chip{padding:6px 0;text-align:center;font-family:var(--label)}
 .planname{font-family:var(--display);font-size:26px;font-weight:600;line-height:1.15;color:var(--ink-bright);margin:0;text-wrap:balance}
 .plandesc{font-size:15px;margin:0}
 .prog{display:flex;flex-direction:column;gap:6px}

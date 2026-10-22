@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v259">
+<link rel="stylesheet" href="jayms-study.css?v=v260">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -28,7 +28,8 @@
     <button data-view="me" aria-pressed="true">My desk</button>
     <button data-view="public" aria-pressed="false">Read along</button>
   </div>
-  <span class="today" id="today"></span>
+  <span class="today" id="today" hidden></span>
+  <button class="topbtn" id="setbtn" aria-label="Settings" title="Settings">Settings</button>
   <button class="topbtn" id="aboutbtn" aria-label="About this project" title="Why this exists">About</button>
   <a class="topbtn support" href="https://buymeacoffee.com/JAYMS" target="_blank" rel="noopener" title="Buy me a coffee">Donate</a>
   <button class="topbtn" id="helpbtn" aria-label="Help: what everything does" title="What everything does">Help</button>
@@ -38,6 +39,12 @@
   <p>There are a lot of free Bible study tools out there, and they are scattered across the web. This is an attempt to build something easy to use and intuitive: one stop for those free tools, working together beside the text.</p>
   <p>I made this Bible Study Workstation for how I study the Bible.</p>
   <p class="ctx">James McLaughlin · <a href="https://jayms.com/" target="_blank" rel="noopener">jayms.com</a> · <a href="https://buymeacoffee.com/JAYMS" target="_blank" rel="noopener">Buy me a coffee</a></p>
+</div></div>
+<div class="helpview" id="setview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Settings"><button class="x" id="setclose" aria-label="Close">×</button>
+  <h2>Settings</h2>
+  <label class="planopt"><input type="checkbox" id="optlogos"> Logos links <span class="sub">Open in Logos, the Shelf's commentaries and study Bibles, the atlases</span></label>
+  <label class="planopt"><input type="checkbox" id="optnums"> Verse numbers <span class="sub">off: the text reads straight through, and Speechify skips them</span></label>
+  <p class="ctx">This browser remembers them.</p>
 </div></div>
 <div class="helpview" id="helpview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Help"><button class="x" id="helpclose" aria-label="Close help">×</button><div id="helpbody">Loading…</div></div></div>
 
@@ -87,12 +94,6 @@
       <div class="seg" id="parsw" role="group" aria-label="Columns">
         <button id="parbtn" title="Switch between one version and two in parallel"></button>
       </div>
-      <div class="seg" id="logosw" role="group" aria-label="Logos links">
-        <button id="logobtn" title="Hide or show every link into Logos Bible Software"></button>
-      </div>
-      <div class="seg" id="numsw" role="group" aria-label="Verse numbers">
-        <button id="numbtn" title="Hide or show the verse numbers (a reader like Speechify then skips them)"></button>
-      </div>
       <div class="seg" id="mapsw" role="group" aria-label="Map">
       </div>
       <div class="vpick">
@@ -141,10 +142,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v259"></script>
-<script src="jayms-store.js?v=v259"></script>
-<script src="x-discuss.js?v=v259"></script>
-<script src="jayms-study.js?v=v259"></script>
+<script src="jayms-ref.js?v=v260"></script>
+<script src="jayms-store.js?v=v260"></script>
+<script src="x-discuss.js?v=v260"></script>
+<script src="jayms-study.js?v=v260"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -407,14 +408,14 @@ function renderReader(){
   const lg = JaymsRef.refly(r.ref, S.ver);
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
   $("rlogos").hidden = !S.logos;
-  $("logobtn").textContent = S.logos ? "Hide Logos" : "Show Logos";
+  $("optlogos").checked = S.logos;
   $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
   const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
   $("ver").innerHTML = opts(S.ver); $("ver2").innerHTML = opts(S.ver2);
   $("ver2wrap").hidden = !S.par;
   /* one toggle each: the button names what a tap switches to, not what's on screen */
   $("layoutbtn").textContent = S.layout==="verse" ? "Reading view" : "Verse by verse";
-  $("numbtn").textContent = S.nums ? "Hide numbers" : "Show numbers"; $("text").classList.toggle("nonums", !S.nums);   // gone from the page, so a read-aloud tool skips them too
+  $("optnums").checked = S.nums; $("text").classList.toggle("nonums", !S.nums);   // gone from the page, so a read-aloud tool skips them too
   $("parbtn").textContent = S.par ? "One version" : "Parallel";
   const vers = S.par ? [S.ver,S.ver2] : [S.ver];
   const rows = r.rows;
@@ -816,17 +817,19 @@ let BP = {};
 function renderBiblePick(){
   const name=b=>b==="Psalm"?"Psalms":b, chip=(attr,label,on)=>`<button class="chip${on?" on":""}" ${attr}>${esc(String(label))}</button>`;
   const books=JaymsRef.books, close=chip('data-bp="close"',"Close");
+  const AB="Gen Exo Lev Num Deu Jos Jdg Rth 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Eze Dan Hos Joe Amo Oba Jon Mic Nah Hab Zep Hag Zec Mal Mat Mar Luk Jhn Act Rom 1Co 2Co Gal Eph Phl Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jo 2Jo 3Jo Jde Rev".split(" ");
+  const bk=b=>`<button class="chip" data-bp-book="${esc(b.name)}" title="${esc(name(b.name))}">${AB[b.order]}</button>`;
   let h="";
   if(!BP.book){
-    h=`<div class="lbl">Old Testament</div><div class="chips">${books.slice(0,39).map(b=>chip(`data-bp-book="${esc(b.name)}"`,name(b.name))).join("")}</div>`
-     +`<div class="lbl u-mt10">New Testament</div><div class="chips">${books.slice(39).map(b=>chip(`data-bp-book="${esc(b.name)}"`,name(b.name))).join("")}</div>`;
+    h=`<div class="lbl">Old Testament</div><div class="bpgrid">${books.slice(0,39).map(bk).join("")}</div>`
+     +`<div class="lbl u-mt10">New Testament</div><div class="bpgrid">${books.slice(39).map(bk).join("")}</div>`;
   } else if(!BP.c){
     const n=JaymsRef.book(BP.book).chapters;
     if(n===1){ BP.c=1; return renderBiblePick() }
-    h=`<div class="lbl">${esc(name(BP.book))} · pick a chapter</div><div class="chips">${chip('data-bp="back"',"‹ Books")}${Array.from({length:n},(_,i)=>chip(`data-bp-c="${i+1}"`,i+1)).join("")}</div>`;
+    h=`<div class="lbl">${esc(name(BP.book))} · pick a chapter</div><div class="chips u-mb10">${chip('data-bp="back"',"‹ Books")}</div><div class="bpgrid">${Array.from({length:n},(_,i)=>chip(`data-bp-c="${i+1}"`,i+1)).join("")}</div>`;
   } else {
     const v=JaymsRef.verses(BP.book,BP.c), one=JaymsRef.book(BP.book).chapters===1, title=one?name(BP.book):`${name(BP.book)} ${BP.c}`;
-    h=`<div class="lbl">${esc(title)} · pick a verse</div><div class="chips">${chip('data-bp="back"',one?"‹ Books":"‹ Chapters")}${chip('data-bp-v="0"',one?"The whole book":"The whole chapter")}${Array.from({length:v},(_,i)=>chip(`data-bp-v="${i+1}"`,i+1)).join("")}</div>`;
+    h=`<div class="lbl">${esc(title)} · pick a verse</div><div class="chips u-mb10">${chip('data-bp="back"',one?"‹ Books":"‹ Chapters")}${chip('data-bp-v="0"',one?"The whole book":"The whole chapter")}</div><div class="bpgrid">${Array.from({length:v},(_,i)=>chip(`data-bp-v="${i+1}"`,i+1)).join("")}</div>`;
   }
   $("biblepick").innerHTML = h + `<div class="chips u-mt10">${close}</div>`;
 }
@@ -912,8 +915,11 @@ $("viewsw").onclick=e=>{const b=e.target.closest("[data-view]"); if(!b) return; 
 $("ver").onchange=e=>{ const was=S.ver; S.ver=e.target.value; if(S.ver===S.ver2){ S.ver2=was; store.set("ver2",S.ver2) } store.set("ver",S.ver); renderReader() };
 $("ver2").onchange=e=>{ const was=S.ver2; S.ver2=e.target.value; if(S.ver2===S.ver){ S.ver=was; store.set("ver",S.ver) } store.set("ver2",S.ver2); renderReader() };
 $("layoutbtn").onclick=()=>{S.layout=S.layout==="verse"?"read":"verse";store.set("layout",S.layout);renderReader()};
-$("numbtn").onclick=()=>{S.nums=!S.nums;store.set("nums",S.nums);renderReader()};
-$("logobtn").onclick=()=>{S.logos=!S.logos;store.set("logos",S.logos);renderReader();renderPanel()};
+$("optnums").onchange=e=>{S.nums=e.target.checked;store.set("nums",S.nums);renderReader()};
+$("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);renderReader();renderPanel()};
+{ const v=$("setview"), close=()=>{ v.hidden=true; $("setbtn").focus() };
+  $("setbtn").onclick=()=>{ v.hidden=false; $("setclose").focus() }; $("setclose").onclick=close;
+  v.addEventListener("click",e=>{ if(e.target===v) close() }); }
 $("parbtn").onclick=()=>{S.par=S.par?0:1;store.set("par",S.par);renderReader()};
 $("smaller").onclick=()=>{S.size=Math.max(16,S.size-1);store.set("size",S.size);renderReader()};
 /* « » the chapter before or after the one on screen (across books too); it opens like a passage from the Go box */
