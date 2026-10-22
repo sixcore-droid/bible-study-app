@@ -500,6 +500,7 @@ body.rail-hidden .rail:not(.open){display:none}
 .notedock .notebody{display:flex;flex-direction:column;gap:8px}
 .notedock.closed .notebody{display:none}
 .notedock textarea{resize:none}
+.pubbody{max-height:34vh;overflow-y:auto}   /* James's notes in Read along: scrolls inside the bar */
 .noteright{display:flex;align-items:center;gap:12px}
 .ngrip{position:absolute;left:0;right:0;top:-5px;height:10px;cursor:row-resize}
 .ngrip::after{content:"";position:absolute;left:50%;top:4px;width:44px;height:2px;margin-left:-22px;border-radius:2px;background:var(--line);transition:background .15s}
