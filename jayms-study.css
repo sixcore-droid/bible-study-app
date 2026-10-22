@@ -119,6 +119,7 @@ a.btn{text-decoration:none;display:inline-block}
 .wc span{font-size:14px}
 .wc em{font-family:var(--label);font-style:normal;font-size:13px;color:var(--gold);margin-top:auto}
 .wc:hover{border-color:var(--gold)}
+.wc.on{border-color:var(--gold);background:var(--paper-deep)}   /* the word open under the grid in Verse */
 .item{display:flex;flex-direction:column;gap:4px}
 .item .when{font-family:var(--label);font-size:13px;color:var(--gold)}
 .item .tt{font-family:var(--display);font-size:22px;font-weight:600;line-height:1.15;color:var(--ink-bright)}

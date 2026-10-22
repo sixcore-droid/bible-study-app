@@ -1,1 +1,1 @@
-{"version":"v279","date":"2026-10-22 12:22","note":"save point before word details inside Verse"}
+{"version":"v280","date":"2026-10-22 12:25","note":"Verse: a tapped word opens its Word Study card inside the Verse panel (Close / Word Study); shared wordDetail() with Words"}

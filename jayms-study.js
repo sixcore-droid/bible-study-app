@@ -2162,6 +2162,16 @@
   }, {}, function (d) { return d ? (d.chats || []).length : null; });
 
   // ------------------------------------------------------------------ Words
+  /* one word, as Word Study shows it: Strong's, meaning, lexicon, glossary, where it appears, + Vocab. Words and Verse both use it. */
+  function wordDetail(w, panel, withGloss) {
+    var h = box("witness", "", '<div class="big">' + esc(w.t) + '</div><dl class="meta"><dt>Strong\'s</dt><dd>' + esc(w.s) + "</dd><dt>Means</dt><dd>" + esc(w.gloss) + "</dd>" + (w.count ? "<dt>Used</dt><dd>" + esc(w.count) + " times</dd>" : "") + "</dl>");
+    if (w.def) h += box("wording", "Lexicon", "<p>" + esc(w.def) + "</p>");
+    if (w.note) h += box("explain", "In this passage", "<p>" + esc(w.note) + "</p>");
+    if (withGloss) h += glossBox(w.t, w.s);
+    if (w.spread) h += box("apparatus", "Where it appears", "<p>" + esc(w.spread) + "</p>");
+    h += '<div class="askrow">' + panel.vocabBtn({ k: String(w.k || w.s || "").toLowerCase(), word: w.t, strong: w.s, gloss: w.gloss || "" }) + "</div>";
+    return h + outlink(entryURL("words", w.k || w.s), "All occurrences");
+  }
   define("Words", { id: "word", label: "Words", name: "Word Study", icon: ICON.word }, {
     /* the glossary marks show as soon as it is in; the panel never waits on it */
     prepare: function () { var self = this; return data.glossary(function () { if (self.alive) self.refresh(); }); },
@@ -2170,13 +2180,7 @@
       if (!list.length) return { kick: "Word Study", title: this.o.ref, body: none("No word-by-word data for this passage yet.") };
       var k = this.o.word, w = (k && WORDS[k]) || list[0];
       var h = '<div class="lbl">Words in ' + esc(this.o.ref) + '</div><div class="chips">' + list.map(function (x) { return '<button class="chip' + (x.k === w.k ? " on" : "") + '" data-jst-pick="' + esc(x.k) + '"' + (glossFor(x.t, x.s).length ? ' title="In my glossary"' : "") + ">" + esc(x.t) + (glossFor(x.t, x.s).length ? ' <span class="jst-gl">G</span>' : "") + "</button>"; }).join("") + "</div>";
-      h += box("witness", "", '<div class="big">' + esc(w.t) + '</div><dl class="meta"><dt>Strong\'s</dt><dd>' + esc(w.s) + "</dd><dt>Means</dt><dd>" + esc(w.gloss) + "</dd>" + (w.count ? "<dt>Used</dt><dd>" + esc(w.count) + " times</dd>" : "") + "</dl>");
-      if (w.def) h += box("wording", "Lexicon", "<p>" + esc(w.def) + "</p>");
-      if (w.note) h += box("explain", "In this passage", "<p>" + esc(w.note) + "</p>");
-      h += glossBox(w.t, w.s);
-      if (w.spread) h += box("apparatus", "Where it appears", "<p>" + esc(w.spread) + "</p>");
-      h += '<div class="askrow">' + this.vocabBtn({ k: String(w.k || w.s || "").toLowerCase(), word: w.t, strong: w.s, gloss: w.gloss || "" }) + "</div>";
-      h += outlink(entryURL("words", w.k || w.s), "All occurrences");
+      h += wordDetail(w, this, true);
       return { kick: "Word Study \u00B7 " + w.s, title: w.t, body: h };
     },
     click: function (e) {
@@ -2213,8 +2217,11 @@
         var gl = glossFor((WORDS[k] && WORDS[k].t) || t, strongKey(w.strong)).concat(glossFor(t, strongKey(w.strong)));
         gl.forEach(function (x) { if (vgloss.indexOf(x) < 0) vgloss.push(x); });
         if (!k) return '<span class="wc wc-sfx"><b>' + esc(t) + "</b><span>" + esc(g) + "</span><em>" + (w.pos === "suffix" ? "suffix" : "") + "</em></span>";
-        return '<button class="wc" data-jst-word="' + k + '" data-wfull="' + esc(JSON.stringify({ t: t, s: strongKey(w.strong), gloss: g, def: "", count: "", spread: "" })) + '"><b>' + esc(t) + "</b><span>" + esc(g) + "</span><em>" + esc(strongKey(w.strong)) + (gl.length ? ' <span class="jst-gl" title="In my glossary">G</span>' : "") + "</em></button>";
+        return '<button class="wc' + (k === o.wk ? " on" : "") + '" data-jst-word="' + k + '" data-wfull="' + esc(JSON.stringify({ t: t, s: strongKey(w.strong), gloss: g, def: "", count: "", spread: "" })) + '"><b>' + esc(t) + "</b><span>" + esc(g) + "</span><em>" + esc(strongKey(w.strong)) + (gl.length ? ' <span class="jst-gl" title="In my glossary">G</span>' : "") + "</em></button>";
       }).join("") + "</div>";
+      /* the word tapped in the grid, right here (no trip to Word Study); tap it again to close */
+      var ws = o.wk && WORDS[o.wk];
+      if (ws) h += '<div class="lbl u-mt10" data-jst-wslot>' + esc(ws.t) + ' <button class="chip" data-jst-wclose>Close</button> <button class="chip" data-jst-wstudy="' + esc(o.wk) + '">Word Study</button></div>' + wordDetail(ws, this, !vgloss.some(function (x) { return glossFor(ws.t, ws.s).indexOf(x) > -1; }));
       /* the words of this verse that have a glossary entry, each linked */
       if (vgloss.length) h += box("explain", "In my glossary", vgloss.map(function (x) { return "<p><b>" + esc(x.t) + "</b>" + (x.x ? " " + esc(x.x) : "") + "</p>" + outlink(x.url, "Glossary entry"); }).join(""));
       var notes = (this.d.verseNotes && this.d.verseNotes[sel.c + ":" + sel.v]) || [];
@@ -2227,10 +2234,18 @@
     },
     click: function (e) {
       var b = e.target.closest("[data-jst-verse]");
-      if (b) { e.stopPropagation(); var p = b.getAttribute("data-jst-verse").split("|"); this.o.verse = { book: p[0], c: +p[1], v: +p[2] }; this.paint(); return; }
+      if (b) { e.stopPropagation(); var p = b.getAttribute("data-jst-verse").split("|"); this.o.verse = { book: p[0], c: +p[1], v: +p[2] }; this.o.wk = null; this.paint(); return; }
+      var wt = e.target.closest(".ilin [data-jst-word]");
+      if (wt) { e.stopPropagation(); var k = wt.getAttribute("data-jst-word"), full = wt.getAttribute("data-wfull");
+        if (full && !WORDS[k]) { try { var ob = JSON.parse(full); ob.k = k; WORDS[k] = ob; } catch (er) {} }
+        this.o.wk = this.o.wk === k ? null : k; this.paint();
+        var slot = this.el.querySelector("[data-jst-wslot]"); if (slot) slot.scrollIntoView({ block: "nearest", behavior: "smooth" }); return; }
+      if (e.target.closest("[data-jst-wclose]")) { e.stopPropagation(); this.o.wk = null; this.paint(); return; }
+      var ws = e.target.closest("[data-jst-wstudy]");
+      if (ws) { e.stopPropagation(); this.emit("word", ws.getAttribute("data-jst-wstudy")); return; }
       Panel.prototype.click.call(this, e);
     }
-  }, { verse: null, scripture: null, translation: "LSB" });
+  }, { verse: null, scripture: null, translation: "LSB", wk: null });
 
   // ------------------------------------------------------------------ Interleave (interlinear + where it sits)
   define("Interleave", { id: "outline", label: "Inter", name: "Interleaved Bible", icon: ICON.outline }, {
