@@ -2644,7 +2644,7 @@
       return '<p class="ctx">Revelation never quotes the Old Testament outright, yet no New Testament book uses it more. The echoes that touch ' + esc(this.o.ref) + ".</p>" +
         (this.eor || []).map(function (e) {
           var part = function (k, v, t) { return e[k] ? box(v, t, "<p>" + md(e[k]) + "</p>") : ""; };
-          return box("scripture", "", '<div class="item"><span class="when">' + go(e.bibleRef) + " \u2190 " + (e.otRef || []).map(go).join(", ") + '</span><span class="tt">' + esc(e.title.replace(/^[^,]*,\s*/, "")) + '</span><span class="sub">' + esc(e.summary) + "</span>" +
+          return box("scripture", "", '<div class="item"><span class="when">' + go(e.bibleRef) + " \u2190 " + (e.otRef || []).map(go).join(", ") + '</span><span class="tt">' + esc(e.title.replace(/^[^,]*,\s*/, "").replace(/^./, function (c) { return c.toUpperCase(); })) + '</span><span class="sub">' + esc(e.summary) + "</span>" +
             (e.plain ? '<div class="box plain u-mt8"><p class="u-m0">' + md(e.plain) + "</p></div>" : "") +
             '<details class="jst-past"><summary class="lbl">What matches, what differs, what John does</summary>' + part("same", "wording", "What matches") + part("differs", "explain", "Why it doesn't match exactly") + part("turn", "explain", "What John does with it") + part("not", "not", "What this echo is not") + "</details>" +
             outlink(entryURL("eor", e.id), "jayms Echoes of Revelation") + "</div>");
