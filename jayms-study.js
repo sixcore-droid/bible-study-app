@@ -2163,12 +2163,14 @@
 
   // ------------------------------------------------------------------ Words
   /* one word, as Word Study shows it: Strong's, meaning, lexicon, glossary, where it appears, + Vocab. Words and Verse both use it. */
-  function wordDetail(w, panel, withGloss) {
-    var h = box("witness", "", '<div class="big">' + esc(w.t) + '</div><dl class="meta"><dt>Strong\'s</dt><dd>' + esc(w.s) + "</dd><dt>Means</dt><dd>" + esc(w.gloss) + "</dd>" + (w.count ? "<dt>Used</dt><dd>" + esc(w.count) + " times</dd>" : "") + "</dl>");
+  /* compact (Verse): the tile above already shows the word, its meaning and Strong's, so no header card; the glossary first, and
+     how often it is used goes with where it appears */
+  function wordDetail(w, panel, withGloss, compact) {
+    var h = compact ? glossBox(w.t, w.s) : box("witness", "", '<div class="big">' + esc(w.t) + '</div><dl class="meta"><dt>Strong\'s</dt><dd>' + esc(w.s) + "</dd><dt>Means</dt><dd>" + esc(w.gloss) + "</dd>" + (w.count ? "<dt>Used</dt><dd>" + esc(w.count) + " times</dd>" : "") + "</dl>");
     if (w.def) h += box("wording", "Lexicon", "<p>" + esc(w.def) + "</p>");
     if (w.note) h += box("explain", "In this passage", "<p>" + esc(w.note) + "</p>");
-    if (withGloss) h += glossBox(w.t, w.s);
-    if (w.spread) h += box("apparatus", "Where it appears", "<p>" + esc(w.spread) + "</p>");
+    if (withGloss && !compact) h += glossBox(w.t, w.s);
+    if (w.spread || (compact && w.count)) h += box("apparatus", "Where it appears", (compact && w.count ? "<p>Used " + esc(w.count) + " times</p>" : "") + (w.spread ? "<p>" + esc(w.spread) + "</p>" : ""));
     h += '<div class="askrow">' + panel.vocabBtn({ k: String(w.k || w.s || "").toLowerCase(), word: w.t, strong: w.s, gloss: w.gloss || "" }) + "</div>";
     return h + outlink(entryURL("words", w.k || w.s), "All occurrences");
   }
@@ -2221,8 +2223,9 @@
       }).join("") + "</div>";
       /* the word tapped in the grid, right here (no trip to Word Study); tap it again to close */
       var ws = o.wk && WORDS[o.wk];
-      if (ws) h += '<div class="lbl u-mt10" data-jst-wslot>' + esc(ws.t) + ' <button class="chip" data-jst-wclose>Close</button> <button class="chip" data-jst-wstudy="' + esc(o.wk) + '">Word Study</button></div>' + wordDetail(ws, this, !vgloss.some(function (x) { return glossFor(ws.t, ws.s).indexOf(x) > -1; }));
+      if (ws) h += '<div class="lbl u-mt10" data-jst-wslot>' + esc(ws.t) + ' <button class="chip" data-jst-wclose>Close</button> <button class="chip" data-jst-wstudy="' + esc(o.wk) + '">Word Study</button></div>' + wordDetail(ws, this, false, true);
       /* the words of this verse that have a glossary entry, each linked */
+      if (ws) { var mine = glossFor(ws.t, ws.s); vgloss = vgloss.filter(function (x) { return mine.indexOf(x) < 0; }); }   // already at the top of the open word
       if (vgloss.length) h += box("explain", "In my glossary", vgloss.map(function (x) { return "<p><b>" + esc(x.t) + "</b>" + (x.x ? " " + esc(x.x) : "") + "</p>" + outlink(x.url, "Glossary entry"); }).join(""));
       var notes = (this.d.verseNotes && this.d.verseNotes[sel.c + ":" + sel.v]) || [];
       h += notes.map(function (b) { return box(b[0], b[1], "<p>" + b[2] + "</p>"); }).join("");
