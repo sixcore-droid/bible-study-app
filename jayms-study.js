@@ -87,6 +87,56 @@
   function ibBookURL(book) { return CFG.site + TOOL.ib + "/?book=" + bookSlug(book) + "#book=" + encodeURIComponent(ibBookKey(book)); }
 
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  /* A note written in Markdown (as Obsidian writes it), shown formatted: front matter dropped; # headings; - and 1. lists (nested by
+     indent); > quotes and > [!type] callouts; --- rules; | tables |; **bold**, *italic*, `code`, [text](link), [[note|label]]. */
+  function mdBlock(src) {
+    var t = String(src || "").replace(/\r/g, "").replace(/^---\n[\s\S]*?\n---\n?/, "");
+    var inline = function (x) {
+      return esc(x).replace(/`([^`]+)`/g, "<code>$1</code>")
+        .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/(^|[^*\w])\*(?!\s)(.+?)\*(?!\w)/g, "$1<i>$2</i>").replace(/(^|\W)_(?!\s)(.+?)_(?!\w)/g, "$1<i>$2</i>")
+        .replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, "$2").replace(/\[\[([^\]]+)\]\]/g, "$1")
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    };
+    var lines = t.split("\n"), out = [], i = 0;
+    var listAt = function (L) { return /^(\s*)([-*+]|\d+[.)])\s+/.exec(L); };
+    while (i < lines.length) {
+      var L = lines[i];
+      if (!L.trim()) { i++; continue; }
+      var h = /^(#{1,6})\s+(.*)$/.exec(L);
+      if (h) { out.push('<h' + Math.min(6, h[1].length + 2) + ' class="jst-mdh">' + inline(h[2]) + "</h" + Math.min(6, h[1].length + 2) + ">"); i++; continue; }
+      if (/^\s*(?:(?:-\s*){3,}|(?:\*\s*){3,}|(?:_\s*){3,})$/.test(L)) { out.push("<hr>"); i++; continue; }
+      if (/^\s*>/.test(L)) {
+        var q = []; while (i < lines.length && /^\s*>/.test(lines[i])) { q.push(lines[i].replace(/^\s*>\s?/, "")); i++; }
+        var co = /^\[!(\w+)\][+-]?\s*(.*)$/.exec(q[0] || "");
+        out.push('<blockquote class="jst-mdq">' + (co ? '<div class="lbl">' + inline(co[2] || co[1]) + "</div>" + mdBlock(q.slice(1).join("\n")) : mdBlock(q.join("\n"))) + "</blockquote>"); continue;
+      }
+      if (/^\s*\|.*\|\s*$/.test(L)) {
+        var rows = []; while (i < lines.length && /^\s*\|.*\|\s*$/.test(lines[i])) { rows.push(lines[i]); i++; }
+        var cells = function (r) { return r.trim().replace(/^\||\|$/g, "").split("|").map(function (c) { return c.trim(); }); };
+        var body = rows.filter(function (r) { return !/^\s*\|[\s:|-]+\|\s*$/.test(r); });
+        out.push('<table class="jst-mdt">' + body.map(function (r, n) { var tag = n === 0 && rows.length > 1 && /^\s*\|[\s:|-]+\|\s*$/.test(rows[1]) ? "th" : "td"; return "<tr>" + cells(r).map(function (c) { return "<" + tag + ">" + inline(c) + "</" + tag + ">"; }).join("") + "</tr>"; }).join("") + "</table>"); continue;
+      }
+      if (listAt(L)) {
+        /* a list, nested by indent */
+        var html = "", stack = [];
+        while (i < lines.length && (listAt(lines[i]) || (lines[i].trim() && /^\s+/.test(lines[i]) && stack.length))) {
+          var m = listAt(lines[i]);
+          if (!m) { html += " " + inline(lines[i].trim()); i++; continue; }   // a wrapped line of the item above
+          var ind = m[1].replace(/\t/g, "    ").length, tag = /\d/.test(m[2]) ? "ol" : "ul";
+          while (stack.length && ind < stack[stack.length - 1].ind) { html += "</li></" + stack.pop().tag + ">"; }
+          if (stack.length && ind === stack[stack.length - 1].ind && stack[stack.length - 1].tag !== tag) html += "</li></" + stack.pop().tag + ">";   // bullets to numbers at the same depth
+          if (!stack.length || ind > stack[stack.length - 1].ind) { html += '<' + tag + ' class="jst-mdl">'; stack.push({ ind: ind, tag: tag }); }
+          else html += "</li>";
+          html += "<li>" + inline(lines[i].slice(m[0].length)); i++;
+        }
+        while (stack.length) html += "</li></" + stack.pop().tag + ">";
+        out.push(html); continue;
+      }
+      var para = []; while (i < lines.length && lines[i].trim() && !/^(#{1,6}\s|\s*>|\s*\|)/.test(lines[i]) && !listAt(lines[i])) { para.push(inline(lines[i])); i++; }
+      out.push("<p>" + para.join("<br>") + "</p>");
+    }
+    return out.join("");
+  }
   var md = function (t) { return esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>"); };
   var box = function (v, h, body) { return '<div class="box v-' + v + '">' + (h ? "<h3>" + h + "</h3>" : "") + body + "</div>"; };
   var outlink = function (href, txt) { return href ? '<a class="out" href="' + esc(href) + '" target="_blank" rel="noopener">' + txt + " \u2197</a>" : ""; };
@@ -749,7 +799,7 @@
     x: '<svg viewBox="0 0 24 24"><path d="M5 4l14 16M19 4L5 20"/></svg>',
     logos: '<svg viewBox="0 0 24 24"><path d="M4 5h11a5 5 0 0 1 0 10H9v4H4z"/><path d="M9 9h6"/></svg>'
   };
-  var api = { events: EVENTS, parseAnswer: function (t) { return parseAnswer(t); }, config: config, data: data, util: { esc: esc, md: md, box: box, outlink: outlink, none: none, slug: slug, parseRef: parseRef, overlap: overlap, bookRow: bookRow, strongKey: strongKey },
+  var api = { events: EVENTS, parseAnswer: function (t) { return parseAnswer(t); }, config: config, data: data, util: { esc: esc, md: md, mdBlock: mdBlock, box: box, outlink: outlink, none: none, slug: slug, parseRef: parseRef, overlap: overlap, bookRow: bookRow, strongKey: strongKey },
               Panel: Panel, define: define, panels: {}, icons: ICON, version: "1.0.0" };
   var L = function (self, k) { return (self.d && self.d[k]) || []; };
 

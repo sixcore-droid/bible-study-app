@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v310">
+<link rel="stylesheet" href="jayms-study.css?v=v311">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -129,9 +129,10 @@
       <div class="notehead">
         <label class="lbl" for="note" id="notelbl">My notes</label>
         <span class="noteright"><label class="pubtog" for="notepub"><input type="checkbox" id="notepub"> Public</label>
-        <button class="sz" id="notetog" aria-controls="notebody"></button></span>
+        <button class="sz" id="noteview" hidden></button><button class="sz" id="notetog" aria-controls="notebody"></button></span>
       </div>
       <div class="notebody" id="notebody">
+      <div class="jst-md notepreview" id="notepreview" hidden title="Tap to edit"></div>
       <textarea id="note"></textarea>
       <div class="saverow"><button class="btn fill" id="notesave">Save note</button><span class="saved" id="saved"></span></div>
       <div class="saverow" id="obsrow" hidden><span class="saved" id="obspath"></span><a class="btn" id="obsopen" target="_blank" rel="noopener" href="#">Open in Obsidian</a><button class="btn" id="obscopy">Copy link</button><span class="saved" id="obsmsg"></span></div>
@@ -159,10 +160,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v310"></script>
-<script src="jayms-store.js?v=v310"></script>
-<script src="x-discuss.js?v=v310"></script>
-<script src="jayms-study.js?v=v310"></script>
+<script src="jayms-ref.js?v=v311"></script>
+<script src="jayms-store.js?v=v311"></script>
+<script src="x-discuss.js?v=v311"></script>
+<script src="jayms-study.js?v=v311"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -506,8 +507,14 @@ function renderReader(){
   $("markdone").hidden = pub || !!S.adhoc;
   $("pubnote").hidden = !pub || PUBLIC;   // the public site has no saved notes
   $("publbl").textContent = `James's notes on ${r.ref}`;
-  $("pubbody").innerHTML = pubText(r.id) ? box("explain","",`<p>${esc(pubText(r.id)).replace(/\n/g,"<br>")}</p>`) : `<p class="empty">No public notes on this reading yet.</p>`;
+  $("pubbody").innerHTML = pubText(r.id) ? box("explain","",`<div class="jst-md">${JST.util.mdBlock(pubText(r.id))}</div>`) : `<p class="empty">No public notes on this reading yet.</p>`;
   const n=NOTES[r.id], dirty=!!DIRTY[r.id];
+  /* a saved note shows formatted (Markdown); Edit, or a tap on it, brings back the editor */
+  if(S.noteFor!==r.id){ S.noteFor=r.id; S.noteEdit=false }   // another passage: its note opens formatted
+  const showMd = !!(n.text && n.text.trim()) && !dirty && !S.noteEdit;
+  $("notepreview").hidden = !showMd; $("note").hidden = showMd;
+  if(showMd) $("notepreview").innerHTML = JST.util.mdBlock(n.text);
+  $("noteview").hidden = !(n.text && n.text.trim()); $("noteview").textContent = showMd ? "Edit" : "Formatted";
   $("notesave").disabled = !dirty;
   $("saved").classList.toggle("dirty",dirty);
   $("saved").textContent = dirty ? "Not saved yet" : (n.text && n.savedAt) ? "Saved " + new Date(n.savedAt).toLocaleString([], {month:"short", day:"numeric", year:"numeric", hour:"numeric", minute:"2-digit"}) : "";
@@ -556,7 +563,7 @@ function scriptureFor(sel){
 function notesHTML(){
   const pub = S.view==="public";
   const all = READINGS.concat(S.adhoc?[S.adhoc]:[]).map(r=>({r,n:pub?pubText(r.id):NOTES[r.id].text,isPub:!!(NOTES[r.id].pub&&NOTES[r.id].savedAt)})).filter(x=>x.n.trim());
-  return all.length ? all.map(x=>box("explain",x.r.ref+(!pub&&x.isPub?' <span class="pubtag">Public</span>':""),`<p>${esc(x.n).replace(/\n/g,"<br>")}</p>`)).join("")
+  return all.length ? all.map(x=>box("explain",x.r.ref+(!pub&&x.isPub?' <span class="pubtag">Public</span>':""),`<div class="jst-md">${JST.util.mdBlock(x.n)}</div>`)).join("")
     : `<p class="empty">${pub?"James hasn't made any of today's notes public yet.":"Nothing yet today. Notes typed under each reading collect here, so the day reads as one page when you are done."}</p>`;
 }
 /* What each component is told by this page. */
@@ -941,18 +948,19 @@ $("goform").onsubmit=e=>{ e.preventDefault(); const v=$("goref").value.trim(); i
 $("goref").oninput=()=>{ $("gomsg").textContent="" };
 /* A notes bar docked to the bottom of the reader (My notes on the desk, James's notes in Read along): open or closed, and its height
    dragged from its top edge, each remembered */
-function noteDock(box, sizeEl, tog, g, key){
+function noteDock(box, sizeEl, tog, g, key, twin){   // twin: a second element that takes the same height (the formatted note)
   const setOpen=open=>{ box.classList.toggle("closed",!open); tog.textContent=open?"Close":"Open"; tog.setAttribute("aria-expanded",open); store.set(key+"Open",open) };
-  const setH=h=>{ sizeEl.style.height = h ? h+"px" : ""; sizeEl.style.maxHeight = h ? "none" : ""; };
+  const setH=h=>{ [sizeEl, twin].forEach(el=>{ if(!el) return; el.style.height = h ? h+"px" : ""; el.style.maxHeight = h ? "none" : "" }) };
+  const shown=()=> twin && !twin.hidden ? twin : sizeEl;
   setOpen(store.get(key+"Open",true)); setH(store.get(key+"H",0));
   tog.onclick=()=>setOpen(box.classList.contains("closed"));
   let y0=0,h0=0; const move=e=>setH(Math.max(80,Math.min(window.innerHeight*0.7,h0+(y0-e.clientY))));
-  const up=()=>{ document.body.classList.remove("dragging"); document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up); store.set(key+"H",sizeEl.offsetHeight) };
-  g.addEventListener("pointerdown",e=>{ e.preventDefault(); if(box.classList.contains("closed")) setOpen(true); y0=e.clientY; h0=sizeEl.offsetHeight; document.body.classList.add("dragging"); document.addEventListener("pointermove",move); document.addEventListener("pointerup",up) });
+  const up=()=>{ document.body.classList.remove("dragging"); document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up); store.set(key+"H",shown().offsetHeight) };
+  g.addEventListener("pointerdown",e=>{ e.preventDefault(); if(box.classList.contains("closed")) setOpen(true); y0=e.clientY; h0=shown().offsetHeight; document.body.classList.add("dragging"); document.addEventListener("pointermove",move); document.addEventListener("pointerup",up) });
   g.addEventListener("dblclick",()=>{ setH(0); store.set(key+"H",0) });
-  g.addEventListener("keydown",e=>{ if(e.key==="ArrowUp"||e.key==="ArrowDown"){ e.preventDefault(); setH(sizeEl.offsetHeight+(e.key==="ArrowUp"?24:-24)); store.set(key+"H",sizeEl.offsetHeight) } });
+  g.addEventListener("keydown",e=>{ if(e.key==="ArrowUp"||e.key==="ArrowDown"){ e.preventDefault(); setH(shown().offsetHeight+(e.key==="ArrowUp"?24:-24)); store.set(key+"H",shown().offsetHeight) } });
 }
-noteDock($("mynotes"), $("note"), $("notetog"), $("ngrip"), "note");
+noteDock($("mynotes"), $("note"), $("notetog"), $("ngrip"), "note", $("notepreview"));
 noteDock($("pubnote"), $("pubbody"), $("pubtog"), $("pubgrip"), "pubnote");
 $("markdone").onclick=()=>{const id=dk(cur()); if(isDone(id)) ST.c("done").remove(id); else ST.c("done").save(id,{done:true, at:Date.now()}); renderPlan(); renderReader()};
 $("nextread").onclick=()=>{if(S.reading<READINGS.length-1){S.reading++; rememberOpen(); S.vsel=null; renderReader(); renderPanel(); readerTop()}};
@@ -1009,10 +1017,12 @@ function obsNewURI(r, n){
   const body = noteBody(r.ref, n, true);
   return "obsidian://new?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(obsPath(r.ref).replace(/\.md$/,""))+"&content="+encodeURIComponent(body)+"&overwrite=true";
 }
-async function commitNote(){ const rid=cur().id; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel() }
+async function commitNote(){ const rid=cur().id; S.noteEdit=false; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel() }
 $("note").oninput=e=>{const rid=cur().id; NOTES[rid].text=e.target.value; markDirty()};
 $("notepub").onchange=e=>{const rid=cur().id; NOTES[rid].pub=e.target.checked; markDirty()};
 $("notesave").onclick=commitNote;
+$("noteview").onclick=()=>{ const toEdit=$("note").hidden; S.noteEdit=toEdit; if(!toEdit) commitNote(); renderReader(); if(toEdit) $("note").focus() };
+$("notepreview").onclick=e=>{ if(e.target.closest("a")) return; S.noteEdit=true; renderReader(); $("note").focus() };
 /* Speechify, on the desk only: the reader and key come from ~/jayms/speechify/web through serve.py (never in this repo or on the site).
    Each version column gets Highlight (select that column's text) and Read (Speechify reads it); Voice opens the voice and speed bar. */
 let SPF = false, READ_VERS = [];

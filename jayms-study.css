@@ -703,3 +703,20 @@ body.noplan #biblepick{margin-top:0}
 #setview .planopt{flex-wrap:wrap;align-items:flex-start;margin-top:14px;font-size:16px;font-weight:600}
 #setview .planopt .sub{flex-basis:100%;padding-left:24px;font-size:15px;font-weight:400;color:var(--ink);line-height:1.45}
 .sw-red{color:var(--jw)}.sw-blue{color:var(--csblue)}.sw-purple{color:var(--cspurple)}   /* Settings: each colour named in its own colour */
+
+/* Notes written in Markdown, shown formatted (JST.util.mdBlock) */
+.jst-md{font-size:17px;line-height:1.55}
+.jst-md p{margin:0 0 10px}
+.jst-md .jst-mdh{font-family:var(--display);color:var(--ink-bright);margin:16px 0 6px;line-height:1.25}
+.jst-md h3.jst-mdh{font-size:22px}.jst-md h4.jst-mdh{font-size:19px}.jst-md h5.jst-mdh,.jst-md h6.jst-mdh{font-size:17px}
+.jst-md .jst-mdh:first-child{margin-top:0}
+.jst-md .jst-mdl{margin:4px 0 10px;padding-left:22px}
+.jst-md .jst-mdl .jst-mdl{margin:2px 0 4px}
+.jst-md li{margin:3px 0}
+.jst-md code{font:14px var(--label);background:var(--paper);padding:1px 4px;border-radius:3px}
+.jst-md hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+.jst-md .jst-mdq{margin:8px 0;padding:6px 12px;border-left:3px solid var(--gold);background:var(--paper)}
+.jst-md .jst-mdt{border-collapse:collapse;margin:8px 0;font-size:15px}
+.jst-md .jst-mdt td,.jst-md .jst-mdt th{border:1px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top}
+.jst-md a{color:var(--gold)}
+.notepreview{min-height:180px;height:180px;overflow-y:auto;background:var(--paper-deep);border:1px solid var(--line);border-left:3px solid var(--edge-note);border-radius:6px;padding:12px 14px;cursor:text}

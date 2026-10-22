@@ -130,9 +130,10 @@
       <div class="notehead">
         <label class="lbl" for="note" id="notelbl">My notes</label>
         <span class="noteright"><label class="pubtog" for="notepub"><input type="checkbox" id="notepub"> Public</label>
-        <button class="sz" id="notetog" aria-controls="notebody"></button></span>
+        <button class="sz" id="noteview" hidden></button><button class="sz" id="notetog" aria-controls="notebody"></button></span>
       </div>
       <div class="notebody" id="notebody">
+      <div class="jst-md notepreview" id="notepreview" hidden title="Tap to edit"></div>
       <textarea id="note"></textarea>
       <div class="saverow"><button class="btn fill" id="notesave">Save note</button><span class="saved" id="saved"></span></div>
       <div class="saverow" id="obsrow" hidden><span class="saved" id="obspath"></span><a class="btn" id="obsopen" target="_blank" rel="noopener" href="#">Open in Obsidian</a><button class="btn" id="obscopy">Copy link</button><span class="saved" id="obsmsg"></span></div>
@@ -507,8 +508,14 @@ function renderReader(){
   $("markdone").hidden = pub || !!S.adhoc;
   $("pubnote").hidden = !pub || PUBLIC;   // the public site has no saved notes
   $("publbl").textContent = `James's notes on ${r.ref}`;
-  $("pubbody").innerHTML = pubText(r.id) ? box("explain","",`<p>${esc(pubText(r.id)).replace(/\n/g,"<br>")}</p>`) : `<p class="empty">No public notes on this reading yet.</p>`;
+  $("pubbody").innerHTML = pubText(r.id) ? box("explain","",`<div class="jst-md">${JST.util.mdBlock(pubText(r.id))}</div>`) : `<p class="empty">No public notes on this reading yet.</p>`;
   const n=NOTES[r.id], dirty=!!DIRTY[r.id];
+  /* a saved note shows formatted (Markdown); Edit, or a tap on it, brings back the editor */
+  if(S.noteFor!==r.id){ S.noteFor=r.id; S.noteEdit=false }   // another passage: its note opens formatted
+  const showMd = !!(n.text && n.text.trim()) && !dirty && !S.noteEdit;
+  $("notepreview").hidden = !showMd; $("note").hidden = showMd;
+  if(showMd) $("notepreview").innerHTML = JST.util.mdBlock(n.text);
+  $("noteview").hidden = !(n.text && n.text.trim()); $("noteview").textContent = showMd ? "Edit" : "Formatted";
   $("notesave").disabled = !dirty;
   $("saved").classList.toggle("dirty",dirty);
   $("saved").textContent = dirty ? "Not saved yet" : (n.text && n.savedAt) ? "Saved " + new Date(n.savedAt).toLocaleString([], {month:"short", day:"numeric", year:"numeric", hour:"numeric", minute:"2-digit"}) : "";
@@ -557,7 +564,7 @@ function scriptureFor(sel){
 function notesHTML(){
   const pub = S.view==="public";
   const all = READINGS.concat(S.adhoc?[S.adhoc]:[]).map(r=>({r,n:pub?pubText(r.id):NOTES[r.id].text,isPub:!!(NOTES[r.id].pub&&NOTES[r.id].savedAt)})).filter(x=>x.n.trim());
-  return all.length ? all.map(x=>box("explain",x.r.ref+(!pub&&x.isPub?' <span class="pubtag">Public</span>':""),`<p>${esc(x.n).replace(/\n/g,"<br>")}</p>`)).join("")
+  return all.length ? all.map(x=>box("explain",x.r.ref+(!pub&&x.isPub?' <span class="pubtag">Public</span>':""),`<div class="jst-md">${JST.util.mdBlock(x.n)}</div>`)).join("")
     : `<p class="empty">${pub?"James hasn't made any of today's notes public yet.":"Nothing yet today. Notes typed under each reading collect here, so the day reads as one page when you are done."}</p>`;
 }
 /* What each component is told by this page. */
@@ -942,18 +949,19 @@ $("goform").onsubmit=e=>{ e.preventDefault(); const v=$("goref").value.trim(); i
 $("goref").oninput=()=>{ $("gomsg").textContent="" };
 /* A notes bar docked to the bottom of the reader (My notes on the desk, James's notes in Read along): open or closed, and its height
    dragged from its top edge, each remembered */
-function noteDock(box, sizeEl, tog, g, key){
+function noteDock(box, sizeEl, tog, g, key, twin){   // twin: a second element that takes the same height (the formatted note)
   const setOpen=open=>{ box.classList.toggle("closed",!open); tog.textContent=open?"Close":"Open"; tog.setAttribute("aria-expanded",open); store.set(key+"Open",open) };
-  const setH=h=>{ sizeEl.style.height = h ? h+"px" : ""; sizeEl.style.maxHeight = h ? "none" : ""; };
+  const setH=h=>{ [sizeEl, twin].forEach(el=>{ if(!el) return; el.style.height = h ? h+"px" : ""; el.style.maxHeight = h ? "none" : "" }) };
+  const shown=()=> twin && !twin.hidden ? twin : sizeEl;
   setOpen(store.get(key+"Open",true)); setH(store.get(key+"H",0));
   tog.onclick=()=>setOpen(box.classList.contains("closed"));
   let y0=0,h0=0; const move=e=>setH(Math.max(80,Math.min(window.innerHeight*0.7,h0+(y0-e.clientY))));
-  const up=()=>{ document.body.classList.remove("dragging"); document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up); store.set(key+"H",sizeEl.offsetHeight) };
-  g.addEventListener("pointerdown",e=>{ e.preventDefault(); if(box.classList.contains("closed")) setOpen(true); y0=e.clientY; h0=sizeEl.offsetHeight; document.body.classList.add("dragging"); document.addEventListener("pointermove",move); document.addEventListener("pointerup",up) });
+  const up=()=>{ document.body.classList.remove("dragging"); document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up); store.set(key+"H",shown().offsetHeight) };
+  g.addEventListener("pointerdown",e=>{ e.preventDefault(); if(box.classList.contains("closed")) setOpen(true); y0=e.clientY; h0=shown().offsetHeight; document.body.classList.add("dragging"); document.addEventListener("pointermove",move); document.addEventListener("pointerup",up) });
   g.addEventListener("dblclick",()=>{ setH(0); store.set(key+"H",0) });
-  g.addEventListener("keydown",e=>{ if(e.key==="ArrowUp"||e.key==="ArrowDown"){ e.preventDefault(); setH(sizeEl.offsetHeight+(e.key==="ArrowUp"?24:-24)); store.set(key+"H",sizeEl.offsetHeight) } });
+  g.addEventListener("keydown",e=>{ if(e.key==="ArrowUp"||e.key==="ArrowDown"){ e.preventDefault(); setH(shown().offsetHeight+(e.key==="ArrowUp"?24:-24)); store.set(key+"H",shown().offsetHeight) } });
 }
-noteDock($("mynotes"), $("note"), $("notetog"), $("ngrip"), "note");
+noteDock($("mynotes"), $("note"), $("notetog"), $("ngrip"), "note", $("notepreview"));
 noteDock($("pubnote"), $("pubbody"), $("pubtog"), $("pubgrip"), "pubnote");
 $("markdone").onclick=()=>{const id=dk(cur()); if(isDone(id)) ST.c("done").remove(id); else ST.c("done").save(id,{done:true, at:Date.now()}); renderPlan(); renderReader()};
 $("nextread").onclick=()=>{if(S.reading<READINGS.length-1){S.reading++; rememberOpen(); S.vsel=null; renderReader(); renderPanel(); readerTop()}};
@@ -1010,10 +1018,12 @@ function obsNewURI(r, n){
   const body = noteBody(r.ref, n, true);
   return "obsidian://new?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(obsPath(r.ref).replace(/\.md$/,""))+"&content="+encodeURIComponent(body)+"&overwrite=true";
 }
-async function commitNote(){ const rid=cur().id; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel() }
+async function commitNote(){ const rid=cur().id; S.noteEdit=false; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel() }
 $("note").oninput=e=>{const rid=cur().id; NOTES[rid].text=e.target.value; markDirty()};
 $("notepub").onchange=e=>{const rid=cur().id; NOTES[rid].pub=e.target.checked; markDirty()};
 $("notesave").onclick=commitNote;
+$("noteview").onclick=()=>{ const toEdit=$("note").hidden; S.noteEdit=toEdit; if(!toEdit) commitNote(); renderReader(); if(toEdit) $("note").focus() };
+$("notepreview").onclick=e=>{ if(e.target.closest("a")) return; S.noteEdit=true; renderReader(); $("note").focus() };
 /* Speechify, on the desk only: the reader and key come from ~/jayms/speechify/web through serve.py (never in this repo or on the site).
    Each version column gets Highlight (select that column's text) and Read (Speechify reads it); Voice opens the voice and speed bar. */
 let SPF = false, READ_VERS = [];
