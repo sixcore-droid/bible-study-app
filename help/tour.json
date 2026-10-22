@@ -169,6 +169,11 @@
      "text": "Shows two versions side by side, paragraph by paragraph."
     },
     {
+     "sel": "#numbtn",
+     "name": "Hide # / Show #",
+     "text": "Takes the verse numbers off the page or puts them back (also in Settings)."
+    },
+    {
      "sel": "#ver",
      "name": "Version",
      "text": "Which translation you read in: LSB, ESV, NET, NLT, NASB, CSB, BSB, KJV, MSG or Brenton's Septuagint."
