@@ -2593,7 +2593,7 @@
         return box(nt ? "witness" : "scripture", "", '<div class="item">' + (x.from.length ? '<span class="when">For ' + esc(forLabel(x.from)) + "</span>" : "") +
           /* tap the reference to read it in place (tap again to fold it); "Open" puts it in the reader */
           '<div class="jst-xrow"><button class="tt jst-xt" data-jst-xpeek="' + esc(x.ref) + '" aria-expanded="' + !!peek + '" title="' + (peek ? "Hide the verse" : "Read it here") + '">' + esc(x.ref) + '</button><button class="jst-ref" data-jst-xopen="' + esc(x.ref) + '" title="Open ' + esc(x.ref) + ' in the reader">Open</button></div>' +
-          (peek ? '<p class="u-fs16 u-m6-4">' + esc(peek) + "</p>" : "") + "</div>");
+          (peek ? '<p class="u-fs16 u-m6-4">' + esc(peek.split("\u0000")[0]) + (peek.split("\u0000")[1] ? ' <span class="sub u-fs13">' + esc(peek.split("\u0000")[1]) + "</span>" : "") + "</p>" : "") + "</div>");
       };
       var sect = function (key, label, list) {
         if (!list.length) return "";
@@ -2616,9 +2616,9 @@
       if (pk && this.st.peek && this.st.peek[pk.getAttribute("data-jst-xpeek")]) { e.stopPropagation(); delete this.st.peek[pk.getAttribute("data-jst-xpeek")]; var kp = this.el.scrollTop; this.paint(); this.el.scrollTop = kp; return; }
       if (pk) { e.stopPropagation(); var r = pk.getAttribute("data-jst-xpeek"); pk.disabled = true;
         data.text(r).then(function (rows) {
-          var ver = self.o.version || "NET";
-          var txt = (rows || []).map(function (x) { var s2 = x.texts[ver] || x.texts.NET || ""; return "[" + x.v + "] " + String(s2).replace(/<[^>]+>/g, " ").replace(/\[\/?w:?\w*\]/g, "").replace(/ {2,}/g, " ").trim(); }).join(" ");
-          self.st.peek = self.st.peek || {}; self.st.peek[r] = txt || "The text for this isn't in the data.";
+          var ver = self.o.version || "NET", used = "";
+          var txt = (rows || []).map(function (x) { var v2 = x.texts[ver] ? ver : "NET", s2 = x.texts[v2] || ""; if (s2) used = used || v2; return "[" + x.v + "] " + String(s2).replace(/<[^>]+>/g, " ").replace(/\[\/?w:?\w*\]/g, "").replace(/ {2,}/g, " ").trim(); }).join(" ");
+          self.st.peek = self.st.peek || {}; self.st.peek[r] = txt ? txt + "\u0000" + used : "The text for this isn't in the data.";   // the version rides along after a separator
           var keep = self.el.scrollTop; self.paint(); self.el.scrollTop = keep;
         }); return; }
       Panel.prototype.click.call(this, e);
