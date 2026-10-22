@@ -2528,11 +2528,18 @@
       var self = this, st = this.st, all = this.x || [], q = data.segs(this.o.ref)[0];
       if (!q) return { kick: "Cross-references", title: this.o.ref, body: none("Open a passage first.") };
       var here = R.book(q.book), pos = function (x) { return x.order * 1e6 + x.c * 1e3 + x.v; }, me = here.order * 1e6 + q.c1 * 1e3 + q.v1;
+      /* which verse of the passage each one is for ("1 Samuel 31:6"); the verse chips narrow the list to one verse */
+      var full = function (lab) { return q.book + " " + (String(lab).indexOf(":") > -1 ? lab : q.c1 + ":" + lab); };
+      var forLabel = function (labs) { var str = q.book + " " + (String(labs[0]).indexOf(":") > -1 ? labs.join(", ") : q.c1 + ":" + labs.join(", ")), sg = R.parse(str); return sg.length ? R.format(sg) : labs.map(full).join(", "); };
+      var vs = []; all.forEach(function (x) { x.from.forEach(function (l) { if (vs.indexOf(String(l)) < 0) vs.push(String(l)); }); });
+      vs.sort(function (a, b) { var A = String(a).split(":"), B = String(b).split(":"); return (A.length > 1 ? +A[0] * 1000 + +A[1] : +A[0]) - (B.length > 1 ? +B[0] * 1000 + +B[1] : +B[0]); });
+      if (st.v && vs.indexOf(st.v) < 0) st.v = null;
+      if (st.v) all = all.filter(function (x) { return x.from.map(String).indexOf(st.v) > -1; });
       var before = all.filter(function (x) { return pos(x) < me; }), after = all.filter(function (x) { return pos(x) > me; });
       var top = Math.max.apply(null, all.map(function (x) { return x.votes; }).concat([1]));
       var row = function (x) {
         var nt = here.order < 39 && x.order >= 39, peek = st.peek && st.peek[x.ref];
-        return box(nt ? "witness" : "scripture", "", '<div class="item">' +
+        return box(nt ? "witness" : "scripture", "", '<div class="item">' + (x.from.length ? '<span class="when">For ' + esc(forLabel(x.from)) + "</span>" : "") +
           /* tap the reference to read it in place (tap again to fold it); "Open" puts it in the reader */
           '<div class="jst-xrow"><button class="tt jst-xt" data-jst-xpeek="' + esc(x.ref) + '" aria-expanded="' + !!peek + '" title="' + (peek ? "Hide the verse" : "Read it here") + '">' + esc(x.ref) + '</button><button class="jst-ref" data-jst-xopen="' + esc(x.ref) + '" title="Open ' + esc(x.ref) + ' in the reader">Open</button></div>' +
           (peek ? '<p class="u-fs16 u-m6-4">' + esc(peek) + "</p>" : "") + "</div>");
@@ -2543,7 +2550,8 @@
         return '<div class="lbl">' + label + " (" + list.length + ")</div>" + shown.map(row).join("") +
           (list.length > 10 ? '<div class="askrow"><button class="btn" data-jst-xall="' + key + '">' + (open ? "Show the strongest 10" : "Show all " + list.length) + "</button></div>" : "");
       };
-      var h = '<p class="ctx">Other places that quote, echo or teach the same thing as ' + esc(this.o.ref) + ", strongest first. Tap one to read it here.</p>";
+      var h = '<p class="ctx">Other places that quote, echo or teach the same thing as ' + esc(this.o.ref) + ", strongest first. Each says which verse it is for. Tap one to read it here.</p>";
+      if (vs.length > 1) h += '<div class="lbl">For verse</div><div class="chips u-mb10"><button class="chip' + (!st.v ? " on" : "") + '" data-jst-xv="">All</button>' + vs.map(function (l) { return '<button class="chip' + (st.v === l ? " on" : "") + '" data-jst-xv="' + esc(l) + '">' + esc(l) + "</button>"; }).join("") + "</div>";
       h += all.length ? sect("after", "Later in the Bible", after) + sect("before", "Earlier in the Bible", before) : none("No cross-references for " + esc(this.o.ref) + ".");
       h += '<p class="ctx u-fs13">Sources: <a href="https://www.openbible.info/labs/cross-references/" target="_blank" rel="noopener">OpenBible.info</a> cross-references (CC BY, ranked by readers\' votes), and the verses cited in the <a href="https://tyndaleopenresources.com/" target="_blank" rel="noopener">Tyndale Open Study Notes</a> and <a href="https://github.com/BibleAquifer/BiblicaStudyNotes" target="_blank" rel="noopener">Biblica Study Notes</a> (CC BY-SA 4.0). Order: passages named by more than one source first, then by readers\' votes. A green edge marks a New Testament passage.</p>';
       return { kick: "Cross-references \u00B7 " + all.length, title: "Where else the Bible says this", body: h };
@@ -2551,6 +2559,8 @@
     click: function (e) {
       var self = this, t = e.target, pk = t.closest("[data-jst-xpeek]"), op = t.closest("[data-jst-xopen]"), al = t.closest("[data-jst-xall]");
       if (op) { e.stopPropagation(); this.emit("passage", { ref: op.getAttribute("data-jst-xopen") }); return; }
+      var xv = t.closest("[data-jst-xv]");
+      if (xv) { e.stopPropagation(); this.st.v = xv.getAttribute("data-jst-xv") || null; this.paint(); return; }
       if (al) { e.stopPropagation(); var k = "all" + al.getAttribute("data-jst-xall"); this.st[k] = !this.st[k]; this.paint(); return; }
       if (pk && this.st.peek && this.st.peek[pk.getAttribute("data-jst-xpeek")]) { e.stopPropagation(); delete this.st.peek[pk.getAttribute("data-jst-xpeek")]; var kp = this.el.scrollTop; this.paint(); this.el.scrollTop = kp; return; }
       if (pk) { e.stopPropagation(); var r = pk.getAttribute("data-jst-xpeek"); pk.disabled = true;
