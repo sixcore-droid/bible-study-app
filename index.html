@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v315">
+<link rel="stylesheet" href="jayms-study.css?v=v316">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -160,10 +160,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v315"></script>
-<script src="jayms-store.js?v=v315"></script>
-<script src="x-discuss.js?v=v315"></script>
-<script src="jayms-study.js?v=v315"></script>
+<script src="jayms-ref.js?v=v316"></script>
+<script src="jayms-store.js?v=v316"></script>
+<script src="x-discuss.js?v=v316"></script>
+<script src="jayms-study.js?v=v316"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -496,7 +496,7 @@ function renderReader(){
   if(th) $("xline").innerHTML = JaymsX.lineHTML(th,{owner:S.view!=="public",label:"this reading"});
   $("markdone").textContent = isDone(dk(r)) ? "\u2713 Done" : "Done";
   $("nextread").hidden = !!S.adhoc || S.reading>=READINGS.length-1;
-  $("notelbl").textContent = "My notes on "+r.ref;
+  $("notelbl").innerHTML = "My notes on "+esc(r.ref) + (NOTES[r.id] && NOTES[r.id].savedAt && String(NOTES[r.id].text||"").trim() ? ' <span class="notecheck" title="A note is saved for this passage">\u2713 saved</span>' : "");
   if(document.activeElement!==$("note")) $("note").value = NOTES[r.id].text;
   $("notepub").checked = !!NOTES[r.id].pub;
   const pub = S.view==="public";
@@ -559,6 +559,24 @@ const outlink=(href,txt)=>href?`<a class="out" href="${href}" target="_blank" re
 function scriptureFor(sel){
   const r = cur(), x = (r.rows||[]).find(y=>y.book===sel.book&&y.c===sel.c&&y.v===sel.v); if(!x) return "";
   const ver = ["LSB",S.ver,"NET"].find(v=>x.texts[v]); return ver ? wordify(x.texts[ver]).replace(/<span class='sup'>.*?<\/span>/,"") : "";
+}
+/* the passage a saved note belongs to: from its vault path ("John 3.16.md"), else from its key ("john-3-16") */
+function noteRef(d){
+  if(d.obsidian){ const r=d.obsidian.replace(/^.*\//,"").replace(/\.md$/,"").replace(/\./g,":"); if(JaymsRef.parse(r).length) return r }
+  const m=/^(.*?)-(\d+)(?:-(\d+))?(?:-(\d+))?$/.exec(d.id||""); if(!m) return d.id;
+  const r=m[1].replace(/-/g," ")+" "+m[2]+(m[3]?":"+m[3]+(m[4]?"-"+m[4]:""):""); return JaymsRef.parse(r).length ? JaymsRef.format(JaymsRef.parse(r)) : d.id;
+}
+/* Find a note: a passage (every saved note on it or inside it) or a word (every note that uses it) */
+function noteFind(q){
+  q=String(q||"").trim(); if(!q) return "";
+  const pub=S.view==="public", docs=(pub?ST.c("pub"):ST.c("notes")).all().filter(d=>String(d.text||"").trim());
+  const segs=JaymsRef.parse(q), byRef=segs.length && !JaymsRef.check(segs);
+  const pos=r=>{ const g=JaymsRef.parse(r)[0], b=g&&JaymsRef.book(g.book); return b ? b.order*1e6+g.c1*1e3+g.v1 : 9e9 };
+  const hits=docs.map(d=>({d, ref:noteRef(d)})).filter(x=> byRef ? JaymsRef.parse(x.ref).some(a=>segs.some(b=>JaymsRef.overlap(a,b))) : x.d.text.toLowerCase().includes(q.toLowerCase()))
+    .sort((a,b)=>pos(a.ref)-pos(b.ref));
+  if(!hits.length) return `<p class="empty">No saved note ${byRef?"on "+esc(JaymsRef.format(segs)):"uses \u201C"+esc(q)+"\u201D"}.</p>`;
+  return `<div class="lbl">${hits.length} note${hits.length>1?"s":""} ${byRef?"on "+esc(JaymsRef.format(segs)):"with \u201C"+esc(q)+"\u201D"}</div>` +
+    hits.slice(0,60).map(x=>box("explain", esc(x.ref)+` <button class="sz" data-open-note="${esc(x.ref)}">Open</button>`, `<div class="jst-md">${JST.util.mdBlock(x.d.text)}</div>`)).join("");
 }
 function notesHTML(){
   const pub = S.view==="public";
@@ -731,7 +749,9 @@ function renderPanel(){
   const r = cur(); if(!r) return;
   if(S.tool==="notes"){
     if(PH){PH.destroy(); PH=null; PH_KEY=""}
-    $("pbody").innerHTML = `<div class="jst">${notesHTML()}</div>`;
+    $("pbody").innerHTML = `<div class="jst"><div class="ask u-mb10"><input class="jst-in" id="notefind" placeholder="Find a note: a passage (Romans 8, John 3:16) or a word" value="${esc(S.noteQ||"")}"></div><div id="notefindres">${noteFind(S.noteQ)}</div>${S.noteQ?'<div class="lbl u-mt14">Today</div>':""}${notesHTML()}</div>`;
+    $("notefind").oninput=e=>{ S.noteQ=e.target.value; $("notefindres").innerHTML=noteFind(S.noteQ) };
+    $("pbody").querySelector(".jst").onclick=e=>{ const b=e.target.closest("[data-open-note]"); if(b){ e.stopPropagation(); openPassage(b.dataset.openNote) } };
     applyMeta({kick:"Today · "+READINGS.length+" readings", title:S.view==="public"?"James's notes":"My notes"});
     return;
   }

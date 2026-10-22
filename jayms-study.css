@@ -720,3 +720,4 @@ body.noplan #biblepick{margin-top:0}
 .jst-md .jst-mdt td,.jst-md .jst-mdt th{border:1px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top}
 .jst-md a{color:var(--gold)}
 .notepreview{min-height:180px;height:180px;overflow-y:auto;background:var(--paper-deep);border:1px solid var(--line);border-left:3px solid var(--edge-note);border-radius:6px;padding:12px 14px;cursor:text}
+.notecheck{color:var(--gold);font-weight:700;margin-left:6px;letter-spacing:0}   /* My notes header: a note is saved here */

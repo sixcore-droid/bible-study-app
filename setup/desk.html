@@ -497,7 +497,7 @@ function renderReader(){
   if(th) $("xline").innerHTML = JaymsX.lineHTML(th,{owner:S.view!=="public",label:"this reading"});
   $("markdone").textContent = isDone(dk(r)) ? "\u2713 Done" : "Done";
   $("nextread").hidden = !!S.adhoc || S.reading>=READINGS.length-1;
-  $("notelbl").textContent = "My notes on "+r.ref;
+  $("notelbl").innerHTML = "My notes on "+esc(r.ref) + (NOTES[r.id] && NOTES[r.id].savedAt && String(NOTES[r.id].text||"").trim() ? ' <span class="notecheck" title="A note is saved for this passage">\u2713 saved</span>' : "");
   if(document.activeElement!==$("note")) $("note").value = NOTES[r.id].text;
   $("notepub").checked = !!NOTES[r.id].pub;
   const pub = S.view==="public";
@@ -560,6 +560,24 @@ const outlink=(href,txt)=>href?`<a class="out" href="${href}" target="_blank" re
 function scriptureFor(sel){
   const r = cur(), x = (r.rows||[]).find(y=>y.book===sel.book&&y.c===sel.c&&y.v===sel.v); if(!x) return "";
   const ver = ["LSB",S.ver,"NET"].find(v=>x.texts[v]); return ver ? wordify(x.texts[ver]).replace(/<span class='sup'>.*?<\/span>/,"") : "";
+}
+/* the passage a saved note belongs to: from its vault path ("John 3.16.md"), else from its key ("john-3-16") */
+function noteRef(d){
+  if(d.obsidian){ const r=d.obsidian.replace(/^.*\//,"").replace(/\.md$/,"").replace(/\./g,":"); if(JaymsRef.parse(r).length) return r }
+  const m=/^(.*?)-(\d+)(?:-(\d+))?(?:-(\d+))?$/.exec(d.id||""); if(!m) return d.id;
+  const r=m[1].replace(/-/g," ")+" "+m[2]+(m[3]?":"+m[3]+(m[4]?"-"+m[4]:""):""); return JaymsRef.parse(r).length ? JaymsRef.format(JaymsRef.parse(r)) : d.id;
+}
+/* Find a note: a passage (every saved note on it or inside it) or a word (every note that uses it) */
+function noteFind(q){
+  q=String(q||"").trim(); if(!q) return "";
+  const pub=S.view==="public", docs=(pub?ST.c("pub"):ST.c("notes")).all().filter(d=>String(d.text||"").trim());
+  const segs=JaymsRef.parse(q), byRef=segs.length && !JaymsRef.check(segs);
+  const pos=r=>{ const g=JaymsRef.parse(r)[0], b=g&&JaymsRef.book(g.book); return b ? b.order*1e6+g.c1*1e3+g.v1 : 9e9 };
+  const hits=docs.map(d=>({d, ref:noteRef(d)})).filter(x=> byRef ? JaymsRef.parse(x.ref).some(a=>segs.some(b=>JaymsRef.overlap(a,b))) : x.d.text.toLowerCase().includes(q.toLowerCase()))
+    .sort((a,b)=>pos(a.ref)-pos(b.ref));
+  if(!hits.length) return `<p class="empty">No saved note ${byRef?"on "+esc(JaymsRef.format(segs)):"uses \u201C"+esc(q)+"\u201D"}.</p>`;
+  return `<div class="lbl">${hits.length} note${hits.length>1?"s":""} ${byRef?"on "+esc(JaymsRef.format(segs)):"with \u201C"+esc(q)+"\u201D"}</div>` +
+    hits.slice(0,60).map(x=>box("explain", esc(x.ref)+` <button class="sz" data-open-note="${esc(x.ref)}">Open</button>`, `<div class="jst-md">${JST.util.mdBlock(x.d.text)}</div>`)).join("");
 }
 function notesHTML(){
   const pub = S.view==="public";
@@ -732,7 +750,9 @@ function renderPanel(){
   const r = cur(); if(!r) return;
   if(S.tool==="notes"){
     if(PH){PH.destroy(); PH=null; PH_KEY=""}
-    $("pbody").innerHTML = `<div class="jst">${notesHTML()}</div>`;
+    $("pbody").innerHTML = `<div class="jst"><div class="ask u-mb10"><input class="jst-in" id="notefind" placeholder="Find a note: a passage (Romans 8, John 3:16) or a word" value="${esc(S.noteQ||"")}"></div><div id="notefindres">${noteFind(S.noteQ)}</div>${S.noteQ?'<div class="lbl u-mt14">Today</div>':""}${notesHTML()}</div>`;
+    $("notefind").oninput=e=>{ S.noteQ=e.target.value; $("notefindres").innerHTML=noteFind(S.noteQ) };
+    $("pbody").querySelector(".jst").onclick=e=>{ const b=e.target.closest("[data-open-note]"); if(b){ e.stopPropagation(); openPassage(b.dataset.openNote) } };
     applyMeta({kick:"Today · "+READINGS.length+" readings", title:S.view==="public"?"James's notes":"My notes"});
     return;
   }
