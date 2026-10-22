@@ -461,8 +461,7 @@ mark.hit.now{background:var(--gold);color:var(--paper-deep)}
 .nonums .vn{display:none}   /* Hide numbers: verse numbers off the page (and out of anything reading it aloud) */
 .sup{font-style:italic;font-size:15px;display:block;margin-bottom:4px}
 .red{color:inherit}   /* the LSB's own red letters: only with Settings > Words of Jesus in red (#text.redon) */
-#text.redon .red{color:var(--jw)}
-#text.redon .cs .red{color:var(--cspurple)}
+
 .sc{font-variant:small-caps;letter-spacing:.03em}
 .w{text-decoration:underline dotted var(--gold);text-underline-offset:5px;text-decoration-thickness:1.5px;cursor:pointer;border-radius:3px}
 .w:hover,.w.on{background:rgba(212,168,92,.18);color:var(--ink-bright)}
@@ -689,9 +688,9 @@ body.hg-noorig .mtag{display:none}
 
 /* Settings: words of Jesus in red, Connecting Scripture verses in blue, purple where both (colorText in the page) */
 :root{--jw:#ff7a70;--csblue:#9ccaff;--cspurple:#d4b0ff}   /* bright enough to read on the dark page */
-#text .jw, #text .jwq{color:var(--jw)}
-#text .cs{color:var(--csblue)}
-#text .cs.jw, #text .cs .jwq{color:var(--cspurple)}
+#text.blueon .cs{color:var(--csblue)}
+#text.redon .jw, #text.redon .jwq, #text.redon .red{color:var(--jw)}
+#text.purpleon .cs.jw, #text.purpleon .cs .jwq, #text.purpleon .cs .red{color:var(--cspurple)}
 #text .cs .vn, #text .jw .vn{color:var(--gold)}
 
 /* Settings > Reading plan off: only The Bible button (and Hebrew & Greek's mark options) stay in the left rail */
@@ -702,3 +701,4 @@ body.noplan #biblebtn{margin-top:0}
 /* Settings: each choice's name, then what it does on its own line under it (easier to read than two squeezed columns) */
 #setview .planopt{flex-wrap:wrap;align-items:flex-start;margin-top:14px;font-size:16px;font-weight:600}
 #setview .planopt .sub{flex-basis:100%;padding-left:24px;font-size:15px;font-weight:400;color:var(--ink);line-height:1.45}
+.sw-red{color:var(--jw)}.sw-blue{color:var(--csblue)}.sw-purple{color:var(--cspurple)}   /* Settings: each colour named in its own colour */

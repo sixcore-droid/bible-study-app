@@ -46,8 +46,9 @@
   <label class="planopt"><input type="checkbox" id="optplan"> Reading plan <span class="sub">off: no plan, no day's readings; just the passages you open (The Bible button stays)</span></label>
   <label class="planopt"><input type="checkbox" id="optlogos"> Logos links <span class="sub">Open in Logos, the Shelf's commentaries and study Bibles, the atlases</span></label>
   <label class="planopt"><input type="checkbox" id="optbible"> The Bible button <span class="sub">under the reading plan: go to any book, chapter and verse</span></label>
-  <label class="planopt"><input type="checkbox" id="optred"> Words of Jesus in red <span class="sub">Jesus's words turn red (from the World English Bible's red letters). Try Matthew 5, the Sermon on the Mount.</span></label>
-  <label class="planopt" id="optbluewrap" hidden><input type="checkbox" id="optblue"> Old Testament connections in blue <span class="sub">Verses with a note in the CSB Connecting Scripture New Testament turn blue; where Jesus is speaking in one, his words turn purple. Try Matthew 4: verses 4, 7 and 10 are Jesus answering with Deuteronomy.</span></label>
+  <label class="planopt"><input type="checkbox" id="optred"> Words of Jesus in <span class="sw-red">red</span> <span class="sub">Jesus's words (from the World English Bible's red letters). Try Matthew 5, the Sermon on the Mount.</span></label>
+  <label class="planopt" id="optbluewrap" hidden><input type="checkbox" id="optblue"> Old Testament connections in <span class="sw-blue">blue</span> <span class="sub">Verses with a note in the CSB Connecting Scripture New Testament. Try Matthew 4 or Matthew 1:23.</span></label>
+  <label class="planopt" id="optpurplewrap" hidden><input type="checkbox" id="optpurple"> Jesus using the Old Testament in <span class="sw-purple">purple</span> <span class="sub">His words inside those verses. Try Matthew 4: verses 4, 7 and 10 are Jesus answering with Deuteronomy.</span></label>
   <label class="planopt"><input type="checkbox" id="optnums"> Verse numbers <span class="sub">off: the text reads straight through, and Speechify skips them</span></label>
   <p class="ctx">This browser remembers them.</p>
 </div></div>
@@ -305,7 +306,7 @@ function initNote(id, force){
 }
 const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:false   /* the box is gone (6 Oct): "My OT Reading Plan" leaves the genealogies out instead */,
            app:store.get("app","study"), mark:null, hgShow:store.get("hgShow",{claim:true, emphasis:true, cosmetic:false}), hgOrig:store.get("hgOrig",true),   /* the Hebrew & Greek mode */
-           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true), logos:store.get("logos",true), bible:store.get("bible",true), red:store.get("red",false), blue:store.get("blue",false), planOn:store.get("planOn",true)};
+           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true), logos:store.get("logos",true), bible:store.get("bible",true), red:store.get("red",false), blue:store.get("blue",false), purple:store.get("purple",false), planOn:store.get("planOn",true)};
 /* public build: Read along only; no My desk switch, no prototype badge */
 if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
 /* a refresh brings back the panel that was open (null = none); a first visit keeps the default above */
@@ -429,7 +430,7 @@ function renderReader(){
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
   $("rlogos").hidden = !S.logos;
   $("optplan").checked = S.planOn; document.body.classList.toggle("noplan", !S.planOn);
-  $("optlogos").checked = S.logos; $("optred").checked = S.red; $("optblue").checked = S.blue; $("optbluewrap").hidden = !CSV; $("optbible").checked = S.bible; $("biblebtn").hidden = !S.bible; if(!S.bible) $("biblepick").hidden = true;
+  $("optlogos").checked = S.logos; $("optred").checked = S.red; $("optblue").checked = S.blue; $("optbluewrap").hidden = !CSV; $("optpurple").checked = S.purple; $("optpurplewrap").hidden = !CSV; $("optbible").checked = S.bible; $("biblebtn").hidden = !S.bible; if(!S.bible) $("biblepick").hidden = true;
   $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
   const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
   $("ver").innerHTML = opts(S.ver); $("ver2").innerHTML = opts(S.ver2);
@@ -629,11 +630,11 @@ fetch("redletter.json").then(r=>r.ok?r.json():null).then(d=>{ RL=d&&d.v; if(RL&&
 if(!PUBLIC) fetch("csnt-verses.json").then(r=>r.ok?r.json():null).then(d=>{ if(d&&d.v){ CSV={}; Object.keys(d.v).forEach(b=>{ CSV[b]=new Set(d.v[b]) }); renderReader() } }).catch(()=>{});
 function colorText(){
   const t=$("text"); if(!t) return;
-  t.classList.toggle("redon", !!S.red);   // the LSB's own red-letter marks follow the same checkbox
+  t.classList.toggle("redon", !!S.red); t.classList.toggle("blueon", !!S.blue); t.classList.toggle("purpleon", !!S.purple);   // each colour has its own checkbox
   t.querySelectorAll(".vn").forEach(n=>{
     const box=n.closest(".vs, .v"); if(!box || box.dataset.tint) return; box.dataset.tint=1;
     const [b,c,v]=String(n.dataset.v||"").split("|"), k=c+":"+v;
-    const cs = S.blue && CSV && CSV[b] && CSV[b].has(k), jw = S.red && RL && RL[b] && RL[b][k];
+    const cs = CSV && CSV[b] && CSV[b].has(k), jw = RL && RL[b] && RL[b][k];   // marked always; the colours come from the checkboxes (CSS)
     if(cs) box.classList.add("cs");
     if(jw===1) box.classList.add("jw");
     else if(jw===2) quoteRed(box);
@@ -1025,6 +1026,7 @@ $("optnums").onchange=e=>{S.nums=e.target.checked;store.set("nums",S.nums);rende
 $("numbtn").onclick=()=>{S.nums=!S.nums;store.set("nums",S.nums);renderReader()};   // the same switch as Settings, kept on the reader bar
 $("optred").onchange=e=>{S.red=e.target.checked;store.set("red",S.red);renderReader()};
 $("optblue").onchange=e=>{S.blue=e.target.checked;store.set("blue",S.blue);renderReader()};
+$("optpurple").onchange=e=>{S.purple=e.target.checked;store.set("purple",S.purple);renderReader()};
 $("optbible").onchange=e=>{S.bible=e.target.checked;store.set("bible",S.bible);renderReader()};
 /* Reading plan off: no plan in the rail (The Bible button stays), no day's tabs, no Done/Next; the passage on screen becomes an
    ordinary opened passage so it keeps a tab you can close */
