@@ -693,3 +693,8 @@ body.hg-noorig .mtag{display:none}
 #text .cs{color:var(--csblue)}
 #text .cs.jw, #text .cs .jwq{color:var(--cspurple)}
 #text .cs .vn, #text .jw .vn{color:var(--gold)}
+
+/* Settings > Reading plan off: only The Bible button (and Hebrew & Greek's mark options) stay in the left rail */
+body.noplan .plansel > label[for="planpick"], body.noplan #planpick, body.noplan #planlist,
+body.noplan .plansel > .planopt:not(.hgopt), body.noplan .railin > :not(.plansel){display:none !important}
+body.noplan #biblebtn{margin-top:0}

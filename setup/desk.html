@@ -43,6 +43,7 @@
 </div></div>
 <div class="helpview" id="setview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Settings"><button class="x" id="setclose" aria-label="Close">×</button>
   <h2>Settings</h2>
+  <label class="planopt"><input type="checkbox" id="optplan"> Reading plan <span class="sub">off: no plan, no day's readings; just the passages you open (The Bible button stays)</span></label>
   <label class="planopt"><input type="checkbox" id="optlogos"> Logos links <span class="sub">Open in Logos, the Shelf's commentaries and study Bibles, the atlases</span></label>
   <label class="planopt"><input type="checkbox" id="optbible"> The Bible button <span class="sub">under the reading plan: go to any book, chapter and verse</span></label>
   <label class="planopt"><input type="checkbox" id="optred"> Words of Jesus in red <span class="sub">from the World English Bible's red letters; the words inside his quotation marks</span></label>
@@ -304,7 +305,7 @@ function initNote(id, force){
 }
 const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:false   /* the box is gone (6 Oct): "My OT Reading Plan" leaves the genealogies out instead */,
            app:store.get("app","study"), mark:null, hgShow:store.get("hgShow",{claim:true, emphasis:true, cosmetic:false}), hgOrig:store.get("hgOrig",true),   /* the Hebrew & Greek mode */
-           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true), logos:store.get("logos",true), bible:store.get("bible",true), red:store.get("red",false), blue:store.get("blue",false)};
+           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true), logos:store.get("logos",true), bible:store.get("bible",true), red:store.get("red",false), blue:store.get("blue",false), planOn:store.get("planOn",true)};
 /* public build: Read along only; no My desk switch, no prototype badge */
 if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
 /* a refresh brings back the panel that was open (null = none); a first visit keeps the default above */
@@ -417,16 +418,17 @@ function renderReader(){
   const r = cur(); if(!r) return;
   /* the day's plan readings as tabs, each with its own ×; none while the reading plan is hidden (Plan off), so only the passages you
      opened sit on top. A closed one stays closed for that day; picking a day in the plan brings them back */
-  const shut = planTabsShut(), planTabs = document.body.classList.contains("rail-hidden") ? [] : READINGS.map((x,i)=>i).filter(i=>!shut.includes(i));
+  const shut = planTabsShut(), planTabs = document.body.classList.contains("rail-hidden") || !S.planOn ? [] : READINGS.map((x,i)=>i).filter(i=>!shut.includes(i));
   $("rtabs").innerHTML = planTabs.map(i=>{ const x=READINGS[i]; return `<span class="rtabgrp"><button class="rtab${!S.adhoc&&i===S.reading?" on":""}${isDone(dk(x))?" done":""}" role="tab" aria-selected="${!S.adhoc&&i===S.reading}" data-r="${i}"><span class="ok"></span>${esc(x.ref)}</button><button class="rtabx" data-close-plan="${i}" title="Close ${esc(x.ref)}" aria-label="Close ${esc(x.ref)}">×</button></span>` }).join("");
   const isToday = S.day===todayNum(plan());
   /* every passage opened with Go (or « ») keeps its own tab until its × closes it (S.opened); S.adhoc is the one on screen */
   $("rtabs").innerHTML += S.opened.map((o,n)=>`<span class="rtabgrp"><button class="rtab${S.adhoc===o?" on":""} adhoc" role="tab" aria-selected="${S.adhoc===o}" data-open-tab="${n}">${esc(o.ref)}</button><button class="rtabx" data-close-adhoc="${n}" title="Close ${esc(o.ref)}" aria-label="Close ${esc(o.ref)}">×</button></span>`).join("");
-  $("rkick").textContent = S.adhoc ? "Opened passage · not in today's plan" : `${isToday?(plan().weekly?"This week":"Today"):(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
+  $("rkick").textContent = !S.planOn ? "Passage" : S.adhoc ? "Opened passage · not in today's plan" : `${isToday?(plan().weekly?"This week":"Today"):(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
   $("rtitle").textContent = r.ref;
   const lg = JaymsRef.refly(r.ref, S.ver);
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
   $("rlogos").hidden = !S.logos;
+  $("optplan").checked = S.planOn; document.body.classList.toggle("noplan", !S.planOn);
   $("optlogos").checked = S.logos; $("optred").checked = S.red; $("optblue").checked = S.blue; $("optbluewrap").hidden = !CSV; $("optbible").checked = S.bible; $("biblebtn").hidden = !S.bible; if(!S.bible) $("biblepick").hidden = true;
   $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
   const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
@@ -605,7 +607,7 @@ function openPassage(ref, replace){
   const id = JaymsRef.key(segs), i = READINGS.findIndex(x=>x.id===id);
   S.vsel=null; S.word=null;
   const had = S.opened.find(x=>x.id===id);
-  if(i>=0){ S.adhoc=null; S.reading=i; }
+  if(i>=0 && S.planOn){ S.adhoc=null; S.reading=i; }   // plan off: even one of the day's readings opens as its own tab
   else if(had) S.adhoc = had;
   else {
     const o = { id, ref:JaymsRef.format(segs), role:"Opened passage", why:"", rows:null, adhoc:true };
@@ -661,6 +663,7 @@ function closePlanTab(i){
   S.vsel=null; renderReader(); renderPanel(); renderDock() }
 function closeAdhoc(n){ const o=S.opened[n]; if(!o) return; S.opened.splice(n,1);
   if(S.adhoc===o) S.adhoc = S.opened[Math.min(n, S.opened.length-1)] || null;
+  if(!S.planOn && !S.adhoc && !S.opened.length){ S.opened.push(o); S.adhoc=o }   // plan off: the last passage stays (nothing else to show)
   S.vsel=null; rememberOpen(); renderReader(); renderPanel(); renderDock() }
 /* where you were, so a reload comes back to it (same day only) */
 function rememberOpen(){ store.set("open",{date:new Date().toDateString(), plan:S.plan, n:(PLANS[S.plan]||{days:[]}).days.length, day:S.day, reading:S.reading, opened:S.opened.map(x=>x.ref), on:S.adhoc?S.opened.indexOf(S.adhoc):-1}) }
@@ -971,6 +974,7 @@ function vaultCatchUp(){
   });
 }
 setTimeout(vaultCatchUp, 4000);
+setTimeout(()=>{ if(!S.planOn && !S.adhoc) noPlanEnsure() }, 1500);   // plan off at start-up: the passage on screen gets its tab
 function obsNewURI(r, n){
   const body = noteBody(r.ref, n, true);
   return "obsidian://new?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(obsPath(r.ref).replace(/\.md$/,""))+"&content="+encodeURIComponent(body)+"&overwrite=true";
@@ -1022,6 +1026,12 @@ $("numbtn").onclick=()=>{S.nums=!S.nums;store.set("nums",S.nums);renderReader()}
 $("optred").onchange=e=>{S.red=e.target.checked;store.set("red",S.red);renderReader()};
 $("optblue").onchange=e=>{S.blue=e.target.checked;store.set("blue",S.blue);renderReader()};
 $("optbible").onchange=e=>{S.bible=e.target.checked;store.set("bible",S.bible);renderReader()};
+/* Reading plan off: no plan in the rail (The Bible button stays), no day's tabs, no Done/Next; the passage on screen becomes an
+   ordinary opened passage so it keeps a tab you can close */
+$("optplan").onchange=e=>{ S.planOn=e.target.checked; store.set("planOn",S.planOn); document.body.classList.toggle("noplan",!S.planOn);
+  if(S.planOn){ const ids=READINGS.map(x=>x.id); S.opened=S.opened.filter(o=>!ids.includes(o.id)); if(S.adhoc && !S.opened.includes(S.adhoc)) S.adhoc=null; rememberOpen() }   // back on: no second tab for a day's reading
+  noPlanEnsure(); render() };
+function noPlanEnsure(){ if(S.planOn || S.adhoc) return; if(S.opened.length){ S.adhoc=S.opened[S.opened.length-1]; return } const r=cur(); if(r) openPassage(r.ref) }
 $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);renderReader();renderPanel()};
 { const v=$("setview"), close=()=>{ v.hidden=true; $("setbtn").focus() };
   $("setbtn").onclick=()=>{ v.hidden=false; $("setclose").focus() }; $("setclose").onclick=close;
