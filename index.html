@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v262">
+<link rel="stylesheet" href="jayms-study.css?v=v263">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -43,6 +43,7 @@
 <div class="helpview" id="setview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Settings"><button class="x" id="setclose" aria-label="Close">×</button>
   <h2>Settings</h2>
   <label class="planopt"><input type="checkbox" id="optlogos"> Logos links <span class="sub">Open in Logos, the Shelf's commentaries and study Bibles, the atlases</span></label>
+  <label class="planopt"><input type="checkbox" id="optbible"> The Bible button <span class="sub">under the reading plan: go to any book, chapter and verse</span></label>
   <label class="planopt"><input type="checkbox" id="optnums"> Verse numbers <span class="sub">off: the text reads straight through, and Speechify skips them</span></label>
   <p class="ctx">This browser remembers them.</p>
 </div></div>
@@ -56,6 +57,7 @@
       <label class="lbl" for="planpick">Reading plan</label>
       <button id="planpick" class="planpick" aria-expanded="false" aria-controls="planlist"></button>
       <ul id="planlist" class="planlist" hidden></ul>
+      <button id="biblebtn" class="planpick u-mt10" aria-expanded="false" aria-controls="biblepick"><span>The Bible</span><span class="caret" aria-hidden="true">▾</span></button>
       <div id="biblepick" class="u-mt10" hidden></div>
       <select id="plan" hidden></select>
       <label class="planopt"><input type="checkbox" id="addpsalm"> Matching psalm</label>
@@ -145,10 +147,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v262"></script>
-<script src="jayms-store.js?v=v262"></script>
-<script src="x-discuss.js?v=v262"></script>
-<script src="jayms-study.js?v=v262"></script>
+<script src="jayms-ref.js?v=v263"></script>
+<script src="jayms-store.js?v=v263"></script>
+<script src="x-discuss.js?v=v263"></script>
+<script src="jayms-study.js?v=v263"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -291,7 +293,7 @@ function initNote(id, force){
 }
 const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:false   /* the box is gone (6 Oct): "My OT Reading Plan" leaves the genealogies out instead */,
            app:store.get("app","study"), mark:null, hgShow:store.get("hgShow",{claim:true, emphasis:true, cosmetic:false}), hgOrig:store.get("hgOrig",true),   /* the Hebrew & Greek mode */
-           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true), logos:store.get("logos",true)};
+           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true), logos:store.get("logos",true), bible:store.get("bible",true)};
 /* public build: Read along only; no My desk switch, no prototype badge */
 if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
 /* a refresh brings back the panel that was open (null = none); a first visit keeps the default above */
@@ -350,7 +352,7 @@ function renderPlan(){
   /* the plans as buttons under one "current plan" button (the select stays as the hidden source of truth) */
   const opts=[...appPlans.map(x=>[x.id,x.name]), ...mine.map(x=>[x.id,x.name])];
   $("planpick").innerHTML = `<span>${esc(p.name)}</span><span class="caret" aria-hidden="true">▾</span>`;
-  $("planlist").innerHTML = `<li><button data-pickplan="__bible">The Bible <span class="sub">go to a book, chapter and verse</span></button></li>` + opts.map(([id,n])=>`<li><button data-pickplan="${id}" class="${id===S.plan?"on":""}"${id===S.plan?' aria-current="true"':""}>${esc(n)}${id===S.plan?' <span class="sub">reading now</span>':""}</button></li>`).join("")
+  $("planlist").innerHTML = opts.map(([id,n])=>`<li><button data-pickplan="${id}" class="${id===S.plan?"on":""}"${id===S.plan?' aria-current="true"':""}>${esc(n)}${id===S.plan?' <span class="sub">reading now</span>':""}</button></li>`).join("")
     + (S.view!=="public" && !hg ? `<li><button data-pickplan="__build" class="build">+ Build a plan…</button></li>` : "");
   /* the options under the plan: Bible Study's, or the Hebrew & Greek mode's */
   ["addpsalm","hidelists"].forEach(id=>$(id).closest("label").hidden=hg);
@@ -411,7 +413,7 @@ function renderReader(){
   const lg = JaymsRef.refly(r.ref, S.ver);
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
   $("rlogos").hidden = !S.logos;
-  $("optlogos").checked = S.logos;
+  $("optlogos").checked = S.logos; $("optbible").checked = S.bible; $("biblebtn").hidden = !S.bible; if(!S.bible) $("biblepick").hidden = true;
   $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
   const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
   $("ver").innerHTML = opts(S.ver); $("ver2").innerHTML = opts(S.ver2);
@@ -813,7 +815,10 @@ document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey) && e.key.toLo
 function setTopH(){ document.documentElement.style.setProperty("--toph", document.querySelector(".top").offsetHeight+"px") }
 setTopH(); window.addEventListener("resize", setTopH);
 if(window.ResizeObserver) new ResizeObserver(setTopH).observe(document.querySelector(".top"));
-$("planpick").onclick=()=>{ const open=$("planlist").hidden; $("planlist").hidden=!open; $("biblepick").hidden=true; $("planpick").setAttribute("aria-expanded",open) };
+/* The Bible: its own button under the plan (Settings can hide it); opens or closes the book > chapter > verse picker */
+$("biblebtn").onclick=()=>{ const open=$("biblepick").hidden; if(open){ BP={}; renderBiblePick(); $("planlist").hidden=true; $("planpick").setAttribute("aria-expanded",false) }
+  $("biblepick").hidden=!open; $("biblebtn").setAttribute("aria-expanded",open) };
+$("planpick").onclick=()=>{ const open=$("planlist").hidden; $("planlist").hidden=!open; $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false); $("planpick").setAttribute("aria-expanded",open) };
 /* "The Bible" at the top of the plan list: book, then chapter, then verse (or the whole chapter); it opens there beside the
    day's readings, like Go to a passage, and the plan stays as it is */
 let BP = {};
@@ -838,7 +843,7 @@ function renderBiblePick(){
 }
 $("biblepick").onclick=e=>{
   const t=e.target.closest("button"); if(!t) return; const d=t.dataset;
-  if(d.bp==="close"){ $("biblepick").hidden=true; BP={}; return }
+  if(d.bp==="close"){ $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false); BP={}; return }
   if(d.bp==="back"){ if(BP.c && JaymsRef.book(BP.book).chapters>1) BP.c=0; else BP={}; return renderBiblePick() }
   if(d.bpBook){ BP={book:d.bpBook, c:0}; return renderBiblePick() }
   if(d.bpC){ BP.c=+d.bpC; return renderBiblePick() }
@@ -846,11 +851,11 @@ $("biblepick").onclick=e=>{
     const one=JaymsRef.book(BP.book).chapters===1, v=+d.bpV;
     const ref = one ? (v ? `${BP.book} ${v}` : BP.book) : (v ? `${BP.book} ${BP.c}:${v}` : `${BP.book} ${BP.c}`);
     const err=openPassage(ref); if(err){ $("biblepick").insertAdjacentHTML("beforeend",`<p class="ctx">${esc(err)}</p>`); return }
-    $("biblepick").hidden=true; BP={}; $("rail").classList.remove("open"); readerTop();
+    $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false); BP={}; $("rail").classList.remove("open"); readerTop();
   }
 };
 $("planlist").onclick=e=>{ const b=e.target.closest("[data-pickplan]"); if(!b) return; $("planlist").hidden=true; $("planpick").setAttribute("aria-expanded",false);
-  if(b.dataset.pickplan==="__bible"){ BP={}; renderBiblePick(); $("biblepick").hidden=false; return }
+
   $("plan").value=b.dataset.pickplan; $("plan").onchange({target:$("plan")}) };
 $("plan").onchange=e=>{ if(e.target.value==="__build"){ e.target.value=S.plan; S.tool="planner"; renderDock(); renderPanel(); return }
   S.adhoc=null; choosePlan(e.target.value); rememberOpen(); render()};
@@ -920,6 +925,7 @@ $("ver2").onchange=e=>{ const was=S.ver2; S.ver2=e.target.value; if(S.ver2===S.v
 $("layoutbtn").onclick=()=>{S.layout=S.layout==="verse"?"read":"verse";store.set("layout",S.layout);renderReader()};
 $("optnums").onchange=e=>{S.nums=e.target.checked;store.set("nums",S.nums);renderReader()};
 $("numbtn").onclick=()=>{S.nums=!S.nums;store.set("nums",S.nums);renderReader()};   // the same switch as Settings, kept on the reader bar
+$("optbible").onchange=e=>{S.bible=e.target.checked;store.set("bible",S.bible);renderReader()};
 $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);renderReader();renderPanel()};
 { const v=$("setview"), close=()=>{ v.hidden=true; $("setbtn").focus() };
   $("setbtn").onclick=()=>{ v.hidden=false; $("setclose").focus() }; $("setclose").onclick=close;

@@ -97,6 +97,11 @@
      "text": "Tap to pick a plan. Each app lists its own plans."
     },
     {
+     "sel": "#biblebtn",
+     "name": "The Bible",
+     "text": "Go to any book, chapter and verse without changing your plan."
+    },
+    {
      "sel": "#addpsalm",
      "up": "label",
      "name": "Matching psalm",
