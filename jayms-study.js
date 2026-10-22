@@ -3181,7 +3181,7 @@
       if (!d) return { kick: "BibleProject", title: this.o.ref, body: none("The BibleProject list didn't load.") };
       var b = R.book(q.book), name = b.name, I = d.items, seen = {}, h = "";
       var link = function (i) { var x = I[i]; return '<p class="u-m8">' + outlink(x[2], esc(x[1])) + (x[3] ? '<br><span class="u-fs15">' + esc(x[3]) + "</span>" : "") + "</p>"; };
-      h += this.audioHTML(this.o.ref);
+      h += '<div data-jst-bpaudio>' + this.audioHTML(this.o.ref) + '</div><div data-jst-bprest>';   // the player sits outside what a tab click redraws
       if (d.guide[name] != null) { seen[d.guide[name]] = 1; h += box("scripture", "", '<div class="item">' + outlink(I[d.guide[name]][2], "BibleProject guide to " + esc(name)) + "</div>"); }
       /* every chapter in the passage, strongest first; a page tied to several of them counts once */
       var score = {};
@@ -3202,7 +3202,7 @@
         h += '<div class="lbl">Michael S. Heiser Foundation (' + hf.length + ")</div>" + box("witness", "", '<div class="item">' + hshown.map(function (a) {
           return '<p class="u-m8">' + outlink(a.u, esc(a.t)) + '<br><span class="u-fs15">' + esc(new Date(a.d + "T12:00:00").toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })) + "</span></p>"; }).join("") + "</div>") +
           (hf.length > 8 ? '<div class="askrow"><button class="btn" data-jst-bpall="hf">' + (hopen ? "Fewer" : "All " + hf.length) + "</button></div>" : "");
-        h += '<p class="ctx u-fs13">From <a href="https://michaelsheiserfoundation.org/articles/" target="_blank" rel="noopener">michaelsheiserfoundation.org</a>: articles that cite these chapters, the ones citing them most first.</p>';
+        h += '<p class="ctx u-fs13">From <a href="https://michaelsheiserfoundation.org/articles/" target="_blank" rel="noopener">michaelsheiserfoundation.org</a>: articles that cite these chapters, the ones citing them most first.</p></div>';
         return { kick: "Media \u00B7 BibleProject, podcasts, Heiser", title: name + " " + q.c1 + (q.c2 && q.c2 !== q.c1 ? "\u2013" + q.c2 : ""), body: h };
       }
       if (ids.length || nbp.length || hf.length) h += '<div class="chips u-m10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t ? " on" : "") + '" data-jst-bptab="' + t[0] + '">' + t[1] + " (" + count(t[2]) + ")</button>"; }).join("") + "</div>";
@@ -3222,10 +3222,17 @@
       });
       if (ids.length && !count(tab[2])) h += none("No " + tab[1].toLowerCase() + " for " + esc(this.o.ref) + ".");
       if (!ids.length && !nbp.length && !hf.length) h += none("BibleProject has nothing filed under " + esc(this.o.ref) + " beyond the guide.");
-      h += '<p class="ctx u-fs13">From <a href="https://bibleproject.com/" target="_blank" rel="noopener">bibleproject.com</a>' + (nbp.length ? ' and the <a href="https://nakedbiblepodcast.com/" target="_blank" rel="noopener">Naked Bible Podcast</a> (episode list via Podcast Index)' : "") + ', matched by the passages each one names. Strongest match first.</p>';
+      h += '<p class="ctx u-fs13">From <a href="https://bibleproject.com/" target="_blank" rel="noopener">bibleproject.com</a>' + (nbp.length ? ' and the <a href="https://nakedbiblepodcast.com/" target="_blank" rel="noopener">Naked Bible Podcast</a> (episode list via Podcast Index)' : "") + ', matched by the passages each one names. Strongest match first.</p>' + "</div>";
       return { kick: "Media \u00B7 BibleProject, podcasts, Heiser", title: name + " " + q.c1 + (q.c2 && q.c2 !== q.c1 ? "\u2013" + q.c2 : ""), body: h };
     },
     destroy: function () { if (this._csp) document.removeEventListener("securitypolicyviolation", this._csp); Panel.prototype.destroy.call(this); },
+    /* a tab or "All" redraws only the lists under the player, so a playing chapter keeps playing */
+    redrawRest: function () {
+      var cur = this.el.querySelector("[data-jst-bprest]");
+      if (!cur) return this.paint();
+      var t = document.createElement("div"); t.innerHTML = this.view().body;
+      var fresh = t.querySelector("[data-jst-bprest]"); if (fresh) cur.innerHTML = fresh.innerHTML; else this.paint();
+    },
     click: function (e) {
       var pl = e.target.closest("[data-jst-lsbplay]");
       if (pl) {
@@ -3241,9 +3248,9 @@
         slot.innerHTML = ""; slot.appendChild(f); return;
       }
       var tb = e.target.closest("[data-jst-bptab]");
-      if (tb) { e.stopPropagation(); BP_TAB = tb.getAttribute("data-jst-bptab"); this.el.scrollTop = 0; this.paint(); return; }
+      if (tb) { e.stopPropagation(); BP_TAB = tb.getAttribute("data-jst-bptab"); this.redrawRest(); return; }
       var al = e.target.closest("[data-jst-bpall]");
-      if (al) { e.stopPropagation(); var k = "all" + al.getAttribute("data-jst-bpall"); this.st[k] = !this.st[k]; this.paint(); }
+      if (al) { e.stopPropagation(); var k = "all" + al.getAttribute("data-jst-bpall"); this.st[k] = !this.st[k]; this.redrawRest(); }
     }
   });
 
