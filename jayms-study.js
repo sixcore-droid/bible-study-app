@@ -2112,7 +2112,7 @@
       ["Nephilim Hunters Association", "A Christian research project on the biblical supernatural: Scripture, ancient texts, archaeology, fieldwork", "https://nephilimhunters.com/"]
     ]]
   ];
-  define("Library", { id: "corpus", label: "Tools", name: "Free tools and texts", icon: ICON.corpus }, {
+  define("Library", { id: "corpus", label: "Links", name: "Links: free study sites and texts", icon: ICON.corpus }, {
     view: function () {
       var lib = L(this, "library"), q = data.segs(this.o.ref)[0], h = "";
       if (q) h += '<div class="lbl">Free tools on ' + esc(this.o.ref) + "</div>" + box("scripture", "", '<div class="item">' + toolLinks(q).map(function (t) {
@@ -2124,7 +2124,7 @@
         '<p class="u-m8">' + outlink(CFG.corpus, "The Corpus Atlas") + '<br><span class="u-fs15">Every ancient text in the research corpus, from Sumerian tablets on, placed in time: what we have, where it came from and when it was written</span></p>' +
         (lib.length ? lib.map(function (c) { return '<p class="u-m8"><b>' + esc(c.t) + '</b><br><span class="sub">' + esc([c.when, c.trad].filter(Boolean).join(" \u00B7 ")) + '</span><br><span class="u-fs15">' + esc(c.why) + "</span></p>"; }).join("")
           : '<p class="u-m8 u-fs15">None is tied to ' + esc(this.o.ref) + " yet.</p>") + "</div>");
-      return { kick: "Tools \u00B7 free study sites at this passage", title: "Free tools", body: h };
+      return { kick: "Links \u00B7 free study sites at this passage", title: "Links", body: h };
     }
   }, {}, function (d) { return d && (d.library || []).length || null; });   // the free tools are always there: never shown as empty
 
