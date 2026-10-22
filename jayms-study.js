@@ -3273,7 +3273,7 @@
                  : '<div class="askrow"><button class="btn fill" data-jst-rshow>Show the meaning</button></div>') + "</div>");
     },
     boxWhen: function (s2) { return s2 && s2.box ? "Box " + s2.box + " of 5" : "New card"; },
-    /* The word course: the most-used words, ten at a time; a set is learned when every word in it has reached box 2 (known twice,
+    /* The word course: the most important words (vocab-course.json: curated core, then James's studied words, then common words), ten at a time; a set is learned when every word in it has reached box 2 (known twice,
        a day apart), and then the next ten open. Each session adds the open chapter's one or two commonest words not yet learned. */
     courseHTML: function () {
       var o = this.o, st = this.st, C = this.C, state = o.state || function () { return null; }, now = Date.now();
@@ -3282,15 +3282,17 @@
       var known = function (k) { var s2 = state("course:" + k); return !!(s2 && s2.box >= 2); };
       var n = 0; while ((n + 1) * 10 <= list.length && list.slice(n * 10, n * 10 + 10).every(function (w) { return known(w[0]); })) n++;
       var set = list.slice(n * 10, n * 10 + 10), inCourse = {}; list.slice(0, n * 10 + 10).forEach(function (w) { inCourse[w[0]] = 1; });
-      /* the open chapter's words: the commonest ones not already in the course so far */
+      /* the open chapter's most important words not yet in the course so far: ranked by their place in the course (the curated core
+         and James's studied words come first); a word the course doesn't have at all ranks after them */
+      var rank = {}; list.forEach(function (w, i) { rank[w[0]] = i; });
       var ch = L(this, "words").filter(function (w) { var k = String(w.k || "").toLowerCase(); return k && k.charAt(0) === (lang === "Greek" ? "g" : "h") && !inCourse[k] && !known(k); })
-        .sort(function (a, b) { return (parseInt(String(b.count).replace(/\D/g, ""), 10) || 0) - (parseInt(String(a.count).replace(/\D/g, ""), 10) || 0); }).slice(0, 2)
-        .map(function (w) { return [String(w.k).toLowerCase(), w.t, w.gloss || "", w.def || "", w.count, true]; });
+        .sort(function (a, b) { var ra = rank[String(a.k).toLowerCase()], rb = rank[String(b.k).toLowerCase()]; return (ra == null ? 1e6 : ra) - (rb == null ? 1e6 : rb); }).slice(0, 2)
+        .map(function (w) { var cw = list[rank[String(w.k).toLowerCase()]]; return cw ? cw.slice(0, 5).concat(["", true]) : [String(w.k).toLowerCase(), w.t, w.gloss || "", w.def || "", w.count, "", true]; });
       var queue = set.concat(ch), due = queue.filter(function (w) { var s2 = state("course:" + w[0]); return !s2 || (s2.due || 0) <= now; });
       var c = due.filter(function (w) { return "course:" + w[0] === st.cur; })[0] || due[0];
       var h = '<div class="chips u-mb10">' + ["Hebrew", "Greek"].map(function (l) { return '<button class="chip' + (l === lang ? " on" : "") + '" data-jst-rlang="' + l + '">' + l + "</button>"; }).join("") + "</div>";
       var got = set.filter(function (w) { return known(w[0]); }).length;
-      h += '<div class="lbl">' + lang + " \u00B7 set " + (n + 1) + " \u00B7 words " + (n * 10 + 1) + "\u2013" + (n * 10 + set.length) + " \u00B7 " + got + " of " + set.length + " known</div>";
+      h += '<div class="lbl">' + lang + " \u00B7 set " + (n + 1) + (set[0] && set[0][5] ? " \u00B7 " + esc(set[0][5]) : "") + " \u00B7 " + got + " of " + set.length + " known</div>";
       h += '<div class="chips u-mb10">' + set.map(function (w) { return '<span class="chip' + (known(w[0]) ? " on" : "") + '" title="' + esc(w[2]) + '">' + (known(w[0]) ? "\u2713 " : "") + esc(w[1]) + "</span>"; }).join("") + "</div>";
       if (ch.length) h += '<p class="ctx">Plus from ' + esc(o.ref) + ": " + ch.map(function (w) { return "<b>" + esc(w[1]) + "</b>"; }).join(" and ") + ".</p>";
       if (!c) {
@@ -3298,10 +3300,10 @@
         h += none("Nothing due in this set. Next card " + (next ? new Date(next).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "short" }) : "soon") + ". The next ten open when you know all of these (knew it twice, a day apart).");
       } else {
         st.cur = "course:" + c[0];
-        var back = '<p class="u-fs18 u-m10-4">' + esc(c[2] || "(no meaning saved)") + "</p>" + (c[3] ? '<p class="u-fs15">' + esc(c[3]) + "</p>" : "") + '<p class="sub">Used ' + esc(String(c[4])) + " times" + (c[5] ? " \u00B7 in " + esc(o.ref) : "") + "</p>";
-        h += this.card(st.cur, c[1], (c[5] ? "From " + esc(o.ref) + " \u00B7 " : "") + this.boxWhen(state(st.cur)) + " \u00B7 " + due.length + " due", back);
+        var back = '<p class="u-fs18 u-m10-4">' + esc(c[2] || "(no meaning saved)") + "</p>" + (c[3] ? '<p class="u-fs15">' + esc(c[3]) + "</p>" : "") + '<p class="sub">Used ' + esc(String(c[4])) + " times" + (c[6] ? " \u00B7 in " + esc(o.ref) : "") + "</p>";
+        h += this.card(st.cur, c[1], (c[6] ? "From " + esc(o.ref) + " \u00B7 " : "") + this.boxWhen(state(st.cur)) + " \u00B7 " + due.length + " due", back);
       }
-      return h + '<p class="ctx u-fs13">The most-used words first, ten at a time, from the Word Study data. A word is learned once you have known it twice, a day apart; then the next ten open.</p>';
+      return h + '<p class="ctx u-fs13">The most important words first, ten at a time: a core set by theological weight (God and covenant, the person, sin and salvation and on), then the words you have studied in your vault, then common words. A word is learned once you have known it twice, a day apart; then the next ten open.</p>';
     },
     deckHTML: function () {
       var o = this.o, st = this.st, cards = o.cards ? o.cards() : [], state = o.state || function () { return null; };
