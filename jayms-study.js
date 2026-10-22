@@ -2638,6 +2638,17 @@
       var eor = data.echoes().then(function (E) { return E.filter(function (e) { return [e.bibleRef].concat(e.otRef || []).some(function (r) { return R.parse(r).some(function (a) { return segs.some(function (q) { return R.overlap(a, q); }); }); }); }); });
       return Promise.all([data.xref(this.o.ref), cs, eor]).then(function (r) { self.x = r[0]; self.cs = r[1]; self.eor = r[2]; });
     },
+    /* the verses side by side in the Echoes tab: filled in once the tab is on screen (each passage in the reading version) */
+    after: function () {
+      var self = this, ver = this.o.version || "NET";
+      this.el.querySelectorAll("[data-eor-txt]").forEach(function (p) {
+        var r = p.getAttribute("data-eor-txt");
+        data.text(r).then(function (rows) {
+          var txt = (rows || []).map(function (x) { var s2 = x.texts[ver] || x.texts.NET || ""; return "[" + x.v + "] " + String(s2).replace(/<[^>]+>/g, " ").replace(/\[\/?w:?\w*\]/g, "").replace(/ {2,}/g, " ").trim(); }).join(" ");
+          if (self.alive) p.textContent = txt || "The text for this isn't in the data.";
+        }).catch(function () { p.textContent = ""; });
+      });
+    },
     /* the Echoes of Revelation tab: each echo with both passages, then what matches, what differs and what John does with it */
     eorHTML: function () {
       var go = function (r) { return '<button class="jst-ref" data-jst-go="' + esc(r) + '" title="Open ' + esc(r) + '">' + esc(r) + "</button>"; };
@@ -2645,6 +2656,8 @@
         (this.eor || []).map(function (e) {
           var part = function (k, v, t) { return e[k] ? box(v, t, "<p>" + md(e[k]) + "</p>") : ""; };
           return box("scripture", "", '<div class="item"><span class="when">' + go(e.bibleRef) + " \u2190 " + (e.otRef || []).map(go).join(", ") + '</span><span class="tt">' + esc(e.title.replace(/^[^,]*,\s*/, "").replace(/^./, function (c) { return c.toUpperCase(); })) + '</span><span class="sub">' + esc(e.summary) + "</span>" +
+            '<div class="jst-two u-mt8" data-eor-two="' + esc(e.id) + '"><div><div class="lbl">' + esc(e.bibleRef) + '</div><p class="u-fs15" data-eor-txt="' + esc(e.bibleRef) + '">\u2026</p></div><div>' +
+              (e.otRef || []).map(function (r) { return '<div class="lbl">' + esc(r) + '</div><p class="u-fs15" data-eor-txt="' + esc(r) + '">\u2026</p>'; }).join("") + "</div></div>" +
             (e.plain ? '<div class="box plain u-mt8"><p class="u-m0">' + md(e.plain) + "</p></div>" : "") +
             '<details class="jst-past"><summary class="lbl">What matches, what differs, what John does</summary>' + part("same", "wording", "What matches") + part("differs", "explain", "Why it doesn't match exactly") + part("turn", "explain", "What John does with it") + part("not", "not", "What this echo is not") + "</details>" +
             outlink(entryURL("eor", e.id), "jayms Echoes of Revelation") + "</div>");
@@ -2666,7 +2679,7 @@
       if (!T.some(function (x) { return x[0] === (st.tab || ""); })) st.tab = "";
       var tabs = T.length > 1 ? '<div class="chips u-mb10">' + T.map(function (x) { return '<button class="chip' + ((st.tab || "") === x[0] ? " on" : "") + '" data-jst-xtab="' + x[0] + '">' + x[1] + " (" + x[2] + ")</button>"; }).join("") + "</div>" : "";
       if (st.tab === "cs") return { kick: "Cross-references \u00B7 Connecting Scripture", title: "How the NT uses the OT here", body: tabs + this.csHTML() };
-      if (st.tab === "eor") return { kick: "Cross-references \u00B7 Echoes of Revelation", title: "Echoes of Revelation", body: tabs + this.eorHTML() };
+      if (st.tab === "eor") return { kick: "Cross-references \u00B7 Echoes of Revelation", title: "Echoes of Revelation", body: tabs + this.eorHTML() + '<p class="ctx u-fs13">Both passages in the ' + esc(this.o.version || "NET") + ".</p>" };
       var here = R.book(q.book), pos = function (x) { return x.order * 1e6 + x.c * 1e3 + x.v; }, me = here.order * 1e6 + q.c1 * 1e3 + q.v1;
       /* which verse of the passage each one is for ("1 Samuel 31:6"); the verse chips narrow the list to one verse */
       var full = function (lab) { return q.book + " " + (String(lab).indexOf(":") > -1 ? lab : q.c1 + ":" + lab); };

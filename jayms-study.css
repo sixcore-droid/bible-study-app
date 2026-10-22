@@ -721,3 +721,7 @@ body.noplan #biblepick{margin-top:0}
 .jst-md a{color:var(--gold)}
 .notepreview{min-height:180px;height:180px;overflow-y:auto;background:var(--paper-deep);border:1px solid var(--line);border-left:3px solid var(--edge-note);border-radius:6px;padding:12px 14px;cursor:text}
 .notecheck{color:var(--gold);font-weight:700;margin-left:6px;letter-spacing:0}   /* My notes header: a note is saved here */
+.jst-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}   /* two passages side by side (Echoes of Revelation) */
+.jst-two > div{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px 10px}
+.jst-two p{margin:4px 0 8px;line-height:1.5}
+@media (max-width:520px){.jst-two{grid-template-columns:1fr}}
