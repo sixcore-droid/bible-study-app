@@ -1941,6 +1941,51 @@
   // ------------------------------------------------------------------ Family
   /* A family tree for anyone named in the passage (STEPBible's TIPNR links): grandparents, parents, the person with their
      spouses and brothers and sisters, children and grandchildren. Tap any relative to move the tree to them. */
+  /* The family drawn as a tree: grandparents, parents, the person (brothers and sisters to the left, wives or husbands to the
+     right), children, and each child's own children stacked under them. Every name is tappable, like the chips. Wide families
+     scroll sideways. */
+  function famTree(P, fid, grand, par, sibs, sps, kids, kidsOf) {
+    var f = P[fid];
+    var W = 104, H = 30, GAP = 14, COL = W + GAP, ROW = 64, GC = 34, MAXGC = 8;
+    var nodes = [], lines = [], minX = 0, maxX = 0;
+    var put = function (id, x, y, me, more) { nodes.push({ id: id, x: x, y: y, me: me, more: more }); minX = Math.min(minX, x); maxX = Math.max(maxX, x + W); };
+    var row = function (list, cx) { var w = list.length * COL - GAP; return list.map(function (id, i) { return cx - w / 2 + i * COL; }); };
+    var yG = 0, yP = grand.length ? ROW : 0, yF = yP + (par.length ? ROW : 0), yC = yF + ROW, deepest = yF + H;
+    /* children first: one column each; the person sits over the middle of them */
+    var kx = kids.map(function (id, i) { return i * COL; }), fx = kids.length ? (kids.length * COL - GAP) / 2 - W / 2 : 0;
+    kids.forEach(function (id, i) { put(id, kx[i], yC);
+      var g = kidsOf(id), shown = g.slice(0, MAXGC);
+      shown.forEach(function (gid, j) { put(gid, kx[i] + 10, yC + H + 14 + j * GC); });
+      if (g.length > MAXGC) put(null, kx[i] + 10, yC + H + 14 + shown.length * GC, false, "+" + (g.length - MAXGC) + " more");
+      var n = shown.length + (g.length > MAXGC ? 1 : 0);
+      if (n) { lines.push([kx[i] + 4, yC + H, kx[i] + 4, yC + H + 14 + (n - 1) * GC + H / 2]);
+               for (var j = 0; j < n; j++) lines.push([kx[i] + 4, yC + H + 14 + j * GC + H / 2, kx[i] + 10, yC + H + 14 + j * GC + H / 2]);
+               deepest = Math.max(deepest, yC + H + 14 + (n - 1) * GC + H); }
+      else deepest = Math.max(deepest, yC + H); });
+    put(fid, fx, yF, true);
+    sibs.forEach(function (id, i) { put(id, fx - (i + 1) * COL, yF); });
+    sps.forEach(function (id, i) { put(id, fx + (i + 1) * COL, yF); });
+    var cx = fx + W / 2;
+    var px = row(par, cx); par.forEach(function (id, i) { put(id, px[i], yP); });
+    var gx = row(grand, cx); grand.forEach(function (id, i) { put(id, gx[i], yG); });
+    /* the lines: a bar between each generation, a drop to every node on either side */
+    var bus = function (ups, downs, yU, yD) {
+      if (!ups.length || !downs.length) return; var mid = yU + H + (yD - yU - H) / 2, all = ups.concat(downs).map(function (x) { return x + W / 2; });
+      lines.push([Math.min.apply(null, all), mid, Math.max.apply(null, all), mid]);
+      ups.forEach(function (x) { lines.push([x + W / 2, yU + H, x + W / 2, mid]); }); downs.forEach(function (x) { lines.push([x + W / 2, mid, x + W / 2, yD]); });
+    };
+    bus(gx, px, yG, yP);
+    bus(px, [fx].concat(sibs.map(function (id, i) { return fx - (i + 1) * COL; })), yP, yF);
+    if (kids.length) bus([fx].concat(sps.map(function (id, i) { return fx + (i + 1) * COL; })), kx, yF, yC);
+    var dx = 8 - minX, wid = maxX - minX + 16, hgt = deepest + 8;
+    var cut = function (n) { return n.length > 14 ? n.slice(0, 13) + "\u2026" : n; };
+    var svg = '<svg class="jst-famsvg" width="' + wid + '" height="' + hgt + '" viewBox="0 0 ' + wid + " " + hgt + '" role="img" aria-label="' + esc(f.n) + "'s family tree\">" +
+      lines.map(function (l) { return '<line x1="' + (l[0] + dx) + '" y1="' + (l[1] + 4) + '" x2="' + (l[2] + dx) + '" y2="' + (l[3] + 4) + '"/>'; }).join("") +
+      nodes.map(function (n) { var p = n.id && P[n.id], label = n.more || (p ? p.n : "");
+        return '<g class="' + (n.me ? "me" : n.more ? "more" : "") + '"' + (n.id && !n.me ? ' data-jst-fam="' + esc(n.id) + '" role="button" tabindex="0"' : "") + '><title>' + esc(p ? (p.n + (p.b ? ": " + p.b : "")) : label) + "</title>" +
+          '<rect x="' + (n.x + dx) + '" y="' + (n.y + 4) + '" width="' + W + '" height="' + H + '" rx="6"/><text x="' + (n.x + dx + W / 2) + '" y="' + (n.y + 4 + H / 2 + 5) + '" text-anchor="middle">' + esc(cut(label)) + "</text></g>"; }).join("") + "</svg>";
+    return '<div class="jst-famtree">' + svg + "</div>";
+  }
   define("Family", { id: "family", label: "Family", name: "Family tree", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2"/><circle cx="6" cy="19.5" r="2"/><circle cx="18" cy="19.5" r="2"/><path d="M12 6.5v6M6 17.5v-5h12v5"/></svg>' }, {
     prepare: function () { var self = this; return data.names().then(function (n) { self.nm = n; }); },
     view: function () {
@@ -1964,6 +2009,7 @@
         row(f.t === "Female" ? "Husband" + (ids(f, "sp").length > 1 ? "s" : "") : "Wife" + (ids(f, "sp").length > 1 ? "s" : ""), ids(f, "sp")) +
         row("Brothers and sisters", ids(f, "sib")) + row("Children", kids) + row("Grandchildren", gkids) + "</div>";
       if (!par.length && !kids.length && !ids(f, "sp").length && !ids(f, "sib").length) h += none("STEPBible records no family for " + esc(f.n) + ".");
+      else h += '<div class="lbl u-mt14">The tree</div>' + famTree(P, st.focus, grand, par, ids(f, "sib"), ids(f, "sp"), kids, function (i) { return ids(P[i], "ch"); });
       h += '<p class="ctx u-fs13">Tap a name to move the tree to them. From <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (TIPNR, CC BY 4.0).</p>';
       return { kick: "Family \u00B7 " + here.length + " people here", title: f.n + "'s family", body: h };
     },
@@ -1971,6 +2017,11 @@
       var c = e.target.closest("[data-jst-fam]");
       if (c) { e.stopPropagation(); this.st.focus = c.getAttribute("data-jst-fam"); this.paint(); this.el.parentNode && (this.el.parentNode.scrollTop = 0); return; }
       Panel.prototype.click.call(this, e);
+    },
+    /* a wide tree opens scrolled to the person, not its left edge */
+    after: function () {
+      var t = this.el.querySelector(".jst-famtree"), me = t && t.querySelector("g.me rect");
+      if (me) t.scrollLeft = Math.max(0, +me.getAttribute("x") + 52 - t.clientWidth / 2);
     }
   }, {}, function (d) {   // the people named, each with a family tree to show
     if (!d || !NAMESD) return null;

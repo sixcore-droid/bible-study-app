@@ -672,3 +672,15 @@ body.hg-noorig .mtag{display:none}
 .jst-photos figcaption{font-size:14px;margin-top:4px}
 .jst-photo-credits{font-size:12px;line-height:1.4;margin:10px 0 0;color:var(--ink)}
 .jst-photo-credits a{color:inherit}
+
+/* Family: the drawn tree under the lists (famTree) */
+.jst-famtree{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--paper-deep);padding:8px;margin:6px 0 10px}
+.jst-famsvg{display:block}
+.jst-famsvg line{stroke:var(--line);stroke-width:1.5}
+.jst-famsvg rect{fill:var(--paper);stroke:var(--line);stroke-width:1}
+.jst-famsvg text{fill:var(--ink);font:500 13px var(--read)}
+.jst-famsvg g[data-jst-fam]{cursor:pointer}
+.jst-famsvg g[data-jst-fam]:hover rect,.jst-famsvg g[data-jst-fam]:focus rect{stroke:var(--gold)}
+.jst-famsvg g.me rect{stroke:var(--gold);stroke-width:2;fill:var(--paper-deep)}
+.jst-famsvg g.me text{fill:var(--ink-bright);font-weight:700}
+.jst-famsvg g.more text{fill:var(--ink);font-style:italic}
