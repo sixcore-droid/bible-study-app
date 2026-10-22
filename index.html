@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v305">
+<link rel="stylesheet" href="jayms-study.css?v=v306">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -159,10 +159,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v305"></script>
-<script src="jayms-store.js?v=v305"></script>
-<script src="x-discuss.js?v=v305"></script>
-<script src="jayms-study.js?v=v305"></script>
+<script src="jayms-ref.js?v=v306"></script>
+<script src="jayms-store.js?v=v306"></script>
+<script src="x-discuss.js?v=v306"></script>
+<script src="jayms-study.js?v=v306"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -429,6 +429,8 @@ function renderReader(){
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
   $("rlogos").hidden = !S.logos;
   $("optplan").checked = S.planOn; document.body.classList.toggle("noplan", !S.planOn);
+  if(!S.planOn && $("biblepick").hidden){ BP={}; renderBiblePick(); $("biblepick").hidden=false }   // plan off: The Bible is always open
+  if(S.planOn && !S.bible) $("biblepick").hidden=true;
   $("optlogos").checked = S.logos; $("optred").checked = S.red; $("optblue").checked = S.blue; $("optbluewrap").hidden = !CSV; $("optpurple").checked = S.purple; $("optpurplewrap").hidden = !CSV; $("optbible").checked = S.bible; $("biblebtn").hidden = !S.bible; if(!S.bible) $("biblepick").hidden = true;
   $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
   const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
@@ -900,7 +902,7 @@ function renderBiblePick(){
     const v=JaymsRef.verses(BP.book,BP.c), one=JaymsRef.book(BP.book).chapters===1, title=one?name(BP.book):`${name(BP.book)} ${BP.c}`;
     h=`<div class="lbl">${esc(title)} · pick a verse</div><div class="chips u-mb10">${chip('data-bp="back"',one?"‹ Books":"‹ Chapters")}${chip('data-bp-v="0"',one?"The whole book":"The whole chapter")}</div><div class="bpgrid">${Array.from({length:v},(_,i)=>chip(`data-bp-v="${i+1}"`,i+1)).join("")}</div>`;
   }
-  $("biblepick").innerHTML = h + `<div class="chips u-mt10">${close}</div>`;
+  $("biblepick").innerHTML = h + (S.planOn ? `<div class="chips u-mt10">${close}</div>` : "");
 }
 $("biblepick").onclick=e=>{
   const t=e.target.closest("button"); if(!t) return; const d=t.dataset;
@@ -912,7 +914,8 @@ $("biblepick").onclick=e=>{
     const one=JaymsRef.book(BP.book).chapters===1, v=+d.bpV;
     const ref = one ? (v ? `${BP.book} ${v}` : BP.book) : (v ? `${BP.book} ${BP.c}:${v}` : `${BP.book} ${BP.c}`);
     const err=openPassage(ref); if(err){ $("biblepick").insertAdjacentHTML("beforeend",`<p class="ctx">${esc(err)}</p>`); return }
-    $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false); BP={}; $("rail").classList.remove("open"); readerTop();
+    BP={}; if(S.planOn){ $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false) } else renderBiblePick();   // plan off: the picker stays open
+    $("rail").classList.remove("open"); readerTop();
   }
 };
 $("planlist").onclick=e=>{ const b=e.target.closest("[data-pickplan]"); if(!b) return; $("planlist").hidden=true; $("planpick").setAttribute("aria-expanded",false);

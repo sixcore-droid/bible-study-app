@@ -430,6 +430,8 @@ function renderReader(){
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
   $("rlogos").hidden = !S.logos;
   $("optplan").checked = S.planOn; document.body.classList.toggle("noplan", !S.planOn);
+  if(!S.planOn && $("biblepick").hidden){ BP={}; renderBiblePick(); $("biblepick").hidden=false }   // plan off: The Bible is always open
+  if(S.planOn && !S.bible) $("biblepick").hidden=true;
   $("optlogos").checked = S.logos; $("optred").checked = S.red; $("optblue").checked = S.blue; $("optbluewrap").hidden = !CSV; $("optpurple").checked = S.purple; $("optpurplewrap").hidden = !CSV; $("optbible").checked = S.bible; $("biblebtn").hidden = !S.bible; if(!S.bible) $("biblepick").hidden = true;
   $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
   const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
@@ -901,7 +903,7 @@ function renderBiblePick(){
     const v=JaymsRef.verses(BP.book,BP.c), one=JaymsRef.book(BP.book).chapters===1, title=one?name(BP.book):`${name(BP.book)} ${BP.c}`;
     h=`<div class="lbl">${esc(title)} · pick a verse</div><div class="chips u-mb10">${chip('data-bp="back"',one?"‹ Books":"‹ Chapters")}${chip('data-bp-v="0"',one?"The whole book":"The whole chapter")}</div><div class="bpgrid">${Array.from({length:v},(_,i)=>chip(`data-bp-v="${i+1}"`,i+1)).join("")}</div>`;
   }
-  $("biblepick").innerHTML = h + `<div class="chips u-mt10">${close}</div>`;
+  $("biblepick").innerHTML = h + (S.planOn ? `<div class="chips u-mt10">${close}</div>` : "");
 }
 $("biblepick").onclick=e=>{
   const t=e.target.closest("button"); if(!t) return; const d=t.dataset;
@@ -913,7 +915,8 @@ $("biblepick").onclick=e=>{
     const one=JaymsRef.book(BP.book).chapters===1, v=+d.bpV;
     const ref = one ? (v ? `${BP.book} ${v}` : BP.book) : (v ? `${BP.book} ${BP.c}:${v}` : `${BP.book} ${BP.c}`);
     const err=openPassage(ref); if(err){ $("biblepick").insertAdjacentHTML("beforeend",`<p class="ctx">${esc(err)}</p>`); return }
-    $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false); BP={}; $("rail").classList.remove("open"); readerTop();
+    BP={}; if(S.planOn){ $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false) } else renderBiblePick();   // plan off: the picker stays open
+    $("rail").classList.remove("open"); readerTop();
   }
 };
 $("planlist").onclick=e=>{ const b=e.target.closest("[data-pickplan]"); if(!b) return; $("planlist").hidden=true; $("planpick").setAttribute("aria-expanded",false);
