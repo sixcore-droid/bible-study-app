@@ -688,7 +688,7 @@ body.hg-noorig .mtag{display:none}
 .jst-famsvg g.more text{fill:var(--ink);font-style:italic}
 
 /* Settings: words of Jesus in red, Connecting Scripture verses in blue, purple where both (colorText in the page) */
-:root{--jw:#e8675f;--csblue:#6ea8f0;--cspurple:#b78cf0}
+:root{--jw:#ff7a70;--csblue:#9ccaff;--cspurple:#d4b0ff}   /* bright enough to read on the dark page */
 #text .jw, #text .jwq{color:var(--jw)}
 #text .cs{color:var(--csblue)}
 #text .cs.jw, #text .cs .jwq{color:var(--cspurple)}
@@ -698,3 +698,7 @@ body.hg-noorig .mtag{display:none}
 body.noplan .plansel > label[for="planpick"], body.noplan #planpick, body.noplan #planlist,
 body.noplan .plansel > .planopt:not(.hgopt), body.noplan .railin > :not(.plansel){display:none !important}
 body.noplan #biblebtn{margin-top:0}
+
+/* Settings: each choice's name, then what it does on its own line under it (easier to read than two squeezed columns) */
+#setview .planopt{flex-wrap:wrap;align-items:flex-start;margin-top:14px;font-size:16px;font-weight:600}
+#setview .planopt .sub{flex-basis:100%;padding-left:24px;font-size:15px;font-weight:400;color:var(--ink);line-height:1.45}
