@@ -1034,7 +1034,8 @@ $("optbible").onchange=e=>{S.bible=e.target.checked;store.set("bible",S.bible);r
 /* Reading plan off: no plan in the rail (The Bible button stays), no day's tabs, no Done/Next; the passage on screen becomes an
    ordinary opened passage so it keeps a tab you can close */
 $("optplan").onchange=e=>{ S.planOn=e.target.checked; store.set("planOn",S.planOn); document.body.classList.toggle("noplan",!S.planOn);
-  if(S.planOn){ const ids=READINGS.map(x=>x.id); S.opened=S.opened.filter(o=>!ids.includes(o.id)); if(S.adhoc && !S.opened.includes(S.adhoc)) S.adhoc=null; rememberOpen() }   // back on: no second tab for a day's reading
+  if(S.planOn){ $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false); BP={};   // back to the button
+    const ids=READINGS.map(x=>x.id); S.opened=S.opened.filter(o=>!ids.includes(o.id)); if(S.adhoc && !S.opened.includes(S.adhoc)) S.adhoc=null; rememberOpen() }   // back on: no second tab for a day's reading
   noPlanEnsure(); render() };
 function noPlanEnsure(){ if(S.planOn || S.adhoc) return; if(S.opened.length){ S.adhoc=S.opened[S.opened.length-1]; return } const r=cur(); if(r) openPassage(r.ref) }
 $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);renderReader();renderPanel()};
