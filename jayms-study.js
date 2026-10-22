@@ -2574,10 +2574,29 @@
   /* Where else the Bible says this: the OpenBible.info cross-references for the passage, strongest first,
      split into what comes before it and after it in the Bible. Each opens in the reader (sends passage) or reads in place. */
   define("CrossRefs", { id: "xref", label: "Cross-refs", name: "Cross-references", icon: '<svg viewBox="0 0 24 24"><path d="M7 7h10l-3-3M17 17H7l3 3"/></svg>' }, {
-    prepare: function () { var self = this; return data.xref(this.o.ref).then(function (x) { self.x = x; }); },
+    prepare: function () {
+      var self = this, segs = data.segs(this.o.ref), books = [];
+      segs.forEach(function (q) { if (books.indexOf(q.book) < 0) books.push(q.book); });
+      /* the CSB Connecting Scripture New Testament's notes on this passage: James's desk only (a copyrighted book) */
+      var cs = global.JAYMS_PUBLIC || this.o.owner === false ? Promise.resolve([]) : Promise.all(books.map(function (b) { return bookFile("csnt", b, segs).catch(function () { return null; }); })).then(function (fs) {
+        var out = []; fs.forEach(function (f, i) { ((f && f.n) || []).forEach(function (n) {
+          if (segs.some(function (q) { return R.overlap({ book: books[i], c1: n[0], v1: n[1], c2: n[2], v2: n[3] }, q); })) out.push({ book: books[i], c1: n[0], v1: n[1], c2: n[2], v2: n[3], text: n[5] }); }); });
+        return out; });
+      return Promise.all([data.xref(this.o.ref), cs]).then(function (r) { self.x = r[0]; self.cs = r[1]; });
+    },
+    /* the Connecting Scripture tab: each note under the verses it is on */
+    csHTML: function () {
+      var list = this.cs || [];
+      var where = function (n) { return n.book + " " + n.c1 + ":" + n.v1 + (n.c2 !== n.c1 ? "\u2013" + n.c2 + ":" + n.v2 : n.v2 !== n.v1 ? "\u2013" + n.v2 : ""); };
+      return '<p class="ctx">How the New Testament uses the Old here, from the CSB Connecting Scripture New Testament. A reference in a note opens in the reader.</p>' +
+        list.map(function (n) { return box("scripture", "", '<div class="item"><span class="when">' + esc(where(n)) + '</span><div class="jst-note">' + noteHTML(n.text) + "</div></div>"); }).join("") +
+        '<p class="ctx u-fs13">G. K. Beale and Benjamin L. Gladd, eds., <i>CSB Connecting Scripture New Testament</i> (Holman, 2025), from your BOOKS vault. On your desk only.</p>';
+    },
     view: function () {
       var self = this, st = this.st, all = this.x || [], q = data.segs(this.o.ref)[0];
       if (!q) return { kick: "Cross-references", title: this.o.ref, body: none("Open a passage first.") };
+      var csn = (this.cs || []).length, tabs = csn ? '<div class="chips u-mb10"><button class="chip' + (st.tab !== "cs" ? " on" : "") + '" data-jst-xtab="">Cross-references (' + all.length + ')</button><button class="chip' + (st.tab === "cs" ? " on" : "") + '" data-jst-xtab="cs">Connecting Scripture (' + csn + ")</button></div>" : "";
+      if (csn && st.tab === "cs") return { kick: "Cross-references \u00B7 Connecting Scripture", title: "How the NT uses the OT here", body: tabs + this.csHTML() };
       var here = R.book(q.book), pos = function (x) { return x.order * 1e6 + x.c * 1e3 + x.v; }, me = here.order * 1e6 + q.c1 * 1e3 + q.v1;
       /* which verse of the passage each one is for ("1 Samuel 31:6"); the verse chips narrow the list to one verse */
       var full = function (lab) { return q.book + " " + (String(lab).indexOf(":") > -1 ? lab : q.c1 + ":" + lab); };
@@ -2601,7 +2620,7 @@
         return '<div class="lbl">' + label + " (" + list.length + ")</div>" + shown.map(row).join("") +
           (list.length > 10 ? '<div class="askrow"><button class="btn" data-jst-xall="' + key + '">' + (open ? "Show the strongest 10" : "Show all " + list.length) + "</button></div>" : "");
       };
-      var h = '<p class="ctx">Other places that quote, echo or teach the same thing as ' + esc(this.o.ref) + ", strongest first. Each says which verse it is for. Tap one to read it here, in the " + esc(this.o.version || "NET") + ".</p>";
+      var h = tabs + '<p class="ctx">Other places that quote, echo or teach the same thing as ' + esc(this.o.ref) + ", strongest first. Each says which verse it is for. Tap one to read it here, in the " + esc(this.o.version || "NET") + ".</p>";
       if (vs.length > 1) h += '<div class="lbl">For verse</div><div class="chips u-mb10"><button class="chip' + (!st.v ? " on" : "") + '" data-jst-xv="">All</button>' + vs.map(function (l) { return '<button class="chip' + (st.v === l ? " on" : "") + '" data-jst-xv="' + esc(l) + '">' + esc(l) + "</button>"; }).join("") + "</div>";
       h += all.length ? sect("after", "Later in the Bible", after) + sect("before", "Earlier in the Bible", before) : none("No cross-references for " + esc(this.o.ref) + ".");
       h += '<p class="ctx u-fs13">Sources: <a href="https://www.openbible.info/labs/cross-references/" target="_blank" rel="noopener">OpenBible.info</a> cross-references (CC BY, ranked by readers\' votes), and the verses cited in the <a href="https://tyndaleopenresources.com/" target="_blank" rel="noopener">Tyndale Open Study Notes</a> and <a href="https://github.com/BibleAquifer/BiblicaStudyNotes" target="_blank" rel="noopener">Biblica Study Notes</a> (CC BY-SA 4.0). Order: passages named by more than one source first, then by readers\' votes. A green edge marks a New Testament passage.</p>';
@@ -2610,6 +2629,8 @@
     click: function (e) {
       var self = this, t = e.target, pk = t.closest("[data-jst-xpeek]"), op = t.closest("[data-jst-xopen]"), al = t.closest("[data-jst-xall]");
       if (op) { e.stopPropagation(); this.emit("passage", { ref: op.getAttribute("data-jst-xopen") }); return; }
+      var xt = t.closest("[data-jst-xtab]");
+      if (xt) { e.stopPropagation(); this.st.tab = xt.getAttribute("data-jst-xtab"); this.paint(); return; }
       var xv = t.closest("[data-jst-xv]");
       if (xv) { e.stopPropagation(); this.st.v = xv.getAttribute("data-jst-xv") || null; this.paint(); return; }
       if (al) { e.stopPropagation(); var k = "all" + al.getAttribute("data-jst-xall"); this.st[k] = !this.st[k]; this.paint(); return; }

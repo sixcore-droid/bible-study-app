@@ -684,3 +684,10 @@ body.hg-noorig .mtag{display:none}
 .jst-famsvg g.me rect{stroke:var(--gold);stroke-width:2;fill:var(--paper-deep)}
 .jst-famsvg g.me text{fill:var(--ink-bright);font-weight:700}
 .jst-famsvg g.more text{fill:var(--ink);font-style:italic}
+
+/* Settings: words of Jesus in red, Connecting Scripture verses in blue, purple where both (colorText in the page) */
+:root{--jw:#e8675f;--csblue:#6ea8f0;--cspurple:#b78cf0}
+#text .jw, #text .jwq{color:var(--jw)}
+#text .cs{color:var(--csblue)}
+#text .cs.jw, #text .cs .jwq{color:var(--cspurple)}
+#text .cs .vn, #text .jw .vn{color:var(--gold)}

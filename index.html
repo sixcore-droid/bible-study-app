@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v295">
+<link rel="stylesheet" href="jayms-study.css?v=v296">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -44,6 +44,8 @@
   <h2>Settings</h2>
   <label class="planopt"><input type="checkbox" id="optlogos"> Logos links <span class="sub">Open in Logos, the Shelf's commentaries and study Bibles, the atlases</span></label>
   <label class="planopt"><input type="checkbox" id="optbible"> The Bible button <span class="sub">under the reading plan: go to any book, chapter and verse</span></label>
+  <label class="planopt"><input type="checkbox" id="optred"> Words of Jesus in red <span class="sub">from the World English Bible's red letters; the words inside his quotation marks</span></label>
+  <label class="planopt" id="optbluewrap" hidden><input type="checkbox" id="optblue"> Old Testament connections in blue <span class="sub">verses with a note in the CSB Connecting Scripture New Testament; purple where Jesus is speaking</span></label>
   <label class="planopt"><input type="checkbox" id="optnums"> Verse numbers <span class="sub">off: the text reads straight through, and Speechify skips them</span></label>
   <p class="ctx">This browser remembers them.</p>
 </div></div>
@@ -155,10 +157,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v295"></script>
-<script src="jayms-store.js?v=v295"></script>
-<script src="x-discuss.js?v=v295"></script>
-<script src="jayms-study.js?v=v295"></script>
+<script src="jayms-ref.js?v=v296"></script>
+<script src="jayms-store.js?v=v296"></script>
+<script src="x-discuss.js?v=v296"></script>
+<script src="jayms-study.js?v=v296"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -301,7 +303,7 @@ function initNote(id, force){
 }
 const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:false   /* the box is gone (6 Oct): "My OT Reading Plan" leaves the genealogies out instead */,
            app:store.get("app","study"), mark:null, hgShow:store.get("hgShow",{claim:true, emphasis:true, cosmetic:false}), hgOrig:store.get("hgOrig",true),   /* the Hebrew & Greek mode */
-           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true), logos:store.get("logos",true), bible:store.get("bible",true)};
+           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true), logos:store.get("logos",true), bible:store.get("bible",true), red:store.get("red",false), blue:store.get("blue",false)};
 /* public build: Read along only; no My desk switch, no prototype badge */
 if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
 /* a refresh brings back the panel that was open (null = none); a first visit keeps the default above */
@@ -424,7 +426,7 @@ function renderReader(){
   const lg = JaymsRef.refly(r.ref, S.ver);
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
   $("rlogos").hidden = !S.logos;
-  $("optlogos").checked = S.logos; $("optbible").checked = S.bible; $("biblebtn").hidden = !S.bible; if(!S.bible) $("biblepick").hidden = true;
+  $("optlogos").checked = S.logos; $("optred").checked = S.red; $("optblue").checked = S.blue; $("optbluewrap").hidden = !CSV; $("optbible").checked = S.bible; $("biblebtn").hidden = !S.bible; if(!S.bible) $("biblepick").hidden = true;
   $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
   const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
   $("ver").innerHTML = opts(S.ver); $("ver2").innerHTML = opts(S.ver2);
@@ -480,6 +482,7 @@ function renderReader(){
         + `<div class="pone" data-col="0">` + blocks.map(b=>b.label?`<div class="lbl seglbl">${esc(b.label)}</div>`:blockHTML(eff[0],b)).join("") + `</div>`)
     + `<div class="ver">${[par?"":eff[0], linkNote].filter(Boolean).join(" · ")}</div>`;
   if(S.app==="hg") hgApply();   // the Hebrew & Greek marks, laid on the text just drawn
+  colorText();   // red letters, Connecting Scripture blue, purple where both (Settings)
   findApply(false);
   syncChapterNav();
   const th = thread(r.id);
@@ -615,6 +618,38 @@ function openPassage(ref, replace){
   return "";
 }
 /* closing a tab: the one on screen falls back to the opened tab beside it, or the day's reading */
+/* Red letters (redletter.json: per verse 1 = all Jesus, 2 = part) and the CSB Connecting Scripture verses (csnt-verses.json, desk
+   only). A verse that is all Jesus goes red; one that is part Jesus has the words inside his quotation marks in red (a version with no
+   quotation marks, like the KJV, colours the verse). Connecting Scripture verses go blue, and Jesus's words in them purple. */
+let RL=null, CSV=null;
+fetch("redletter.json").then(r=>r.ok?r.json():null).then(d=>{ RL=d&&d.v; if(RL&&S.red) renderReader() }).catch(()=>{});
+if(!PUBLIC) fetch("csnt-verses.json").then(r=>r.ok?r.json():null).then(d=>{ if(d&&d.v){ CSV={}; Object.keys(d.v).forEach(b=>{ CSV[b]=new Set(d.v[b]) }); renderReader() } }).catch(()=>{});
+function colorText(){
+  const t=$("text"); if(!t) return;
+  t.querySelectorAll(".vn").forEach(n=>{
+    const box=n.closest(".vs, .v"); if(!box || box.dataset.tint) return; box.dataset.tint=1;
+    const [b,c,v]=String(n.dataset.v||"").split("|"), k=c+":"+v;
+    const cs = S.blue && CSV && CSV[b] && CSV[b].has(k), jw = S.red && RL && RL[b] && RL[b][k];
+    if(cs) box.classList.add("cs");
+    if(jw===1) box.classList.add("jw");
+    else if(jw===2) quoteRed(box);
+  });
+}
+function quoteRed(box){
+  const walk=document.createTreeWalker(box, NodeFilter.SHOW_TEXT, { acceptNode:x=>x.parentNode.closest(".vn, .vtag, .sup") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+  const nodes=[]; while(walk.nextNode()) nodes.push(walk.currentNode);
+  const all=nodes.map(x=>x.nodeValue).join(""), first=all.search(/[“”]/);
+  if(first<0){ box.classList.add("jw"); return }          // no quotation marks in this version: the whole verse
+  let inside = all[first]==="”";                          // the verse starts inside a quotation carried over from the last
+  nodes.forEach(nd=>{
+    const parts=nd.nodeValue.split(/([“”])/); if(parts.length===1 && !inside) return;
+    const frag=document.createDocumentFragment();
+    parts.forEach(p=>{ if(p==="“"){ inside=true; frag.appendChild(Object.assign(document.createElement("span"),{className:"jwq",textContent:p})); return }
+      if(p==="”"){ frag.appendChild(Object.assign(document.createElement("span"),{className:"jwq",textContent:p})); inside=false; return }
+      if(!p) return; if(inside){ const sp=document.createElement("span"); sp.className="jwq"; sp.textContent=p; frag.appendChild(sp) } else frag.appendChild(document.createTextNode(p)); });
+    nd.parentNode.replaceChild(frag, nd);
+  });
+}
 const PLAN_SHUT = {};   // "plan|day" -> the plan readings closed for that day
 function planTabsShut(){ return PLAN_SHUT[S.plan+"|"+S.day] || [] }
 function closePlanTab(i){
@@ -982,6 +1017,8 @@ $("ver2").onchange=e=>{ const was=S.ver2; S.ver2=e.target.value; if(S.ver2===S.v
 $("layoutbtn").onclick=()=>{S.layout=S.layout==="verse"?"read":"verse";store.set("layout",S.layout);renderReader()};
 $("optnums").onchange=e=>{S.nums=e.target.checked;store.set("nums",S.nums);renderReader()};
 $("numbtn").onclick=()=>{S.nums=!S.nums;store.set("nums",S.nums);renderReader()};   // the same switch as Settings, kept on the reader bar
+$("optred").onchange=e=>{S.red=e.target.checked;store.set("red",S.red);renderReader()};
+$("optblue").onchange=e=>{S.blue=e.target.checked;store.set("blue",S.blue);renderReader()};
 $("optbible").onchange=e=>{S.bible=e.target.checked;store.set("bible",S.bible);renderReader()};
 $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);renderReader();renderPanel()};
 { const v=$("setview"), close=()=>{ v.hidden=true; $("setbtn").focus() };
