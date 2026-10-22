@@ -557,6 +557,8 @@ function newId(ref){ return `${JaymsRef.key(ref)}~${Date.now()}~${(++ID_N).toStr
 const HANDLERS = {
   meta:    m => applyMeta(m),
   word:    k => { S.word=k; if(S.tool!=="word"){ S.tool="word"; renderDock(); renderPanel() } renderReader() },
+  /* "On the map" in the Fact Book: the Maps panel, with that place selected */
+  mapPlace: id => { S.mapPlace=id; S.tool="maps"; renderDock(); renderPanel(); if(PH && PH.o && S.mapPlace){ PH.o.focusStep=S.mapPlace; PH.refresh() } S.mapPlace=null },
   verse:   v => { S.vsel=v; S.tool="verse"; renderReader(); renderDock(); renderPanel() },
   mark:    id => { S.mark=id; S.tool="marks"; renderReader(); renderDock(); renderPanel() },
   passage: d => { const err=openPassage(d.ref); if(err) $("gomsg").textContent=err },
