@@ -2651,11 +2651,11 @@
     },
     /* the Echoes of Revelation tab: each echo with both passages, then what matches, what differs and what John does with it */
     eorHTML: function () {
-      var go = function (r) { return '<button class="jst-ref" data-jst-go="' + esc(r) + '" title="Open ' + esc(r) + '">' + esc(r) + "</button>"; };
+      var ver = this.o.version || "NET", go = function (r) { return '<button class="jst-ref" data-jst-go="' + esc(r) + '" title="Open ' + esc(r) + '">' + esc(r) + "</button>"; };
       return '<p class="ctx">Revelation never quotes the Old Testament outright, yet no New Testament book uses it more. The echoes that touch ' + esc(this.o.ref) + ".</p>" +
         (this.eor || []).map(function (e) {
           var part = function (k, v, t) { return e[k] ? box(v, t, "<p>" + md(e[k]) + "</p>") : ""; };
-          return box("scripture", "", '<div class="item"><span class="when">' + go(e.bibleRef) + " \u2190 " + (e.otRef || []).map(go).join(", ") + '</span><span class="tt">' + esc(e.title.replace(/^[^,]*,\s*/, "").replace(/^./, function (c) { return c.toUpperCase(); })) + '</span><span class="sub">' + esc(e.summary) + "</span>" +
+          return box("scripture", "", '<div class="item"><span class="when">' + go(e.bibleRef) + " \u2190 " + (e.otRef || []).map(go).join(", ") + " \u00B7 " + esc(ver) + '</span><span class="tt">' + esc(e.title.replace(/^[^,]*,\s*/, "").replace(/^./, function (c) { return c.toUpperCase(); })) + '</span><span class="sub">' + esc(e.summary) + "</span>" +
             '<div class="jst-two u-mt8" data-eor-two="' + esc(e.id) + '"><div><div class="lbl">' + esc(e.bibleRef) + '</div><p class="u-fs15" data-eor-txt="' + esc(e.bibleRef) + '">\u2026</p></div><div>' +
               (e.otRef || []).map(function (r) { return '<div class="lbl">' + esc(r) + '</div><p class="u-fs15" data-eor-txt="' + esc(r) + '">\u2026</p>'; }).join("") + "</div></div>" +
             (e.plain ? '<div class="box plain u-mt8"><p class="u-m0">' + md(e.plain) + "</p></div>" : "") +
@@ -2679,7 +2679,7 @@
       if (!T.some(function (x) { return x[0] === (st.tab || ""); })) st.tab = "";
       var tabs = T.length > 1 ? '<div class="chips u-mb10">' + T.map(function (x) { return '<button class="chip' + ((st.tab || "") === x[0] ? " on" : "") + '" data-jst-xtab="' + x[0] + '">' + x[1] + " (" + x[2] + ")</button>"; }).join("") + "</div>" : "";
       if (st.tab === "cs") return { kick: "Cross-references \u00B7 Connecting Scripture", title: "How the NT uses the OT here", body: tabs + this.csHTML() };
-      if (st.tab === "eor") return { kick: "Cross-references \u00B7 Echoes of Revelation", title: "Echoes of Revelation", body: tabs + this.eorHTML() + '<p class="ctx u-fs13">Both passages in the ' + esc(this.o.version || "NET") + ".</p>" };
+      if (st.tab === "eor") return { kick: "Cross-references \u00B7 Echoes of Revelation", title: "Echoes of Revelation", body: tabs + this.eorHTML() };
       var here = R.book(q.book), pos = function (x) { return x.order * 1e6 + x.c * 1e3 + x.v; }, me = here.order * 1e6 + q.c1 * 1e3 + q.v1;
       /* which verse of the passage each one is for ("1 Samuel 31:6"); the verse chips narrow the list to one verse */
       var full = function (lab) { return q.book + " " + (String(lab).indexOf(":") > -1 ? lab : q.c1 + ":" + lab); };
