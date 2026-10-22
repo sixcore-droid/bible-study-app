@@ -1115,7 +1115,19 @@
   /* the chart: distance along, height up, sea level marked, each stop ticked; under it the highest, lowest and total climb */
   function profileSVG(P, color, width) {
     var S = P.samples.filter(function (p) { return p.h != null; }); if (S.length < 2) return "";
-    var W = Math.max(300, Math.round(width || 640)), H = Math.round(Math.max(150, Math.min(220, W * .32))), L = 52, B = 24, T = 16, lo = Math.min(0, Math.min.apply(null, S.map(function (p) { return p.h; }))), hi = Math.max(50, Math.max.apply(null, S.map(function (p) { return p.h; })));   // drawn at the slot's own width so the lettering stays readable
+    var W = Math.max(300, Math.round(width || 640)), L = 52, T = 16;
+    /* stop names under the chart: each goes on the first line where it doesn't touch the name before it (up to three lines);
+       a name that fits nowhere shows its stop number instead */
+    var CW = 7.8, rowEnd = [-1e9, -1e9, -1e9], labs = (P.marks || []).map(function (m, i, a) {
+      var x = L + (W - L - 8) * m.k / (P.total || 1), txt = m.n, w = txt.length * CW, anchor = i === 0 ? "start" : i === a.length - 1 ? "end" : "middle";
+      var x0 = anchor === "start" ? x : anchor === "end" ? x - w : x - w / 2;
+      if (x0 < 0) { anchor = "start"; x0 = Math.max(0, x0); }
+      for (var r = 0; r < 3; r++) if (x0 >= rowEnd[r] + 8) { rowEnd[r] = x0 + w; return { x: x, t: txt, a: anchor, r: r }; }
+      var num = String(i + 1); w = num.length * CW;
+      for (r = 0; r < 3; r++) if (x - w / 2 >= rowEnd[r] + 4) { rowEnd[r] = x + w / 2; return { x: x, t: num, a: "middle", r: r }; }
+      return null; });
+    var rows = 1 + Math.max(0, Math.max.apply(null, labs.map(function (l) { return l ? l.r : 0; }))), B = 8 + 16 * rows,
+      H = Math.round(Math.max(150, Math.min(220, W * .32))) + 16 * (rows - 1), lo = Math.min(0, Math.min.apply(null, S.map(function (p) { return p.h; }))), hi = Math.max(50, Math.max.apply(null, S.map(function (p) { return p.h; })));   // drawn at the slot's own width so the lettering stays readable
     var X = function (k) { return L + (W - L - 8) * k / (P.total || 1); }, Y = function (h) { return T + (H - T - B) * (1 - (h - lo) / ((hi - lo) || 1)); };
     var line = S.map(function (p, i) { return (i ? "L" : "M") + X(p.k).toFixed(1) + " " + Y(p.h).toFixed(1); }).join("");
     var climb = 0, fall = 0, ref = S[0].h;   // count a rise or fall once it passes 20 m, so ripples in the height data don't pile up
@@ -1126,7 +1138,7 @@
       (lo < 0 ? '<line x1="' + L + '" x2="' + (W - 8) + '" y1="' + Y(0) + '" y2="' + Y(0) + '" class="sea0"/><text x="' + (W - 10) + '" y="' + (Y(0) - 4) + '" class="ax" text-anchor="end">sea level</text>' : "") +
       '<path d="' + line + "L" + X(S[S.length - 1].k) + " " + (H - B) + "L" + X(S[0].k) + " " + (H - B) + 'Z" class="fill" fill="' + color + '"/><path d="' + line + '" class="ln" stroke="' + color + '"/>' +
       '<text x="' + (L - 6) + '" y="' + (Y(hi) + 4) + '" class="ax" text-anchor="end">' + Math.round(hi) + ' m</text><text x="' + (L - 6) + '" y="' + (Y(lo) + 4) + '" class="ax" text-anchor="end">' + Math.round(lo) + " m</text>" +
-      P.marks.map(function (m, i) { return '<line x1="' + X(m.k) + '" x2="' + X(m.k) + '" y1="' + T + '" y2="' + (H - B) + '" class="tick"/><text x="' + X(m.k) + '" y="' + (H - 6) + '" class="ax" text-anchor="' + (i === 0 ? "start" : i === P.marks.length - 1 ? "end" : "middle") + '">' + (P.marks.length > 8 ? i + 1 : esc(m.n)) + "</text>"; }).join("") + "</svg>";
+      P.marks.map(function (m, i) { var lb = labs[i]; return '<line x1="' + X(m.k) + '" x2="' + X(m.k) + '" y1="' + T + '" y2="' + (H - B + (lb ? 4 + 16 * lb.r : 0)) + '" class="tick"/>' + (lb ? '<text x="' + lb.x.toFixed(1) + '" y="' + (H - B + 16 + 16 * lb.r) + '" class="ax" text-anchor="' + lb.a + '">' + esc(lb.t) + "</text>" : ""); }).join("") + "</svg>";
     return g + '<p class="u-fs14 u-m4-8">Highest ' + Math.round(top.h).toLocaleString() + " m near " + esc(near(top)) + "; lowest " + Math.round(bot.h).toLocaleString() + " m near " + esc(near(bot)) +
       ". About " + Math.round(climb / 10) * 10 + " m of climbing and " + Math.round(fall / 10) * 10 + " m of descent along the line, " + Math.round(P.total).toLocaleString() + " km. Straight lines between the stops, so a real road's switchbacks add more; heights from Mapterhorn (Copernicus GLO-30).</p>";
   }
@@ -1768,7 +1780,9 @@
       if (kv) { this._atlas.camera(kv.cam); if (kv.pick && !this.st.pick) this.st.pick = kv.pick; } else this._atlas.fit(pts);
       if (sel && sel.kind === "p" && this._items[0]) { var it0 = this._items[0]; this._atlas.alts(it0.alt ? it0.alt.map(function (a) { return { n: a[0], ll: [a[1], a[2]], s: a[3], from: it0.ll }; }) : []); }
       var pslot = this.el.querySelector("[data-jst-aprof]");
-      if (rt && pslot && CFG.onlineMaps) profileOf(rt.stops.map(function (s) { return { ll: s.ll, n: s.via ? null : s.n, sea: s.m === "sea" }; })).then(function (P) { if (pslot.isConnected) pslot.innerHTML = profileSVG(P, rt.color, pslot.clientWidth) || '<p class="sub u-fs14">No heights here.</p>'; }, function () { pslot.innerHTML = '<p class="sub u-fs14">The heights didn\'t load here.</p>'; });
+      if (rt && pslot && CFG.onlineMaps) profileOf(rt.stops.map(function (s) { return { ll: s.ll, n: s.via ? null : s.n, sea: s.m === "sea" }; })).then(function (P) { if (!pslot.isConnected) return;
+        var drawn = 0, draw = function () { var w = pslot.clientWidth; if (!w || Math.abs(w - drawn) < 12) return; drawn = w; pslot.innerHTML = profileSVG(P, rt.color, w) || '<p class="sub u-fs14">No heights here.</p>'; };
+        draw(); if (global.ResizeObserver) new ResizeObserver(draw).observe(pslot); /* a resized panel redraws it at the new width */ }, function () { pslot.innerHTML = '<p class="sub u-fs14">The heights didn\'t load here.</p>'; });
       if (this.st.pick) this.pickItem(this.st.pick, false);
     },
     /* show one stop or place under the map: its name, the verse (in the first version the text has), and a link to open it */
@@ -2074,13 +2088,37 @@
       ["Enduring Word", "David Guzik's free commentary", "https://enduringword.com/bible-commentary/" + ew + "/"]
     ];
     if (i < 39) L.push(["Sefaria", "The Hebrew with Jewish commentary (Rashi, Ramban ...)", "https://www.sefaria.org/" + SITE_BOOK.sefaria[i] + "." + c + (full ? "." + v : "") + "?lang=bi"]);
-    return L;
+    return L.concat(MORE_TOOLS);
   }
+  /* free tools that open at their own front page, not at the passage */
+  var MORE_TOOLS = [
+    ["CSNTM manuscripts", "High-resolution photographs of New Testament manuscripts; the newly added ones first", "https://collections.csntm.org/search?artifact_list=newly-added-manuscripts"],
+    ["Historical Christian Faith", "The early Christian writers: their writings, their comments verse by verse, doctrine across the centuries", "https://historicalchristian.faith/"],
+    ["OLEB", "Orthodox Liturgical English Bible: Brenton's Septuagint with the King James New Testament, conformed to the Byzantine text", "https://oleb.bible/"],
+    ["Biblical Israel map", "A hand-drawn map of 160+ places: where each was, the evidence for it, and the verses that name it", "https://biblemap.shop/pages/interactive-map"]
+  ];
+  /* other links, by kind (James's list) */
+  var OTHER_LINKS = [
+    ["Divine Council", [
+      ["More Unseen Realm", "More of the Bible than you've been told", "https://www.moreunseenrealm.com/"],
+      ["Genesis Marks the Spot", "A biblical theology podcast: the Bible read in its original context", "https://www.genesismarksthespot.com/"],
+      ["The Naked Bible Podcast", "Biblical theology stripped of denominational systems by its context", "https://nakedbiblepodcast.com/"],
+      ["AWKNG", "Courses in theology, Hebrew, 1 Enoch and the divine council", "https://awkng.com/"],
+      ["Dr. Michael Heiser", "Michael S. Heiser's own site", "https://drmsh.com/"],
+      ["Heiser community", "The Michael S. Heiser Foundation's community (it moved from community.drmsh.com)", "https://community.michaelsheiserfoundation.com/"]
+    ]],
+    ["The Weird", [
+      ["FringePop321", "Thinking well about all things fringe, the channel Heiser started, now hosted by Greg Outlaw", "https://www.fringepop321.com/"],
+      ["Nephilim Hunters Association", "A Christian research project on the biblical supernatural: Scripture, ancient texts, archaeology, fieldwork", "https://nephilimhunters.com/"]
+    ]]
+  ];
   define("Library", { id: "corpus", label: "Tools", name: "Free tools and texts", icon: ICON.corpus }, {
     view: function () {
       var lib = L(this, "library"), q = data.segs(this.o.ref)[0], h = "";
       if (q) h += '<div class="lbl">Free tools on ' + esc(this.o.ref) + "</div>" + box("scripture", "", '<div class="item">' + toolLinks(q).map(function (t) {
         return '<p class="u-m8">' + outlink(t[2], esc(t[0])) + '<br><span class="u-fs15">' + esc(t[1]) + "</span></p>"; }).join("") + "</div>");
+      h += OTHER_LINKS.map(function (g) { return '<div class="lbl u-mt14">Other links \u00B7 ' + esc(g[0]) + "</div>" + box("apparatus", "", '<div class="item">' + g[1].map(function (t) {
+        return '<p class="u-m8">' + outlink(t[2], esc(t[0])) + '<br><span class="u-fs15">' + esc(t[1]) + "</span></p>"; }).join("") + "</div>"); }).join("");
       h += '<div class="lbl u-mt14">Texts outside the Bible (' + lib.length + ")</div>" + (lib.length ? lib.map(function (c) { return box("witness", "", '<div class="item"><span class="when">' + esc(c.when) + '</span><span class="tt">' + esc(c.t) + '</span><span class="sub">' + esc(c.trad) + '</span><p class="u-m8-0 u-fs15">' + esc(c.why) + "</p></div>"); }).join("")
         : none("No text outside the Bible is tied to " + esc(this.o.ref) + " yet.")) + outlink(CFG.corpus, "Open the Corpus Atlas");
       return { kick: "Tools \u00B7 free study sites at this passage", title: "Free tools", body: h };
