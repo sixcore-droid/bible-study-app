@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v287">
+<link rel="stylesheet" href="jayms-study.css?v=v288">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -155,10 +155,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v287"></script>
-<script src="jayms-store.js?v=v287"></script>
-<script src="x-discuss.js?v=v287"></script>
-<script src="jayms-study.js?v=v287"></script>
+<script src="jayms-ref.js?v=v288"></script>
+<script src="jayms-store.js?v=v288"></script>
+<script src="x-discuss.js?v=v288"></script>
+<script src="jayms-study.js?v=v288"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -412,7 +412,10 @@ function wordify(html){return html.replace(/\[w:(\w+)\](.*?)\[\/w\]/g,(m,k,t)=>`
 function renderReader(){
   JaymsRef.setWeb(S.view==="public");   // Read along: Logos's web links, so a reader who doesn't own the book lands on its page
   const r = cur(); if(!r) return;
-  $("rtabs").innerHTML = READINGS.map((x,i)=>`<button class="rtab${!S.adhoc&&i===S.reading?" on":""}${isDone(dk(x))?" done":""}" role="tab" aria-selected="${!S.adhoc&&i===S.reading}" data-r="${i}"><span class="ok"></span>${esc(x.ref)}</button>`).join("");
+  /* the day's plan readings as tabs, each with its own ×; none while the reading plan is hidden (Plan off), so only the passages you
+     opened sit on top. A closed one stays closed for that day; picking a day in the plan brings them back */
+  const shut = planTabsShut(), planTabs = document.body.classList.contains("rail-hidden") ? [] : READINGS.map((x,i)=>i).filter(i=>!shut.includes(i));
+  $("rtabs").innerHTML = planTabs.map(i=>{ const x=READINGS[i]; return `<span class="rtabgrp"><button class="rtab${!S.adhoc&&i===S.reading?" on":""}${isDone(dk(x))?" done":""}" role="tab" aria-selected="${!S.adhoc&&i===S.reading}" data-r="${i}"><span class="ok"></span>${esc(x.ref)}</button><button class="rtabx" data-close-plan="${i}" title="Close ${esc(x.ref)}" aria-label="Close ${esc(x.ref)}">×</button></span>` }).join("");
   const isToday = S.day===todayNum(plan());
   /* every passage opened with Go (or « ») keeps its own tab until its × closes it (S.opened); S.adhoc is the one on screen */
   $("rtabs").innerHTML += S.opened.map((o,n)=>`<span class="rtabgrp"><button class="rtab${S.adhoc===o?" on":""} adhoc" role="tab" aria-selected="${S.adhoc===o}" data-open-tab="${n}">${esc(o.ref)}</button><button class="rtabx" data-close-adhoc="${n}" title="Close ${esc(o.ref)}" aria-label="Close ${esc(o.ref)}">×</button></span>`).join("");
@@ -612,6 +615,13 @@ function openPassage(ref, replace){
   return "";
 }
 /* closing a tab: the one on screen falls back to the opened tab beside it, or the day's reading */
+const PLAN_SHUT = {};   // "plan|day" -> the plan readings closed for that day
+function planTabsShut(){ return PLAN_SHUT[S.plan+"|"+S.day] || [] }
+function closePlanTab(i){
+  const k=S.plan+"|"+S.day; PLAN_SHUT[k]=[...new Set(planTabsShut().concat(i))];
+  if(!S.adhoc && S.reading===i){ const left=READINGS.map((x,j)=>j).filter(j=>!PLAN_SHUT[k].includes(j));
+    if(left.length) S.reading=left[0]; else if(S.opened.length) S.adhoc=S.opened[S.opened.length-1]; }
+  S.vsel=null; renderReader(); renderPanel(); renderDock() }
 function closeAdhoc(n){ const o=S.opened[n]; if(!o) return; S.opened.splice(n,1);
   if(S.adhoc===o) S.adhoc = S.opened[Math.min(n, S.opened.length-1)] || null;
   S.vsel=null; rememberOpen(); renderReader(); renderPanel(); renderDock() }
@@ -783,8 +793,9 @@ document.addEventListener("click",e=>{
   const v=e.target.closest("[data-v]"); if(v){e.preventDefault(); const [b,c,n]=v.dataset.v.split("|"); S.vsel={book:b,c:+c,v:+n}; S.tool="verse"; renderReader(); renderDock(); renderPanel(); return}
   const t=e.target.closest("[data-t]"); if(t){openTool(t.dataset.t); return}
   const cx=e.target.closest("[data-close-adhoc]"); if(cx){ e.stopPropagation(); closeAdhoc(+cx.dataset.closeAdhoc); return }
+  const cp=e.target.closest("[data-close-plan]"); if(cp){ e.stopPropagation(); closePlanTab(+cp.dataset.closePlan); return }
   if(e.target.closest("[data-alldays]")){ S.allDays=!S.allDays; renderPlan(); return }
-  const dy=e.target.closest("[data-day]"); if(dy){ S.adhoc=null; S.vsel=null; S.word=null;S.day=+dy.dataset.day; S.reading=0; buildDay(); rememberOpen(); render(); $("rail").classList.remove("open"); readerTop(); return}
+  const dy=e.target.closest("[data-day]"); if(dy){ delete PLAN_SHUT[S.plan+"|"+dy.dataset.day]; S.adhoc=null; S.vsel=null; S.word=null;S.day=+dy.dataset.day; S.reading=0; buildDay(); rememberOpen(); render(); $("rail").classList.remove("open"); readerTop(); return}
   const ot=e.target.closest("[data-open-tab]"); if(ot){ S.adhoc=S.opened[+ot.dataset.openTab]||null; S.vsel=null; S.word=null; rememberOpen(); renderReader(); renderPanel(); renderDock(); readerTop(); return }
   const r=e.target.closest("[data-r]"); if(r){ S.adhoc=null; S.vsel=null; S.word=null;S.reading=+r.dataset.r; rememberOpen(); renderReader(); renderPanel(); readerTop(); return}
 });
@@ -999,7 +1010,7 @@ $("railbtn").onclick=()=>{
   else if(getComputedStyle(r).position==="fixed" && getComputedStyle(r).display!=="none"){ r.classList.add("open") }
   else { const hide=!document.body.classList.contains("rail-hidden"); document.body.classList.toggle("rail-hidden",hide); store.set("railHidden",hide);
          if(!hide && getComputedStyle(r).position==="fixed") r.classList.add("open") }
-  syncRailBtn();
+  syncRailBtn(); renderReader();   // the plan's tabs come and go with the plan
 };
 document.body.classList.toggle("rail-hidden",!!store.get("railHidden",false));
 window.addEventListener("resize",syncRailBtn);
