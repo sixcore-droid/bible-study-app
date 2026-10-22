@@ -460,7 +460,9 @@ mark.hit.now{background:var(--gold);color:var(--paper-deep)}
 .vn:hover{background:var(--gold);color:var(--paper)}
 .nonums .vn{display:none}   /* Hide numbers: verse numbers off the page (and out of anything reading it aloud) */
 .sup{font-style:italic;font-size:15px;display:block;margin-bottom:4px}
-.red{color:#e7a08f}
+.red{color:inherit}   /* the LSB's own red letters: only with Settings > Words of Jesus in red (#text.redon) */
+#text.redon .red{color:var(--jw)}
+#text.redon .cs .red{color:var(--cspurple)}
 .sc{font-variant:small-caps;letter-spacing:.03em}
 .w{text-decoration:underline dotted var(--gold);text-underline-offset:5px;text-decoration-thickness:1.5px;cursor:pointer;border-radius:3px}
 .w:hover,.w.on{background:rgba(212,168,92,.18);color:var(--ink-bright)}

@@ -627,6 +627,7 @@ fetch("redletter.json").then(r=>r.ok?r.json():null).then(d=>{ RL=d&&d.v; if(RL&&
 if(!PUBLIC) fetch("csnt-verses.json").then(r=>r.ok?r.json():null).then(d=>{ if(d&&d.v){ CSV={}; Object.keys(d.v).forEach(b=>{ CSV[b]=new Set(d.v[b]) }); renderReader() } }).catch(()=>{});
 function colorText(){
   const t=$("text"); if(!t) return;
+  t.classList.toggle("redon", !!S.red);   // the LSB's own red-letter marks follow the same checkbox
   t.querySelectorAll(".vn").forEach(n=>{
     const box=n.closest(".vs, .v"); if(!box || box.dataset.tint) return; box.dataset.tint=1;
     const [b,c,v]=String(n.dataset.v||"").split("|"), k=c+":"+v;
