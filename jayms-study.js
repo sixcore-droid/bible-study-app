@@ -847,6 +847,30 @@
   var TIER = { secure: "Secure identification", likely: "Likely identification", contested: "Contested identification", unlocated: "No proposed site",
     area: "Exact spot unknown", region: "Region" };   // area: known only as in or near somewhere (a gate "in Jerusalem"); region: the pin marks the middle
   function tierNote(p) { return p.tier === "area" ? '<p class="u-fs14 u-m4-8">Known only as ' + esc(p.near || "in this area") + '; the pin marks that, not the spot.</p>' : p.tier === "region" ? '<p class="u-fs14 u-m4-8">A land or region; the pin marks its middle.</p>' : ""; }
+  /* STEPBible's articles mark verses as <ref="1Sa.1.2, 6-7">1Sa.1.2, 6-7</ref> (a bare "2.23" means the book before it): each
+     becomes a verse button that opens in the reader, written out ("1 Samuel 1:2, 6-7") */
+  var STEP_BK = "Gen Exo Lev Num Deu Jos Jdg Rut 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Ezk Dan Hos Jol Amo Oba Jon Mic Nam Hab Zep Hag Zec Mal Mat Mrk Luk Jhn Act Rom 1Co 2Co Gal Eph Php Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jn 2Jn 3Jn Jud Rev".split(" ");
+  function stepRef(r, ctx) {
+    r = String(r).trim();
+    if (/^[1-3]?\s?[A-Za-z][A-Za-z ]+\s\d+:\d/.test(r)) return r;                       // already written out: "2 Kings 8:16, 25"
+    var out = [], book = ctx.book;
+    r.split(/\s*;\s*/).forEach(function (part) {
+      var m = part.match(/^([1-3]?[A-Za-z]{2,3})\.(.*)$/);
+      if (m && STEP_BK.indexOf(m[1]) > -1) { book = R.books[STEP_BK.indexOf(m[1])].name; part = m[2]; }
+      if (!book) return;
+      var cv = part.replace(/^(\d+)\.(\d+)/, "$1:$2").replace(/-(\d+)\.(\d+)/, "-$1:$2");   // 1.2-3 / 1.2-2.4
+      out.push((out.length ? "" : book + " ") + cv.replace(/\s+/g, " "));
+    });
+    ctx.book = book;
+    return out.join("; ");
+  }
+  function stepText(x, ctx) {
+    return String(x).split(/(<ref="[^"]*">[^<]*<\/ref>)/).map(function (part) {
+      var m = part.match(/^<ref="([^"]*)">/); if (!m) return esc(part);
+      var ref = stepRef(m[1], ctx), segs = ref ? R.parse(ref) : [];
+      return segs.length ? '<button class="jst-ref" data-jst-go="' + esc(ref) + '" title="Open ' + esc(R.format(segs)) + '">' + esc(R.format(segs)) + "</button>" : esc(m[1].replace(/(\d+)\.(\d+)/g, "$1:$2"));   // no book to tie it to: plain "2:24"
+    }).join("");
+  }
   function namesIn(nm, ref) {
     if (!nm) return [];
     var out = [], seen = {};
@@ -901,7 +925,7 @@
       if (m) { e.stopPropagation(); mapViewer(MAPBY[m.getAttribute("data-jst-pmap")]); return; }
       var sum = e.target.closest("[data-jst-step] summary");
       if (sum) { var d = sum.parentNode, slot = d.querySelector("[data-jst-art]"), id = d.getAttribute("data-jst-step");
-        if (!slot.innerHTML) getJSON("names-articles.json").then(function (a) { var t = a && a[id]; if (t) slot.innerHTML = t.split(/\s*<br\s*\/?>\s*/i).filter(Boolean).map(function (x) { return "<p class=\"u-m4-8\">" + esc(x) + "</p>"; }).join(""); }).catch(function () {}); }
+        if (!slot.innerHTML) getJSON("names-articles.json").then(function (a) { var t = a && a[id]; if (t) { var ctx = { book: "" }; slot.innerHTML = t.split(/\s*<br\s*\/?>\s*/i).filter(Boolean).map(function (x) { return "<p class=\"u-m4-8\">" + stepText(x, ctx) + "</p>"; }).join(""); } }).catch(function () {}); }
       Panel.prototype.click.call(this, e);
     },
     view: function () {
