@@ -2593,7 +2593,7 @@
         return box(nt ? "witness" : "scripture", "", '<div class="item">' + (x.from.length ? '<span class="when">For ' + esc(forLabel(x.from)) + "</span>" : "") +
           /* tap the reference to read it in place (tap again to fold it); "Open" puts it in the reader */
           '<div class="jst-xrow"><button class="tt jst-xt" data-jst-xpeek="' + esc(x.ref) + '" aria-expanded="' + !!peek + '" title="' + (peek ? "Hide the verse" : "Read it here") + '">' + esc(x.ref) + '</button><button class="jst-ref" data-jst-xopen="' + esc(x.ref) + '" title="Open ' + esc(x.ref) + ' in the reader">Open</button></div>' +
-          (peek ? '<p class="u-fs16 u-m6-4">' + esc(peek.split("\u0000")[0]) + (peek.split("\u0000")[1] ? ' <span class="sub u-fs13">' + esc(peek.split("\u0000")[1]) + "</span>" : "") + "</p>" : "") + "</div>");
+          (peek ? '<p class="u-fs16 u-m6-4">' + esc(peek.split("\u0000")[0]) + "" + "</p>" : "") + "</div>");
       };
       var sect = function (key, label, list) {
         if (!list.length) return "";
@@ -2601,7 +2601,7 @@
         return '<div class="lbl">' + label + " (" + list.length + ")</div>" + shown.map(row).join("") +
           (list.length > 10 ? '<div class="askrow"><button class="btn" data-jst-xall="' + key + '">' + (open ? "Show the strongest 10" : "Show all " + list.length) + "</button></div>" : "");
       };
-      var h = '<p class="ctx">Other places that quote, echo or teach the same thing as ' + esc(this.o.ref) + ", strongest first. Each says which verse it is for. Tap one to read it here.</p>";
+      var h = '<p class="ctx">Other places that quote, echo or teach the same thing as ' + esc(this.o.ref) + ", strongest first. Each says which verse it is for. Tap one to read it here, in the " + esc(this.o.version || "NET") + ".</p>";
       if (vs.length > 1) h += '<div class="lbl">For verse</div><div class="chips u-mb10"><button class="chip' + (!st.v ? " on" : "") + '" data-jst-xv="">All</button>' + vs.map(function (l) { return '<button class="chip' + (st.v === l ? " on" : "") + '" data-jst-xv="' + esc(l) + '">' + esc(l) + "</button>"; }).join("") + "</div>";
       h += all.length ? sect("after", "Later in the Bible", after) + sect("before", "Earlier in the Bible", before) : none("No cross-references for " + esc(this.o.ref) + ".");
       h += '<p class="ctx u-fs13">Sources: <a href="https://www.openbible.info/labs/cross-references/" target="_blank" rel="noopener">OpenBible.info</a> cross-references (CC BY, ranked by readers\' votes), and the verses cited in the <a href="https://tyndaleopenresources.com/" target="_blank" rel="noopener">Tyndale Open Study Notes</a> and <a href="https://github.com/BibleAquifer/BiblicaStudyNotes" target="_blank" rel="noopener">Biblica Study Notes</a> (CC BY-SA 4.0). Order: passages named by more than one source first, then by readers\' votes. A green edge marks a New Testament passage.</p>';
