@@ -396,15 +396,9 @@
    "at": "top",
    "callouts": [
     {
-     "sel": "#railbtn",
-     "name": "Plan",
-     "text": "Slides the reading plan in from the left.",
-     "at": "top"
-    },
-    {
-     "sel": "#menubtn",
+     "sel": "#fabmenu",
      "name": "Menu",
-     "text": "Opens the rest of the top bar: the apps, Settings, About, Donate and Help."
+     "text": "The round button: the reading plan, The Bible, the three apps, Settings, About, Donate and Help."
     },
     {
      "sel": "#dock",
