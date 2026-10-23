@@ -2411,7 +2411,9 @@
         }
       }
       if (st.diff) { var d = df.list.filter(function (x) { return x.id === st.diff; })[0]; if (d) return box("wording", "How the translations differ \u00B7 " + esc(d.ref), "<p>" + esc(d.gist) + '</p><p class="u-fs14">' + esc(d.lemma) + "</p>" + outlink(entryURL("diffs", d.slug), "jayms Translation Differences")); }
-      return '<p class="empty u-fs15 u-m0">Tap any word to see it here: what it means, its form, and whether the versions differ on it. Tap a verse number for that verse in the NET; one underlined in gold also has a note on why the translations differ.</p>';
+      /* nothing picked: the drawer folds away (the text gets the room); the how-to line shows only until the first tap */
+      var seen = false; try { seen = localStorage.getItem("jst-il-hint") === "1"; } catch (e) {}
+      return seen ? "" : '<p class="empty u-fs15 u-m0">Tap any word for what it means, its form and whether the versions differ on it; tap a verse number for the NET. This note goes away after your first tap.</p>';
     },
     view: function () {
       var self = this, o = this.o, st = this.st, segs = data.segs(o.ref), q = segs[0], book = this.book;
@@ -2461,6 +2463,7 @@
         /* only the drawer changes, so the text never moves */
         this.el.querySelectorAll(".ilu.on,.ilv.on").forEach(function (x) { x.classList.remove("on"); });
         if (st.word || st.verse) (w || d).classList.add("on");
+        try { localStorage.setItem("jst-il-hint", "1"); } catch (er) {}   // they know how it works now
         var dr = this.el.querySelector(".jst-drawer"); dr.innerHTML = this.drawer(); dr.scrollTop = 0;
         return;
       }

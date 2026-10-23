@@ -88,6 +88,8 @@
 .ilu-or{font-size:15px;color:var(--ink);opacity:.85;font-family:"SBL Hebrew","Ezra SIL","Times New Roman",serif}
 .ilnote{font-size:14px;margin:0}
 .ilscroll{flex:1;min-height:0;overflow:auto;padding:16px 18px 20px;display:flex;flex-direction:column;gap:14px}
+.ildrawer:empty{display:none}   /* nothing picked: no drawer, the interlinear gets the whole panel */
+.ildrawer:has(> p.empty:only-child){height:auto;max-height:clamp(80px,14vh,130px)}   /* just the one-time note: a slim strip */
 .ildrawer{flex:none;height:clamp(180px,32vh,280px);overflow:auto;border-top:1px solid var(--gold);padding:12px 18px 16px;background:var(--paper-deep);display:flex;flex-direction:column;gap:10px}
 a.btn{text-decoration:none;display:inline-block}
 .ask{display:flex;flex-direction:column;gap:8px}
