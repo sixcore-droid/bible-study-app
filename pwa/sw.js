@@ -6,13 +6,14 @@
        while a fresh copy is fetched behind it (so a new build arrives on the next visit).
      - jayms.com's live data (posts, glossary): fresh when online, the last copy when not.
      - Everything else (YouTube, BibleProject, podcasts, Claude): straight to the network, untouched.
-   scripts/build-public.py fills in v332 on every build; a new version replaces the old app copy. */
-const VERSION = "v332";
+   scripts/build-public.py fills in v333 on every build; a new version replaces the old app copy. */
+const VERSION = "v333";
 const GH = "https://sixcore-droid.github.io/bible-study-app/";
 const PAGE = "/bible-study-app/";
 const SHELL = "bsa-shell-" + VERSION, DATA = "bsa-data", LIVE = "bsa-live";
-const SHELL_FILES = [PAGE].concat(["jayms-ref.js", "jayms-store.js", "x-discuss.js", "jayms-study.js", "jayms-study.css", "help.html",
-  "version.json", "plans/index.json", "pwa/icon-192.png", "pwa/icon-512.png"].map(function (f) { return GH + f; }));
+/* the code and styles carry the build's version in their names (?v=), the same names the page asks for */
+const SHELL_FILES = [PAGE].concat(["jayms-ref.js", "jayms-store.js", "x-discuss.js", "jayms-study.js", "jayms-study.css"].map(function (f) { return GH + f + "?v=" + VERSION; }),
+  ["help.html", "version.json", "plans/index.json", "pwa/icon-192.png", "pwa/icon-512.png"].map(function (f) { return GH + f; }));
 
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(SHELL).then(function (c) { return c.addAll(SHELL_FILES); }).then(function () { return self.skipWaiting(); }));
