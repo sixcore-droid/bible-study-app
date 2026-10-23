@@ -413,7 +413,7 @@
     return (GLOSS.keys[foldWord(word)] || []).map(function (i) { return GLOSS.terms[i]; }).filter(function (g) { return lang && (g.lang === lang || (lang === "hebrew" && g.lang === "aramaic")); });
   }
   function glossBox(word, strong) {
-    return glossFor(word, strong).map(function (g) { return box("explain", "In my glossary", "<p><b>" + esc(g.t) + "</b>" + (g.x ? " " + esc(g.x) : "") + "</p>" + outlink(g.url, "jayms Glossary")); }).join("");
+    return glossFor(word, strong).map(function (g) { return box("explain", "In my glossary", "<p><b>" + esc(g.t) + "</b>" + (g.x ? " " + esc(g.x) : "") + "</p>"); }).join("");
   }
   /* a title that repeats itself in brackets ("Seir (Seir)") reads as just the name */
   /* "Joseph (Jacob's son living at the time of the Patriarchs)" -> name "Joseph", about "Jacob's son ..."; an "about" that only repeats the name is dropped */
@@ -458,12 +458,12 @@
     glossaryLive: function () {
       if (cache.__glossLive) return cache.__glossLive;
       if (CFG.liveOff) return (cache.__glossLive = Promise.resolve(null));
-      var page = function () { return getPaged(CFG.siteData + "jayms_term?per_page=100&orderby=id&order=asc&_fields=id,slug,link,title,excerpt,meta"); };
+      var page = function () { return getPaged(CFG.siteData + "jayms_term?per_page=100&orderby=id&order=asc&_fields=id,slug,link,title,excerpt,content,meta"); };
       var un = function (h) { var t = document.createElement("textarea"); t.innerHTML = String(h || "").replace(/<[^>]+>/g, ""); return t.value.replace(/\s+/g, " ").trim(); };
       return (cache.__glossLive = page().then(function (rows) {
         var terms = [], keys = {};
         rows.forEach(function (x) {
-          var m = x.meta || {}, t = { t: un(x.title && x.title.rendered), url: x.link, lang: m._jayms_language || "", tr: m._jayms_transliteration || "", x: un(x.excerpt && x.excerpt.rendered).slice(0, 240) };
+          var m = x.meta || {}, t = { t: un(x.title && x.title.rendered), url: x.link, lang: m._jayms_language || "", tr: m._jayms_transliteration || "", x: un((x.content && x.content.rendered) || (x.excerpt && x.excerpt.rendered)) };   // the whole entry: no link needed to read the rest
           var i = terms.length; terms.push(t);
           [foldWord(String(x.slug).replace(/-/g, "")), foldWord(t.t), foldWord(t.tr)].filter(function (k, j, a) { return k.length >= 2 && a.indexOf(k) === j; })
             .forEach(function (k) { (keys[k] = keys[k] || []).push(i); });
@@ -2361,7 +2361,7 @@
       if (ws) h += '<div class="lbl u-mt10" data-jst-wslot>' + esc(ws.t) + ' <button class="chip" data-jst-wclose>Close</button> <button class="chip" data-jst-wstudy="' + esc(o.wk) + '">Word Study</button></div>' + wordDetail(ws, this, false, true);
       /* the words of this verse that have a glossary entry, each linked */
       if (ws) { var mine = glossFor(ws.t, ws.s); vgloss = vgloss.filter(function (x) { return mine.indexOf(x) < 0; }); }   // already at the top of the open word
-      if (vgloss.length) h += box("explain", "In my glossary", vgloss.map(function (x) { return "<p><b>" + esc(x.t) + "</b>" + (x.x ? " " + esc(x.x) : "") + "</p>" + outlink(x.url, "jayms Glossary"); }).join(""));
+      if (vgloss.length) h += box("explain", "In my glossary", vgloss.map(function (x) { return "<p><b>" + esc(x.t) + "</b>" + (x.x ? " " + esc(x.x) : "") + "</p>"; }).join(""));
       var notes = (this.d.verseNotes && this.d.verseNotes[sel.c + ":" + sel.v]) || [];
       h += notes.map(function (b) { return box(b[0], b[1], "<p>" + b[2] + "</p>"); }).join("");
       (this.df.byVerse[sel.book + "|" + sel.c + ":" + sel.v] || []).forEach(function (d) { h += box("wording", "How the translations differ", "<p>" + esc(d.gist) + "</p>" + outlink(entryURL("diffs", d.slug), "jayms Translation Differences")); });
