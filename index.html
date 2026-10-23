@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v338">
+<link rel="stylesheet" href="jayms-study.css?v=v339">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -109,7 +109,7 @@
         <select id="ver" class="versel" aria-label="Version"></select>
         <span id="ver2wrap"><span class="lbl">beside</span> <select id="ver2" class="versel" aria-label="Second version"></select></span>
       </div>
-      <div class="vpick">
+      <div class="vpick" id="textsz">
         <span class="lbl">Text</span>
         <button class="sz" id="smaller" aria-label="Smaller text">A−</button>
         <button class="sz" id="larger" aria-label="Larger text">A+</button>
@@ -160,10 +160,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v338"></script>
-<script src="jayms-store.js?v=v338"></script>
-<script src="x-discuss.js?v=v338"></script>
-<script src="jayms-study.js?v=v338"></script>
+<script src="jayms-ref.js?v=v339"></script>
+<script src="jayms-store.js?v=v339"></script>
+<script src="x-discuss.js?v=v339"></script>
+<script src="jayms-study.js?v=v339"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -1114,13 +1114,16 @@ $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);r
   const row=(act,k,label,on)=>`<button class="fabrow${on?" on":""}" data-fab="${act}">${svg(k)}<span>${label}</span>${on?'<span class="fabnow">now</span>':""}</button>`;
   const draw=()=>{ const app=S.atlasOn?"atlas":S.app;
     card.innerHTML = `<div class="fabsec"><div class="fabhead">Reading</div>${S.planOn?row("plan","plan","Reading plan"):""}${row("bible","bible","The Bible")}</div>`
+      + `<div class="fabsec"><div class="fabhead">Text size</div><div class="fabsize"><button class="sz" data-fab="smaller" aria-label="Smaller text">A\u2212</button><span>${S.size}px</span><button class="sz" data-fab="larger" aria-label="Larger text">A+</button></div></div>`
       + `<div class="fabsec"><div class="fabhead">Apps</div>${row("app:study","study","Bible Study",app==="study")}${row("app:hg","hg","Hebrew & Greek",app==="hg")}${row("app:atlas","atlas","Atlas",app==="atlas")}</div>`
       + `<div class="fabsec"><div class="fabhead">More</div>${OWNER&&!PUBLIC?row("view","view",S.view==="public"?"My desk":"Read along"):""}${row("set","set","Settings")}${row("about","about","About")}${row("donate","donate","Donate")}${row("help","help","Help")}</div>` };
   const open=on=>{ if(on) draw(); card.hidden=!on; fab.setAttribute("aria-expanded",on); fab.classList.toggle("on",on) };
   fab.onclick=e=>{ e.stopPropagation(); open(card.hidden) };
   document.addEventListener("click",e=>{ if(!card.hidden && !card.contains(e.target) && e.target!==fab) open(false) });
   document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !card.hidden) open(false) });
-  card.onclick=e=>{ const b=e.target.closest("[data-fab]"); if(!b) return; const a=b.dataset.fab; open(false);
+  card.onclick=e=>{ const b=e.target.closest("[data-fab]"); if(!b) return; const a=b.dataset.fab;
+    if(a==="smaller"||a==="larger"){ e.stopPropagation(); $(a).onclick(); draw(); return }   // the handler itself, not a click (a click would close the menu)   // text size: the menu stays open to tap again
+    open(false);
     if(a==="plan"){ $("rail").classList.add("open"); syncRailBtn() }
     else if(a==="bible"){ $("rail").classList.add("open"); syncRailBtn(); if($("biblepick").hidden) $("biblebtn").click(); $("biblepick").scrollIntoView({block:"nearest"}) }
     else if(a.startsWith("app:")) document.querySelector(`#appsw [data-app="${a.slice(4)}"]`).click();

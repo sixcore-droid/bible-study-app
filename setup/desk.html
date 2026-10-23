@@ -110,7 +110,7 @@
         <select id="ver" class="versel" aria-label="Version"></select>
         <span id="ver2wrap"><span class="lbl">beside</span> <select id="ver2" class="versel" aria-label="Second version"></select></span>
       </div>
-      <div class="vpick">
+      <div class="vpick" id="textsz">
         <span class="lbl">Text</span>
         <button class="sz" id="smaller" aria-label="Smaller text">A−</button>
         <button class="sz" id="larger" aria-label="Larger text">A+</button>
@@ -1115,13 +1115,16 @@ $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);r
   const row=(act,k,label,on)=>`<button class="fabrow${on?" on":""}" data-fab="${act}">${svg(k)}<span>${label}</span>${on?'<span class="fabnow">now</span>':""}</button>`;
   const draw=()=>{ const app=S.atlasOn?"atlas":S.app;
     card.innerHTML = `<div class="fabsec"><div class="fabhead">Reading</div>${S.planOn?row("plan","plan","Reading plan"):""}${row("bible","bible","The Bible")}</div>`
+      + `<div class="fabsec"><div class="fabhead">Text size</div><div class="fabsize"><button class="sz" data-fab="smaller" aria-label="Smaller text">A\u2212</button><span>${S.size}px</span><button class="sz" data-fab="larger" aria-label="Larger text">A+</button></div></div>`
       + `<div class="fabsec"><div class="fabhead">Apps</div>${row("app:study","study","Bible Study",app==="study")}${row("app:hg","hg","Hebrew & Greek",app==="hg")}${row("app:atlas","atlas","Atlas",app==="atlas")}</div>`
       + `<div class="fabsec"><div class="fabhead">More</div>${OWNER&&!PUBLIC?row("view","view",S.view==="public"?"My desk":"Read along"):""}${row("set","set","Settings")}${row("about","about","About")}${row("donate","donate","Donate")}${row("help","help","Help")}</div>` };
   const open=on=>{ if(on) draw(); card.hidden=!on; fab.setAttribute("aria-expanded",on); fab.classList.toggle("on",on) };
   fab.onclick=e=>{ e.stopPropagation(); open(card.hidden) };
   document.addEventListener("click",e=>{ if(!card.hidden && !card.contains(e.target) && e.target!==fab) open(false) });
   document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !card.hidden) open(false) });
-  card.onclick=e=>{ const b=e.target.closest("[data-fab]"); if(!b) return; const a=b.dataset.fab; open(false);
+  card.onclick=e=>{ const b=e.target.closest("[data-fab]"); if(!b) return; const a=b.dataset.fab;
+    if(a==="smaller"||a==="larger"){ e.stopPropagation(); $(a).onclick(); draw(); return }   // the handler itself, not a click (a click would close the menu)   // text size: the menu stays open to tap again
+    open(false);
     if(a==="plan"){ $("rail").classList.add("open"); syncRailBtn() }
     else if(a==="bible"){ $("rail").classList.add("open"); syncRailBtn(); if($("biblepick").hidden) $("biblebtn").click(); $("biblepick").scrollIntoView({block:"nearest"}) }
     else if(a.startsWith("app:")) document.querySelector(`#appsw [data-app="${a.slice(4)}"]`).click();
