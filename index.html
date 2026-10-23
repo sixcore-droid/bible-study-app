@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v334">
+<link rel="stylesheet" href="jayms-study.css?v=v337">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -115,7 +115,7 @@
         <button class="sz" id="larger" aria-label="Larger text">A+</button>
       </div>
       <div class="vpick" id="voicewrap" hidden><button class="sz" id="voicecfg" aria-expanded="false" title="Speechify voice and speed">Voice</button></div>
-      <div class="vpick chnav"><button class="sz" id="prevch" aria-label="Previous chapter">«</button><button class="sz" id="nextch" aria-label="Next chapter">»</button></div>
+      <div class="vpick chnav"><button class="sz" id="fullch" hidden aria-label="Full chapter" title="Full chapter">FC</button><button class="sz" id="prevch" aria-label="Previous chapter">«</button><button class="sz" id="nextch" aria-label="Next chapter">»</button></div>
     </div>
     <div id="spfhost" hidden></div>
     <article class="text" id="text"></article>
@@ -160,10 +160,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v334"></script>
-<script src="jayms-store.js?v=v334"></script>
-<script src="x-discuss.js?v=v334"></script>
-<script src="jayms-study.js?v=v334"></script>
+<script src="jayms-ref.js?v=v337"></script>
+<script src="jayms-store.js?v=v337"></script>
+<script src="x-discuss.js?v=v337"></script>
+<script src="jayms-study.js?v=v337"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -438,9 +438,9 @@ function renderReader(){
   $("ver").innerHTML = opts(S.ver); $("ver2").innerHTML = opts(S.ver2);
   $("ver2wrap").hidden = !S.par;
   /* one toggle each: the button names what a tap switches to, not what's on screen */
-  $("layoutbtn").textContent = S.layout==="verse" ? "Reading view" : "Verse by verse";
+  $("layoutbtn").textContent = S.layout==="verse" ? "Reading" : "Verses";
   $("optnums").checked = S.nums; $("numbtn").textContent = S.nums ? "Hide #" : "Show #"; $("numbtn").title = S.nums ? "Hide the verse numbers" : "Show the verse numbers"; $("text").classList.toggle("nonums", !S.nums);   // gone from the page, so a read-aloud tool skips them too
-  $("parbtn").textContent = S.par ? "One version" : "Parallel";
+  $("parbtn").textContent = S.par ? "Single" : "Parallel";
   const vers = S.par ? [S.ver,S.ver2] : [S.ver];
   const rows = r.rows;
   const multi = !!rows && new Set(rows.map(x=>x.book+" "+x.c)).size>1;
@@ -484,7 +484,7 @@ function renderReader(){
       ? `<div class="phdr">${eff.map((v,c)=>`<span class="lbl">${v}${readBtns(c)}</span>`).join("")}</div><div class="pgrid">`
         + blocks.map((b,n)=>b.label?`<div class="pcell seglbl lbl" style="grid-column:1 / -1;grid-row:${n+1};--o:${n*2}">${esc(b.label)}</div>`:"").join("")
         + eff.map((ver,col)=>blocks.map((b,n)=>b.label?"":`<div class="pcell" data-col="${col}" style="grid-column:${col+1};grid-row:${n+1};--o:${n*2+col}">${blockHTML(ver,b)}</div>`).join("")).join("") + `</div>`
-      : (SPF ? `<div class="phdr one"><span class="lbl">${eff[0]}${readBtns(0)}</span></div>` : "")
+      : `<div class="phdr one"><span class="lbl">${eff[0]}${readBtns(0)}</span></div>`
         + `<div class="pone" data-col="0">` + blocks.map(b=>b.label?`<div class="lbl seglbl">${esc(b.label)}</div>`:blockHTML(eff[0],b)).join("") + `</div>`)
     + `<div class="ver">${[par?"":eff[0], linkNote].filter(Boolean).join(" · ")}</div>`;
   if(S.app==="hg") hgApply();   // the Hebrew & Greek marks, laid on the text just drawn
@@ -1046,7 +1046,7 @@ $("notepreview").onclick=e=>{ if(e.target.closest("a")) return; S.noteEdit=true;
 /* Speechify, on the desk only: the reader and key come from ~/jayms/speechify/web through serve.py (never in this repo or on the site).
    Each version column gets Highlight (select that column's text) and Read (Speechify reads it); Voice opens the voice and speed bar. */
 let SPF = false, READ_VERS = [];
-function readBtns(c){ return SPF ? `<span class="rdbtns"><button class="sz" data-hl="${c}" title="Highlight this column">Highlight</button><button class="sz spf-btn" data-rd="${c}" title="Read this column aloud in Speechify"><span class="spf-ico">▶</span> <span class="spf-lab">Read</span></button></span>` : "" }
+function readBtns(c){ return `<span class="rdbtns"><button class="sz" data-hl="${c}" title="Highlight this column and copy it">Highlight</button>${SPF ? `<button class="sz spf-btn" data-rd="${c}" title="Read this column aloud in Speechify"><span class="spf-ico">▶</span> <span class="spf-lab">Read</span></button>` : ""}</span>` }
 function colText(c){
   const r=cur(), ver=READ_VERS[c]||S.ver, by={};
   (r.rows||[]).forEach(x=>{ const g=`${x.book} ${x.c}`; (by[g]=by[g]||[]).push(String(x.texts[ver]||"").replace(/<span class='sup'>.*?<\/span>/g," ").replace(/<[^>]+>/g," ").replace(/\[\/?w:?\w*\]/g,"").replace(/\s{2,}/g," ").trim()) });
@@ -1062,7 +1062,10 @@ function highlightCol(c){
 }
 $("text").addEventListener("click",e=>{
   const h=e.target.closest("[data-hl]"), rd=e.target.closest("[data-rd]");
-  if(h){ e.preventDefault(); highlightCol(+h.dataset.hl); }
+  if(h){ e.preventDefault(); const c=+h.dataset.hl; highlightCol(c);   // one tap: the column selected and copied, ready to paste
+    const say=t=>{ h.textContent=t; setTimeout(()=>{ h.textContent="Highlight" }, 1600) };
+    if(navigator.clipboard) navigator.clipboard.writeText(colText(c)).then(()=>say("Copied")).catch(()=>{ try{ document.execCommand("copy"); say("Copied") }catch(er){} });
+    else { try{ document.execCommand("copy"); say("Copied") }catch(er){} } }
   if(rd && window.Speechify){ e.preventDefault(); const c=+rd.dataset.rd; rd.__spfBtn=rd;
     Speechify.read(rd, { text: colText(c), highlight: ()=>highlightCol(c) }); }
 });
@@ -1141,7 +1144,14 @@ function stepChapter(d){
   else if(c>b.chapters){ bk=books[b.order+1]; if(!bk) return null; c=1 }
   return bk.chapters===1 ? bk.name : `${bk.name} ${c}`;
 }
-function syncChapterNav(){ [["prevch",-1],["nextch",1]].forEach(([id,d])=>{ const t=cur()&&stepChapter(d); $(id).disabled=!t; $(id).title=t?(d<0?"Previous chapter: ":"Next chapter: ")+t:"" }) }
+/* only part of a chapter on screen (Psalm 61:1-4): one FC button opens the whole chapter; with whole chapters on screen, « and » step */
+function fullChapterRef(){ const r=cur(); if(!r) return null; const segs=JaymsRef.parse(r.ref); if(!segs.length) return null;
+  const part=segs.some(g=>{ const last=JaymsRef.verses(g.book,g.c2); return g.v1>1 || (g.v2!==999 && g.v2<last) }); if(!part) return null;
+  const b=segs[0].book, c1=Math.min(...segs.filter(g=>g.book===b).map(g=>g.c1)), c2=Math.max(...segs.filter(g=>g.book===b).map(g=>g.c2)), bk=JaymsRef.book(b);
+  return bk.chapters===1 ? bk.name : `${bk.name} ${c1}${c2>c1?"-"+c2:""}` }
+function syncChapterNav(){ const fc=fullChapterRef(); $("fullch").hidden=!fc; $("fullch").title=fc?"Full chapter: "+fc:"";
+  [["prevch",-1],["nextch",1]].forEach(([id,d])=>{ $(id).hidden=!!fc; const t=cur()&&stepChapter(d); $(id).disabled=!t; $(id).title=t?(d<0?"Previous chapter: ":"Next chapter: ")+t:"" }) }
+$("fullch").onclick=()=>{ const t=fullChapterRef(); if(t) openPassage(t, true) };
 $("prevch").onclick=()=>{ const t=stepChapter(-1); if(t) openPassage(t, true) };
 $("nextch").onclick=()=>{ const t=stepChapter(1); if(t) openPassage(t, true) };
 $("larger").onclick=()=>{S.size=Math.min(26,S.size+1);store.set("size",S.size);renderReader()};

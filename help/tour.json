@@ -165,12 +165,12 @@
     },
     {
      "sel": "#layoutbtn",
-     "name": "Verse by verse / Reading view",
+     "name": "Verses / Reading",
      "text": "Named for what it switches to: one verse per line, or paragraphs."
     },
     {
      "sel": "#parbtn",
-     "name": "Parallel / One version",
+     "name": "Parallel / Single",
      "text": "Shows two versions side by side, paragraph by paragraph."
     },
     {
@@ -200,6 +200,12 @@
      "sel": ".chnav",
      "name": "« »",
      "text": "Previous and next chapter."
+    },
+    {
+     "sel": "#fullch",
+     "name": "FC",
+     "text": "Full chapter: in place of « » when only part of a chapter is on screen.",
+     "optional": true
     },
     {
      "sel": "#text .vn",
