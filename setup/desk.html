@@ -9,6 +9,7 @@
 <header class="top">
   <button class="railbtn" id="railbtn" aria-controls="rail" aria-expanded="false">Plan</button>
   <div class="brand">Study Workstation<small><a id="brandlink" href="https://jayms.com/bible-study-app/" target="_blank" rel="noopener" title="Open the online version on jayms.com">jayms.com</a></small></div>
+  <button class="topbtn menubtn" id="menubtn" aria-expanded="false" aria-label="Show the menu">Menu</button>
   <div class="viewsw" id="appsw" role="group" aria-label="Which app">
     <button data-app="study" aria-pressed="true">Bible Study</button>
     <button data-app="hg" aria-pressed="false">Hebrew &amp; Greek</button>
@@ -1097,7 +1098,10 @@ $("optplan").onchange=e=>{ S.planOn=e.target.checked; store.set("planOn",S.planO
 function noPlanEnsure(){ if(S.planOn || S.adhoc) return; if(S.opened.length){ S.adhoc=S.opened[S.opened.length-1]; return } const r=cur(); if(r) openPassage(r.ref) }
 $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);renderReader();renderPanel()};
 { const v=$("setview"), close=()=>{ v.hidden=true; $("setbtn").focus() };
-  $("setbtn").onclick=()=>{ v.hidden=false; $("setclose").focus() }; $("setclose").onclick=close;
+  /* phone: the header folds to one line (Plan, the title, Menu); Menu opens the rest. Remembered. */
+const setTop=open=>{ document.body.classList.toggle("topopen",open); $("menubtn").setAttribute("aria-expanded",open); $("menubtn").textContent=open?"Close":"Menu"; store.set("topOpen",open) };
+setTop(!!store.get("topOpen",false)); $("menubtn").onclick=()=>setTop(!document.body.classList.contains("topopen"));
+$("setbtn").onclick=()=>{ v.hidden=false; $("setclose").focus() }; $("setclose").onclick=close;
   v.addEventListener("click",e=>{ if(e.target===v) close() }); }
 $("parbtn").onclick=()=>{S.par=S.par?0:1;store.set("par",S.par);renderReader()};
 $("smaller").onclick=()=>{S.size=Math.max(16,S.size-1);store.set("size",S.size);renderReader()};

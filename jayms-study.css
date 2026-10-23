@@ -725,3 +725,13 @@ body.noplan #biblepick{margin-top:0}
 .jst-two > div{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px 10px}
 .jst-two p{margin:4px 0 8px;line-height:1.5}
 @media (max-width:520px){.jst-two{grid-template-columns:1fr}}
+
+/* Phone: no Go to a passage or Find in the text (The Bible and the plan do that job); the header folds to one line (Plan, the
+   title, Menu) and Menu opens the rest */
+.menubtn{display:none}
+@media (max-width:700px){
+  #goform, #findform{display:none !important}
+  .menubtn{display:inline-flex;margin-left:auto}
+  body:not(.topopen) .top > :not(.railbtn):not(.brand):not(.menubtn){display:none !important}
+  .top .brand small{display:none}
+}

@@ -402,6 +402,11 @@
      "at": "top"
     },
     {
+     "sel": "#menubtn",
+     "name": "Menu",
+     "text": "Opens the rest of the top bar: the apps, Settings, About, Donate and Help."
+    },
+    {
      "sel": "#dock",
      "name": "Side buttons",
      "text": "Along the bottom; swipe sideways for more. A panel opens as a sheet over the text."

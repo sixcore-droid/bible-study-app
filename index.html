@@ -1,13 +1,14 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v326">
+<link rel="stylesheet" href="jayms-study.css?v=v328">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
 <header class="top">
   <button class="railbtn" id="railbtn" aria-controls="rail" aria-expanded="false">Plan</button>
   <div class="brand">Study Workstation<small><a id="brandlink" href="https://jayms.com/bible-study-app/" target="_blank" rel="noopener" title="Open the online version on jayms.com">jayms.com</a></small></div>
+  <button class="topbtn menubtn" id="menubtn" aria-expanded="false" aria-label="Show the menu">Menu</button>
   <div class="viewsw" id="appsw" role="group" aria-label="Which app">
     <button data-app="study" aria-pressed="true">Bible Study</button>
     <button data-app="hg" aria-pressed="false">Hebrew &amp; Greek</button>
@@ -160,10 +161,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v326"></script>
-<script src="jayms-store.js?v=v326"></script>
-<script src="x-discuss.js?v=v326"></script>
-<script src="jayms-study.js?v=v326"></script>
+<script src="jayms-ref.js?v=v328"></script>
+<script src="jayms-store.js?v=v328"></script>
+<script src="x-discuss.js?v=v328"></script>
+<script src="jayms-study.js?v=v328"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -1096,7 +1097,10 @@ $("optplan").onchange=e=>{ S.planOn=e.target.checked; store.set("planOn",S.planO
 function noPlanEnsure(){ if(S.planOn || S.adhoc) return; if(S.opened.length){ S.adhoc=S.opened[S.opened.length-1]; return } const r=cur(); if(r) openPassage(r.ref) }
 $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);renderReader();renderPanel()};
 { const v=$("setview"), close=()=>{ v.hidden=true; $("setbtn").focus() };
-  $("setbtn").onclick=()=>{ v.hidden=false; $("setclose").focus() }; $("setclose").onclick=close;
+  /* phone: the header folds to one line (Plan, the title, Menu); Menu opens the rest. Remembered. */
+const setTop=open=>{ document.body.classList.toggle("topopen",open); $("menubtn").setAttribute("aria-expanded",open); $("menubtn").textContent=open?"Close":"Menu"; store.set("topOpen",open) };
+setTop(!!store.get("topOpen",false)); $("menubtn").onclick=()=>setTop(!document.body.classList.contains("topopen"));
+$("setbtn").onclick=()=>{ v.hidden=false; $("setclose").focus() }; $("setclose").onclick=close;
   v.addEventListener("click",e=>{ if(e.target===v) close() }); }
 $("parbtn").onclick=()=>{S.par=S.par?0:1;store.set("par",S.par);renderReader()};
 $("smaller").onclick=()=>{S.size=Math.max(16,S.size-1);store.set("size",S.size);renderReader()};
