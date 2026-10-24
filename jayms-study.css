@@ -759,3 +759,9 @@ body.noplan #biblepick{margin-top:0}
 
 .tabab{display:none}
 @media (max-width:700px){ .rtab .tabfull{display:none} .rtab .tabab{display:inline} }
+
+/* installed on a phone: nothing sits under the clock; a strip in the page colour covers it while the page scrolls */
+@media (max-width:700px){
+  body{padding-top:env(safe-area-inset-top,0px)}
+  body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:70}
+}
