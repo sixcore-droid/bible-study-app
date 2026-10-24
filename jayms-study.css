@@ -752,3 +752,7 @@ body.noplan #biblepick{margin-top:0}
   .fabsize .sz{min-width:56px;height:42px;font-size:18px}
   .fabsize span{font:600 15px var(--label);color:var(--ink)}
 }
+/* Interleave: the lemma under each word (Lemma button; Settings on a phone) */
+.ilu-lem{display:block;font:500 13px var(--label);color:var(--gold);margin-top:2px;letter-spacing:.02em}
+.phoneonly{display:none !important}
+@media (max-width:700px){ .phoneonly{display:flex !important} .jst-lemchip{display:none} }

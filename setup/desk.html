@@ -57,6 +57,7 @@
   <label class="planopt"><input type="checkbox" id="optred"> Words of Jesus in <span class="sw-red">red</span> <span class="sub">Jesus's words (from the World English Bible's red letters). Try Matthew 5, the Sermon on the Mount.</span></label>
   <label class="planopt" id="optbluewrap" hidden><input type="checkbox" id="optblue"> Old Testament connections in <span class="sw-blue">blue</span> <span class="sub">Verses with a note in the CSB Connecting Scripture New Testament. Try Matthew 4 or Matthew 1:23.</span></label>
   <label class="planopt" id="optpurplewrap" hidden><input type="checkbox" id="optpurple"> Jesus using the Old Testament in <span class="sw-purple">purple</span> <span class="sub">His words inside those verses. Try Matthew 4: verses 4, 7 and 10 are Jesus answering with Deuteronomy.</span></label>
+  <label class="planopt phoneonly"><input type="checkbox" id="optlemma"> Lemma in Interleave <span class="sub">Each word's dictionary form, in English letters, under the word. On a computer it is the Lemma button in the Interleave panel.</span></label>
   <label class="planopt"><input type="checkbox" id="optnums"> Verse numbers <span class="sub">off: the text reads straight through, and Speechify skips them</span></label>
   <p class="ctx">This browser remembers them.</p>
 </div></div>
@@ -1095,6 +1096,8 @@ $("ver2").onchange=e=>{ const was=S.ver2; S.ver2=e.target.value; if(S.ver2===S.v
 $("layoutbtn").onclick=()=>{S.layout=S.layout==="verse"?"read":"verse";store.set("layout",S.layout);renderReader()};
 $("optnums").onchange=e=>{S.nums=e.target.checked;store.set("nums",S.nums);renderReader()};
 $("numbtn").onclick=()=>{S.nums=!S.nums;store.set("nums",S.nums);renderReader()};   // the same switch as Settings, kept on the reader bar
+$("optlemma").onchange=e=>{ JST.util.lemmaSet(e.target.checked); if(S.tool==="outline" && PH) PH.refresh() };
+$("setbtn").addEventListener("click",()=>{ $("optlemma").checked=JST.util.lemmaOn() });
 $("optred").onchange=e=>{S.red=e.target.checked;store.set("red",S.red);renderReader()};
 $("optblue").onchange=e=>{S.blue=e.target.checked;store.set("blue",S.blue);renderReader()};
 $("optpurple").onchange=e=>{S.purple=e.target.checked;store.set("purple",S.purple);renderReader()};
