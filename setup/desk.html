@@ -67,6 +67,7 @@
   <aside class="rail" id="rail" aria-label="Reading plan">
     <div class="rgrip" id="rgrip" role="separator" aria-orientation="vertical" aria-label="Drag to resize the reading plan" tabindex="0" title="Drag to resize · double-click to reset"></div>
     <div class="railin">
+    <div class="railtop"><button class="chip" id="railclose" aria-controls="rail">Close</button></div>
     <div class="plansel">
       <label class="lbl" for="planpick">Reading plan</label>
       <button id="planpick" class="planpick" aria-expanded="false" aria-controls="planlist"></button>
@@ -1193,6 +1194,10 @@ $("railbtn").onclick=()=>{
   syncRailBtn(); renderReader();   // the plan's tabs come and go with the plan
 };
 document.body.classList.toggle("rail-hidden",!!store.get("railHidden",false));
+/* the plan as a slide-in (phone, narrow window): Close at its top, or a tap anywhere outside it */
+$("railclose").onclick=()=>{ $("rail").classList.remove("open"); syncRailBtn() };
+document.addEventListener("click",e=>{ const r=$("rail");
+  if(r.classList.contains("open") && !r.contains(e.target) && !e.target.closest("#railbtn,.fabmenu,.fabcard")){ r.classList.remove("open"); syncRailBtn() } });
 window.addEventListener("resize",syncRailBtn);
 /* today's date in the top bar, checked every minute so it turns over at midnight */
 function showToday(){ const d=new Date(), p=n=>String(n).padStart(2,"0"); $("today").textContent = `${p(d.getMonth()+1)}/${p(d.getDate())}/${p(d.getFullYear()%100)}` }   // 10/07/26

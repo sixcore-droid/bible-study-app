@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v353">
+<link rel="stylesheet" href="jayms-study.css?v=v354">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -66,6 +66,7 @@
   <aside class="rail" id="rail" aria-label="Reading plan">
     <div class="rgrip" id="rgrip" role="separator" aria-orientation="vertical" aria-label="Drag to resize the reading plan" tabindex="0" title="Drag to resize · double-click to reset"></div>
     <div class="railin">
+    <div class="railtop"><button class="chip" id="railclose" aria-controls="rail">Close</button></div>
     <div class="plansel">
       <label class="lbl" for="planpick">Reading plan</label>
       <button id="planpick" class="planpick" aria-expanded="false" aria-controls="planlist"></button>
@@ -169,10 +170,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v353"></script>
-<script src="jayms-store.js?v=v353"></script>
-<script src="x-discuss.js?v=v353"></script>
-<script src="jayms-study.js?v=v353"></script>
+<script src="jayms-ref.js?v=v354"></script>
+<script src="jayms-store.js?v=v354"></script>
+<script src="x-discuss.js?v=v354"></script>
+<script src="jayms-study.js?v=v354"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -1192,6 +1193,10 @@ $("railbtn").onclick=()=>{
   syncRailBtn(); renderReader();   // the plan's tabs come and go with the plan
 };
 document.body.classList.toggle("rail-hidden",!!store.get("railHidden",false));
+/* the plan as a slide-in (phone, narrow window): Close at its top, or a tap anywhere outside it */
+$("railclose").onclick=()=>{ $("rail").classList.remove("open"); syncRailBtn() };
+document.addEventListener("click",e=>{ const r=$("rail");
+  if(r.classList.contains("open") && !r.contains(e.target) && !e.target.closest("#railbtn,.fabmenu,.fabcard")){ r.classList.remove("open"); syncRailBtn() } });
 window.addEventListener("resize",syncRailBtn);
 /* today's date in the top bar, checked every minute so it turns over at midnight */
 function showToday(){ const d=new Date(), p=n=>String(n).padStart(2,"0"); $("today").textContent = `${p(d.getMonth()+1)}/${p(d.getDate())}/${p(d.getFullYear()%100)}` }   // 10/07/26
