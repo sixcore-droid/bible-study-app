@@ -178,8 +178,12 @@
     return out.replace(/^'/, "").replace(/[^a-z']/g, "");
   }
   /* Interleave's Lemma switch (the panel's Lemma button, or Settings on a phone): each word's dictionary form, in English letters */
-  function lemmaOn() { try { return localStorage.getItem("jst-lemma") === "1"; } catch (e) { return false; } }
-  function lemmaSet(on) { try { localStorage.setItem("jst-lemma", on ? "1" : "0"); } catch (e) {} }
+  /* Interleave lines, each on or off: the English gloss, the Hebrew or Greek, the lemma (off until asked for) */
+  var IL_DEF = { en: true, or: true, lemma: false };
+  function ilOn(k) { try { var v = localStorage.getItem("jst-" + k); return v === null ? IL_DEF[k] : v === "1"; } catch (e) { return IL_DEF[k]; } }
+  function ilSet(k, on) { try { localStorage.setItem("jst-" + k, on ? "1" : "0"); } catch (e) {} }
+  function lemmaOn() { return ilOn("lemma"); }
+  function lemmaSet(on) { ilSet("lemma", on); }
   function lemmaLatin(w) {
     var k = strongKey(w.strong).toLowerCase(), ws = WORDS[k] && WORDS[k].t;
     if (ws && !/[\u0590-\u05FF\u0370-\u03FF\u1F00-\u1FFF]/.test(ws)) return ws;          // the Word Study spelling
@@ -810,7 +814,7 @@
     x: '<svg viewBox="0 0 24 24"><path d="M5 4l14 16M19 4L5 20"/></svg>',
     logos: '<svg viewBox="0 0 24 24"><path d="M4 5h11a5 5 0 0 1 0 10H9v4H4z"/><path d="M9 9h6"/></svg>'
   };
-  var api = { events: EVENTS, parseAnswer: function (t) { return parseAnswer(t); }, config: config, data: data, util: { esc: esc, md: md, mdBlock: mdBlock, lemmaOn: lemmaOn, lemmaSet: lemmaSet, box: box, outlink: outlink, none: none, slug: slug, parseRef: parseRef, overlap: overlap, bookRow: bookRow, strongKey: strongKey },
+  var api = { events: EVENTS, parseAnswer: function (t) { return parseAnswer(t); }, config: config, data: data, util: { esc: esc, md: md, mdBlock: mdBlock, lemmaOn: lemmaOn, lemmaSet: lemmaSet, ilOn: ilOn, ilSet: ilSet, box: box, outlink: outlink, none: none, slug: slug, parseRef: parseRef, overlap: overlap, bookRow: bookRow, strongKey: strongKey },
               Panel: Panel, define: define, panels: {}, icons: ICON, version: "1.0.0" };
   var L = function (self, k) { return (self.d && self.d[k]) || []; };
 
@@ -2431,9 +2435,10 @@
       if (book) book.eras.forEach(function (e, ei) { e.events.forEach(function (x, vi) { var a = parseRef(x.books || x.date); if (a && overlap(a, q)) { if (eraI < 0) { eraI = ei; ev = x; } if (ei === eraI) on[vi] = 1; } }); });
       var bookName = book ? book.title.replace(/^The (Book|Gospel) of /, "").replace(/ Timeline$/, "") : q.book;
       var tail = segs.length > 1 ? q.c1 + ":" + q.v1 : o.ref.replace(/^.*?\s(?=\d)/, "");
+      var w0 = ((this.vs || [])[0] || { words: [] }).words[0], orName = w0 && /[\u0590-\u05FF]/.test(w0.text || "") ? "Hebrew" : "Greek";
       var h = '<div class="ilcrumb"><span>' + esc(bookName) + "</span><span>\u203A</span><span>" + esc(tail) + "</span></div>" +
               '<div class="iltitle">' + esc(ev ? ev.title : o.ref) + "</div>" +
-              '<div class="ilhead"><span class="lbl">' + esc(o.ref) + '</span><span class="chips"><button class="chip' + (st.mode === "il" ? " on" : "") + '" data-jst-mode="il">Interlinear</button><button class="chip' + (st.mode === "where" ? " on" : "") + '" data-jst-mode="where">Where it sits</button><button class="chip jst-lemchip' + (lemmaOn() ? " on" : "") + '" data-jst-lemma title="Show each word\'s dictionary form (lemma) under it">Lemma</button></span></div>';
+              '<div class="ilhead"><span class="lbl">' + esc(o.ref) + '</span><span class="chips"><button class="chip' + (st.mode === "il" ? " on" : "") + '" data-jst-mode="il">Interlinear</button><button class="chip' + (st.mode === "where" ? " on" : "") + '" data-jst-mode="where">Where it sits</button><button class="chip jst-lemchip' + (ilOn("en") ? " on" : "") + '" data-jst-line="en" title="The English gloss over each word">English</button><button class="chip jst-lemchip' + (ilOn("or") ? " on" : "") + '" data-jst-line="or" title="The word in the original">' + orName + '</button><button class="chip jst-lemchip' + (lemmaOn() ? " on" : "") + '" data-jst-line="lemma" title="Show each word\'s dictionary form (lemma) under it">Lemma</button></span></div>';
       var last = (this.vs || []).filter(function (r) { return r.book === q.book && r.c === q.c2; }).map(function (r) { return r.v; }).pop();
       var link = st.mode === "where" ? outlink(ibBookURL(q.book), "jayms Interleaved Bible") : outlink(ibURL(q, last), "jayms Interleaved Bible");
       if (st.mode === "where") return { kick: "Interleaved Bible", title: "Interleave", wide: true, body: '<div class="jst-pad u-flex u-col u-gap14">' + h + whereItSits(book, eraI, on, q) + link + "</div>" };
@@ -2453,7 +2458,7 @@
           var isOn = st.word && st.word.b === row.book && st.word.c === row.c && st.word.v === row.v && st.word.i >= i && st.word.i < i + run.length;
           var gloss = run.map(function (w) { return String(w.gloss || w.english || ""); }).join(" ").replace(/\./g, " ").replace(/\s+/g, " ").trim();
           var rtl = /[\u0590-\u05FF]/.test(run[0].text || "");
-          return '<button class="ilu' + (isOn ? " on" : "") + (argued ? " ilu-diff" : "") + '" data-jst-il="' + esc(row.book) + "|" + row.c + "|" + row.v + "|" + head + '"' + (argued ? ' title="The versions differ on this word"' : "") + '><span class="ilu-en">' + esc(gloss || "\u00B7") + '</span><span class="ilu-or" lang="' + (rtl ? "he" : "grc") + '"' + (rtl ? ' dir="rtl"' : "") + ">" + run.map(function (w) { return esc(w.text); }).join("") + "</span>" + (lemmaOn() ? '<span class="ilu-lem">' + esc(lemmaLatin(hw)) + "</span>" : "") + "</button>";
+          return '<button class="ilu' + (isOn ? " on" : "") + (argued ? " ilu-diff" : "") + '" data-jst-il="' + esc(row.book) + "|" + row.c + "|" + row.v + "|" + head + '"' + (argued ? ' title="The versions differ on this word"' : "") + '>' + (ilOn("en") ? '<span class="ilu-en">' + esc(gloss || "\u00B7") + "</span>" : "") + (ilOn("or") ? '<span class="ilu-or" lang="' + (rtl ? "he" : "grc") + '"' + (rtl ? ' dir="rtl"' : "") + ">" + run.map(function (w) { return esc(w.text); }).join("") + "</span>" : "") + (lemmaOn() ? '<span class="ilu-lem">' + esc(lemmaLatin(hw)) + "</span>" : "") + "</button>";
         }
         row.words.forEach(function (w, i) { if (!run.length) first = i; run.push(w); if (w.after !== "") { out.push(unit(run, first)); run = []; } });
         if (run.length) out.push(unit(run, first));
@@ -2464,7 +2469,8 @@
     click: function (e) {
       var m = e.target.closest("[data-jst-mode]"), w = e.target.closest("[data-jst-il]"), d = e.target.closest("[data-jst-vnum]"), st = this.st;
       if (m) { e.stopPropagation(); st.mode = m.getAttribute("data-jst-mode"); this.paint(); return; }
-      if (e.target.closest("[data-jst-lemma]")) { e.stopPropagation(); lemmaSet(!lemmaOn()); var sc = this.el.querySelector(".ilscroll"), keep = sc ? sc.scrollTop : 0; this.paint(); sc = this.el.querySelector(".ilscroll"); if (sc) sc.scrollTop = keep; return; }
+      var ln = e.target.closest("[data-jst-line]");
+      if (ln) { e.stopPropagation(); var lk = ln.getAttribute("data-jst-line"); ilSet(lk, !ilOn(lk)); var sc = this.el.querySelector(".ilscroll"), keep = sc ? sc.scrollTop : 0; this.paint(); sc = this.el.querySelector(".ilscroll"); if (sc) sc.scrollTop = keep; return; }
       if (w || d) {
         e.stopPropagation();
         if (w) { var p = w.getAttribute("data-jst-il").split("|"), pb = p[0], pn = p.slice(1).map(Number), same = st.word && st.word.b === pb && st.word.c === pn[0] && st.word.v === pn[1] && st.word.i === pn[2]; st.word = same ? null : { b: pb, c: pn[0], v: pn[1], i: pn[2] }; st.diff = null; }
