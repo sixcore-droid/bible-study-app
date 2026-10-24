@@ -809,16 +809,16 @@
   define("Council", { id: "council", label: "Council", name: "Divine Council Index", icon: ICON.council }, {
     view: function () {
       var all = L(this, "council"), mains = all.filter(function (e) { return e.main; }), rest = all.filter(function (e) { return !e.main; });
-      if (!mains.length) return { kick: "Divine Council Index", title: "The council in this text", body: none("The Divine Council Index has no entry on " + esc(this.o.ref) + ".") + outlink(CFG.site + "divine-council-index/", "jayms Divine Council Index") };
+      if (!mains.length) return { kick: "Divine Council Index", title: "The council in this text", body: none("The Divine Council Index has no entry on " + esc(this.o.ref) + ".") + outlink(CFG.site + "divine-council-index/", "The whole jayms Divine Council Index") };
       var h = "";
       mains.forEach(function (m) {
         h += '<div class="item"><span class="when">' + esc(m.cat) + " \u00B7 " + esc(m.group) + '</span><span class="tt">' + esc(m.title) + "</span></div>";
         if (m.plain) h += '<div class="box plain"><p class="u-m0">' + md(m.plain) + "</p></div>";
         if (m.prob) h += box("explain", "The problem", "<p>" + esc(m.prob) + "</p>");
         if (m.res) h += box("explain", "What this reading resolves", "<p>" + esc(m.res) + "</p>");
-        h += outlink(entryURL("council", m.id), "jayms Divine Council Index");
+        h += outlink(entryURL("council", m.id), "jayms Divine Council Index: " + esc(m.title));
       });
-      if (rest.length) h += '<div class="lbl">Reads with</div>' + rest.map(function (e) { return box("apparatus", "", '<div class="item"><span class="when">' + esc(e.cat) + '</span><span class="tt">' + esc(e.title) + '</span><span class="sub">' + esc(e.summary) + "</span>" + outlink(entryURL("council", e.id), "jayms Divine Council Index") + "</div>"); }).join("");
+      if (rest.length) h += '<div class="lbl">Reads with</div>' + rest.map(function (e) { return box("apparatus", "", '<div class="item"><span class="when">' + esc(e.cat) + '</span><span class="tt">' + esc(e.title) + '</span><span class="sub">' + esc(e.summary) + "</span>" + outlink(entryURL("council", e.id), "jayms Divine Council Index: " + esc(e.title)) + "</div>"); }).join("");
       return { kick: "Divine Council Index \u00B7 " + mains.length + " entr" + (mains.length > 1 ? "ies" : "y") + " for this passage", title: "The council in this text", body: h };
     }
   }, {}, function (d) { return d ? (d.council || []).filter(function (e) { return e.main; }).length : null; });
@@ -827,9 +827,9 @@
   define("Gods", { id: "gods", label: "Gods", name: "Gods of the Bible", icon: ICON.gods }, {
     view: function () {
       var g = L(this, "gods");
-      var h = g.length ? g.map(function (x, i) { return box(i ? "apparatus" : "witness", "", '<div class="item"><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(x.summary) + "</span>" + (x.plain ? '<p class="u-mt8">' + md(x.plain) + "</p>" : "") + outlink(entryURL("gods", x.id), "jayms Gods of the Bible") + "</div>"); }).join("")
+      var h = g.length ? g.map(function (x, i) { return box(i ? "apparatus" : "witness", "", '<div class="item"><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(x.summary) + "</span>" + (x.plain ? '<p class="u-mt8">' + md(x.plain) + "</p>" : "") + outlink(entryURL("gods", x.id), "jayms Gods of the Bible: " + esc(x.title)) + "</div>"); }).join("")
         : none("No one from Gods of the Bible is named in " + esc(this.o.ref) + ".");
-      return { kick: "Gods of the Bible \u00B7 " + g.length + " named here", title: "Who is in the room", body: h + outlink(CFG.site + "gods-of-the-bible/", "jayms Gods of the Bible") };
+      return { kick: "Gods of the Bible \u00B7 " + g.length + " named here", title: "Who is in the room", body: h + outlink(CFG.site + "gods-of-the-bible/", "The whole jayms Gods of the Bible") };
     }
   }, {}, function (d) { return d ? (d.gods || []).length : null; });
 
@@ -846,17 +846,17 @@
         var h = '<button class="btn u-mb10" data-jst-awback>Back</button><div class="item"><span class="sub">' + esc(e.summary) + "</span></div>";   // the title is the panel's own
         h += (e.plain ? '<div class="box plain"><p class="u-m0">' + md(e.plain) + "</p></div>" : "") + f("then", "explain", "What it meant then") + f("bridge", "witness", "The bridge to today") +
              f("changes", "explain", "What it changes in the reading") + f("not", "not", "Where the analogy breaks") + f("dissent", "open", "Where scholars disagree");
-        return { kick: kick, title: e.title, body: h + outlink(entryURL("awi", e.id), "jayms Ancient World") };
+        return { kick: kick, title: e.title, body: h + outlink(entryURL("awi", e.id), "jayms Ancient World: " + esc(e.title)) };
       }
       var list = awFor(this.o.ref);
-      if (!list.length) return { kick: kick, title: "The world behind this passage", body: none("The Ancient World tool has no note on " + esc(this.o.ref) + " yet. It covers the New Testament.") + outlink(CFG.site + TOOL.awp + "/", "jayms Ancient World") };
+      if (!list.length) return { kick: kick, title: "The world behind this passage", body: none("The Ancient World tool has no note on " + esc(this.o.ref) + " yet. It covers the New Testament.") + outlink(CFG.site + TOOL.awp + "/", "The whole jayms Ancient World") };
       var h = list.map(function (e) {
         var ideas = (e._ideas || []).filter(function (id) { return AWI[id]; });
         return '<div class="item u-mt14"><span class="when">' + esc(e.bibleRef) + '</span><span class="tt">' + esc(e.title.replace(/^[^,]*,\s*/, "")) + '</span><span class="sub">' + esc(e.summary) + "</span></div>" +
           (e.plain ? '<div class="box plain"><h3>What is going on here</h3><p class="u-m0">' + md(e.plain) + "</p></div>" : "") +
           (ideas.length ? '<div class="lbl">The ancient world behind it</div><div class="chips u-mb10">' + ideas.map(function (id) { return '<button class="chip" data-jst-awi="' + esc(id) + '">' + esc(AWI[id].title) + "</button>"; }).join("") + "</div>" : "") +
           (e.note ? '<details class="jst-past"><summary class="lbl">Also in this passage</summary>' + box("explain", "", "<p>" + md(e.note) + "</p>") + "</details>" : "") +
-          outlink(entryURL("awp", e.id), "jayms Ancient World");
+          outlink(entryURL("awp", e.id), "jayms Ancient World: " + esc(e.bibleRef));
       }).join("");
       return { kick: kick + " \u00B7 " + list.length + " for this passage", title: "The world behind this passage", body: h };
     },
@@ -992,14 +992,14 @@
       var match = function (x) { for (var i = 0; i < st.length; i++) if (!used[i] && st[i].n === x.title) { used[i] = 1; return st[i]; } return null; };
       var h = f.map(function (x) { var p = match(x), line = p ? nameLine(p) : "";
         return box("apparatus", "", '<div class="item"><span class="when">' + esc([x.kind, x.about].filter(Boolean).join(" \u00B7 ")) + '</span><span class="tt">' + esc(x.title) + '</span><p class="sub u-m4-8 u-fs15">' + esc(x.note) + "</p>" +
-          (line ? '<p class="u-m4-8 u-fs15">' + line + "</p>" : "") + extra(p) + outlink(entryURL("facts", x.id), "jayms Fact Book") + "</div>"); }).join("");
+          (line ? '<p class="u-m4-8 u-fs15">' + line + "</p>" : "") + extra(p) + outlink(entryURL("facts", x.id), "jayms Fact Book: " + esc(x.title)) + "</div>"); }).join("");
       var more = st.filter(function (p, i) { return !used[i]; });
       if (more.length) h += (f.length ? '<div class="lbl u-mt14">Also named here</div>' : "") + more.map(function (p) {
         var line = nameLine(p);
         return box("apparatus", "", '<div class="item"><span class="when">' + esc(p.t === "Place" ? "Place" : (p.d || "Person")) + '</span><span class="tt">' + esc(p.n) + "</span>" +
           (p.b ? '<p class="sub u-m4-8 u-fs15">' + esc(p.b) + "</p>" : "") + (line ? '<p class="u-m4-8 u-fs15">' + line + "</p>" : "") + extra(p) + "</div>"); }).join("");
       if (!f.length && !more.length) h = none("No people or places are named in " + esc(this.o.ref) + ".");
-      return { kick: "Fact Book \u00B7 " + (f.length + more.length) + " people and places", title: "People and places here", body: h + outlink(CFG.site + "bible-entity-explorer/", "jayms Fact Book") +
+      return { kick: "Fact Book \u00B7 " + (f.length + more.length) + " people and places", title: "People and places here", body: h + outlink(CFG.site + "bible-entity-explorer/", "The whole jayms Fact Book") +
         '<p class="ctx u-fs13">Family lines, STEPBible entries and "Also named here": <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible</a> (TIPNR, CC BY 4.0). Maps: <a href="https://github.com/BibleAquifer/BiblicaOpenBibleMaps" target="_blank" rel="noopener">Biblica Open Bible Maps</a> (CC BY-SA 4.0); tap one to open it full screen.</p>' +
         (LV.ok.facts ? "" : '<p class="ctx u-fs13">' + liveNote() + "</p>") };
     }
@@ -2663,7 +2663,7 @@
               (e.otRef || []).map(function (r) { return '<div class="lbl">' + esc(r) + '</div><p class="u-fs15" data-eor-txt="' + esc(r) + '">\u2026</p>'; }).join("") + "</div></div>" +
             (e.plain ? '<div class="box plain u-mt8"><p class="u-m0">' + md(e.plain) + "</p></div>" : "") +
             '<details class="jst-past"><summary class="lbl">What matches, what differs, what John does</summary>' + part("same", "wording", "What matches") + part("differs", "explain", "Why it doesn't match exactly") + part("turn", "explain", "What John does with it") + part("not", "not", "What this echo is not") + "</details>" +
-            outlink(entryURL("eor", e.id), "jayms Echoes of Revelation") + "</div>");
+            outlink(entryURL("eor", e.id), "jayms Echoes of Revelation: " + esc(e.bibleRef)) + "</div>");
         }).join("");
     },
     /* the Connecting Scripture tab: each note under the verses it is on */
