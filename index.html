@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v351">
+<link rel="stylesheet" href="jayms-study.css?v=v352">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -169,10 +169,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v351"></script>
-<script src="jayms-store.js?v=v351"></script>
-<script src="x-discuss.js?v=v351"></script>
-<script src="jayms-study.js?v=v351"></script>
+<script src="jayms-ref.js?v=v352"></script>
+<script src="jayms-store.js?v=v352"></script>
+<script src="x-discuss.js?v=v352"></script>
+<script src="jayms-study.js?v=v352"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -429,10 +429,10 @@ function renderReader(){
   /* the day's plan readings as tabs, each with its own ×; none while the reading plan is hidden (Plan off), so only the passages you
      opened sit on top. A closed one stays closed for that day; picking a day in the plan brings them back */
   const shut = planTabsShut(), planTabs = document.body.classList.contains("rail-hidden") || !S.planOn ? [] : READINGS.map((x,i)=>i).filter(i=>!shut.includes(i));
-  $("rtabs").innerHTML = planTabs.map(i=>{ const x=READINGS[i]; return `<span class="rtabgrp"><button class="rtab${!S.adhoc&&i===S.reading?" on":""}${isDone(dk(x))?" done":""}" role="tab" aria-selected="${!S.adhoc&&i===S.reading}" data-r="${i}"><span class="ok"></span>${esc(x.ref)}</button><button class="rtabx" data-close-plan="${i}" title="Close ${esc(x.ref)}" aria-label="Close ${esc(x.ref)}">×</button></span>` }).join("");
+  $("rtabs").innerHTML = planTabs.map(i=>{ const x=READINGS[i]; return `<span class="rtabgrp"><button class="rtab${!S.adhoc&&i===S.reading?" on":""}${isDone(dk(x))?" done":""}" role="tab" aria-selected="${!S.adhoc&&i===S.reading}" data-r="${i}"><span class="ok"></span>${tabRef(x.ref)}</button><button class="rtabx" data-close-plan="${i}" title="Close ${esc(x.ref)}" aria-label="Close ${esc(x.ref)}">×</button></span>` }).join("");
   const isToday = S.day===todayNum(plan());
   /* every passage opened with Go (or « ») keeps its own tab until its × closes it (S.opened); S.adhoc is the one on screen */
-  $("rtabs").innerHTML += S.opened.map((o,n)=>`<span class="rtabgrp"><button class="rtab${S.adhoc===o?" on":""} adhoc" role="tab" aria-selected="${S.adhoc===o}" data-open-tab="${n}">${esc(o.ref)}</button><button class="rtabx" data-close-adhoc="${n}" title="Close ${esc(o.ref)}" aria-label="Close ${esc(o.ref)}">×</button></span>`).join("");
+  $("rtabs").innerHTML += S.opened.map((o,n)=>`<span class="rtabgrp"><button class="rtab${S.adhoc===o?" on":""} adhoc" role="tab" aria-selected="${S.adhoc===o}" data-open-tab="${n}">${tabRef(o.ref)}</button><button class="rtabx" data-close-adhoc="${n}" title="Close ${esc(o.ref)}" aria-label="Close ${esc(o.ref)}">×</button></span>`).join("");
   $("rkick").textContent = !S.planOn ? "Passage" : S.adhoc ? "Opened passage · not in today's plan" : `${isToday?(plan().weekly?"This week":"Today"):(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
   $("rtitle").textContent = r.ref;
   const lg = JaymsRef.refly(r.ref, S.ver);
@@ -928,11 +928,14 @@ $("biblebtn").onclick=()=>{ const open=$("biblepick").hidden; if(open){ BP={}; r
 $("planpick").onclick=()=>{ const open=$("planlist").hidden; $("planlist").hidden=!open; $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false); $("planpick").setAttribute("aria-expanded",open) };
 /* "The Bible" at the top of the plan list: book, then chapter, then verse (or the whole chapter); it opens there beside the
    day's readings, like Go to a passage, and the plan stays as it is */
+const AB="Gen Exo Lev Num Deu Jos Jdg Rth 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Eze Dan Hos Joe Amo Oba Jon Mic Nah Hab Zep Hag Zec Mal Mat Mar Luk Jhn Act Rom 1Co 2Co Gal Eph Phl Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jo 2Jo 3Jo Jde Rev".split(" ");
+/* the same three-letter names in a reference: "Lam 2", "Psa 61; Psa 62" (reading tabs on a phone) */
+function abRef(r){ return JaymsRef.books.slice().sort((a,b)=>b.name.length-a.name.length).reduce((t,b)=>t.replace(new RegExp("\\b"+b.name+"s?(?= \\d)","g"),AB[b.order]),String(r)) }
+const tabRef=r=>`<span class="tabfull">${esc(r)}</span><span class="tabab">${esc(abRef(r))}</span>`;
 let BP = {};
 function renderBiblePick(){
   const name=b=>b==="Psalm"?"Psalms":b, chip=(attr,label,on)=>`<button class="chip${on?" on":""}" ${attr}>${esc(String(label))}</button>`;
   const books=JaymsRef.books, close=chip('data-bp="close"',"Close");
-  const AB="Gen Exo Lev Num Deu Jos Jdg Rth 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Eze Dan Hos Joe Amo Oba Jon Mic Nah Hab Zep Hag Zec Mal Mat Mar Luk Jhn Act Rom 1Co 2Co Gal Eph Phl Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jo 2Jo 3Jo Jde Rev".split(" ");
   const bk=b=>`<button class="chip" data-bp-book="${esc(b.name)}" title="${esc(name(b.name))}">${AB[b.order]}</button>`;
   let h="";
   if(!BP.book){

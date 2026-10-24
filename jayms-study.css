@@ -756,3 +756,6 @@ body.noplan #biblepick{margin-top:0}
 .ilu-lem{display:block;font:500 13px var(--label);color:var(--gold);margin-top:2px;letter-spacing:.02em}
 .phoneonly{display:none !important}
 @media (max-width:700px){ .phoneonly{display:flex !important} .jst-lemchip{display:none} }
+
+.tabab{display:none}
+@media (max-width:700px){ .rtab .tabfull{display:none} .rtab .tabab{display:inline} }
