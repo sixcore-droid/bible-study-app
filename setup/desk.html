@@ -160,6 +160,7 @@
     <div class="pgrip" id="pgrip" role="separator" aria-orientation="vertical" aria-label="Drag to resize the panel" tabindex="0" title="Drag to resize · double-click to reset"></div>
     <div class="phead">
       <div class="sp">
+        <button class="pback" id="pback" hidden></button>
         <div class="lbl" id="pkick"></div>
         <h2 id="ptitle"></h2>
       </div>
@@ -602,11 +603,11 @@ let ID_N = 0;
 function newId(ref){ return `${JaymsRef.key(ref)}~${Date.now()}~${(++ID_N).toString(36)}${Math.random().toString(36).slice(2,6)}` }
 const HANDLERS = {
   meta:    m => applyMeta(m),
-  word:    k => { S.word=k; if(S.tool!=="word"){ S.tool="word"; renderDock(); renderPanel() } renderReader() },
+  word:    k => { S.word=k; if(S.tool!=="word"){ stashPanel("word"); S.tool="word"; renderDock(); renderPanel() } renderReader() },
   /* "On the map" in the Fact Book: the Maps panel, with that place selected */
-  mapPlace: id => { S.mapPlace=id; S.tool="maps"; renderDock(); renderPanel(); if(PH && PH.o && S.mapPlace){ PH.o.focusStep=S.mapPlace; PH.refresh() } S.mapPlace=null },
-  verse:   v => { S.vsel=v; S.tool="verse"; renderReader(); renderDock(); renderPanel() },
-  mark:    id => { S.mark=id; S.tool="marks"; renderReader(); renderDock(); renderPanel() },
+  mapPlace: id => { S.mapPlace=id; stashPanel("maps"); S.tool="maps"; renderDock(); renderPanel(); if(PH && PH.o && S.mapPlace){ PH.o.focusStep=S.mapPlace; PH.refresh() } S.mapPlace=null },
+  verse:   v => { S.vsel=v; stashPanel("verse"); S.tool="verse"; renderReader(); renderDock(); renderPanel() },
+  mark:    id => { S.mark=id; stashPanel("marks"); S.tool="marks"; renderReader(); renderDock(); renderPanel() },
   passage: d => { const err=openPassage(d.ref); if(err) $("gomsg").textContent=err },
   note:    d => { const id=JaymsRef.key(d.ref); initNote(id); NOTES[id].text=(NOTES[id].text?NOTES[id].text+"\n\n":"")+"Claude: "+d.text; if(id===cur().id) markDirty() },
   answer:  rec => ST.c("answers").save(rec.id, rec),
@@ -750,11 +751,24 @@ function applyMeta(m){
   applyPanelWidth(); syncRailBtn();
 }
 let PH = null, PH_KEY = "";
+/* Back: a panel that opens another (Review to Word Study, Fact Book to Maps) is kept as it was, and the new panel
+   names it at the top ("‹ Review"); a dock button, the ×, or another passage starts fresh */
+let PBACK = [];
+function stashPanel(to){ if(!PH || !S.tool || S.tool===to || S.tool==="notes") return; const m=$("pmount");
+  PBACK.push({tool:S.tool, ph:PH, key:PH_KEY, node:m, scroll:$("pbody").scrollTop, ref:cur()&&cur().ref, word:S.word, vsel:S.vsel, mark:S.mark});
+  m.remove(); PH=null; PH_KEY=""; if(PBACK.length>6){ const x=PBACK.shift(); try{ x.ph.destroy() }catch(e){} } }
+function clearBack(){ PBACK.forEach(x=>{ try{ x.ph.destroy() }catch(e){} }); PBACK=[]; syncBack() }
+function syncBack(){ const x=PBACK[PBACK.length-1], t=x&&TOOLS.find(t=>t.id===x.tool); $("pback").hidden=!x; if(x) $("pback").textContent="\u2039 "+(t?t.label:x.tool) }
+function goBack(){ const x=PBACK.pop(); if(!x) return; if(PH) PH.destroy();
+  Object.assign(S,{tool:x.tool, word:x.word, vsel:x.vsel, mark:x.mark}); store.set("tool",S.tool);
+  $("pbody").innerHTML=""; $("pbody").append(x.node); PH=x.ph; PH_KEY=x.key;
+  renderDock(); renderReader(); PH.refresh(); $("pbody").scrollTop=x.scroll; syncBack() }
 function renderPanel(){
   JaymsRef.setWeb(S.view==="public");
   store.set("tool", S.tool);   // remembered for a refresh
   const desk=$("desk");
   document.body.classList.toggle("panel-open",!!S.tool);
+  if(!S.tool || (PBACK.length && PBACK[0].ref!==(cur()&&cur().ref))) clearBack();
   if(!S.tool){ if(PH){PH.destroy(); PH=null; PH_KEY=""} desk.classList.add("no-panel"); document.body.classList.remove("panel-wide"); syncRailBtn(); return }
   desk.classList.remove("no-panel");
   const r = cur(); if(!r) return;
@@ -771,7 +785,7 @@ function renderPanel(){
   if(PH && PH_KEY===key){ PH.refresh(); return }
   if(PH) PH.destroy();
   $("pbody").innerHTML = '<div id="pmount"></div>'; $("pbody").scrollTop = 0;
-  PH = new JST.panels[S.tool]($("pmount"), panelOptions(S.tool)); PH_KEY = key;
+  PH = new JST.panels[S.tool]($("pmount"), panelOptions(S.tool)); PH_KEY = key; syncBack();
 }
 /* Panel width: drag the left edge. Remembered; double-click puts it back. */
 let PW = store.get("pw",null);
@@ -875,7 +889,7 @@ function helpTabs(b){
   v.addEventListener("click",e=>{ if(e.target===v) close() });
   document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!v.hidden) close() });
 })();
-function openTool(id){ S.tool = (S.tool===id)?null:id; renderReader(); renderDock(); renderPanel()}
+function openTool(id){ clearBack(); S.tool = (S.tool===id)?null:id; renderReader(); renderDock(); renderPanel()}
 document.addEventListener("click",e=>{
   const w=e.target.closest("[data-w]"); if(w){ S.word=w.dataset.w; S.tool="word"; renderReader(); renderDock(); renderPanel(); return}
   const v=e.target.closest("[data-v]"); if(v){e.preventDefault(); const [b,c,n]=v.dataset.v.split("|"); S.vsel={book:b,c:+c,v:+n}; S.tool="verse"; renderReader(); renderDock(); renderPanel(); return}
@@ -892,6 +906,7 @@ document.addEventListener("keydown",e=>{
   if(e.key==="Escape"&&S.tool&&$("helpview").hidden&&!document.querySelector(".jst-mapview")&&!(e.target.closest&&e.target.closest("input,textarea,select,[contenteditable]"))){openTool(S.tool)}
 });
 $("pclose").onclick=()=>openTool(S.tool);
+$("pback").onclick=goBack;
 $("addpsalm").checked=S.addPsalm;
 S.hideLists=store.get("hideLists",false); $("hidelists").checked=S.hideLists;
 $("hidelists").onchange=e=>{ S.hideLists=e.target.checked; store.set("hideLists",S.hideLists); renderPlan() };

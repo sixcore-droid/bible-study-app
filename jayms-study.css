@@ -773,3 +773,8 @@ body.noplan #biblepick{margin-top:0}
 
 /* My desk / Read along: one button, named for the view it switches to */
 #viewsw button.on{display:none}
+
+/* "‹ Review": back to the panel this one was opened from */
+.pback{display:inline-block;margin:0 0 6px;padding:4px 10px 4px 8px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--gold);font:600 13px var(--label);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.pback:hover{border-color:var(--gold)}
+.pback[hidden]{display:none}
