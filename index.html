@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v348">
+<link rel="stylesheet" href="jayms-study.css?v=v349">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -39,6 +39,14 @@
   <p>There are a lot of free Bible study tools out there, and they are scattered across the web. This is an attempt to build something easy to use and intuitive: one stop for those free tools, working together beside the text.</p>
   <p>I made this Bible Study Workstation for how I study the Bible.</p>
   <p class="ctx">James McLaughlin · <a href="https://jayms.com/" target="_blank" rel="noopener">jayms.com</a> · <a href="https://buymeacoffee.com/JAYMS" target="_blank" rel="noopener">Buy me a coffee</a></p>
+</div></div>
+<div class="helpview" id="installview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Add to Home Screen"><button class="x" id="installclose" aria-label="Close">×</button>
+  <h2>Add to Home Screen</h2>
+  <p>On an iPhone or iPad, in Safari:</p>
+  <ol class="tourlist"><li>Tap the <b>Share</b> button (the square with the arrow pointing up) at the bottom or top of Safari.</li><li>Scroll down and tap <b>Add to Home Screen</b>, then <b>Add</b>.</li></ol>
+  <p>The app then opens from its own icon, full screen, like any other app.</p>
+  <p class="ctx">In Chrome or another browser on an iPhone, open this page in Safari first; Apple only allows adding to the Home Screen from Safari.</p>
+  <p>On Android, in Chrome: tap the <b>⋮</b> menu, then <b>Install app</b> (or <b>Add to Home screen</b>).</p>
 </div></div>
 <div class="helpview" id="setview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Settings"><button class="x" id="setclose" aria-label="Close">×</button>
   <h2>Settings</h2>
@@ -160,10 +168,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v348"></script>
-<script src="jayms-store.js?v=v348"></script>
-<script src="x-discuss.js?v=v348"></script>
-<script src="jayms-study.js?v=v348"></script>
+<script src="jayms-ref.js?v=v349"></script>
+<script src="jayms-store.js?v=v349"></script>
+<script src="x-discuss.js?v=v349"></script>
+<script src="jayms-study.js?v=v349"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -1099,7 +1107,13 @@ $("optplan").onchange=e=>{ S.planOn=e.target.checked; store.set("planOn",S.planO
 function noPlanEnsure(){ if(S.planOn || S.adhoc) return; if(S.opened.length){ S.adhoc=S.opened[S.opened.length-1]; return } const r=cur(); if(r) openPassage(r.ref) }
 $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);renderReader();renderPanel()};
 { const v=$("setview"), close=()=>{ v.hidden=true; $("setbtn").focus() };
-  /* Phone: no header. One round button floats at the top right and opens a card with everything the header holds:
+  /* Add to Home Screen: Android and desktop Chrome hand the page an install prompt to show on a tap; an iPhone has none, so the
+   menu shows the two Safari steps instead. Already running as the installed app: the row is not shown. */
+let INSTALL_PROMPT=null; const INSTALLED = matchMedia("(display-mode: standalone)").matches || navigator.standalone===true;
+window.addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); INSTALL_PROMPT=e });
+window.addEventListener("appinstalled",()=>{ INSTALL_PROMPT=null });
+$("installclose").onclick=()=>{ $("installview").hidden=true };
+/* Phone: no header. One round button floats at the top right and opens a card with everything the header holds:
    Reading (the plan, The Bible), Apps (Bible Study, Hebrew & Greek, Atlas), More (My desk / Read along, Settings, About,
    Donate, Help). Each row works the header's own button, so the two never drift apart. */
 { const fab=document.createElement("button"); fab.id="fabmenu"; fab.className="fabmenu"; fab.setAttribute("aria-label","Menu"); fab.setAttribute("aria-expanded","false");
@@ -1109,6 +1123,7 @@ $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);r
   const I={ plan:'<path d="M5 5h14M5 12h14M5 19h9"/>', bible:'<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/>', study:'<path d="M4 6h7v13H4zM13 6h7v13h-7z"/>',
     hg:'<path d="M5 18L9 6l4 12M6.5 14h5M15 6h4M17 6v12"/>', atlas:'<path d="M4 6l5-2 6 2 5-2v14l-5 2-6-2-5 2z"/><path d="M9 4v14M15 6v14"/>', view:'<circle cx="12" cy="12" r="3"/><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z"/>',
     set:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>', about:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+    install:'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
     donate:'<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/>', help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 1-1 1.7M12 16.5v.5"/>' };
   const svg=k=>`<span class="fabico"><svg viewBox="0 0 24 24">${I[k]}</svg></span>`;
   const row=(act,k,label,on)=>`<button class="fabrow${on?" on":""}" data-fab="${act}">${svg(k)}<span>${label}</span>${on?'<span class="fabnow">now</span>':""}</button>`;
@@ -1116,7 +1131,7 @@ $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);r
     card.innerHTML = `<div class="fabsec"><div class="fabhead">Reading</div>${S.planOn?row("plan","plan","Reading plan"):""}${row("bible","bible","The Bible")}</div>`
       + `<div class="fabsec"><div class="fabhead">Text size</div><div class="fabsize"><button class="sz" data-fab="smaller" aria-label="Smaller text">A\u2212</button><span>${S.size}px</span><button class="sz" data-fab="larger" aria-label="Larger text">A+</button></div></div>`
       + `<div class="fabsec"><div class="fabhead">Apps</div>${row("app:study","study","Bible Study",app==="study")}${row("app:hg","hg","Hebrew & Greek",app==="hg")}${row("app:atlas","atlas","Atlas",app==="atlas")}</div>`
-      + `<div class="fabsec"><div class="fabhead">More</div>${OWNER&&!PUBLIC?row("view","view",S.view==="public"?"My desk":"Read along"):""}${row("set","set","Settings")}${row("about","about","About")}${row("donate","donate","Donate")}${row("help","help","Help")}</div>` };
+      + `<div class="fabsec"><div class="fabhead">More</div>${OWNER&&!PUBLIC?row("view","view",S.view==="public"?"My desk":"Read along"):""}${INSTALLED ? "" : row("install","install","Add to Home Screen")}${row("set","set","Settings")}${row("about","about","About")}${row("donate","donate","Donate")}${row("help","help","Help")}</div>` };
   const open=on=>{ if(on) draw(); card.hidden=!on; fab.setAttribute("aria-expanded",on); fab.classList.toggle("on",on) };
   fab.onclick=e=>{ e.stopPropagation(); open(card.hidden) };
   document.addEventListener("click",e=>{ if(!card.hidden && !card.contains(e.target) && e.target!==fab) open(false) });
@@ -1131,6 +1146,7 @@ $("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);r
     else if(a==="set") $("setbtn").click();
     else if(a==="about") $("aboutbtn").click();
     else if(a==="help") $("helpbtn").click();
+    else if(a==="install"){ if(INSTALL_PROMPT){ INSTALL_PROMPT.prompt(); INSTALL_PROMPT.userChoice.finally(()=>{ INSTALL_PROMPT=null }) } else { $("installview").hidden=false; $("installclose").focus() } }
     else if(a==="donate") window.open("https://buymeacoffee.com/JAYMS","_blank","noopener");
   };
 }
