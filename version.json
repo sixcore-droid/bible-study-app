@@ -1,1 +1,1 @@
-{"version":"v363","date":"2026-10-27 13:03","note":"Backlog: link Fact Book entries to the Logos Fact Book"}
+{"version":"v364","date":"2026-10-27 15:21","note":"Fact Book maps: retry from GitHub's copy when the CDN refuses, link if both fail, skip the 2 maps with no picture"}

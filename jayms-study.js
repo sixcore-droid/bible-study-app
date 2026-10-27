@@ -967,7 +967,7 @@
     mapsHTML: function (p) {
       var segs = data.segs(this.o.ref), ot = segs[0] && R.book(segs[0].book).order < 39, rank = {};
       /* the maps for this passage first, then this book's, then this testament's (an OT place in Ruth shouldn't open a Matthew map first) */
-      var ids = (this.mp[p.n] || []).filter(function (i) { return MAPBY[i]; });
+      var ids = (this.mp[p.n] || []).filter(function (i) { return MAPBY[i] && MAPBY[i].img; });
       ids.forEach(function (i, n) { var m = MAPBY[i], r = m.r || [], sc = 0;
         if (r.some(function (x) { return segs.some(function (q) { return R.overlap({ book: x[0], c1: x[1], v1: x[2], c2: x[3], v2: x[4] }, q); }); })) sc += 4;
         if (r.some(function (x) { return segs.some(function (q) { return x[0] === q.book; }); })) sc += 2;
@@ -978,7 +978,7 @@
       if (!ids.length) return "";
       var first = MAPBY[ids[0]], name = function (i) { return esc(MAPBY[i].t.replace(/^[^:]+:\s*/, "")); };
       /* the best map shows on the card; tap it (or any title) for full screen */
-      return '<div class="lbl u-mt8">Map \u00B7 ' + name(ids[0]) + '</div><img class="jst-mapimg u-mt6" src="' + esc(mapOnline(first)) + '" alt="' + esc(first.t) + '" data-jst-pmap="' + esc(ids[0]) + '" role="button" tabindex="0" title="Full screen"' + (++this._maps > 2 ? ' loading="lazy"' : "") + ">" +
+      return '<div class="lbl u-mt8">Map \u00B7 ' + name(ids[0]) + '</div><img class="jst-mapimg u-mt6" src="' + esc(mapOnline(first)) + '" data-jst-raw="' + esc(first.img) + '" alt="' + esc(first.t) + '" data-jst-pmap="' + esc(ids[0]) + '" role="button" tabindex="0" title="Full screen"' + (++this._maps > 2 ? ' loading="lazy"' : "") + ">" +
         (ids.length > 1 ? '<div class="lbl u-mt8">More maps</div><div class="chips">' + ids.slice(1, 5).map(function (i) { return '<button class="chip" data-jst-pmap="' + esc(i) + '">' + name(i) + "</button>"; }).join("") + "</div>" : "");
     },
     /* STEPBible's own entry: the short one at once, the full article when opened */
@@ -2792,6 +2792,14 @@
   var MAPIDX = null, MAPBY = {}, MAPURL = {};
   /* a map's picture as a blob URL: sliced out of its bundle file (the page's own file, so it loads anywhere), else the original */
   function mapOnline(m) { return String(m.img).replace("https://raw.githubusercontent.com/BibleAquifer/BiblicaOpenBibleMaps/main/", "https://cdn.jsdelivr.net/gh/BibleAquifer/BiblicaOpenBibleMaps@main/"); }
+  /* A map picture comes from the jsDelivr copy of the open map set. It refuses 39 of the 542 (too big for it), and a phone's network can drop
+     one, so a picture that fails is tried once from GitHub's own copy (data-jst-raw); if that fails too it becomes a link to open the map. */
+  document.addEventListener("error", function (e) {
+    var im = e.target, raw = im && im.tagName === "IMG" && im.getAttribute("data-jst-raw"); if (!raw) return;
+    if (!im.dataset.jstTried && im.getAttribute("src") !== raw) { im.dataset.jstTried = "1"; im.src = raw; return; }
+    var p = document.createElement("p"); p.className = "ctx"; p.innerHTML = '<a href="' + esc(raw) + '" target="_blank" rel="noopener">Open this map</a>, it would not load here.';
+    im.replaceWith(p);
+  }, true);
   /* a map's picture: the online original (no copies are kept; maps.json's bundle fields are history from when claude.ai held them) */
   function mapURL(m) {
     if (!m) return Promise.resolve("");
@@ -2802,7 +2810,7 @@
     if (!m) return;
     mapURL(m).then(function (u) {
       var v = document.createElement("div"); v.className = "jst-mapview";
-      v.innerHTML = '<div class="jst-mapbar"><span>' + esc(m.t) + '</span><button class="btn" data-x aria-label="Close">\u00D7</button></div><div class="jst-mapscroll"><img src="' + u + '" alt="' + esc(m.t) + '" referrerpolicy="no-referrer"></div>';
+      v.innerHTML = '<div class="jst-mapbar"><span>' + esc(m.t) + '</span><button class="btn" data-x aria-label="Close">\u00D7</button></div><div class="jst-mapscroll"><img src="' + u + '" data-jst-raw="' + esc(m.img) + '" alt="' + esc(m.t) + '" referrerpolicy="no-referrer"></div>';
       var close = function () { v.remove(); document.removeEventListener("keydown", key); };
       var key = function (e) { if (e.key === "Escape") close(); };
       v.addEventListener("click", function (e) {
@@ -2817,7 +2825,7 @@
   function mapsFor(ref) {
     if (!MAPIDX) return [];
     var segs = data.segs(ref);
-    return MAPIDX.filter(function (m) { return (m.b || m.img) && m.r.some(function (r) { return segs.some(function (q) { return R.overlap({ book: r[0], c1: r[1], v1: r[2], c2: r[3], v2: r[4] }, q); }); }); });
+    return MAPIDX.filter(function (m) { return m.img && m.r.some(function (r) { return segs.some(function (q) { return R.overlap({ book: r[0], c1: r[1], v1: r[2], c2: r[3], v2: r[4] }, q); }); }); });
   }
 
   /* The shelf. For James: his Logos commentaries, his study Bibles (Logos plus the open Tyndale and Biblica notes), maps, and the rest
