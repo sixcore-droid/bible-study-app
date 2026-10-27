@@ -785,3 +785,12 @@ body.noplan #biblepick{margin-top:0}
 #setview .spfkeyrow .sub{flex-basis:100%}
 #setview .spfkeyrow input{flex:1 1 200px;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);font:16px var(--read)}
 #setview .spfkeyrow input[hidden],#setview .spfkeyrow .chip[hidden]{display:none}
+
+/* Settings, in groups */
+#setview .setcat{margin:26px 0 0;padding-top:14px;border-top:1px solid var(--line);font:600 13px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+#setview h2 + .setcat{margin-top:12px;border-top:0;padding-top:0}
+#setview .spfvoicerow{cursor:default}
+#setview .spfvlabel{font-size:16px;font-weight:600;flex-basis:100%}
+#setview #spfsetbar{flex-basis:100%}
+#setview .spf-bar{color:var(--ink);border-color:var(--line);font-family:var(--label);margin:6px 0 0}
+#setview .spfkeyrow label{cursor:default}

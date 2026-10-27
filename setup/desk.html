@@ -51,18 +51,26 @@
 </div></div>
 <div class="helpview" id="setview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Settings"><button class="x" id="setclose" aria-label="Close">×</button>
   <h2>Settings</h2>
-  <label class="planopt"><input type="checkbox" id="optplan"> Reading plan <span class="sub">off: no plan, no day's readings; just the passages you open (The Bible button stays)</span></label>
-  <label class="planopt"><input type="checkbox" id="optlogos"> Logos links <span class="sub">Open in Logos, the Shelf's commentaries and study Bibles, the atlases</span></label>
-  <label class="planopt"><input type="checkbox" id="optbible"> The Bible button <span class="sub">under the reading plan: go to any book, chapter and verse</span></label>
-  <label class="planopt"><input type="checkbox" id="optred"> Words of Jesus in <span class="sw-red">red</span> <span class="sub">Jesus's words (from the World English Bible's red letters). Try Matthew 5, the Sermon on the Mount.</span></label>
-  <label class="planopt" id="optbluewrap" hidden><input type="checkbox" id="optblue"> Old Testament connections in <span class="sw-blue">blue</span> <span class="sub">Verses with a note in the CSB Connecting Scripture New Testament. Try Matthew 4 or Matthew 1:23.</span></label>
+  <h3 class="setcat">Reading</h3>
+  <label class="planopt"><input type="checkbox" id="optplan"> Reading plan <span class="sub">Show the reading plan on the left, with its days, your progress and the Done ticks. Off: no plan, just the passages you open yourself.</span></label>
+  <label class="planopt"><input type="checkbox" id="optbible"> The Bible button <span class="sub">Show The Bible under the reading plan, to open any book, chapter and verse.</span></label>
+  <label class="planopt"><input type="checkbox" id="optnums"> Verse numbers <span class="sub">Show the verse numbers in the text. Off: the passage reads straight through, and Speechify does not read the numbers.</span></label>
+  <h3 class="setcat">Colours in the text</h3>
+  <label class="planopt"><input type="checkbox" id="optred"> Words of Jesus in <span class="sw-red">red</span> <span class="sub">Jesus's words in red (from the World English Bible's red letters). Try Matthew 5, the Sermon on the Mount.</span></label>
+  <label class="planopt" id="optbluewrap" hidden><input type="checkbox" id="optblue"> Old Testament connections in <span class="sw-blue">blue</span> <span class="sub">Verses that have a note in the CSB Connecting Scripture New Testament. Try Matthew 4 or Matthew 1:23.</span></label>
   <label class="planopt" id="optpurplewrap" hidden><input type="checkbox" id="optpurple"> Jesus using the Old Testament in <span class="sw-purple">purple</span> <span class="sub">His words inside those verses. Try Matthew 4: verses 4, 7 and 10 are Jesus answering with Deuteronomy.</span></label>
-  <div class="planopt phoneonly ilopts">Interleave shows <label><input type="checkbox" id="optilen"> English</label><label><input type="checkbox" id="optilor"> Hebrew or Greek</label><label><input type="checkbox" id="optlemma"> Lemma</label><span class="sub">Turn any line under the words on or off. On a computer these are the English, Hebrew or Greek, and Lemma buttons in the Interleave panel.</span></div>
-  <label class="planopt"><input type="checkbox" id="optnums"> Verse numbers <span class="sub">off: the text reads straight through, and Speechify skips them</span></label>
-  <div class="planopt spfkeyrow" id="spfrow"><label for="spfkey">Speechify voice</label>
-    <span class="sub" id="spfhelp">Paste your own Speechify API key (from <a href="https://platform.speechify.ai" target="_blank" rel="noopener">platform.speechify.ai</a>) and the Voice and Read buttons appear, so any passage can be read aloud. The key stays in this browser and goes only to Speechify. Treat it like a password for your own account. Speechify's free plan covers about 40 chapters a month.</span>
+  <h3 class="setcat">Logos</h3>
+  <label class="planopt"><input type="checkbox" id="optlogos"> Logos links <span class="sub">Show the links that open Logos Bible Software: Open in Logos, the commentaries and study Bibles on the Shelf, and the atlases.</span></label>
+  <h3 class="setcat phoneonly">Interleaved Bible</h3>
+  <div class="planopt phoneonly ilopts">Show under each word <label><input type="checkbox" id="optilen"> English</label><label><input type="checkbox" id="optilor"> Hebrew or Greek</label><label><input type="checkbox" id="optlemma"> Lemma</label><span class="sub">Turn any line on or off. Lemma is the word's dictionary form, in English letters. On a computer these are the English, Hebrew or Greek, and Lemma buttons in the Interleave panel.</span></div>
+  <h3 class="setcat">Read aloud (Speechify)</h3>
+  <div class="planopt spfkeyrow" id="spfrow"><label for="spfkey">Your Speechify key</label>
+    <span class="sub" id="spfhelp">Paste your own Speechify API key (from <a href="https://platform.speechify.ai" target="_blank" rel="noopener">platform.speechify.ai</a>) to turn on reading aloud. The Voice and Read buttons then appear on the text. The key stays in this browser and goes only to Speechify. Treat it like a password for your own account. Speechify's free plan covers about 40 chapters a month.</span>
     <input type="password" id="spfkey" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your Speechify key"><button class="chip" id="spfsave">Save</button><button class="chip" id="spfclear" hidden>Remove</button>
     <span class="sub" id="spfmsg" aria-live="polite"></span></div>
+  <div class="planopt spfvoicerow"><span class="spfvlabel">Voice and speed</span>
+    <span class="sub" id="spfsetnote">Once a key is saved, you choose the voice that reads and how fast it reads here. 1x is normal speed; 2x is twice as fast.</span>
+    <div id="spfsetbar" hidden></div></div>
   <p class="ctx">This browser remembers them.</p>
 </div></div>
 <div class="helpview" id="helpview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Help"><button class="x" id="helpclose" aria-label="Close help">×</button><div id="helpbody">Loading…</div></div></div>
@@ -1105,7 +1113,7 @@ $("text").addEventListener("click",e=>{
   if(rd && window.Speechify){ e.preventDefault(); const c=+rd.dataset.rd; rd.__spfBtn=rd;
     Speechify.read(rd, { text: colText(c), highlight: ()=>highlightCol(c) }); }
 });
-$("voicecfg").onclick=()=>{ const h=$("spfhost"), open=h.hidden; h.hidden=!open; $("voicecfg").setAttribute("aria-expanded",String(open)); if(open && window.Speechify){ const b=Speechify.bar(h), l=b&&b.querySelector("#spf-load"); if(l&&!l.dataset.done){ l.dataset.done=1; l.click() } } };
+$("voicecfg").onclick=()=>{ const h=$("spfhost"), open=h.hidden; h.hidden=!open; $("voicecfg").setAttribute("aria-expanded",String(open)); if(open && window.Speechify) spfBarIn(h) };
 const SPF_DESK = !PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 let SPF_FILE = false;   // the desk's own key file is in use
 function spfKey(){ try{ return localStorage.getItem("spf_key")||"" }catch(e){ return "" } }
@@ -1117,7 +1125,12 @@ function spfLoad(){
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
     return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
+/* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
+function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);
+  const l=b.querySelector("#spf-load"); if(l&&!l.dataset.done){ l.dataset.done=1; l.click() } }
 function spfSettings(){ const has=!!spfKey();
+  $("spfsetbar").hidden=!SPF; $("spfsetnote").hidden=SPF;
+  $("spfhelp").hidden=SPF_FILE;
   $("spfkey").hidden=$("spfsave").hidden=SPF_FILE; $("spfclear").hidden=!has||SPF_FILE; $("spfkey").value="";
   $("spfkey").placeholder=has?"A key is saved in this browser":"Paste your Speechify key";
   $("spfmsg").textContent=SPF_FILE?"Using the Speechify key on this computer.":(has?"Voice and Read are on.":"") }
@@ -1145,6 +1158,7 @@ $("numbtn").onclick=()=>{S.nums=!S.nums;store.set("nums",S.nums);renderReader()}
 [["optilen","en"],["optilor","or"],["optlemma","lemma"]].forEach(([id,k])=>{
   $(id).onchange=e=>{ JST.util.ilSet(k,e.target.checked); if(S.tool==="outline" && PH) PH.refresh() };
   $("setbtn").addEventListener("click",()=>{ $(id).checked=JST.util.ilOn(k) }) });
+$("setbtn").addEventListener("click",()=>{ if(SPF) spfBarIn($("spfsetbar")) });   // Settings shows the voice and speed bar
 $("optred").onchange=e=>{S.red=e.target.checked;store.set("red",S.red);renderReader()};
 $("optblue").onchange=e=>{S.blue=e.target.checked;store.set("blue",S.blue);renderReader()};
 $("optpurple").onchange=e=>{S.purple=e.target.checked;store.set("purple",S.purple);renderReader()};
