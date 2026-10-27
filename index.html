@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v359">
+<link rel="stylesheet" href="jayms-study.css?v=v360">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -58,6 +58,10 @@
   <label class="planopt" id="optpurplewrap" hidden><input type="checkbox" id="optpurple"> Jesus using the Old Testament in <span class="sw-purple">purple</span> <span class="sub">His words inside those verses. Try Matthew 4: verses 4, 7 and 10 are Jesus answering with Deuteronomy.</span></label>
   <div class="planopt phoneonly ilopts">Interleave shows <label><input type="checkbox" id="optilen"> English</label><label><input type="checkbox" id="optilor"> Hebrew or Greek</label><label><input type="checkbox" id="optlemma"> Lemma</label><span class="sub">Turn any line under the words on or off. On a computer these are the English, Hebrew or Greek, and Lemma buttons in the Interleave panel.</span></div>
   <label class="planopt"><input type="checkbox" id="optnums"> Verse numbers <span class="sub">off: the text reads straight through, and Speechify skips them</span></label>
+  <div class="planopt spfkeyrow" id="spfrow"><label for="spfkey">Speechify voice</label>
+    <span class="sub" id="spfhelp">Paste your own Speechify API key (from <a href="https://platform.speechify.ai" target="_blank" rel="noopener">platform.speechify.ai</a>) and the Voice and Read buttons appear, so any passage can be read aloud. The key stays in this browser and goes only to Speechify. Treat it like a password for your own account. Speechify's free plan covers about 40 chapters a month.</span>
+    <input type="password" id="spfkey" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your Speechify key"><button class="chip" id="spfsave">Save</button><button class="chip" id="spfclear" hidden>Remove</button>
+    <span class="sub" id="spfmsg" aria-live="polite"></span></div>
   <p class="ctx">This browser remembers them.</p>
 </div></div>
 <div class="helpview" id="helpview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Help"><button class="x" id="helpclose" aria-label="Close help">×</button><div id="helpbody">Loading…</div></div></div>
@@ -171,10 +175,10 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v359"></script>
-<script src="jayms-store.js?v=v359"></script>
-<script src="x-discuss.js?v=v359"></script>
-<script src="jayms-study.js?v=v359"></script>
+<script src="jayms-ref.js?v=v360"></script>
+<script src="jayms-store.js?v=v360"></script>
+<script src="x-discuss.js?v=v360"></script>
+<script src="jayms-study.js?v=v360"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -1072,7 +1076,9 @@ $("notepub").onchange=e=>{const rid=cur().id; NOTES[rid].pub=e.target.checked; m
 $("notesave").onclick=commitNote;
 $("noteview").onclick=()=>{ const toEdit=$("note").hidden; S.noteEdit=toEdit; if(!toEdit) commitNote(); renderReader(); if(toEdit) $("note").focus() };
 $("notepreview").onclick=e=>{ if(e.target.closest("a")) return; S.noteEdit=true; renderReader(); $("note").focus() };
-/* Speechify, on the desk only: the reader and key come from ~/jayms/speechify/web through serve.py (never in this repo or on the site).
+/* Speechify (read aloud). The desk's key file loads the reader from ~/jayms/speechify/web through serve.py (never in this repo or on the site).
+   Everyone else brings a key of their own: Settings keeps it in this browser (localStorage spf_key), and the reader sends it only to
+   api.speechify.ai from their own browser, so their quota and no cost to anyone else. Voice and Read show only once a key is in place.
    Each version column gets Highlight (select that column's text) and Read (Speechify reads it); Voice opens the voice and speed bar. */
 let SPF = false, READ_VERS = [];
 function readBtns(c){ return `<span class="rdbtns"><button class="sz" data-hl="${c}" title="Highlight this column and copy it">Highlight</button>${SPF ? `<button class="sz spf-btn" data-rd="${c}" title="Read this column aloud in Speechify"><span class="spf-ico">▶</span> <span class="spf-lab">Read</span></button>` : ""}</span>` }
@@ -1099,11 +1105,31 @@ $("text").addEventListener("click",e=>{
     Speechify.read(rd, { text: colText(c), highlight: ()=>highlightCol(c) }); }
 });
 $("voicecfg").onclick=()=>{ const h=$("spfhost"), open=h.hidden; h.hidden=!open; $("voicecfg").setAttribute("aria-expanded",String(open)); if(open && window.Speechify){ const b=Speechify.bar(h), l=b&&b.querySelector("#spf-load"); if(l&&!l.dataset.done){ l.dataset.done=1; l.click() } } };
-if(!PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname)){
+const SPF_DESK = !PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+let SPF_FILE = false;   // the desk's own key file is in use
+function spfKey(){ try{ return localStorage.getItem("spf_key")||"" }catch(e){ return "" } }
+function spfLoad(){
   const load=src=>new Promise((ok,no)=>{ const sc=document.createElement("script"); sc.src=src; sc.onload=ok; sc.onerror=no; document.head.appendChild(sc) });
-  load("/speechify/speechify-key.js").then(()=>{ Object.assign(window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}, { bar:false, selector:"[data-spf-none]" }); return load("/speechify/speechify-reader.js") })
-    .then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }).catch(()=>{});
+  (SPF_DESK ? load("/speechify/speechify-key.js").then(()=>true,()=>false) : Promise.resolve(false)).then(file=>{
+    const mine=spfKey(); if(!file && !mine) return;
+    SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
+    Object.assign(o, { bar:false, selector:"[data-spf-none]" });
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v360").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
+function spfSettings(){ const has=!!spfKey();
+  $("spfkey").hidden=$("spfsave").hidden=SPF_FILE; $("spfclear").hidden=!has||SPF_FILE; $("spfkey").value="";
+  $("spfkey").placeholder=has?"A key is saved in this browser":"Paste your Speechify key";
+  $("spfmsg").textContent=SPF_FILE?"Using the Speechify key on this computer.":(has?"Voice and Read are on.":"") }
+$("spfsave").onclick=async()=>{ const k=$("spfkey").value.trim(), m=$("spfmsg"); if(!k){ m.textContent="Paste a key first."; return }
+  m.textContent="Checking the key...";
+  try{ const r=await fetch("https://api.speechify.ai/v1/voices?model=simba-3.2&limit=1",{headers:{Authorization:"Bearer "+k}});
+    if(r.status===401||r.status===403){ m.textContent="Speechify did not accept that key."; return }
+    if(!r.ok){ m.textContent="Speechify answered with an error ("+r.status+"). Try again in a minute."; return } }
+  catch(e){ m.textContent="Could not reach Speechify. Check the connection and try again."; return }
+  try{ localStorage.setItem("spf_key",k) }catch(e){ m.textContent="This browser would not save it."; return }
+  m.textContent="Saved. Voice and Read are on."; setTimeout(()=>location.reload(),600) };
+$("spfclear").onclick=()=>{ try{ localStorage.removeItem("spf_key") }catch(e){}; $("spfmsg").textContent="Removed."; setTimeout(()=>location.reload(),400) };
+spfLoad();
 $("obscopy").onclick=async()=>{ const u=obsURI(obsPath(cur().ref));
   try{ await navigator.clipboard.writeText(u); $("obsmsg").textContent="Link copied. Paste it into your browser's address bar." }catch(e){ $("obsmsg").textContent=u } };
 document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="s"&&document.activeElement===$("note")){ e.preventDefault(); commitNote() } });

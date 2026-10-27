@@ -192,8 +192,7 @@
     {
      "sel": "#voicecfg",
      "name": "Voice",
-     "text": "Speechify voice and speed for Read.",
-     "who": "owner",
+     "text": "Speechify voice and speed for Read. It shows once you have pasted your own Speechify key in Settings.",
      "optional": true
     },
     {
@@ -216,8 +215,7 @@
     {
      "sel": ".rdbtns",
      "name": "Highlight and Read",
-     "text": "Highlight marks a column; Read reads it aloud with Speechify.",
-     "who": "owner",
+     "text": "Highlight marks a column and copies it; Read reads it aloud with Speechify (once your own key is in Settings).",
      "optional": true,
      "at": "right"
     }
