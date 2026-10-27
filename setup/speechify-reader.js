@@ -196,7 +196,7 @@
       '<select id="spf-voice"></select>' +
       '<button type="button" id="spf-load">Load voices</button>' +
       '<label for="spf-speed">Speed</label>' +
-      '<input id="spf-speed" type="range" min="-50" max="100" step="5">' +
+      '<input id="spf-speed" type="range" min="-50" max="100" step="10">' +
       '<output id="spf-speedout"></output>';
     var host = O.mount ? (typeof O.mount === 'string' ? d.querySelector(O.mount) : O.mount) : d.body;
     (host || d.body).insertBefore(el, (host || d.body).firstChild);
@@ -212,7 +212,7 @@
     v.addEventListener('change', function () { state.voice = v.value; set(LS.voice, state.voice); });
     el.querySelector('#spf-load').addEventListener('click', function () { voices(v, this); });
     sp.value = String(state.speed);
-    function shown() { out.textContent = state.speed === 0 ? 'normal' : (state.speed > 0 ? '+' : '') + state.speed + '%'; }
+    function shown() { /* 1x, 1.2x, 2x: the stored value stays a percent change */ out.textContent = (Math.round((100 + state.speed) / 10) / 10) + 'x'; }
     sp.addEventListener('input', function () { state.speed = parseInt(sp.value, 10) || 0; set(LS.speed, String(state.speed)); shown(); });
     shown();
   }
