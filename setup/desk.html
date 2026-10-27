@@ -1211,9 +1211,10 @@ $("railbtn").onclick=()=>{
 };
 document.body.classList.toggle("rail-hidden",!!store.get("railHidden",false));
 /* the plan as a slide-in (phone, narrow window): Close at its top, or a tap anywhere outside it */
+/* isConnected + composedPath: a tap on a button the picker has since redrawn (book, chapter, verse) is still a tap inside */
 $("railclose").onclick=()=>{ $("rail").classList.remove("open"); syncRailBtn() };
 document.addEventListener("click",e=>{ const r=$("rail");
-  if(r.classList.contains("open") && !r.contains(e.target) && !e.target.closest("#railbtn,.fabmenu,.fabcard")){ r.classList.remove("open"); syncRailBtn() } });
+  if(r.classList.contains("open") && e.target.isConnected && !e.composedPath().includes(r) && !e.target.closest("#railbtn,.fabmenu,.fabcard")){ r.classList.remove("open"); syncRailBtn() } });
 window.addEventListener("resize",syncRailBtn);
 /* today's date in the top bar, checked every minute so it turns over at midnight */
 function showToday(){ const d=new Date(), p=n=>String(n).padStart(2,"0"); $("today").textContent = `${p(d.getMonth()+1)}/${p(d.getDate())}/${p(d.getFullYear()%100)}` }   // 10/07/26
