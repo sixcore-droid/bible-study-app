@@ -224,7 +224,7 @@
   {
    "id": "after",
    "title": "Under the text",
-   "intro": "When you've read it. On jayms.com, the notes you type and the readings you mark Done are kept in your own browser on that device, and nobody else sees them.",
+   "intro": "When you've read it. On jayms.com, James's public notes on the passage show under the text when he has written some, and the readings you mark Done are kept in your own browser on that device, so nobody else sees them.",
    "app": "study",
    "clip": "#markdone",
    "clipTo": "#note",
