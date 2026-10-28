@@ -231,7 +231,7 @@ const QUICK = [
 const NOTES_ICON = '<svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>';
 const DOCK = ["marks","verse","outline","word","|","council","gods","ancient","facts","family","maps","art","scrolls","posts","corpus","fathers","targum","xref","bp","x","chats","logos","shelf","vocab","ideas","vault","|","wrap","review","config","notes"];
 function toolMeta(id){
-  if(id==="notes") return {id, label:"Notes", name:"All my notes", icon:NOTES_ICON};
+  if(id==="notes") return PUBLIC ? {id, label:"Jayms Notes", name:"Jayms Notes: James's public notes", icon:NOTES_ICON} : {id, label:"Notes", name:"All my notes", icon:NOTES_ICON};
   const P = JST.panels[id]; return Object.assign({}, P.meta);
 }
 function toolCount(id){
@@ -242,6 +242,7 @@ function toolCount(id){
   if(id==="vocab") return ST.c("vocab").all().length;
   if(id==="ideas") return ST.c("ideas").all().filter(x=>!x.written).length;
   if(id==="review") return JST.reviewCount(ST.c("vocab").all(), k=>ST.c("reviews").peek(k));
+  if(id==="notes" && PUBLIC) return cur() && PUBNOTES[cur().id] ? 1 : 0;
   if(id==="notes"||id==="claude"||id==="verse"||id==="outline"||id==="word") return null;
   const r=cur(); return r ? JST.panels[id].count(JST.data.peek(r.ref)) : null;
 }
@@ -252,9 +253,10 @@ const PUBLIC = !!window.JAYMS_PUBLIC;
 if(PUBLIC && location.hostname==="jayms.com" && "serviceWorker" in navigator)
   window.addEventListener("load",()=>navigator.serviceWorker.register(location.origin+"/bible-study-app/sw",{scope:location.origin+"/bible-study-app/"}).catch(()=>{}));
 if(PUBLIC){ const bl=document.getElementById("brandlink"); bl.href="https://jayms.com/"; bl.removeAttribute("target"); bl.title="jayms.com" }   // already the online version: go to the site
-/* Visitors writing notes of their own (saved in their browser) is built but off: for now the public site shows James's public notes. Set true to turn it on. */
+/* Visitors writing notes of their own (the bar under the text, saved in their browser) is built but off: for now the web version has only
+   the Jayms Notes side button, which shows James's public notes. Set true to turn the bar on. */
 const VISITOR_NOTES = false;
-const TOOLS = DOCK.filter(id=>!(PUBLIC && (id==="x" || (id==="notes" && !VISITOR_NOTES)))).map(id=>id==="|"?{sep:true}:toolMeta(id));
+const TOOLS = DOCK.filter(id=>!(PUBLIC && id==="x")).map(id=>id==="|"?{sep:true}:toolMeta(id));
 
 /* ===== STATE ===== */
 /* Saved state moved to canonical reference keys in v024: the three hand ids become their references. */
@@ -321,8 +323,8 @@ const thread = id => { const t=ST.c("threads").peek(id); return t&&JaymsX.parse(
 /* the public text of a note: James sees his own saved public notes (also when previewing Read along); readers see the public copy */
 const pubText = id => { if(OWNER){ const n=ST.c("notes").peek(id); return n&&n.pub ? n.text||"" : "" } return PUBNOTES[id] || (ST.c("pub").peek(id)||{}).text||"" };
 /* the public web app: James's notes marked public in his vault, collected into public-notes.json at each save point (scripts/build-public-notes.py) */
-const PUBNOTES = {};
-if(PUBLIC) fetch("public-notes.json").then(r=>r.ok?r.json():[]).then(l=>{ l.forEach(n=>{ try{ PUBNOTES[JaymsRef.key(n.passage)] = n.text }catch(e){} }); renderReader(); if(S.tool==="notes") renderPanel() }).catch(()=>{});
+const PUBNOTES = {}, PUBLIST = [];
+if(PUBLIC) fetch("public-notes.json").then(r=>r.ok?r.json():[]).then(l=>{ l.forEach(n=>{ try{ PUBNOTES[JaymsRef.key(n.passage)] = n.text; PUBLIST.push(n) }catch(e){} }); renderReader(); if(S.tool==="notes") renderPanel() }).catch(()=>{});
 const isDone = id => !!(ST.c("done").peek(id)||{}).done;
 function dayPosts(){const ids=new Set(); (S.adhoc?[S.adhoc]:READINGS).forEach(r=>((JST.data.peek(r.ref)||{}).posts||[]).forEach(p=>ids.add(p.id))); return [...ids]}
 /* ===== DISCUSSION ON X =====
@@ -537,7 +539,7 @@ function renderReader(){
      Only the desk's Read along preview hides them, since there they would be James's. */
   $("mynotes").hidden = pub && !(PUBLIC && VISITOR_NOTES);
   $("markdone").hidden = (pub && !PUBLIC) || !!S.adhoc;
-  $("pubnote").hidden = !pub || (PUBLIC && !pubText(r.id));   // the public site shows James's public note when there is one
+  $("pubnote").hidden = true;   // James's notes are the Jayms Notes side button on the web version, not a bar under the text
   $("publbl").textContent = `James's notes on ${r.ref}`;
   $("pubbody").innerHTML = pubText(r.id) ? box("explain","",`<div class="jst-md">${JST.util.mdBlock(pubText(r.id))}</div>`) : `<p class="empty">No public notes on this reading yet.</p>`;
   const n=NOTES[r.id], dirty=!!DIRTY[r.id];
@@ -583,7 +585,7 @@ function renderDock(){
   const list = TOOLS.filter(t=>!(t.owner && S.view==="public") && !(t.id==="marks" && S.app!=="hg") && !(t.id && off.includes(t.id)));
   $("dock").innerHTML = list.map(t=>{ if(t.sep) return "<hr>"; const n=toolCount(t.id);
     /* a number: how many for this passage; greyed: nothing for this passage; plain: always something there */
-    return `<button class="dk${S.tool===t.id?" on":""}${n===0?" none":""}" data-t="${t.id}" aria-pressed="${S.tool===t.id}" title="${esc(t.name)}${n===0?" (nothing for this passage)":""}">${t.icon}<span>${t.label}</span>${n?`<span class="cnt">${n}</span>`:""}</button>`}).join("");
+    return `<button class="dk${S.tool===t.id?" on":""}${n===0?" none":""}" data-t="${t.id}" aria-pressed="${S.tool===t.id}" title="${esc(t.id==="notes"&&S.view==="public"?"Jayms Notes: James's public notes":t.name)}${n===0?" (nothing for this passage)":""}">${t.icon}<span>${t.id==="notes"&&S.view==="public"?"Jayms Notes":t.label}</span>${n?`<span class="cnt">${n}</span>`:""}</button>`}).join("");
 }
 const box=(v,h,body)=>`<div class="box v-${v}">${h?`<h3>${h}</h3>`:""}${body}</div>`;
 const outlink=(href,txt)=>href?`<a class="out" href="${href}" target="_blank" rel="noopener">${txt} ↗</a>`:"";
@@ -601,20 +603,20 @@ function noteRef(d){
 /* Find a note: a passage (every saved note on it or inside it) or a word (every note that uses it) */
 function noteFind(q){
   q=String(q||"").trim(); if(!q) return "";
-  const pub=S.view==="public" && !PUBLIC, docs=(pub?ST.c("pub"):ST.c("notes")).all().filter(d=>String(d.text||"").trim());
+  const pub=S.view==="public", docs=(PUBLIC ? PUBLIST : (pub?ST.c("pub"):ST.c("notes")).all()).filter(d=>String(d.text||"").trim());
   const segs=JaymsRef.parse(q), byRef=segs.length && !JaymsRef.check(segs);
   const pos=r=>{ const g=JaymsRef.parse(r)[0], b=g&&JaymsRef.book(g.book); return b ? b.order*1e6+g.c1*1e3+g.v1 : 9e9 };
-  const hits=docs.map(d=>({d, ref:noteRef(d)})).filter(x=> byRef ? JaymsRef.parse(x.ref).some(a=>segs.some(b=>JaymsRef.overlap(a,b))) : x.d.text.toLowerCase().includes(q.toLowerCase()))
+  const hits=docs.map(d=>({d, ref:d.passage||noteRef(d)})).filter(x=> byRef ? JaymsRef.parse(x.ref).some(a=>segs.some(b=>JaymsRef.overlap(a,b))) : x.d.text.toLowerCase().includes(q.toLowerCase()))
     .sort((a,b)=>pos(a.ref)-pos(b.ref));
   if(!hits.length) return `<p class="empty">No saved note ${byRef?"on "+esc(JaymsRef.format(segs)):"uses \u201C"+esc(q)+"\u201D"}.</p>`;
   return `<div class="lbl">${hits.length} note${hits.length>1?"s":""} ${byRef?"on "+esc(JaymsRef.format(segs)):"with \u201C"+esc(q)+"\u201D"}</div>` +
     hits.slice(0,60).map(x=>box("explain", esc(x.ref)+` <button class="sz" data-open-note="${esc(x.ref)}">Open</button>`, `<div class="jst-md">${JST.util.mdBlock(x.d.text)}</div>`)).join("");
 }
 function notesHTML(){
-  const pub = S.view==="public" && !PUBLIC;
+  const pub = S.view==="public";
   const all = READINGS.concat(S.adhoc?[S.adhoc]:[]).map(r=>({r,n:pub?pubText(r.id):NOTES[r.id].text,isPub:!!(NOTES[r.id].pub&&NOTES[r.id].savedAt)})).filter(x=>x.n.trim());
   return all.length ? all.map(x=>box("explain",x.r.ref+(!pub&&x.isPub?' <span class="pubtag">Public</span>':""),`<div class="jst-md">${JST.util.mdBlock(x.n)}</div>`)).join("")
-    : `<p class="empty">${pub?"James hasn't made any of today's notes public yet.":"Nothing yet today. Notes typed under each reading collect here, so the day reads as one page when you are done."}</p>`;
+    : `<p class="empty">${pub?"James has no notes on today's readings yet. Search above, or open another passage.":"Nothing yet today. Notes typed under each reading collect here, so the day reads as one page when you are done."}</p>`;
 }
 /* What each component is told by this page. */
 /* What this page does with each message a panel sends (the names are JaymsStudy.events). One object, every panel. */
@@ -797,7 +799,7 @@ function renderPanel(){
     $("pbody").innerHTML = `<div class="jst"><div class="ask u-mb10"><input class="jst-in" id="notefind" placeholder="Find a note: a passage (Romans 8, John 3:16) or a word" value="${esc(S.noteQ||"")}"></div><div id="notefindres">${noteFind(S.noteQ)}</div>${S.noteQ?'<div class="lbl u-mt14">Today</div>':""}${notesHTML()}</div>`;
     $("notefind").oninput=e=>{ S.noteQ=e.target.value; $("notefindres").innerHTML=noteFind(S.noteQ) };
     $("pbody").querySelector(".jst").onclick=e=>{ const b=e.target.closest("[data-open-note]"); if(b){ e.stopPropagation(); openPassage(b.dataset.openNote) } };
-    applyMeta({kick:"Today · "+READINGS.length+" readings", title:S.view==="public"&&!PUBLIC?"James's notes":"My notes"});
+    applyMeta({kick:"Today · "+READINGS.length+" readings", title:S.view==="public"?"Jayms Notes":"My notes"});
     return;
   }
   /* the same panel on the same passage keeps its own state (an open word, a typed question) */
