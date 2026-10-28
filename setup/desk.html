@@ -268,6 +268,10 @@ const PUBLIC = !!window.JAYMS_PUBLIC;
    storage names) so nothing it does touches the live app's. FOLDER_UI: the screens for the visitor's own folder. VISITOR_NOTES: the notes bar. */
 const TEST = !!window.JAYMS_TEST, FOLDER_UI = TEST, VISITOR_NOTES = TEST;
 const PFX = TEST ? "wst." : "ws.";   // the small per-device settings
+/* the side buttons a reader sees: James's own tools (owner) are his copy only. The test copy also gives everyone the Config panel (their own
+   order and hiding for the shared Logos shelf, and which side buttons show), kept in their own browser. */
+const toolName = t => TEST && PUBLIC && t.id==="shelf" ? "Study notes and the Logos shelf" : t.name;   // "my" is James's shelf
+const toolShown = t => !(t.owner && S.view==="public" && !(TEST && t.id==="config"));
 /* the installable app (PWA): only on jayms.com, where the worker lives at the app's own address (the page's <base> points
    elsewhere, so the address is written out in full) */
 if(PUBLIC && !TEST && location.hostname==="jayms.com" && "serviceWorker" in navigator)
@@ -361,7 +365,7 @@ const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:
 /* public build: Read along only; no My desk switch, no prototype badge */
 if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
 /* a refresh brings back the panel that was open (null = none); a first visit keeps the default above */
-{ const t=store.get("tool","__unset"); if(t!=="__unset" && (t===null || TOOLS.some(x=>x.id===t && !(x.owner && S.view==="public")))) S.tool=t; }
+{ const t=store.get("tool","__unset"); if(t!=="__unset" && (t===null || TOOLS.some(x=>x.id===t && toolShown(x)))) S.tool=t; }
 const $ = id=>document.getElementById(id);
 const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
@@ -408,7 +412,7 @@ function buildDay(){
 }
 function renderPlan(){
   const p = plan(); if(!p) return;
-  const hg = S.app==="hg", appPlans = PLANINDEX.plans.filter(x=>(x.app||"study")===S.app);   // each app lists its own plans
+  const hg = S.app==="hg", appPlans = planVisible(PLANINDEX.plans.filter(x=>(x.app||"study")===S.app));   // each app lists its own plans
   const mine = hg ? [] : ST.c("plans").all();
   $("plan").innerHTML = appPlans.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")
     + (mine.length ? `<optgroup label="Plans I made">${mine.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")}</optgroup>` : "")
@@ -601,10 +605,10 @@ setTimeout(()=>JST.data.counts().then(()=>renderDock()),1500);   // after the fi
 const dockHidden = () => { const d=ST.c("shelfcfg").peek("dock"); return (d&&d.hidden) || ["scrolls"] };
 function renderDock(){
   const off = dockHidden();
-  const list = TOOLS.filter(t=>!(t.owner && S.view==="public") && !(t.id==="marks" && S.app!=="hg") && !(t.id && off.includes(t.id)));
+  const list = TOOLS.filter(t=>toolShown(t) && !(t.id==="marks" && S.app!=="hg") && !(t.id && off.includes(t.id)));
   $("dock").innerHTML = list.map(t=>{ if(t.sep) return "<hr>"; const n=toolCount(t.id);
     /* a number: how many for this passage; greyed: nothing for this passage; plain: always something there */
-    return `<button class="dk${S.tool===t.id?" on":""}${n===0?" none":""}" data-t="${t.id}" aria-pressed="${S.tool===t.id}" title="${esc(t.id==="notes"&&S.view==="public"?"Jayms Notes: James's public notes":t.name)}${n===0?" (nothing for this passage)":""}">${t.icon}<span>${t.id==="notes"&&S.view==="public"?"Jayms Notes":t.label}</span>${n?`<span class="cnt">${n}</span>`:""}</button>`}).join("");
+    return `<button class="dk${S.tool===t.id?" on":""}${n===0?" none":""}" data-t="${t.id}" aria-pressed="${S.tool===t.id}" title="${esc(t.id==="notes"&&S.view==="public"?"Jayms Notes: James's public notes":toolName(t))}${n===0?" (nothing for this passage)":""}">${t.icon}<span>${t.id==="notes"&&S.view==="public"?"Jayms Notes":t.label}</span>${n?`<span class="cnt">${n}</span>`:""}</button>`}).join("");
 }
 const box=(v,h,body)=>`<div class="box v-${v}">${h?`<h3>${h}</h3>`:""}${body}</div>`;
 const outlink=(href,txt)=>href?`<a class="out" href="${href}" target="_blank" rel="noopener">${txt} ↗</a>`:"";
@@ -674,9 +678,14 @@ ST.c("logos").on(()=>{ renderDock(); if(S.tool==="logos" && PH) PH.refresh() });
 ST.c("vocab").on(()=>{ renderDock(); if(S.tool==="vocab" && PH) PH.refresh() });
 ST.c("reviews").on(()=>renderDock());
 /* shelf settings live in one place; the shelf and Config both redraw when they change */
+/* the reading plans on the plan menu: the saved order (Config > Plans), without the hidden ones, but the plan being read always stays */
+function planCfg(){ const c=ST.c("shelfcfg").peek("plans")||{}; return {order:c.order||[], hidden:c.hidden||[]} }
+function planVisible(list){ const {order,hidden}=planCfg(), pos=id=>{ const i=order.indexOf(id); return i<0?1e6:i };
+  return list.filter(x=>x.id===S.plan || !hidden.includes(x.id)).map((x,n)=>({x,n})).sort((a,b)=>pos(a.x.id)-pos(b.x.id)||a.n-b.n).map(o=>o.x) }
 function shelfConfig(){ const c=ST.c("shelfcfg"); return { authors:c.peek("authors"), commentaries:c.peek("commentaries"), studyBibles:c.peek("studyBibles"),
-  dock:{ hidden:dockHidden(), tools:TOOLS.filter(t=>t.id && t.id!=="config" && t.id!=="marks").map(t=>({id:t.id, label:t.label, name:t.name})) } } }
-ST.c("shelfcfg").on(()=>{ renderDock(); if((S.tool==="shelf"||S.tool==="config") && PH) PH.refresh() });
+  plans:{ ...planCfg(), current:S.plan, list:PLANINDEX ? PLANINDEX.plans.filter(x=>(x.app||"study")===S.app).map(x=>({id:x.id, name:x.name, days:(PLANS[x.id]&&PLANS[x.id].days||[]).length, weekly:!!(PLANS[x.id]&&PLANS[x.id].weekly)})) : [] },
+  dock:{ hidden:dockHidden(), tools:TOOLS.filter(t=>t.id && t.id!=="config" && t.id!=="marks" && !(t.owner && S.view==="public")).map(t=>({id:t.id, label:t.label, name:toolName(t)})) } } }
+ST.c("shelfcfg").on(()=>{ renderDock(); if(PLANINDEX) renderPlan(); if((S.tool==="shelf"||S.tool==="config") && PH) PH.refresh() });
 ST.c("ideas").on(()=>{ renderDock(); if(S.tool==="ideas" && PH) PH.refresh() });
 /* Open any passage. A reading of the day switches to its tab; anything else opens as its own tab beside them.
    Returns an error message when the reference can't be read, so the box can say what went wrong. */

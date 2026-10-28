@@ -2966,7 +2966,15 @@
     rowHTML: function (i, n, label, sub, hidden, kind, core) {
             return '<div class="askrow u-gap6 u-m3' + (hidden ? " u-faded" : "") + '" data-jst-crow="' + esc((label + " " + sub).toLowerCase()) + '"><span class="u-minw22">' + (hidden ? "" : (i + 1) + ".") + '</span><span class="u-flex1">' + esc(label) + (sub ? ' <span class="sub">' + esc(sub) + "</span>" : "") + "</span>" +
         (hidden ? "" : '<button class="btn" data-jst-cmv="' + kind + "|" + i + '|-1"' + (i ? "" : " disabled") + ' aria-label="Move up">\u2191</button><button class="btn" data-jst-cmv="' + kind + "|" + i + '|1"' + (i < n - 1 ? "" : " disabled") + ' aria-label="Move down">\u2193</button>') +
-        (core ? '<span class="sub">Core</span></div>' : '<button class="btn" data-jst-chide="' + kind + "|" + i + "|" + (hidden ? 1 : 0) + '">' + (kind === "authors" ? "\u00D7" : hidden ? "Show" : "Hide") + "</button></div>");
+        (core ? '<span class="sub">' + (core === "now" ? "Reading now" : "Core") + "</span></div>" : '<button class="btn" data-jst-chide="' + kind + "|" + i + "|" + (hidden ? 1 : 0) + '">' + (kind === "authors" ? "\u00D7" : hidden ? "Show" : "Hide") + "</button></div>");
+    },
+    /* the reading plans: the page gives the list (config().plans: {list, order, hidden, current}); shown ones in the saved order, then hidden ones */
+    planLists: function () {
+      var pc = (this.o.config && this.o.config() || {}).plans || { list: [], order: [], hidden: [], current: "" };
+      var pos = function (id) { var i = pc.order.indexOf(id); return i < 0 ? 1e6 : i; };
+      var hid = function (x) { return x.id !== pc.current && pc.hidden.indexOf(x.id) > -1; };
+      var shown = pc.list.filter(function (x) { return !hid(x); }).map(function (x, n) { return { x: x, n: n }; }).sort(function (a, b) { return pos(a.x.id) - pos(b.x.id) || a.n - b.n; }).map(function (o) { return o.x; });
+      return { shown: shown, hidden: pc.list.filter(hid), order: pc.order, hiddenIds: pc.hidden, current: pc.current };
     },
     /* the list a section works on, in its current order: shown ones first (ranked), then hidden ones */
     lists: function () {
@@ -2985,16 +2993,23 @@
     },
     view: function () {
       var st = this.st, sec = st.sec || "authors", L2 = this.lists(), self = this, lib = (this.lib && this.lib.lib) || [];
-      var tabs = '<div class="chips u-mb10">' + [["authors", "Authors"], ["com", "Commentaries"], ["sb", "Study Bibles"], ["dock", "Buttons"]].map(function (t) { return '<button class="chip' + (sec === t[0] ? " on" : "") + '" data-jst-csec="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
+      var tabs = '<div class="chips u-mb10">' + [["authors", "Authors"], ["com", "Commentaries"], ["sb", "Study Bibles"], ["plans", "Plans"], ["dock", "Buttons"]].map(function (t) { return '<button class="chip' + (sec === t[0] ? " on" : "") + '" data-jst-csec="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
       var h = tabs;
       if (sec === "authors") {
         var vba = (this.vb && this.vb.authors) || [];
         var names = L2.c.authors, count = function (nm) { return lib.filter(function (x) { return byAuthor(nm, x[2]); }).length; },
             vcount = function (nm) { return vba.filter(function (a) { return byAuthor(nm, a.by); }).reduce(function (n, a) { return n + a.books.length; }, 0); },
-            label = function (nm) { var n = count(nm), v = vcount(nm); return (n ? n + " in Logos" : "none in Logos") + (v ? " \u00B7 " + v + " in your vault" : ""); };
+            label = function (nm) { if (!self.o.owner) return ""; var n = count(nm), v = vcount(nm); return (n ? n + " in Logos" : "none in Logos") + (v ? " \u00B7 " + v + " in your vault" : ""); };
         h += '<p class="ctx">Your authors, in order. Higher shows first on the shelf and lifts their commentaries and study Bibles.</p>';
         h += names.map(function (nm, i) { var n = count(nm); return self.rowHTML(i, names.length, nm, label(nm), false, "authors"); }).join("");
         h += '<div class="ask"><label class="lbl">Add an author</label><input class="jst-in" data-jst-anew placeholder="Michael Heiser, or Heiser, Michael"><div class="askrow"><button class="btn" data-jst-aadd>Add</button><span class="jst-msg">' + esc(st.msg || "") + "</span></div></div>";
+      } else if (sec === "plans") {
+        var pl = this.planLists();
+        h += '<p class="ctx">The reading plans, in the order they show on the plan menu. Hide one to take it off the menu. The plan you are reading now stays.</p>';
+        h += pl.shown.map(function (x, i) { return self.rowHTML(i, pl.shown.length, x.name, x.days ? x.days + (x.weekly ? " weeks" : " days") : "", false, "plans", x.id === pl.current ? "now" : false); }).join("");
+        if (pl.hidden.length) h += '<div class="lbl u-mt10">Hidden (' + pl.hidden.length + ")</div>" + pl.hidden.map(function (x, i) { return self.rowHTML(i, 0, x.name, "", true, "plans"); }).join("");
+        h += '<div class="askrow u-mt10"><button class="btn" data-jst-preset' + (pl.order.length || pl.hidden.length ? "" : " disabled") + '>Reset: original order, show all</button><span class="sub">Your progress is not touched.</span></div>';
+        if (st.msg) h += '<p class="jst-msg">' + esc(st.msg) + "</p>";
       } else if (sec === "dock") {
         /* the side buttons: show or hide each one (Config itself always stays) */
         var dk = (this.o.config && this.o.config().dock) || { tools: [], hidden: [] };
@@ -3020,18 +3035,23 @@
     click: function (e) {
       var t = e.target, sc = t.closest("[data-jst-csec]"), mv = t.closest("[data-jst-cmv]"), hd = t.closest("[data-jst-chide]"), ad = t.closest("[data-jst-aadd]");
       if (sc) { e.stopPropagation(); this.st.sec = sc.getAttribute("data-jst-csec"); this.st.msg = ""; this.paint(); return; }
+      if (t.closest("[data-jst-preset]")) { e.stopPropagation(); return this.save("plans", { order: [], hidden: [] }, "The plans are back in their original order, and all are showing."); }
       var dkb = t.closest("[data-jst-dock]");
       if (dkb) { e.stopPropagation(); var id = dkb.getAttribute("data-jst-dock"), cur0 = ((this.o.config && this.o.config().dock) || {}).hidden || [], was = cur0.indexOf(id) > -1;
         return this.save("dock", { hidden: was ? cur0.filter(function (x) { return x !== id; }) : cur0.concat([id]) }); }
       var L2 = this.lists(), c = L2.c;
       if (mv) { e.stopPropagation(); var p = mv.getAttribute("data-jst-cmv").split("|"), kind = p[0], i = +p[1], j = i + (+p[2]);
         if (kind === "authors") { var names = c.authors.slice(), x = names.splice(i, 1)[0]; names.splice(j, 0, x); return this.save("authors", { names: names }); }
+        if (kind === "plans") { var pl = this.planLists(), pids = pl.shown.map(function (y) { return y.id; }), py = pids.splice(i, 1)[0]; pids.splice(j, 0, py);
+          return this.save("plans", { order: pids.concat(pl.order.filter(function (id) { return pids.indexOf(id) < 0; })), hidden: pl.hiddenIds }); }
         var part = kind === "com" ? L2.com : L2.sb, ids = part.shown.map(function (y) { return y.id; }), y = ids.splice(i, 1)[0]; ids.splice(j, 0, y);
         var cur = kind === "com" ? c.com : c.sb, rest = cur.order.filter(function (id) { return ids.indexOf(id) < 0; });
         return this.save(kind === "com" ? "commentaries" : "studyBibles", { order: ids.concat(rest), hidden: cur.hidden });
       }
       if (hd) { e.stopPropagation(); var q = hd.getAttribute("data-jst-chide").split("|"), k2 = q[0], i2 = +q[1], wasHidden = q[2] === "1";
         if (k2 === "authors") { var nm = c.authors.slice(), gone = nm.splice(i2, 1)[0]; return this.save("authors", { names: nm }, "Removed " + gone + "."); }
+        if (k2 === "plans") { var pl2 = this.planLists(), it = (wasHidden ? pl2.hidden : pl2.shown)[i2];
+          return this.save("plans", { order: pl2.order, hidden: wasHidden ? pl2.hiddenIds.filter(function (id) { return id !== it.id; }) : pl2.hiddenIds.concat([it.id]) }, (wasHidden ? "Showing " : "Hid ") + it.name + "."); }
         var part2 = k2 === "com" ? L2.com : L2.sb, item = (wasHidden ? part2.hidden : part2.shown)[i2], cur2 = k2 === "com" ? c.com : c.sb;
         var hidden = wasHidden ? cur2.hidden.filter(function (id) { return id !== item.id; }) : cur2.hidden.concat([item.id]);
         return this.save(k2 === "com" ? "commentaries" : "studyBibles", { order: cur2.order, hidden: hidden }, (wasHidden ? "Showing " : "Hid ") + (item.title || item.t) + ".");
