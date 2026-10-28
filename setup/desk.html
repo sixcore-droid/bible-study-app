@@ -157,6 +157,7 @@
       <div class="notebody" id="notebody">
       <div class="jst-md notepreview" id="notepreview" hidden title="Tap to edit"></div>
       <textarea id="note"></textarea>
+      <p class="ctx public-only">Your notes are saved in this browser, on this device only. Nobody else can see them.</p>
       <div class="saverow"><button class="btn fill" id="notesave">Save note</button><span class="saved" id="saved"></span></div>
       <div class="saverow" id="obsrow" hidden><span class="saved" id="obspath"></span><a class="btn" id="obsopen" target="_blank" rel="noopener" href="#">Open in Obsidian</a><button class="btn" id="obscopy">Copy link</button><span class="saved" id="obsmsg"></span></div>
       </div>
@@ -251,7 +252,7 @@ const PUBLIC = !!window.JAYMS_PUBLIC;
 if(PUBLIC && location.hostname==="jayms.com" && "serviceWorker" in navigator)
   window.addEventListener("load",()=>navigator.serviceWorker.register(location.origin+"/bible-study-app/sw",{scope:location.origin+"/bible-study-app/"}).catch(()=>{}));
 if(PUBLIC){ const bl=document.getElementById("brandlink"); bl.href="https://jayms.com/"; bl.removeAttribute("target"); bl.title="jayms.com" }   // already the online version: go to the site
-const TOOLS = DOCK.filter(id=>!(PUBLIC && (id==="notes"||id==="x"))).map(id=>id==="|"?{sep:true}:toolMeta(id));
+const TOOLS = DOCK.filter(id=>!(PUBLIC && id==="x")).map(id=>id==="|"?{sep:true}:toolMeta(id));
 
 /* ===== STATE ===== */
 /* Saved state moved to canonical reference keys in v024: the three hand ids become their references. */
@@ -527,8 +528,10 @@ function renderReader(){
   document.body.classList.toggle("view-public",pub);
   document.querySelectorAll("#viewsw button").forEach(b=>{const on=b.dataset.view===S.view;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
   $("viewsw").hidden = !OWNER;
-  $("mynotes").hidden = pub;
-  $("markdone").hidden = pub || !!S.adhoc;
+  /* the public web app: every visitor has their own notes and Done ticks, kept in their own browser (no server, nobody else sees them).
+     Only the desk's Read along preview hides them, since there they would be James's. */
+  $("mynotes").hidden = pub && !PUBLIC;
+  $("markdone").hidden = (pub && !PUBLIC) || !!S.adhoc;
   $("pubnote").hidden = !pub || PUBLIC;   // the public site has no saved notes
   $("publbl").textContent = `James's notes on ${r.ref}`;
   $("pubbody").innerHTML = pubText(r.id) ? box("explain","",`<div class="jst-md">${JST.util.mdBlock(pubText(r.id))}</div>`) : `<p class="empty">No public notes on this reading yet.</p>`;
@@ -593,7 +596,7 @@ function noteRef(d){
 /* Find a note: a passage (every saved note on it or inside it) or a word (every note that uses it) */
 function noteFind(q){
   q=String(q||"").trim(); if(!q) return "";
-  const pub=S.view==="public", docs=(pub?ST.c("pub"):ST.c("notes")).all().filter(d=>String(d.text||"").trim());
+  const pub=S.view==="public" && !PUBLIC, docs=(pub?ST.c("pub"):ST.c("notes")).all().filter(d=>String(d.text||"").trim());
   const segs=JaymsRef.parse(q), byRef=segs.length && !JaymsRef.check(segs);
   const pos=r=>{ const g=JaymsRef.parse(r)[0], b=g&&JaymsRef.book(g.book); return b ? b.order*1e6+g.c1*1e3+g.v1 : 9e9 };
   const hits=docs.map(d=>({d, ref:noteRef(d)})).filter(x=> byRef ? JaymsRef.parse(x.ref).some(a=>segs.some(b=>JaymsRef.overlap(a,b))) : x.d.text.toLowerCase().includes(q.toLowerCase()))
@@ -603,7 +606,7 @@ function noteFind(q){
     hits.slice(0,60).map(x=>box("explain", esc(x.ref)+` <button class="sz" data-open-note="${esc(x.ref)}">Open</button>`, `<div class="jst-md">${JST.util.mdBlock(x.d.text)}</div>`)).join("");
 }
 function notesHTML(){
-  const pub = S.view==="public";
+  const pub = S.view==="public" && !PUBLIC;
   const all = READINGS.concat(S.adhoc?[S.adhoc]:[]).map(r=>({r,n:pub?pubText(r.id):NOTES[r.id].text,isPub:!!(NOTES[r.id].pub&&NOTES[r.id].savedAt)})).filter(x=>x.n.trim());
   return all.length ? all.map(x=>box("explain",x.r.ref+(!pub&&x.isPub?' <span class="pubtag">Public</span>':""),`<div class="jst-md">${JST.util.mdBlock(x.n)}</div>`)).join("")
     : `<p class="empty">${pub?"James hasn't made any of today's notes public yet.":"Nothing yet today. Notes typed under each reading collect here, so the day reads as one page when you are done."}</p>`;
@@ -789,7 +792,7 @@ function renderPanel(){
     $("pbody").innerHTML = `<div class="jst"><div class="ask u-mb10"><input class="jst-in" id="notefind" placeholder="Find a note: a passage (Romans 8, John 3:16) or a word" value="${esc(S.noteQ||"")}"></div><div id="notefindres">${noteFind(S.noteQ)}</div>${S.noteQ?'<div class="lbl u-mt14">Today</div>':""}${notesHTML()}</div>`;
     $("notefind").oninput=e=>{ S.noteQ=e.target.value; $("notefindres").innerHTML=noteFind(S.noteQ) };
     $("pbody").querySelector(".jst").onclick=e=>{ const b=e.target.closest("[data-open-note]"); if(b){ e.stopPropagation(); openPassage(b.dataset.openNote) } };
-    applyMeta({kick:"Today · "+READINGS.length+" readings", title:S.view==="public"?"James's notes":"My notes"});
+    applyMeta({kick:"Today · "+READINGS.length+" readings", title:S.view==="public"&&!PUBLIC?"James's notes":"My notes"});
     return;
   }
   /* the same panel on the same passage keeps its own state (an open word, a typed question) */

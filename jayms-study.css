@@ -794,3 +794,6 @@ body.noplan #biblepick{margin-top:0}
 #setview #spfsetbar{flex-basis:100%}
 #setview .spf-bar{color:var(--ink);border-color:var(--line);font-family:var(--label);margin:6px 0 0}
 #setview .spfkeyrow label{cursor:default}
+
+/* the public web app: no "Public" tick (that is James's, to share a note) and no Obsidian row */
+.public-app .pubtog,.public-app #obsrow{display:none}
