@@ -797,3 +797,14 @@ body.noplan #biblepick{margin-top:0}
 
 /* the public web app: no "Public" tick (that is James's, to share a note) and no Obsidian row */
 .public-app .pubtog,.public-app #obsrow{display:none}
+
+/* the visitor's own folder (test copy): Settings group, set-up screens, reconnect strip, and the TEST tag */
+#setview .folderui.planopt{flex-wrap:wrap;align-items:center;gap:8px;cursor:default}
+#setview .folderui.planopt .sub{flex-basis:100%}
+.folderbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 12px;padding:10px 14px;border:1px solid var(--gold);border-radius:8px;background:var(--paper-deep);font-size:16px}
+#folderview .helpbox details{margin:10px 0;border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+#folderview summary{cursor:pointer;font-weight:600}
+#folderview .saverow,#keyview .saverow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.testtag{position:fixed;left:8px;bottom:8px;z-index:80;padding:4px 10px;border-radius:999px;background:var(--rust);color:#fff;font:600 12px var(--label);letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
+@media (max-width:700px){ .testtag{bottom:calc(72px + env(safe-area-inset-bottom,0px))} }
+#folderview,#keyview{z-index:1100}

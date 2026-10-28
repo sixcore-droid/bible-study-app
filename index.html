@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v370">
+<link rel="stylesheet" href="jayms-study.css?v=v371">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -48,6 +48,13 @@
   <p class="ctx">In Chrome or another browser on an iPhone, open this page in Safari first; Apple only allows adding to the Home Screen from Safari.</p>
   <p>On Android, in Chrome: tap the <b>⋮</b> menu, then <b>Install app</b> (or <b>Add to Home screen</b>).</p>
 </div></div>
+<div class="helpview" id="folderview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Your folder"><button class="x" id="folderclose" aria-label="Close">×</button><div id="folderbody"></div></div></div>
+<div class="helpview" id="keyview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Keep a copy of your key"><button class="x" id="keyclose" aria-label="Close">×</button>
+  <h2>Keep a copy of your key</h2>
+  <p>Keep a copy of your Speechify key somewhere safe, such as a password manager or your Speechify account page. If this browser's data is cleared, the key is lost and you will need to paste it again.</p>
+  <label class="planopt" id="keyinfolder" hidden><input type="checkbox" id="keyfolder"> Also keep it in my folder <span class="sub">It is saved as Private/speechify-key.txt. If your folder is inside iCloud, Google Drive, Dropbox or OneDrive, the key is stored there too.</span></label>
+  <div class="saverow"><button class="btn fill" id="keyok">Save key</button><button class="btn" id="keycancel">Cancel</button></div>
+</div></div>
 <div class="helpview" id="setview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Settings"><button class="x" id="setclose" aria-label="Close">×</button>
   <h2>Settings</h2>
   <h3 class="setcat">Reading</h3>
@@ -65,11 +72,18 @@
   <h3 class="setcat">Read aloud (Speechify)</h3>
   <div class="planopt spfkeyrow" id="spfrow"><label for="spfkey">Your Speechify key</label>
     <span class="sub" id="spfhelp">Paste your own Speechify API key (from <a href="https://platform.speechify.ai" target="_blank" rel="noopener">platform.speechify.ai</a>) to turn on reading aloud. The Voice and Read buttons then appear on the text. The key stays in this browser and goes only to Speechify. Treat it like a password for your own account. Speechify's free plan covers about 40 chapters a month.</span>
-    <input type="password" id="spfkey" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your Speechify key"><button class="chip" id="spfsave">Save</button><button class="chip" id="spfclear" hidden>Remove</button>
+    <input type="password" id="spfkey" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your Speechify key"><button class="chip" id="spfsave">Save</button><button class="chip" id="spfclear" hidden>Remove</button><button class="chip" id="spffolder" hidden>Use the key saved in my folder</button>
     <span class="sub" id="spfmsg" aria-live="polite"></span></div>
   <div class="planopt spfvoicerow"><span class="spfvlabel">Voice and speed</span>
     <span class="sub" id="spfsetnote">Once a key is saved, you choose the voice that reads and how fast it reads here. 1x is normal speed; 2x is twice as fast.</span>
     <div id="spfsetbar" hidden></div></div>
+  <h3 class="setcat folderui" hidden>Your folder</h3>
+  <div class="planopt folderui" id="folderrow" hidden>
+    <span class="sub">Keep your notes, settings and progress in a folder on your own computer, so clearing the browser never loses them. The folder is yours: nothing is uploaded and nobody else can see it.</span>
+    <span class="sub" id="folderstate" aria-live="polite"></span>
+    <button class="chip" id="folderpick">Set up your folder</button><button class="chip" id="folderreconnect" hidden>Reconnect</button><button class="chip" id="folderoff" hidden>Disconnect</button>
+    <button class="chip" id="folderbackup">Back up now</button><button class="chip" id="folderrestore">Restore from a backup</button><input type="file" id="folderfile" accept=".json,application/json" hidden>
+    <span class="sub" id="foldermsg" aria-live="polite"></span></div>
   <p class="ctx">This browser remembers them.</p>
 </div></div>
 <div class="helpview" id="helpview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Help"><button class="x" id="helpclose" aria-label="Close help">×</button><div id="helpbody">Loading…</div></div></div>
@@ -106,6 +120,7 @@
   </aside>
 
   <main class="reader" id="reader">
+    <div class="folderbar" id="folderbar" hidden><span>Your folder needs your permission again before notes can save to it.</span><button class="btn fill" id="folderbarbtn">Reconnect</button></div>
     <div class="rtabs" id="rtabs" role="tablist" aria-label="Today's readings"></div>
     <div class="rhead">
       <div>
@@ -184,10 +199,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v370"></script>
-<script src="jayms-store.js?v=v370"></script>
-<script src="x-discuss.js?v=v370"></script>
-<script src="jayms-study.js?v=v370"></script>
+<script src="jayms-ref.js?v=v371"></script>
+<script src="jayms-store.js?v=v371"></script>
+<script src="jayms-folder.js?v=v371"></script>
+<script src="x-discuss.js?v=v371"></script>
+<script src="jayms-study.js?v=v371"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -247,14 +263,16 @@ function toolCount(id){
 }
 /* the public build on jayms.com (scripts/build-public.py sets window.JAYMS_PUBLIC): readers only, so no Notes button */
 const PUBLIC = !!window.JAYMS_PUBLIC;
+/* The test copy (jayms.com/bible-study-app-TEST, built as test.html): new features are switched on here first, with their own saved data (other
+   storage names) so nothing it does touches the live app's. FOLDER_UI: the screens for the visitor's own folder. VISITOR_NOTES: the notes bar. */
+const TEST = !!window.JAYMS_TEST, FOLDER_UI = TEST, VISITOR_NOTES = TEST;
+const PFX = TEST ? "wst." : "ws.";   // the small per-device settings
 /* the installable app (PWA): only on jayms.com, where the worker lives at the app's own address (the page's <base> points
    elsewhere, so the address is written out in full) */
-if(PUBLIC && location.hostname==="jayms.com" && "serviceWorker" in navigator)
+if(PUBLIC && !TEST && location.hostname==="jayms.com" && "serviceWorker" in navigator)
   window.addEventListener("load",()=>navigator.serviceWorker.register(location.origin+"/bible-study-app/sw",{scope:location.origin+"/bible-study-app/"}).catch(()=>{}));
 if(PUBLIC){ const bl=document.getElementById("brandlink"); bl.href="https://jayms.com/"; bl.removeAttribute("target"); bl.title="jayms.com" }   // already the online version: go to the site
-/* Visitors writing notes of their own (the bar under the text, saved in their browser) is built but off: for now the web version has only
-   the Jayms Notes side button, which shows James's public notes. Set true to turn the bar on. */
-const VISITOR_NOTES = false;
+/* Visitors writing notes of their own (the bar under the text) is on in the test copy only; the live web version has just the Jayms Notes side button. */
 const TOOLS = DOCK.filter(id=>!(PUBLIC && id==="x")).map(id=>id==="|"?{sep:true}:toolMeta(id));
 
 /* ===== STATE ===== */
@@ -287,6 +305,7 @@ async function migrateDB(){
 }
 /* v025: everything James saves goes through one store (jayms-store.js). This moves the v024-era keys into it, once. */
 function migrateToStore(){
+  if(TEST) return;   // the old keys belong to the live app
   try{
     if(localStorage.getItem("ws.migrated2")==="1") return;
     const J=k=>{ try{ const v=localStorage.getItem(k); return v==null?null:JSON.parse(v) }catch(e){ return null } };
@@ -304,7 +323,7 @@ function migrateToStore(){
 }
 migrateToStore();
 /* The collections. sync:true = saved to James's account as well as this browser; public:true = readers can read it. */
-const ST = JaymsStore.create({ collections: {
+const ST = JaymsStore.create({ prefix: TEST ? "jt:" : undefined, prefsPrefix: PFX, collections: {
   notes:   {sync:true},                  // a note per passage: {text, pub, obsidian}
   drafts:  {sync:false},                 // unsaved note edits, this browser only
   done:    {sync:true},                  // "plan:day:passage" -> {done, at}
@@ -1049,19 +1068,54 @@ function noteBody(ref, n, withPlan){
 }
 /* Saved notes go straight into the vault: the desk's own server writes the file (localhost only; the site and claude.ai can't).
    ifNewer: only when the vault has no copy or this one is newer, so an edit made in Obsidian is never overwritten by the catch-up. */
-const VAULT_WRITE = !PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+/* The vault, behind one interface with two places it can live:
+     server: this desk's own server writes the files into the Obsidian vault (localhost only; the site and claude.ai can't);
+     folder: on the web version, a folder the visitor chose on their own computer (JaymsFolder), the same files in Notes/.
+   write({path, content, updatedAt, ifNewer, baseAt}) -> {written, conflict?, mtime, path} or null; list() -> [{path, passage, pub, mtime, text}].
+   ifNewer: only when there is no copy or this one is newer, so an edit made in Obsidian is never overwritten by the catch-up.
+   baseAt: when the app last saw the file; a file changed since then is never overwritten (the edit goes beside it instead). */
+const VAULT_SERVER = !PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+const noteName = path => String(path).replace(/^.*\//,"");
+const VAULT_BACKENDS = {
+  server: {
+    write: b => fetch("/api/vault-note",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}).then(r=>r.ok?r.json():null).catch(()=>null),
+    list:  () => fetch("/api/vault-notes").then(r=>r.ok?r.json():null).then(g=>(g&&g.notes)||[]).catch(()=>[])
+  },
+  folder: {
+    async write(b){
+      try{
+        const rel="Notes/"+noteName(b.path), cur=await JaymsFolder.stat(rel);
+        if(b.ifNewer && cur && cur.mtime>=(b.updatedAt||0)) return {written:false, path:b.path};
+        if(b.baseAt!==undefined && cur && cur.mtime>b.baseAt+2000) return {written:false, conflict:true, path:b.path, mtime:cur.mtime};
+        const w=await JaymsFolder.write(rel, b.content); return {written:true, path:b.path, mtime:w.mtime};
+      }catch(e){ return null }
+    },
+    async list(){
+      const out=[];
+      try{
+        for(const f of await JaymsFolder.list("Notes")){
+          if(!/\.md$/.test(f.name) || /^[_.]/.test(f.name) || f.name.includes("(app copy") || f.size>1e6) continue;
+          const r=await JaymsFolder.read("Notes/"+f.name), m=r&&/^---\n([\s\S]*?)\n---\n/.exec(r.text); if(!m) continue;
+          const p=/^passage:\s*"?(.*?)"?\s*$/m.exec(m[1]); if(!p) continue;
+          const ref=p[1].trim(), body=r.text.slice(m[0].length).replace(new RegExp("^\\s*#\\s+"+ref.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*\\n"),"").replace(/^\n+|\n+$/g,"");
+          out.push({path:`${OBS_FOLDER}/${f.name}`, passage:ref, pub:/^public:\s*true\s*$/m.test(m[1]), mtime:f.mtime, text:body});
+        }
+      }catch(e){}
+      return out;
+    }
+  }
+};
+const vaultBackend = () => VAULT_SERVER ? VAULT_BACKENDS.server : (JaymsFolder.ready() ? VAULT_BACKENDS.folder : null);
 function vaultWrite(path, content, updatedAt, ifNewer, baseAt){
-  if(!VAULT_WRITE || !path) return Promise.resolve(null);
+  const be=vaultBackend(); if(!be || !path) return Promise.resolve(null);
   const b = {path,content,updatedAt,ifNewer:!!ifNewer}; if(baseAt!==undefined) b.baseAt = baseAt;
-  return fetch("/api/vault-note",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)})
-    .then(r=>r.ok?r.json():null).catch(()=>null);
+  return be.write(b);
 }
-/* at start-up, first: notes written or edited in Obsidian (02-BIBLE/Study Workstation) come into My notes when the vault copy is
-   newer than the app's, unless the passage has an unsaved edit open. vaultAt records the file time the app has seen. */
+/* at start-up, first: notes written or edited in Obsidian (02-BIBLE/Study Workstation), or in the visitor's folder, come into My notes when the
+   file is newer than the app's copy, unless the passage has an unsaved edit open. vaultAt records the file time the app has seen. */
 async function vaultImport(){
-  if(!VAULT_WRITE) return;
-  const got = await fetch("/api/vault-notes").then(r=>r.ok?r.json():null).catch(()=>null);
-  for(const v of (got&&got.notes)||[]){
+  const be=vaultBackend(); if(!be) return;
+  for(const v of await be.list()){
     let id; try{ id = JaymsRef.key(v.passage) }catch(e){ continue }
     if(!id || DIRTY[id] || !v.text.trim()) continue;
     const mine = ST.c("notes").peek(id);
@@ -1072,23 +1126,58 @@ async function vaultImport(){
   }
   renderReader(); renderDock(); if(S.tool==="notes") renderPanel();
 }
-/* then: every saved note that isn't in the vault yet (or is newer here) is written there. A note the app has synced (vaultAt)
-   is only written when the vault file hasn't changed since, so an Obsidian edit is never overwritten. */
+/* then: every saved note that isn't there yet (or is newer here) is written. A note the app has synced (vaultAt)
+   is only written when the file hasn't changed since, so an Obsidian edit is never overwritten. */
 function vaultCatchUp(){
-  if(!VAULT_WRITE) return;
+  if(!vaultBackend()) return;
   ST.c("notes").all().filter(d=>d.text&&d.text.trim()&&d.obsidian).forEach(d=>{
     const ref=d.obsidian.replace(/^.*\//,"").replace(/\.md$/,"").replace(/\./g,":");
     if(d.vaultAt) vaultWrite(d.obsidian, noteBody(ref, d, false), d.updatedAt||0, true, d.vaultAt);
     else vaultWrite(d.obsidian, noteBody(ref, d, false), d.updatedAt||0, true);
   });
 }
-setTimeout(()=>vaultImport().catch(()=>{}).then(vaultCatchUp), 4000);
+const vaultSync = () => vaultImport().catch(()=>{}).then(vaultCatchUp);
+setTimeout(vaultSync, 4000);   // the desk
+/* ===== the web version's own folder (JaymsFolder) =====
+   Once a visitor has chosen a folder: notes are Markdown files in it (above), the Done ticks and the other synced collections are
+   Data/<collection>.json (the store's folder layer), and the settings are Data/settings.json. Nothing here runs on the desk or in claude.ai. */
+const FOLDER_COLLECTIONS = ["done","vocab","reviews"];
+const PREF_SKIP = /^(tool|pw|rw|scroll|open|railHidden|atlasOn|noteOpen|pubnoteOpen|migrated\d*|draft\..*|thread\..*)$/;   // per-device, not settings
+function prefsSnapshot(){ const o={}; for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k.startsWith(PFX) && !PREF_SKIP.test(k.slice(PFX.length))) o[k.slice(PFX.length)]=localStorage.getItem(k) } return o }
+let PREF_T=null;
+function prefsMirror(){ if(!PUBLIC || !FOLDER_UI || !JaymsFolder.ready()) return; clearTimeout(PREF_T);
+  PREF_T=setTimeout(()=>{ const at=Date.now(); try{ localStorage.setItem(PFX+"prefsAt",String(at)) }catch(e){} JaymsFolder.writeJSON("Data/settings.json",{savedAt:at, prefs:prefsSnapshot()}).catch(()=>{}) }, 800) }
+{ const set0=store.set; store.set=function(k,v){ set0.call(store,k,v); prefsMirror() } }
+/* a cleared browser: the settings come back from the folder (when the folder's copy is newer than this browser's); the page reloads once to use them */
+async function prefsPull(){
+  const f=await JaymsFolder.readJSON("Data/settings.json"); if(!f||!f.prefs) return false;
+  const mine=parseInt(localStorage.getItem(PFX+"prefsAt")||"0",10); if((f.savedAt||0)<=mine) return false;
+  let changed=false; Object.keys(f.prefs).forEach(k=>{ if(PREF_SKIP.test(k)||k==="prefsAt") return; if(localStorage.getItem(PFX+k)!==f.prefs[k]){ try{ localStorage.setItem(PFX+k,f.prefs[k]); changed=true }catch(e){} } });
+  try{ localStorage.setItem(PFX+"prefsAt",String(f.savedAt)) }catch(e){}
+  return changed;
+}
+let FOLDER_ON=false;
+async function folderStart(){
+  if(!PUBLIC || !FOLDER_UI || FOLDER_ON) return; FOLDER_ON=true;
+  try{
+    if(await prefsPull() && !sessionStorage.getItem(PFX+"prefsReloaded")){ sessionStorage.setItem(PFX+"prefsReloaded","1"); location.reload(); return }
+    ST.attach(JaymsStore.adapters.folder(JaymsFolder, FOLDER_COLLECTIONS));
+    await ST.syncAll(); render();
+    await vaultSync(); prefsMirror();
+  }catch(e){}
+}
+function folderStop(){ if(!FOLDER_ON) return; FOLDER_ON=false; ST.attach(null) }
+if(PUBLIC && FOLDER_UI){
+  JaymsFolder.on("state", s=>{ if(s==="ready") folderStart(); else folderStop() });
+  JaymsFolder.load();
+  document.addEventListener("visibilitychange", ()=>{ if(!document.hidden && JaymsFolder.ready()) vaultImport().catch(()=>{}) });   // an edit made in Obsidian or on another computer
+}
 setTimeout(()=>{ if(!S.planOn && !S.adhoc) noPlanEnsure() }, 1500);   // plan off at start-up: the passage on screen gets its tab
 function obsNewURI(r, n){
   const body = noteBody(r.ref, n, true);
   return "obsidian://new?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(obsPath(r.ref).replace(/\.md$/,""))+"&content="+encodeURIComponent(body)+"&overwrite=true";
 }
-async function commitNote(){ const rid=cur().id; S.noteEdit=false; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel() }
+async function commitNote(){ const rid=cur().id; S.noteEdit=false; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel(); folderNudge() }
 $("note").oninput=e=>{const rid=cur().id; NOTES[rid].text=e.target.value; markDirty()};
 $("notepub").onchange=e=>{const rid=cur().id; NOTES[rid].pub=e.target.checked; markDirty()};
 $("notesave").onclick=commitNote;
@@ -1132,7 +1221,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v370").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v371").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);
@@ -1149,10 +1238,99 @@ $("spfsave").onclick=async()=>{ const k=$("spfkey").value.trim(), m=$("spfmsg");
     if(r.status===401||r.status===403){ m.textContent="Speechify did not accept that key."; return }
     if(!r.ok){ m.textContent="Speechify answered with an error ("+r.status+"). Try again in a minute."; return } }
   catch(e){ m.textContent="Could not reach Speechify. Check the connection and try again."; return }
+  let inFolder=false;
+  if(FOLDER_UI){ const a=await askKeyCopy(); if(!a){ m.textContent="Not saved."; return } inFolder=a.inFolder }   // the keep-a-copy reminder
   try{ localStorage.setItem("spf_key",k) }catch(e){ m.textContent="This browser would not save it."; return }
+  if(inFolder){ try{ await JaymsFolder.write("Private/speechify-key.txt", k+"\n") }catch(e){} }
   m.textContent="Saved. Voice and Read are on."; setTimeout(()=>location.reload(),600) };
 $("spfclear").onclick=()=>{ try{ localStorage.removeItem("spf_key") }catch(e){}; $("spfmsg").textContent="Removed."; setTimeout(()=>location.reload(),400) };
 spfLoad();
+/* ===== the folder's screens (the test copy only: FOLDER_UI) =====
+   Settings > Your folder; a four-step set-up; a Reconnect strip; Back up now / Restore (for browsers that cannot pick a folder);
+   and the keep-a-copy reminder when a Speechify key is saved. */
+const FW = {step:1, msg:""}, FOLDER_STEPS = 4;
+const FOLDER_WELCOME = `# Bible Study\n\nThis folder is where the Bible Study app keeps your notes, settings and progress.\n\n- **Notes** holds one file per passage. They are ordinary Markdown files: open them in any text app, or in Obsidian.\n- **Data** holds your Done ticks and settings. Leave it alone.\n\nNothing here was uploaded anywhere. If you ever clear your browser, open the app, choose this same folder again, and everything comes back.\n`;
+function folderRefresh(){
+  if(!FOLDER_UI) return;
+  const st=JaymsFolder.state(), sup=JaymsFolder.supported();
+  $("folderpick").hidden = !sup || st==="ready" || st==="prompt";
+  $("folderreconnect").hidden = st!=="prompt";
+  $("folderoff").hidden = st!=="ready" && st!=="prompt";
+  $("folderstate").textContent = !sup ? "This browser cannot save to a folder (Safari, Firefox, iPhones and iPads cannot yet). Use Back up now to keep a copy, and Restore to put it back."
+    : st==="ready" ? `Saving to the folder "${JaymsFolder.name()}".` : st==="prompt" ? `Your folder "${JaymsFolder.name()}" needs your permission again. Tap Reconnect.` : "No folder yet.";
+  $("folderbar").hidden = st!=="prompt";
+}
+function folderWizard(step){
+  FW.step=step; $("folderview").hidden=false; const b=$("folderbody");
+  const nav=(back,next,label)=>`<div class="saverow">${back?'<button class="btn" data-fw="back">Back</button>':""}<button class="btn fill" data-fw="${next}">${label}</button></div>`;
+  if(!JaymsFolder.supported()){ b.innerHTML=`<h2>Your folder</h2><p>This browser cannot save to a folder on your computer. Chrome and Edge on a computer can; Safari, Firefox, iPhones and iPads cannot yet.</p><p>You can still keep your notes, settings and progress safe. <b>Back up now</b> in Settings makes one file to keep in Files, iCloud Drive or Google Drive, and <b>Restore from a backup</b> puts it back.</p>${nav(false,"close","Close")}`; return }
+  const head=`<p class="lbl">Step ${step} of ${FOLDER_STEPS}</p>`;
+  if(step===1) b.innerHTML=head+`<h2>Keep your notes safe</h2><p>Your notes, settings and progress are kept in this browser. If the browser is cleared, they are gone.</p><p>Instead, keep them in a <b>folder on your own computer</b>. The folder is yours: nothing is uploaded, and the person who made this app cannot see it. Your notes are saved there as ordinary files that open in any text app, or in Obsidian.</p>`+nav(false,"2","Next");
+  else if(step===2) b.innerHTML=head+`<h2>Choose your folder</h2><p>Make a new, empty folder, for example <b>Documents &gt; Bible Study</b>, then choose it. Your browser will refuse a main folder such as Documents, Desktop or Downloads, so make a new folder inside one of them.</p><p>When your browser asks, allow it to <b>view and edit files</b> in that folder. If it offers <b>Allow on every visit</b>, choose that.</p><div class="saverow"><button class="btn" data-fw="back">Back</button><button class="btn fill" data-fw="pick">Choose folder</button></div><p class="ctx" id="fwmsg" aria-live="polite">${esc(FW.msg)}</p>`;
+  else if(step===3) b.innerHTML=head+`<h2>It works</h2><p>Saved a first file in <b>${esc(JaymsFolder.name())}</b>. From now on, <b>Save note</b> writes your note into that folder, in a folder called Notes, one file for each passage. Your Done ticks and settings go in there too.</p><p>You can open the folder in any text app, or open it as a vault in Obsidian.</p>`+nav(false,"4","Next");
+  else b.innerHTML=head+`<h2>Want it on another computer?</h2><p>Put your folder inside a folder that a cloud service already syncs, then choose the same folder on the other computer. Give the sync a minute before you open the app there.</p>
+    <details><summary>iCloud Drive</summary><p>Move the folder into iCloud Drive (in Finder on a Mac, or File Explorer with iCloud for Windows). On the other computer, choose it from iCloud Drive.</p></details>
+    <details><summary>Google Drive</summary><p>Install Google Drive for desktop, then put the folder inside My Drive. On the other computer, choose it from Google Drive.</p></details>
+    <details><summary>Dropbox or OneDrive</summary><p>Put the folder inside your Dropbox or OneDrive folder. On the other computer, choose it from there.</p></details>
+    <details><summary>Obsidian Sync</summary><p>Open the folder as a vault in Obsidian and turn on Obsidian Sync (a paid Obsidian service). On the other computer, open the same vault and choose its folder.</p></details>
+    <p class="ctx">The company you choose stores those files under its own privacy rules. This app never sees them.</p>
+    <p><b>If you ever clear your browser:</b> open this page, choose the same folder again, and your notes, settings and progress come back.</p><p class="ctx">A phone cannot choose a folder yet. On a phone you can read the same notes by opening the synced folder in the Obsidian app or Files.</p>`+nav(true,"close","Done");
+}
+async function folderPickStep(){
+  try{ await JaymsFolder.pick() }
+  catch(e){ FW.msg = e && e.name==="AbortError" ? "No folder was chosen." : "Your browser would not let us use that folder. Make a new, empty folder (for example Documents > Bible Study) and choose that one."; folderWizard(2); return }
+  try{ await JaymsFolder.write("Welcome.md", FOLDER_WELCOME) }catch(e){ FW.msg="Could not write to that folder. Choose another one."; folderWizard(2); return }
+  FW.msg=""; folderWizard(3);
+}
+function folderNudge(){   // once, after the first note is saved with no folder
+  if(!FOLDER_UI || !JaymsFolder.supported() || JaymsFolder.state()!=="none") return;
+  if(localStorage.getItem(PFX+"folderAsked")) return; try{ localStorage.setItem(PFX+"folderAsked","1") }catch(e){} folderWizard(1);
+}
+/* a copy of everything, as one file, for browsers that cannot choose a folder (and for anyone who wants a spare) */
+function backupData(){
+  const col={}; ["notes","done","vocab","reviews"].forEach(c=>{ const o={}; ST.c(c).all().forEach(d=>{ const x=Object.assign({},d); delete x.id; o[d.id]=x }); col[c]=o });
+  return {format:"jayms-bible-study-backup", version:1, savedAt:Date.now(), prefs:prefsSnapshot(), collections:col};
+}
+async function backupNow(){
+  const name=`Bible Study backup ${new Date().toISOString().slice(0,10)}.json`, blob=new Blob([JSON.stringify(backupData(),null,1)],{type:"application/json"}), file=new File([blob],name,{type:"application/json"});
+  if(/iPhone|iPad|Android/.test(navigator.userAgent) && navigator.canShare && navigator.canShare({files:[file]})){   // the share sheet: save it to Files, iCloud Drive or Google Drive
+    try{ await navigator.share({files:[file], title:name}); return "Backup ready. Save it to Files or your cloud drive." }catch(e){ if(e && e.name==="AbortError") return "" } }
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+  return "Backup saved to your Downloads folder. Keep it somewhere safe.";
+}
+async function restoreFrom(file){
+  let d; try{ d=JSON.parse(await file.text()) }catch(e){ return "That file could not be read." }
+  if(!d || d.format!=="jayms-bible-study-backup" || !d.collections) return "That is not a Bible Study backup file.";
+  let n=0;
+  for(const c of Object.keys(d.collections)){ if(!["notes","done","vocab","reviews"].includes(c)) continue;
+    for(const id of Object.keys(d.collections[c])){ const doc=d.collections[c][id], mine=ST.c(c).peek(id); if(!mine || (doc.updatedAt||0)>(mine.updatedAt||0)){ await ST.c(c).save(id,doc); n++ } } }
+  let p=0; Object.keys(d.prefs||{}).forEach(k=>{ if(PREF_SKIP.test(k)||k==="prefsAt") return; try{ localStorage.setItem(PFX+k,d.prefs[k]); p++ }catch(e){} });
+  setTimeout(()=>location.reload(),900);
+  return `Restored ${n} saved item${n===1?"":"s"} and ${p} setting${p===1?"":"s"}. Reloading...`;
+}
+function askKeyCopy(){   // resolves {inFolder} on Save, null on Cancel
+  return new Promise(res=>{ const v=$("keyview"); $("keyinfolder").hidden=!JaymsFolder.ready(); $("keyfolder").checked=false; v.hidden=false;
+    const done=r=>{ v.hidden=true; $("keyok").onclick=$("keycancel").onclick=$("keyclose").onclick=null; res(r) };
+    $("keyok").onclick=()=>done({inFolder:$("keyfolder").checked}); $("keycancel").onclick=$("keyclose").onclick=()=>done(null) });
+}
+async function spfFolderCheck(){ if(!FOLDER_UI) return; const has=!!spfKey(); if(has || !JaymsFolder.ready()){ $("spffolder").hidden=true; return } $("spffolder").hidden=!(await JaymsFolder.stat("Private/speechify-key.txt")) }
+if(FOLDER_UI){
+  document.querySelectorAll(".folderui").forEach(e=>e.hidden=false);
+  const t=document.createElement("div"); t.className="testtag"; t.textContent="Test copy"; t.title="This is the test copy of the Bible Study App. New features are on here first, and it keeps its own saved data."; document.body.appendChild(t);
+  JaymsFolder.on("state", ()=>{ folderRefresh(); spfFolderCheck() });
+  folderRefresh();
+  $("setbtn").addEventListener("click",()=>{ folderRefresh(); spfFolderCheck(); $("foldermsg").textContent="" });
+  $("folderpick").onclick=()=>folderWizard(1);
+  $("folderreconnect").onclick=$("folderbarbtn").onclick=()=>{ JaymsFolder.reconnect().then(()=>folderRefresh()) };
+  $("folderoff").onclick=()=>{ JaymsFolder.disconnect().then(()=>{ $("foldermsg").textContent="Disconnected. Your files stay in the folder."; folderRefresh() }) };
+  $("folderbackup").onclick=async()=>{ $("foldermsg").textContent=await backupNow() };
+  $("folderrestore").onclick=()=>$("folderfile").click();
+  $("folderfile").onchange=async e=>{ const f=e.target.files[0]; e.target.value=""; if(f) $("foldermsg").textContent=await restoreFrom(f) };
+  $("folderclose").onclick=()=>{ $("folderview").hidden=true };
+  $("folderview").addEventListener("click",e=>{ const b=e.target.closest("[data-fw]"); if(!b) return; const a=b.dataset.fw;
+    if(a==="close") $("folderview").hidden=true; else if(a==="back") folderWizard(Math.max(1,FW.step-1)); else if(a==="pick") folderPickStep(); else folderWizard(+a) });
+  $("spffolder").onclick=async()=>{ const r=await JaymsFolder.read("Private/speechify-key.txt"); const k=r&&r.text.trim(); if(!k) return; try{ localStorage.setItem("spf_key",k) }catch(e){ return } location.reload() };
+}
 $("obscopy").onclick=async()=>{ const u=obsURI(obsPath(cur().ref));
   try{ await navigator.clipboard.writeText(u); $("obsmsg").textContent="Link copied. Paste it into your browser's address bar." }catch(e){ $("obsmsg").textContent=u } };
 document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="s"&&document.activeElement===$("note")){ e.preventDefault(); commitNote() } });

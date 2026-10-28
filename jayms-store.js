@@ -20,6 +20,7 @@
  *   artifactDb(db, uid)   a claude.ai Artifact database. Private collections live in data/users/<uid> as "<coll>~<id>",
  *                         public ones in a top-level collection of their own name.
  *   rest(base, headers)   a JSON endpoint (GET/PUT/DELETE base/<coll>/<id>, GET base/<coll>): the shape for jayms.com.
+ *   folder(JaymsFolder, ["done", ...])   a folder on the user's own computer: Data/<collection>.json for each collection named.
  *
  * Ids are passage keys from JaymsRef ("psalm-82") or any other stable string. A doc never needs to carry its own id.
  */
@@ -68,6 +69,32 @@
             s.docChanges().forEach(function (ch) { var d = clone(ch.doc.data()); delete d._c; cb(pub[c] ? ch.doc.id : ch.doc.id.slice(c.length + 1), ch.type === "removed" ? null : d); });
           }, function () {});
         }
+      };
+    },
+    /* a folder on the user's own computer (JaymsFolder): each named collection is one file, Data/<collection>.json, holding {docs: {id: doc}}.
+       Only the collections named are kept there (notes are Markdown files, handled by the page); the others are ignored. Writes are gathered
+       and made a moment after the last change, and list() merges what is on disk with changes not yet written, newest updatedAt winning. */
+    folder: function (F, names) {
+      var want = {}, mem = {}, timer = {}; (names || []).forEach(function (n) { want[n] = 1; });
+      var file = function (c) { return "Data/" + c + ".json"; };
+      function disk(c) { return F.readJSON(file(c)).then(function (o) { return (o && o.docs) || {}; }).catch(function () { return {}; }); }
+      function load(c) { return mem[c] ? Promise.resolve(mem[c]) : disk(c).then(function (m) { return (mem[c] = m); }); }
+      function flush(c) { clearTimeout(timer[c]); timer[c] = setTimeout(function () { timer[c] = null; F.writeJSON(file(c), { docs: mem[c], savedAt: now() }).catch(function () {}); }, 500); }
+      return {
+        name: "folder",
+        get: function (c, id) { return want[c] ? load(c).then(function (m) { return m[id] ? clone(m[id]) : null; }) : Promise.resolve(null); },
+        set: function (c, id, d) { return want[c] ? load(c).then(function (m) { var x = clone(d); delete x.id; m[id] = x; flush(c); }) : Promise.resolve(); },
+        remove: function (c, id) { return want[c] ? load(c).then(function (m) { delete m[id]; flush(c); }) : Promise.resolve(); },
+        list: function (c) {
+          if (!want[c]) return Promise.resolve([]);
+          return disk(c).then(function (d) {
+            var m = mem[c] || {};
+            Object.keys(m).forEach(function (id) { if (!d[id] || (m[id].updatedAt || 0) > (d[id].updatedAt || 0)) d[id] = m[id]; });   // changes not written yet stay
+            mem[c] = d;
+            return Object.keys(d).map(function (id) { var x = clone(d[id]); x.id = id; return x; });
+          });
+        },
+        flush: function () { return Promise.all(Object.keys(timer).filter(function (c) { return timer[c]; }).map(function (c) { clearTimeout(timer[c]); timer[c] = null; return F.writeJSON(file(c), { docs: mem[c], savedAt: now() }); })); }
       };
     },
     rest: function (base, headers) {

@@ -1,0 +1,1589 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>TEST: Bible Study App | jayms.com</title><meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://jayms.com/bible-study-app-TEST/"><meta name="theme-color" content="#0d0e11"><script>window.JAYMS_PUBLIC = true; window.JAYMS_TEST = true; window.JAYMS_FOLDER_DB = "jayms-folder-test";</script></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="jayms-study.css?v=v371">
+<!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
+     Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
+
+<header class="top">
+  <button class="railbtn" id="railbtn" aria-controls="rail" aria-expanded="false">Plan</button>
+  <div class="brand">Study Workstation<small><a id="brandlink" href="https://jayms.com/bible-study-app/" target="_blank" rel="noopener" title="Open the online version on jayms.com">jayms.com</a></small></div>
+  <div class="viewsw" id="appsw" role="group" aria-label="Which app">
+    <button data-app="study" aria-pressed="true">Bible Study</button>
+    <button data-app="hg" aria-pressed="false">Hebrew &amp; Greek</button>
+    <button data-app="atlas" aria-pressed="false" id="atlasbtn" title="The atlas on its own: the map full size, and a search for places, journeys, kingdoms and topics">Atlas</button>
+  </div>
+  <form class="goto" id="goform" role="search" autocomplete="off">
+    <input id="goref" list="gobooks" placeholder="Go to a passage: Mark 13:14" aria-label="Go to a passage" spellcheck="false">
+    <button type="submit">Go</button>
+    <span class="gomsg" id="gomsg" role="status"></span>
+  </form>
+  <datalist id="gobooks"></datalist>
+  <form class="goto find" id="findform" role="search" autocomplete="off">
+    <input id="findq" placeholder="Find in the text" aria-label="Find a word in the text" spellcheck="false">
+    <span class="gomsg" id="findmsg" role="status"></span>
+  </form>
+  <span class="sp"></span>
+  <div class="viewsw" id="viewsw" role="group" aria-label="View">
+    <button data-view="me" aria-pressed="true">My desk</button>
+    <button data-view="public" aria-pressed="false">Read along</button>
+  </div>
+  <span class="today" id="today" hidden></span>
+  <button class="topbtn" id="setbtn" aria-label="Settings" title="Settings">Settings</button>
+  <button class="topbtn" id="aboutbtn" aria-label="About this project" title="Why this exists">About</button>
+  <a class="topbtn support" href="https://buymeacoffee.com/JAYMS" target="_blank" rel="noopener" title="Buy me a coffee">Donate</a>
+  <button class="topbtn" id="helpbtn" aria-label="Help: what everything does" title="What everything does">Help</button>
+</header>
+<div class="helpview" id="aboutview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="About"><button class="x" id="aboutclose" aria-label="Close">×</button>
+  <h2>Why this exists</h2>
+  <p>There are a lot of free Bible study tools out there, and they are scattered across the web. This is an attempt to build something easy to use and intuitive: one stop for those free tools, working together beside the text.</p>
+  <p>I made this Bible Study Workstation for how I study the Bible.</p>
+  <p class="ctx">James McLaughlin · <a href="https://jayms.com/" target="_blank" rel="noopener">jayms.com</a> · <a href="https://buymeacoffee.com/JAYMS" target="_blank" rel="noopener">Buy me a coffee</a></p>
+</div></div>
+<div class="helpview" id="installview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Add to Home Screen"><button class="x" id="installclose" aria-label="Close">×</button>
+  <h2>Add to Home Screen</h2>
+  <p>On an iPhone or iPad, in Safari:</p>
+  <ol class="tourlist"><li>Tap the <b>Share</b> button (the square with the arrow pointing up) at the bottom or top of Safari.</li><li>Scroll down and tap <b>Add to Home Screen</b>, then <b>Add</b>.</li></ol>
+  <p>The app then opens from its own icon, full screen, like any other app.</p>
+  <p class="ctx">In Chrome or another browser on an iPhone, open this page in Safari first; Apple only allows adding to the Home Screen from Safari.</p>
+  <p>On Android, in Chrome: tap the <b>⋮</b> menu, then <b>Install app</b> (or <b>Add to Home screen</b>).</p>
+</div></div>
+<div class="helpview" id="folderview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Your folder"><button class="x" id="folderclose" aria-label="Close">×</button><div id="folderbody"></div></div></div>
+<div class="helpview" id="keyview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Keep a copy of your key"><button class="x" id="keyclose" aria-label="Close">×</button>
+  <h2>Keep a copy of your key</h2>
+  <p>Keep a copy of your Speechify key somewhere safe, such as a password manager or your Speechify account page. If this browser's data is cleared, the key is lost and you will need to paste it again.</p>
+  <label class="planopt" id="keyinfolder" hidden><input type="checkbox" id="keyfolder"> Also keep it in my folder <span class="sub">It is saved as Private/speechify-key.txt. If your folder is inside iCloud, Google Drive, Dropbox or OneDrive, the key is stored there too.</span></label>
+  <div class="saverow"><button class="btn fill" id="keyok">Save key</button><button class="btn" id="keycancel">Cancel</button></div>
+</div></div>
+<div class="helpview" id="setview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Settings"><button class="x" id="setclose" aria-label="Close">×</button>
+  <h2>Settings</h2>
+  <h3 class="setcat">Reading</h3>
+  <label class="planopt"><input type="checkbox" id="optplan"> Reading plan <span class="sub">Show the reading plan on the left, with its days, your progress and the Done ticks. Off: no plan, just the passages you open yourself.</span></label>
+  <label class="planopt"><input type="checkbox" id="optbible"> The Bible button <span class="sub">Show The Bible under the reading plan, to open any book, chapter and verse.</span></label>
+  <label class="planopt"><input type="checkbox" id="optnums"> Verse numbers <span class="sub">Show the verse numbers in the text. Off: the passage reads straight through, and Speechify does not read the numbers.</span></label>
+  <h3 class="setcat">Colours in the text</h3>
+  <label class="planopt"><input type="checkbox" id="optred"> Words of Jesus in <span class="sw-red">red</span> <span class="sub">Jesus's words in red (from the World English Bible's red letters). Try Matthew 5, the Sermon on the Mount.</span></label>
+  <label class="planopt" id="optbluewrap" hidden><input type="checkbox" id="optblue"> Old Testament connections in <span class="sw-blue">blue</span> <span class="sub">Verses that have a note in the CSB Connecting Scripture New Testament. Try Matthew 4 or Matthew 1:23.</span></label>
+  <label class="planopt" id="optpurplewrap" hidden><input type="checkbox" id="optpurple"> Jesus using the Old Testament in <span class="sw-purple">purple</span> <span class="sub">His words inside those verses. Try Matthew 4: verses 4, 7 and 10 are Jesus answering with Deuteronomy.</span></label>
+  <h3 class="setcat">Logos</h3>
+  <label class="planopt"><input type="checkbox" id="optlogos"> Logos links <span class="sub">Show the links that open Logos Bible Software: Open in Logos, the commentaries and study Bibles on the Shelf, and the atlases.</span></label>
+  <h3 class="setcat phoneonly">Interleaved Bible</h3>
+  <div class="planopt phoneonly ilopts">Show under each word <label><input type="checkbox" id="optilen"> English</label><label><input type="checkbox" id="optilor"> Hebrew or Greek</label><label><input type="checkbox" id="optlemma"> Lemma</label><span class="sub">Turn any line on or off. Lemma is the word's dictionary form, in English letters. On a computer these are the English, Hebrew or Greek, and Lemma buttons in the Interleave panel.</span></div>
+  <h3 class="setcat">Read aloud (Speechify)</h3>
+  <div class="planopt spfkeyrow" id="spfrow"><label for="spfkey">Your Speechify key</label>
+    <span class="sub" id="spfhelp">Paste your own Speechify API key (from <a href="https://platform.speechify.ai" target="_blank" rel="noopener">platform.speechify.ai</a>) to turn on reading aloud. The Voice and Read buttons then appear on the text. The key stays in this browser and goes only to Speechify. Treat it like a password for your own account. Speechify's free plan covers about 40 chapters a month.</span>
+    <input type="password" id="spfkey" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your Speechify key"><button class="chip" id="spfsave">Save</button><button class="chip" id="spfclear" hidden>Remove</button><button class="chip" id="spffolder" hidden>Use the key saved in my folder</button>
+    <span class="sub" id="spfmsg" aria-live="polite"></span></div>
+  <div class="planopt spfvoicerow"><span class="spfvlabel">Voice and speed</span>
+    <span class="sub" id="spfsetnote">Once a key is saved, you choose the voice that reads and how fast it reads here. 1x is normal speed; 2x is twice as fast.</span>
+    <div id="spfsetbar" hidden></div></div>
+  <h3 class="setcat folderui" hidden>Your folder</h3>
+  <div class="planopt folderui" id="folderrow" hidden>
+    <span class="sub">Keep your notes, settings and progress in a folder on your own computer, so clearing the browser never loses them. The folder is yours: nothing is uploaded and nobody else can see it.</span>
+    <span class="sub" id="folderstate" aria-live="polite"></span>
+    <button class="chip" id="folderpick">Set up your folder</button><button class="chip" id="folderreconnect" hidden>Reconnect</button><button class="chip" id="folderoff" hidden>Disconnect</button>
+    <button class="chip" id="folderbackup">Back up now</button><button class="chip" id="folderrestore">Restore from a backup</button><input type="file" id="folderfile" accept=".json,application/json" hidden>
+    <span class="sub" id="foldermsg" aria-live="polite"></span></div>
+  <p class="ctx">This browser remembers them.</p>
+</div></div>
+<div class="helpview" id="helpview" hidden><div class="helpbox" role="dialog" aria-modal="true" aria-label="Help"><button class="x" id="helpclose" aria-label="Close help">×</button><div id="helpbody">Loading…</div></div></div>
+
+<div class="desk" id="desk">
+  <aside class="rail" id="rail" aria-label="Reading plan">
+    <div class="rgrip" id="rgrip" role="separator" aria-orientation="vertical" aria-label="Drag to resize the reading plan" tabindex="0" title="Drag to resize · double-click to reset"></div>
+    <div class="railin">
+    <div class="railtop"><button class="chip" id="railclose" aria-controls="rail">Close</button></div>
+    <div class="plansel">
+      <label class="lbl" for="planpick">Reading plan</label>
+      <button id="planpick" class="planpick" aria-expanded="false" aria-controls="planlist"></button>
+      <ul id="planlist" class="planlist" hidden></ul>
+      <button id="biblebtn" class="planpick u-mt10" aria-expanded="false" aria-controls="biblepick"><span>The Bible</span><span class="caret" aria-hidden="true">▾</span></button>
+      <div id="biblepick" class="u-mt10" hidden></div>
+      <select id="plan" hidden></select>
+      <label class="planopt"><input type="checkbox" id="addpsalm"> Matching psalm</label>
+      <label class="planopt"><input type="checkbox" id="hidelists"> Hide genealogies &amp; lists</label>
+      <label class="planopt hgopt" hidden><input type="checkbox" id="hgorig"> Original words</label>
+      <label class="planopt hgopt mk-claim" hidden><input type="checkbox" data-hgcat="claim"> <i class="dot"></i> Changes the claim</label>
+      <label class="planopt hgopt mk-emphasis" hidden><input type="checkbox" data-hgcat="emphasis"> <i class="dot"></i> Changes the emphasis</label>
+      <label class="planopt hgopt mk-cosmetic" hidden><input type="checkbox" data-hgcat="cosmetic"> <i class="dot"></i> Cosmetic</label>
+    </div>
+    <div hidden>   <!-- the plan's name and description: the plan menu above already names it, so this stays out of the way -->
+      <h2 class="planname" id="planname"></h2>
+      <p class="plandesc" id="plandesc"></p>
+    </div>
+    <div class="prog">
+      <div class="lbl"><span id="progtxt"></span><span id="progpct"></span></div>
+      <div class="bar"><i id="progbar"></i></div>
+    </div>
+    <ol class="days" id="days"></ol>
+      </div>
+  </aside>
+
+  <main class="reader" id="reader">
+    <div class="folderbar" id="folderbar" hidden><span>Your folder needs your permission again before notes can save to it.</span><button class="btn fill" id="folderbarbtn">Reconnect</button></div>
+    <div class="rtabs" id="rtabs" role="tablist" aria-label="Today's readings"></div>
+    <div class="rhead">
+      <div>
+        <div class="lbl" id="rkick"></div>
+        <h1 id="rtitle"></h1>
+        <div class="rlinks" id="rlogos"></div>
+        <p class="why" id="rwhy"></p>
+      </div>
+    </div>
+    <div class="tbar" aria-label="How the text is shown">
+      <div class="seg" id="layoutsw" role="group" aria-label="Layout">
+        <button id="layoutbtn" title="Switch between reading layout and verse by verse"></button>
+      </div>
+      <div class="seg" id="parsw" role="group" aria-label="Columns">
+        <button id="parbtn" title="Switch between one version and two in parallel"></button>
+      </div>
+      <div class="seg" id="numsw" role="group" aria-label="Verse numbers">
+        <button id="numbtn"></button>
+      </div>
+      <div class="seg" id="mapsw" role="group" aria-label="Map">
+      </div>
+      <div class="vpick">
+        <select id="ver" class="versel" aria-label="Version"></select>
+        <span id="ver2wrap"><span class="lbl">beside</span> <select id="ver2" class="versel" aria-label="Second version"></select></span>
+      </div>
+      <div class="vpick" id="textsz">
+        <span class="lbl">Text</span>
+        <button class="sz" id="smaller" aria-label="Smaller text">A−</button>
+        <button class="sz" id="larger" aria-label="Larger text">A+</button>
+      </div>
+      <div class="vpick" id="voicewrap" hidden><button class="sz" id="voicecfg" aria-expanded="false" title="Speechify voice and speed">Voice</button></div>
+      <div class="vpick chnav"><button class="sz" id="fullch" hidden aria-label="Full chapter" title="Full chapter">FC</button><button class="sz" id="prevch" aria-label="Previous chapter">«</button><button class="sz" id="nextch" aria-label="Next chapter">»</button></div>
+    </div>
+    <div id="spfhost" hidden></div>
+    <article class="text" id="text"></article>
+    <p class="jx-line" id="xline" hidden></p>
+    <div class="after">
+      <button class="btn fill" id="markdone">Done</button>
+      <button class="btn" id="nextread">Next →</button>
+    </div>
+    <div class="notes notedock" id="mynotes">
+      <div class="ngrip" id="ngrip" role="separator" aria-orientation="horizontal" aria-label="Drag to make the notes taller or shorter" tabindex="0" title="Drag to resize · double-click to reset"></div>
+      <div class="notehead">
+        <label class="lbl" for="note" id="notelbl">My notes</label>
+        <span class="noteright"><label class="pubtog" for="notepub"><input type="checkbox" id="notepub"> Public</label>
+        <button class="sz" id="noteview" hidden></button><button class="sz" id="notetog" aria-controls="notebody"></button></span>
+      </div>
+      <div class="notebody" id="notebody">
+      <div class="jst-md notepreview" id="notepreview" hidden title="Tap to edit"></div>
+      <textarea id="note"></textarea>
+      <p class="ctx public-only">Your notes are saved in this browser, on this device only. Nobody else can see them.</p>
+      <div class="saverow"><button class="btn fill" id="notesave">Save note</button><span class="saved" id="saved"></span></div>
+      <div class="saverow" id="obsrow" hidden><span class="saved" id="obspath"></span><a class="btn" id="obsopen" target="_blank" rel="noopener" href="#">Open in Obsidian</a><button class="btn" id="obscopy">Copy link</button><span class="saved" id="obsmsg"></span></div>
+      </div>
+    </div>
+    <div class="notes notedock pubnote" id="pubnote" hidden>
+      <div class="ngrip" id="pubgrip" role="separator" aria-orientation="horizontal" aria-label="Drag to make the notes taller or shorter" tabindex="0" title="Drag to resize · double-click to reset"></div>
+      <div class="notehead"><span class="lbl" id="publbl"></span><button class="sz" id="pubtog" aria-controls="pubbody"></button></div>
+      <div class="notebody pubbody" id="pubbody"></div>
+    </div>
+  </main>
+
+  <aside class="panel" id="panel" aria-label="Reference panel">
+    <div class="pgrip" id="pgrip" role="separator" aria-orientation="vertical" aria-label="Drag to resize the panel" tabindex="0" title="Drag to resize · double-click to reset"></div>
+    <div class="phead">
+      <div class="sp">
+        <button class="pback" id="pback" hidden></button>
+        <div class="lbl" id="pkick"></div>
+        <h2 id="ptitle"></h2>
+      </div>
+      <button class="x" id="pclose" aria-label="Close panel">×</button>
+    </div>
+    <div class="pbody" id="pbody"></div>
+  </aside>
+
+  <nav class="dock" id="dock" aria-label="Study tools"></nav>
+</div>
+
+<script src="jayms-ref.js?v=v371"></script>
+<script src="jayms-store.js?v=v371"></script>
+<script src="jayms-folder.js?v=v371"></script>
+<script src="x-discuss.js?v=v371"></script>
+<script src="jayms-study.js?v=v371"></script>
+<script>
+/* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
+
+/* Plans, passages and versions are data files published beside this page:
+   plans/index.json lists the plans, plans/<id>.json holds each plan's days. Text and every panel's data come by
+   reference from text/<book>.json and index/<book>.json (see jayms-study.js), so any passage can be opened.
+   Changing or adding a plan is a data edit, never a code edit. */
+let PLANINDEX=null, PLANS={}, READINGS=[];
+/* Versions whose text carries the dotted word links (the [w:key] markers in the text files). */
+const LINKED = ["LSB","ESV","NET"];
+const VERNAMES = {LSB:"Legacy Standard Bible",NLT:"New Living Translation",ESV:"English Standard Version",NET:"New English Translation",BSB:"Berean Standard Bible",CSB:"Christian Standard Bible",NASB:"New American Standard Bible 2020",MSG:"The Message",LXX:"Brenton Septuagint (Greek OT in English)",KJV:"King James Version"};
+
+/* Everything the side panels show comes from the data files listed in docs/DEVELOPER.md section 3 (text/, index/, study/ ...),
+   built by scripts/build-*.py from the tools' own data, jayms.com, the vault and the synced Claude chats. */
+/* The side panels are JaymsStudy components (jayms-study.js). The workstation only hosts them:
+   which one is open, which passage it follows, and what it hears back (a word, a heading). */
+const JST = JaymsStudy;
+/* ?live=0 shows only the copy the workstation was built with (for testing that it matches the live data) */
+try{ if(new URLSearchParams(location.search).get("live")==="0") JST.config({liveOff:true}) }catch(e){}
+/* the reading on screen: one of the day's readings, or a passage opened from the box (S.adhoc) */
+const cur = ()=> S.adhoc || READINGS[S.reading];
+const pd = ()=>{ const r=cur(); return r ? JST.data.peek(r.ref) : null };
+const L = k => (pd()&&pd()[k]) || [];
+function loadPanel(ref){ Promise.all([JST.data.passage(ref), JST.data.xref(ref), JST.data.notes(ref), JST.data.live(), S.view==="public"?null:JST.data.shelf()]).then(()=>{ renderDock() }) }
+/* James's study Project on claude.ai: "Ask in my Project" copies the question with the passage material and opens it beside the app
+   (claude.ai can't be framed or driven from another page, so this is the route to the Project's own answers) */
+/* the owner's own places: James's by default; someone running their own copy sets theirs in setup/settings.json (setup/setup.py),
+   which their local server hands the page as window.JAYMS_SETTINGS */
+const MY = Object.assign({ notesVault:"Jayms", studyFolder:"02-BIBLE/Study Workstation", claudeProject:"https://claude.ai/project/019d9436-1dc6-7487-a80d-088b37cc8581",
+  ddd:"obsidian://open?vault=BOOKS&file="+encodeURIComponent("ZZZ-BOOKS/van der Toorn, Karel; Becking, Bob; van der Horst, Pieter W./Dictionary of Deities and Demons in the Bible") }, window.JAYMS_SETTINGS||{});
+const STUDY_PROJECT = MY.claudeProject;
+const QUICK = [
+  "Walk me through this passage verse by verse",
+  "What is the ANE background here?",
+  "How does this connect to Deuteronomy 32 and John 10?",
+  "Quiz me: 5 questions on this passage"
+];
+
+/* The dock: an order, plus the one tool that belongs to this page alone (Notes). Everything else is a component's own meta. */
+const NOTES_ICON = '<svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>';
+const DOCK = ["marks","verse","outline","word","|","council","gods","ancient","facts","family","maps","art","scrolls","posts","corpus","fathers","targum","xref","bp","x","chats","logos","shelf","vocab","ideas","vault","|","wrap","review","config","notes"];
+function toolMeta(id){
+  if(id==="notes") return PUBLIC ? {id, label:"Jayms Notes", name:"Jayms Notes: James's public notes", icon:NOTES_ICON} : {id, label:"Notes", name:"All my notes", icon:NOTES_ICON};
+  const P = JST.panels[id]; return Object.assign({}, P.meta);
+}
+function toolCount(id){
+  if(id==="marks") return hgSpots().length;
+  if(id==="posts") return dayPosts().length;
+  if(id==="x") return cur() && thread(cur().id) ? 1 : 0;
+  if(id==="logos") return ST.c("logos").all().filter(x=>!x.done).length;
+  if(id==="vocab") return ST.c("vocab").all().length;
+  if(id==="ideas") return ST.c("ideas").all().filter(x=>!x.written).length;
+  if(id==="review") return JST.reviewCount(ST.c("vocab").all(), k=>ST.c("reviews").peek(k));
+  if(id==="notes" && PUBLIC) return cur() && PUBNOTES[cur().id] ? 1 : 0;
+  if(id==="notes"||id==="claude"||id==="verse"||id==="outline"||id==="word") return null;
+  const r=cur(); return r ? JST.panels[id].count(JST.data.peek(r.ref)) : null;
+}
+/* the public build on jayms.com (scripts/build-public.py sets window.JAYMS_PUBLIC): readers only, so no Notes button */
+const PUBLIC = !!window.JAYMS_PUBLIC;
+/* The test copy (jayms.com/bible-study-app-TEST, built as test.html): new features are switched on here first, with their own saved data (other
+   storage names) so nothing it does touches the live app's. FOLDER_UI: the screens for the visitor's own folder. VISITOR_NOTES: the notes bar. */
+const TEST = !!window.JAYMS_TEST, FOLDER_UI = TEST, VISITOR_NOTES = TEST;
+const PFX = TEST ? "wst." : "ws.";   // the small per-device settings
+/* the installable app (PWA): only on jayms.com, where the worker lives at the app's own address (the page's <base> points
+   elsewhere, so the address is written out in full) */
+if(PUBLIC && !TEST && location.hostname==="jayms.com" && "serviceWorker" in navigator)
+  window.addEventListener("load",()=>navigator.serviceWorker.register(location.origin+"/bible-study-app/sw",{scope:location.origin+"/bible-study-app/"}).catch(()=>{}));
+if(PUBLIC){ const bl=document.getElementById("brandlink"); bl.href="https://jayms.com/"; bl.removeAttribute("target"); bl.title="jayms.com" }   // already the online version: go to the site
+/* Visitors writing notes of their own (the bar under the text) is on in the test copy only; the live web version has just the Jayms Notes side button. */
+const TOOLS = DOCK.filter(id=>!(PUBLIC && id==="x")).map(id=>id==="|"?{sep:true}:toolMeta(id));
+
+/* ===== STATE ===== */
+/* Saved state moved to canonical reference keys in v024: the three hand ids become their references. */
+const MOVED = {ps82:"psalm-82", dt32:"deuteronomy-32-7-9", jn10:"john-10-31-39"};
+function migrateLocal(){
+  try{
+    if(localStorage.getItem("ws.migrated")==="1") return;
+    for(const [o,n] of Object.entries(MOVED)){
+      for(const p of ["ws.note.","ws.pub.","ws.saved.","ws.draft.","ws.thread.","ws.obs.","jx.draft."]){
+        const v=localStorage.getItem(p+o); if(v==null) continue;
+        if(localStorage.getItem(p+n)==null) localStorage.setItem(p+n,v); localStorage.removeItem(p+o);
+      }
+    }
+    const done=JSON.parse(localStorage.getItem("ws.done")||"{}"), nd={};
+    for(const k in done){ const parts=k.split(":"), last=parts.pop(); nd[[...parts, MOVED[last]||last].join(":")]=done[k]; }
+    localStorage.setItem("ws.done",JSON.stringify(nd)); localStorage.setItem("ws.migrated","1");
+  }catch(e){}
+}
+migrateLocal();
+async function migrateDB(){
+  if(!DB||!OWNER) return;
+  for(const [o,n] of Object.entries(MOVED)){
+    for(const coll of [UID?"data/users/"+UID:null,"pub","threads"]){ if(!coll) continue;
+      try{ const a=await DB.collection(coll).doc(o).get(); if(!a.exists) continue;
+        const b=await DB.collection(coll).doc(n).get(); if(!b.exists) await DB.collection(coll).doc(n).set(a.data());
+        await DB.collection(coll).doc(o).delete(); }catch(e){}
+    }
+  }
+}
+/* v025: everything James saves goes through one store (jayms-store.js). This moves the v024-era keys into it, once. */
+function migrateToStore(){
+  if(TEST) return;   // the old keys belong to the live app
+  try{
+    if(localStorage.getItem("ws.migrated2")==="1") return;
+    const J=k=>{ try{ const v=localStorage.getItem(k); return v==null?null:JSON.parse(v) }catch(e){ return null } };
+    const put=(c,id,d)=>localStorage.setItem(`js:${c}:${id}`, JSON.stringify(d));
+    const keys=[]; for(let i=0;i<localStorage.length;i++) keys.push(localStorage.key(i));
+    keys.filter(k=>k.startsWith("ws.note.")).forEach(k=>{ const id=k.slice(8), t=J("ws.saved."+id)||Date.now();
+      put("notes",id,{text:J(k)||"", pub:!!J("ws.pub."+id), obsidian:J("ws.obs."+id)||null, createdAt:t, updatedAt:t});
+      if(J("ws.pub."+id) && J(k)) put("pub",id,{text:J(k), createdAt:t, updatedAt:t});
+      ["ws.note.","ws.pub.","ws.saved.","ws.obs."].forEach(p=>localStorage.removeItem(p+id)) });
+    keys.filter(k=>k.startsWith("ws.draft.")).forEach(k=>{ const d=J(k); if(d) put("drafts",k.slice(9),Object.assign({updatedAt:Date.now()},d)); localStorage.removeItem(k) });
+    keys.filter(k=>k.startsWith("ws.thread.")).forEach(k=>{ const t=J(k); if(t&&t.url) put("threads",k.slice(10),Object.assign({updatedAt:t.savedAt||Date.now()},t)); localStorage.removeItem(k) });
+    const done=J("ws.done")||{}; Object.keys(done).forEach(id=>{ if(done[id]) put("done",id,{done:true, at:null, updatedAt:Date.now()}) }); localStorage.removeItem("ws.done");
+    localStorage.setItem("ws.migrated2","1");
+  }catch(e){}
+}
+migrateToStore();
+/* The collections. sync:true = saved to James's account as well as this browser; public:true = readers can read it. */
+const ST = JaymsStore.create({ prefix: TEST ? "jt:" : undefined, prefsPrefix: PFX, collections: {
+  notes:   {sync:true},                  // a note per passage: {text, pub, obsidian}
+  drafts:  {sync:false},                 // unsaved note edits, this browser only
+  done:    {sync:true},                  // "plan:day:passage" -> {done, at}
+  pub:     {sync:true, public:true},     // the public copy of a note readers see: {text}
+  threads: {sync:true, public:true},     // the X discussion for a passage: {url, handle, text, savedAt}
+  wraps:   {sync:true},
+  shelfcfg:{sync:true},
+  vocab:   {sync:true},  ideas: {sync:true},  logos: {sync:true},     // ready for the features to come
+  plans:   {sync:true},  answers: {sync:true}, reviews: {sync:true}
+}});
+const store = ST.prefs;                  // per-device settings (layout, widths, version) keep their own keys
+let DB=null, UID=null, SAMPLE=null, OWNER=true, LIVE=false;
+const NOTES={};                          // the note being edited for each passage, loaded from the store
+const thread = id => { const t=ST.c("threads").peek(id); return t&&JaymsX.parse(t.url) ? t : null };
+/* the public text of a note: James sees his own saved public notes (also when previewing Read along); readers see the public copy */
+const pubText = id => { if(OWNER){ const n=ST.c("notes").peek(id); return n&&n.pub ? n.text||"" : "" } return PUBNOTES[id] || (ST.c("pub").peek(id)||{}).text||"" };
+/* the public web app: James's notes marked public in his vault, collected into public-notes.json at each save point (scripts/build-public-notes.py) */
+const PUBNOTES = {}, PUBLIST = [];
+if(PUBLIC) fetch("public-notes.json").then(r=>r.ok?r.json():[]).then(l=>{ l.forEach(n=>{ try{ PUBNOTES[JaymsRef.key(n.passage)] = n.text; PUBLIST.push(n) }catch(e){} }); renderReader(); if(S.tool==="notes") renderPanel() }).catch(()=>{});
+const isDone = id => !!(ST.c("done").peek(id)||{}).done;
+function dayPosts(){const ids=new Set(); (S.adhoc?[S.adhoc]:READINGS).forEach(r=>((JST.data.peek(r.ref)||{}).posts||[]).forEach(p=>ids.add(p.id))); return [...ids]}
+/* ===== DISCUSSION ON X =====
+   The feature itself is the JaymsX component (x-discuss.js), the same one any jayms.com page can use.
+   The workstation only decides the key (the passage), the copy, the link choices and where threads are stored. */
+function xStore(){ return JaymsStore.forJaymsX(ST.c("threads")) }
+function initNote(id, force){
+  if(NOTES[id] && !force) return;
+  const n=ST.c("notes").peek(id)||{}; NOTES[id]={text:n.text||"", pub:!!n.pub, savedAt:n.updatedAt||null, obsidian:n.obsidian||null, vaultAt:n.vaultAt||null};
+  const dr=ST.c("drafts").peek(id); if(dr){ NOTES[id].text=dr.text; NOTES[id].pub=!!dr.pub; DIRTY[id]=true }
+}
+const S = {opened:[], view:"me", plan:store.get("plan",null), day:null, reading:0, tool:"council", word:null, addPsalm:store.get("addPsalm",false), skipLists:false   /* the box is gone (6 Oct): "My OT Reading Plan" leaves the genealogies out instead */,
+           app:store.get("app","study"), mark:null, hgShow:store.get("hgShow",{claim:true, emphasis:true, cosmetic:false}), hgOrig:store.get("hgOrig",true),   /* the Hebrew & Greek mode */
+           size:store.get("size",19), ver:store.get("ver","LSB"), ver2:store.get("ver2","NLT"), par:store.get("par",1), layout:store.get("layout","read"), nums:store.get("nums",true), logos:store.get("logos",true), bible:store.get("bible",true), red:store.get("red",false), blue:store.get("blue",false), purple:store.get("purple",false), planOn:store.get("planOn",true)};
+/* public build: Read along only; no My desk switch, no prototype badge */
+if(PUBLIC){ OWNER=false; S.view="public"; S.tool=null; document.body.classList.add("public-app") }   // visitors arrive with no panel open
+/* a refresh brings back the panel that was open (null = none); a first visit keeps the default above */
+{ const t=store.get("tool","__unset"); if(t!=="__unset" && (t===null || TOOLS.some(x=>x.id===t && !(x.owner && S.view==="public")))) S.tool=t; }
+const $ = id=>document.getElementById(id);
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ===== PLAN RAIL ===== */
+const plan=()=>PLANS[S.plan];
+/* day N of a plan; a weekdays plan (F260) moves on Monday to Friday only, so a weekend stays on Friday's reading for catching up */
+/* when a plan starts: James's own start date on his desk; on the public site, the day the visitor first opened that plan (they begin at day 1) */
+function planStart(p){ if(!PUBLIC) return p.start; const k="start:"+p.id; let d=store.get(k,null);
+  if(!d){ const t=new Date(); d=`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`; store.set(k,d) } return d }
+function todayNum(p){const d0=new Date(planStart(p)+"T00:00:00"), now=new Date(); now.setHours(0,0,0,0);
+  const days=Math.round((now-d0)/864e5);   // round, not floor: a span across the clocks changing is an hour short of whole days
+  if(p.weekly) return now<d0 ? 0 : Math.floor(days/7)+1;   // one entry a week (the F260 memory verses)
+  if(!p.weekdays) return days+1;
+  if(now<d0) return 0;
+  let n=0; for(const d=new Date(d0); d<=now; d.setDate(d.getDate()+1)){ const w=d.getDay(); if(w&&w<6) n++ }
+  return Math.max(n,1)}
+const dk=(r,day)=>`${S.plan}:${day||S.day}:${r.did||r.id}`;   // did: the plan's own reference, before skip lists trimmed it
+function dayDone(d){return d.readings.every(x=>isDone(`${S.plan}:${d.day}:${JaymsRef.key(x.ref)}`))}
+function buildDay(){
+  const p=plan(); const d=p.days.find(x=>x.day===S.day)||p.days[0];
+  /* the day's readings, less the chapters James skips (when that box is ticked), plus a psalm (when that one is) */
+  let list = d.readings.slice();
+  /* skipping trims the skipped chapters out of a reading ("Numbers 32-35" becomes "Numbers 32"), and drops a reading left empty */
+  if(S.skipLists && SKIP) list = list.map(x=>{
+    const segs=JaymsRef.parse(x.ref), keep=[];
+    for(const sg of segs){
+      const sk=SKIP[sg.book]||[];
+      if(sg.v1!==1 || sg.v2!==999){ if(!sk.includes(sg.c1) || sg.c1!==sg.c2) keep.push(sg); continue }   /* a verse range stays as it is */
+      let run=null;
+      for(let c=sg.c1;c<=sg.c2;c++){ if(sk.includes(c)){ run=null; continue } if(run && run.c2===c-1) run.c2=c; else { run={book:sg.book,c1:c,v1:1,c2:c,v2:999}; keep.push(run) } }
+    }
+    return keep.length ? Object.assign({}, x, {ref: JaymsRef.format(keep), orig: x.ref}) : null }).filter(Boolean);
+  /* the psalm that goes with the day's chapter (plans/psalm-pairs.json: quotations, cross-references, the Divine Council Index), with the reason */
+  if(S.addPsalm && d.readings.length){ const sg=JaymsRef.parse((list[0]||d.readings[0]).ref)[0];
+    if(sg && sg.book!=="Psalm"){ const pr=PAIRS && PAIRS[`${sg.book}|${sg.c1}`], ps=`Psalm ${pr ? pr[0] : ((S.day-1)%150)+1}`;
+      if(!list.some(x=>JaymsRef.key(x.ref)===JaymsRef.key(ps))) list.push({ref:ps, role:`Psalm for ${sg.book} ${sg.c1}`, why:pr ? pr[1].replace(/^./,c=>c.toUpperCase()) + "." : ""}) } }
+  if(!list.length) list = d.readings.map(x=>Object.assign({}, x, {role:"Usually skipped: a list or genealogy"}));
+  /* a reading is addressed by its reference: id is the canonical key ("psalm-82"), used by notes, done marks and threads */
+  READINGS = list.map(x=>{const id=JaymsRef.key(x.ref); initNote(id); loadPanel(x.ref);
+    const o={id, did:JaymsRef.key(x.orig||x.ref), ref:x.ref, role:x.role||"Reading", why:x.why||"", rows:null};
+    JST.data.text(x.ref).then(rows=>{ o.rows=rows; if(READINGS.includes(o)) renderReader() });
+    return o});
+  if(S.reading>=READINGS.length) S.reading=0;
+}
+function renderPlan(){
+  const p = plan(); if(!p) return;
+  const hg = S.app==="hg", appPlans = PLANINDEX.plans.filter(x=>(x.app||"study")===S.app);   // each app lists its own plans
+  const mine = hg ? [] : ST.c("plans").all();
+  $("plan").innerHTML = appPlans.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")
+    + (mine.length ? `<optgroup label="Plans I made">${mine.map(x=>`<option value="${x.id}"${x.id===S.plan?" selected":""}>${esc(x.name)}</option>`).join("")}</optgroup>` : "")
+    + (S.view!=="public" && !hg ? `<option value="__build">+ Build a plan\u2026</option>` : "");
+  /* the plans as buttons under one "current plan" button (the select stays as the hidden source of truth) */
+  const opts=[...appPlans.map(x=>[x.id,x.name]), ...mine.map(x=>[x.id,x.name])];
+  $("planpick").innerHTML = `<span>${esc(p.name)}</span><span class="caret" aria-hidden="true">▾</span>`;
+  $("planlist").innerHTML = opts.map(([id,n])=>`<li><button data-pickplan="${id}" class="${id===S.plan?"on":""}"${id===S.plan?' aria-current="true"':""}>${esc(n)}${id===S.plan?' <span class="sub">reading now</span>':""}</button></li>`).join("")
+    + (S.view!=="public" && !hg ? `<li><button data-pickplan="__build" class="build">+ Build a plan…</button></li>` : "");
+  /* the options under the plan: Bible Study's, or the Hebrew & Greek mode's */
+  ["addpsalm","hidelists"].forEach(id=>$(id).closest("label").hidden=hg);
+  document.querySelectorAll(".hgopt").forEach(l=>l.hidden=!hg);
+  document.querySelectorAll("#appsw button").forEach(b=>{ const on = S.atlasOn ? b.dataset.app==="atlas" : b.dataset.app===S.app; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on) });
+  document.body.classList.toggle("hg-noorig", hg && !S.hgOrig);
+  $("planname").textContent = p.name; $("plandesc").textContent = p.description||"";
+  const t = todayNum(p), total=p.days.length, done=p.days.filter(dayDone).length;
+  $("progtxt").textContent = t<1 ? `Starts ${new Date(planStart(p)+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long"})}` : t>total ? `Finished · ${total} ${p.weekly?"weeks":"days"}` : `${p.weekly?"Week":"Day"} ${t} of ${total}`;
+  $("progpct").textContent = Math.round(done/total*100)+"%";
+  $("progbar").style.width = Math.max(2,done/total*100)+"%";
+  /* the list starts where you are: the first day not yet done (or today), and the days before it follow at the bottom, so
+     the plan menu above is never a long scroll away and day 1 comes round again after the last day */
+  /* genealogies and lists (a plan's "list" days, or chapters in plans/skip.json): greyed, never where the list starts, hidden with the box */
+  const isList=d=>d.list || (!!SKIP && d.readings.length>0 && (()=>{ const g=JaymsRef.parse(d.readings[0].ref)[0]; return !!g && (SKIP[g.book]||[]).includes(g.c1) && (!g.c2 || g.c2===g.c1) })());
+  const first=(p.days.find(d=>!dayDone(d) && !isList(d))||p.days.find(d=>d.day===t)||p.days[0]).day;
+  const full=p.days.filter(d=>d.day>=first).concat(p.days.filter(d=>d.day<first)).filter(d=>!S.hideLists || !isList(d) || d.day===S.day);
+  /* a week at a time: where you are and the six after it; the rest behind "Show all" (the day you picked stays in view) */
+  const SHOW=7, order = S.allDays || (S.app==="hg" && full.length<=50) ? full : full.filter((d,i)=>i<SHOW || d.day===S.day);   // Hebrew & Greek: 50 days or fewer simply scroll
+  const more = full.length>order.length || S.allDays ? `<li><button class="daysmore" data-alldays>${S.allDays?"Show fewer":"Show all "+full.length+(p.weekly?" weeks":" days")}</button></li>` : "";
+  $("days").innerHTML = (S.allDays ? more : "") + order.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
+    const sep = d.day===p.days[0].day && first>p.days[0].day ? `<li class="days-sep lbl">Done · from ${p.weekly?"week":"day"} 1</li>` : "";
+    return sep+`<li><button class="day${fin?" done":""}${on?" on":""}${isList(d)?" list":""}" data-day="${d.day}" ${isT?'aria-current="date"':""}>
+      <span class="n">${isT?(p.weekly?"This week":"Today"):(p.weekly?"Week ":"Day ")+d.day}</span>
+      <span class="t">${esc(d.title)}${isList(d)?' <em class="listtag">genealogy / list</em>':""}${(d.readings.length>1||d.note)?`<small>${esc(d.readings.length>1?"with "+d.readings.slice(1).map(x=>x.ref).join(" · "):d.note)}</small>`:""}</span>
+      <span class="ck" role="img" aria-label="${fin?"done":"not done"}">${fin?"✓":""}</span></button></li>`}).join("") + (S.allDays ? "" : more);   // "Show fewer" sits at the top of the long list, where you are
+  /* the day you're on is in view when the plan opens (no scrolling down from day 1): once per plan and day, and only if it's out of sight */
+  const at=S.plan+":"+S.day; if(renderPlan.at!==at){ renderPlan.at=at; setTimeout(()=>{
+    const el=$("days").querySelector(".day.on")||$("days").querySelector("[aria-current]"); if(!el) return;
+    const box=[document.querySelector(".railin"),$("rail")].find(x=>x && x.scrollHeight>x.clientHeight+1); if(!box) return;
+    const r=el.getBoundingClientRect(), b=box.getBoundingClientRect();
+    if(r.top<b.top || r.bottom>b.bottom) box.scrollTop += r.top-b.top-(b.height-r.height)/3;
+  },0) }
+}
+/* the chapters James skips (plans/skip.json, built from his vault notes) */
+let SKIP=null, PAIRS=null;
+fetch("plans/psalm-pairs.json").then(r=>r.ok?r.json():null).then(d=>{ PAIRS=d; if(S.addPsalm && PLANINDEX){ buildDay(); render() } }).catch(()=>{});
+fetch("plans/skip.json").then(r=>r.ok?r.json():null).then(d=>{ SKIP=d; if(S.skipLists && PLANINDEX){ buildDay(); render() } }).catch(()=>{});
+/* a plan file can say how far James has already read ("doneThrough": a day): those days are ticked once in each browser */
+function seedDone(p){ if(!p || !p.doneThrough) return; const k=`seeded:${p.id}:${p.doneThrough}`; if(store.get(k,false)) return;
+  p.days.filter(d=>d.day<=p.doneThrough).forEach(d=>d.readings.forEach(x=>{ const id=`${p.id}:${d.day}:${JaymsRef.key(x.ref)}`; if(!isDone(id)) ST.c("done").save(id,{done:true, at:Date.now()}) }));
+  store.set(k,true) }
+function choosePlan(id){
+  S.plan=id; store.set(S.app==="hg"?"plan:hg":"plan",id); const p=plan(); const t=todayNum(p);   // each app remembers its own plan
+  S.day=Math.min(Math.max(t,1),p.days.length); S.reading=0; buildDay();
+}
+/* ===== READER ===== */
+function wordify(html){return html.replace(/\[w:(\w+)\](.*?)\[\/w\]/g,(m,k,t)=>`<span class="w${k===S.word&&S.tool==="word"?" on":""}" data-w="${k}" role="button" tabindex="0">${t}</span>`)}
+function renderReader(){
+  JaymsRef.setWeb(S.view==="public");   // Read along: Logos's web links, so a reader who doesn't own the book lands on its page
+  const r = cur(); if(!r) return;
+  /* the day's plan readings as tabs, each with its own ×; none while the reading plan is hidden (Plan off), so only the passages you
+     opened sit on top. A closed one stays closed for that day; picking a day in the plan brings them back */
+  const shut = planTabsShut(), planTabs = document.body.classList.contains("rail-hidden") || !S.planOn ? [] : READINGS.map((x,i)=>i).filter(i=>!shut.includes(i));
+  $("rtabs").innerHTML = planTabs.map(i=>{ const x=READINGS[i]; return `<span class="rtabgrp"><button class="rtab${!S.adhoc&&i===S.reading?" on":""}${isDone(dk(x))?" done":""}" role="tab" aria-selected="${!S.adhoc&&i===S.reading}" data-r="${i}"><span class="ok"></span>${tabRef(x.ref)}</button><button class="rtabx" data-close-plan="${i}" title="Close ${esc(x.ref)}" aria-label="Close ${esc(x.ref)}">×</button></span>` }).join("");
+  const isToday = S.day===todayNum(plan());
+  /* every passage opened with Go (or « ») keeps its own tab until its × closes it (S.opened); S.adhoc is the one on screen */
+  $("rtabs").innerHTML += S.opened.map((o,n)=>`<span class="rtabgrp"><button class="rtab${S.adhoc===o?" on":""} adhoc" role="tab" aria-selected="${S.adhoc===o}" data-open-tab="${n}">${tabRef(o.ref)}</button><button class="rtabx" data-close-adhoc="${n}" title="Close ${esc(o.ref)}" aria-label="Close ${esc(o.ref)}">×</button></span>`).join("");
+  $("rkick").textContent = !S.planOn ? "Passage" : S.adhoc ? "Opened passage · not in today's plan" : `${isToday?(plan().weekly?"This week":"Today"):(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
+  $("rtitle").textContent = r.ref;
+  const lg = JaymsRef.refly(r.ref, S.ver);
+  $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
+  $("rlogos").hidden = !S.logos;
+  $("optplan").checked = S.planOn; document.body.classList.toggle("noplan", !S.planOn);
+  if(!S.planOn && $("biblepick").hidden){ BP={}; renderBiblePick(); $("biblepick").hidden=false }   // plan off: The Bible is always open
+  if(S.planOn && !S.bible) $("biblepick").hidden=true;
+  $("optlogos").checked = S.logos; $("optred").checked = S.red; $("optblue").checked = S.blue; $("optbluewrap").hidden = !CSV; $("optpurple").checked = S.purple; $("optpurplewrap").hidden = !CSV; $("optbible").checked = S.bible; $("biblebtn").hidden = !S.bible; if(!S.bible) $("biblepick").hidden = true;
+  $("rwhy").textContent = r.why; $("rwhy").hidden = !r.why;
+  const opts=k=>Object.keys(VERNAMES).map(v=>`<option value="${v}"${v===k?" selected":""}>${v}</option>`).join("");
+  $("ver").innerHTML = opts(S.ver); $("ver2").innerHTML = opts(S.ver2);
+  $("ver2wrap").hidden = !S.par;
+  /* one toggle each: the button names what a tap switches to, not what's on screen */
+  $("layoutbtn").textContent = S.layout==="verse" ? "Reading" : "Verses";
+  $("optnums").checked = S.nums; $("numbtn").textContent = S.nums ? "Hide #" : "Show #"; $("numbtn").title = S.nums ? "Hide the verse numbers" : "Show the verse numbers"; $("text").classList.toggle("nonums", !S.nums);   // gone from the page, so a read-aloud tool skips them too
+  $("parbtn").textContent = S.par ? "Single" : "Parallel";
+  const vers = S.par ? [S.ver,S.ver2] : [S.ver];
+  const rows = r.rows;
+  const multi = !!rows && new Set(rows.map(x=>x.book+" "+x.c)).size>1;
+  const has = ver => !!rows && rows.some(x=>x.texts[ver]);
+  const textOf=(ver,row)=>{ const t=row.texts[ver]; if(!t) return '<span class="nov">not in this version</span>'; return LINKED.includes(ver)?wordify(t):t.replace(/\[\/?w:?\w*\]/g,"") };
+  const splitSup=t=>{const m=t.match(/<span class='sup'>.*?<\/span>/); return m?[m[0],t.replace(m[0],"")]:["",t]};
+  const vkey=x=>`${x.book}|${x.c}|${x.v}`, vlabel=x=>multi?`${x.c}:${x.v}`:`${x.v}`;
+  const isSel=x=>S.tool==="verse"&&S.vsel&&S.vsel.book===x.book&&S.vsel.c===x.c&&S.vsel.v===x.v;
+  const verseHTML=(ver,x,inPara)=>{ const sel=isSel(x); const [sup,body]=splitSup(textOf(ver,x));
+    const num=`<a href="#" class="vn" data-v="${vkey(x)}" title="Verse ${vlabel(x)} tools">[${vlabel(x)}]</a>`;
+    return inPara ? `${sup}<span class="vs${sel?" sel":""}">${num}${body}</span> ` : `<p class="v${sel?" sel":""}">${sup}<span class="vtag">${ver}</span>${num} ${body}</p>` };
+  /* one group per book and chapter: "Jude 6; 2 Peter 2:4" reads as two, each labelled */
+  const groups=[]; (rows||[]).forEach(x=>{ const g=`${x.book} ${x.c}`; if(!groups.length||groups[groups.length-1].g!==g) groups.push({g,rows:[]}); groups[groups.length-1].rows.push(x) });
+  const blocks=[]; groups.forEach(G=>{ if(groups.length>1) blocks.push({label:G.g}); if(S.layout==="verse") G.rows.forEach(x=>blocks.push({rows:[x]}));
+    /* Reading view: a new paragraph wherever the text's own paragraphs begin (x.para, from the ESV's paragraphing) */
+    else { let run=[]; G.rows.forEach(x=>{ if(x.para && run.length){ blocks.push({rows:run}); run=[] } run.push(x) }); if(run.length) blocks.push({rows:run}) } });
+  const blockHTML=(ver,b)=>{ if(S.layout==="verse") return verseHTML(ver,b.rows[0],false);
+    const body=b.rows.map(x=>verseHTML(ver,x,true)).join(""); const m=body.match(/<span class='sup'>.*?<\/span>/);
+    return `${m?m[0]:""}<p class="para"><span class="vtag">${ver}</span>${m?body.replace(m[0],""):body}</p>` };
+  /* the dotted-word note only when the text on screen really has dotted words; otherwise name the versions that do here, if any */
+  const dotted = v => (rows||[]).some(r=>String(r.texts[v]||"").indexOf("[w:")>-1);
+  const shownVers = vers.some(has) ? vers.filter(has) : (has("NET")?["NET"]:[]);
+  const dotVers = LINKED.filter(dotted);
+  const linkNote = shownVers.some(v=>LINKED.includes(v)&&dotted(v)) ? "Dotted words open Word Study" : dotVers.length ? "Dotted word links show in the "+dotVers.join(", ") : "";
+  const missing = rows&&rows.length ? vers.filter(v=>!has(v)) : [];
+  /* a version that isn't loaded for this passage shows the NET in its place, and says so */
+  let eff = vers.map(v=>has(v)||!has("NET")?v:"NET"); if(eff.length===2&&eff[0]===eff[1]) eff=[eff[0]];
+  const par = eff.length===2;
+  READ_VERS = eff;
+  $("text").classList.toggle("par",par && !!rows && rows.length>0);
+  /* no text to shape: the layout, column and version controls would change nothing, so they rest */
+  const tb=document.querySelector(".tbar"); tb.classList.toggle("idle", !!rows && !rows.length);
+  tb.querySelectorAll("button,select").forEach(x=>x.disabled=!!rows && !rows.length);
+  if(!rows) $("text").innerHTML = `<p class="empty">Loading ${esc(r.ref)}…</p>`;
+  else if(!rows.length) $("text").innerHTML = `<p class="empty">There's no text for ${esc(r.ref)} in the data yet.</p>`;
+  else $("text").innerHTML =
+      (missing.length ? `<p class="empty nover">${missing.length===1 && missing[0]==="LXX" && JaymsRef.book(rows[0].book) && JaymsRef.book(rows[0].book).order>=39
+          ? "The Septuagint is the Old Testament only, so this column shows the NET."
+          : `${missing.map(v=>VERNAMES[v]).join(" and ")} ${missing.length>1?"aren't":"isn't"} loaded for ${esc(r.ref)} yet, so ${missing.length>1?"they show":"it shows"} the NET.`}</p>` : "")
+    + (par
+      ? `<div class="phdr">${eff.map((v,c)=>`<span class="lbl">${v}${readBtns(c)}</span>`).join("")}</div><div class="pgrid">`
+        + blocks.map((b,n)=>b.label?`<div class="pcell seglbl lbl" style="grid-column:1 / -1;grid-row:${n+1};--o:${n*2}">${esc(b.label)}</div>`:"").join("")
+        + eff.map((ver,col)=>blocks.map((b,n)=>b.label?"":`<div class="pcell" data-col="${col}" style="grid-column:${col+1};grid-row:${n+1};--o:${n*2+col}">${blockHTML(ver,b)}</div>`).join("")).join("") + `</div>`
+      : `<div class="phdr one"><span class="lbl">${eff[0]}${readBtns(0)}</span></div>`
+        + `<div class="pone" data-col="0">` + blocks.map(b=>b.label?`<div class="lbl seglbl">${esc(b.label)}</div>`:blockHTML(eff[0],b)).join("") + `</div>`)
+    + `<div class="ver">${[par?"":eff[0], linkNote].filter(Boolean).join(" · ")}</div>`;
+  if(S.app==="hg") hgApply();   // the Hebrew & Greek marks, laid on the text just drawn
+  colorText();   // red letters, Connecting Scripture blue, purple where both (Settings)
+  findApply(false);
+  syncChapterNav();
+  const th = thread(r.id);
+  $("xline").hidden = !th;
+  if(th) $("xline").innerHTML = JaymsX.lineHTML(th,{owner:S.view!=="public",label:"this reading"});
+  $("markdone").textContent = isDone(dk(r)) ? "\u2713 Done" : "Done";
+  $("nextread").hidden = !!S.adhoc || S.reading>=READINGS.length-1;
+  $("notelbl").innerHTML = "My notes on "+esc(r.ref) + (NOTES[r.id] && NOTES[r.id].savedAt && String(NOTES[r.id].text||"").trim() ? ' <span class="notecheck" title="A note is saved for this passage">\u2713 saved</span>' : "");
+  if(document.activeElement!==$("note")) $("note").value = NOTES[r.id].text;
+  $("notepub").checked = !!NOTES[r.id].pub;
+  const pub = S.view==="public";
+  document.body.classList.toggle("view-public",pub);
+  document.querySelectorAll("#viewsw button").forEach(b=>{const on=b.dataset.view===S.view;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
+  $("viewsw").hidden = !OWNER;
+  /* the public web app: every visitor has their own notes and Done ticks, kept in their own browser (no server, nobody else sees them).
+     Only the desk's Read along preview hides them, since there they would be James's. */
+  $("mynotes").hidden = pub && !(PUBLIC && VISITOR_NOTES);
+  $("markdone").hidden = (pub && !PUBLIC) || !!S.adhoc;
+  $("pubnote").hidden = true;   // James's notes are the Jayms Notes side button on the web version, not a bar under the text
+  $("publbl").textContent = `James's notes on ${r.ref}`;
+  $("pubbody").innerHTML = pubText(r.id) ? box("explain","",`<div class="jst-md">${JST.util.mdBlock(pubText(r.id))}</div>`) : `<p class="empty">No public notes on this reading yet.</p>`;
+  const n=NOTES[r.id], dirty=!!DIRTY[r.id];
+  /* a saved note shows formatted (Markdown); Edit, or a tap on it, brings back the editor */
+  if(S.noteFor!==r.id){ S.noteFor=r.id; S.noteEdit=false }   // another passage: its note opens formatted
+  const showMd = !!(n.text && n.text.trim()) && !dirty && !S.noteEdit;
+  $("notepreview").hidden = !showMd; $("note").hidden = showMd;
+  if(showMd) $("notepreview").innerHTML = JST.util.mdBlock(n.text);
+  $("noteview").hidden = !(n.text && n.text.trim()); $("noteview").textContent = showMd ? "Edit" : "Formatted";
+  $("notesave").disabled = !dirty;
+  $("saved").classList.toggle("dirty",dirty);
+  $("saved").textContent = dirty ? "Not saved yet" : (n.text && n.savedAt) ? "Saved " + new Date(n.savedAt).toLocaleString([], {month:"short", day:"numeric", year:"numeric", hour:"numeric", minute:"2-digit"}) : "";
+  $("obsrow").hidden = !n.text.trim() || !n.savedAt || dirty;
+  if(!$("obsrow").hidden){ const path = obsPath(r.ref); n.obsidian = path; $("obspath").textContent = (n.inVault ? "Saved in Obsidian: " : "Obsidian: ") + path; $("obsopen").href = obsNewURI(r, n); }
+  document.documentElement.style.setProperty("--reader-size",S.size+"px");
+  /* after a refresh, return to where the page was scrolled, once this reading's text is on screen */
+  if(PENDING_SCROLL && r.rows){
+    if(PENDING_SCROLL.id===r.id){ const y=PENDING_SCROLL.y; PENDING_SCROLL=null;
+      /* opening a passage scrolls to the top straight after rendering, so set the position after that, and once more as late text settles */
+      [60,400].forEach(ms=>setTimeout(()=>{ if(!USER_MOVED && Math.abs(readerY()-y)>40) readerTo(y) },ms)) }
+    else if(RESTORED) PENDING_SCROLL=null }   // once the last place is restored, a different reading (a new day) starts at the top
+}
+/* on a wide screen the reader scrolls inside its own column (its scroll bar sits beside the text, not past the dock); on a phone the page scrolls */
+function readerScroller(){ const r=document.getElementById("reader"); return r && getComputedStyle(r).overflowY==="auto" ? r : null }
+function readerY(){ const r=readerScroller(); return r ? r.scrollTop : window.scrollY }
+function readerTo(y){ const r=readerScroller(); r ? r.scrollTo(0,y) : window.scrollTo(0,y) }
+function readerTop(){ readerTo(0) }
+var PENDING_SCROLL = store.get("scroll", null);   // var: renderReader may run before this line does
+var USER_MOVED = false;   // once you scroll or type yourself, the restore never moves the page
+["wheel","touchstart","keydown","mousedown"].forEach(ev=>window.addEventListener(ev,()=>{ USER_MOVED=true },{once:true,passive:true}));
+{ let t=null; const save=()=>{ const r=cur(); if(r && !PENDING_SCROLL) store.set("scroll",{id:r.id, y:Math.round(readerY())}) };
+  const later=()=>{ clearTimeout(t); t=setTimeout(save,300) };
+  window.addEventListener("scroll",later,{passive:true}); $("reader").addEventListener("scroll",later,{passive:true});
+  window.addEventListener("pagehide",save);   // a refresh right after scrolling still keeps the spot
+}
+
+/* ===== DOCK + PANEL ===== */
+setTimeout(()=>JST.data.counts().then(()=>renderDock()),1500);   // after the first paint: what the dock buttons count from (people, places, maps, scrolls, art)
+/* the side buttons James has hidden in Config (Buttons tab); Scrolls is hidden until he shows it */
+const dockHidden = () => { const d=ST.c("shelfcfg").peek("dock"); return (d&&d.hidden) || ["scrolls"] };
+function renderDock(){
+  const off = dockHidden();
+  const list = TOOLS.filter(t=>!(t.owner && S.view==="public") && !(t.id==="marks" && S.app!=="hg") && !(t.id && off.includes(t.id)));
+  $("dock").innerHTML = list.map(t=>{ if(t.sep) return "<hr>"; const n=toolCount(t.id);
+    /* a number: how many for this passage; greyed: nothing for this passage; plain: always something there */
+    return `<button class="dk${S.tool===t.id?" on":""}${n===0?" none":""}" data-t="${t.id}" aria-pressed="${S.tool===t.id}" title="${esc(t.id==="notes"&&S.view==="public"?"Jayms Notes: James's public notes":t.name)}${n===0?" (nothing for this passage)":""}">${t.icon}<span>${t.id==="notes"&&S.view==="public"?"Jayms Notes":t.label}</span>${n?`<span class="cnt">${n}</span>`:""}</button>`}).join("");
+}
+const box=(v,h,body)=>`<div class="box v-${v}">${h?`<h3>${h}</h3>`:""}${body}</div>`;
+const outlink=(href,txt)=>href?`<a class="out" href="${href}" target="_blank" rel="noopener">${txt} ↗</a>`:"";
+
+function scriptureFor(sel){
+  const r = cur(), x = (r.rows||[]).find(y=>y.book===sel.book&&y.c===sel.c&&y.v===sel.v); if(!x) return "";
+  const ver = ["LSB",S.ver,"NET"].find(v=>x.texts[v]); return ver ? wordify(x.texts[ver]).replace(/<span class='sup'>.*?<\/span>/,"") : "";
+}
+/* the passage a saved note belongs to: from its vault path ("John 3.16.md"), else from its key ("john-3-16") */
+function noteRef(d){
+  if(d.obsidian){ const r=d.obsidian.replace(/^.*\//,"").replace(/\.md$/,"").replace(/\./g,":"); if(JaymsRef.parse(r).length) return r }
+  const m=/^(.*?)-(\d+)(?:-(\d+))?(?:-(\d+))?$/.exec(d.id||""); if(!m) return d.id;
+  const r=m[1].replace(/-/g," ")+" "+m[2]+(m[3]?":"+m[3]+(m[4]?"-"+m[4]:""):""); return JaymsRef.parse(r).length ? JaymsRef.format(JaymsRef.parse(r)) : d.id;
+}
+/* Find a note: a passage (every saved note on it or inside it) or a word (every note that uses it) */
+function noteFind(q){
+  q=String(q||"").trim(); if(!q) return "";
+  const pub=S.view==="public", docs=(PUBLIC ? PUBLIST : (pub?ST.c("pub"):ST.c("notes")).all()).filter(d=>String(d.text||"").trim());
+  const segs=JaymsRef.parse(q), byRef=segs.length && !JaymsRef.check(segs);
+  const pos=r=>{ const g=JaymsRef.parse(r)[0], b=g&&JaymsRef.book(g.book); return b ? b.order*1e6+g.c1*1e3+g.v1 : 9e9 };
+  const hits=docs.map(d=>({d, ref:d.passage||noteRef(d)})).filter(x=> byRef ? JaymsRef.parse(x.ref).some(a=>segs.some(b=>JaymsRef.overlap(a,b))) : x.d.text.toLowerCase().includes(q.toLowerCase()))
+    .sort((a,b)=>pos(a.ref)-pos(b.ref));
+  if(!hits.length) return `<p class="empty">No saved note ${byRef?"on "+esc(JaymsRef.format(segs)):"uses \u201C"+esc(q)+"\u201D"}.</p>`;
+  return `<div class="lbl">${hits.length} note${hits.length>1?"s":""} ${byRef?"on "+esc(JaymsRef.format(segs)):"with \u201C"+esc(q)+"\u201D"}</div>` +
+    hits.slice(0,60).map(x=>box("explain", esc(x.ref)+` <button class="sz" data-open-note="${esc(x.ref)}">Open</button>`, `<div class="jst-md">${JST.util.mdBlock(x.d.text)}</div>`)).join("");
+}
+function notesHTML(){
+  const pub = S.view==="public";
+  const all = READINGS.concat(S.adhoc?[S.adhoc]:[]).map(r=>({r,n:pub?pubText(r.id):NOTES[r.id].text,isPub:!!(NOTES[r.id].pub&&NOTES[r.id].savedAt)})).filter(x=>x.n.trim());
+  return all.length ? all.map(x=>box("explain",x.r.ref+(!pub&&x.isPub?' <span class="pubtag">Public</span>':""),`<div class="jst-md">${JST.util.mdBlock(x.n)}</div>`)).join("")
+    : `<p class="empty">${pub?"James has no notes on today's readings yet. Search above, or open another passage.":"Nothing yet today. Notes typed under each reading collect here, so the day reads as one page when you are done."}</p>`;
+}
+/* What each component is told by this page. */
+/* What this page does with each message a panel sends (the names are JaymsStudy.events). One object, every panel. */
+/* a record id that can never repeat, even for two saves in the same millisecond */
+let ID_N = 0;
+function newId(ref){ return `${JaymsRef.key(ref)}~${Date.now()}~${(++ID_N).toString(36)}${Math.random().toString(36).slice(2,6)}` }
+const HANDLERS = {
+  meta:    m => applyMeta(m),
+  word:    k => { S.word=k; if(S.tool!=="word"){ stashPanel("word"); S.tool="word"; renderDock(); renderPanel() } renderReader() },
+  /* "On the map" in the Fact Book: the Maps panel, with that place selected */
+  mapPlace: id => { S.mapPlace=id; stashPanel("maps"); S.tool="maps"; renderDock(); renderPanel(); if(PH && PH.o && S.mapPlace){ PH.o.focusStep=S.mapPlace; PH.refresh() } S.mapPlace=null },
+  verse:   v => { S.vsel=v; stashPanel("verse"); S.tool="verse"; renderReader(); renderDock(); renderPanel() },
+  mark:    id => { S.mark=id; stashPanel("marks"); S.tool="marks"; renderReader(); renderDock(); renderPanel() },
+  passage: d => { const err=openPassage(d.ref); if(err) $("gomsg").textContent=err },
+  note:    d => { const id=JaymsRef.key(d.ref); initNote(id); NOTES[id].text=(NOTES[id].text?NOTES[id].text+"\n\n":"")+"Claude: "+d.text; if(id===cur().id) markDirty() },
+  answer:  rec => ST.c("answers").save(rec.id, rec),
+  /* one card per word: adding it again from another passage adds that passage to its list */
+  vocab:   d => { const id=d.k||JaymsRef.key(d.word), x=ST.c("vocab").peek(id)||{}, refs=[...new Set([...(x.refs||(x.ref?[x.ref]:[])), d.ref].filter(Boolean))];
+                  ST.c("vocab").save(id, Object.assign({}, x, d, {refs, gloss:d.gloss||x.gloss||"", addedAt:x.addedAt||Date.now()})) },
+  vocabRemove: d => ST.c("vocab").remove(d.k),
+  ideaSet:     d => { const x=ST.c("ideas").peek(d.id); if(x) ST.c("ideas").save(d.id, Object.assign(x, d.written==null?{}:{written:!!d.written, writtenAt:d.written?Date.now():null}, d.title?{title:d.title}:{})) },
+  ideaRemove:  d => ST.c("ideas").remove(d.id),
+  plan:        p => { ST.c("plans").save(p.id, p); mergeMyPlans(); S.adhoc=null; choosePlan(p.id); rememberOpen(); render() },
+  planRemove:  d => ST.c("plans").remove(d.id),
+  wrap:        d => ST.c("wraps").save(d.key || wrapKey(), d),
+  shelfcfg:    d => ST.c("shelfcfg").save(d.key, d.value),
+  review:      d => { const x=ST.c("reviews").peek(d.k)||{}; ST.c("reviews").save(d.k, {box:d.box, due:d.due, last:d.at, seen:(x.seen||0)+1, knew:(x.knew||0)+(d.knew?1:0)}) },
+  idea:    d => ST.c("ideas").save(newId(d.ref), d),
+  logos:   d => ST.c("logos").save(newId(d.ref), Object.assign({done:false}, d)),
+  thread:  () => { renderReader(); renderDock() },
+  logosDone:   d => { const x=ST.c("logos").peek(d.id); if(x) ST.c("logos").save(d.id, Object.assign(x, {done:!!d.done, doneAt:d.done?Date.now():null})) },
+  logosRemove: d => ST.c("logos").remove(d.id)
+};
+/* the queue redraws itself whenever it changes, wherever the change came from */
+ST.c("logos").on(()=>{ renderDock(); if(S.tool==="logos" && PH) PH.refresh() });
+ST.c("vocab").on(()=>{ renderDock(); if(S.tool==="vocab" && PH) PH.refresh() });
+ST.c("reviews").on(()=>renderDock());
+/* shelf settings live in one place; the shelf and Config both redraw when they change */
+function shelfConfig(){ const c=ST.c("shelfcfg"); return { authors:c.peek("authors"), commentaries:c.peek("commentaries"), studyBibles:c.peek("studyBibles"),
+  dock:{ hidden:dockHidden(), tools:TOOLS.filter(t=>t.id && t.id!=="config" && t.id!=="marks").map(t=>({id:t.id, label:t.label, name:t.name})) } } }
+ST.c("shelfcfg").on(()=>{ renderDock(); if((S.tool==="shelf"||S.tool==="config") && PH) PH.refresh() });
+ST.c("ideas").on(()=>{ renderDock(); if(S.tool==="ideas" && PH) PH.refresh() });
+/* Open any passage. A reading of the day switches to its tab; anything else opens as its own tab beside them.
+   Returns an error message when the reference can't be read, so the box can say what went wrong. */
+function openPassage(ref, replace){
+  const segs = JaymsRef.parse(ref);
+  if(!segs.length) return `Couldn't read "${ref}" as a Bible reference.`;
+  const bad = JaymsRef.check(segs); if(bad) return bad;   // chapter and verse must exist ("Revelation 22 has 21 verses.")
+  const id = JaymsRef.key(segs), i = READINGS.findIndex(x=>x.id===id);
+  S.vsel=null; S.word=null;
+  const had = S.opened.find(x=>x.id===id);
+  if(i>=0 && S.planOn){ S.adhoc=null; S.reading=i; }   // plan off: even one of the day's readings opens as its own tab
+  else if(had) S.adhoc = had;
+  else {
+    const o = { id, ref:JaymsRef.format(segs), role:"Opened passage", why:"", rows:null, adhoc:true };
+    /* « » step the tab on screen to the next chapter; Go adds a tab beside the others */
+    const at = replace && S.adhoc ? S.opened.indexOf(S.adhoc) : -1;
+    if(at>=0) S.opened[at] = o; else S.opened.push(o);
+    S.adhoc = o; initNote(id); loadPanel(o.ref);
+    JST.data.text(o.ref).then(rows=>{ o.rows=rows; if(S.adhoc===o) renderReader() });
+  }
+  rememberOpen(); renderReader(); renderPanel(); renderDock(); readerTop();
+  return "";
+}
+/* closing a tab: the one on screen falls back to the opened tab beside it, or the day's reading */
+/* Red letters (redletter.json: per verse 1 = all Jesus, 2 = part) and the CSB Connecting Scripture verses (csnt-verses.json, desk
+   only). A verse that is all Jesus goes red; one that is part Jesus has the words inside his quotation marks in red (a version with no
+   quotation marks, like the KJV, colours the verse). Connecting Scripture verses go blue, and Jesus's words in them purple. */
+let RL=null, CSV=null;
+fetch("redletter.json").then(r=>r.ok?r.json():null).then(d=>{ RL=d&&d.v; if(RL&&S.red) renderReader() }).catch(()=>{});
+if(!PUBLIC) fetch("csnt-verses.json").then(r=>r.ok?r.json():null).then(d=>{ if(d&&d.v){ CSV={}; Object.keys(d.v).forEach(b=>{ CSV[b]=new Set(d.v[b]) }); renderReader() } }).catch(()=>{});
+function colorText(){
+  const t=$("text"); if(!t) return;
+  t.classList.toggle("redon", !!S.red); t.classList.toggle("blueon", !!S.blue); t.classList.toggle("purpleon", !!S.purple);   // each colour has its own checkbox
+  t.querySelectorAll(".vn").forEach(n=>{
+    const box=n.closest(".vs, .v"); if(!box || box.dataset.tint) return; box.dataset.tint=1;
+    const [b,c,v]=String(n.dataset.v||"").split("|"), k=c+":"+v;
+    const cs = CSV && CSV[b] && CSV[b].has(k), jw = RL && RL[b] && RL[b][k];   // marked always; the colours come from the checkboxes (CSS)
+    if(cs) box.classList.add("cs");
+    if(jw===1) box.classList.add("jw");
+    else if(jw===2) quoteRed(box);
+  });
+}
+function quoteRed(box){
+  const walk=document.createTreeWalker(box, NodeFilter.SHOW_TEXT, { acceptNode:x=>x.parentNode.closest(".vn, .vtag, .sup") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+  const nodes=[]; while(walk.nextNode()) nodes.push(walk.currentNode);
+  const all=nodes.map(x=>x.nodeValue).join(""), first=all.search(/[“”]/);
+  if(first<0){ box.classList.add("jw"); return }          // no quotation marks in this version: the whole verse
+  let inside = all[first]==="”";                          // the verse starts inside a quotation carried over from the last
+  nodes.forEach(nd=>{
+    const parts=nd.nodeValue.split(/([“”])/); if(parts.length===1 && !inside) return;
+    const frag=document.createDocumentFragment();
+    parts.forEach(p=>{ if(p==="“"){ inside=true; frag.appendChild(Object.assign(document.createElement("span"),{className:"jwq",textContent:p})); return }
+      if(p==="”"){ frag.appendChild(Object.assign(document.createElement("span"),{className:"jwq",textContent:p})); inside=false; return }
+      if(!p) return; if(inside){ const sp=document.createElement("span"); sp.className="jwq"; sp.textContent=p; frag.appendChild(sp) } else frag.appendChild(document.createTextNode(p)); });
+    nd.parentNode.replaceChild(frag, nd);
+  });
+}
+const PLAN_SHUT = {};   // "plan|day" -> the plan readings closed for that day
+function planTabsShut(){ return PLAN_SHUT[S.plan+"|"+S.day] || [] }
+function closePlanTab(i){
+  const k=S.plan+"|"+S.day; PLAN_SHUT[k]=[...new Set(planTabsShut().concat(i))];
+  if(!S.adhoc && S.reading===i){ const left=READINGS.map((x,j)=>j).filter(j=>!PLAN_SHUT[k].includes(j));
+    if(left.length) S.reading=left[0]; else if(S.opened.length) S.adhoc=S.opened[S.opened.length-1]; }
+  S.vsel=null; renderReader(); renderPanel(); renderDock() }
+function closeAdhoc(n){ const o=S.opened[n]; if(!o) return; S.opened.splice(n,1);
+  if(S.adhoc===o) S.adhoc = S.opened[Math.min(n, S.opened.length-1)] || null;
+  if(!S.planOn && !S.adhoc && !S.opened.length){ S.opened.push(o); S.adhoc=o }   // plan off: the last passage stays (nothing else to show)
+  S.vsel=null; rememberOpen(); renderReader(); renderPanel(); renderDock() }
+/* where you were, so a reload comes back to it (same day only) */
+function rememberOpen(){ store.set("open",{date:new Date().toDateString(), plan:S.plan, n:(PLANS[S.plan]||{days:[]}).days.length, day:S.day, reading:S.reading, opened:S.opened.map(x=>x.ref), on:S.adhoc?S.opened.indexOf(S.adhoc):-1}) }
+var RESTORED=false;   // set once restoreOpen has put back the last reading, so a saved scroll position isn't dropped too early
+function restoreOpen(){
+  const o=store.get("open",null); RESTORED=true; if(!o || o.date!==new Date().toDateString() || o.plan!==S.plan) return;
+  if(o.day!==S.day && o.n===PLANS[S.plan].days.length && PLANS[S.plan].days.some(d=>d.day===o.day)){ S.day=o.day; buildDay(); }   // a rebuilt plan renumbers its days: start at today
+  if(o.reading<READINGS.length) S.reading=o.reading;
+  (o.opened || (o.adhoc ? [o.adhoc] : []).concat(o.parked ? [o.parked] : [])).forEach(r=>openPassage(r));
+  S.adhoc = o.on>=0 && S.opened[o.on] ? S.opened[o.on] : (o.adhoc && S.opened[0]) || null;
+}
+function panelOptions(id){
+  const r = cur();
+  const o = { ref:r.ref, on:HANDLERS, owner:S.view!=="public", logos:S.logos };   // logos: false = Hide Logos (no Logos links anywhere)   // owner:false in Read along hides vocab buttons, Logos links and James-only notes
+  if(id==="marks")   { const sp=hgSpots(); o.mark = sp.find(x=>x.id===S.mark) || null; o.list = sp.map(x=>x.id); }
+  if(id==="word")    o.word = S.word;
+  if(id==="verse")   { o.verse = S.vsel; o.scripture = scriptureFor; }
+  if(id==="vault")   o.vaultName = MY.notesVault;
+  if(id==="logos")   o.items = () => ST.c("logos").all();
+  if(id==="vocab")   Object.assign(o, { items:() => ST.c("vocab").all(), obsidian:{vault:MY.notesVault, path:MY.studyFolder+"/Vocabulary.md"} });
+  if(id==="wrap")    { const rs = S.adhoc ? [S.adhoc] : READINGS;
+                       Object.assign(o, { saveKey:wrapKey(), ask:SAMPLE, material:wrapMaterial, refs:rs.map(x=>x.ref), saved:()=>ST.c("wraps").peek(wrapKey()),
+                         title: S.adhoc ? S.adhoc.ref : `${plan().name} - Day ${S.day} - ${rs[0].ref}`, obsidian:{vault:MY.notesVault, folder:MY.studyFolder+"/Wrap-ups"} }); }
+  if(id==="xref"||id==="targum") o.version = S.ver;
+  if(id==="shelf"||id==="config") Object.assign(o, { owner:S.view!=="public", config:shelfConfig,
+                       dddVault:MY.ddd });
+  if(id==="review")  Object.assign(o, { cards:()=>ST.c("vocab").all(), state:k=>ST.c("reviews").peek(k), note:()=>{ const r=cur(); return r && NOTES[r.id] ? NOTES[r.id].text : "" },
+                       quizzes:()=>ST.c("wraps").all().filter(w=>w.parts&&w.parts.quiz).sort((a,b)=>b.at-a.at).map(w=>({title:w.title, refs:w.refs, quiz:w.parts.quiz, at:w.at})) });
+  if(id==="planner") o.skipList = SKIP;
+  if(id==="planner") o.mine = () => ST.c("plans").all().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  if(id==="ideas")   Object.assign(o, { items:() => ST.c("ideas").all(), obsidian:{vault:MY.notesVault, path:MY.studyFolder+"/Post ideas.md"} });
+  o.inVocab = k => !!ST.c("vocab").peek(k);
+  if(id==="posts")   o.alsoRefs = S.adhoc ? [] : READINGS.filter(x=>x!==r).map(x=>x.ref);   // a passage opened with Go stands alone
+  if(id==="claude")  Object.assign(o, { ask:SAMPLE, project:STUDY_PROJECT, context:contextFor, quick:QUICK, instructions:"claude-instructions.md",
+                       blurb:`Claude answers by your study rules and starts from your own material: ${r.ref} in the ${S.ver}, your notes, the Divine Council entry, your posts, your Obsidian notes and your past Claude chats on it.`,
+                       placeholder:"Why does verse 7 say they will die like men?",
+                       history:()=>ST.c("answers").all().filter(x=>x.key===r.id).sort((a,b)=>b.at-a.at) });
+  if(id==="x")       { const note=(NOTES[r.id]&&NOTES[r.id].pub&&NOTES[r.id].text)||"";
+                       Object.assign(o, { owner:S.view!=="public", key:r.id, store:xStore(), draft:`${r.ref}\n\n${note.slice(0,200)}`.trim() }); }
+  return o;
+}
+function applyMeta(m){
+  $("pkick").textContent = m.kick; $("ptitle").textContent = m.title;
+  document.body.classList.toggle("panel-wide", !!m.wide);
+  $("pbody").classList.toggle("split", !!m.split);
+  applyPanelWidth(); syncRailBtn();
+}
+let PH = null, PH_KEY = "";
+/* Back: a panel that opens another (Review to Word Study, Fact Book to Maps) is kept as it was, and the new panel
+   names it at the top ("‹ Review"); a dock button, the ×, or another passage starts fresh */
+let PBACK = [];
+function stashPanel(to){ if(!PH || !S.tool || S.tool===to || S.tool==="notes") return; const m=$("pmount");
+  PBACK.push({tool:S.tool, ph:PH, key:PH_KEY, node:m, scroll:$("pbody").scrollTop, ref:cur()&&cur().ref, word:S.word, vsel:S.vsel, mark:S.mark});
+  m.remove(); PH=null; PH_KEY=""; if(PBACK.length>6){ const x=PBACK.shift(); try{ x.ph.destroy() }catch(e){} } }
+function clearBack(){ PBACK.forEach(x=>{ try{ x.ph.destroy() }catch(e){} }); PBACK=[]; syncBack() }
+function syncBack(){ const x=PBACK[PBACK.length-1], t=x&&TOOLS.find(t=>t.id===x.tool); $("pback").hidden=!x; if(x) $("pback").textContent="\u2039 "+(t?t.label:x.tool) }
+function goBack(){ const x=PBACK.pop(); if(!x) return; if(PH) PH.destroy();
+  Object.assign(S,{tool:x.tool, word:x.word, vsel:x.vsel, mark:x.mark}); store.set("tool",S.tool);
+  $("pbody").innerHTML=""; $("pbody").append(x.node); PH=x.ph; PH_KEY=x.key;
+  renderDock(); renderReader(); PH.refresh(); $("pbody").scrollTop=x.scroll; syncBack() }
+function renderPanel(){
+  JaymsRef.setWeb(S.view==="public");
+  store.set("tool", S.tool);   // remembered for a refresh
+  const desk=$("desk");
+  document.body.classList.toggle("panel-open",!!S.tool);
+  if(!S.tool || (PBACK.length && PBACK[0].ref!==(cur()&&cur().ref))) clearBack();
+  if(!S.tool){ if(PH){PH.destroy(); PH=null; PH_KEY=""} desk.classList.add("no-panel"); document.body.classList.remove("panel-wide"); syncRailBtn(); return }
+  desk.classList.remove("no-panel");
+  const r = cur(); if(!r) return;
+  if(S.tool==="notes"){
+    if(PH){PH.destroy(); PH=null; PH_KEY=""}
+    $("pbody").innerHTML = `<div class="jst"><div class="ask u-mb10"><input class="jst-in" id="notefind" placeholder="Find a note: a passage (Romans 8, John 3:16) or a word" value="${esc(S.noteQ||"")}"></div><div id="notefindres">${noteFind(S.noteQ)}</div>${S.noteQ?'<div class="lbl u-mt14">Today</div>':""}${notesHTML()}</div>`;
+    $("notefind").oninput=e=>{ S.noteQ=e.target.value; $("notefindres").innerHTML=noteFind(S.noteQ) };
+    $("pbody").querySelector(".jst").onclick=e=>{ const b=e.target.closest("[data-open-note]"); if(b){ e.stopPropagation(); openPassage(b.dataset.openNote) } };
+    applyMeta({kick:"Today · "+READINGS.length+" readings", title:S.view==="public"?"Jayms Notes":"My notes"});
+    return;
+  }
+  /* the same panel on the same passage keeps its own state (an open word, a typed question) */
+  const key = [S.tool, r.ref, S.view, S.logos, (S.tool==="xref"||S.tool==="targum")?S.ver:"", S.tool==="word"?S.word:"", S.tool==="verse"?JSON.stringify(S.vsel):"", S.tool==="claude"?!!SAMPLE:"", S.tool==="marks"?S.mark+"|"+hgSpots().map(x=>x.id).join(","):""].join("|");
+  if(PH && PH_KEY===key){ PH.refresh(); return }
+  if(PH) PH.destroy();
+  $("pbody").innerHTML = '<div id="pmount"></div>'; $("pbody").scrollTop = 0;
+  PH = new JST.panels[S.tool]($("pmount"), panelOptions(S.tool)); PH_KEY = key; syncBack();
+}
+/* Panel width: drag the left edge. Remembered; double-click puts it back. */
+let PW = store.get("pw",null);
+function maxPW(){ const r=$("rail"), rw=(getComputedStyle(r).position!=="fixed"&&getComputedStyle(r).display!=="none")?r.getBoundingClientRect().width:0; return Math.max(340, window.innerWidth - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--dock"))||64) - rw - 340) }
+function applyPanelWidth(){ if(PW) document.body.style.setProperty("--panel", Math.min(Math.max(PW,320),maxPW())+"px"); else document.body.style.removeProperty("--panel") }
+(()=>{ const g=$("pgrip"); let x0=0,w0=0;
+  const move=e=>{ PW=Math.min(Math.max(w0+(x0-e.clientX),320),maxPW()); applyPanelWidth() };
+  const up=()=>{ document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up); document.body.classList.remove("dragging"); store.set("pw",PW) };
+  g.addEventListener("pointerdown",e=>{ e.preventDefault(); x0=e.clientX; w0=$("panel").getBoundingClientRect().width; document.body.classList.add("dragging"); document.addEventListener("pointermove",move); document.addEventListener("pointerup",up) });
+  g.addEventListener("dblclick",()=>{ PW=null; store.set("pw",null); applyPanelWidth() });
+  g.addEventListener("keydown",e=>{ if(e.key!=="ArrowLeft"&&e.key!=="ArrowRight") return; e.preventDefault(); PW=($("panel").getBoundingClientRect().width)+(e.key==="ArrowLeft"?40:-40); applyPanelWidth(); store.set("pw",PW) });
+  window.addEventListener("resize",applyPanelWidth);
+})();
+/* Plan width: same idea as the panel. Remembered; double-click puts it back. */
+let RW = store.get("rw",null);
+function maxRW(){ return Math.max(240, Math.min(560, window.innerWidth*0.4)) }
+function applyRailWidth(){ if(RW) document.documentElement.style.setProperty("--rail", Math.min(Math.max(RW,220),maxRW())+"px"); else document.documentElement.style.removeProperty("--rail") }
+(()=>{ const g=$("rgrip"); let x0=0,w0=0;
+  const move=e=>{ RW=Math.min(Math.max(w0+(e.clientX-x0),220),maxRW()); applyRailWidth() };
+  const up=()=>{ document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up); document.body.classList.remove("dragging"); store.set("rw",RW) };
+  g.addEventListener("pointerdown",e=>{ e.preventDefault(); x0=e.clientX; w0=$("rail").getBoundingClientRect().width; document.body.classList.add("dragging"); document.addEventListener("pointermove",move); document.addEventListener("pointerup",up) });
+  g.addEventListener("dblclick",()=>{ RW=null; store.set("rw",null); applyRailWidth() });
+  g.addEventListener("keydown",e=>{ if(e.key!=="ArrowLeft"&&e.key!=="ArrowRight") return; e.preventDefault(); RW=$("rail").getBoundingClientRect().width+(e.key==="ArrowRight"?30:-30); applyRailWidth(); store.set("rw",RW) });
+  window.addEventListener("resize",applyRailWidth); applyRailWidth();
+})();
+function render(){renderPlan();renderReader();renderDock();renderPanel()}
+
+/* ===== EVENTS ===== */
+/* the Bible Study Mac app (mac-app/) reads this for its "Send to Claude" button: the open passage's material, ready for a question */
+window.JaymsSend = () => { try { return contextFor() + "\n\nMy question: " } catch(e){ return "" } };
+function contextFor(){
+  const r = cur();
+  const ver = r.rows && r.rows.some(x=>x.texts[S.ver]) ? S.ver : "NET";
+  const text = (r.rows||[]).map(x=>`[${x.c}:${x.v}] `+String(x.texts[ver]||"").replace(/<[^>]+>/g," ").replace(/\[\/?w:?\w*\]/g,"").replace(/ {2,}/g," ").trim()).join("\n");
+  const dc = L("council").find(e=>e.main);
+  const posts=L("posts").map(p=>`- "${p.title}" (${p.url}), cites it ${p.cites} time${p.cites>1?"s":""}: ${p.excerpt}`).join("\n")||"(none cite it yet)";
+  const vault=L("vault").map(n=>`- ${n.t} (${n.path}): ${n.hit}`).join("\n")||"(none)";
+  const chats=L("chats").map(x=>`- ${x.t}, ${x.date}: ${x.tldr}`).join("\n")||"(none)";
+  return `=== JAMES'S MATERIAL FOR THIS QUESTION ===\n\nPassage: ${r.ref} (${VERNAMES[ver]})\n${text}\n\nPlan: ${plan().name}, day ${S.day}. Also reading: ${READINGS.filter(x=>x!==r).map(x=>x.ref).join(", ")}.\n\nDivine Council Index entry: ${dc?`${dc.title}. ${dc.summary} Problem: ${dc.prob} Resolution: ${dc.res}`:"(none for this passage)"}\n\nMy notes on this reading: ${NOTES[r.id].text||"(none yet)"}\n\nMy jayms.com posts that cite ${r.ref}:\n${posts}\n\nMy Obsidian notes that mention it:\n${vault}\n\nMy past Claude chats on it:\n${chats}\n\n=== END OF JAMES'S MATERIAL ===`;
+}
+/* one wrap-up per plan day, or per opened passage */
+function wrapKey(){ return S.adhoc ? `adhoc~${S.adhoc.id}` : `${S.plan}~${S.day}` }
+/* what the wrap-up works from: each of the day's passages, James's note on it, and every Claude answer he saved on it */
+function wrapMaterial(){
+  const rs = S.adhoc ? [S.adhoc] : READINGS;
+  const one = r => {
+    const ver = r.rows && r.rows.some(x=>x.texts[S.ver]) ? S.ver : "NET";
+    const text = (r.rows||[]).map(x=>`[${x.c}:${x.v}] `+String(x.texts[ver]||"").replace(/<[^>]+>/g," ").replace(/\[\/?w:?\w*\]/g,"").replace(/ {2,}/g," ").trim()).join("\n");
+    const note = (NOTES[r.id]&&NOTES[r.id].text) || (ST.c("notes").peek(r.id)||{}).text || "";
+    const ans = ST.c("answers").all().filter(x=>x.key===r.id).sort((a,b)=>a.at-b.at).map(x=>`Question: ${x.question}\nClaude: ${x.text}`).join("\n\n");
+    return `--- ${r.ref} (${r.role||"Opened passage"}) ---\n${r.why?`Why it's in the plan: ${r.why}\n`:""}${text?`Text (${VERNAMES[ver]}):\n${text}\n`:""}\nMy notes:\n${note.trim()||"(none)"}\n\nClaude answers I saved:\n${ans||"(none)"}`;
+  };
+  return `=== JAMES'S MATERIAL FOR THIS WRAP-UP ===\n\n${S.adhoc?"":`Plan: ${plan().name}, day ${S.day}.\n\n`}${rs.map(one).join("\n\n")}\n\n=== END OF JAMES'S MATERIAL ===`;
+}
+async function saveNote(rid){
+  const n=NOTES[rid], ref=(READINGS.concat(S.adhoc?[S.adhoc]:[]).find(x=>x.id===rid)||{}).ref||rid;
+  n.obsidian = n.obsidian || obsPath(ref);
+  await ST.c("notes").save(rid,{text:n.text, pub:n.pub, obsidian:n.obsidian, vaultAt:n.vaultAt||null});
+  n.savedAt = ST.c("notes").peek(rid).updatedAt;
+  /* straight into the vault, guarded: if the vault file changed since the app last saw it (an Obsidian edit), it is left alone
+     and this edit goes beside it as "<ref> (app copy <date>).md", so neither version is lost */
+  const w = await vaultWrite(n.obsidian, noteBody(ref, n, true), n.savedAt, false, n.vaultAt||0); n.inVault = !!(w && w.written);
+  if(w && w.written){ n.vaultAt = w.mtime; await ST.c("notes").save(rid,{text:n.text, pub:n.pub, obsidian:n.obsidian, vaultAt:n.vaultAt, updatedAt:n.savedAt}) }
+  else if(w && w.conflict){
+    const side = n.obsidian.replace(/\.md$/, ` (app copy ${new Date(n.savedAt).toISOString().slice(0,16).replace("T"," ").replace(":",".")}).md`);
+    await vaultWrite(side, noteBody(ref, n, true), n.savedAt, false);
+    $("obsmsg").textContent = "The Obsidian copy is newer, so it was left alone. This edit is saved beside it as an app copy.";
+  }
+  if(n.pub&&n.text.trim()) await ST.c("pub").save(rid,{text:n.text}); else if(ST.c("pub").peek(rid)) await ST.c("pub").remove(rid);
+}
+document.addEventListener("pointerdown",e=>{ const t=document.getElementById("text"); if(!t) return; const c=e.target.closest&&e.target.closest("#text .pcell[data-col]"); if(c) t.dataset.selcol=c.dataset.col; else if(!e.target.closest||!e.target.closest("#text")) delete t.dataset.selcol; });
+/* Help's menu: one tab per section (each <h2> in help.html), and under it a row for the section's parts (its <h3>s), which scroll to them */
+function helpTabs(b){
+  const SHORT={"How the Study Workstation works":"Start","How to use it":"Tour","Every button":"Buttons","Sources and websites":"Sources"};
+  const secs=[]; let cur=null;
+  [...b.childNodes].forEach(n=>{ if(n.nodeName==="H2"){ cur={name:n.dataset.tab||SHORT[n.textContent.trim()]||n.textContent.trim(), el:document.createElement("div")}; secs.push(cur) }
+    if(cur) cur.el.appendChild(n) });   // the file's opening comment is dropped
+  const nav=document.createElement("div"), sub=document.createElement("div"); nav.className="chips u-mb10"; sub.className="chips u-mb10";
+  b.innerHTML=""; b.append(nav, sub); secs.forEach(x=>{ x.el.hidden=true; b.appendChild(x.el) });
+  const show=i=>{ secs.forEach((x,j)=>x.el.hidden=j!==i);
+    nav.innerHTML=secs.map((x,j)=>`<button class="chip${j===i?" on":""}" data-h="${j}">${esc(x.name)}</button>`).join("");
+    const parts=[...secs[i].el.querySelectorAll("h3")].filter(h=>h.offsetParent!==null);
+    sub.hidden=parts.length<2; sub.innerHTML=parts.map((h,k)=>`<button class="chip" data-hs="${k}">${esc(h.textContent)}</button>`).join("");
+    sub.onclick=e=>{ const c=e.target.closest("[data-hs]"); if(c) parts[+c.dataset.hs].scrollIntoView({behavior:"smooth",block:"start"}) };
+    document.getElementById("helpview").scrollTop=0 };
+  nav.onclick=e=>{ const c=e.target.closest("[data-h]"); if(c) show(+c.dataset.h) };
+  show(0);
+}
+/* Help: the guide lives in help.html, loaded the first time it opens */
+(()=>{ const v=document.getElementById("helpview"), b=document.getElementById("helpbody"); let got=false;
+  const close=()=>{ v.hidden=true; document.getElementById("helpbtn").focus() };
+  document.getElementById("helpbtn").onclick=()=>{ v.hidden=false; if(!got){ got=true; fetch("help.html").then(r=>r.ok?r.text():Promise.reject()).then(t=>{ b.innerHTML=t; helpTabs(b);
+    /* which version this copy is (version.json, written by ws.sh snap): the desk, claude.ai and the site should all match */
+    fetch("version.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(v=>{ if(v) b.insertAdjacentHTML("beforeend",`<p class="ctx u-fs13">Version ${esc(v.version)} · ${esc(v.date)}</p>`) }).catch(()=>{}) }).catch(()=>{ got=false; b.textContent="The guide didn't load. Try again." }) } document.getElementById("helpclose").focus() };
+  document.getElementById("helpclose").onclick=close;
+  const av=document.getElementById("aboutview"), aclose=()=>{ av.hidden=true; document.getElementById("aboutbtn").focus() };
+  document.getElementById("aboutbtn").onclick=()=>{ av.hidden=false; document.getElementById("aboutclose").focus() };
+  document.getElementById("aboutclose").onclick=aclose;
+  av.addEventListener("click",e=>{ if(e.target===av) aclose() });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!av.hidden) aclose() });
+  v.addEventListener("click",e=>{ if(e.target===v) close() });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!v.hidden) close() });
+})();
+function openTool(id){ clearBack(); S.tool = (S.tool===id)?null:id; renderReader(); renderDock(); renderPanel()}
+document.addEventListener("click",e=>{
+  const w=e.target.closest("[data-w]"); if(w){ S.word=w.dataset.w; S.tool="word"; renderReader(); renderDock(); renderPanel(); return}
+  const v=e.target.closest("[data-v]"); if(v){e.preventDefault(); const [b,c,n]=v.dataset.v.split("|"); S.vsel={book:b,c:+c,v:+n}; S.tool="verse"; renderReader(); renderDock(); renderPanel(); return}
+  const t=e.target.closest("[data-t]"); if(t){openTool(t.dataset.t); return}
+  const cx=e.target.closest("[data-close-adhoc]"); if(cx){ e.stopPropagation(); closeAdhoc(+cx.dataset.closeAdhoc); return }
+  const cp=e.target.closest("[data-close-plan]"); if(cp){ e.stopPropagation(); closePlanTab(+cp.dataset.closePlan); return }
+  if(e.target.closest("[data-alldays]")){ S.allDays=!S.allDays; renderPlan(); return }
+  const dy=e.target.closest("[data-day]"); if(dy){ delete PLAN_SHUT[S.plan+"|"+dy.dataset.day]; S.adhoc=null; S.vsel=null; S.word=null;S.day=+dy.dataset.day; S.reading=0; buildDay(); rememberOpen(); render(); $("rail").classList.remove("open"); readerTop(); return}
+  const ot=e.target.closest("[data-open-tab]"); if(ot){ S.adhoc=S.opened[+ot.dataset.openTab]||null; S.vsel=null; S.word=null; rememberOpen(); renderReader(); renderPanel(); renderDock(); readerTop(); return }
+  const r=e.target.closest("[data-r]"); if(r){ S.adhoc=null; S.vsel=null; S.word=null;S.reading=+r.dataset.r; rememberOpen(); renderReader(); renderPanel(); readerTop(); return}
+});
+document.addEventListener("keydown",e=>{
+  if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".w, .jst-mapimg")){e.preventDefault();e.target.click()}
+  if(e.key==="Escape"&&S.tool&&$("helpview").hidden&&!document.querySelector(".jst-mapview")&&!(e.target.closest&&e.target.closest("input,textarea,select,[contenteditable]"))){openTool(S.tool)}
+});
+$("pclose").onclick=()=>openTool(S.tool);
+$("pback").onclick=goBack;
+$("addpsalm").checked=S.addPsalm;
+S.hideLists=store.get("hideLists",false); $("hidelists").checked=S.hideLists;
+$("hidelists").onchange=e=>{ S.hideLists=e.target.checked; store.set("hideLists",S.hideLists); renderPlan() };
+$("addpsalm").onchange=e=>{ S.addPsalm=e.target.checked; store.set("addPsalm",S.addPsalm); S.reading=0; buildDay(); render() };
+/* Find in the text: marks every match in the passage on screen, Enter for the next, Shift+Enter for the previous, Esc to clear.
+   Ctrl/Cmd+F goes to the box. It searches the words as shown, so it ignores verse numbers and markup. */
+let FIND_I = 0;
+function findApply(move){
+  const box=$("text"), q=$("findq").value.trim();
+  box.querySelectorAll("mark.hit").forEach(m=>{ m.replaceWith(document.createTextNode(m.textContent)); });
+  box.normalize();
+  if(q.length<2){ $("findmsg").textContent=""; return }
+  const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"gi"), hits=[];
+  const walk=document.createTreeWalker(box, NodeFilter.SHOW_TEXT, {acceptNode:n=>n.parentElement.closest(".sup,.vtag,.lbl,.empty")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  const nodes=[]; while(walk.nextNode()) nodes.push(walk.currentNode);
+  nodes.forEach(n=>{ const t=n.nodeValue; let m, last=0, frag=null; re.lastIndex=0;
+    while((m=re.exec(t))){ frag=frag||document.createDocumentFragment(); frag.append(t.slice(last,m.index)); const mk=document.createElement("mark"); mk.className="hit"; mk.textContent=m[0]; frag.append(mk); hits.push(mk); last=m.index+m[0].length }
+    if(frag){ frag.append(t.slice(last)); n.replaceWith(frag) } });
+  if(!hits.length){ $("findmsg").textContent="none"; return }
+  FIND_I = move===false ? Math.min(FIND_I, hits.length-1) : (FIND_I + move + hits.length) % hits.length;
+  hits[FIND_I].classList.add("now");
+  if(move!==false || document.activeElement===$("findq")) hits[FIND_I].scrollIntoView({block:"center",behavior:"smooth"});
+  $("findmsg").textContent=`${FIND_I+1} of ${hits.length}`;
+}
+$("findform").onsubmit=e=>{ e.preventDefault() };
+$("findq").oninput=()=>{ FIND_I=0; findApply(0) };
+$("findq").onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); findApply(e.shiftKey?-1:1) } else if(e.key==="Escape"){ $("findq").value=""; findApply(0); $("findq").blur() } };
+document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==="f"){ e.preventDefault(); $("findq").focus(); $("findq").select() } });
+/* the header can wrap onto two lines in a narrow window; everything pinned under it follows its real height */
+/* no top bar (phone): the notch and clock are the top, so the installed app keeps clear of them */
+function setTopH(){ const h=document.querySelector(".top").offsetHeight; document.documentElement.style.setProperty("--toph", h ? h+"px" : "env(safe-area-inset-top,0px)") }
+setTopH(); window.addEventListener("resize", setTopH);
+if(window.ResizeObserver) new ResizeObserver(setTopH).observe(document.querySelector(".top"));
+/* The Bible: its own button under the plan (Settings can hide it); opens or closes the book > chapter > verse picker */
+$("biblebtn").onclick=()=>{ const open=$("biblepick").hidden; if(open){ BP={}; renderBiblePick(); $("planlist").hidden=true; $("planpick").setAttribute("aria-expanded",false) }
+  $("biblepick").hidden=!open; $("biblebtn").setAttribute("aria-expanded",open) };
+$("planpick").onclick=()=>{ const open=$("planlist").hidden; $("planlist").hidden=!open; $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false); $("planpick").setAttribute("aria-expanded",open) };
+/* "The Bible" at the top of the plan list: book, then chapter, then verse (or the whole chapter); it opens there beside the
+   day's readings, like Go to a passage, and the plan stays as it is */
+const AB="Gen Exo Lev Num Deu Jos Jdg Rth 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Eze Dan Hos Joe Amo Oba Jon Mic Nah Hab Zep Hag Zec Mal Mat Mar Luk Jhn Act Rom 1Co 2Co Gal Eph Phl Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jo 2Jo 3Jo Jde Rev".split(" ");
+/* the same three-letter names in a reference: "Lam 2", "Psa 61; Psa 62" (reading tabs on a phone) */
+function abRef(r){ return JaymsRef.books.slice().sort((a,b)=>b.name.length-a.name.length).reduce((t,b)=>t.replace(new RegExp("\\b"+b.name+"s?(?= \\d)","g"),AB[b.order]),String(r)) }
+const tabRef=r=>`<span class="tabfull">${esc(r)}</span><span class="tabab">${esc(abRef(r))}</span>`;
+let BP = {};
+function renderBiblePick(){
+  const name=b=>b==="Psalm"?"Psalms":b, chip=(attr,label,on)=>`<button class="chip${on?" on":""}" ${attr}>${esc(String(label))}</button>`;
+  const books=JaymsRef.books, close=chip('data-bp="close"',"Close");
+  const bk=b=>`<button class="chip" data-bp-book="${esc(b.name)}" title="${esc(name(b.name))}">${AB[b.order]}</button>`;
+  let h="";
+  if(!BP.book){
+    h=`<div class="lbl">Old Testament</div><div class="bpgrid">${books.slice(0,39).map(bk).join("")}</div>`
+     +`<div class="lbl u-mt10">New Testament</div><div class="bpgrid">${books.slice(39).map(bk).join("")}</div>`;
+  } else if(!BP.c){
+    const n=JaymsRef.book(BP.book).chapters;
+    if(n===1){ BP.c=1; return renderBiblePick() }
+    h=`<div class="lbl">${esc(name(BP.book))} · pick a chapter</div><div class="chips u-mb10">${chip('data-bp="back"',"‹ Books")}</div><div class="bpgrid">${Array.from({length:n},(_,i)=>chip(`data-bp-c="${i+1}"`,i+1)).join("")}</div>`;
+  } else {
+    const v=JaymsRef.verses(BP.book,BP.c), one=JaymsRef.book(BP.book).chapters===1, title=one?name(BP.book):`${name(BP.book)} ${BP.c}`;
+    h=`<div class="lbl">${esc(title)} · pick a verse</div><div class="chips u-mb10">${chip('data-bp="back"',one?"‹ Books":"‹ Chapters")}${chip('data-bp-v="0"',one?"The whole book":"The whole chapter")}</div><div class="bpgrid">${Array.from({length:v},(_,i)=>chip(`data-bp-v="${i+1}"`,i+1)).join("")}</div>`;
+  }
+  $("biblepick").innerHTML = h + (S.planOn ? `<div class="chips u-mt10">${close}</div>` : "");
+}
+$("biblepick").onclick=e=>{
+  const t=e.target.closest("button"); if(!t) return; const d=t.dataset;
+  if(d.bp==="close"){ $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false); BP={}; return }
+  if(d.bp==="back"){ if(BP.c && JaymsRef.book(BP.book).chapters>1) BP.c=0; else BP={}; return renderBiblePick() }
+  if(d.bpBook){ BP={book:d.bpBook, c:0}; return renderBiblePick() }
+  if(d.bpC){ BP.c=+d.bpC; return renderBiblePick() }
+  if(d.bpV!==undefined){
+    const one=JaymsRef.book(BP.book).chapters===1, v=+d.bpV;
+    const ref = one ? (v ? `${BP.book} ${v}` : BP.book) : (v ? `${BP.book} ${BP.c}:${v}` : `${BP.book} ${BP.c}`);
+    const err=openPassage(ref); if(err){ $("biblepick").insertAdjacentHTML("beforeend",`<p class="ctx">${esc(err)}</p>`); return }
+    BP={}; if(S.planOn){ $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false) } else renderBiblePick();   // plan off: the picker stays open
+    $("rail").classList.remove("open"); readerTop();
+  }
+};
+$("planlist").onclick=e=>{ const b=e.target.closest("[data-pickplan]"); if(!b) return; $("planlist").hidden=true; $("planpick").setAttribute("aria-expanded",false);
+
+  $("plan").value=b.dataset.pickplan; $("plan").onchange({target:$("plan")}) };
+$("plan").onchange=e=>{ if(e.target.value==="__build"){ e.target.value=S.plan; S.tool="planner"; renderDock(); renderPanel(); return }
+  S.adhoc=null; choosePlan(e.target.value); rememberOpen(); render()};
+/* plans James builds live in the store beside the plan files, in the same shape */
+function mergeMyPlans(){ ST.c("plans").all().forEach(p=>{ const x=Object.assign({},p); delete x.createdAt; delete x.updatedAt; PLANS[p.id]=x }) }
+ST.c("plans").on((id,d)=>{ if(!PLANINDEX) return; if(d) mergeMyPlans(); else { delete PLANS[id]; if(S.plan===id) choosePlan(PLANINDEX.default) } render() });
+/* the reference box */
+$("gobooks").innerHTML = JaymsRef.books.map(b=>`<option value="${b.name} ">`).join("");
+$("goform").onsubmit=e=>{ e.preventDefault(); const v=$("goref").value.trim(); if(!v) return;
+  const err=openPassage(v); $("gomsg").textContent=err; if(!err){ $("goref").value=""; $("goref").blur(); } };
+$("goref").oninput=()=>{ $("gomsg").textContent="" };
+/* A notes bar docked to the bottom of the reader (My notes on the desk, James's notes in Read along): open or closed, and its height
+   dragged from its top edge, each remembered */
+function noteDock(box, sizeEl, tog, g, key, twin){   // twin: a second element that takes the same height (the formatted note)
+  const setOpen=open=>{ box.classList.toggle("closed",!open); tog.textContent=open?"Close":"Open"; tog.setAttribute("aria-expanded",open); store.set(key+"Open",open) };
+  const setH=h=>{ [sizeEl, twin].forEach(el=>{ if(!el) return; el.style.height = h ? h+"px" : ""; el.style.maxHeight = h ? "none" : "" }) };
+  const shown=()=> twin && !twin.hidden ? twin : sizeEl;
+  setOpen(store.get(key+"Open",true)); setH(store.get(key+"H",0));
+  tog.onclick=()=>setOpen(box.classList.contains("closed"));
+  let y0=0,h0=0; const move=e=>setH(Math.max(80,Math.min(window.innerHeight*0.7,h0+(y0-e.clientY))));
+  const up=()=>{ document.body.classList.remove("dragging"); document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up); store.set(key+"H",shown().offsetHeight) };
+  g.addEventListener("pointerdown",e=>{ e.preventDefault(); if(box.classList.contains("closed")) setOpen(true); y0=e.clientY; h0=shown().offsetHeight; document.body.classList.add("dragging"); document.addEventListener("pointermove",move); document.addEventListener("pointerup",up) });
+  g.addEventListener("dblclick",()=>{ setH(0); store.set(key+"H",0) });
+  g.addEventListener("keydown",e=>{ if(e.key==="ArrowUp"||e.key==="ArrowDown"){ e.preventDefault(); setH(shown().offsetHeight+(e.key==="ArrowUp"?24:-24)); store.set(key+"H",shown().offsetHeight) } });
+}
+noteDock($("mynotes"), $("note"), $("notetog"), $("ngrip"), "note", $("notepreview"));
+noteDock($("pubnote"), $("pubbody"), $("pubtog"), $("pubgrip"), "pubnote");
+$("markdone").onclick=()=>{const id=dk(cur()); if(isDone(id)) ST.c("done").remove(id); else ST.c("done").save(id,{done:true, at:Date.now()}); renderPlan(); renderReader()};
+$("nextread").onclick=()=>{if(S.reading<READINGS.length-1){S.reading++; rememberOpen(); S.vsel=null; renderReader(); renderPanel(); readerTop()}};
+/* Notes save when you press Save (or Cmd/Ctrl+S). Until then the change is held as a draft and marked "Not saved yet". */
+const DIRTY = {};
+function markDirty(){ const rid=cur().id; DIRTY[rid]=true; ST.c("drafts").save(rid,{text:NOTES[rid].text,pub:NOTES[rid].pub}); renderReader() }
+/* The note's copy in the vault: one file per passage. "Open in Obsidian" is an obsidian://new link with the note as its
+   content and overwrite on, so Obsidian itself writes (or updates) the file and opens it. No connection needed. */
+const OBS_FOLDER = MY.studyFolder;
+function obsPath(ref){ return `${OBS_FOLDER}/${ref.replace(/:/g,".").replace(/[\\/?*"<>|]/g,"-")}.md` }
+function obsURI(path){ return "obsidian://open?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(path.replace(/\.md$/,"")) }
+/* the note as a Markdown file: the same body whether the desk server writes it or Obsidian does (Open in Obsidian) */
+function noteBody(ref, n, withPlan){
+  return `---\npassage: "${ref}"\n${withPlan?`plan: "${plan().name}"\nday: ${S.day}\n`:""}public: ${!!n.pub}\nupdated: ${new Date(n.savedAt||n.updatedAt||Date.now()).toISOString()}\nsource: Study Workstation\ntags: [study-workstation]\n---\n\n# ${ref}\n\n${n.text}\n`;
+}
+/* Saved notes go straight into the vault: the desk's own server writes the file (localhost only; the site and claude.ai can't).
+   ifNewer: only when the vault has no copy or this one is newer, so an edit made in Obsidian is never overwritten by the catch-up. */
+/* The vault, behind one interface with two places it can live:
+     server: this desk's own server writes the files into the Obsidian vault (localhost only; the site and claude.ai can't);
+     folder: on the web version, a folder the visitor chose on their own computer (JaymsFolder), the same files in Notes/.
+   write({path, content, updatedAt, ifNewer, baseAt}) -> {written, conflict?, mtime, path} or null; list() -> [{path, passage, pub, mtime, text}].
+   ifNewer: only when there is no copy or this one is newer, so an edit made in Obsidian is never overwritten by the catch-up.
+   baseAt: when the app last saw the file; a file changed since then is never overwritten (the edit goes beside it instead). */
+const VAULT_SERVER = !PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+const noteName = path => String(path).replace(/^.*\//,"");
+const VAULT_BACKENDS = {
+  server: {
+    write: b => fetch("/api/vault-note",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}).then(r=>r.ok?r.json():null).catch(()=>null),
+    list:  () => fetch("/api/vault-notes").then(r=>r.ok?r.json():null).then(g=>(g&&g.notes)||[]).catch(()=>[])
+  },
+  folder: {
+    async write(b){
+      try{
+        const rel="Notes/"+noteName(b.path), cur=await JaymsFolder.stat(rel);
+        if(b.ifNewer && cur && cur.mtime>=(b.updatedAt||0)) return {written:false, path:b.path};
+        if(b.baseAt!==undefined && cur && cur.mtime>b.baseAt+2000) return {written:false, conflict:true, path:b.path, mtime:cur.mtime};
+        const w=await JaymsFolder.write(rel, b.content); return {written:true, path:b.path, mtime:w.mtime};
+      }catch(e){ return null }
+    },
+    async list(){
+      const out=[];
+      try{
+        for(const f of await JaymsFolder.list("Notes")){
+          if(!/\.md$/.test(f.name) || /^[_.]/.test(f.name) || f.name.includes("(app copy") || f.size>1e6) continue;
+          const r=await JaymsFolder.read("Notes/"+f.name), m=r&&/^---\n([\s\S]*?)\n---\n/.exec(r.text); if(!m) continue;
+          const p=/^passage:\s*"?(.*?)"?\s*$/m.exec(m[1]); if(!p) continue;
+          const ref=p[1].trim(), body=r.text.slice(m[0].length).replace(new RegExp("^\\s*#\\s+"+ref.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*\\n"),"").replace(/^\n+|\n+$/g,"");
+          out.push({path:`${OBS_FOLDER}/${f.name}`, passage:ref, pub:/^public:\s*true\s*$/m.test(m[1]), mtime:f.mtime, text:body});
+        }
+      }catch(e){}
+      return out;
+    }
+  }
+};
+const vaultBackend = () => VAULT_SERVER ? VAULT_BACKENDS.server : (JaymsFolder.ready() ? VAULT_BACKENDS.folder : null);
+function vaultWrite(path, content, updatedAt, ifNewer, baseAt){
+  const be=vaultBackend(); if(!be || !path) return Promise.resolve(null);
+  const b = {path,content,updatedAt,ifNewer:!!ifNewer}; if(baseAt!==undefined) b.baseAt = baseAt;
+  return be.write(b);
+}
+/* at start-up, first: notes written or edited in Obsidian (02-BIBLE/Study Workstation), or in the visitor's folder, come into My notes when the
+   file is newer than the app's copy, unless the passage has an unsaved edit open. vaultAt records the file time the app has seen. */
+async function vaultImport(){
+  const be=vaultBackend(); if(!be) return;
+  for(const v of await be.list()){
+    let id; try{ id = JaymsRef.key(v.passage) }catch(e){ continue }
+    if(!id || DIRTY[id] || !v.text.trim()) continue;
+    const mine = ST.c("notes").peek(id);
+    if(mine && (mine.updatedAt||0) >= v.mtime){ if(!mine.vaultAt && mine.text===v.text) await ST.c("notes").save(id, Object.assign({}, mine, {vaultAt:v.mtime})); continue }
+    await ST.c("notes").save(id, {text:v.text, pub:v.pub, obsidian:v.path, vaultAt:v.mtime, updatedAt:v.mtime});
+    if(v.pub) await ST.c("pub").save(id, {text:v.text}); else if(ST.c("pub").peek(id)) await ST.c("pub").remove(id);
+    if(NOTES[id]) initNote(id, true);
+  }
+  renderReader(); renderDock(); if(S.tool==="notes") renderPanel();
+}
+/* then: every saved note that isn't there yet (or is newer here) is written. A note the app has synced (vaultAt)
+   is only written when the file hasn't changed since, so an Obsidian edit is never overwritten. */
+function vaultCatchUp(){
+  if(!vaultBackend()) return;
+  ST.c("notes").all().filter(d=>d.text&&d.text.trim()&&d.obsidian).forEach(d=>{
+    const ref=d.obsidian.replace(/^.*\//,"").replace(/\.md$/,"").replace(/\./g,":");
+    if(d.vaultAt) vaultWrite(d.obsidian, noteBody(ref, d, false), d.updatedAt||0, true, d.vaultAt);
+    else vaultWrite(d.obsidian, noteBody(ref, d, false), d.updatedAt||0, true);
+  });
+}
+const vaultSync = () => vaultImport().catch(()=>{}).then(vaultCatchUp);
+setTimeout(vaultSync, 4000);   // the desk
+/* ===== the web version's own folder (JaymsFolder) =====
+   Once a visitor has chosen a folder: notes are Markdown files in it (above), the Done ticks and the other synced collections are
+   Data/<collection>.json (the store's folder layer), and the settings are Data/settings.json. Nothing here runs on the desk or in claude.ai. */
+const FOLDER_COLLECTIONS = ["done","vocab","reviews"];
+const PREF_SKIP = /^(tool|pw|rw|scroll|open|railHidden|atlasOn|noteOpen|pubnoteOpen|migrated\d*|draft\..*|thread\..*)$/;   // per-device, not settings
+function prefsSnapshot(){ const o={}; for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k.startsWith(PFX) && !PREF_SKIP.test(k.slice(PFX.length))) o[k.slice(PFX.length)]=localStorage.getItem(k) } return o }
+let PREF_T=null;
+function prefsMirror(){ if(!PUBLIC || !FOLDER_UI || !JaymsFolder.ready()) return; clearTimeout(PREF_T);
+  PREF_T=setTimeout(()=>{ const at=Date.now(); try{ localStorage.setItem(PFX+"prefsAt",String(at)) }catch(e){} JaymsFolder.writeJSON("Data/settings.json",{savedAt:at, prefs:prefsSnapshot()}).catch(()=>{}) }, 800) }
+{ const set0=store.set; store.set=function(k,v){ set0.call(store,k,v); prefsMirror() } }
+/* a cleared browser: the settings come back from the folder (when the folder's copy is newer than this browser's); the page reloads once to use them */
+async function prefsPull(){
+  const f=await JaymsFolder.readJSON("Data/settings.json"); if(!f||!f.prefs) return false;
+  const mine=parseInt(localStorage.getItem(PFX+"prefsAt")||"0",10); if((f.savedAt||0)<=mine) return false;
+  let changed=false; Object.keys(f.prefs).forEach(k=>{ if(PREF_SKIP.test(k)||k==="prefsAt") return; if(localStorage.getItem(PFX+k)!==f.prefs[k]){ try{ localStorage.setItem(PFX+k,f.prefs[k]); changed=true }catch(e){} } });
+  try{ localStorage.setItem(PFX+"prefsAt",String(f.savedAt)) }catch(e){}
+  return changed;
+}
+let FOLDER_ON=false;
+async function folderStart(){
+  if(!PUBLIC || !FOLDER_UI || FOLDER_ON) return; FOLDER_ON=true;
+  try{
+    if(await prefsPull() && !sessionStorage.getItem(PFX+"prefsReloaded")){ sessionStorage.setItem(PFX+"prefsReloaded","1"); location.reload(); return }
+    ST.attach(JaymsStore.adapters.folder(JaymsFolder, FOLDER_COLLECTIONS));
+    await ST.syncAll(); render();
+    await vaultSync(); prefsMirror();
+  }catch(e){}
+}
+function folderStop(){ if(!FOLDER_ON) return; FOLDER_ON=false; ST.attach(null) }
+if(PUBLIC && FOLDER_UI){
+  JaymsFolder.on("state", s=>{ if(s==="ready") folderStart(); else folderStop() });
+  JaymsFolder.load();
+  document.addEventListener("visibilitychange", ()=>{ if(!document.hidden && JaymsFolder.ready()) vaultImport().catch(()=>{}) });   // an edit made in Obsidian or on another computer
+}
+setTimeout(()=>{ if(!S.planOn && !S.adhoc) noPlanEnsure() }, 1500);   // plan off at start-up: the passage on screen gets its tab
+function obsNewURI(r, n){
+  const body = noteBody(r.ref, n, true);
+  return "obsidian://new?vault="+encodeURIComponent(MY.notesVault)+"&file="+encodeURIComponent(obsPath(r.ref).replace(/\.md$/,""))+"&content="+encodeURIComponent(body)+"&overwrite=true";
+}
+async function commitNote(){ const rid=cur().id; S.noteEdit=false; if(!DIRTY[rid]) return; await saveNote(rid); delete DIRTY[rid]; ST.c("drafts").remove(rid); renderReader(); if(S.tool==="notes") renderPanel(); folderNudge() }
+$("note").oninput=e=>{const rid=cur().id; NOTES[rid].text=e.target.value; markDirty()};
+$("notepub").onchange=e=>{const rid=cur().id; NOTES[rid].pub=e.target.checked; markDirty()};
+$("notesave").onclick=commitNote;
+$("noteview").onclick=()=>{ const toEdit=$("note").hidden; S.noteEdit=toEdit; if(!toEdit) commitNote(); renderReader(); if(toEdit) $("note").focus() };
+$("notepreview").onclick=e=>{ if(e.target.closest("a")) return; S.noteEdit=true; renderReader(); $("note").focus() };
+/* Speechify (read aloud). The desk's key file loads the reader from ~/jayms/speechify/web through serve.py (never in this repo or on the site).
+   Everyone else brings a key of their own: Settings keeps it in this browser (localStorage spf_key), and the reader sends it only to
+   api.speechify.ai from their own browser, so their quota and no cost to anyone else. Voice and Read show only once a key is in place.
+   Each version column gets Highlight (select that column's text) and Read (Speechify reads it); Voice opens the voice and speed bar. */
+let SPF = false, READ_VERS = [];
+function readBtns(c){ return `<span class="rdbtns"><button class="sz" data-hl="${c}" title="Highlight this column and copy it">Highlight</button>${SPF ? `<button class="sz spf-btn" data-rd="${c}" title="Read this column aloud in Speechify"><span class="spf-ico">▶</span> <span class="spf-lab">Read</span></button>` : ""}</span>` }
+function colText(c){
+  const r=cur(), ver=READ_VERS[c]||S.ver, by={};
+  (r.rows||[]).forEach(x=>{ const g=`${x.book} ${x.c}`; (by[g]=by[g]||[]).push(String(x.texts[ver]||"").replace(/<span class='sup'>.*?<\/span>/g," ").replace(/<[^>]+>/g," ").replace(/\[\/?w:?\w*\]/g,"").replace(/\s{2,}/g," ").trim()) });
+  const groups=Object.keys(by);
+  return `${r.ref}.\n\n`+groups.map(g=>(groups.length>1?g+".\n":"")+by[g].filter(Boolean).join(" ")).join("\n\n");
+}
+function highlightCol(c){
+  const t=$("text"), cells=[...t.querySelectorAll(`.pcell[data-col="${c}"], .pone[data-col="${c}"]`)];
+  if(!cells.length) return;
+  if(cells[0].classList.contains("pcell")) t.dataset.selcol=c;
+  const sel=getSelection(), rg=document.createRange(); rg.setStartBefore(cells[0]); rg.setEndAfter(cells[cells.length-1]);
+  sel.removeAllRanges(); sel.addRange(rg);
+}
+$("text").addEventListener("click",e=>{
+  const h=e.target.closest("[data-hl]"), rd=e.target.closest("[data-rd]");
+  if(h){ e.preventDefault(); const c=+h.dataset.hl; highlightCol(c);   // one tap: the column selected and copied, ready to paste
+    const say=t=>{ h.textContent=t; setTimeout(()=>{ h.textContent="Highlight" }, 1600) };
+    if(navigator.clipboard) navigator.clipboard.writeText(colText(c)).then(()=>say("Copied")).catch(()=>{ try{ document.execCommand("copy"); say("Copied") }catch(er){} });
+    else { try{ document.execCommand("copy"); say("Copied") }catch(er){} } }
+  if(rd && window.Speechify){ e.preventDefault(); const c=+rd.dataset.rd; rd.__spfBtn=rd;
+    Speechify.read(rd, { text: colText(c), highlight: ()=>highlightCol(c) }); }
+});
+$("voicecfg").onclick=()=>{ const h=$("spfhost"), open=h.hidden; h.hidden=!open; $("voicecfg").setAttribute("aria-expanded",String(open)); if(open && window.Speechify) spfBarIn(h) };
+const SPF_DESK = !PUBLIC && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+let SPF_FILE = false;   // the desk's own key file is in use
+function spfKey(){ try{ return localStorage.getItem("spf_key")||"" }catch(e){ return "" } }
+function spfLoad(){
+  const load=src=>new Promise((ok,no)=>{ const sc=document.createElement("script"); sc.src=src; sc.onload=ok; sc.onerror=no; document.head.appendChild(sc) });
+  (SPF_DESK ? load("/speechify/speechify-key.js").then(()=>true,()=>false) : Promise.resolve(false)).then(file=>{
+    const mine=spfKey(); if(!file && !mine) return;
+    SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
+    Object.assign(o, { bar:false, selector:"[data-spf-none]" });
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v371").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+}
+/* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
+function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);
+  const l=b.querySelector("#spf-load"); if(l&&!l.dataset.done){ l.dataset.done=1; l.click() } }
+function spfSettings(){ const has=!!spfKey();
+  $("spfsetbar").hidden=!SPF; $("spfsetnote").hidden=SPF;
+  $("spfhelp").hidden=SPF_FILE;
+  $("spfkey").hidden=$("spfsave").hidden=SPF_FILE; $("spfclear").hidden=!has||SPF_FILE; $("spfkey").value="";
+  $("spfkey").placeholder=has?"A key is saved in this browser":"Paste your Speechify key";
+  $("spfmsg").textContent=SPF_FILE?"Using the Speechify key on this computer.":(has?"Voice and Read are on.":"") }
+$("spfsave").onclick=async()=>{ const k=$("spfkey").value.trim(), m=$("spfmsg"); if(!k){ m.textContent="Paste a key first."; return }
+  m.textContent="Checking the key...";
+  try{ const r=await fetch("https://api.speechify.ai/v1/voices?model=simba-3.2&limit=1",{headers:{Authorization:"Bearer "+k}});
+    if(r.status===401||r.status===403){ m.textContent="Speechify did not accept that key."; return }
+    if(!r.ok){ m.textContent="Speechify answered with an error ("+r.status+"). Try again in a minute."; return } }
+  catch(e){ m.textContent="Could not reach Speechify. Check the connection and try again."; return }
+  let inFolder=false;
+  if(FOLDER_UI){ const a=await askKeyCopy(); if(!a){ m.textContent="Not saved."; return } inFolder=a.inFolder }   // the keep-a-copy reminder
+  try{ localStorage.setItem("spf_key",k) }catch(e){ m.textContent="This browser would not save it."; return }
+  if(inFolder){ try{ await JaymsFolder.write("Private/speechify-key.txt", k+"\n") }catch(e){} }
+  m.textContent="Saved. Voice and Read are on."; setTimeout(()=>location.reload(),600) };
+$("spfclear").onclick=()=>{ try{ localStorage.removeItem("spf_key") }catch(e){}; $("spfmsg").textContent="Removed."; setTimeout(()=>location.reload(),400) };
+spfLoad();
+/* ===== the folder's screens (the test copy only: FOLDER_UI) =====
+   Settings > Your folder; a four-step set-up; a Reconnect strip; Back up now / Restore (for browsers that cannot pick a folder);
+   and the keep-a-copy reminder when a Speechify key is saved. */
+const FW = {step:1, msg:""}, FOLDER_STEPS = 4;
+const FOLDER_WELCOME = `# Bible Study\n\nThis folder is where the Bible Study app keeps your notes, settings and progress.\n\n- **Notes** holds one file per passage. They are ordinary Markdown files: open them in any text app, or in Obsidian.\n- **Data** holds your Done ticks and settings. Leave it alone.\n\nNothing here was uploaded anywhere. If you ever clear your browser, open the app, choose this same folder again, and everything comes back.\n`;
+function folderRefresh(){
+  if(!FOLDER_UI) return;
+  const st=JaymsFolder.state(), sup=JaymsFolder.supported();
+  $("folderpick").hidden = !sup || st==="ready" || st==="prompt";
+  $("folderreconnect").hidden = st!=="prompt";
+  $("folderoff").hidden = st!=="ready" && st!=="prompt";
+  $("folderstate").textContent = !sup ? "This browser cannot save to a folder (Safari, Firefox, iPhones and iPads cannot yet). Use Back up now to keep a copy, and Restore to put it back."
+    : st==="ready" ? `Saving to the folder "${JaymsFolder.name()}".` : st==="prompt" ? `Your folder "${JaymsFolder.name()}" needs your permission again. Tap Reconnect.` : "No folder yet.";
+  $("folderbar").hidden = st!=="prompt";
+}
+function folderWizard(step){
+  FW.step=step; $("folderview").hidden=false; const b=$("folderbody");
+  const nav=(back,next,label)=>`<div class="saverow">${back?'<button class="btn" data-fw="back">Back</button>':""}<button class="btn fill" data-fw="${next}">${label}</button></div>`;
+  if(!JaymsFolder.supported()){ b.innerHTML=`<h2>Your folder</h2><p>This browser cannot save to a folder on your computer. Chrome and Edge on a computer can; Safari, Firefox, iPhones and iPads cannot yet.</p><p>You can still keep your notes, settings and progress safe. <b>Back up now</b> in Settings makes one file to keep in Files, iCloud Drive or Google Drive, and <b>Restore from a backup</b> puts it back.</p>${nav(false,"close","Close")}`; return }
+  const head=`<p class="lbl">Step ${step} of ${FOLDER_STEPS}</p>`;
+  if(step===1) b.innerHTML=head+`<h2>Keep your notes safe</h2><p>Your notes, settings and progress are kept in this browser. If the browser is cleared, they are gone.</p><p>Instead, keep them in a <b>folder on your own computer</b>. The folder is yours: nothing is uploaded, and the person who made this app cannot see it. Your notes are saved there as ordinary files that open in any text app, or in Obsidian.</p>`+nav(false,"2","Next");
+  else if(step===2) b.innerHTML=head+`<h2>Choose your folder</h2><p>Make a new, empty folder, for example <b>Documents &gt; Bible Study</b>, then choose it. Your browser will refuse a main folder such as Documents, Desktop or Downloads, so make a new folder inside one of them.</p><p>When your browser asks, allow it to <b>view and edit files</b> in that folder. If it offers <b>Allow on every visit</b>, choose that.</p><div class="saverow"><button class="btn" data-fw="back">Back</button><button class="btn fill" data-fw="pick">Choose folder</button></div><p class="ctx" id="fwmsg" aria-live="polite">${esc(FW.msg)}</p>`;
+  else if(step===3) b.innerHTML=head+`<h2>It works</h2><p>Saved a first file in <b>${esc(JaymsFolder.name())}</b>. From now on, <b>Save note</b> writes your note into that folder, in a folder called Notes, one file for each passage. Your Done ticks and settings go in there too.</p><p>You can open the folder in any text app, or open it as a vault in Obsidian.</p>`+nav(false,"4","Next");
+  else b.innerHTML=head+`<h2>Want it on another computer?</h2><p>Put your folder inside a folder that a cloud service already syncs, then choose the same folder on the other computer. Give the sync a minute before you open the app there.</p>
+    <details><summary>iCloud Drive</summary><p>Move the folder into iCloud Drive (in Finder on a Mac, or File Explorer with iCloud for Windows). On the other computer, choose it from iCloud Drive.</p></details>
+    <details><summary>Google Drive</summary><p>Install Google Drive for desktop, then put the folder inside My Drive. On the other computer, choose it from Google Drive.</p></details>
+    <details><summary>Dropbox or OneDrive</summary><p>Put the folder inside your Dropbox or OneDrive folder. On the other computer, choose it from there.</p></details>
+    <details><summary>Obsidian Sync</summary><p>Open the folder as a vault in Obsidian and turn on Obsidian Sync (a paid Obsidian service). On the other computer, open the same vault and choose its folder.</p></details>
+    <p class="ctx">The company you choose stores those files under its own privacy rules. This app never sees them.</p>
+    <p><b>If you ever clear your browser:</b> open this page, choose the same folder again, and your notes, settings and progress come back.</p><p class="ctx">A phone cannot choose a folder yet. On a phone you can read the same notes by opening the synced folder in the Obsidian app or Files.</p>`+nav(true,"close","Done");
+}
+async function folderPickStep(){
+  try{ await JaymsFolder.pick() }
+  catch(e){ FW.msg = e && e.name==="AbortError" ? "No folder was chosen." : "Your browser would not let us use that folder. Make a new, empty folder (for example Documents > Bible Study) and choose that one."; folderWizard(2); return }
+  try{ await JaymsFolder.write("Welcome.md", FOLDER_WELCOME) }catch(e){ FW.msg="Could not write to that folder. Choose another one."; folderWizard(2); return }
+  FW.msg=""; folderWizard(3);
+}
+function folderNudge(){   // once, after the first note is saved with no folder
+  if(!FOLDER_UI || !JaymsFolder.supported() || JaymsFolder.state()!=="none") return;
+  if(localStorage.getItem(PFX+"folderAsked")) return; try{ localStorage.setItem(PFX+"folderAsked","1") }catch(e){} folderWizard(1);
+}
+/* a copy of everything, as one file, for browsers that cannot choose a folder (and for anyone who wants a spare) */
+function backupData(){
+  const col={}; ["notes","done","vocab","reviews"].forEach(c=>{ const o={}; ST.c(c).all().forEach(d=>{ const x=Object.assign({},d); delete x.id; o[d.id]=x }); col[c]=o });
+  return {format:"jayms-bible-study-backup", version:1, savedAt:Date.now(), prefs:prefsSnapshot(), collections:col};
+}
+async function backupNow(){
+  const name=`Bible Study backup ${new Date().toISOString().slice(0,10)}.json`, blob=new Blob([JSON.stringify(backupData(),null,1)],{type:"application/json"}), file=new File([blob],name,{type:"application/json"});
+  if(/iPhone|iPad|Android/.test(navigator.userAgent) && navigator.canShare && navigator.canShare({files:[file]})){   // the share sheet: save it to Files, iCloud Drive or Google Drive
+    try{ await navigator.share({files:[file], title:name}); return "Backup ready. Save it to Files or your cloud drive." }catch(e){ if(e && e.name==="AbortError") return "" } }
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+  return "Backup saved to your Downloads folder. Keep it somewhere safe.";
+}
+async function restoreFrom(file){
+  let d; try{ d=JSON.parse(await file.text()) }catch(e){ return "That file could not be read." }
+  if(!d || d.format!=="jayms-bible-study-backup" || !d.collections) return "That is not a Bible Study backup file.";
+  let n=0;
+  for(const c of Object.keys(d.collections)){ if(!["notes","done","vocab","reviews"].includes(c)) continue;
+    for(const id of Object.keys(d.collections[c])){ const doc=d.collections[c][id], mine=ST.c(c).peek(id); if(!mine || (doc.updatedAt||0)>(mine.updatedAt||0)){ await ST.c(c).save(id,doc); n++ } } }
+  let p=0; Object.keys(d.prefs||{}).forEach(k=>{ if(PREF_SKIP.test(k)||k==="prefsAt") return; try{ localStorage.setItem(PFX+k,d.prefs[k]); p++ }catch(e){} });
+  setTimeout(()=>location.reload(),900);
+  return `Restored ${n} saved item${n===1?"":"s"} and ${p} setting${p===1?"":"s"}. Reloading...`;
+}
+function askKeyCopy(){   // resolves {inFolder} on Save, null on Cancel
+  return new Promise(res=>{ const v=$("keyview"); $("keyinfolder").hidden=!JaymsFolder.ready(); $("keyfolder").checked=false; v.hidden=false;
+    const done=r=>{ v.hidden=true; $("keyok").onclick=$("keycancel").onclick=$("keyclose").onclick=null; res(r) };
+    $("keyok").onclick=()=>done({inFolder:$("keyfolder").checked}); $("keycancel").onclick=$("keyclose").onclick=()=>done(null) });
+}
+async function spfFolderCheck(){ if(!FOLDER_UI) return; const has=!!spfKey(); if(has || !JaymsFolder.ready()){ $("spffolder").hidden=true; return } $("spffolder").hidden=!(await JaymsFolder.stat("Private/speechify-key.txt")) }
+if(FOLDER_UI){
+  document.querySelectorAll(".folderui").forEach(e=>e.hidden=false);
+  const t=document.createElement("div"); t.className="testtag"; t.textContent="Test copy"; t.title="This is the test copy of the Bible Study App. New features are on here first, and it keeps its own saved data."; document.body.appendChild(t);
+  JaymsFolder.on("state", ()=>{ folderRefresh(); spfFolderCheck() });
+  folderRefresh();
+  $("setbtn").addEventListener("click",()=>{ folderRefresh(); spfFolderCheck(); $("foldermsg").textContent="" });
+  $("folderpick").onclick=()=>folderWizard(1);
+  $("folderreconnect").onclick=$("folderbarbtn").onclick=()=>{ JaymsFolder.reconnect().then(()=>folderRefresh()) };
+  $("folderoff").onclick=()=>{ JaymsFolder.disconnect().then(()=>{ $("foldermsg").textContent="Disconnected. Your files stay in the folder."; folderRefresh() }) };
+  $("folderbackup").onclick=async()=>{ $("foldermsg").textContent=await backupNow() };
+  $("folderrestore").onclick=()=>$("folderfile").click();
+  $("folderfile").onchange=async e=>{ const f=e.target.files[0]; e.target.value=""; if(f) $("foldermsg").textContent=await restoreFrom(f) };
+  $("folderclose").onclick=()=>{ $("folderview").hidden=true };
+  $("folderview").addEventListener("click",e=>{ const b=e.target.closest("[data-fw]"); if(!b) return; const a=b.dataset.fw;
+    if(a==="close") $("folderview").hidden=true; else if(a==="back") folderWizard(Math.max(1,FW.step-1)); else if(a==="pick") folderPickStep(); else folderWizard(+a) });
+  $("spffolder").onclick=async()=>{ const r=await JaymsFolder.read("Private/speechify-key.txt"); const k=r&&r.text.trim(); if(!k) return; try{ localStorage.setItem("spf_key",k) }catch(e){ return } location.reload() };
+}
+$("obscopy").onclick=async()=>{ const u=obsURI(obsPath(cur().ref));
+  try{ await navigator.clipboard.writeText(u); $("obsmsg").textContent="Link copied. Paste it into your browser's address bar." }catch(e){ $("obsmsg").textContent=u } };
+document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="s"&&document.activeElement===$("note")){ e.preventDefault(); commitNote() } });
+window.addEventListener("beforeunload",e=>{ if(Object.keys(DIRTY).length){ e.preventDefault(); e.returnValue="" } });
+$("viewsw").onclick=e=>{const b=e.target.closest("[data-view]"); if(!b) return; S.view=b.dataset.view; if(S.view==="public"&&TOOLS.find(t=>t.id===S.tool&&t.owner)) S.tool="council"; render()};
+/* the two columns never hold the same version: choosing the other column's version swaps the two */
+$("ver").onchange=e=>{ const was=S.ver; S.ver=e.target.value; if(S.ver===S.ver2){ S.ver2=was; store.set("ver2",S.ver2) } store.set("ver",S.ver); renderReader() };
+$("ver2").onchange=e=>{ const was=S.ver2; S.ver2=e.target.value; if(S.ver2===S.ver){ S.ver=was; store.set("ver",S.ver) } store.set("ver2",S.ver2); renderReader() };
+$("layoutbtn").onclick=()=>{S.layout=S.layout==="verse"?"read":"verse";store.set("layout",S.layout);renderReader()};
+$("optnums").onchange=e=>{S.nums=e.target.checked;store.set("nums",S.nums);renderReader()};
+$("numbtn").onclick=()=>{S.nums=!S.nums;store.set("nums",S.nums);renderReader()};   // the same switch as Settings, kept on the reader bar
+[["optilen","en"],["optilor","or"],["optlemma","lemma"]].forEach(([id,k])=>{
+  $(id).onchange=e=>{ JST.util.ilSet(k,e.target.checked); if(S.tool==="outline" && PH) PH.refresh() };
+  $("setbtn").addEventListener("click",()=>{ $(id).checked=JST.util.ilOn(k) }) });
+$("setbtn").addEventListener("click",()=>{ if(SPF) spfBarIn($("spfsetbar")) });   // Settings shows the voice and speed bar
+$("optred").onchange=e=>{S.red=e.target.checked;store.set("red",S.red);renderReader()};
+$("optblue").onchange=e=>{S.blue=e.target.checked;store.set("blue",S.blue);renderReader()};
+$("optpurple").onchange=e=>{S.purple=e.target.checked;store.set("purple",S.purple);renderReader()};
+$("optbible").onchange=e=>{S.bible=e.target.checked;store.set("bible",S.bible);renderReader()};
+/* Reading plan off: no plan in the rail (The Bible button stays), no day's tabs, no Done/Next; the passage on screen becomes an
+   ordinary opened passage so it keeps a tab you can close */
+$("optplan").onchange=e=>{ S.planOn=e.target.checked; store.set("planOn",S.planOn); document.body.classList.toggle("noplan",!S.planOn);
+  if(S.planOn){ $("biblepick").hidden=true; $("biblebtn").setAttribute("aria-expanded",false); BP={};   // back to the button
+    const ids=READINGS.map(x=>x.id); S.opened=S.opened.filter(o=>!ids.includes(o.id)); if(S.adhoc && !S.opened.includes(S.adhoc)) S.adhoc=null; rememberOpen() }   // back on: no second tab for a day's reading
+  noPlanEnsure(); render() };
+function noPlanEnsure(){ if(S.planOn || S.adhoc) return; if(S.opened.length){ S.adhoc=S.opened[S.opened.length-1]; return } const r=cur(); if(r) openPassage(r.ref) }
+$("optlogos").onchange=e=>{S.logos=e.target.checked;store.set("logos",S.logos);renderReader();renderPanel()};
+{ const v=$("setview"), close=()=>{ v.hidden=true; $("setbtn").focus() };
+  /* Add to Home Screen: Android and desktop Chrome hand the page an install prompt to show on a tap; an iPhone has none, so the
+   menu shows the two Safari steps instead. Already running as the installed app: the row is not shown. */
+let INSTALL_PROMPT=null; const INSTALLED = matchMedia("(display-mode: standalone)").matches || navigator.standalone===true;
+window.addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); INSTALL_PROMPT=e });
+window.addEventListener("appinstalled",()=>{ INSTALL_PROMPT=null });
+$("installclose").onclick=()=>{ $("installview").hidden=true };
+/* Phone: no header. One round button floats at the top right and opens a card with everything the header holds:
+   Reading (the plan, The Bible), Apps (Bible Study, Hebrew & Greek, Atlas), More (My desk / Read along, Settings, About,
+   Donate, Help). Each row works the header's own button, so the two never drift apart. */
+{ const fab=document.createElement("button"); fab.id="fabmenu"; fab.className="fabmenu"; fab.setAttribute("aria-label","Menu"); fab.setAttribute("aria-expanded","false");
+  fab.innerHTML='<svg viewBox="0 0 24 24"><rect x="5" y="5" width="5" height="5" rx="1"/><rect x="14" y="5" width="5" height="5" rx="1"/><rect x="5" y="14" width="5" height="5" rx="1"/><rect x="14" y="14" width="5" height="5" rx="1"/></svg>';
+  const card=document.createElement("div"); card.id="fabcard"; card.className="fabcard"; card.hidden=true; card.setAttribute("role","menu");
+  document.body.append(fab, card);
+  const I={ plan:'<path d="M5 5h14M5 12h14M5 19h9"/>', bible:'<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/>', study:'<path d="M4 6h7v13H4zM13 6h7v13h-7z"/>',
+    hg:'<path d="M5 18L9 6l4 12M6.5 14h5M15 6h4M17 6v12"/>', atlas:'<path d="M4 6l5-2 6 2 5-2v14l-5 2-6-2-5 2z"/><path d="M9 4v14M15 6v14"/>', view:'<circle cx="12" cy="12" r="3"/><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z"/>',
+    set:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>', about:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+    install:'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
+    donate:'<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/>', help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 1-1 1.7M12 16.5v.5"/>' };
+  const svg=k=>`<span class="fabico"><svg viewBox="0 0 24 24">${I[k]}</svg></span>`;
+  const row=(act,k,label,on)=>`<button class="fabrow${on?" on":""}" data-fab="${act}">${svg(k)}<span>${label}</span>${on?'<span class="fabnow">now</span>':""}</button>`;
+  const draw=()=>{ const app=S.atlasOn?"atlas":S.app;
+    card.innerHTML = `<div class="fabsec"><div class="fabhead">Reading</div>${S.planOn?row("plan","plan","Reading plan"):""}${row("bible","bible","The Bible")}</div>`
+      + `<div class="fabsec"><div class="fabhead">Text size</div><div class="fabsize"><button class="sz" data-fab="smaller" aria-label="Smaller text">A\u2212</button><span>${S.size}px</span><button class="sz" data-fab="larger" aria-label="Larger text">A+</button></div></div>`
+      + `<div class="fabsec"><div class="fabhead">Apps</div>${row("app:study","study","Bible Study",app==="study")}${row("app:hg","hg","Hebrew & Greek",app==="hg")}${row("app:atlas","atlas","Atlas",app==="atlas")}</div>`
+      + `<div class="fabsec"><div class="fabhead">More</div>${OWNER&&!PUBLIC?row("view","view",S.view==="public"?"My desk":"Read along"):""}${INSTALLED ? "" : row("install","install","Add to Home Screen")}${row("set","set","Settings")}${row("about","about","About")}${row("donate","donate","Donate")}${row("help","help","Help")}</div>` };
+  const open=on=>{ if(on) draw(); card.hidden=!on; fab.setAttribute("aria-expanded",on); fab.classList.toggle("on",on) };
+  fab.onclick=e=>{ e.stopPropagation(); open(card.hidden) };
+  document.addEventListener("click",e=>{ if(!card.hidden && !card.contains(e.target) && e.target!==fab) open(false) });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !card.hidden) open(false) });
+  card.onclick=e=>{ const b=e.target.closest("[data-fab]"); if(!b) return; const a=b.dataset.fab;
+    if(a==="smaller"||a==="larger"){ e.stopPropagation(); $(a).onclick(); draw(); return }   // the handler itself, not a click (a click would close the menu)   // text size: the menu stays open to tap again
+    open(false);
+    if(a==="plan"){ $("rail").classList.add("open"); syncRailBtn() }
+    else if(a==="bible"){ $("rail").classList.add("open"); syncRailBtn(); if($("biblepick").hidden) $("biblebtn").click(); $("biblepick").scrollIntoView({block:"nearest"}) }
+    else if(a.startsWith("app:")) document.querySelector(`#appsw [data-app="${a.slice(4)}"]`).click();
+    else if(a==="view") document.querySelector(`#viewsw [data-view="${S.view==="public"?"me":"public"}"]`).click();
+    else if(a==="set") $("setbtn").click();
+    else if(a==="about") $("aboutbtn").click();
+    else if(a==="help") $("helpbtn").click();
+    else if(a==="install"){ if(INSTALL_PROMPT){ INSTALL_PROMPT.prompt(); INSTALL_PROMPT.userChoice.finally(()=>{ INSTALL_PROMPT=null }) } else { $("installview").hidden=false; $("installclose").focus() } }
+    else if(a==="donate") window.open("https://buymeacoffee.com/JAYMS","_blank","noopener");
+  };
+}
+$("setbtn").onclick=()=>{ v.hidden=false; $("setclose").focus() }; $("setclose").onclick=close;
+  v.addEventListener("click",e=>{ if(e.target===v) close() }); }
+$("parbtn").onclick=()=>{S.par=S.par?0:1;store.set("par",S.par);renderReader()};
+$("smaller").onclick=()=>{S.size=Math.max(16,S.size-1);store.set("size",S.size);renderReader()};
+/* « » the chapter before or after the one on screen (across books too); it opens like a passage from the Go box */
+function stepChapter(d){
+  const segs=JaymsRef.parse(cur().ref); if(!segs.length) return null;
+  const s=d<0?segs[0]:segs[segs.length-1], books=JaymsRef.books, b=JaymsRef.book(s.book);
+  let c=(d<0?s.c1:s.c2)+d, bk=b;
+  if(c<1){ bk=books[b.order-1]; if(!bk) return null; c=bk.chapters }
+  else if(c>b.chapters){ bk=books[b.order+1]; if(!bk) return null; c=1 }
+  return bk.chapters===1 ? bk.name : `${bk.name} ${c}`;
+}
+/* only part of a chapter on screen (Psalm 61:1-4): one FC button opens the whole chapter; with whole chapters on screen, « and » step */
+function fullChapterRef(){ const r=cur(); if(!r) return null; const segs=JaymsRef.parse(r.ref); if(!segs.length) return null;
+  const part=segs.some(g=>{ const last=JaymsRef.verses(g.book,g.c2); return g.v1>1 || (g.v2!==999 && g.v2<last) }); if(!part) return null;
+  const b=segs[0].book, c1=Math.min(...segs.filter(g=>g.book===b).map(g=>g.c1)), c2=Math.max(...segs.filter(g=>g.book===b).map(g=>g.c2)), bk=JaymsRef.book(b);
+  return bk.chapters===1 ? bk.name : `${bk.name} ${c1}${c2>c1?"-"+c2:""}` }
+function syncChapterNav(){ const fc=fullChapterRef(); $("fullch").hidden=!fc; $("fullch").title=fc?"Full chapter: "+fc:"";
+  [["prevch",-1],["nextch",1]].forEach(([id,d])=>{ $(id).hidden=!!fc; const t=cur()&&stepChapter(d); $(id).disabled=!t; $(id).title=t?(d<0?"Previous chapter: ":"Next chapter: ")+t:"" }) }
+$("fullch").onclick=()=>{ const t=fullChapterRef(); if(t) openPassage(t, true) };
+$("prevch").onclick=()=>{ const t=stepChapter(-1); if(t) openPassage(t, true) };
+$("nextch").onclick=()=>{ const t=stepChapter(1); if(t) openPassage(t, true) };
+$("larger").onclick=()=>{S.size=Math.min(26,S.size+1);store.set("size",S.size);renderReader()};
+function railShown(){ const r=$("rail"); return getComputedStyle(r).display!=="none" && (getComputedStyle(r).position!=="fixed" || r.classList.contains("open")) }
+function syncRailBtn(){ const on=railShown(); $("railbtn").classList.toggle("on",on); $("railbtn").setAttribute("aria-expanded",on) }
+$("railbtn").onclick=()=>{
+  const r=$("rail");
+  if(r.classList.contains("open")){ r.classList.remove("open") }
+  else if(getComputedStyle(r).position==="fixed" && getComputedStyle(r).display!=="none"){ r.classList.add("open") }
+  else { const hide=!document.body.classList.contains("rail-hidden"); document.body.classList.toggle("rail-hidden",hide); store.set("railHidden",hide);
+         if(!hide && getComputedStyle(r).position==="fixed") r.classList.add("open") }
+  syncRailBtn(); renderReader();   // the plan's tabs come and go with the plan
+};
+document.body.classList.toggle("rail-hidden",!!store.get("railHidden",false));
+/* the plan as a slide-in (phone, narrow window): Close at its top, or a tap anywhere outside it */
+/* isConnected + composedPath: a tap on a button the picker has since redrawn (book, chapter, verse) is still a tap inside */
+$("railclose").onclick=()=>{ $("rail").classList.remove("open"); syncRailBtn() };
+document.addEventListener("click",e=>{ const r=$("rail");
+  if(r.classList.contains("open") && e.target.isConnected && !e.composedPath().includes(r) && !e.target.closest("#railbtn,.fabmenu,.fabcard")){ r.classList.remove("open"); syncRailBtn() } });
+window.addEventListener("resize",syncRailBtn);
+/* today's date in the top bar, checked every minute so it turns over at midnight */
+function showToday(){ const d=new Date(), p=n=>String(n).padStart(2,"0"); $("today").textContent = `${p(d.getMonth()+1)}/${p(d.getDate())}/${p(d.getFullYear()%100)}` }   // 10/07/26
+showToday(); setInterval(showToday, 60000);
+/* ===== HEBREW & GREEK =====
+   "Hebrew and Greek Without Learning Either" read a chapter at a time. The tracks are ordinary plans (plans/hg-*.json, "app":"hg"),
+   so the rail, reader, toolbar, notes and dock are Bible Study's own; this lays the marks on the text (hebrew-greek.json, by
+   scripts/build-hebrew-greek.py), and the Marks panel (jayms-study.js) explains one. Nothing here runs in Bible Study. */
+let HGD = null;
+const MK = JST.marks;
+function hgDefault(){ if(S.app!=="hg") return PLANINDEX.default; const p=PLANINDEX.plans.find(x=>x.app==="hg"); return p ? p.id : PLANINDEX.default }
+function hgLoad(){ if(HGD) return; JST.data.hg().then(d=>{ HGD=d||{spots:{}}; if(S.app==="hg"){ renderReader(); renderDock(); renderPanel() } }) }
+/* the marks in the passage on screen that the category boxes let through, in verse order */
+function hgSpots(){
+  const r=cur(); if(!HGD || !r || S.app!=="hg") return [];
+  const out=[]; JaymsRef.parse(r.ref).forEach(g=>{ for(let c=g.c1;c<=g.c2;c++) (HGD.spots[`${g.book}|${c}`]||[]).forEach(x=>{ if(S.hgShow[x.category]!==false && JaymsRef.contains([g],g.book,c,x.v)) out.push(x) }) });
+  return out.sort((a,b)=>a.c-b.c||a.v-b.v);
+}
+/* underline each mark's own English word and put its tag right after it; a mark with no single word tags its verse */
+function hgApply(){
+  const list=hgSpots(); if(!list.length) return;
+  const by={}; list.forEach(x=>(x.vs||[x.v]).forEach(v=>(by[`${x.c}|${v}`]=by[`${x.c}|${v}`]||[]).push(x)));
+  $("text").querySelectorAll("a.vn[data-v]").forEach(a=>{
+    const [, c, v] = a.dataset.v.split("|"), here = by[`${c}|${v}`]; if(!here) return;
+    const box = a.closest(".vs, p.v"); if(!box) return;
+    if(box.matches("p.v")) box.classList.add("mkhas", "mk-"+here[0].category);
+    /* the verse's words, across its text nodes (not the number, version tag or notes) */
+    const walk=document.createTreeWalker(box, NodeFilter.SHOW_TEXT, {acceptNode:n=>n.parentElement.closest(".vn,.vtag,.sup,.nov,.lbl")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+    const nodes=[]; while(walk.nextNode()) nodes.push(walk.currentNode);
+    const words=[]; nodes.forEach(n=>{ const re=/[A-Za-z\u00C0-\u017F']+/g; let m; while((m=re.exec(n.nodeValue))) words.push({n, i:m.index, t:m[0]}) });
+    const toks=[]; words.forEach(w=>{ toks.push(" "); toks.push(w.t) }); toks.push(" ");   // the shape JST.marks.find reads: words at odd indexes
+    const owner={}, last={}, loose=[];
+    here.forEach(x=>{ const at=MK.find(toks, x, +v).filter(i=>!(i in owner)); if(!at.length){ if(+v===x.v) loose.push(x); return }
+      at.forEach(i=>owner[i]=x); last[x.id]=at[at.length-1] });
+    const tagFor = x => { const b=document.createElement("button"); b.className=`mtag mk-${x.category}${S.mark===x.id?" cur":""}`; b.dataset.mark=x.id; b.title=x.summary; b.textContent=MK.tag(x); return b };
+    /* wrap from the end, so earlier offsets in the same text node stay true */
+    Object.keys(owner).map(Number).sort((a,b)=>b-a).forEach(i=>{
+      const w=words[(i-1)/2], x=owner[i], rg=document.createRange(); rg.setStart(w.n,w.i); rg.setEnd(w.n,w.i+w.t.length);
+      const sp=document.createElement("span"); sp.className=`mk mk-${x.category}${S.mark===x.id?" cur":""}`; sp.dataset.mark=x.id; sp.tabIndex=0; sp.setAttribute("role","button");
+      rg.surroundContents(sp); if(last[x.id]===i) sp.after(tagFor(x));
+    });
+    loose.forEach(x=>box.append(tagFor(x)));
+  });
+}
+function hgSwitch(app){
+  if(app===S.app) return;
+  S.app=app; store.set("app",app); S.mark=null; S.adhoc=null;
+  if(S.tool==="marks" || app==="hg") S.tool=null;   // the panel stays shut until a mark is tapped
+  const want = store.get(app==="hg"?"plan:hg":"plan",null);
+  choosePlan(PLANS[want] && (PLANS[want].app||"study")===app ? want : hgDefault());
+  if(app==="hg") hgLoad();
+  rememberOpen(); render();
+}
+/* ===== ATLAS =====
+   The Maps panel on a page of its own (no reader): the map full size, its column on the right with a search for places, journeys,
+   kingdoms and topics. Same component as the side panel (jayms-study.js, option atlas:true). Opening a verse from it goes back
+   to Bible Study at that passage. */
+S.atlasOn = store.get("atlasOn", false);
+let AP = null;
+function atlasOn(on){
+  S.atlasOn = on; store.set("atlasOn", on); document.body.classList.toggle("app-atlas", on);
+  let sec = $("atlasview"); if(!sec){ sec=document.createElement("section"); sec.id="atlasview"; sec.className="atlasview"; $("desk").after(sec) }
+  if(AP){ AP.destroy(); AP=null }
+  if(on){ const o = panelOptions("maps");
+    o.atlas = true; o.focusSearch = true;
+    o.on = Object.assign({}, HANDLERS, { meta: ()=>{}, passage: d => { atlasOn(false); HANDLERS.passage(d) } });
+    AP = new JST.panels.maps(sec, o) }
+  document.querySelectorAll("#appsw button").forEach(b=>{ const x = on ? b.dataset.app==="atlas" : b.dataset.app===S.app; b.classList.toggle("on",x); b.setAttribute("aria-pressed",x) });
+}
+document.addEventListener("click",e=>{
+  const ap=e.target.closest("#appsw [data-app]"); if(ap){ if(ap.dataset.app==="atlas"){ if(!S.atlasOn) atlasOn(true); return } if(S.atlasOn) atlasOn(false); hgSwitch(ap.dataset.app); return }
+  const mk=e.target.closest("#text [data-mark]"); if(mk){ e.preventDefault(); HANDLERS.mark(mk.dataset.mark) }
+});
+document.addEventListener("change",e=>{
+  if(e.target.id==="hgorig"){ S.hgOrig=e.target.checked; store.set("hgOrig",S.hgOrig); renderPlan(); return }
+  const c=e.target.closest("[data-hgcat]"); if(c){ S.hgShow=Object.assign({},S.hgShow,{[c.dataset.hgcat]:c.checked}); store.set("hgShow",S.hgShow);
+    if(S.mark && !hgSpots().some(x=>x.id===S.mark)) S.mark=null; renderReader(); renderDock(); renderPanel() }
+});
+/* a mark's word and its tag light up together */
+const hgLit=(id,on)=>$("text").querySelectorAll(`[data-mark="${id}"]`).forEach(x=>x.classList.toggle("lit",on));
+$("text").addEventListener("mouseover",e=>{ const x=e.target.closest("[data-mark]"); if(x) hgLit(x.dataset.mark,true) });
+$("text").addEventListener("mouseout",e=>{ const x=e.target.closest("[data-mark]"); if(x) hgLit(x.dataset.mark,false) });
+document.addEventListener("keydown",e=>{
+  if(S.app!=="hg") return;
+  if((e.key==="Enter"||e.key===" ") && e.target.matches && e.target.matches("#text .mk")){ e.preventDefault(); HANDLERS.mark(e.target.dataset.mark); return }
+  if(S.tool==="marks" && S.mark && (e.key==="ArrowRight"||e.key==="ArrowLeft") && !(e.target.closest && e.target.closest("input,textarea,select"))){
+    const ids=hgSpots().map(x=>x.id), n=ids[ids.indexOf(S.mark)+(e.key==="ArrowRight"?1:-1)]; if(n){ e.preventDefault(); HANDLERS.mark(n) } }
+});
+$("hgorig").checked=S.hgOrig; document.querySelectorAll("[data-hgcat]").forEach(c=>c.checked=S.hgShow[c.dataset.hgcat]!==false);
+
+/* Load the plan data, then draw. */
+(async()=>{
+  try{
+    const get=u=>fetch(u).then(x=>{if(!x.ok) throw new Error(u); return x.json()});
+    PLANINDEX = await get("plans/index.json");
+    const plans = await Promise.all(PLANINDEX.plans.map(x=>get(x.file)));
+    plans.forEach(p=>PLANS[p.id]=p); mergeMyPlans(); plans.forEach(seedDone);
+    if(S.app==="hg") S.plan = store.get("plan:hg",null);
+    choosePlan(PLANS[S.plan] && (PLANS[S.plan].app||"study")===S.app ? S.plan : hgDefault());
+    if(S.app==="hg") hgLoad();
+    restoreOpen();
+    render();
+    if(S.atlasOn) atlasOn(true);
+  }catch(e){
+    $("rtitle").textContent="Reading plans didn't load";
+    $("rwhy").textContent="The plan files (plans/index.json) couldn't be read. Reload the page to try again.";
+  }
+})();
+
+/* Light up the live parts when the page is open on claude.ai: who is viewing, saved notes, asking Claude. */
+(async()=>{
+  if(!window.claude||!claude.use) return;
+  const user = await claude.use("user");
+  if(user){
+    OWNER = await user.isOwner();
+    if(!OWNER){S.view="public"; if(TOOLS.find(t=>t.id===S.tool&&t.owner)) S.tool="council"}
+    try{UID = await user.id()}catch(e){}
+  }
+  DB = await claude.use("db");
+  if(DB){
+    LIVE = true;
+    await migrateDB();
+    ST.attach(JaymsStore.adapters.artifactDb(DB, UID, ["pub","threads"]), {canWritePublic: OWNER});
+    /* notes saved before v025 sit in data/users/<uid>/<passage>: bring them into the notes collection, then retire them */
+    if(OWNER&&UID){
+      const got = await DB.collection("data/users/"+UID).get().catch(()=>null);
+      for(const d of (got?got.docs:[])){
+        if(d.id.includes("~")) continue; const v=d.data()||{};
+        const mine=ST.c("notes").peek(d.id);
+        if(!mine || (v.updatedAt||0) > (mine.updatedAt||0)) await ST.c("notes").save(d.id,{text:String(v.text||""), pub:!!v.pub, obsidian:v.obsidian||null, updatedAt:v.updatedAt||Date.now()});
+        try{ await DB.collection("data/users/"+UID).doc(d.id).delete() }catch(e){}
+      }
+    }
+    await ST.syncAll();
+    ["notes","pub","threads","done"].forEach(c=>ST.c(c).on(id=>{
+      if(c==="notes" && !DIRTY[id]) initNote(id, true);
+      renderReader(); renderDock(); renderPlan(); if(S.tool==="notes"||S.tool==="x") renderPanel();
+    }));
+    Object.keys(NOTES).forEach(id=>{ if(!DIRTY[id]) initNote(id, true) });
+  }
+  SAMPLE = OWNER ? await claude.use("sample") : null;
+  if(PLANINDEX) render();
+})();
+</script>
+</body></html>
