@@ -13,6 +13,11 @@
    "name": "The Gospel of Luke"
   },
   {
+   "id": "romans-wright",
+   "file": "plans/romans-wright.json",
+   "name": "Romans with N. T. Wright"
+  },
+  {
    "id": "psalms-150",
    "file": "plans/psalms-150.json",
    "name": "A Psalm a Day"

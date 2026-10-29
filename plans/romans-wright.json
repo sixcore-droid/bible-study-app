@@ -1,0 +1,788 @@
+{
+ "id": "romans-wright",
+ "name": "Romans with N. T. Wright",
+ "description": "One short section of Romans a day, in the 65 sections N. T. Wright uses in Romans for Everyone (Part 1, chapters 1 to 8, then Part 2, chapters 9 to 16). Read the passage, then Wright's section in the book (the Shelf lists it beside each passage).",
+ "start": "2026-10-29",
+ "days": [
+  {
+   "day": 1,
+   "title": "Romans 1:1-7",
+   "note": "Romans for Everyone, Part 1, section 1 of 38",
+   "readings": [
+    {
+     "ref": "Romans 1:1-7",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Romans 1:8-13",
+   "note": "Romans for Everyone, Part 1, section 2 of 38",
+   "readings": [
+    {
+     "ref": "Romans 1:8-13",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "Romans 1:14-17",
+   "note": "Romans for Everyone, Part 1, section 3 of 38",
+   "readings": [
+    {
+     "ref": "Romans 1:14-17",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "Romans 1:18-23",
+   "note": "Romans for Everyone, Part 1, section 4 of 38",
+   "readings": [
+    {
+     "ref": "Romans 1:18-23",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Romans 1:24-27",
+   "note": "Romans for Everyone, Part 1, section 5 of 38",
+   "readings": [
+    {
+     "ref": "Romans 1:24-27",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Romans 1:28-32",
+   "note": "Romans for Everyone, Part 1, section 6 of 38",
+   "readings": [
+    {
+     "ref": "Romans 1:28-32",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Romans 2:1-11",
+   "note": "Romans for Everyone, Part 1, section 7 of 38",
+   "readings": [
+    {
+     "ref": "Romans 2:1-11",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Romans 2:12-16",
+   "note": "Romans for Everyone, Part 1, section 8 of 38",
+   "readings": [
+    {
+     "ref": "Romans 2:12-16",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Romans 2:17-24",
+   "note": "Romans for Everyone, Part 1, section 9 of 38",
+   "readings": [
+    {
+     "ref": "Romans 2:17-24",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Romans 2:25-29",
+   "note": "Romans for Everyone, Part 1, section 10 of 38",
+   "readings": [
+    {
+     "ref": "Romans 2:25-29",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "Romans 3:1-8",
+   "note": "Romans for Everyone, Part 1, section 11 of 38",
+   "readings": [
+    {
+     "ref": "Romans 3:1-8",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Romans 3:9-20",
+   "note": "Romans for Everyone, Part 1, section 12 of 38",
+   "readings": [
+    {
+     "ref": "Romans 3:9-20",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Romans 3:21-24",
+   "note": "Romans for Everyone, Part 1, section 13 of 38",
+   "readings": [
+    {
+     "ref": "Romans 3:21-24",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Romans 3:25-26",
+   "note": "Romans for Everyone, Part 1, section 14 of 38",
+   "readings": [
+    {
+     "ref": "Romans 3:25-26",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "Romans 3:27-31",
+   "note": "Romans for Everyone, Part 1, section 15 of 38",
+   "readings": [
+    {
+     "ref": "Romans 3:27-31",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "Romans 4:1-8",
+   "note": "Romans for Everyone, Part 1, section 16 of 38",
+   "readings": [
+    {
+     "ref": "Romans 4:1-8",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "Romans 4:9-12",
+   "note": "Romans for Everyone, Part 1, section 17 of 38",
+   "readings": [
+    {
+     "ref": "Romans 4:9-12",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Romans 4:13-17",
+   "note": "Romans for Everyone, Part 1, section 18 of 38",
+   "readings": [
+    {
+     "ref": "Romans 4:13-17",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Romans 4:18-25",
+   "note": "Romans for Everyone, Part 1, section 19 of 38",
+   "readings": [
+    {
+     "ref": "Romans 4:18-25",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Romans 5:1-5",
+   "note": "Romans for Everyone, Part 1, section 20 of 38",
+   "readings": [
+    {
+     "ref": "Romans 5:1-5",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "Romans 5:6-11",
+   "note": "Romans for Everyone, Part 1, section 21 of 38",
+   "readings": [
+    {
+     "ref": "Romans 5:6-11",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "Romans 5:12-17",
+   "note": "Romans for Everyone, Part 1, section 22 of 38",
+   "readings": [
+    {
+     "ref": "Romans 5:12-17",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Romans 5:18-21",
+   "note": "Romans for Everyone, Part 1, section 23 of 38",
+   "readings": [
+    {
+     "ref": "Romans 5:18-21",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Romans 6:1-5",
+   "note": "Romans for Everyone, Part 1, section 24 of 38",
+   "readings": [
+    {
+     "ref": "Romans 6:1-5",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "Romans 6:6-11",
+   "note": "Romans for Everyone, Part 1, section 25 of 38",
+   "readings": [
+    {
+     "ref": "Romans 6:6-11",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "title": "Romans 6:12-14",
+   "note": "Romans for Everyone, Part 1, section 26 of 38",
+   "readings": [
+    {
+     "ref": "Romans 6:12-14",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "title": "Romans 6:15-19",
+   "note": "Romans for Everyone, Part 1, section 27 of 38",
+   "readings": [
+    {
+     "ref": "Romans 6:15-19",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "title": "Romans 6:20-23",
+   "note": "Romans for Everyone, Part 1, section 28 of 38",
+   "readings": [
+    {
+     "ref": "Romans 6:20-23",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "title": "Romans 7:1-6",
+   "note": "Romans for Everyone, Part 1, section 29 of 38",
+   "readings": [
+    {
+     "ref": "Romans 7:1-6",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "title": "Romans 7:7-12",
+   "note": "Romans for Everyone, Part 1, section 30 of 38",
+   "readings": [
+    {
+     "ref": "Romans 7:7-12",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "title": "Romans 7:13-20",
+   "note": "Romans for Everyone, Part 1, section 31 of 38",
+   "readings": [
+    {
+     "ref": "Romans 7:13-20",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "title": "Romans 7:21-25",
+   "note": "Romans for Everyone, Part 1, section 32 of 38",
+   "readings": [
+    {
+     "ref": "Romans 7:21-25",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "title": "Romans 8:1-4",
+   "note": "Romans for Everyone, Part 1, section 33 of 38",
+   "readings": [
+    {
+     "ref": "Romans 8:1-4",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "title": "Romans 8:5-11",
+   "note": "Romans for Everyone, Part 1, section 34 of 38",
+   "readings": [
+    {
+     "ref": "Romans 8:5-11",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "title": "Romans 8:12-17",
+   "note": "Romans for Everyone, Part 1, section 35 of 38",
+   "readings": [
+    {
+     "ref": "Romans 8:12-17",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "title": "Romans 8:18-25",
+   "note": "Romans for Everyone, Part 1, section 36 of 38",
+   "readings": [
+    {
+     "ref": "Romans 8:18-25",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "title": "Romans 8:26-30",
+   "note": "Romans for Everyone, Part 1, section 37 of 38",
+   "readings": [
+    {
+     "ref": "Romans 8:26-30",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "title": "Romans 8:31-39",
+   "note": "Romans for Everyone, Part 1, section 38 of 38",
+   "readings": [
+    {
+     "ref": "Romans 8:31-39",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "title": "Romans 9:1-5",
+   "note": "Romans for Everyone, Part 2, section 1 of 27",
+   "readings": [
+    {
+     "ref": "Romans 9:1-5",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "title": "Romans 9:6-13",
+   "note": "Romans for Everyone, Part 2, section 2 of 27",
+   "readings": [
+    {
+     "ref": "Romans 9:6-13",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "title": "Romans 9:14-24",
+   "note": "Romans for Everyone, Part 2, section 3 of 27",
+   "readings": [
+    {
+     "ref": "Romans 9:14-24",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "title": "Romans 9:25-29",
+   "note": "Romans for Everyone, Part 2, section 4 of 27",
+   "readings": [
+    {
+     "ref": "Romans 9:25-29",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "title": "Romans 9:30-10:4",
+   "note": "Romans for Everyone, Part 2, section 5 of 27",
+   "readings": [
+    {
+     "ref": "Romans 9:30-10:4",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "title": "Romans 10:5-13",
+   "note": "Romans for Everyone, Part 2, section 6 of 27",
+   "readings": [
+    {
+     "ref": "Romans 10:5-13",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "title": "Romans 10:14-21",
+   "note": "Romans for Everyone, Part 2, section 7 of 27",
+   "readings": [
+    {
+     "ref": "Romans 10:14-21",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "title": "Romans 11:1-6",
+   "note": "Romans for Everyone, Part 2, section 8 of 27",
+   "readings": [
+    {
+     "ref": "Romans 11:1-6",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "title": "Romans 11:7-15",
+   "note": "Romans for Everyone, Part 2, section 9 of 27",
+   "readings": [
+    {
+     "ref": "Romans 11:7-15",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "title": "Romans 11:16-24",
+   "note": "Romans for Everyone, Part 2, section 10 of 27",
+   "readings": [
+    {
+     "ref": "Romans 11:16-24",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "title": "Romans 11:25-32",
+   "note": "Romans for Everyone, Part 2, section 11 of 27",
+   "readings": [
+    {
+     "ref": "Romans 11:25-32",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "title": "Romans 11:33-36",
+   "note": "Romans for Everyone, Part 2, section 12 of 27",
+   "readings": [
+    {
+     "ref": "Romans 11:33-36",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "title": "Romans 12:1-5",
+   "note": "Romans for Everyone, Part 2, section 13 of 27",
+   "readings": [
+    {
+     "ref": "Romans 12:1-5",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "title": "Romans 12:6-13",
+   "note": "Romans for Everyone, Part 2, section 14 of 27",
+   "readings": [
+    {
+     "ref": "Romans 12:6-13",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "title": "Romans 12:14-21",
+   "note": "Romans for Everyone, Part 2, section 15 of 27",
+   "readings": [
+    {
+     "ref": "Romans 12:14-21",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "title": "Romans 13:1-7",
+   "note": "Romans for Everyone, Part 2, section 16 of 27",
+   "readings": [
+    {
+     "ref": "Romans 13:1-7",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "title": "Romans 13:8-14",
+   "note": "Romans for Everyone, Part 2, section 17 of 27",
+   "readings": [
+    {
+     "ref": "Romans 13:8-14",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "title": "Romans 14:1-6",
+   "note": "Romans for Everyone, Part 2, section 18 of 27",
+   "readings": [
+    {
+     "ref": "Romans 14:1-6",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "title": "Romans 14:7-12",
+   "note": "Romans for Everyone, Part 2, section 19 of 27",
+   "readings": [
+    {
+     "ref": "Romans 14:7-12",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "title": "Romans 14:13-23",
+   "note": "Romans for Everyone, Part 2, section 20 of 27",
+   "readings": [
+    {
+     "ref": "Romans 14:13-23",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "title": "Romans 15:1-6",
+   "note": "Romans for Everyone, Part 2, section 21 of 27",
+   "readings": [
+    {
+     "ref": "Romans 15:1-6",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "title": "Romans 15:7-13",
+   "note": "Romans for Everyone, Part 2, section 22 of 27",
+   "readings": [
+    {
+     "ref": "Romans 15:7-13",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 61,
+   "title": "Romans 15:14-24",
+   "note": "Romans for Everyone, Part 2, section 23 of 27",
+   "readings": [
+    {
+     "ref": "Romans 15:14-24",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "title": "Romans 15:25-33",
+   "note": "Romans for Everyone, Part 2, section 24 of 27",
+   "readings": [
+    {
+     "ref": "Romans 15:25-33",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 63,
+   "title": "Romans 16:1-16",
+   "note": "Romans for Everyone, Part 2, section 25 of 27",
+   "readings": [
+    {
+     "ref": "Romans 16:1-16",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 64,
+   "title": "Romans 16:17-24",
+   "note": "Romans for Everyone, Part 2, section 26 of 27",
+   "readings": [
+    {
+     "ref": "Romans 16:17-24",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 65,
+   "title": "Romans 16:25-27",
+   "note": "Romans for Everyone, Part 2, section 27 of 27",
+   "readings": [
+    {
+     "ref": "Romans 16:25-27",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  }
+ ]
+}
