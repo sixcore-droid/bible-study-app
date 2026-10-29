@@ -1,0 +1,1076 @@
+{
+ "id": "luke-wright",
+ "name": "Luke with N. T. Wright",
+ "description": "One short section of Luke a day, in the 89 sections N. T. Wright uses in Luke for Everyone. Read the passage, then Wright's section in the book (the Shelf lists it beside each passage).",
+ "start": "2026-10-30",
+ "days": [
+  {
+   "day": 1,
+   "title": "Luke 1:1-4",
+   "note": "Luke for Everyone, section 1 of 89",
+   "readings": [
+    {
+     "ref": "Luke 1:1-4",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "title": "Luke 1:5-25",
+   "note": "Luke for Everyone, section 2 of 89",
+   "readings": [
+    {
+     "ref": "Luke 1:5-25",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "title": "Luke 1:26-38",
+   "note": "Luke for Everyone, section 3 of 89",
+   "readings": [
+    {
+     "ref": "Luke 1:26-38",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "title": "Luke 1:39-56",
+   "note": "Luke for Everyone, section 4 of 89",
+   "readings": [
+    {
+     "ref": "Luke 1:39-56",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "title": "Luke 1:57-80",
+   "note": "Luke for Everyone, section 5 of 89",
+   "readings": [
+    {
+     "ref": "Luke 1:57-80",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "title": "Luke 2:1-20",
+   "note": "Luke for Everyone, section 6 of 89",
+   "readings": [
+    {
+     "ref": "Luke 2:1-20",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "title": "Luke 2:21-40",
+   "note": "Luke for Everyone, section 7 of 89",
+   "readings": [
+    {
+     "ref": "Luke 2:21-40",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "title": "Luke 2:41-52",
+   "note": "Luke for Everyone, section 8 of 89",
+   "readings": [
+    {
+     "ref": "Luke 2:41-52",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "title": "Luke 3:1-9",
+   "note": "Luke for Everyone, section 9 of 89",
+   "readings": [
+    {
+     "ref": "Luke 3:1-9",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "title": "Luke 3:10-20",
+   "note": "Luke for Everyone, section 10 of 89",
+   "readings": [
+    {
+     "ref": "Luke 3:10-20",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "title": "Luke 3:21-38",
+   "note": "Luke for Everyone, section 11 of 89",
+   "readings": [
+    {
+     "ref": "Luke 3:21-38",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "title": "Luke 4:1-13",
+   "note": "Luke for Everyone, section 12 of 89",
+   "readings": [
+    {
+     "ref": "Luke 4:1-13",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "title": "Luke 4:14-30",
+   "note": "Luke for Everyone, section 13 of 89",
+   "readings": [
+    {
+     "ref": "Luke 4:14-30",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "title": "Luke 4:31-44",
+   "note": "Luke for Everyone, section 14 of 89",
+   "readings": [
+    {
+     "ref": "Luke 4:31-44",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "title": "Luke 5:1-11",
+   "note": "Luke for Everyone, section 15 of 89",
+   "readings": [
+    {
+     "ref": "Luke 5:1-11",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "title": "Luke 5:12-16",
+   "note": "Luke for Everyone, section 16 of 89",
+   "readings": [
+    {
+     "ref": "Luke 5:12-16",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "title": "Luke 5:17-26",
+   "note": "Luke for Everyone, section 17 of 89",
+   "readings": [
+    {
+     "ref": "Luke 5:17-26",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "title": "Luke 5:27-39",
+   "note": "Luke for Everyone, section 18 of 89",
+   "readings": [
+    {
+     "ref": "Luke 5:27-39",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "title": "Luke 6:1-11",
+   "note": "Luke for Everyone, section 19 of 89",
+   "readings": [
+    {
+     "ref": "Luke 6:1-11",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "title": "Luke 6:12-26",
+   "note": "Luke for Everyone, section 20 of 89",
+   "readings": [
+    {
+     "ref": "Luke 6:12-26",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "title": "Luke 6:27-38",
+   "note": "Luke for Everyone, section 21 of 89",
+   "readings": [
+    {
+     "ref": "Luke 6:27-38",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "title": "Luke 6:39-49",
+   "note": "Luke for Everyone, section 22 of 89",
+   "readings": [
+    {
+     "ref": "Luke 6:39-49",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "title": "Luke 7:1-10",
+   "note": "Luke for Everyone, section 23 of 89",
+   "readings": [
+    {
+     "ref": "Luke 7:1-10",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "title": "Luke 7:11-17",
+   "note": "Luke for Everyone, section 24 of 89",
+   "readings": [
+    {
+     "ref": "Luke 7:11-17",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "title": "Luke 7:18-35",
+   "note": "Luke for Everyone, section 25 of 89",
+   "readings": [
+    {
+     "ref": "Luke 7:18-35",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "title": "Luke 7:36-50",
+   "note": "Luke for Everyone, section 26 of 89",
+   "readings": [
+    {
+     "ref": "Luke 7:36-50",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "title": "Luke 8:1-15",
+   "note": "Luke for Everyone, section 27 of 89",
+   "readings": [
+    {
+     "ref": "Luke 8:1-15",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "title": "Luke 8:16-25",
+   "note": "Luke for Everyone, section 28 of 89",
+   "readings": [
+    {
+     "ref": "Luke 8:16-25",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "title": "Luke 8:26-39",
+   "note": "Luke for Everyone, section 29 of 89",
+   "readings": [
+    {
+     "ref": "Luke 8:26-39",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "title": "Luke 8:40-56",
+   "note": "Luke for Everyone, section 30 of 89",
+   "readings": [
+    {
+     "ref": "Luke 8:40-56",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "title": "Luke 9:1-17",
+   "note": "Luke for Everyone, section 31 of 89",
+   "readings": [
+    {
+     "ref": "Luke 9:1-17",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "title": "Luke 9:18-27",
+   "note": "Luke for Everyone, section 32 of 89",
+   "readings": [
+    {
+     "ref": "Luke 9:18-27",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "title": "Luke 9:28-45",
+   "note": "Luke for Everyone, section 33 of 89",
+   "readings": [
+    {
+     "ref": "Luke 9:28-45",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "title": "Luke 9:46-62",
+   "note": "Luke for Everyone, section 34 of 89",
+   "readings": [
+    {
+     "ref": "Luke 9:46-62",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "title": "Luke 10:1-16",
+   "note": "Luke for Everyone, section 35 of 89",
+   "readings": [
+    {
+     "ref": "Luke 10:1-16",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "title": "Luke 10:17-24",
+   "note": "Luke for Everyone, section 36 of 89",
+   "readings": [
+    {
+     "ref": "Luke 10:17-24",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "title": "Luke 10:25-37",
+   "note": "Luke for Everyone, section 37 of 89",
+   "readings": [
+    {
+     "ref": "Luke 10:25-37",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "title": "Luke 10:38-42",
+   "note": "Luke for Everyone, section 38 of 89",
+   "readings": [
+    {
+     "ref": "Luke 10:38-42",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "title": "Luke 11:1-13",
+   "note": "Luke for Everyone, section 39 of 89",
+   "readings": [
+    {
+     "ref": "Luke 11:1-13",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "title": "Luke 11:14-28",
+   "note": "Luke for Everyone, section 40 of 89",
+   "readings": [
+    {
+     "ref": "Luke 11:14-28",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "title": "Luke 11:29-41",
+   "note": "Luke for Everyone, section 41 of 89",
+   "readings": [
+    {
+     "ref": "Luke 11:29-41",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "title": "Luke 11:42-54",
+   "note": "Luke for Everyone, section 42 of 89",
+   "readings": [
+    {
+     "ref": "Luke 11:42-54",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "title": "Luke 12:1-12",
+   "note": "Luke for Everyone, section 43 of 89",
+   "readings": [
+    {
+     "ref": "Luke 12:1-12",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "title": "Luke 12:13-34",
+   "note": "Luke for Everyone, section 44 of 89",
+   "readings": [
+    {
+     "ref": "Luke 12:13-34",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "title": "Luke 12:35-48",
+   "note": "Luke for Everyone, section 45 of 89",
+   "readings": [
+    {
+     "ref": "Luke 12:35-48",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "title": "Luke 12:49-59",
+   "note": "Luke for Everyone, section 46 of 89",
+   "readings": [
+    {
+     "ref": "Luke 12:49-59",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "title": "Luke 13:1-9",
+   "note": "Luke for Everyone, section 47 of 89",
+   "readings": [
+    {
+     "ref": "Luke 13:1-9",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "title": "Luke 13:10-21",
+   "note": "Luke for Everyone, section 48 of 89",
+   "readings": [
+    {
+     "ref": "Luke 13:10-21",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "title": "Luke 13:22-30",
+   "note": "Luke for Everyone, section 49 of 89",
+   "readings": [
+    {
+     "ref": "Luke 13:22-30",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "title": "Luke 13:31-35",
+   "note": "Luke for Everyone, section 50 of 89",
+   "readings": [
+    {
+     "ref": "Luke 13:31-35",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "title": "Luke 14:1-11",
+   "note": "Luke for Everyone, section 51 of 89",
+   "readings": [
+    {
+     "ref": "Luke 14:1-11",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "title": "Luke 14:12-24",
+   "note": "Luke for Everyone, section 52 of 89",
+   "readings": [
+    {
+     "ref": "Luke 14:12-24",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "title": "Luke 14:25-35",
+   "note": "Luke for Everyone, section 53 of 89",
+   "readings": [
+    {
+     "ref": "Luke 14:25-35",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "title": "Luke 15:1-10",
+   "note": "Luke for Everyone, section 54 of 89",
+   "readings": [
+    {
+     "ref": "Luke 15:1-10",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "title": "Luke 15:11-24",
+   "note": "Luke for Everyone, section 55 of 89",
+   "readings": [
+    {
+     "ref": "Luke 15:11-24",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "title": "Luke 15:25-32",
+   "note": "Luke for Everyone, section 56 of 89",
+   "readings": [
+    {
+     "ref": "Luke 15:25-32",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "title": "Luke 16:1-9",
+   "note": "Luke for Everyone, section 57 of 89",
+   "readings": [
+    {
+     "ref": "Luke 16:1-9",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "title": "Luke 16:10-18",
+   "note": "Luke for Everyone, section 58 of 89",
+   "readings": [
+    {
+     "ref": "Luke 16:10-18",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "title": "Luke 16:19-31",
+   "note": "Luke for Everyone, section 59 of 89",
+   "readings": [
+    {
+     "ref": "Luke 16:19-31",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "title": "Luke 17:1-10",
+   "note": "Luke for Everyone, section 60 of 89",
+   "readings": [
+    {
+     "ref": "Luke 17:1-10",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 61,
+   "title": "Luke 17:11-19",
+   "note": "Luke for Everyone, section 61 of 89",
+   "readings": [
+    {
+     "ref": "Luke 17:11-19",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "title": "Luke 17:20-37",
+   "note": "Luke for Everyone, section 62 of 89",
+   "readings": [
+    {
+     "ref": "Luke 17:20-37",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 63,
+   "title": "Luke 18:1-14",
+   "note": "Luke for Everyone, section 63 of 89",
+   "readings": [
+    {
+     "ref": "Luke 18:1-14",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 64,
+   "title": "Luke 18:15-30",
+   "note": "Luke for Everyone, section 64 of 89",
+   "readings": [
+    {
+     "ref": "Luke 18:15-30",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 65,
+   "title": "Luke 18:31-43",
+   "note": "Luke for Everyone, section 65 of 89",
+   "readings": [
+    {
+     "ref": "Luke 18:31-43",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 66,
+   "title": "Luke 19:1-10",
+   "note": "Luke for Everyone, section 66 of 89",
+   "readings": [
+    {
+     "ref": "Luke 19:1-10",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 67,
+   "title": "Luke 19:11-27",
+   "note": "Luke for Everyone, section 67 of 89",
+   "readings": [
+    {
+     "ref": "Luke 19:11-27",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 68,
+   "title": "Luke 19:28-40",
+   "note": "Luke for Everyone, section 68 of 89",
+   "readings": [
+    {
+     "ref": "Luke 19:28-40",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 69,
+   "title": "Luke 19:41-48",
+   "note": "Luke for Everyone, section 69 of 89",
+   "readings": [
+    {
+     "ref": "Luke 19:41-48",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "title": "Luke 20:1-8",
+   "note": "Luke for Everyone, section 70 of 89",
+   "readings": [
+    {
+     "ref": "Luke 20:1-8",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 71,
+   "title": "Luke 20:9-19",
+   "note": "Luke for Everyone, section 71 of 89",
+   "readings": [
+    {
+     "ref": "Luke 20:9-19",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 72,
+   "title": "Luke 20:20-26",
+   "note": "Luke for Everyone, section 72 of 89",
+   "readings": [
+    {
+     "ref": "Luke 20:20-26",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 73,
+   "title": "Luke 20:27-40",
+   "note": "Luke for Everyone, section 73 of 89",
+   "readings": [
+    {
+     "ref": "Luke 20:27-40",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 74,
+   "title": "Luke 20:41-21:4",
+   "note": "Luke for Everyone, section 74 of 89",
+   "readings": [
+    {
+     "ref": "Luke 20:41-21:4",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 75,
+   "title": "Luke 21:5-19",
+   "note": "Luke for Everyone, section 75 of 89",
+   "readings": [
+    {
+     "ref": "Luke 21:5-19",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 76,
+   "title": "Luke 21:20-33",
+   "note": "Luke for Everyone, section 76 of 89",
+   "readings": [
+    {
+     "ref": "Luke 21:20-33",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 77,
+   "title": "Luke 21:34-38",
+   "note": "Luke for Everyone, section 77 of 89",
+   "readings": [
+    {
+     "ref": "Luke 21:34-38",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 78,
+   "title": "Luke 22:1-23",
+   "note": "Luke for Everyone, section 78 of 89",
+   "readings": [
+    {
+     "ref": "Luke 22:1-23",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 79,
+   "title": "Luke 22:24-38",
+   "note": "Luke for Everyone, section 79 of 89",
+   "readings": [
+    {
+     "ref": "Luke 22:24-38",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 80,
+   "title": "Luke 22:39-53",
+   "note": "Luke for Everyone, section 80 of 89",
+   "readings": [
+    {
+     "ref": "Luke 22:39-53",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 81,
+   "title": "Luke 22:54-71",
+   "note": "Luke for Everyone, section 81 of 89",
+   "readings": [
+    {
+     "ref": "Luke 22:54-71",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 82,
+   "title": "Luke 23:1-12",
+   "note": "Luke for Everyone, section 82 of 89",
+   "readings": [
+    {
+     "ref": "Luke 23:1-12",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 83,
+   "title": "Luke 23:13-26",
+   "note": "Luke for Everyone, section 83 of 89",
+   "readings": [
+    {
+     "ref": "Luke 23:13-26",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 84,
+   "title": "Luke 23:27-43",
+   "note": "Luke for Everyone, section 84 of 89",
+   "readings": [
+    {
+     "ref": "Luke 23:27-43",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 85,
+   "title": "Luke 23:44-56",
+   "note": "Luke for Everyone, section 85 of 89",
+   "readings": [
+    {
+     "ref": "Luke 23:44-56",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 86,
+   "title": "Luke 24:1-12",
+   "note": "Luke for Everyone, section 86 of 89",
+   "readings": [
+    {
+     "ref": "Luke 24:1-12",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 87,
+   "title": "Luke 24:13-27",
+   "note": "Luke for Everyone, section 87 of 89",
+   "readings": [
+    {
+     "ref": "Luke 24:13-27",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 88,
+   "title": "Luke 24:28-35",
+   "note": "Luke for Everyone, section 88 of 89",
+   "readings": [
+    {
+     "ref": "Luke 24:28-35",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  },
+  {
+   "day": 89,
+   "title": "Luke 24:36-53",
+   "note": "Luke for Everyone, section 89 of 89",
+   "readings": [
+    {
+     "ref": "Luke 24:36-53",
+     "role": "Main reading",
+     "why": ""
+    }
+   ]
+  }
+ ]
+}
