@@ -896,3 +896,13 @@ body.app-classes #desk{display:none}
 .jcl-md{font:15px/1.6 var(--read,'Archivo',system-ui,sans-serif);color:var(--ink);max-height:calc(100vh - var(--toph,60px) - 160px);overflow:auto;padding-right:6px}
 .jcl-md p{margin:0 0 .8em}.jcl-md h4{font:600 15px var(--label,monospace);margin:1.1em 0 .4em;color:var(--gold)}
 .jcl-md ul{margin:0 0 .8em;padding-left:1.2em}.jcl-md blockquote{margin:0 0 .8em;padding:2px 12px;border-left:3px solid var(--line)}
+.classesview{height:calc(100vh - var(--toph,60px));height:calc(100dvh - var(--toph,60px));min-height:0;overflow:hidden;box-sizing:border-box;padding-bottom:16px}
+.jcl-grid{height:100%;align-items:stretch;grid-template-columns:minmax(0,250px) minmax(0,1fr) minmax(0,340px)}
+.jcl-grid section{min-height:0;overflow:auto}
+#jcl-mid{display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.jcl-top{display:flex;flex-direction:column;gap:6px}
+.jcl-title{font:500 24px/1.2 var(--display,'EB Garamond',Georgia,serif);color:var(--ink);text-wrap:balance}
+.jcl-top .jcl-acts{margin:0;align-items:center}
+.jcl-view{flex:1;min-height:320px;display:grid;place-items:center;text-align:center;background:var(--paper-deep);border:1px solid var(--line);border-radius:10px;padding:20px}
+.jcl-viewmsg{max-width:420px}
+@media (max-width:1100px){.classesview{height:auto;overflow:auto}.jcl-grid{height:auto}.jcl-view{min-height:60vh}}
