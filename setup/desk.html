@@ -115,6 +115,7 @@
     <div class="prog">
       <div class="lbl"><span id="progtxt"></span><span id="progpct"></span></div>
       <div class="bar"><i id="progbar"></i></div>
+      <button class="chip planrestart" id="planrestart" title="Clear this plan's Done ticks and start it again from day 1, today">Restart this plan</button>
     </div>
     <ol class="days" id="days"></ol>
       </div>
@@ -245,7 +246,7 @@ const QUICK = [
 
 /* The dock: an order, plus the one tool that belongs to this page alone (Notes). Everything else is a component's own meta. */
 const NOTES_ICON = '<svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>';
-const DOCK = ["marks","verse","outline","word","|","council","gods","ancient","facts","family","maps","art","scrolls","posts","corpus","fathers","targum","xref","bp","x","chats","logos","shelf","vocab","ideas","vault","|","wrap","review","config","notes"];
+const DOCK = ["marks","verse","outline","word","|","council","gods","ancient","facts","family","maps","art","scrolls","posts","corpus","fathers","targum","xref","bp","x","chats","logos","shelf","book","vocab","ideas","vault","|","wrap","review","config","notes"];
 function toolMeta(id){
   if(id==="notes") return PUBLIC ? {id, label:"Jayms Notes", name:"Jayms Notes: James's public notes", icon:NOTES_ICON} : {id, label:"Notes", name:"All my notes", icon:NOTES_ICON};
   const P = JST.panels[id]; return Object.assign({}, P.meta);
@@ -373,7 +374,7 @@ const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;
 const plan=()=>PLANS[S.plan];
 /* day N of a plan; a weekdays plan (F260) moves on Monday to Friday only, so a weekend stays on Friday's reading for catching up */
 /* when a plan starts: James's own start date on his desk; on the public site, the day the visitor first opened that plan (they begin at day 1) */
-function planStart(p){ if(!PUBLIC) return p.start; const k="start:"+p.id; let d=store.get(k,null);
+function planStart(p){ const k="start:"+p.id; let d=store.get(k,null); if(!PUBLIC) return d||p.start;   // the desk uses the plan's own start unless that plan was restarted here
   if(!d){ const t=new Date(); d=`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`; store.set(k,d) } return d }
 function todayNum(p){const d0=new Date(planStart(p)+"T00:00:00"), now=new Date(); now.setHours(0,0,0,0);
   const days=Math.round((now-d0)/864e5);   // round, not floor: a span across the clocks changing is an hour short of whole days
@@ -437,12 +438,14 @@ function renderPlan(){
   /* genealogies and lists (a plan's "list" days, or chapters in plans/skip.json): greyed, never where the list starts, hidden with the box */
   const isList=d=>d.list || (!!SKIP && d.readings.length>0 && (()=>{ const g=JaymsRef.parse(d.readings[0].ref)[0]; return !!g && (SKIP[g.book]||[]).includes(g.c1) && (!g.c2 || g.c2===g.c1) })());
   const first=(p.days.find(d=>!dayDone(d) && !isList(d))||p.days.find(d=>d.day===t)||p.days[0]).day;
-  const full=p.days.filter(d=>d.day>=first).concat(p.days.filter(d=>d.day<first)).filter(d=>!S.hideLists || !isList(d) || d.day===S.day);
+  /* the two days before where you are come first, so yesterday is in view; the days further back follow at the bottom */
+  const prevN=p.days.filter(d=>d.day>=first-2 && d.day<first).length;
+  const full=p.days.filter(d=>d.day>=first-2 && d.day<first).concat(p.days.filter(d=>d.day>=first), p.days.filter(d=>d.day<first-2)).filter(d=>!S.hideLists || !isList(d) || d.day===S.day);
   /* a week at a time: where you are and the six after it; the rest behind "Show all" (the day you picked stays in view) */
-  const SHOW=7, order = S.allDays || (S.app==="hg" && full.length<=50) ? full : full.filter((d,i)=>i<SHOW || d.day===S.day);   // Hebrew & Greek: 50 days or fewer simply scroll
+  const SHOW=7+prevN, order = S.allDays || (S.app==="hg" && full.length<=50) ? full : full.filter((d,i)=>i<SHOW || d.day===S.day);   // Hebrew & Greek: 50 days or fewer simply scroll
   const more = full.length>order.length || S.allDays ? `<li><button class="daysmore" data-alldays>${S.allDays?"Show fewer":"Show all "+full.length+(p.weekly?" weeks":" days")}</button></li>` : "";
   $("days").innerHTML = (S.allDays ? more : "") + order.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
-    const sep = d.day===p.days[0].day && first>p.days[0].day ? `<li class="days-sep lbl">Done · from ${p.weekly?"week":"day"} 1</li>` : "";
+    const sep = d.day===p.days[0].day && first-2>p.days[0].day ? `<li class="days-sep lbl">Done · from ${p.weekly?"week":"day"} 1</li>` : "";
     return sep+`<li><button class="day${fin?" done":""}${on?" on":""}${isList(d)?" list":""}" data-day="${d.day}" ${isT?'aria-current="date"':""}>
       <span class="n">${isT?(p.weekly?"This week":"Today"):(p.weekly?"Week ":"Day ")+d.day}</span>
       <span class="t">${esc(d.title)}${isList(d)?' <em class="listtag">genealogy / list</em>':""}${(d.readings.length>1||d.note)?`<small>${esc(d.readings.length>1?"with "+d.readings.slice(1).map(x=>x.ref).join(" · "):d.note)}</small>`:""}</span>
@@ -653,7 +656,8 @@ const HANDLERS = {
   mapPlace: id => { S.mapPlace=id; stashPanel("maps"); S.tool="maps"; renderDock(); renderPanel(); if(PH && PH.o && S.mapPlace){ PH.o.focusStep=S.mapPlace; PH.refresh() } S.mapPlace=null },
   verse:   v => { S.vsel=v; stashPanel("verse"); S.tool="verse"; renderReader(); renderDock(); renderPanel() },
   mark:    id => { S.mark=id; stashPanel("marks"); S.tool="marks"; renderReader(); renderDock(); renderPanel() },
-  passage: d => { const err=openPassage(d.ref); if(err) $("gomsg").textContent=err },
+  planRestart: d => { restartPlan(d.id) },
+  passage: d => { const err=d.follow ? followPlan(d.ref) : openPassage(d.ref); if(err) $("gomsg").textContent=err },
   note:    d => { const id=JaymsRef.key(d.ref); initNote(id); NOTES[id].text=(NOTES[id].text?NOTES[id].text+"\n\n":"")+"Claude: "+d.text; if(id===cur().id) markDirty() },
   answer:  rec => ST.c("answers").save(rec.id, rec),
   /* one card per word: adding it again from another passage adds that passage to its list */
@@ -687,6 +691,27 @@ function shelfConfig(){ const c=ST.c("shelfcfg"); return { authors:c.peek("autho
   dock:{ hidden:dockHidden(), tools:TOOLS.filter(t=>t.id && t.id!=="config" && t.id!=="marks" && !(t.owner && S.view==="public")).map(t=>({id:t.id, label:t.label, name:toolName(t)})) } } }
 ST.c("shelfcfg").on(()=>{ renderDock(); if(PLANINDEX) renderPlan(); if((S.tool==="shelf"||S.tool==="config") && PH) PH.refresh() });
 ST.c("ideas").on(()=>{ renderDock(); if(S.tool==="ideas" && PH) PH.refresh() });
+/* Restart one plan (the others are not touched): its Done ticks are cleared and day 1 is today. Asks first; returns whether it did. */
+function restartPlan(id){
+  const p=PLANS[id]; if(!p) return false;
+  const mine=ST.c("done").all().filter(d=>d.id.startsWith(id+":"));
+  if(!confirm(`Restart "${p.name}"?\n\nThis clears its ${mine.length} Done tick${mine.length===1?"":"s"} and starts it again from day 1, today. Your other plans are not touched.`)) return false;
+  mine.forEach(d=>ST.c("done").remove(d.id));
+  const t=new Date(); store.set("start:"+id, `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`);
+  if(S.plan===id){ S.day=1; S.reading=0; S.adhoc=null; buildDay() }
+  render(); return true;
+}
+$("planrestart").onclick=()=>restartPlan(S.plan);
+/* The Book panel's Previous / Next: go to the plan's day that reads this passage (the plan and the reader stay in step with the book);
+   when the plan has no such day, open it as a passage of its own. Returns an error message, like openPassage. */
+function followPlan(ref){
+  const segs=JaymsRef.parse(ref); if(!segs.length) return openPassage(ref);
+  const id=JaymsRef.key(segs), p=plan(), d=p && p.days.find(x=>x.readings.some(r=>JaymsRef.key(r.ref)===id));
+  if(!d) return openPassage(ref);
+  S.adhoc=null; S.vsel=null; S.word=null; S.day=d.day; S.reading=0; buildDay();
+  const i=READINGS.findIndex(x=>x.id===id); S.reading=i>=0?i:0;
+  rememberOpen(); render(); readerTop(); return "";
+}
 /* Open any passage. A reading of the day switches to its tab; anything else opens as its own tab beside them.
    Returns an error message when the reference can't be read, so the box can say what went wrong. */
 function openPassage(ref, replace){

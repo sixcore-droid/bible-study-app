@@ -516,6 +516,9 @@
     library: function () { return getJSON("shelf.json").then(function (d) { return { lib: (d && d.lib) || [], studyBibles: (d && d.studyBibles) || [], atlases: (d && d.atlases) || [] }; }); },
     /* James's Obsidian BOOKS vault, by author (scripts/build-vault-books.py); desk only, so the site gets null */
     vaultBooks: function () { return global.JAYMS_PUBLIC ? Promise.resolve(null) : getJSON("vault-books.json").catch(function () { return null; }); },
+    /* the books read beside the Bible (Book panel): desk only, from his vault through the desk server (scripts/readbooks.py) */
+    readBooks: function () { return global.JAYMS_PUBLIC ? Promise.resolve([]) : getJSON("api/read-books").then(function (r) { return (r && r.books) || []; }).catch(function () { return []; }); },
+    readBook: function (id) { return global.JAYMS_PUBLIC ? Promise.resolve(null) : getJSON("api/read-book?id=" + encodeURIComponent(id)); },
     shelf: function () { return getJSON("shelf.json").then(function (d) { CORE = (d && d.core) || {}; CORE_IDS = {}; Object.keys(CORE).forEach(function (b) { CORE[b].forEach(function (x) { CORE_IDS[x.id] = 1; }); }); return (SHELF = (d && d.books) || {}); }); },
     /* everything the panels show for a passage, by reference: "Psalm 82", "Daniel 10:13, 20-21" */
     passage: function (ref) {
@@ -703,7 +706,8 @@
     meta:    "the panel's heading changed            {kick, title, wide, split}",
     word:    "open this word in Word Study            \"h430\" (Strong's key)",
     verse:   "open this verse's tools                 {book, c, v}",
-    passage: "open this passage in the reader          {ref}",
+    planRestart: "restart one plan: clear its Done ticks, day 1 is today   {id}",
+    passage: "open this passage in the reader          {ref, follow?}  (follow: go to the plan's day that reads it, if there is one)",
     note:    "add this text to the passage's notes     {ref, text}",
     vocab:   "add this word to the vocabulary deck     {k, word, strong, gloss, ref}",
     vocabRemove: "drop a word from the vocabulary deck    {k}",
@@ -809,6 +813,7 @@
     posts: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10v4H7zM7 15h10M7 18h6"/></svg>',
     corpus: '<svg viewBox="0 0 24 24"><path d="M4 4v16M8 4v16M12 6l3 14M17 4l3 16"/></svg>',
     vault: '<svg viewBox="0 0 24 24"><path d="M12 2l7 5-2 12-5 3-5-3-2-12z"/><path d="M12 2v20M5 7l7 5 7-5"/></svg>',
+    book: '<svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 7h6M9 11h6"/></svg>',
     chats: '<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>',
     claude: '<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>',
     x: '<svg viewBox="0 0 24 24"><path d="M5 4l14 16M19 4L5 20"/></svg>',
@@ -2300,6 +2305,50 @@
     }
   }, { vaultName: "Jayms" }, function (d) { return d ? (d.vault || []).length : null; });
 
+  // ------------------------------------------------------------------ Book (a book read beside the Bible; desk only)
+  /* A book James owns, read in the panel while the reader shows the passage it is about. The text stays in his Obsidian BOOKS vault;
+     scripts/readbooks.py (the desk server) cuts it into sections, one per passage. The reading drives the panel (it shows the section that
+     overlaps the passage on screen) and the panel drives the reading (Previous and Next move the reader, and the plan, to that section's passage).
+     sends: passage {ref, follow} */
+  function bookParas(pages) {
+    var text = pages.join(" ").replace(/\s+/g, " ").trim(), sents = text.match(/[^.!?]+(?:[.!?]+['"\u201d\u2019)]*)(?:\s+|$)|[^.!?]+$/g) || [text], out = [], cur = "";
+    sents.forEach(function (s) { if (cur && (cur + s).length > 700) { out.push(cur.trim()); cur = ""; } cur += s; });
+    if (cur.trim()) out.push(cur.trim());
+    return out.map(function (p) { return esc(p).replace(/(^|[\s(\u2014-])(\d{1,2})(?=(?!st\b|nd\b|rd\b|th\b)[A-Za-z\u2018\u201c(]|&#39;|&quot;)/g, '$1<sup class="jst-vn">$2</sup>'); });   /* a number run straight into a word is a verse number */
+  }
+  define("Book", { id: "book", label: "Book", name: "Read a book beside the Bible", icon: ICON.book, owner: true }, {
+    prepare: function () {
+      var self = this, q = data.segs(this.o.ref)[0];
+      return data.readBooks().then(function (list) {
+        self.list = list.filter(function (b) { return q && b.book === q.book && (!b.chapters || (q.c2 >= b.chapters[0] && q.c1 <= b.chapters[1])); });
+        return Promise.all(self.list.map(function (b) { return data.readBook(b.id); }));
+      }).then(function (bk) {
+        self.bk = bk.filter(Boolean); self.hits = [];
+        self.bk.forEach(function (b, bi) { b.sections.forEach(function (s, si) { var g = data.segs(s.ref)[0]; if (g && q && overlap(g, q)) self.hits.push({ b: bi, i: si }); }); });
+      });
+    },
+    view: function () {
+      var st = this.st;
+      if (!this.bk || !this.bk.length) return { kick: "Book", title: "Books beside the Bible", body: none("None of your books covers " + esc(this.o.ref) + " yet. The books are listed in books-reader.json.") };
+      if (!this.hits.length) return { kick: "Book", title: "Books beside the Bible", body: none("None of your books has a section on " + esc(this.o.ref) + ".") };
+      var n = this.hits.length; st.k = Math.min(st.k || 0, n - 1);
+      var h = this.hits[st.k], b = this.bk[h.b], s = b.sections[h.i], prev = b.sections[h.i - 1], next = b.sections[h.i + 1];
+      var go = function (x, label, dir) { return x ? '<button class="btn" data-jst-bkgo="' + esc(x.ref) + '" title="' + esc(x.ref + (x.title ? ": " + x.title : "")) + '">' + (dir < 0 ? "\u2039 " : "") + label + (dir > 0 ? " \u203A" : "") + "</button>" : '<button class="btn" disabled>' + (dir < 0 ? "\u2039 " : "") + label + (dir > 0 ? " \u203A" : "") + "</button>"; };
+      var h2 = '<div class="askrow u-gap6 jst-bknav">' + go(prev, "Previous", -1) + '<span class="sub u-flex1 u-ta-c">Section ' + s.n + " of " + b.sections.length + "</span>" + go(next, "Next", 1) + "</div>";
+      if (n > 1) h2 += '<div class="chips u-mt6"><span class="lbl">On this reading</span>' + this.hits.map(function (x, k) { var y = this.bk[x.b].sections[x.i]; return '<button class="chip' + (k === st.k ? " on" : "") + '" data-jst-bkhit="' + k + '">' + esc(y.ref.replace(/^\S+\s/, "")) + "</button>"; }, this).join("") + "</div>";
+      var ob = b.obsidian ? outlink("obsidian://open?vault=" + encodeURIComponent(b.obsidian.vault) + "&file=" + encodeURIComponent(b.obsidian.file), "Open the whole book in Obsidian") : "";
+      h2 += '<p class="ctx u-fs13 u-mt10">' + esc(b.by) + ", " + esc(b.title) + " \u00B7 " + esc(s.ref) + "</p>";
+      h2 += '<div class="jst-book">' + bookParas(s.pages).map(function (p) { return "<p>" + p + "</p>"; }).join("") + "</div>" + (ob ? '<p class="u-mt10">' + ob + "</p>" : "");
+      return { kick: "Book \u00B7 " + b.by, title: s.title || s.ref, wide: true, body: h2 };
+    },
+    click: function (e) {
+      var go = e.target.closest("[data-jst-bkgo]"), hit = e.target.closest("[data-jst-bkhit]");
+      if (go) { e.stopPropagation(); this.emit("passage", { ref: go.getAttribute("data-jst-bkgo"), follow: true }); return; }
+      if (hit) { e.stopPropagation(); this.st.k = +hit.getAttribute("data-jst-bkhit"); this.paint(); return; }
+      Panel.prototype.click.call(this, e);
+    }
+  }, {});
+
   // ------------------------------------------------------------------ Chats (past Claude chats)
   function chatsHTML(list) {
     return list.length ? list.map(function (x) { return box("apparatus", "", '<div class="session"><span class="when u-label u-fs13 u-gold">' + esc(x.date) + '</span><span class="tt u-display u-fs20 u-w600 u-bright">' + esc(x.t) + '</span><p class="u-m4-6 u-fs15">' + esc(x.tldr) + "</p>" + outlink(x.url, "Reopen the chat") + "</div>"); }).join("")
@@ -2963,8 +3012,9 @@
         var keep = names.filter(function (nm) { return lib.some(function (x) { return byAuthor(nm, x[2]); }) || vba.some(function (a) { return byAuthor(nm, a.by); }); });
         if (keep.length < names.length) self.emit("shelfcfg", { key: "authors", value: { names: keep } });
       } }); },
-    rowHTML: function (i, n, label, sub, hidden, kind, core) {
+    rowHTML: function (i, n, label, sub, hidden, kind, core, id) {
             return '<div class="askrow u-gap6 u-m3' + (hidden ? " u-faded" : "") + '" data-jst-crow="' + esc((label + " " + sub).toLowerCase()) + '"><span class="u-minw22">' + (hidden ? "" : (i + 1) + ".") + '</span><span class="u-flex1">' + esc(label) + (sub ? ' <span class="sub">' + esc(sub) + "</span>" : "") + "</span>" +
+        (kind === "plans" && id ? '<button class="btn" data-jst-prestart="' + esc(id) + '" title="Clear this plan\'s Done ticks and start it again from day 1, today">Restart</button>' : "") +
         (hidden ? "" : '<button class="btn" data-jst-cmv="' + kind + "|" + i + '|-1"' + (i ? "" : " disabled") + ' aria-label="Move up">\u2191</button><button class="btn" data-jst-cmv="' + kind + "|" + i + '|1"' + (i < n - 1 ? "" : " disabled") + ' aria-label="Move down">\u2193</button>') +
         (core ? '<span class="sub">' + (core === "now" ? "Reading now" : "Core") + "</span></div>" : '<button class="btn" data-jst-chide="' + kind + "|" + i + "|" + (hidden ? 1 : 0) + '">' + (kind === "authors" ? "\u00D7" : hidden ? "Show" : "Hide") + "</button></div>");
     },
@@ -3006,9 +3056,9 @@
       } else if (sec === "plans") {
         var pl = this.planLists();
         h += '<p class="ctx">The reading plans, in the order they show on the plan menu. Hide one to take it off the menu. The plan you are reading now stays.</p>';
-        h += pl.shown.map(function (x, i) { return self.rowHTML(i, pl.shown.length, x.name, x.days ? x.days + (x.weekly ? " weeks" : " days") : "", false, "plans", x.id === pl.current ? "now" : false); }).join("");
-        if (pl.hidden.length) h += '<div class="lbl u-mt10">Hidden (' + pl.hidden.length + ")</div>" + pl.hidden.map(function (x, i) { return self.rowHTML(i, 0, x.name, "", true, "plans"); }).join("");
-        h += '<div class="askrow u-mt10"><button class="btn" data-jst-preset' + (pl.order.length || pl.hidden.length ? "" : " disabled") + '>Reset: original order, show all</button><span class="sub">Your progress is not touched.</span></div>';
+        h += pl.shown.map(function (x, i) { return self.rowHTML(i, pl.shown.length, x.name, x.days ? x.days + (x.weekly ? " weeks" : " days") : "", false, "plans", x.id === pl.current ? "now" : false, x.id); }).join("");
+        if (pl.hidden.length) h += '<div class="lbl u-mt10">Hidden (' + pl.hidden.length + ")</div>" + pl.hidden.map(function (x, i) { return self.rowHTML(i, 0, x.name, "", true, "plans", false, x.id); }).join("");
+        h += '<div class="askrow u-mt10"><button class="btn" data-jst-preset' + (pl.order.length || pl.hidden.length ? "" : " disabled") + '>Reset the order, show all</button><span class="sub">Only the order and what shows. The Restart button on each plan is what clears that plan progress.</span></div>';
         if (st.msg) h += '<p class="jst-msg">' + esc(st.msg) + "</p>";
       } else if (sec === "dock") {
         /* the side buttons: show or hide each one (Config itself always stays) */
@@ -3035,6 +3085,8 @@
     click: function (e) {
       var t = e.target, sc = t.closest("[data-jst-csec]"), mv = t.closest("[data-jst-cmv]"), hd = t.closest("[data-jst-chide]"), ad = t.closest("[data-jst-aadd]");
       if (sc) { e.stopPropagation(); this.st.sec = sc.getAttribute("data-jst-csec"); this.st.msg = ""; this.paint(); return; }
+      var pr = t.closest("[data-jst-prestart]");
+      if (pr) { e.stopPropagation(); this.emit("planRestart", { id: pr.getAttribute("data-jst-prestart") }); return; }
       if (t.closest("[data-jst-preset]")) { e.stopPropagation(); return this.save("plans", { order: [], hidden: [] }, "The plans are back in their original order, and all are showing."); }
       var dkb = t.closest("[data-jst-dock]");
       if (dkb) { e.stopPropagation(); var id = dkb.getAttribute("data-jst-dock"), cur0 = ((this.o.config && this.o.config().dock) || {}).hidden || [], was = cur0.indexOf(id) > -1;

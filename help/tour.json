@@ -119,6 +119,11 @@
      "text": "Which day of the plan it is, and how much is done."
     },
     {
+     "sel": "#planrestart",
+     "name": "Restart this plan",
+     "text": "Clears this plan's Done ticks and starts it again from day 1, today. It asks first, and your other plans are not touched."
+    },
+    {
      "sel": "#days .day",
      "name": "A day",
      "text": "Tap a day to read it. The list starts at the first day not yet done."

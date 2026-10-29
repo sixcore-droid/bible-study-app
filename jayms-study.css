@@ -808,3 +808,13 @@ body.noplan #biblepick{margin-top:0}
 .testtag{position:fixed;left:8px;bottom:8px;z-index:80;padding:4px 10px;border-radius:999px;background:var(--rust);color:#fff;font:600 12px var(--label);letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
 @media (max-width:700px){ .testtag{bottom:calc(72px + env(safe-area-inset-bottom,0px))} }
 #folderview,#keyview{z-index:1100}
+
+/* a book read beside the Bible (Book panel) */
+.jst-book{margin-top:12px}
+.jst-book p{margin:0 0 1em;font:17px/1.65 var(--read);color:var(--ink)}
+.jst-vn{font:600 .66em var(--label);color:var(--gold);margin-right:2px;vertical-align:super}
+.jst-bknav{align-items:center}
+.u-ta-c{text-align:center}
+
+/* Restart one plan (under the plan's progress bar) */
+.planrestart{margin-top:8px;font-size:13px}
