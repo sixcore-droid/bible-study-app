@@ -906,3 +906,47 @@ body.app-classes #desk{display:none}
 .jcl-view{flex:1;min-height:320px;display:grid;place-items:center;text-align:center;background:var(--paper-deep);border:1px solid var(--line);border-radius:10px;padding:20px}
 .jcl-viewmsg{max-width:420px}
 @media (max-width:1100px){.classesview{height:auto;overflow:auto}.jcl-grid{height:auto}.jcl-view{min-height:60vh}}
+
+/* ---------- Learn tab (desk only; jayms-learn.js, classes jlr-, sharing the Classes page's jcl- parts) ---------- */
+body.app-learn #desk{display:none}
+.learnview{height:calc(100vh - var(--toph,60px));height:calc(100dvh - var(--toph,60px));min-height:0;overflow:hidden;box-sizing:border-box;padding:0 20px 16px}
+.jlr-grid{height:100%;align-items:stretch}
+.jlr-grid section{min-height:0;overflow:auto}
+.jlr-mb{margin:16px 0 8px}
+.jlr-unit{border:1px solid var(--line);border-radius:10px;margin-bottom:6px;background:var(--paper-deep)}
+.jlr-uh{width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;background:none;border:0;padding:10px 12px;text-align:left;color:var(--ink);font:600 13px var(--label,monospace);cursor:pointer}
+.jlr-ls{border-top:1px solid var(--line)}
+.jlr-l{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;background:none;border:0;padding:8px 12px;color:var(--ink);font:14px var(--read,system-ui);cursor:pointer}
+.jlr-l.cur{background:var(--paper-deeper)}
+.jlr-inter{display:block;width:100%;text-align:left;border:1px dashed var(--line);border-radius:10px;background:none;padding:9px 12px;margin-bottom:6px;color:var(--ink);font:600 11px var(--label,monospace);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.jlr-inter.cur{border-color:var(--gold)}
+.jlr-rh{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.jlr-pos{flex:1;text-align:center}
+.jlr-opts{display:flex;gap:16px;flex-wrap:wrap;margin:6px 0 12px}
+.jlr-opt{display:inline-flex;gap:6px;align-items:center;font:600 11px var(--label,monospace);letter-spacing:.06em}
+.jlr-rd{font:17px/1.65 var(--read,'Archivo',system-ui,sans-serif);color:var(--ink)}
+.jlr-rd h3{font:500 28px/1.2 var(--display,'EB Garamond',Georgia,serif);margin:12px 0 6px}
+.jlr-rd h4,.jlr-rd h5,.jlr-rd h6{font:600 13px var(--label,monospace);letter-spacing:.1em;text-transform:uppercase;margin:20px 0 8px;color:var(--gold)}
+.jlr-rd p,.jlr-rd li{margin:0 0 .8em}.jlr-rd ul,.jlr-rd ol{padding-left:1.3em;margin:0 0 1em}
+.jlr-rd blockquote{margin:0 0 1em;padding:6px 14px;border-left:3px solid var(--line);background:var(--paper-deep);border-radius:0 8px 8px 0}
+.jlr-tw{overflow-x:auto;margin:0 0 1em}
+.jlr-rd table{border-collapse:collapse;width:100%}
+.jlr-rd th{font:600 11px var(--label,monospace);letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+.jlr-rd td{padding:8px 10px;border-bottom:1px solid var(--line);font-size:16px}
+.jlr-w{font-family:var(--display,'EB Garamond',Georgia,serif);font-size:1.1em;cursor:pointer}
+.jlr-lm{font:500 .8em var(--label,monospace);color:var(--gold);margin-left:3px;cursor:pointer;white-space:nowrap}
+.jlr-rd.nolm .jlr-lm{display:none}
+.jlr-par{background:none;border:1px solid var(--line);border-radius:6px;padding:0 7px;color:var(--edge-open,#8fb4d9);font:600 12px var(--label,monospace);cursor:pointer}
+.jlr-search{width:100%;font-size:16px;margin-bottom:10px}
+.jlr-hits{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.jlr-parbox{border:1px solid var(--line);border-left:3px solid var(--edge-open,#8fb4d9);border-radius:9px;padding:12px 14px;background:var(--paper-deep)}
+.jlr-flash{margin:12px 0;text-align:center}
+.jlr-fg{font:500 44px/1.2 var(--display,'EB Garamond',Georgia,serif);cursor:pointer;margin:8px 0}
+.jlr-fe{font:500 22px var(--display,'EB Garamond',Georgia,serif);margin:6px 0 10px}
+.jlr-h2{font:500 20px var(--display,'EB Garamond',Georgia,serif);margin:6px 0 10px}
+.jlr-fillrow{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 12px}
+.jlr-fc{display:inline-flex;align-items:center;gap:2px}
+.jlr-blank{min-width:56px;height:34px;border:2px dashed var(--line);border-radius:6px;background:none;color:var(--edge-open,#8fb4d9);font:600 18px var(--display,'EB Garamond',Georgia,serif);cursor:pointer}
+.jlr-blank.act{border-color:var(--gold)}.jlr-blank.ok{border:2px solid #8fd694}.jlr-blank.no{border:2px solid var(--rust)}
+.jlr-end{font:500 18px var(--display,'EB Garamond',Georgia,serif)}
+@media (max-width:1100px){.learnview{height:auto;overflow:auto}.jlr-grid{height:auto}}

@@ -14,6 +14,7 @@
     <button data-app="hg" aria-pressed="false">Hebrew &amp; Greek</button>
     <button data-app="atlas" aria-pressed="false" id="atlasbtn" title="The atlas on its own: the map full size, and a search for places, journeys, kingdoms and topics">Atlas</button>
     <button data-app="classes" aria-pressed="false" id="classesbtn" title="Your online classes: watch a lesson beside the app, keep notes, and plan the semester">Classes</button>
+    <button data-app="learn" aria-pressed="false" id="learnbtn" title="Courses and books to learn from: read a lesson, hear a word's lemma, drill it, review it">Learn</button>
   </div>
   <form class="goto" id="goform" role="search" autocomplete="off">
     <input id="goref" list="gobooks" placeholder="Go to a passage: Mark 13:14" aria-label="Go to a passage" spellcheck="false">
@@ -340,6 +341,7 @@ const ST = JaymsStore.create({ prefix: TEST ? "jt:" : undefined, prefsPrefix: PF
   shelfcfg:{sync:true},
   vocab:   {sync:true},  ideas: {sync:true},  logos: {sync:true},     // ready for the features to come
   plans:   {sync:true},  answers: {sync:true}, reviews: {sync:true},
+  learn:   {sync:true},                  // desk-only Learn tab: Done, notes, place, cards and boxes, options
   classes: {sync:true}                   // desk-only Classes page: ticks, notes, semester settings, classes you added
 }});
 const store = ST.prefs;                  // per-device settings (layout, widths, version) keep their own keys
@@ -1569,7 +1571,7 @@ function atlasOn(on){
    (jayms-classes.js, which the public build never ships). */
 S.classesOn = false;
 let CLS = null;
-function appNow(){ return S.atlasOn ? "atlas" : S.classesOn ? "classes" : S.app }
+function appNow(){ return S.atlasOn ? "atlas" : S.classesOn ? "classes" : S.learnOn ? "learn" : S.app }
 function classesOn(on){
   if(PUBLIC) return;
   const go = () => {
@@ -1582,11 +1584,29 @@ function classesOn(on){
   if(on && !window.JaymsClasses){ const sc=document.createElement("script"); sc.src="jayms-classes.js?v="+Date.now(); sc.onload=go; document.head.append(sc) } else go();
 }
 if(PUBLIC){ const cb=$("classesbtn"); if(cb) cb.remove() }
+/* ===== LEARN (desk only) =====
+   Packs from the vault (a coursebook so far): read, hear a word's lemma, drill, review. jayms-learn.js, which the public build never ships. */
+S.learnOn = false;
+let LRN = null;
+function learnOn(on){
+  if(PUBLIC) return;
+  const go = () => {
+    S.learnOn = on; document.body.classList.toggle("app-learn", on);
+    let sec = $("learnview"); if(!sec){ sec=document.createElement("section"); sec.id="learnview"; sec.className="learnview"; $("desk").after(sec) }
+    if(LRN){ LRN.destroy(); LRN=null }
+    if(on) LRN = JaymsLearn.mount(sec, { store: ST.c("learn"), speech: ()=>SPF, copy: copyHighlight });
+    document.querySelectorAll("#appsw button").forEach(b=>{ const x = b.dataset.app===appNow(); b.classList.toggle("on",x); b.setAttribute("aria-pressed",x) });
+  };
+  if(on && !window.JaymsLearn){ const sc=document.createElement("script"); sc.src="jayms-learn.js?v="+Date.now(); sc.onload=go; document.head.append(sc) } else go();
+}
+if(PUBLIC){ const lb=$("learnbtn"); if(lb) lb.remove() }
 document.addEventListener("click",e=>{
   const ap=e.target.closest("#appsw [data-app]"); if(ap){ const a=ap.dataset.app;
-    if(a==="atlas"){ if(S.classesOn) classesOn(false); if(!S.atlasOn) atlasOn(true); return }
-    if(a==="classes"){ if(S.atlasOn) atlasOn(false); if(!S.classesOn) classesOn(true); return }
-    if(S.atlasOn) atlasOn(false); if(S.classesOn) classesOn(false); hgSwitch(a); return }
+    const off=(keep)=>{ if(keep!=="atlas" && S.atlasOn) atlasOn(false); if(keep!=="classes" && S.classesOn) classesOn(false); if(keep!=="learn" && S.learnOn) learnOn(false) };
+    if(a==="atlas"){ off("atlas"); if(!S.atlasOn) atlasOn(true); return }
+    if(a==="classes"){ off("classes"); if(!S.classesOn) classesOn(true); return }
+    if(a==="learn"){ off("learn"); if(!S.learnOn) learnOn(true); return }
+    off(); hgSwitch(a); return }
   const mk=e.target.closest("#text [data-mark]"); if(mk){ e.preventDefault(); HANDLERS.mark(mk.dataset.mark) }
 });
 document.addEventListener("change",e=>{

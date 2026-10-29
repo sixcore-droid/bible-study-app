@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v390">
+<link rel="stylesheet" href="jayms-study.css?v=v391">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -13,6 +13,7 @@
     <button data-app="hg" aria-pressed="false">Hebrew &amp; Greek</button>
     <button data-app="atlas" aria-pressed="false" id="atlasbtn" title="The atlas on its own: the map full size, and a search for places, journeys, kingdoms and topics">Atlas</button>
     <button data-app="classes" aria-pressed="false" id="classesbtn" title="Your online classes: watch a lesson beside the app, keep notes, and plan the semester">Classes</button>
+    <button data-app="learn" aria-pressed="false" id="learnbtn" title="Courses and books to learn from: read a lesson, hear a word's lemma, drill it, review it">Learn</button>
   </div>
   <form class="goto" id="goform" role="search" autocomplete="off">
     <input id="goref" list="gobooks" placeholder="Go to a passage: Mark 13:14" aria-label="Go to a passage" spellcheck="false">
@@ -201,11 +202,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v390"></script>
-<script src="jayms-store.js?v=v390"></script>
-<script src="jayms-folder.js?v=v390"></script>
-<script src="x-discuss.js?v=v390"></script>
-<script src="jayms-study.js?v=v390"></script>
+<script src="jayms-ref.js?v=v391"></script>
+<script src="jayms-store.js?v=v391"></script>
+<script src="jayms-folder.js?v=v391"></script>
+<script src="x-discuss.js?v=v391"></script>
+<script src="jayms-study.js?v=v391"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -339,6 +340,7 @@ const ST = JaymsStore.create({ prefix: TEST ? "jt:" : undefined, prefsPrefix: PF
   shelfcfg:{sync:true},
   vocab:   {sync:true},  ideas: {sync:true},  logos: {sync:true},     // ready for the features to come
   plans:   {sync:true},  answers: {sync:true}, reviews: {sync:true},
+  learn:   {sync:true},                  // desk-only Learn tab: Done, notes, place, cards and boxes, options
   classes: {sync:true}                   // desk-only Classes page: ticks, notes, semester settings, classes you added
 }});
 const store = ST.prefs;                  // per-device settings (layout, widths, version) keep their own keys
@@ -1273,7 +1275,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v390").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v391").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);
@@ -1568,7 +1570,7 @@ function atlasOn(on){
    (jayms-classes.js, which the public build never ships). */
 S.classesOn = false;
 let CLS = null;
-function appNow(){ return S.atlasOn ? "atlas" : S.classesOn ? "classes" : S.app }
+function appNow(){ return S.atlasOn ? "atlas" : S.classesOn ? "classes" : S.learnOn ? "learn" : S.app }
 function classesOn(on){
   if(PUBLIC) return;
   const go = () => {
@@ -1581,11 +1583,29 @@ function classesOn(on){
   if(on && !window.JaymsClasses){ const sc=document.createElement("script"); sc.src="jayms-classes.js?v="+Date.now(); sc.onload=go; document.head.append(sc) } else go();
 }
 if(PUBLIC){ const cb=$("classesbtn"); if(cb) cb.remove() }
+/* ===== LEARN (desk only) =====
+   Packs from the vault (a coursebook so far): read, hear a word's lemma, drill, review. jayms-learn.js, which the public build never ships. */
+S.learnOn = false;
+let LRN = null;
+function learnOn(on){
+  if(PUBLIC) return;
+  const go = () => {
+    S.learnOn = on; document.body.classList.toggle("app-learn", on);
+    let sec = $("learnview"); if(!sec){ sec=document.createElement("section"); sec.id="learnview"; sec.className="learnview"; $("desk").after(sec) }
+    if(LRN){ LRN.destroy(); LRN=null }
+    if(on) LRN = JaymsLearn.mount(sec, { store: ST.c("learn"), speech: ()=>SPF, copy: copyHighlight });
+    document.querySelectorAll("#appsw button").forEach(b=>{ const x = b.dataset.app===appNow(); b.classList.toggle("on",x); b.setAttribute("aria-pressed",x) });
+  };
+  if(on && !window.JaymsLearn){ const sc=document.createElement("script"); sc.src="jayms-learn.js?v="+Date.now(); sc.onload=go; document.head.append(sc) } else go();
+}
+if(PUBLIC){ const lb=$("learnbtn"); if(lb) lb.remove() }
 document.addEventListener("click",e=>{
   const ap=e.target.closest("#appsw [data-app]"); if(ap){ const a=ap.dataset.app;
-    if(a==="atlas"){ if(S.classesOn) classesOn(false); if(!S.atlasOn) atlasOn(true); return }
-    if(a==="classes"){ if(S.atlasOn) atlasOn(false); if(!S.classesOn) classesOn(true); return }
-    if(S.atlasOn) atlasOn(false); if(S.classesOn) classesOn(false); hgSwitch(a); return }
+    const off=(keep)=>{ if(keep!=="atlas" && S.atlasOn) atlasOn(false); if(keep!=="classes" && S.classesOn) classesOn(false); if(keep!=="learn" && S.learnOn) learnOn(false) };
+    if(a==="atlas"){ off("atlas"); if(!S.atlasOn) atlasOn(true); return }
+    if(a==="classes"){ off("classes"); if(!S.classesOn) classesOn(true); return }
+    if(a==="learn"){ off("learn"); if(!S.learnOn) learnOn(true); return }
+    off(); hgSwitch(a); return }
   const mk=e.target.closest("#text [data-mark]"); if(mk){ e.preventDefault(); HANDLERS.mark(mk.dataset.mark) }
 });
 document.addEventListener("change",e=>{

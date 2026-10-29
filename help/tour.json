@@ -46,6 +46,13 @@
      "who": "owner"
     },
     {
+     "sel": "#learnbtn",
+     "name": "Learn",
+     "text": "Packs to learn from, read in place from your vault. The first is Reading Greek Deeply: every lesson, with each Greek word's lemma beside it (click a word and it says its lemma), a paradigm opened from any code, vocabulary and paradigm drills, and a review of what you have finished.",
+     "at": "bottom",
+     "who": "owner"
+    },
+    {
      "sel": "#goref",
      "name": "Go to a passage",
      "text": "Type any reference, like Mark 13:14 or Psalm 82, and press Go. It opens in its own tab beside the day's readings."
