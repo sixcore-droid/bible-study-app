@@ -39,6 +39,13 @@
      "at": "bottom"
     },
     {
+     "sel": "#classesbtn",
+     "name": "Classes",
+     "text": "Your online classes (Peterson Academy, BibleProject Classroom, AWKNG): a lesson plays in its own window on the right half of the screen, you tick it Done and keep notes here, and a semester plan lays the lessons left in every class onto the days you choose.",
+     "at": "bottom",
+     "who": "owner"
+    },
+    {
      "sel": "#goref",
      "name": "Go to a passage",
      "text": "Type any reference, like Mark 13:14 or Psalm 82, and press Go. It opens in its own tab beside the day's readings."

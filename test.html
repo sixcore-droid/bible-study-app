@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>TEST: Bible Study App | jayms.com</title><meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://jayms.com/bible-study-app-TEST/"><meta name="theme-color" content="#0d0e11"><script>window.JAYMS_PUBLIC = true; window.JAYMS_TEST = true; window.JAYMS_FOLDER_DB = "jayms-folder-test";</script></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v384">
+<link rel="stylesheet" href="jayms-study.css?v=v385">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -12,6 +12,7 @@
     <button data-app="study" aria-pressed="true">Bible Study</button>
     <button data-app="hg" aria-pressed="false">Hebrew &amp; Greek</button>
     <button data-app="atlas" aria-pressed="false" id="atlasbtn" title="The atlas on its own: the map full size, and a search for places, journeys, kingdoms and topics">Atlas</button>
+    <button data-app="classes" aria-pressed="false" id="classesbtn" title="Your online classes: watch a lesson beside the app, keep notes, and plan the semester">Classes</button>
   </div>
   <form class="goto" id="goform" role="search" autocomplete="off">
     <input id="goref" list="gobooks" placeholder="Go to a passage: Mark 13:14" aria-label="Go to a passage" spellcheck="false">
@@ -200,11 +201,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v384"></script>
-<script src="jayms-store.js?v=v384"></script>
-<script src="jayms-folder.js?v=v384"></script>
-<script src="x-discuss.js?v=v384"></script>
-<script src="jayms-study.js?v=v384"></script>
+<script src="jayms-ref.js?v=v385"></script>
+<script src="jayms-store.js?v=v385"></script>
+<script src="jayms-folder.js?v=v385"></script>
+<script src="x-discuss.js?v=v385"></script>
+<script src="jayms-study.js?v=v385"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -337,7 +338,8 @@ const ST = JaymsStore.create({ prefix: TEST ? "jt:" : undefined, prefsPrefix: PF
   wraps:   {sync:true},
   shelfcfg:{sync:true},
   vocab:   {sync:true},  ideas: {sync:true},  logos: {sync:true},     // ready for the features to come
-  plans:   {sync:true},  answers: {sync:true}, reviews: {sync:true}
+  plans:   {sync:true},  answers: {sync:true}, reviews: {sync:true},
+  classes: {sync:true}                   // desk-only Classes page: ticks, notes, semester settings, classes you added
 }});
 const store = ST.prefs;                  // per-device settings (layout, widths, version) keep their own keys
 let DB=null, UID=null, SAMPLE=null, OWNER=true, LIVE=false;
@@ -425,7 +427,7 @@ function renderPlan(){
   /* the options under the plan: Bible Study's, or the Hebrew & Greek mode's */
   ["addpsalm","hidelists"].forEach(id=>$(id).closest("label").hidden=hg);
   document.querySelectorAll(".hgopt").forEach(l=>l.hidden=!hg);
-  document.querySelectorAll("#appsw button").forEach(b=>{ const on = S.atlasOn ? b.dataset.app==="atlas" : b.dataset.app===S.app; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on) });
+  document.querySelectorAll("#appsw button").forEach(b=>{ const on = b.dataset.app===appNow(); b.classList.toggle("on",on); b.setAttribute("aria-pressed",on) });
   document.body.classList.toggle("hg-noorig", hg && !S.hgOrig);
   $("planname").textContent = p.name; $("plandesc").textContent = p.description||"";
   const t = todayNum(p), total=p.days.length, done=p.days.filter(dayDone).length;
@@ -1271,7 +1273,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v384").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v385").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);
@@ -1559,10 +1561,31 @@ function atlasOn(on){
     o.atlas = true; o.focusSearch = true;
     o.on = Object.assign({}, HANDLERS, { meta: ()=>{}, passage: d => { atlasOn(false); HANDLERS.passage(d) } });
     AP = new JST.panels.maps(sec, o) }
-  document.querySelectorAll("#appsw button").forEach(b=>{ const x = on ? b.dataset.app==="atlas" : b.dataset.app===S.app; b.classList.toggle("on",x); b.setAttribute("aria-pressed",x) });
+  document.querySelectorAll("#appsw button").forEach(b=>{ const x = b.dataset.app===appNow(); b.classList.toggle("on",x); b.setAttribute("aria-pressed",x) });
 }
+/* ===== CLASSES (desk only) =====
+   The online classes James takes: lessons play in a window beside the app; the plan, ticks and notes live on this page
+   (jayms-classes.js, which the public build never ships). */
+S.classesOn = false;
+let CLS = null;
+function appNow(){ return S.atlasOn ? "atlas" : S.classesOn ? "classes" : S.app }
+function classesOn(on){
+  if(PUBLIC) return;
+  const go = () => {
+    S.classesOn = on; document.body.classList.toggle("app-classes", on);
+    let sec = $("classesview"); if(!sec){ sec=document.createElement("section"); sec.id="classesview"; sec.className="classesview"; $("desk").after(sec) }
+    if(CLS){ CLS.destroy(); CLS=null }
+    if(on) CLS = JaymsClasses.mount(sec, { store: ST.c("classes"), passage: ref => { classesOn(false); HANDLERS.passage({ref}) } });
+    document.querySelectorAll("#appsw button").forEach(b=>{ const x = b.dataset.app===appNow(); b.classList.toggle("on",x); b.setAttribute("aria-pressed",x) });
+  };
+  if(on && !window.JaymsClasses){ const sc=document.createElement("script"); sc.src="jayms-classes.js?v="+Date.now(); sc.onload=go; document.head.append(sc) } else go();
+}
+if(PUBLIC){ const cb=$("classesbtn"); if(cb) cb.remove() }
 document.addEventListener("click",e=>{
-  const ap=e.target.closest("#appsw [data-app]"); if(ap){ if(ap.dataset.app==="atlas"){ if(!S.atlasOn) atlasOn(true); return } if(S.atlasOn) atlasOn(false); hgSwitch(ap.dataset.app); return }
+  const ap=e.target.closest("#appsw [data-app]"); if(ap){ const a=ap.dataset.app;
+    if(a==="atlas"){ if(S.classesOn) classesOn(false); if(!S.atlasOn) atlasOn(true); return }
+    if(a==="classes"){ if(S.atlasOn) atlasOn(false); if(!S.classesOn) classesOn(true); return }
+    if(S.atlasOn) atlasOn(false); if(S.classesOn) classesOn(false); hgSwitch(a); return }
   const mk=e.target.closest("#text [data-mark]"); if(mk){ e.preventDefault(); HANDLERS.mark(mk.dataset.mark) }
 });
 document.addEventListener("change",e=>{
