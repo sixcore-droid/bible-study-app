@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v382">
+<link rel="stylesheet" href="jayms-study.css?v=v383">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -200,11 +200,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v382"></script>
-<script src="jayms-store.js?v=v382"></script>
-<script src="jayms-folder.js?v=v382"></script>
-<script src="x-discuss.js?v=v382"></script>
-<script src="jayms-study.js?v=v382"></script>
+<script src="jayms-ref.js?v=v383"></script>
+<script src="jayms-store.js?v=v383"></script>
+<script src="jayms-folder.js?v=v383"></script>
+<script src="x-discuss.js?v=v383"></script>
+<script src="jayms-study.js?v=v383"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -795,6 +795,7 @@ function panelOptions(id){
   if(id==="word")    o.word = S.word;
   if(id==="verse")   { o.verse = S.vsel; o.scripture = scriptureFor; }
   if(id==="vault")   o.vaultName = MY.notesVault;
+  if(id==="book")    o.speech = () => SPF;   // Read shows once Speechify is set up
   if(id==="logos")   o.items = () => ST.c("logos").all();
   if(id==="vocab")   Object.assign(o, { items:() => ST.c("vocab").all(), obsidian:{vault:MY.notesVault, path:MY.studyFolder+"/Vocabulary.md"} });
   if(id==="wrap")    { const rs = S.adhoc ? [S.adhoc] : READINGS;
@@ -1236,12 +1237,27 @@ function highlightCol(c){
   const sel=getSelection(), rg=document.createRange(); rg.setStartBefore(cells[0]); rg.setEndAfter(cells[cells.length-1]);
   sel.removeAllRanges(); sel.addRange(rg);
 }
+/* Highlight: the text copied (the button says Copied for a moment). The reader's column and the Book panel's section both use it. */
+function copyHighlight(btn, text){
+  const say=t=>{ btn.textContent=t; setTimeout(()=>{ btn.textContent="Highlight" }, 1600) };
+  if(navigator.clipboard) navigator.clipboard.writeText(text).then(()=>say("Copied")).catch(()=>{ try{ document.execCommand("copy"); say("Copied") }catch(er){} });
+  else { try{ document.execCommand("copy"); say("Copied") }catch(er){} }
+}
+/* the Book panel's section as plain text, to copy or to read aloud: its title first, no verse numbers */
+function bookText(box){
+  const c=box.cloneNode(true); c.querySelectorAll(".jst-vn").forEach(x=>x.remove());
+  return `${$("ptitle").textContent}.\n\n`+[...c.querySelectorAll("p")].map(p=>p.textContent.replace(/\s+/g," ").trim()).filter(Boolean).join("\n\n");
+}
+$("pbody").addEventListener("click",e=>{   // the Book panel's Highlight and Read: the reader's two buttons, on the book's text
+  const h=e.target.closest("[data-bk-hl]"), rd=e.target.closest("[data-bk-rd]"); if(!h && !rd) return;
+  const box=$("pbody").querySelector(".jst-book"); if(!box) return;
+  const select=()=>{ const sel=getSelection(), rg=document.createRange(); rg.selectNodeContents(box); sel.removeAllRanges(); sel.addRange(rg) };
+  if(h){ e.preventDefault(); select(); copyHighlight(h, bookText(box)) }
+  if(rd && window.Speechify){ e.preventDefault(); rd.__spfBtn=rd; Speechify.read(rd, { text: bookText(box), highlight: select }) }
+});
 $("text").addEventListener("click",e=>{
   const h=e.target.closest("[data-hl]"), rd=e.target.closest("[data-rd]");
-  if(h){ e.preventDefault(); const c=+h.dataset.hl; highlightCol(c);   // one tap: the column selected and copied, ready to paste
-    const say=t=>{ h.textContent=t; setTimeout(()=>{ h.textContent="Highlight" }, 1600) };
-    if(navigator.clipboard) navigator.clipboard.writeText(colText(c)).then(()=>say("Copied")).catch(()=>{ try{ document.execCommand("copy"); say("Copied") }catch(er){} });
-    else { try{ document.execCommand("copy"); say("Copied") }catch(er){} } }
+  if(h){ e.preventDefault(); const c=+h.dataset.hl; highlightCol(c); copyHighlight(h, colText(c)) }   // one tap: the column selected and copied, ready to paste
   if(rd && window.Speechify){ e.preventDefault(); const c=+rd.dataset.rd; rd.__spfBtn=rd;
     Speechify.read(rd, { text: colText(c), highlight: ()=>highlightCol(c) }); }
 });
@@ -1255,7 +1271,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v382").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v383").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);

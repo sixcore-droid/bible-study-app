@@ -2337,7 +2337,10 @@
       var h2 = '<div class="askrow u-gap6 jst-bknav">' + go(prev, "Previous", -1) + '<span class="sub u-flex1 u-ta-c">Section ' + s.n + " of " + b.sections.length + "</span>" + go(next, "Next", 1) + "</div>";
       if (n > 1) h2 += '<div class="chips u-mt6"><span class="lbl">On this reading</span>' + this.hits.map(function (x, k) { var y = this.bk[x.b].sections[x.i]; return '<button class="chip' + (k === st.k ? " on" : "") + '" data-jst-bkhit="' + k + '">' + esc(y.ref.replace(/^\S+\s/, "")) + "</button>"; }, this).join("") + "</div>";
       var ob = b.obsidian ? outlink("obsidian://open?vault=" + encodeURIComponent(b.obsidian.vault) + "&file=" + encodeURIComponent(b.obsidian.file), "Open the whole book in Obsidian") : "";
-      h2 += '<p class="ctx u-fs13 u-mt10">' + esc(b.by) + ", " + esc(b.title) + " \u00B7 " + esc(s.ref) + "</p>";
+      var speech = this.o.speech && this.o.speech();
+      h2 += '<div class="phdr one u-mt10"><span class="lbl">' + esc(b.by) + " \u00B7 " + esc(s.ref) + '<span class="rdbtns"><button class="sz" data-bk-hl title="Highlight this section and copy it">Highlight</button>' +
+        (speech ? '<button class="sz spf-btn" data-bk-rd title="Read this section aloud in Speechify"><span class="spf-ico">\u25B6</span> <span class="spf-lab">Read</span></button>' : "") + "</span></span></div>";
+      h2 += '<p class="ctx u-fs13">' + esc(b.title) + "</p>";
       h2 += '<div class="jst-book">' + bookParas(s.pages).map(function (p) { return "<p>" + p + "</p>"; }).join("") + "</div>" + (ob ? '<p class="u-mt10">' + ob + "</p>" : "");
       return { kick: "Book \u00B7 " + b.by, title: s.title || s.ref, wide: true, body: h2 };
     },

@@ -796,6 +796,7 @@ function panelOptions(id){
   if(id==="word")    o.word = S.word;
   if(id==="verse")   { o.verse = S.vsel; o.scripture = scriptureFor; }
   if(id==="vault")   o.vaultName = MY.notesVault;
+  if(id==="book")    o.speech = () => SPF;   // Read shows once Speechify is set up
   if(id==="logos")   o.items = () => ST.c("logos").all();
   if(id==="vocab")   Object.assign(o, { items:() => ST.c("vocab").all(), obsidian:{vault:MY.notesVault, path:MY.studyFolder+"/Vocabulary.md"} });
   if(id==="wrap")    { const rs = S.adhoc ? [S.adhoc] : READINGS;
@@ -1237,12 +1238,27 @@ function highlightCol(c){
   const sel=getSelection(), rg=document.createRange(); rg.setStartBefore(cells[0]); rg.setEndAfter(cells[cells.length-1]);
   sel.removeAllRanges(); sel.addRange(rg);
 }
+/* Highlight: the text copied (the button says Copied for a moment). The reader's column and the Book panel's section both use it. */
+function copyHighlight(btn, text){
+  const say=t=>{ btn.textContent=t; setTimeout(()=>{ btn.textContent="Highlight" }, 1600) };
+  if(navigator.clipboard) navigator.clipboard.writeText(text).then(()=>say("Copied")).catch(()=>{ try{ document.execCommand("copy"); say("Copied") }catch(er){} });
+  else { try{ document.execCommand("copy"); say("Copied") }catch(er){} }
+}
+/* the Book panel's section as plain text, to copy or to read aloud: its title first, no verse numbers */
+function bookText(box){
+  const c=box.cloneNode(true); c.querySelectorAll(".jst-vn").forEach(x=>x.remove());
+  return `${$("ptitle").textContent}.\n\n`+[...c.querySelectorAll("p")].map(p=>p.textContent.replace(/\s+/g," ").trim()).filter(Boolean).join("\n\n");
+}
+$("pbody").addEventListener("click",e=>{   // the Book panel's Highlight and Read: the reader's two buttons, on the book's text
+  const h=e.target.closest("[data-bk-hl]"), rd=e.target.closest("[data-bk-rd]"); if(!h && !rd) return;
+  const box=$("pbody").querySelector(".jst-book"); if(!box) return;
+  const select=()=>{ const sel=getSelection(), rg=document.createRange(); rg.selectNodeContents(box); sel.removeAllRanges(); sel.addRange(rg) };
+  if(h){ e.preventDefault(); select(); copyHighlight(h, bookText(box)) }
+  if(rd && window.Speechify){ e.preventDefault(); rd.__spfBtn=rd; Speechify.read(rd, { text: bookText(box), highlight: select }) }
+});
 $("text").addEventListener("click",e=>{
   const h=e.target.closest("[data-hl]"), rd=e.target.closest("[data-rd]");
-  if(h){ e.preventDefault(); const c=+h.dataset.hl; highlightCol(c);   // one tap: the column selected and copied, ready to paste
-    const say=t=>{ h.textContent=t; setTimeout(()=>{ h.textContent="Highlight" }, 1600) };
-    if(navigator.clipboard) navigator.clipboard.writeText(colText(c)).then(()=>say("Copied")).catch(()=>{ try{ document.execCommand("copy"); say("Copied") }catch(er){} });
-    else { try{ document.execCommand("copy"); say("Copied") }catch(er){} } }
+  if(h){ e.preventDefault(); const c=+h.dataset.hl; highlightCol(c); copyHighlight(h, colText(c)) }   // one tap: the column selected and copied, ready to paste
   if(rd && window.Speechify){ e.preventDefault(); const c=+rd.dataset.rd; rd.__spfBtn=rd;
     Speechify.read(rd, { text: colText(c), highlight: ()=>highlightCol(c) }); }
 });
