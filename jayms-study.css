@@ -951,10 +951,8 @@ body.app-learn #desk{display:none}
 .jlr-end{font:500 18px var(--display,'EB Garamond',Georgia,serif)}
 @media (max-width:1100px){.learnview{height:auto;overflow:auto}.jlr-grid{height:auto}}
 
-/* ---------- test copy: Go to a passage and Find live in the reading-tab row (body.hdr-new) ---------- */
-.rtabrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.rtabrow .rtabs{flex:1 1 auto;min-width:0}
-.rtabq{display:flex;align-items:center;gap:10px;margin-left:auto}
+/* ---------- test copy: Go to a passage and Find live on the passage title line (body.hdr-new) ---------- */
+.rhead .rtabq{display:flex;align-items:center;gap:10px;align-self:flex-start;margin:24px 0 0 auto}
 .rtabq .goto input{width:min(240px,22vw);min-width:120px}
 .rtabq .find input{width:min(170px,16vw);min-width:100px}
 .findico{display:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--paper-deep);align-items:center;justify-content:center;cursor:pointer;flex:none}
