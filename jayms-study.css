@@ -967,6 +967,6 @@ body.hdr-new .rhead>div:first-child{flex:1 1 280px;min-width:0}   /* the title b
 body.hdr-new .rhead .rtabq{flex:none}
 
 /* the verses you came from, marked in the full chapter (the FC breadcrumb) */
-.vs.vfrom{background:rgba(212,168,92,.16);border-radius:4px}
-p.v.vfrom{background:rgba(212,168,92,.12);border-left:3px solid var(--gold);padding-left:10px;border-radius:0 6px 6px 0}
+.vs.vfrom{background:rgba(237,228,211,.09);border-radius:3px;padding:.36em .12em;margin:0 -.12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}   /* the padding fills the gap between lines, so the tint reads as one block across wrapped lines */
+p.v.vfrom{background:rgba(237,228,211,.08);border-left:3px solid var(--gold);padding-left:10px;border-radius:0 6px 6px 0}
 body.hdr-new .top .sp{flex:1 1 8px}   /* the buttons at the right end (Settings, About, Donate, Help) sit flush right now that Go and Find have left the bar */
