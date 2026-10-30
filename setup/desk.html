@@ -1702,4 +1702,21 @@ $("hgorig").checked=S.hgOrig; document.querySelectorAll("[data-hgcat]").forEach(
   SAMPLE = OWNER ? await claude.use("sample") : null;
   if(PLANINDEX) render();
 })();
+
+/* Every link from the app back to jayms.com carries source / medium / campaign, so Jetpack can see where a click came from (a bare link posted anywhere is a lost
+   measurement). Done at the link itself, as it is drawn and again at the click, so panels, Help, the footer and the brand all get it; the campaign names the place. */
+(function(){
+  const isJ=h=>/^(www\.)?jayms\.com$/.test(h);
+  const camp=a=>a.closest("#helpview")?"help":a.closest("#pbody")?"panel-"+(S.tool||"panel"):a.closest("#text,#reader")?"reader":a.closest(".top")?"topbar":a.closest("#learnview")?"learn":a.closest("#classesview")?"classes":a.closest("#atlasview")?"atlas":"app";
+  function tag(a){
+    let u; try{ u=new URL(a.getAttribute("href")||"", location.href) }catch(e){ return }
+    if(!isJ(u.hostname) || u.pathname.startsWith("/wp-json") || u.searchParams.has("utm_source")) return;
+    u.searchParams.set("utm_source","bible-study-app"); u.searchParams.set("utm_medium","app"); u.searchParams.set("utm_campaign",camp(a));
+    a.setAttribute("href",u.href);
+  }
+  const SEL='a[href*="jayms.com"]', scan=r=>{ if(r.matches&&r.matches(SEL)) tag(r); r.querySelectorAll&&r.querySelectorAll(SEL).forEach(tag) };
+  scan(document.body);
+  new MutationObserver(ms=>ms.forEach(m=>{ if(m.type==="attributes") scan(m.target); else m.addedNodes.forEach(n=>{ if(n.nodeType===1) scan(n) }) })).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["href"]});
+  document.addEventListener("click",e=>{ const a=e.target.closest&&e.target.closest(SEL); if(a) tag(a) },true);
+})();
 </script>
