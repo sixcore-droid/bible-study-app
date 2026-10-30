@@ -48,7 +48,7 @@
     {
      "sel": "#learnbtn",
      "name": "Learn",
-     "text": "Packs to learn from, read in place from your vault. The first is Reading Greek Deeply: every lesson, with each Greek word's lemma beside it (click a word and it says its lemma), a paradigm opened from any code, vocabulary and paradigm drills, and a review of what you have finished.",
+     "text": "Packs to learn from, read in place from your vault. The first is Reading Greek Deeply: every lesson, with each Greek word's lemma beside it (click a word and it says its lemma), a paradigm opened from any code, vocabulary and paradigm drills, and a review of what you have finished. A− and A+ set the text size, and the bar between the lesson and the right panel drags to resize it.",
      "at": "bottom",
      "who": "owner"
     },
