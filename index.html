@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v398">
+<link rel="stylesheet" href="jayms-study.css?v=v399">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -155,7 +155,7 @@
         <button class="sz" id="larger" aria-label="Larger text">A+</button>
       </div>
       <div class="vpick" id="voicewrap" hidden><button class="sz" id="voicecfg" aria-expanded="false" title="Speechify voice and speed">Voice</button></div>
-      <div class="vpick chnav"><button class="sz" id="fullch" hidden aria-label="Full chapter" title="Full chapter">FC</button><button class="sz" id="prevch" aria-label="Previous chapter">«</button><button class="sz" id="nextch" aria-label="Next chapter">»</button></div>
+      <div class="vpick chnav"><button class="sz" id="prevch" aria-label="Previous chapter">«</button><button class="sz" id="fullch" hidden aria-label="Full chapter" title="Full chapter">FC</button><button class="sz" id="nextch" aria-label="Next chapter">»</button></div>
     </div>
     <div id="spfhost" hidden></div>
     <article class="text" id="text"></article>
@@ -202,11 +202,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v398"></script>
-<script src="jayms-store.js?v=v398"></script>
-<script src="jayms-folder.js?v=v398"></script>
-<script src="x-discuss.js?v=v398"></script>
-<script src="jayms-study.js?v=v398"></script>
+<script src="jayms-ref.js?v=v399"></script>
+<script src="jayms-store.js?v=v399"></script>
+<script src="jayms-folder.js?v=v399"></script>
+<script src="x-discuss.js?v=v399"></script>
+<script src="jayms-study.js?v=v399"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -1286,7 +1286,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v398").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v399").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);
@@ -1485,13 +1485,30 @@ function fullChapterRef(){ const r=cur(); if(!r) return null; const segs=JaymsRe
   const part=segs.some(g=>{ const last=JaymsRef.verses(g.book,g.c2); return g.v1>1 || (g.v2!==999 && g.v2<last) }); if(!part) return null;
   const b=segs[0].book, c1=Math.min(...segs.filter(g=>g.book===b).map(g=>g.c1)), c2=Math.max(...segs.filter(g=>g.book===b).map(g=>g.c2)), bk=JaymsRef.book(b);
   return bk.chapters===1 ? bk.name : `${bk.name} ${c1}${c2>c1?"-"+c2:""}` }
+/* with only part of a chapter on screen « and » step to the verses before and after (the same number of them), with FC between them; with whole chapters they step chapters */
+function stepVerse(d){
+  const r=cur(); if(!r) return null; const segs=JaymsRef.parse(r.ref); if(segs.length!==1) return null;
+  const g=segs[0], b=g.book, bk=JaymsRef.book(b), last=c=>JaymsRef.verses(b,c), toEnd=(c,v)=>v===999?last(c):v;
+  let n=0; for(let c=g.c1;c<=g.c2;c++){ const a=c===g.c1?g.v1:1, z=c===g.c2?toEnd(c,g.v2):last(c); n+=z-a+1 }
+  let sc, sv, ec, ev;
+  if(d>0){
+    sc=g.c2; sv=toEnd(g.c2,g.v2)+1; if(sv>last(sc)){ sc++; sv=1 } if(sc>bk.chapters) return null;
+    ec=sc; ev=sv; let left=n-1;
+    while(left>0){ const room=last(ec)-ev; if(room>=left){ ev+=left; left=0 } else { left-=room+1; ec++; ev=1; if(ec>bk.chapters){ ec=bk.chapters; ev=last(ec); left=0 } } }
+  } else {
+    ec=g.c1; ev=g.v1-1; if(ev<1){ ec--; if(ec<1) return null; ev=last(ec) }
+    sc=ec; sv=ev; let left=n-1;
+    while(left>0){ if(sv-1>=left){ sv-=left; left=0 } else { left-=sv; sc--; if(sc<1){ sc=1; sv=1; left=0 } else sv=last(sc) } }
+  }
+  return JaymsRef.format([{book:b,c1:sc,v1:sv,c2:ec,v2:ev}]);
+}
 function syncChapterNav(){ const fc=fullChapterRef(); $("fullch").hidden=!fc; $("fullch").title=fc?"Full chapter: "+fc:"";
-  [["prevch",-1],["nextch",1]].forEach(([id,d])=>{ $(id).hidden=!!fc; const t=cur()&&stepChapter(d); $(id).disabled=!t; $(id).title=t?(d<0?"Previous chapter: ":"Next chapter: ")+t:"" }) }
-/* FC opens the full chapter in a tab of its own beside the verses you were on (the tab stays: click it to go back, × closes it); in the chapter the verses you came from are marked and scrolled to */
+  [["prevch",-1],["nextch",1]].forEach(([id,d])=>{ const t=cur()&&(fc?stepVerse(d):stepChapter(d)); $(id).hidden=false; $(id).disabled=!t;
+    $(id).title=t?(fc?(d<0?"Previous verses: ":"Next verses: "):(d<0?"Previous chapter: ":"Next chapter: "))+t:""; $(id).setAttribute("aria-label",fc?(d<0?"Previous verses":"Next verses"):(d<0?"Previous chapter":"Next chapter")) }) }
 $("fullch").onclick=()=>{ const t=fullChapterRef(); if(!t) return; const from=cur().ref;
   if(!openPassage(t)){ cur().crumb={ mark:JaymsRef.parse(from) }; renderReader() } };
-$("prevch").onclick=()=>{ const t=stepChapter(-1); if(t) openPassage(t, true) };
-$("nextch").onclick=()=>{ const t=stepChapter(1); if(t) openPassage(t, true) };
+$("prevch").onclick=()=>{ const t=fullChapterRef()?stepVerse(-1):stepChapter(-1); if(t) openPassage(t, true) };
+$("nextch").onclick=()=>{ const t=fullChapterRef()?stepVerse(1):stepChapter(1); if(t) openPassage(t, true) };
 $("larger").onclick=()=>{S.size=Math.min(26,S.size+1);store.set("size",S.size);renderReader()};
 function railShown(){ const r=$("rail"); return getComputedStyle(r).display!=="none" && (getComputedStyle(r).position!=="fixed" || r.classList.contains("open")) }
 function syncRailBtn(){ const on=railShown(); $("railbtn").classList.toggle("on",on); $("railbtn").setAttribute("aria-expanded",on) }

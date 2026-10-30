@@ -219,12 +219,12 @@
     {
      "sel": ".chnav",
      "name": "« »",
-     "text": "Previous and next chapter."
+     "text": "Previous and next chapter; with only part of a chapter on screen, the verses before and after (the same number of them), with FC between them."
     },
     {
      "sel": "#fullch",
      "name": "FC",
-     "text": "Full chapter: in place of « » when only part of a chapter is on screen, in a tab of its own beside the verses you were on, which stay one click away; the verses you came from are marked and scrolled to.",
+     "text": "Full chapter: shows between « » when only part of a chapter is on screen (they then step to the verses before and after); it opens in a tab of its own beside the verses you were on, which stay one click away; the verses you came from are marked and scrolled to.",
      "optional": true
     },
     {
