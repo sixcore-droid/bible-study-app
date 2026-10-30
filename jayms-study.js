@@ -2331,8 +2331,8 @@
       return data.readBooks().then(function (list) {
         self.list = list.filter(function (b) {
           if (!q) return false;
-          if (b.any) return !!ot;                                              /* a book about the whole Old Testament's world: beside any Old Testament passage */
-          if (b.book !== q.book) return false;
+          if (b.any) return b.any === "all" || (b.any === "nt" ? !ot : !!ot);   /* a book about a whole Testament: beside any passage in it */
+          if (b.book !== q.book && !(b.books && b.books.indexOf(q.book) > -1)) return false;
           if (b.kind === "topical" && b.ref) { var g = data.segs(b.ref)[0]; return !!g && overlap(g, q); }   /* a book about a passage: beside that passage */
           return !b.chapters || (q.c2 >= b.chapters[0] && q.c1 <= b.chapters[1]);
         });
@@ -2914,7 +2914,7 @@
     /* a book he can read right here (books-reader.json): the one for this Logos id on this Bible book, or the vault file */
     readable: function (logosId, bible, file) {
       file = file && file.split("/").pop();
-      return (this.rb || []).filter(function (b) { return (logosId && b.logos === logosId && (b.any || b.book === bible)) || (file && b.vaultFile === file) ||
+      return (this.rb || []).filter(function (b) { return (logosId && b.logos === logosId && (b.any || b.book === bible || (b.books && b.books.indexOf(bible) > -1))) || (file && b.vaultFile === file) ||
         (file && b.obsidian && (b.obsidian.file.split("/").pop() + ".md") === file); })[0];
     },
     readBtn: function (b) { return b ? '<button class="btn fill" data-jst-readbook="' + esc(b.id) + '" title="Read it here, beside the Bible">Read here</button> ' : ""; },
