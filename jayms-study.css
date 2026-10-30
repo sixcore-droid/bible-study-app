@@ -965,3 +965,7 @@ body.app-learn #desk{display:none}
 @media (max-width:860px){ .rtabq{display:none} }
 body.hdr-new .rhead>div:first-child{flex:1 1 280px;min-width:0}   /* the title block gives way, so Go and Find stay on its line */
 body.hdr-new .rhead .rtabq{flex:none}
+
+/* the verses you came from, marked in the full chapter (the FC breadcrumb) */
+.vs.vfrom{background:rgba(212,168,92,.16);border-radius:4px}
+p.v.vfrom{background:rgba(212,168,92,.12);border-left:3px solid var(--gold);padding-left:10px;border-radius:0 6px 6px 0}

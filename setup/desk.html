@@ -128,6 +128,7 @@
     <div class="rtabs" id="rtabs" role="tablist" aria-label="Today's readings"></div>
     <div class="rhead">
       <div>
+        <button class="pback" id="rcrumb" hidden></button>
         <div class="lbl" id="rkick"></div>
         <h1 id="rtitle"></h1>
         <div class="rlinks" id="rlogos"></div>
@@ -488,6 +489,7 @@ function renderReader(){
   $("rtabs").innerHTML += S.opened.map((o,n)=>`<span class="rtabgrp"><button class="rtab${S.adhoc===o?" on":""} adhoc" role="tab" aria-selected="${S.adhoc===o}" data-open-tab="${n}">${tabRef(o.ref)}</button><button class="rtabx" data-close-adhoc="${n}" title="Close ${esc(o.ref)}" aria-label="Close ${esc(o.ref)}">×</button></span>`).join("");
   $("rkick").textContent = !S.planOn ? "Passage" : S.adhoc ? "Opened passage · not in today's plan" : `${isToday?(plan().weekly?"This week":"Today"):(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
   $("rtitle").textContent = r.ref;
+  { const cb=r.crumb; $("rcrumb").hidden=!cb; if(cb){ $("rcrumb").textContent = cb.back ? "\u2039 "+cb.back : cb.fwd+" \u203A"; $("rcrumb").title = cb.back ? "Back to the verses you were on" : "Back to the full chapter" } }
   const lg = JaymsRef.refly(r.ref, S.ver);
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
   $("rlogos").hidden = !S.logos;
@@ -511,9 +513,10 @@ function renderReader(){
   const splitSup=t=>{const m=t.match(/<span class='sup'>.*?<\/span>/); return m?[m[0],t.replace(m[0],"")]:["",t]};
   const vkey=x=>`${x.book}|${x.c}|${x.v}`, vlabel=x=>multi?`${x.c}:${x.v}`:`${x.v}`;
   const isSel=x=>S.tool==="verse"&&S.vsel&&S.vsel.book===x.book&&S.vsel.c===x.c&&S.vsel.v===x.v;
+  const mk=r.crumb&&r.crumb.mark, inFrom=x=>!!mk&&mk.some(g=>g.book===x.book&&(x.c>g.c1||(x.c===g.c1&&x.v>=g.v1))&&(x.c<g.c2||(x.c===g.c2&&x.v<=g.v2)));   // the verses you came from, in the full chapter
   const verseHTML=(ver,x,inPara)=>{ const sel=isSel(x); const [sup,body]=splitSup(textOf(ver,x));
     const num=`<a href="#" class="vn" data-v="${vkey(x)}" title="Verse ${vlabel(x)} tools">[${vlabel(x)}]</a>`;
-    return inPara ? `${sup}<span class="vs${sel?" sel":""}">${num}${body}</span> ` : `<p class="v${sel?" sel":""}">${sup}<span class="vtag">${ver}</span>${num} ${body}</p>` };
+    const fr=inFrom(x)?" vfrom":""; return inPara ? `${sup}<span class="vs${sel?" sel":""}${fr}">${num}${body}</span> ` : `<p class="v${sel?" sel":""}${fr}">${sup}<span class="vtag">${ver}</span>${num} ${body}</p>` };
   /* one group per book and chapter: "Jude 6; 2 Peter 2:4" reads as two, each labelled */
   const groups=[]; (rows||[]).forEach(x=>{ const g=`${x.book} ${x.c}`; if(!groups.length||groups[groups.length-1].g!==g) groups.push({g,rows:[]}); groups[groups.length-1].rows.push(x) });
   const blocks=[]; groups.forEach(G=>{ if(groups.length>1) blocks.push({label:G.g}); if(S.layout==="verse") G.rows.forEach(x=>blocks.push({rows:[x]}));
@@ -553,6 +556,7 @@ function renderReader(){
   colorText();   // red letters, Connecting Scripture blue, purple where both (Settings)
   findApply(false);
   syncChapterNav();
+  if(r.crumb && r.crumb.mark && rows && rows.length && !r.crumb.scrolled){ r.crumb.scrolled=true; requestAnimationFrame(()=>{ const el=$("text").querySelector(".vfrom"); if(el) el.scrollIntoView({block:"center"}) }) }
   const th = thread(r.id);
   $("xline").hidden = !th;
   if(th) $("xline").innerHTML = JaymsX.lineHTML(th,{owner:S.view!=="public",label:"this reading"});
@@ -1486,7 +1490,12 @@ function fullChapterRef(){ const r=cur(); if(!r) return null; const segs=JaymsRe
   return bk.chapters===1 ? bk.name : `${bk.name} ${c1}${c2>c1?"-"+c2:""}` }
 function syncChapterNav(){ const fc=fullChapterRef(); $("fullch").hidden=!fc; $("fullch").title=fc?"Full chapter: "+fc:"";
   [["prevch",-1],["nextch",1]].forEach(([id,d])=>{ $(id).hidden=!!fc; const t=cur()&&stepChapter(d); $(id).disabled=!t; $(id).title=t?(d<0?"Previous chapter: ":"Next chapter: ")+t:"" }) }
-$("fullch").onclick=()=>{ const t=fullChapterRef(); if(t) openPassage(t, true) };
+/* FC leaves a breadcrumb: the verses you were on, one tap back, and the full chapter one tap forward again. In the chapter the verses you came from are marked and scrolled to. */
+$("fullch").onclick=()=>{ const t=fullChapterRef(); if(!t) return; const from=cur().ref;
+  if(!openPassage(t, true)){ const n=cur(); n.crumb={ back:from, mark:JaymsRef.parse(from) }; renderReader() } };
+$("rcrumb").onclick=()=>{ const r=cur(), c=r&&r.crumb; if(!c) return;
+  if(c.back){ const full=r.ref, part=c.back; if(!openPassage(part, true)){ cur().crumb={ fwd:full, part }; renderReader() } }
+  else { const part=c.part; if(!openPassage(c.fwd, true)){ cur().crumb={ back:part, mark:JaymsRef.parse(part) }; renderReader() } } };
 $("prevch").onclick=()=>{ const t=stepChapter(-1); if(t) openPassage(t, true) };
 $("nextch").onclick=()=>{ const t=stepChapter(1); if(t) openPassage(t, true) };
 $("larger").onclick=()=>{S.size=Math.min(26,S.size+1);store.set("size",S.size);renderReader()};
