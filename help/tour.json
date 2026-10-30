@@ -53,16 +53,6 @@
      "who": "owner"
     },
     {
-     "sel": "#goref",
-     "name": "Go to a passage",
-     "text": "Type any reference, like Mark 13:14 or Psalm 82, and press Go. It opens in its own tab beside the day's readings."
-    },
-    {
-     "sel": "#findq",
-     "name": "Find in the text",
-     "text": "Highlights a word everywhere in the passage on screen. Enter jumps to the next one."
-    },
-    {
      "sel": "#viewsw",
      "name": "My desk / Read along",
      "text": "My desk is your full view. Read along shows what a visitor sees.",
@@ -174,6 +164,18 @@
      "sel": "#rtabs .rtab",
      "name": "Reading tabs",
      "text": "One tab for each of the day's readings, and one for each passage you open with Go. × closes an opened passage."
+    },
+    {
+     "sel": "#goref",
+     "name": "Go to a passage",
+     "text": "Type any reference, like Mark 13:14 or Psalm 82, and press Go. It opens in its own tab beside the day's readings.",
+     "at": "bottom"
+    },
+    {
+     "sel": "#findq",
+     "name": "Find in the text",
+     "text": "Highlights a word everywhere in the passage on screen. Enter jumps to the next one. It sits beside Go to a passage; in a narrow window it folds to a search button.",
+     "at": "bottom"
     },
     {
      "sel": "#rlogos a",
