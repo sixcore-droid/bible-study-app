@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>TEST: Bible Study App | jayms.com</title><meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://jayms.com/bible-study-app-TEST/"><meta name="theme-color" content="#0d0e11"><script>window.JAYMS_PUBLIC = true; window.JAYMS_TEST = true; window.JAYMS_FOLDER_DB = "jayms-folder-test";</script></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v391">
+<link rel="stylesheet" href="jayms-study.css?v=v392">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -202,11 +202,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v391"></script>
-<script src="jayms-store.js?v=v391"></script>
-<script src="jayms-folder.js?v=v391"></script>
-<script src="x-discuss.js?v=v391"></script>
-<script src="jayms-study.js?v=v391"></script>
+<script src="jayms-ref.js?v=v392"></script>
+<script src="jayms-store.js?v=v392"></script>
+<script src="jayms-folder.js?v=v392"></script>
+<script src="x-discuss.js?v=v392"></script>
+<script src="jayms-study.js?v=v392"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -1013,7 +1013,17 @@ function findApply(move){
 $("findform").onsubmit=e=>{ e.preventDefault() };
 $("findq").oninput=()=>{ FIND_I=0; findApply(0) };
 $("findq").onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); findApply(e.shiftKey?-1:1) } else if(e.key==="Escape"){ $("findq").value=""; findApply(0); $("findq").blur() } };
-document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==="f"){ e.preventDefault(); $("findq").focus(); $("findq").select() } });
+document.addEventListener("keydown",e=>{ if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==="f"){ e.preventDefault(); $("findform").classList.add("open"); $("findq").focus(); $("findq").select() } });
+/* TEST COPY: Go to a passage and Find move out of the top bar to the right of the reading tabs (the top bar was too crowded at 1200px: the Find box covered Go).
+   Below about 1250px Find folds to a search button; on a phone the top bar's own menu is used, so they are not shown there. */
+if(TEST){
+  const row=document.createElement("div"); row.className="rtabrow"; $("rtabs").before(row); row.append($("rtabs"));
+  const q=document.createElement("div"); q.className="rtabq"; q.append($("goform"),$("findform")); row.append(q);
+  const ico=document.createElement("button"); ico.type="button"; ico.className="findico"; ico.setAttribute("aria-label","Find in the text"); ico.title="Find in the text";
+  ico.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg>';
+  $("findform").prepend(ico); ico.onclick=()=>{ const f=$("findform"); f.classList.toggle("open"); if(f.classList.contains("open")) $("findq").focus() };
+  document.body.classList.add("hdr-new");
+}
 /* the header can wrap onto two lines in a narrow window; everything pinned under it follows its real height */
 /* no top bar (phone): the notch and clock are the top, so the installed app keeps clear of them */
 function setTopH(){ const h=document.querySelector(".top").offsetHeight; document.documentElement.style.setProperty("--toph", h ? h+"px" : "env(safe-area-inset-top,0px)") }
@@ -1275,7 +1285,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v391").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v392").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);
