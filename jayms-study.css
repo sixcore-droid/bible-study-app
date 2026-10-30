@@ -986,4 +986,7 @@ body:not(.app-atlas) .atlasview,body:not(.app-classes) .classesview,body:not(.ap
 .jlr-sz{display:inline-flex;gap:6px;align-items:center;margin-left:auto}
 
 /* "Read here": a small button beside a book's name, not a full-size one */
-.btn.jst-rdbtn{padding:3px 9px;font-size:11px;border-radius:5px;margin:0 0 0 6px;vertical-align:middle;white-space:nowrap}
+.btn.jst-rdbtn{padding:3px 9px;font-size:11px;border-radius:5px;margin:0 6px 0 0;vertical-align:middle;white-space:nowrap}
+.jst-rdrow{display:flex;align-items:flex-start;gap:8px}
+.jst-rdrow .btn.jst-rdbtn{margin:1px 0 0;flex:none}
+.jst-rdrow>span{min-width:0}

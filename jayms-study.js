@@ -2922,7 +2922,8 @@
     vaultHTML: function () {
       var vb = this.vb, segs = data.segs(this.o.ref), q = segs[0], bk = q && q.book, names = this.cfg().authors, lib = (this.lib && this.lib.lib) || [];
       if (!vb || !vb.authors) return none("Your BOOKS vault list isn't built yet.");
-      var rd = this, open = function (b, by) { var rb = rd.readBtn(rd.readable(null, bk, b.f)); return '<p class="u-m5">' + outlink("obsidian://open?vault=" + encodeURIComponent(vb.vault) + "&file=" + encodeURIComponent(b.f.replace(/\.md$/, "")), esc(b.t)) + (by ? ' <span class="sub">' + esc(by) + "</span>" : "") + rb + "</p>"; };
+      var rd = this, open = function (b, by) { var rb = rd.readBtn(rd.readable(null, bk, b.f)), lk = outlink("obsidian://open?vault=" + encodeURIComponent(vb.vault) + "&file=" + encodeURIComponent(b.f.replace(/\.md$/, "")), esc(b.t)) + (by ? ' <span class="sub">' + esc(by) + "</span>" : "");
+        return rb ? '<p class="u-m5 jst-rdrow">' + rb + "<span>" + lk + "</span></p>" : '<p class="u-m5">' + lk + "</p>"; };
       var h = "", on = [];
       vb.authors.forEach(function (a) { a.books.forEach(function (b) { if (!bk || !b.bk || b.bk.indexOf(bk) < 0) return;
         /* a file about one chapter ("Psalm 23", "Romans 1-7") shows only beside a passage in that chapter */
