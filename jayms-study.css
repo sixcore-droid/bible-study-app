@@ -951,7 +951,7 @@ body.app-learn #desk{display:none}
 .jlr-end{font:500 18px var(--display,'EB Garamond',Georgia,serif)}
 @media (max-width:1100px){.learnview{height:auto;overflow:auto}.jlr-grid{height:auto}}
 
-/* ---------- test copy: Go to a passage and Find live on the passage title line (body.hdr-new) ---------- */
+/* ---------- Go to a passage and Find live on the passage title line (body.hdr-new) ---------- */
 .rhead .rtabq{display:flex;align-items:center;gap:10px;align-self:flex-start;margin:24px 0 0 auto}
 .rtabq .goto input{width:min(240px,22vw);min-width:120px}
 .rtabq .find input{width:min(170px,16vw);min-width:100px}
@@ -963,3 +963,5 @@ body.app-learn #desk{display:none}
   body.hdr-new #findform.open #findq{display:block}
 }
 @media (max-width:860px){ .rtabq{display:none} }
+body.hdr-new .rhead>div:first-child{flex:1 1 280px;min-width:0}   /* the title block gives way, so Go and Find stay on its line */
+body.hdr-new .rhead .rtabq{flex:none}
