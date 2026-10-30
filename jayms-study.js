@@ -2922,8 +2922,11 @@
     vaultHTML: function () {
       var vb = this.vb, segs = data.segs(this.o.ref), q = segs[0], bk = q && q.book, names = this.cfg().authors, lib = (this.lib && this.lib.lib) || [];
       if (!vb || !vb.authors) return none("Your BOOKS vault list isn't built yet.");
-      var rd = this, open = function (b, by) { var rb = rd.readBtn(rd.readable(null, bk, b.f)), lk = outlink("obsidian://open?vault=" + encodeURIComponent(vb.vault) + "&file=" + encodeURIComponent(b.f.replace(/\.md$/, "")), esc(b.t)) + (by ? ' <span class="sub">' + esc(by) + "</span>" : "");
-        return rb ? '<p class="u-m5 jst-rdrow">' + rb + "<span>" + lk + "</span></p>" : '<p class="u-m5">' + lk + "</p>"; };
+      var rd = this, open = function (b, by) {
+        /* the title opens the book here when it can be read in the app; otherwise it opens the file in Obsidian (purple, Obsidian's colour) */
+        var rb = rd.readable(null, bk, b.f), sub = by ? ' <span class="sub">' + esc(by) + "</span>" : "";
+        if (rb) return '<p class="u-m5"><a class="out" href="#" data-jst-readbook="' + esc(rb.id) + '" title="Read it here, beside the Bible">' + esc(b.t) + "</a>" + sub + "</p>";
+        return '<p class="u-m5">' + outlink("obsidian://open?vault=" + encodeURIComponent(vb.vault) + "&file=" + encodeURIComponent(b.f.replace(/\.md$/, "")), esc(b.t)).replace('class="out"', 'class="out obs" title="Open in Obsidian"') + sub + "</p>"; };
       var h = "", on = [];
       vb.authors.forEach(function (a) { a.books.forEach(function (b) { if (!bk || !b.bk || b.bk.indexOf(bk) < 0) return;
         /* a file about one chapter ("Psalm 23", "Romans 1-7") shows only beside a passage in that chapter */
@@ -2995,7 +2998,7 @@
       if (sb) { e.stopPropagation(); this.st.src = sb.getAttribute("data-jst-nsrc"); this.paint(); return; }
       if (e.target.closest("[data-jst-rfirst]")) { e.stopPropagation(); READ_FIRST = !READ_FIRST; try { localStorage.setItem("jst.readfirst", READ_FIRST ? "1" : "0"); } catch (x) {} this.paint(); return; }
       var rbk = e.target.closest("[data-jst-readbook]");
-      if (rbk) { e.stopPropagation(); this.emit("book", { id: rbk.getAttribute("data-jst-readbook") }); return; }
+      if (rbk) { e.stopPropagation(); e.preventDefault(); this.emit("book", { id: rbk.getAttribute("data-jst-readbook") }); return; }
       var tb = e.target.closest("[data-jst-stab]");
       if (tb) { e.stopPropagation(); SHELF_TAB = tb.getAttribute("data-jst-stab"); this.el.scrollTop = 0; this.paint(); return; }
       Panel.prototype.click.call(this, e);

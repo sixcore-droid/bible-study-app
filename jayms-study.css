@@ -990,3 +990,6 @@ body:not(.app-atlas) .atlasview,body:not(.app-classes) .classesview,body:not(.ap
 .jst-rdrow{display:flex;align-items:flex-start;gap:8px}
 .jst-rdrow .btn.jst-rdbtn{margin:1px 0 0;flex:none}
 .jst-rdrow>span{min-width:0}
+
+/* an Obsidian link wears Obsidian's purple */
+.out.obs{color:#a08cf5;border-bottom-color:#a08cf5}
