@@ -2938,7 +2938,7 @@
         var books = [].concat.apply([], a.map(function (x) { return x.books; })), inLogos = lib.filter(function (x) { return byAuthor(nm, x[2]); }).length;
         any = true;
         h += '<div class="box v-' + (inLogos ? "apparatus" : "witness") + '"><div class="item"><span class="tt u-fs18">' + esc(nm) + '</span><span class="sub">' + books.length + " in your vault \u00B7 " + (inLogos ? inLogos + " in Logos" : "none in Logos") + "</span>" +
-          (inLogos ? '<details class="jst-past"><summary class="lbl">Their books (' + books.length + ")</summary>" + books.map(open).join("") + "</details>" : books.map(open).join("")) + "</div></div>";
+          (inLogos ? '<details class="jst-past"><summary class="lbl">Their books (' + books.length + ")</summary>" + books.map(function (b) { return open(b); }).join("") + "</details>" : books.map(function (b) { return open(b); }).join("")) + "</div></div>";
       });
       if (!any) h += none("None of your authors has a book in your BOOKS vault.");
       return h + '<p class="ctx u-fs13">Opens in Obsidian (BOOKS vault). Refreshed with the Logos shelf each morning.</p>';
