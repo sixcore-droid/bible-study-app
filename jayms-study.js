@@ -437,6 +437,7 @@
   }
 
   var SHELF = null;
+  var READ_FIRST = false; try { READ_FIRST = localStorage.getItem("jst.readfirst") === "1"; } catch (e) {}   // Shelf: books he can read in the app first
   var CORE = {}, CORE_IDS = {};            // the core stack (shelf.json core): by book, always shown, never hidden
   var SHELF_TAB = "com";                  // the Shelf tab James last picked: com | sb | other
   var XREFN = {}, NOTEN = {};
@@ -2991,6 +2992,7 @@
     click: function (e) {
       var sb = e.target.closest("[data-jst-nsrc]");
       if (sb) { e.stopPropagation(); this.st.src = sb.getAttribute("data-jst-nsrc"); this.paint(); return; }
+      if (e.target.closest("[data-jst-rfirst]")) { e.stopPropagation(); READ_FIRST = !READ_FIRST; try { localStorage.setItem("jst.readfirst", READ_FIRST ? "1" : "0"); } catch (x) {} this.paint(); return; }
       var rbk = e.target.closest("[data-jst-readbook]");
       if (rbk) { e.stopPropagation(); this.emit("book", { id: rbk.getAttribute("data-jst-readbook") }); return; }
       var tb = e.target.closest("[data-jst-stab]");
@@ -3010,18 +3012,24 @@
       if (tab === "other") return { kick: kick, title: "Others", body: tabs + this.dddHTML() + this.coursesHTML() + this.authorsHTML() };
       if (!segs.length) return { kick: kick, title: "Commentaries", body: tabs };
       h += tabs;
+      var canRead = own && (this.rb || []).length > 0;
+      if (canRead) h += '<div class="chips u-mb10"><span class="lbl">Sort</span><button class="chip' + (READ_FIRST ? " on" : "") + '" data-jst-rfirst title="Books you can read here, in the app, come first">Read here first</button></div>';
+      var rdFirst = function (list) { if (!READ_FIRST || !canRead) return list;
+        return list.map(function (x, i) { return { x: x, i: i, r: self.readable(x.id, shelfBook) ? 0 : 1 }; }).sort(function (a, b) { return a.r - b.r || a.i - b.i; }).map(function (o) { return o.x; }); };
+      var shelfBook = "";
       var c = this.cfg(), names = c.authors, rank = function (x) { var r = authorRank(names, x.by); return r < 0 ? 999 : r; }, hidden = 0;
       var order = function (list) { var n0 = list.length, out = cfgSort(list, function (x) { return x.id; }, c.com, function (a, b) { return rank(a) - rank(b) || (b.year || 0) - (a.year || 0); }); hidden += n0 - out.length; return out; };
       var mine = function (x) { return c.com.order.indexOf(x.id) > -1 || rank(x) < 999; };
       var card = function (s) { return function (x) {
         return box(mine(x) ? "witness" : "apparatus", "", '<div class="item"><span class="when">' + esc([x.series, x.year].filter(Boolean).join(" \u00B7 ")) + '</span><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(x.by) + "</span>" +
-          outlink(logosRes(x.id, s), "Open") + "</div>");
+          self.readBtn(self.readable(x.id, s.book)) + outlink(logosRes(x.id, s), "Open") + "</div>");
       }; };
       var notCore = function (x) { return !CORE_IDS[x.id]; };
       segs.forEach(function (s) {
         /* the core stack: the same layers on every book; a volume split by chapters shows the part the passage is in */
         var core = (CORE[s.book] || []).filter(function (x) { return !x.ch || (s.c1 <= x.ch[1] && (s.c2 || s.c1) >= x.ch[0]); });
-        var all = order(sh[s.book] || []).filter(notCore), tr = all.filter(mine), rest = all.filter(function (x) { return !mine(x); });
+        shelfBook = s.book; core = rdFirst(core);
+        var all = order(sh[s.book] || []).filter(notCore), tr = rdFirst(all.filter(mine)), rest = rdFirst(all.filter(function (x) { return !mine(x); }));
         if (segs.length > 1) h += '<div class="lbl">' + esc(bookLabel(s.book)) + "</div>";
         if (core.length) h += '<div class="lbl">Core stack</div>' + core.map(function (x) {
           return box("witness", "", '<div class="item"><span class="when">' + esc(x.layer) + '</span><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(shortBy(x.by)) + "</span>" +
