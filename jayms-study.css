@@ -984,3 +984,6 @@ body:not(.app-atlas) .atlasview,body:not(.app-classes) .classesview,body:not(.ap
 .jlr-rd{font-size:var(--jlr-fs,17px)}
 .jlr-rd td{font-size:.94em}
 .jlr-sz{display:inline-flex;gap:6px;align-items:center;margin-left:auto}
+
+/* "Read here": a small button beside a book's name, not a full-size one */
+.btn.jst-rdbtn{padding:3px 9px;font-size:11px;border-radius:5px;margin:0 0 0 6px;vertical-align:middle;white-space:nowrap}

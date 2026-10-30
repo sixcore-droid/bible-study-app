@@ -2917,18 +2917,18 @@
       return (this.rb || []).filter(function (b) { return (logosId && b.logos === logosId && (b.any || b.book === bible || (b.books && b.books.indexOf(bible) > -1))) || (file && b.vaultFile === file) ||
         (file && b.obsidian && (b.obsidian.file.split("/").pop() + ".md") === file); })[0];
     },
-    readBtn: function (b) { return b ? '<button class="btn fill" data-jst-readbook="' + esc(b.id) + '" title="Read it here, beside the Bible">Read here</button> ' : ""; },
+    readBtn: function (b) { return b ? '<button class="btn fill jst-rdbtn" data-jst-readbook="' + esc(b.id) + '" title="Read it here, beside the Bible">Read here</button> ' : ""; },
     /* the Vault tab: books in his Obsidian BOOKS vault, for the authors Logos doesn't cover. Books about this Bible book first, then his authors in order */
     vaultHTML: function () {
       var vb = this.vb, segs = data.segs(this.o.ref), q = segs[0], bk = q && q.book, names = this.cfg().authors, lib = (this.lib && this.lib.lib) || [];
       if (!vb || !vb.authors) return none("Your BOOKS vault list isn't built yet.");
-      var rd = this, open = function (b) { return '<p class="u-m5">' + rd.readBtn(rd.readable(null, bk, b.f)) + outlink("obsidian://open?vault=" + encodeURIComponent(vb.vault) + "&file=" + encodeURIComponent(b.f.replace(/\.md$/, "")), esc(b.t)) + "</p>"; };
+      var rd = this, open = function (b, by) { var rb = rd.readBtn(rd.readable(null, bk, b.f)); return '<p class="u-m5">' + outlink("obsidian://open?vault=" + encodeURIComponent(vb.vault) + "&file=" + encodeURIComponent(b.f.replace(/\.md$/, "")), esc(b.t)) + (by ? ' <span class="sub">' + esc(by) + "</span>" : "") + rb + "</p>"; };
       var h = "", on = [];
       vb.authors.forEach(function (a) { a.books.forEach(function (b) { if (!bk || !b.bk || b.bk.indexOf(bk) < 0) return;
         /* a file about one chapter ("Psalm 23", "Romans 1-7") shows only beside a passage in that chapter */
         if (b.ch && !b.ch.some(function (c) { return segs.some(function (sg) { return sg.book === bk && c >= sg.c1 && c <= sg.c2; }); })) return;
         on.push({ a: a, b: b }); }); });
-      if (on.length) h += '<div class="lbl">On ' + esc(bookLabel(bk)) + " (" + on.length + ")</div>" + box("witness", "", '<div class="item">' + on.map(function (x) { return open(x.b).replace("</p>", ' <span class="sub">' + esc(x.a.by) + "</span></p>"); }).join("") + "</div>");
+      if (on.length) h += '<div class="lbl">On ' + esc(bookLabel(bk)) + " (" + on.length + ")</div>" + box("witness", "", '<div class="item">' + on.map(function (x) { return open(x.b, x.a.by); }).join("") + "</div>");
       var used = {}, any = false;
       h += '<div class="lbl u-mt14">My authors</div>';
       names.forEach(function (nm) {
