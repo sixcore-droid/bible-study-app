@@ -969,3 +969,4 @@ body.hdr-new .rhead .rtabq{flex:none}
 /* the verses you came from, marked in the full chapter (the FC breadcrumb) */
 .vs.vfrom{background:rgba(212,168,92,.16);border-radius:4px}
 p.v.vfrom{background:rgba(212,168,92,.12);border-left:3px solid var(--gold);padding-left:10px;border-radius:0 6px 6px 0}
+body.hdr-new .top .sp{flex:1 1 8px}   /* the buttons at the right end (Settings, About, Donate, Help) sit flush right now that Go and Find have left the bar */
