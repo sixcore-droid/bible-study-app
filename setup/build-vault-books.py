@@ -29,6 +29,13 @@ def title_of(stem, folder):
     t = re.sub(r"\s+by\s+[^-]*" + re.escape(last) + r"\s*$", "", t, flags=re.I)          # "Mere Christianity by C. S. Lewis"
     return re.sub(r"\s+", " ", t).strip()
 
+def has_text(f):
+    """A Markdown file with real reading in it: at least 150 words of prose, and not one of the commentary's charts, maps or adverts."""
+    if re.search(r"Charts and Maps|Comparative Ancient Near Eastern Chronology|Finding the Textbook", f.stem): return False
+    try: body = re.sub(r"^---\n.*?\n---\n", "", f.read_text(encoding="utf-8", errors="ignore"), count=1, flags=re.S)
+    except OSError: return False
+    return len(re.findall(r"[A-Za-z]{3,}", body)) >= 150
+
 out = []
 if SHELF.is_dir():
     for d in sorted(p for p in SHELF.iterdir() if p.is_dir() and not p.name.startswith(".") and p.name not in SKIP):
@@ -38,6 +45,7 @@ if SHELF.is_dir():
         for f in files:
             if f.suffix.lower() == ".pdf" and f.stem in mds: continue
             if f.stem.startswith("duplicate_") or re.search(r" \d$", f.stem) and f.stem[:-2] in mds: continue
+            if f.suffix.lower() == ".md" and not has_text(f): continue                  # a chart, a map's labels, an advert: nothing to read
             t = title_of(f.stem, d.name)
             last = re.sub(r"[^a-z0-9]", "", d.name.split(",")[0].lower())
             key = re.sub(r"^(the)", "", re.sub(r"^" + re.escape(last), "", re.sub(r"[^a-z0-9]", "", t.lower())))
