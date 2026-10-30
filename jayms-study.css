@@ -811,6 +811,8 @@ body.noplan #biblepick{margin-top:0}
 
 /* a book read beside the Bible (Book panel) */
 .jst-book{margin-top:12px}
+.jst-book .jst-bkh{margin:1.4em 0 .5em;font:600 13px var(--label);letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.jst-book .jst-bkv{font-family:var(--label);font-weight:500;color:var(--gold);letter-spacing:.04em}
 .jst-book p{margin:0 0 1em;font:17px/1.65 var(--read);color:var(--ink)}
 .jst-vn{font:600 .66em var(--label);color:var(--gold);margin-right:2px;vertical-align:super}
 .jst-bknav{align-items:center}

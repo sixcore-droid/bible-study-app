@@ -2316,15 +2316,36 @@
     if (cur.trim()) out.push(cur.trim());
     return out.map(function (p) { return esc(p).replace(/(^|[\s(\u2014-])(\d{1,2})(?=(?!st\b|nd\b|rd\b|th\b)[A-Za-z\u2018\u201c(]|&#39;|&quot;)/g, '$1<sup class="jst-vn">$2</sup>'); });   /* a number run straight into a word is a verse number */
   }
+  /* a book already cut into paragraphs (the IVP commentary's entries, Walton's chapters): "3:3. Samuel's dream? text" gets its verse in bold, "## x" is a sub-heading */
+  function rawParas(pages) {
+    return pages.map(function (p) {
+      if (/^#{2,4} /.test(p)) return '<h4 class="jst-bkh">' + esc(p.replace(/^#+\s*/, "")) + "</h4>";
+      var m = /^(\d{1,3}(?::\d{1,3})?(?:[-\u2013]\d{1,3}(?::\d{1,3})?)?)\.\s+([^.]{1,100}\.)\s*(.*)$/.exec(p);
+      return m ? '<p><b class="jst-bkv">' + esc(m[1]) + "</b> <b>" + esc(m[2]) + "</b> " + esc(m[3]) + "</p>" : "<p>" + esc(p) + "</p>";
+    }).join("");
+  }
   define("Book", { id: "book", label: "Book", name: "Read a book beside the Bible", icon: ICON.book, owner: true }, {
     prepare: function () {
-      var self = this, q = data.segs(this.o.ref)[0];
+      var self = this, q = data.segs(this.o.ref)[0], ot = q && R.book(q.book) && R.book(q.book).order < 39;
       return data.readBooks().then(function (list) {
-        self.list = list.filter(function (b) { return q && b.book === q.book && (!b.chapters || (q.c2 >= b.chapters[0] && q.c1 <= b.chapters[1])); });
+        self.list = list.filter(function (b) {
+          if (!q) return false;
+          if (b.any) return !!ot;                                              /* a book about the whole Old Testament's world: beside any Old Testament passage */
+          if (b.book !== q.book) return false;
+          if (b.kind === "topical" && b.ref) { var g = data.segs(b.ref)[0]; return !!g && overlap(g, q); }   /* a book about a passage: beside that passage */
+          return !b.chapters || (q.c2 >= b.chapters[0] && q.c1 <= b.chapters[1]);
+        });
         return Promise.all(self.list.map(function (b) { return data.readBook(b.id); }));
       }).then(function (bk) {
         self.bk = bk.filter(Boolean); self.hits = [];
-        self.bk.forEach(function (b, bi) { b.sections.forEach(function (s, si) { var g = data.segs(s.ref)[0]; if (g && q && overlap(g, q)) self.hits.push({ b: bi, i: si }); }); });
+        self.bk.forEach(function (b, bi) {
+          if (b.kind === "topical") { self.hits.push({ b: bi, i: 0, whole: true }); return; }   /* one entry for the book; its chapters are stepped through inside */
+          b.sections.forEach(function (s, si) { var g = data.segs(s.ref)[0]; if (g && q && overlap(g, q)) self.hits.push({ b: bi, i: si }); });
+        });
+        if (self.o.pick) {   /* "Read here" from the shelf: that book first */
+          var at = self.hits.findIndex(function (x) { return self.bk[x.b].id === self.o.pick || (self.o.pick === "ivp" && self.bk[x.b].kind === "ivp"); });
+          if (at > -1) self.st.k = at; self.o.pick = null;
+        }
       });
     },
     view: function () {
@@ -2332,20 +2353,25 @@
       if (!this.bk || !this.bk.length) return { kick: "Book", title: "Books beside the Bible", body: none("None of your books covers " + esc(this.o.ref) + " yet. The books are listed in books-reader.json.") };
       if (!this.hits.length) return { kick: "Book", title: "Books beside the Bible", body: none("None of your books has a section on " + esc(this.o.ref) + ".") };
       var n = this.hits.length; st.k = Math.min(st.k || 0, n - 1);
-      var h = this.hits[st.k], b = this.bk[h.b], s = b.sections[h.i], prev = b.sections[h.i - 1], next = b.sections[h.i + 1];
-      var go = function (x, label, dir) { return x ? '<button class="btn" data-jst-bkgo="' + esc(x.ref) + '" title="' + esc(x.ref + (x.title ? ": " + x.title : "")) + '">' + (dir < 0 ? "\u2039 " : "") + label + (dir > 0 ? " \u203A" : "") + "</button>" : '<button class="btn" disabled>' + (dir < 0 ? "\u2039 " : "") + label + (dir > 0 ? " \u203A" : "") + "</button>"; };
-      var h2 = '<div class="askrow u-gap6 jst-bknav">' + go(prev, "Previous", -1) + '<span class="sub u-flex1 u-ta-c">Section ' + s.n + " of " + b.sections.length + "</span>" + go(next, "Next", 1) + "</div>";
-      if (n > 1) h2 += '<div class="chips u-mt6"><span class="lbl">On this reading</span>' + this.hits.map(function (x, k) { var y = this.bk[x.b].sections[x.i]; return '<button class="chip' + (k === st.k ? " on" : "") + '" data-jst-bkhit="' + k + '">' + esc(y.ref.replace(/^\S+\s/, "")) + "</button>"; }, this).join("") + "</div>";
+      var h = this.hits[st.k], b = this.bk[h.b], top = !!h.whole, sec = st.sec = st.sec || {};
+      var at = top ? Math.min(sec[b.id] || 0, b.sections.length - 1) : h.i, s = b.sections[at], prev = b.sections[at - 1], next = b.sections[at + 1];
+      var go = function (x, label, dir, k) {
+        var tgt = top ? ' data-jst-bksec="' + (at + dir) + '"' : ' data-jst-bkgo="' + esc(x ? x.ref : "") + '"';
+        return x ? '<button class="btn"' + tgt + ' title="' + esc((top ? x.title : x.ref + (x.title ? ": " + x.title : ""))) + '">' + (dir < 0 ? "\u2039 " : "") + label + (dir > 0 ? " \u203A" : "") + "</button>" : '<button class="btn" disabled>' + (dir < 0 ? "\u2039 " : "") + label + (dir > 0 ? " \u203A" : "") + "</button>"; };
+      var h2 = '<div class="askrow u-gap6 jst-bknav">' + go(prev, "Previous", -1) + '<span class="sub u-flex1 u-ta-c">' + (top ? "Part " : "Section ") + s.n + " of " + b.sections.length + "</span>" + go(next, "Next", 1) + "</div>";
+      if (n > 1) h2 += '<div class="chips u-mt6"><span class="lbl">On this reading</span>' + this.hits.map(function (x, k) { var bb = this.bk[x.b], y = bb.sections[x.i]; return '<button class="chip' + (k === st.k ? " on" : "") + '" data-jst-bkhit="' + k + '" title="' + esc(bb.title) + '">' + esc(x.whole ? bb.title : bb.kind === "ivp" ? "IVP " + y.ref.split(" ").pop() : y.ref.replace(/^\S+\s/, "")) + "</button>"; }, this).join("") + "</div>";
+      if (top && b.sections.length > 1) h2 += '<details class="jst-past u-mt6"><summary class="lbl">Contents (' + b.sections.length + ')</summary><div class="chips">' + b.sections.map(function (x, k) { return '<button class="chip' + (k === at ? " on" : "") + '" data-jst-bksec="' + k + '">' + esc(x.title) + "</button>"; }).join("") + "</div></details>";
       var ob = b.obsidian ? outlink("obsidian://open?vault=" + encodeURIComponent(b.obsidian.vault) + "&file=" + encodeURIComponent(b.obsidian.file), "Open the whole book in Obsidian") : "";
       var speech = this.o.speech && this.o.speech();
-      h2 += '<div class="phdr one u-mt10"><span class="lbl">' + esc(b.by) + " \u00B7 " + esc(s.ref) + '<span class="rdbtns"><button class="sz" data-bk-hl title="Highlight this section and copy it">Highlight</button>' +
+      h2 += '<div class="phdr one u-mt10"><span class="lbl">' + esc(b.by) + " \u00B7 " + esc(top ? s.title : s.ref) + '<span class="rdbtns"><button class="sz" data-bk-hl title="Highlight this section and copy it">Highlight</button>' +
         (speech ? '<button class="sz spf-btn" data-bk-rd title="Read this section aloud in Speechify"><span class="spf-ico">\u25B6</span> <span class="spf-lab">Read</span></button>' : "") + "</span></span></div>";
       h2 += '<p class="ctx u-fs13">' + esc(b.title) + "</p>";
-      h2 += '<div class="jst-book">' + bookParas(s.pages).map(function (p) { return "<p>" + p + "</p>"; }).join("") + "</div>" + (ob ? '<p class="u-mt10">' + ob + "</p>" : "");
-      return { kick: "Book \u00B7 " + b.by, title: s.title || s.ref, wide: true, body: h2 };
+      h2 += '<div class="jst-book">' + (b.sections[at].raw ? rawParas(s.pages) : bookParas(s.pages).map(function (p) { return "<p>" + p + "</p>"; }).join("")) + "</div>" + (ob ? '<p class="u-mt10">' + ob + "</p>" : "");
+      return { kick: "Book \u00B7 " + b.by, title: top ? b.title : s.title || s.ref, wide: true, body: h2 };
     },
     click: function (e) {
-      var go = e.target.closest("[data-jst-bkgo]"), hit = e.target.closest("[data-jst-bkhit]");
+      var go = e.target.closest("[data-jst-bkgo]"), hit = e.target.closest("[data-jst-bkhit]"), sc = e.target.closest("[data-jst-bksec]");
+      if (sc) { e.stopPropagation(); var hh = this.hits[this.st.k]; this.st.sec[this.bk[hh.b].id] = +sc.getAttribute("data-jst-bksec"); this.paint(); this.el.scrollTop = 0; return; }
       if (go) { e.stopPropagation(); this.emit("passage", { ref: go.getAttribute("data-jst-bkgo"), follow: true }); return; }
       if (hit) { e.stopPropagation(); this.st.k = +hit.getAttribute("data-jst-bkhit"); this.paint(); return; }
       Panel.prototype.click.call(this, e);
@@ -2883,12 +2909,19 @@
   /* The shelf. For James: his Logos commentaries, his study Bibles (Logos plus the open Tyndale and Biblica notes), maps, and the rest
      (DDD, his authors' books), one tab at a time. For readers: the open study notes and the maps. Order and hiding come from Config. */
   define("Shelf", { id: "shelf", label: "Shelf", name: "Study notes and my Logos shelf", icon: '<svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15 20l2-13 3 .5-2 12.5"/></svg>' }, {
-    prepare: function () { var self = this, own = this.o.owner, lg = this.o.logos !== false; return Promise.all([data.notes(this.o.ref), lg ? data.shelf() : null, lg ? data.library() : null, data.maps(), own ? data.vaultBooks() : null]).then(function (r) { self.notes = r[0]; self.sh = r[1]; self.lib = r[2]; self.vb = r[4]; }); },
+    prepare: function () { var self = this, own = this.o.owner, lg = this.o.logos !== false; return Promise.all([data.notes(this.o.ref), lg ? data.shelf() : null, lg ? data.library() : null, data.maps(), own ? data.vaultBooks() : null, own ? data.readBooks() : null]).then(function (r) { self.notes = r[0]; self.sh = r[1]; self.lib = r[2]; self.vb = r[4]; self.rb = r[5] || []; }); },
+    /* a book he can read right here (books-reader.json): the one for this Logos id on this Bible book, or the vault file */
+    readable: function (logosId, bible, file) {
+      file = file && file.split("/").pop();
+      return (this.rb || []).filter(function (b) { return (logosId && b.logos === logosId && (b.any || b.book === bible)) || (file && b.vaultFile === file) ||
+        (file && b.obsidian && (b.obsidian.file.split("/").pop() + ".md") === file); })[0];
+    },
+    readBtn: function (b) { return b ? '<button class="btn fill" data-jst-readbook="' + esc(b.id) + '" title="Read it here, beside the Bible">Read here</button> ' : ""; },
     /* the Vault tab: books in his Obsidian BOOKS vault, for the authors Logos doesn't cover. Books about this Bible book first, then his authors in order */
     vaultHTML: function () {
       var vb = this.vb, segs = data.segs(this.o.ref), q = segs[0], bk = q && q.book, names = this.cfg().authors, lib = (this.lib && this.lib.lib) || [];
       if (!vb || !vb.authors) return none("Your BOOKS vault list isn't built yet.");
-      var open = function (b) { return '<p class="u-m5">' + outlink("obsidian://open?vault=" + encodeURIComponent(vb.vault) + "&file=" + encodeURIComponent(b.f.replace(/\.md$/, "")), esc(b.t)) + "</p>"; };
+      var rd = this, open = function (b) { return '<p class="u-m5">' + rd.readBtn(rd.readable(null, bk, b.f)) + outlink("obsidian://open?vault=" + encodeURIComponent(vb.vault) + "&file=" + encodeURIComponent(b.f.replace(/\.md$/, "")), esc(b.t)) + "</p>"; };
       var h = "", on = [];
       vb.authors.forEach(function (a) { a.books.forEach(function (b) { if (!bk || !b.bk || b.bk.indexOf(bk) < 0) return;
         /* a file about one chapter ("Psalm 23", "Romans 1-7") shows only beside a passage in that chapter */
@@ -2958,12 +2991,14 @@
     click: function (e) {
       var sb = e.target.closest("[data-jst-nsrc]");
       if (sb) { e.stopPropagation(); this.st.src = sb.getAttribute("data-jst-nsrc"); this.paint(); return; }
+      var rbk = e.target.closest("[data-jst-readbook]");
+      if (rbk) { e.stopPropagation(); this.emit("book", { id: rbk.getAttribute("data-jst-readbook") }); return; }
       var tb = e.target.closest("[data-jst-stab]");
       if (tb) { e.stopPropagation(); SHELF_TAB = tb.getAttribute("data-jst-stab"); this.el.scrollTop = 0; this.paint(); return; }
       Panel.prototype.click.call(this, e);
     },
     view: function () {
-      var sh = this.sh || {}, segs = shelfBooks(this.o.ref), h = "", own = this.o.owner;
+      var self = this, sh = this.sh || {}, segs = shelfBooks(this.o.ref), h = "", own = this.o.owner;
       var lg = this.o.logos !== false;   // Hide Logos: no Logos lists, just the open study notes (and, on the desk, the vault)
       var TABS = own ? (lg ? [["com", "Commentaries"], ["sb", "Study Bibles"], ["vault", "Vault"], ["other", "Others"]] : [["sb", "Study notes"], ["vault", "Vault"]])
                      : (lg ? [["com", "Commentaries"], ["sb", "Study notes"]] : [["sb", "Study notes"]]);   // maps live in the Maps panel
@@ -2990,7 +3025,7 @@
         if (segs.length > 1) h += '<div class="lbl">' + esc(bookLabel(s.book)) + "</div>";
         if (core.length) h += '<div class="lbl">Core stack</div>' + core.map(function (x) {
           return box("witness", "", '<div class="item"><span class="when">' + esc(x.layer) + '</span><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(shortBy(x.by)) + "</span>" +
-            outlink(x.at ? logosRes(x.id, s) : R.logos(x.id), "Open") + "</div>"); }).join("");
+            self.readBtn(self.readable(x.id, s.book)) + outlink(x.at ? logosRes(x.id, s) : R.logos(x.id), "Open") + "</div>"); }).join("");
         if (tr.length) h += '<div class="lbl">' + (own ? "My first picks" : "First picks") + "</div>" + tr.map(card(s)).join("");
         if (rest.length) h += '<div class="lbl">' + (tr.length ? "The rest of the shelf" : "On " + esc(bookLabel(s.book))) + " (" + rest.length + ")</div>" + rest.map(card(s)).join("");
         if (!all.length && !core.length) h += none((own ? "You don't own" : "No") + " commentary on " + esc(bookLabel(s.book)) + " in Logos.");
