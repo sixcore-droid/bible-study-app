@@ -120,12 +120,12 @@
     {
      "sel": ".prog",
      "name": "Progress",
-     "text": "Which day of the plan it is, and how much is done."
+     "text": "Which day you are up to in the plan, by what you have done and not by the calendar, and how much is done."
     },
     {
      "sel": "#planrestart",
      "name": "Restart this plan",
-     "text": "Clears this plan's Done ticks and starts it again from day 1, today. It asks first, and your other plans are not touched."
+     "text": "Clears this plan's Done ticks and starts it again from day 1. It asks first, and your other plans are not touched."
     },
     {
      "sel": "#days .day",

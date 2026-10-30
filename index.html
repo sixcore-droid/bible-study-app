@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v400">
+<link rel="stylesheet" href="jayms-study.css?v=v401">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -116,7 +116,7 @@
     <div class="prog">
       <div class="lbl"><span id="progtxt"></span><span id="progpct"></span></div>
       <div class="bar"><i id="progbar"></i></div>
-      <button class="chip planrestart" id="planrestart" title="Clear this plan's Done ticks and start it again from day 1, today">Restart this plan</button>
+      <button class="chip planrestart" id="planrestart" title="Clear this plan's Done ticks and start it again from day 1">Restart this plan</button>
     </div>
     <ol class="days" id="days"></ol>
       </div>
@@ -202,11 +202,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v400"></script>
-<script src="jayms-store.js?v=v400"></script>
-<script src="jayms-folder.js?v=v400"></script>
-<script src="x-discuss.js?v=v400"></script>
-<script src="jayms-study.js?v=v400"></script>
+<script src="jayms-ref.js?v=v401"></script>
+<script src="jayms-store.js?v=v401"></script>
+<script src="jayms-folder.js?v=v401"></script>
+<script src="x-discuss.js?v=v401"></script>
+<script src="jayms-study.js?v=v401"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -379,13 +379,9 @@ const plan=()=>PLANS[S.plan];
 /* when a plan starts: James's own start date on his desk; on the public site, the day the visitor first opened that plan (they begin at day 1) */
 function planStart(p){ const k="start:"+p.id; let d=store.get(k,null); if(!PUBLIC) return d||p.start;   // the desk uses the plan's own start unless that plan was restarted here
   if(!d){ const t=new Date(); d=`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`; store.set(k,d) } return d }
-function todayNum(p){const d0=new Date(planStart(p)+"T00:00:00"), now=new Date(); now.setHours(0,0,0,0);
-  const days=Math.round((now-d0)/864e5);   // round, not floor: a span across the clocks changing is an hour short of whole days
-  if(p.weekly) return now<d0 ? 0 : Math.floor(days/7)+1;   // one entry a week (the F260 memory verses)
-  if(!p.weekdays) return days+1;
-  if(now<d0) return 0;
-  let n=0; for(const d=new Date(d0); d<=now; d.setDate(d.getDate()+1)){ const w=d.getDay(); if(w&&w<6) n++ }
-  return Math.max(n,1)}
+/* Where you are in a plan is by what you have done, never by the calendar: the first day not yet done. You may read six days in a row or none for a week; the plan waits. */
+function isListDay(d){ return d.list || (!!SKIP && d.readings.length>0 && (()=>{ const g=JaymsRef.parse(d.readings[0].ref)[0]; return !!g && (SKIP[g.book]||[]).includes(g.c1) && (!g.c2 || g.c2===g.c1) })()) }
+function todayNum(p){ const f=p.days.find(d=>!dayDone(d) && !isListDay(d)); return f ? f.day : p.days.length+1 }   // past the last day: finished
 const dk=(r,day)=>`${S.plan}:${day||S.day}:${r.did||r.id}`;   // did: the plan's own reference, before skip lists trimmed it
 function dayDone(d){return d.readings.every(x=>isDone(`${S.plan}:${d.day}:${JaymsRef.key(x.ref)}`))}
 function buildDay(){
@@ -433,24 +429,21 @@ function renderPlan(){
   document.body.classList.toggle("hg-noorig", hg && !S.hgOrig);
   $("planname").textContent = p.name; $("plandesc").textContent = p.description||"";
   const t = todayNum(p), total=p.days.length, done=p.days.filter(dayDone).length;
-  $("progtxt").textContent = t<1 ? `Starts ${new Date(planStart(p)+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long"})}` : t>total ? `Finished · ${total} ${p.weekly?"weeks":"days"}` : `${p.weekly?"Week":"Day"} ${t} of ${total}`;
+  $("progtxt").textContent = t>total ? `Finished \u00B7 ${total} ${p.weekly?"weeks":"days"}` : `${p.weekly?"Week":"Day"} ${t} of ${total}`;
   $("progpct").textContent = Math.round(done/total*100)+"%";
   $("progbar").style.width = Math.max(2,done/total*100)+"%";
-  /* the list starts where you are: the first day not yet done (or today), and the days before it follow at the bottom, so
-     the plan menu above is never a long scroll away and day 1 comes round again after the last day */
-  /* genealogies and lists (a plan's "list" days, or chapters in plans/skip.json): greyed, never where the list starts, hidden with the box */
-  const isList=d=>d.list || (!!SKIP && d.readings.length>0 && (()=>{ const g=JaymsRef.parse(d.readings[0].ref)[0]; return !!g && (SKIP[g.book]||[]).includes(g.c1) && (!g.c2 || g.c2===g.c1) })());
-  const first=(p.days.find(d=>!dayDone(d) && !isList(d))||p.days.find(d=>d.day===t)||p.days[0]).day;
-  /* the two days before where you are come first, so yesterday is in view; the days further back follow at the bottom */
+  /* the list is the plan in order; by default only where you are: the two days before the first day not yet done and the week after it
+     (the day you picked stays in view); "Show all" is the whole plan from day 1 */
+  const isList=isListDay;
+  const first=(p.days.find(d=>!dayDone(d) && !isList(d))||p.days[p.days.length-1]||p.days[0]).day;
+  const full=p.days.filter(d=>!S.hideLists || !isList(d) || d.day===S.day);
   const prevN=p.days.filter(d=>d.day>=first-2 && d.day<first).length;
-  const full=p.days.filter(d=>d.day>=first-2 && d.day<first).concat(p.days.filter(d=>d.day>=first), p.days.filter(d=>d.day<first-2)).filter(d=>!S.hideLists || !isList(d) || d.day===S.day);
-  /* a week at a time: where you are and the six after it; the rest behind "Show all" (the day you picked stays in view) */
-  const SHOW=7+prevN, order = S.allDays || (S.app==="hg" && full.length<=50) ? full : full.filter((d,i)=>i<SHOW || d.day===S.day);   // Hebrew & Greek: 50 days or fewer simply scroll
+  const order = S.allDays || (S.app==="hg" && full.length<=50) ? full : full.filter(d=>(d.day>=first-2 && d.day<=first+6) || d.day===S.day);   // Hebrew & Greek: 50 days or fewer simply scroll
   const more = full.length>order.length || S.allDays ? `<li><button class="daysmore" data-alldays>${S.allDays?"Show fewer":"Show all "+full.length+(p.weekly?" weeks":" days")}</button></li>` : "";
   $("days").innerHTML = (S.allDays ? more : "") + order.map(d=>{const fin=dayDone(d), isT=d.day===t, on=d.day===S.day;
-    const sep = d.day===p.days[0].day && first-2>p.days[0].day ? `<li class="days-sep lbl">Done · from ${p.weekly?"week":"day"} 1</li>` : "";
+    const sep = "";
     return sep+`<li><button class="day${fin?" done":""}${on?" on":""}${isList(d)?" list":""}" data-day="${d.day}" ${isT?'aria-current="date"':""}>
-      <span class="n">${isT?(p.weekly?"This week":"Today"):(p.weekly?"Week ":"Day ")+d.day}</span>
+      <span class="n">${isT?"Up next":(p.weekly?"Week ":"Day ")+d.day}</span>
       <span class="t">${esc(d.title)}${isList(d)?' <em class="listtag">genealogy / list</em>':""}${(d.readings.length>1||d.note)?`<small>${esc(d.readings.length>1?"with "+d.readings.slice(1).map(x=>x.ref).join(" · "):d.note)}</small>`:""}</span>
       <span class="ck" role="img" aria-label="${fin?"done":"not done"}">${fin?"✓":""}</span></button></li>`}).join("") + (S.allDays ? "" : more);   // "Show fewer" sits at the top of the long list, where you are
   /* the day you're on is in view when the plan opens (no scrolling down from day 1): once per plan and day, and only if it's out of sight */
@@ -485,7 +478,7 @@ function renderReader(){
   const isToday = S.day===todayNum(plan());
   /* every passage opened with Go (or « ») keeps its own tab until its × closes it (S.opened); S.adhoc is the one on screen */
   $("rtabs").innerHTML += S.opened.map((o,n)=>`<span class="rtabgrp"><button class="rtab${S.adhoc===o?" on":""} adhoc" role="tab" aria-selected="${S.adhoc===o}" data-open-tab="${n}">${tabRef(o.ref)}</button><button class="rtabx" data-close-adhoc="${n}" title="Close ${esc(o.ref)}" aria-label="Close ${esc(o.ref)}">×</button></span>`).join("");
-  $("rkick").textContent = !S.planOn ? "Passage" : S.adhoc ? "Opened passage · not in today's plan" : `${isToday?(plan().weekly?"This week":"Today"):(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
+  $("rkick").textContent = !S.planOn ? "Passage" : S.adhoc ? "Opened passage · not in the plan" : `${isToday?"Up next":(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
   $("rtitle").textContent = r.ref;
   const lg = JaymsRef.refly(r.ref, S.ver);
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
@@ -696,11 +689,11 @@ function shelfConfig(){ const c=ST.c("shelfcfg"); return { authors:c.peek("autho
   dock:{ hidden:dockHidden(), tools:TOOLS.filter(t=>t.id && t.id!=="config" && t.id!=="marks" && !(t.owner && S.view==="public")).map(t=>({id:t.id, label:t.label, name:toolName(t)})) } } }
 ST.c("shelfcfg").on(()=>{ renderDock(); if(PLANINDEX) renderPlan(); if((S.tool==="shelf"||S.tool==="config") && PH) PH.refresh() });
 ST.c("ideas").on(()=>{ renderDock(); if(S.tool==="ideas" && PH) PH.refresh() });
-/* Restart one plan (the others are not touched): its Done ticks are cleared and day 1 is today. Asks first; returns whether it did. */
+/* Restart one plan (the others are not touched): its Done ticks are cleared and it starts again from day 1. Asks first; returns whether it did. */
 function restartPlan(id){
   const p=PLANS[id]; if(!p) return false;
   const mine=ST.c("done").all().filter(d=>d.id.startsWith(id+":"));
-  if(!confirm(`Restart "${p.name}"?\n\nThis clears its ${mine.length} Done tick${mine.length===1?"":"s"} and starts it again from day 1, today. Your other plans are not touched.`)) return false;
+  if(!confirm(`Restart "${p.name}"?\n\nThis clears its ${mine.length} Done tick${mine.length===1?"":"s"} and starts it again from day 1. Your other plans are not touched.`)) return false;
   mine.forEach(d=>ST.c("done").remove(d.id));
   const t=new Date(); store.set("start:"+id, `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`);
   if(S.plan===id){ S.day=1; S.reading=0; S.adhoc=null; buildDay() }
@@ -1286,7 +1279,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v400").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v401").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);
