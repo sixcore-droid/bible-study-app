@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v397">
+<link rel="stylesheet" href="jayms-study.css?v=v398">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -127,7 +127,6 @@
     <div class="rtabs" id="rtabs" role="tablist" aria-label="Today's readings"></div>
     <div class="rhead">
       <div>
-        <button class="pback" id="rcrumb" hidden></button>
         <div class="lbl" id="rkick"></div>
         <h1 id="rtitle"></h1>
         <div class="rlinks" id="rlogos"></div>
@@ -203,11 +202,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v397"></script>
-<script src="jayms-store.js?v=v397"></script>
-<script src="jayms-folder.js?v=v397"></script>
-<script src="x-discuss.js?v=v397"></script>
-<script src="jayms-study.js?v=v397"></script>
+<script src="jayms-ref.js?v=v398"></script>
+<script src="jayms-store.js?v=v398"></script>
+<script src="jayms-folder.js?v=v398"></script>
+<script src="x-discuss.js?v=v398"></script>
+<script src="jayms-study.js?v=v398"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -488,7 +487,6 @@ function renderReader(){
   $("rtabs").innerHTML += S.opened.map((o,n)=>`<span class="rtabgrp"><button class="rtab${S.adhoc===o?" on":""} adhoc" role="tab" aria-selected="${S.adhoc===o}" data-open-tab="${n}">${tabRef(o.ref)}</button><button class="rtabx" data-close-adhoc="${n}" title="Close ${esc(o.ref)}" aria-label="Close ${esc(o.ref)}">×</button></span>`).join("");
   $("rkick").textContent = !S.planOn ? "Passage" : S.adhoc ? "Opened passage · not in today's plan" : `${isToday?(plan().weekly?"This week":"Today"):(plan().weekly?"Week ":"Day ")+S.day} · reading ${S.reading+1} of ${READINGS.length} · ${r.role}`;
   $("rtitle").textContent = r.ref;
-  { const cb=r.crumb; $("rcrumb").hidden=!cb; if(cb){ $("rcrumb").textContent = cb.back ? "\u2039 "+cb.back : cb.fwd+" \u203A"; $("rcrumb").title = cb.back ? "Back to the verses you were on" : "Back to the full chapter" } }
   const lg = JaymsRef.refly(r.ref, S.ver);
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
   $("rlogos").hidden = !S.logos;
@@ -1288,7 +1286,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v397").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v398").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);
@@ -1489,12 +1487,9 @@ function fullChapterRef(){ const r=cur(); if(!r) return null; const segs=JaymsRe
   return bk.chapters===1 ? bk.name : `${bk.name} ${c1}${c2>c1?"-"+c2:""}` }
 function syncChapterNav(){ const fc=fullChapterRef(); $("fullch").hidden=!fc; $("fullch").title=fc?"Full chapter: "+fc:"";
   [["prevch",-1],["nextch",1]].forEach(([id,d])=>{ $(id).hidden=!!fc; const t=cur()&&stepChapter(d); $(id).disabled=!t; $(id).title=t?(d<0?"Previous chapter: ":"Next chapter: ")+t:"" }) }
-/* FC leaves a breadcrumb: the verses you were on, one tap back, and the full chapter one tap forward again. In the chapter the verses you came from are marked and scrolled to. */
+/* FC opens the full chapter in a tab of its own beside the verses you were on (the tab stays: click it to go back, × closes it); in the chapter the verses you came from are marked and scrolled to */
 $("fullch").onclick=()=>{ const t=fullChapterRef(); if(!t) return; const from=cur().ref;
-  if(!openPassage(t, true)){ const n=cur(); n.crumb={ back:from, mark:JaymsRef.parse(from) }; renderReader() } };
-$("rcrumb").onclick=()=>{ const r=cur(), c=r&&r.crumb; if(!c) return;
-  if(c.back){ const full=r.ref, part=c.back; if(!openPassage(part, true)){ cur().crumb={ fwd:full, part }; renderReader() } }
-  else { const part=c.part; if(!openPassage(c.fwd, true)){ cur().crumb={ back:part, mark:JaymsRef.parse(part) }; renderReader() } } };
+  if(!openPassage(t)){ cur().crumb={ mark:JaymsRef.parse(from) }; renderReader() } };
 $("prevch").onclick=()=>{ const t=stepChapter(-1); if(t) openPassage(t, true) };
 $("nextch").onclick=()=>{ const t=stepChapter(1); if(t) openPassage(t, true) };
 $("larger").onclick=()=>{S.size=Math.min(26,S.size+1);store.set("size",S.size);renderReader()};

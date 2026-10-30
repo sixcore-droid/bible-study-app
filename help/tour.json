@@ -224,7 +224,7 @@
     {
      "sel": "#fullch",
      "name": "FC",
-     "text": "Full chapter: in place of « » when only part of a chapter is on screen, with a breadcrumb back to the verses you were on.",
+     "text": "Full chapter: in place of « » when only part of a chapter is on screen, in a tab of its own beside the verses you were on, which stay one click away; the verses you came from are marked and scrolled to.",
      "optional": true
     },
     {
