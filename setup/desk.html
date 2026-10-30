@@ -271,10 +271,10 @@ const PUBLIC = !!window.JAYMS_PUBLIC;
    storage names) so nothing it does touches the live app's. FOLDER_UI: the screens for the visitor's own folder. VISITOR_NOTES: the notes bar. */
 const TEST = !!window.JAYMS_TEST, FOLDER_UI = TEST, VISITOR_NOTES = TEST;
 const PFX = TEST ? "wst." : "ws.";   // the small per-device settings
-/* the side buttons a reader sees: James's own tools (owner) are his copy only. The test copy also gives everyone the Config panel (their own
-   order and hiding for the shared Logos shelf, and which side buttons show), kept in their own browser. */
+/* the side buttons a reader sees: James's own tools (owner) are his copy only. Everyone gets the Config panel (their own
+   order and hiding for the shared Logos shelf, plans and which side buttons show), kept in their own browser. */
 const toolName = t => TEST && PUBLIC && t.id==="shelf" ? "Study notes and the Logos shelf" : t.name;   // "my" is James's shelf
-const toolShown = t => !(t.owner && S.view==="public" && !(TEST && t.id==="config"));
+const toolShown = t => !(t.owner && S.view==="public" && t.id!=="config");
 /* the installable app (PWA): only on jayms.com, where the worker lives at the app's own address (the page's <base> points
    elsewhere, so the address is written out in full) */
 if(PUBLIC && !TEST && location.hostname==="jayms.com" && "serviceWorker" in navigator)
