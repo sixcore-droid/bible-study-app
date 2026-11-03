@@ -439,7 +439,7 @@
   var SHELF = null;
   var READ_FIRST = false; try { READ_FIRST = localStorage.getItem("jst.readfirst") === "1"; } catch (e) {}   // Shelf: books he can read in the app first
   var CORE = {}, CORE_IDS = {};            // the core stack (shelf.json core): by book, always shown, never hidden
-  var SHELF_TAB = "com";                  // the Shelf tab James last picked: com | sb | other
+  var SHELF_TAB = "com";                  // the Shelf tab James last picked: com | sb | logos | vault | other
   var XREFN = {}, NOTEN = {};
   var NOTE_SRC = {
     T: { code: "T", name: "Tyndale Open Study Notes", short: "Tyndale", url: "https://tyndaleopenresources.com/", licence: "CC BY-SA 4.0" },
@@ -3006,12 +3006,13 @@
     view: function () {
       var self = this, sh = this.sh || {}, segs = shelfBooks(this.o.ref), h = "", own = this.o.owner;
       var lg = this.o.logos !== false;   // Hide Logos: no Logos lists, just the open study notes (and, on the desk, the vault)
-      var TABS = own ? (lg ? [["com", "Commentaries"], ["sb", "Study Bibles"], ["vault", "Vault"], ["other", "Others"]] : [["sb", "Study notes"], ["vault", "Vault"]])
-                     : (lg ? [["com", "Commentaries"], ["sb", "Study notes"]] : [["sb", "Study notes"]]);   // maps live in the Maps panel
+      var TABS = own ? (lg ? [["com", "Commentaries"], ["sb", "Study notes"], ["logos", "Logos Bibles"], ["vault", "Vault"], ["other", "Others"]] : [["sb", "Study notes"], ["vault", "Vault"]])
+                     : (lg ? [["com", "Commentaries"], ["sb", "Study notes"], ["logos", "Logos Bibles"]] : [["sb", "Study notes"]]);   // maps live in the Maps panel
       var tab = TABS.some(function (t) { return t[0] === SHELF_TAB; }) ? SHELF_TAB : TABS[0][0];
       var tabs = '<div class="chips u-mb10">' + TABS.map(function (t) { return '<button class="chip' + (tab === t[0] ? " on" : "") + '" data-jst-stab="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
       var kick = (own ? "My shelf" : "Shelf") + (segs.length ? " \u00B7 " + segs.map(function (s) { return bookLabel(s.book); }).join(", ") : "");
-      if (tab === "sb") return { kick: kick, title: own && lg ? "Study Bibles" : "Study notes", body: tabs + (lg ? this.studyBiblesHTML() : "") + this.notesHTML() };
+      if (tab === "sb") return { kick: kick, title: "Study notes", body: tabs + this.notesHTML() };   // the notes first; the Logos study Bibles are their own tab
+      if (tab === "logos") return { kick: kick, title: "Study Bibles in Logos", body: tabs + (this.studyBiblesHTML() || none("No study Bible to open for this passage.")) };
       if (tab === "vault") return { kick: kick, title: "Books in my vault", body: tabs + this.vaultHTML() };
       if (tab === "other") return { kick: kick, title: "Others", body: tabs + this.dddHTML() + this.coursesHTML() + this.authorsHTML() };
       if (!segs.length) return { kick: kick, title: "Commentaries", body: tabs };
