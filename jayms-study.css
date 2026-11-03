@@ -993,3 +993,19 @@ body:not(.app-atlas) .atlasview,body:not(.app-classes) .classesview,body:not(.ap
 
 /* an Obsidian link wears Obsidian's purple */
 .out.obs{color:#a08cf5;border-bottom-color:#a08cf5}
+
+/* Go to a passage: the guided picker (book, then chapter, then verse) */
+.gopick{position:fixed;z-index:60;background:var(--paper-deep);border:1px solid var(--gold);border-radius:10px;padding:10px;overflow:auto;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.gopick[hidden]{display:none}
+.gopick .gohd{font-size:14px;color:var(--ink);margin:0 0 8px}
+.gopick .gosec{font:600 12px var(--label);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:10px 0 6px}
+.gopick .gochips,.gopick .gobooks{display:flex;flex-wrap:wrap;gap:6px}
+.gopick button{border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font:15px var(--read);padding:7px 11px;min-height:38px;cursor:pointer}
+.gopick .gochips button{min-width:44px;text-align:center;font-family:var(--label)}
+.gopick button:hover,.gopick button:focus-visible{border-color:var(--gold);outline:none}
+.gopick .gowhole{display:block;width:100%;margin:0 0 8px;border-color:var(--gold);color:var(--gold);text-align:left}
+@media (max-width:760px){
+  .rhead .rtabq{align-self:stretch;margin-left:0}
+  .rtabq #goform{flex:1 1 auto;min-width:0}
+  .rtabq #goform input{width:100%;min-width:0}
+}

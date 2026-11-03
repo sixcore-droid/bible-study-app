@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Bible Study App | jayms.com</title><meta name="description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><link rel="canonical" href="https://jayms.com/bible-study-app/"><meta property="og:type" content="website"><meta property="og:site_name" content="jayms.com"><meta property="og:title" content="Bible Study App"><meta property="og:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><meta property="og:url" content="https://jayms.com/bible-study-app/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Bible Study App"><meta name="twitter:description" content="A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading."><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://jayms.com/bible-study-app/#app", "name": "Bible Study App", "url": "https://jayms.com/bible-study-app/", "description": "A free Bible study app from jayms.com: reading plans, seven translations side by side, Hebrew and Greek word by word, cross-references, study notes, the Church Fathers, the Targums, maps, BibleProject and LSB audio, all on the passage you are reading.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@id": "https://jayms.com/#person"}, "publisher": {"@id": "https://jayms.com/#person"}, "isPartOf": {"@id": "https://jayms.com/#website"}}, {"@type": "Person", "@id": "https://jayms.com/#person", "name": "James McLaughlin", "url": "https://jayms.com/"}, {"@type": "WebSite", "@id": "https://jayms.com/#website", "name": "jayms.com", "url": "https://jayms.com/"}]}</script><script>window.JAYMS_PUBLIC = true;</script><link rel="manifest" href="https://jayms.com/bible-study-app/manifest.webmanifest"><meta name="theme-color" content="#0d0e11"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Bible Study"><link rel="apple-touch-icon" href="https://sixcore-droid.github.io/bible-study-app/pwa/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="https://sixcore-droid.github.io/bible-study-app/pwa/icon-192.png"></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v417">
+<link rel="stylesheet" href="jayms-study.css?v=v418">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -16,11 +16,10 @@
     <button data-app="learn" aria-pressed="false" id="learnbtn" title="Courses and books to learn from: read a lesson, hear a word's lemma, drill it, review it">Learn</button>
   </div>
   <form class="goto" id="goform" role="search" autocomplete="off">
-    <input id="goref" list="gobooks" placeholder="Go to a passage: Mark 13:14" aria-label="Go to a passage" spellcheck="false">
+    <input id="goref" placeholder="Go to a passage" aria-label="Go to a passage" spellcheck="false" autocapitalize="off" autocorrect="off" aria-autocomplete="list" aria-controls="gopick" aria-expanded="false">
     <button type="submit">Go</button>
     <span class="gomsg" id="gomsg" role="status"></span>
   </form>
-  <datalist id="gobooks"></datalist>
   <form class="goto find" id="findform" role="search" autocomplete="off">
     <input id="findq" placeholder="Find in the text" aria-label="Find a word in the text" spellcheck="false">
     <span class="gomsg" id="findmsg" role="status"></span>
@@ -202,11 +201,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v417"></script>
-<script src="jayms-store.js?v=v417"></script>
-<script src="jayms-folder.js?v=v417"></script>
-<script src="x-discuss.js?v=v417"></script>
-<script src="jayms-study.js?v=v417"></script>
+<script src="jayms-ref.js?v=v418"></script>
+<script src="jayms-store.js?v=v418"></script>
+<script src="jayms-folder.js?v=v418"></script>
+<script src="x-discuss.js?v=v418"></script>
+<script src="jayms-study.js?v=v418"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -1079,10 +1078,69 @@ $("plan").onchange=e=>{ if(e.target.value==="__build"){ e.target.value=S.plan; S
 function mergeMyPlans(){ ST.c("plans").all().forEach(p=>{ const x=Object.assign({},p); delete x.createdAt; delete x.updatedAt; PLANS[p.id]=x }) }
 ST.c("plans").on((id,d)=>{ if(!PLANINDEX) return; if(d) mergeMyPlans(); else { delete PLANS[id]; if(S.plan===id) choosePlan(PLANINDEX.default) } render() });
 /* the reference box */
-$("gobooks").innerHTML = JaymsRef.books.map(b=>`<option value="${b.name} ">`).join("");
-$("goform").onsubmit=e=>{ e.preventDefault(); const v=$("goref").value.trim(); if(!v) return;
-  const err=openPassage(v); $("gomsg").textContent=err; if(!err){ $("goref").value=""; $("goref").blur(); } };
-$("goref").oninput=()=>{ $("gomsg").textContent="" };
+/* Go to a passage walks you through it: type a few letters and the books that fit are listed; once one book is left it is chosen and the
+   chapters show; a chapter shows its verses; a verse opens. Typing the whole reference and pressing Go still works. On a phone the
+   keyboard drops after each tap so the numbers are in view. */
+{ const inp=$("goref"), pick=document.createElement("div"); pick.id="gopick"; pick.className="gopick"; pick.hidden=true; pick.setAttribute("role","listbox"); pick.setAttribute("aria-label","Pick a book, chapter and verse");
+  document.body.appendChild(pick);
+  const ROWS=JaymsRef.books, norm=t=>String(t).toLowerCase().replace(/\./g,"").replace(/\s+/g," ").trim(), coarse=matchMedia("(pointer:coarse)").matches;
+  let open=false;
+  const find=q=>{ q=norm(q); return q? ROWS.filter(r=>[r.name,r.slug,r.il,r.ib].concat(r.aliases).some(a=>norm(a).startsWith(q))) : ROWS.slice() };
+  function parts(text){   // book, chapter, verse: whatever has been typed so far
+    const t=text.replace(/\s+/g," ").replace(/^ /,"");
+    const m=t.match(/^((?:[1-3] ?)?[A-Za-z][A-Za-z.' ]*?)\s*(\d+)?\s*(:)?\s*(\d*)$/);
+    if(!m) return /^[1-3]$/.test(t)? {q:t,rows:find(t)} : {q:t,rows:find(t)};
+    const q=m[1].trim(), rows=find(q), bk=JaymsRef.book(q)||(rows.length===1?rows[0]:null);
+    return {q, rows, bk, c:m[2], colon:!!m[3], v:m[4]} }
+  function render(){
+    const P=parts(inp.value), bk=P.bk; let h="";
+    if(bk && (P.c!==undefined || P.colon || (P.rows.length===1 && /\s$/.test(inp.value)))){
+      const one=bk.chapters===1, cn=+P.c||0;
+      if(!one && !P.colon){
+        const all=[]; for(let n=1;n<=bk.chapters;n++) all.push(n);
+        const list=P.c? all.filter(n=>String(n).startsWith(P.c)) : all;
+        h=`<div class="gohd"><b>${esc(bk.name)}</b> · pick a chapter</div><div class="gochips">${list.map(n=>`<button type="button" role="option" data-gc="${n}">${n}</button>`).join("")}</div>`;
+        if(!list.length) h=`<div class="gohd">${esc(bk.name)} has ${bk.chapters} chapters.</div>`;
+      } else {
+        const c=one?1:cn, vn=JaymsRef.verses(bk.name,c);
+        if(!vn) h=`<div class="gohd">${esc(bk.name)} ${one?"":"has "+bk.chapters+" chapters."}</div>`;
+        else { const all=[]; for(let n=1;n<=vn;n++) all.push(n); const list=P.v? all.filter(n=>String(n).startsWith(P.v)) : all;
+          h=`<div class="gohd"><b>${esc(bk.name)}${one?"":" "+c}</b> · pick a verse</div><button type="button" class="gowhole" data-gwhole="1">${one?"Whole book":"Whole chapter"}</button><div class="gochips">${list.map(n=>`<button type="button" role="option" data-gv="${n}">${n}</button>`).join("")}</div>` }
+      }
+    } else if(P.rows.length){
+      const grp=(from,to,name)=>{ const r=P.rows.filter(b=>b.order>=from&&b.order<to); return r.length? `<div class="gosec">${name}</div><div class="gobooks">${r.map(b=>`<button type="button" role="option" data-gb="${esc(b.name)}">${esc(b.name)}</button>`).join("")}</div>` : "" };
+      h=(inp.value.trim()? "" : `<div class="gohd">Pick a book, or start typing its name.</div>`) + grp(0,39,"Old Testament") + grp(39,99,"New Testament");
+    } else h=`<div class="gohd">No book starts with "${esc(inp.value.trim())}".</div>`;
+    pick.innerHTML=h; place() }
+  function place(){   // under the box, kept on screen; above the on-screen keyboard where there is one
+    const r=$("goform").getBoundingClientRect(), vv=window.visualViewport, W=vv?vv.width:innerWidth, H=vv?vv.height:innerHeight, w=Math.min(360,W-16);
+    pick.style.width=w+"px"; pick.style.left=Math.max(8,Math.min(r.right-w,W-w-8))+"px"; pick.style.top=(r.bottom+4)+"px"; pick.style.maxHeight=Math.max(140,H-r.bottom-16)+"px" }
+  function show(){ open=true; pick.hidden=false; inp.setAttribute("aria-expanded","true"); $("gomsg").textContent=""; render() }
+  function hide(){ open=false; pick.hidden=true; inp.setAttribute("aria-expanded","false") }
+  const go=ref=>{ const err=openPassage(ref); if(err){ $("gomsg").textContent=err; return } inp.value=""; inp.blur(); hide() };
+  const settle=()=>{ if(coarse) inp.blur() };   // phone: the keyboard drops so the numbers show
+  inp.addEventListener("focus",show);
+  inp.addEventListener("click",()=>{ if(!open) show() });
+  inp.addEventListener("input",e=>{ $("gomsg").textContent="";
+    /* one book left while typing: choose it (not on delete, so Backspace can still reach the name) */
+    if(/^insert/.test(e.inputType||"insert") && !/\s$/.test(inp.value) && !/[\d:]/.test(inp.value.replace(/^[1-3]\s?/,""))){
+      const rows=find(inp.value); if(rows.length===1 && inp.value.trim().length>=2){ inp.value=rows[0].name+(rows[0].chapters===1?" ":" ") } }
+    show() });
+  pick.addEventListener("mousedown",e=>e.preventDefault());   // taps keep the box focused
+  pick.addEventListener("click",e=>{
+    const b=e.target.closest("button"); if(!b) return; const P=parts(inp.value), bk=P.bk;
+    if(b.dataset.gb){ inp.value=b.dataset.gb+" "; render(); settle(); if(!coarse) inp.focus() }
+    else if(b.dataset.gc){ inp.value=bk.name+" "+b.dataset.gc+":"; render(); settle() }
+    else if(b.dataset.gv){ go(bk.chapters===1? bk.name+" "+b.dataset.gv : bk.name+" "+(+P.c)+":"+b.dataset.gv) }
+    else if(b.dataset.gwhole){ go(bk.chapters===1? bk.name : bk.name+" "+(+P.c)) } });
+  document.addEventListener("pointerdown",e=>{ if(open && !e.target.closest("#gopick,#goform")) hide() });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape" && open){ hide() } });
+  addEventListener("resize",()=>{ if(open) place() }); if(window.visualViewport) visualViewport.addEventListener("resize",()=>{ if(open) place() });
+  $("goform").onsubmit=e=>{ e.preventDefault(); const v=inp.value.trim(); if(!v) return;
+    if(!JaymsRef.parse(v).length){   // not a reference yet: a book name left half typed picks the first book that fits
+      const rows=find(v.replace(/[\d:\s-]+$/,"")); if(rows.length){ inp.value=rows[0].name+" "; show(); return } }
+    go(v) };
+}
 /* A notes bar docked to the bottom of the reader (My notes on the desk, James's notes in Read along): open or closed, and its height
    dragged from its top edge, each remembered */
 function noteDock(box, sizeEl, tog, g, key, twin){   // twin: a second element that takes the same height (the formatted note)
@@ -1283,7 +1341,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v417").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v418").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);

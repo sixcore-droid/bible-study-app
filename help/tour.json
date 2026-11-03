@@ -168,7 +168,7 @@
     {
      "sel": "#goref",
      "name": "Go to a passage",
-     "text": "Type any reference, like Mark 13:14 or Psalm 82, and press Go. It opens in its own tab beside the day's readings.",
+     "text": "Type a few letters of a book and pick from the list; one match is chosen for you, then tap a chapter and a verse. Or type a whole reference, like Mark 13:14, and press Go. It opens in its own tab beside the day's readings.",
      "at": "bottom"
     },
     {
