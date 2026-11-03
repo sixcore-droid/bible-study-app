@@ -696,7 +696,7 @@ body.hg-noorig .mtag{display:none}
 #text .cs .vn, #text .jw .vn{color:var(--gold)}
 
 /* Settings > Reading plan off: only The Bible button (and Hebrew & Greek's mark options) stay in the left rail */
-body.noplan .plansel > label[for="planpick"], body.noplan #planpick, body.noplan #planlist,
+body.noplan #planpick, body.noplan #planlist,
 body.noplan .plansel > .planopt:not(.hgopt), body.noplan .railin > :not(.plansel){display:none !important}
 body.noplan #biblebtn{display:none}   /* plan off: the picker itself is always open, so no button for it */
 body.noplan #biblepick{margin-top:0}

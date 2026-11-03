@@ -485,6 +485,7 @@ function renderReader(){
   $("rlogos").innerHTML = lg.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">Open ${lg.length>1?esc(l.label)+" ":""}in Logos ↗</a>`).join("");
   $("rlogos").hidden = !S.logos;
   $("optplan").checked = S.planOn; document.body.classList.toggle("noplan", !S.planOn);
+  { const l=document.querySelector('.plansel > label[for="planpick"]'); if(l) l.textContent = S.planOn ? "Reading plan" : "Bible" }   // plan off: the rail is only the Bible picker, so it is headed Bible
   if(!S.planOn && $("biblepick").hidden){ BP={}; renderBiblePick(); $("biblepick").hidden=false }   // plan off: The Bible is always open
   if(S.planOn && !S.bible) $("biblepick").hidden=true;
   $("optlogos").checked = S.logos; $("optred").checked = S.red; $("optblue").checked = S.blue; $("optbluewrap").hidden = !CSV; $("optpurple").checked = S.purple; $("optpurplewrap").hidden = !CSV; $("optbible").checked = S.bible; $("biblebtn").hidden = !S.bible; if(!S.bible) $("biblepick").hidden = true;
