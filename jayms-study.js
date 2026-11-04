@@ -607,9 +607,9 @@
     notes: function (ref) {
       var segs = data.segs(ref), books = [];
       segs.forEach(function (q) { if (books.indexOf(q.book) < 0) books.push(q.book); });
-      var own = !global.JAYMS_PUBLIC;   // the Faithlife Study Bible's notes: James's desk only
-      /* the NET's translators' notes for everyone (netnotes/<book>.json, scripts/fetch-net-notes.py) */
-      return Promise.all(books.map(function (b) { return Promise.all([bookFile("study", b, segs), bookFile("netnotes", b, segs).catch(function () { return null; }), own ? bookFile("fsb", b, segs).catch(function () { return null; }) : null]); })).then(function (sets) {
+      var own = !global.JAYMS_PUBLIC;   // the Faithlife Study Bible's and the NET's notes: James's desk only
+      /* the NET's translators' notes (netnotes/<book>.json, scripts/fetch-net-notes.py): never shipped to the site */
+      return Promise.all(books.map(function (b) { return Promise.all([bookFile("study", b, segs), own ? bookFile("netnotes", b, segs).catch(function () { return null; }) : null, own ? bookFile("fsb", b, segs).catch(function () { return null; }) : null]); })).then(function (sets) {
         var files = sets.map(function (p) { return { n: [].concat.apply([], p.map(function (x) { return (x && x.n) || []; })) }; });
         var out = [];
         segs.forEach(function (q) {
