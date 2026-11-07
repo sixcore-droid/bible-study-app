@@ -635,6 +635,20 @@
         return out;
       });
     },
+    /* Later voices (1500 on: Erasmus, the Reformers, Lewis, Chesterton, Tolkien): study/<book>.json "l", same rows as "f". James's desk only: build-public.py never ships "l" */
+    later: function (ref) {
+      var segs = data.segs(ref), books = [];
+      segs.forEach(function (q) { if (books.indexOf(q.book) < 0) books.push(q.book); });
+      return Promise.all(books.map(function (b) { return bookFile("study", b, segs); })).then(function (files) {
+        var out = [];
+        segs.forEach(function (q) {
+          ((files[books.indexOf(q.book)] || {}).l || []).forEach(function (f) {
+            if (R.overlap({ book: q.book, c1: f[0], v1: f[1], c2: f[0], v2: f[2] }, q)) out.push({ book: q.book, c: f[0], v1: f[1], v2: f[2], by: f[3], year: f[4], text: f[5] });
+          });
+        });
+        return out;
+      });
+    },
     /* the Aramaic Targums in English on the passage: study/<book>.json "t" {"c:v": [[label, text]]}, "tsrc" (scripts/build-targums.py) */
     targum: function (ref) {
       var segs = data.segs(ref), books = [];
@@ -3711,6 +3725,32 @@
       });
       h += '<p class="ctx u-fs13">From the <a href="https://historicalchristian.faith/" target="_blank" rel="noopener">Historical Christian Faith</a> commentaries database (early Christian writers, public domain). Each is an excerpt; Read it opens the whole comment.</p>';
       return { kick: "Church Fathers \u00B7 " + all.length, title: "The Fathers on " + this.o.ref, body: h };
+    },
+    click: function (e) {
+      var al = e.target.closest("[data-jst-fall]");
+      if (al) { e.stopPropagation(); var k = "all" + al.getAttribute("data-jst-fall"), keep = this.el.scrollTop; this.st[k] = !this.st[k]; this.paint(); this.el.scrollTop = keep; }
+    }
+  });
+
+  /* Later voices (desk only): writers from 1500 on, the Fathers' layout, same data source, an excerpt each with a link to the
+     whole comment on historicalchristian.faith (the source of the data). Grouped by verse; four per verse until "All". */
+  define("Later", { id: "later", label: "Later", name: "Later voices on this passage", owner: true, icon: '<svg viewBox="0 0 24 24"><path d="M12 3v6M9 6h6"/><path d="M6 21v-7a6 6 0 0 1 12 0v7"/><path d="M4 21h16"/></svg>' }, {
+    prepare: function () { var self = this; return data.later(this.o.ref).then(function (f) { self.f = f; }); },
+    view: function () {
+      var st = this.st, all = this.f || [], groups = {}, order = [];
+      all.forEach(function (f) { var k = f.book + "|" + f.c + "|" + f.v1 + "|" + f.v2; if (!groups[k]) { groups[k] = []; order.push(k); } groups[k].push(f); });
+      var where = function (f) { var one = (R.book(f.book) || {}).chapters === 1; return f.book + " " + (one ? "" : f.c + ":") + f.v1 + (f.v2 !== f.v1 ? "-" + f.v2 : ""); };
+      var url = function (f) { return "https://historicalchristian.faith/" + bookRow(f.book).il + "/" + f.c + "/" + f.v1; };
+      var h = all.length ? "" : none("No later voice on " + esc(this.o.ref) + ".");
+      order.forEach(function (k) {
+        var list = groups[k], open = st["all" + k], shown = open ? list : list.slice(0, 4), f0 = list[0];
+        h += '<div class="lbl">' + esc(where(f0)) + " (" + list.length + ")</div>" + shown.map(function (f) {
+          return box("witness", "", '<div class="item"><span class="tt u-fs17">' + esc(f.by) + "</span>" + (f.year ? '<span class="sub">c. ' + (f.year < 0 ? -f.year + " BC" : "AD " + f.year) + "</span>" : "") +
+            '<p class="u-m6">' + esc(f.text) + "</p>" + outlink(url(f), "Read it") + "</div>");
+        }).join("") + (list.length > 4 ? '<div class="askrow"><button class="btn" data-jst-fall="' + esc(k) + '">' + (open ? "Fewer" : "All " + list.length) + "</button></div>" : "");
+      });
+      h += '<p class="ctx u-fs13">From the <a href="https://historicalchristian.faith/" target="_blank" rel="noopener">Historical Christian Faith</a> database: writers from 1500 on (Erasmus, the Reformers, Lewis, Chesterton, Tolkien). Desk only. Each is an excerpt; Read it opens the whole comment.</p>';
+      return { kick: "Later voices \u00B7 " + all.length, title: "Later voices on " + this.o.ref, body: h };
     },
     click: function (e) {
       var al = e.target.closest("[data-jst-fall]");
