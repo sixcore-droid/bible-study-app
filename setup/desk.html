@@ -1093,7 +1093,7 @@ ST.c("plans").on((id,d)=>{ if(!PLANINDEX) return; if(d) mergeMyPlans(); else { d
     if(!m) return /^[1-3]$/.test(t)? {q:t,rows:find(t)} : {q:t,rows:find(t)};
     const q=m[1].trim(), rows=find(q), bk=JaymsRef.book(q)||(rows.length===1?rows[0]:null);
     return {q, rows, bk, c:m[2], colon:!!m[3], v:m[4]} }
-  function render(){
+  function renderGo(){
     const P=parts(inp.value), bk=P.bk; let h="";
     if(bk && (P.c!==undefined || P.colon || (P.rows.length===1 && /\s$/.test(inp.value)))){
       const one=bk.chapters===1, cn=+P.c||0;
@@ -1116,7 +1116,7 @@ ST.c("plans").on((id,d)=>{ if(!PLANINDEX) return; if(d) mergeMyPlans(); else { d
   function place(){   // under the box, kept on screen; above the on-screen keyboard where there is one
     const r=$("goform").getBoundingClientRect(), vv=window.visualViewport, W=vv?vv.width:innerWidth, H=vv?vv.height:innerHeight, w=Math.min(360,W-16);
     pick.style.width=w+"px"; pick.style.left=Math.max(8,Math.min(r.right-w,W-w-8))+"px"; pick.style.top=(r.bottom+4)+"px"; pick.style.maxHeight=Math.max(140,H-r.bottom-16)+"px" }
-  function show(){ open=true; pick.hidden=false; inp.setAttribute("aria-expanded","true"); $("gomsg").textContent=""; render() }
+  function show(){ open=true; pick.hidden=false; inp.setAttribute("aria-expanded","true"); $("gomsg").textContent=""; renderGo() }
   function hide(){ open=false; pick.hidden=true; inp.setAttribute("aria-expanded","false") }
   const go=ref=>{ const err=openPassage(ref); if(err){ $("gomsg").textContent=err; return } inp.value=""; inp.blur(); hide() };
   const settle=()=>{ if(coarse) inp.blur() };   // phone: the keyboard drops so the numbers show
@@ -1130,8 +1130,8 @@ ST.c("plans").on((id,d)=>{ if(!PLANINDEX) return; if(d) mergeMyPlans(); else { d
   pick.addEventListener("mousedown",e=>e.preventDefault());   // taps keep the box focused
   pick.addEventListener("click",e=>{
     const b=e.target.closest("button"); if(!b) return; const P=parts(inp.value), bk=P.bk;
-    if(b.dataset.gb){ inp.value=b.dataset.gb+" "; render(); settle(); if(!coarse) inp.focus() }
-    else if(b.dataset.gc){ inp.value=bk.name+" "+b.dataset.gc+":"; render(); settle() }
+    if(b.dataset.gb){ inp.value=b.dataset.gb+" "; renderGo(); settle(); if(!coarse) inp.focus() }
+    else if(b.dataset.gc){ inp.value=bk.name+" "+b.dataset.gc+":"; renderGo(); settle() }
     else if(b.dataset.gv){ go(bk.chapters===1? bk.name+" "+b.dataset.gv : bk.name+" "+(+P.c)+":"+b.dataset.gv) }
     else if(b.dataset.gwhole){ go(bk.chapters===1? bk.name : bk.name+" "+(+P.c)) } });
   document.addEventListener("pointerdown",e=>{ if(open && !e.target.closest("#gopick,#goform")) hide() });

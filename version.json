@@ -1,1 +1,1 @@
-{"version":"v423","date":"2026-11-09 05:35","note":"Daily refresh: bibleproject.json"}
+{"version":"v424","date":"2026-11-11 15:28","note":"Fix: app buttons (Hebrew & Greek, Atlas...) did not light up; Go-box render() overwrote the main render()"}
