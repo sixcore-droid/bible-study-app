@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>TEST: Bible Study App | jayms.com</title><meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://jayms.com/bible-study-app-TEST/"><meta name="theme-color" content="#0d0e11"><script>window.JAYMS_PUBLIC = true; window.JAYMS_TEST = true; window.JAYMS_FOLDER_DB = "jayms-folder-test";</script></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v433">
+<link rel="stylesheet" href="jayms-study.css?v=v434">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -201,11 +201,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v433"></script>
-<script src="jayms-store.js?v=v433"></script>
-<script src="jayms-folder.js?v=v433"></script>
-<script src="x-discuss.js?v=v433"></script>
-<script src="jayms-study.js?v=v433"></script>
+<script src="jayms-ref.js?v=v434"></script>
+<script src="jayms-store.js?v=v434"></script>
+<script src="jayms-folder.js?v=v434"></script>
+<script src="x-discuss.js?v=v434"></script>
+<script src="jayms-study.js?v=v434"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -867,7 +867,7 @@ function renderPanel(){
     $("pbody").innerHTML = `<div class="jst"><div class="ask u-mb10"><input class="jst-in" id="notefind" placeholder="Find a note: a passage (Romans 8, John 3:16) or a word" value="${esc(S.noteQ||"")}"></div><div id="notefindres">${noteFind(S.noteQ)}</div>${S.noteQ?'<div class="lbl u-mt14">Today</div>':""}${notesHTML()}</div>`;
     $("notefind").oninput=e=>{ S.noteQ=e.target.value; $("notefindres").innerHTML=noteFind(S.noteQ) };
     $("pbody").querySelector(".jst").onclick=e=>{ const sb=e.target.closest("[data-note-sel]"); if(sb){ e.stopPropagation(); S.noteSel=sb.dataset.noteSel||null; renderPanel(); return } const b=e.target.closest("[data-open-note]"); if(b){ e.stopPropagation(); openPassage(b.dataset.openNote) } };
-    applyMeta({kick:"Today · "+READINGS.length+" readings", title:S.view==="public"?"Jayms Notes":"My notes"});
+    applyMeta({kick:"", title:S.view==="public"?"Jayms Notes":"My notes"});
     return;
   }
   /* the same panel on the same passage keeps its own state (an open word, a typed question) */
@@ -1354,7 +1354,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v433").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v434").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);

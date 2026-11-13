@@ -868,7 +868,7 @@ function renderPanel(){
     $("pbody").innerHTML = `<div class="jst"><div class="ask u-mb10"><input class="jst-in" id="notefind" placeholder="Find a note: a passage (Romans 8, John 3:16) or a word" value="${esc(S.noteQ||"")}"></div><div id="notefindres">${noteFind(S.noteQ)}</div>${S.noteQ?'<div class="lbl u-mt14">Today</div>':""}${notesHTML()}</div>`;
     $("notefind").oninput=e=>{ S.noteQ=e.target.value; $("notefindres").innerHTML=noteFind(S.noteQ) };
     $("pbody").querySelector(".jst").onclick=e=>{ const sb=e.target.closest("[data-note-sel]"); if(sb){ e.stopPropagation(); S.noteSel=sb.dataset.noteSel||null; renderPanel(); return } const b=e.target.closest("[data-open-note]"); if(b){ e.stopPropagation(); openPassage(b.dataset.openNote) } };
-    applyMeta({kick:"Today · "+READINGS.length+" readings", title:S.view==="public"?"Jayms Notes":"My notes"});
+    applyMeta({kick:"", title:S.view==="public"?"Jayms Notes":"My notes"});
     return;
   }
   /* the same panel on the same passage keeps its own state (an open word, a typed question) */
