@@ -351,7 +351,7 @@ const thread = id => { const t=ST.c("threads").peek(id); return t&&JaymsX.parse(
 const pubText = id => { if(OWNER){ const n=ST.c("notes").peek(id); return n&&n.pub ? n.text||"" : "" } return PUBNOTES[id] || (ST.c("pub").peek(id)||{}).text||"" };
 /* the public web app: James's notes marked public in his vault, collected into public-notes.json at each save point (scripts/build-public-notes.py) */
 const PUBNOTES = {}, PUBLIST = [];
-if(PUBLIC) fetch("public-notes.json").then(r=>r.ok?r.json():[]).then(l=>{ l.forEach(n=>{ try{ PUBNOTES[JaymsRef.key(n.passage)] = n.text; PUBLIST.push(n) }catch(e){} }); renderReader(); if(S.tool==="notes") renderPanel() }).catch(()=>{});
+if(PUBLIC) fetch("public-notes.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).then(l=>{ l.forEach(n=>{ try{ PUBNOTES[JaymsRef.key(n.passage)] = n.text; PUBLIST.push(n) }catch(e){} }); renderReader(); if(S.tool==="notes") renderPanel() }).catch(()=>{});
 const isDone = id => !!(ST.c("done").peek(id)||{}).done;
 function dayPosts(){const ids=new Set(); (S.adhoc?[S.adhoc]:READINGS).forEach(r=>((JST.data.peek(r.ref)||{}).posts||[]).forEach(p=>ids.add(p.id))); return [...ids]}
 /* ===== DISCUSSION ON X =====
