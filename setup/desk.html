@@ -640,7 +640,18 @@ function noteFind(q){
 function notesHTML(){
   const pub = S.view==="public";
   const all = READINGS.concat(S.adhoc?[S.adhoc]:[]).map(r=>({r,n:pub?pubText(r.id):NOTES[r.id].text,isPub:!!(NOTES[r.id].pub&&NOTES[r.id].savedAt)})).filter(x=>x.n.trim());
-  return all.length ? all.map(x=>box("explain",x.r.ref+(!pub&&x.isPub?' <span class="pubtag">Public</span>':""),`<div class="jst-md">${JST.util.mdBlock(x.n)}</div>`)).join("")
+  /* notes on a smaller part of what is open (Romans 1:8-13 while reading Romans 1) come under it, in book order */
+  const shown = new Set(all.map(x=>x.r.id));
+  const subs = r => {
+    const seg=JaymsRef.parse(r.ref); if(!seg.length) return "";
+    const docs=(PUBLIC ? PUBLIST : (pub?ST.c("pub"):ST.c("notes")).all()).filter(d=>String(d.text||"").trim() && (PUBLIC||pub||d.id!==r.id));
+    const pos=x=>{ const g=JaymsRef.parse(x)[0]; return g ? g.c1*1e3+g.v1 : 9e9 };
+    const hits=docs.map(d=>({d, ref:d.passage||noteRef(d)})).filter(x=>!shown.has(JaymsRef.key(x.ref)) && JaymsRef.parse(x.ref).some(a=>seg.some(b=>JaymsRef.overlap(a,b)))).sort((a,b)=>pos(a.ref)-pos(b.ref));
+    hits.forEach(x=>shown.add(JaymsRef.key(x.ref)));
+    return hits.map(x=>box("explain", esc(x.ref)+` <button class="sz" data-open-note="${esc(x.ref)}">Open</button>`, `<div class="jst-md">${JST.util.mdBlock(x.d.text)}</div>`)).join("");
+  };
+  const subHTML = READINGS.concat(S.adhoc?[S.adhoc]:[]).map(subs).join("");
+  return all.length||subHTML ? all.map(x=>box("explain",x.r.ref+(!pub&&x.isPub?' <span class="pubtag">Public</span>':""),`<div class="jst-md">${JST.util.mdBlock(x.n)}</div>`)).join("") + subHTML
     : `<p class="empty">${pub?"James has no notes on today's readings yet. Search above, or open another passage.":"Nothing yet today. Notes typed under each reading collect here, so the day reads as one page when you are done."}</p>`;
 }
 /* What each component is told by this page. */
