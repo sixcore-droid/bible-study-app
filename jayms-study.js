@@ -446,8 +446,70 @@
     B: { code: "B", name: "Biblica Study Notes", short: "Biblica", url: "https://github.com/BibleAquifer/BiblicaStudyNotes", licence: "CC BY-SA 4.0" },
     N: { code: "N", name: "NET Bible notes", short: "NET", url: "https://netbible.org/", licence: "Biblical Studies Press" },
     /* James's own Logos book, on his desk only: fsb/<book>.json (scripts/build-fsb.py from his BOOKS vault) never reaches the site */
-    F: { code: "F", name: "Faithlife Study Bible", short: "Faithlife", url: "logosres:FSB", licence: "in your Logos library", own: true }
+    F: { code: "F", name: "Faithlife Study Bible", short: "Faithlife", url: "logosres:FSB", licence: "in your Logos library", own: true },
+    /* James's Logos book, desk only: gntsb/<book>.json (scripts/build-gntsb.py) never reaches the site (build-public.py refuses it) */
+    G: { code: "G", name: "The Greek New Testament Study Bible: Notes", short: "Greek NT", url: "https://www.logos.com/product/444348/the-greek-new-testament-study-bible-notes", licence: "in your Logos library", own: true }
   };
+
+  /* ===== The Greek New Testament Study Bible: Notes (desk only) =====
+     Every note opens on a Greek phrase and talks in Greek words and grammar terms, so the Greek is shown in English letters by default
+     (a switch brings the Greek back), a tapped Greek word opens a small card (dictionary form, meaning, Word Study), a tapped grammar
+     word opens the book's own glossary entry, and manuscript letters (papyri, aleph, A, B) are kept as labels, not read as Greek. */
+  var GN = { gl: null, words: null, terms: null };   // gntsb/_glossary.json and _words.json, loaded with the first note
+  var GK = { mode: "tr", terms: true, plain: true };
+  try { var gks = JSON.parse(localStorage.getItem("jst.gntsb") || "{}"); if (gks.mode) GK.mode = gks.mode; if (gks.terms === false) GK.terms = false; if (gks.plain === false) GK.plain = false; } catch (e) {}
+  function gkSave() { try { localStorage.setItem("jst.gntsb", JSON.stringify(GK)); } catch (e) {} }
+  var GK_MAP = {"\u03b1": "a", "\u03b2": "b", "\u03b3": "g", "\u03b4": "d", "\u03b5": "e", "\u03b6": "z", "\u03b7": "e", "\u03b8": "th", "\u03b9": "i", "\u03ba": "k", "\u03bb": "l", "\u03bc": "m", "\u03bd": "n", "\u03be": "x", "\u03bf": "o", "\u03c0": "p", "\u03c1": "r", "\u03c3": "s", "\u03c2": "s", "\u03c4": "t", "\u03c5": "u", "\u03c6": "ph", "\u03c7": "ch", "\u03c8": "ps", "\u03c9": "o"};
+  var GK_RE = /[Ͱ-Ͽἀ-῿]+/g;
+  function gkTr(s) {   // Greek to English letters, no accents or macrons (dikaiosune, pisteos, huios)
+    var d = String(s).normalize("NFD"), toks = [], i, c, V = "\u03b1\u03b5\u03b7\u03b9\u03bf\u03c5\u03c9", out = "";
+    for (i = 0; i < d.length; i++) {
+      c = d.charAt(i);
+      if (c >= "̀" && c <= "ͯ") { if (c === "̔" && toks.length) toks[toks.length - 1].r = true; continue; }
+      var lo = c.toLowerCase(); toks.push({ c: lo, up: c !== lo, r: false });
+    }
+    for (i = 0; i < toks.length; i++) {
+      var t = toks[i], n = toks[i + 1], p = toks[i - 1], r = GK_MAP[t.c];
+      if (r === undefined) { out += t.c; continue; }
+      if (t.c === "\u03b3" && n && "\u03b3\u03ba\u03be\u03c7".indexOf(n.c) > -1) r = "n";
+      var w0 = !p || GK_MAP[p.c] === undefined;
+      if (w0 && V.indexOf(t.c) > -1 && (t.r || (n && V.indexOf(n.c) > -1 && n.r && "\u03b1\u03b5\u03bf\u03c5".indexOf(t.c) > -1 && "\u03b9\u03c5".indexOf(n.c) > -1))) r = "h" + r;
+      if (w0 && t.c === "\u03c1" && t.r) r = "rh";
+      if (t.up) r = r.charAt(0).toUpperCase() + r.slice(1);
+      out += r;
+    }
+    return out;
+  }
+  var gkNorm = function (w) { return String(w).replace(/[ʼ’]/g, "").toLowerCase(); };
+  function gkWord(w) {
+    var show = GK.mode === "gk" ? esc(w) : GK.mode === "both" ? esc(w) + " <small>(" + esc(gkTr(w)) + ")</small>" : esc(gkTr(w));
+    return '<span class="jst-gw' + (GK.mode === "tr" ? "" : " jst-gk") + '" role="button" tabindex="0" data-jst-gw="' + esc(w) + '">' + show + "</span>";
+  }
+  function gkRender(text) {   // a note's text: manuscript letters kept apart, grammar words tappable, Greek words in the chosen letters
+    var h = esc(text), sig = [];
+    h = h.replace(/\(([^)]*(?:𝔓|א)[^)]*)\)/g, function (m, g) { sig.push("(" + g.split(/\s+/).map(function (s) { return '<span class="jst-sig">' + s + "</span>"; }).join(" ") + ")"); return "\u0001" + (sig.length - 1) + "\u0002"; });
+    if (GK.terms && GN.gl) {
+      if (!GN.terms) GN.terms = new RegExp("(^|[^A-Za-zʼ’])(" + Object.keys(GN.gl).sort(function (a, b) { return b.length - a.length; }).map(function (k) { return k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }).join("|") + ")(?![A-Za-z])", "gi");
+      h = h.replace(GN.terms, function (m, a, term) { var k = Object.keys(GN.gl).filter(function (x) { return x.toLowerCase() === term.toLowerCase(); })[0]; return a + '<span class="jst-gt" role="button" tabindex="0" data-jst-gt="' + esc(k) + '">' + term + "</span>"; });
+    }
+    h = h.split(/(<[^>]+>)/).map(function (p) { return p.charAt(0) === "<" ? p : p.replace(GK_RE, gkWord); }).join("");
+    return h.replace(/\u0001(\d+)\u0002/g, function (m, i) { return sig[+i]; });
+  }
+  function gkCard(kind, key) {
+    if (kind === "t") return '<div class="jst-gcard"><b>' + esc(key) + "</b><br>" + esc((GN.gl || {})[key] || "") + '<div class="sub">From the book\'s glossary.</div></div>';
+    var w = (GN.words || {})[gkNorm(key)];
+    return '<div class="jst-gcard"><span class="jst-gk">' + esc(key) + "</span> <span class=\"sub\">" + esc(gkTr(key)) + "</span>" +
+      (w ? "<br><b>" + esc(gkTr(w[0])) + '</b> <span class="sub">(' + esc(w[0]) + ")</span>: " + esc(w[1]) + (w[2] ? '<div class="askrow"><button class="btn" data-jst-word="' + esc(strongKey(w[2])) + '">Word Study</button></div>' : "") : '<br><span class="sub">No meaning for this form in the app\'s Greek data.</span>') + "</div>";
+  }
+  function gkNote(n, i, st, where) {
+    var logos = R.logos("grknwtstmnstbbl", { book: n.book, c1: n.c1, v1: n.v1, c2: n.c1, v2: n.v1 });
+    var lem = n.lemma ? esc(n.lemma).replace(GK_RE, gkWord) : "", pop = st.gpop ? st.gpop.split("|") : null;
+    return '<div class="item" data-jst-gi="' + i + '"><span class="when">' + esc(where(n)) + (n.ms ? ' <span class="jst-mss">Manuscripts</span>' : "") + "</span>" +
+      (lem ? '<div class="jst-glem">' + lem + "</div>" : "") +
+      (GK.plain && n.plain ? '<div class="jst-gplain">' + esc(n.plain) + "</div>" : "") +
+      '<div class="jst-note"><p>' + gkRender(n.text) + "</p></div>" +
+      (pop && +pop[0] === i ? gkCard(pop[1], pop.slice(2).join("|")) : "") + outlink(logos, "Open in Logos") + "</div>";
+  }
   /* a note's light markup to HTML: blank-line paragraphs, "- " list items, *emphasis*, {{Ref|label}} as a button that opens the verse */
   function noteHTML(t) {
     return String(t).split(/\n\n+/).map(function (para) {
@@ -609,16 +671,17 @@
       segs.forEach(function (q) { if (books.indexOf(q.book) < 0) books.push(q.book); });
       var own = !global.JAYMS_PUBLIC;   // the Faithlife Study Bible's and the NET's notes: James's desk only
       /* the NET's translators' notes (netnotes/<book>.json, scripts/fetch-net-notes.py): never shipped to the site */
-      return Promise.all(books.map(function (b) { return Promise.all([bookFile("study", b, segs), own ? bookFile("netnotes", b, segs).catch(function () { return null; }) : null, own ? bookFile("fsb", b, segs).catch(function () { return null; }) : null]); })).then(function (sets) {
-        var files = sets.map(function (p) { return { n: [].concat.apply([], p.map(function (x) { return (x && x.n) || []; })) }; });
+      return Promise.all(books.map(function (b) { return Promise.all([bookFile("study", b, segs), own ? bookFile("netnotes", b, segs).catch(function () { return null; }) : null, own ? bookFile("fsb", b, segs).catch(function () { return null; }) : null, own ? bookFile("gntsb", b, segs).catch(function () { return null; }) : null]); })).then(function (sets) {
+        var files = sets.map(function (p) { return { n: [].concat.apply([], p.map(function (x) { return (x && x.n) || []; })), author: (p[3] && p[3].author) || "" }; });
         var out = [];
         segs.forEach(function (q) {
           ((files[books.indexOf(q.book)] || {}).n || []).forEach(function (n) {
-            if (R.overlap({ book: q.book, c1: n[0], v1: n[1], c2: n[2], v2: n[3] }, q)) out.push({ book: q.book, c1: n[0], v1: n[1], c2: n[2], v2: n[3], src: NOTE_SRC[n[4]], text: n[5] });
+            if (R.overlap({ book: q.book, c1: n[0], v1: n[1], c2: n[2], v2: n[3] }, q)) out.push({ book: q.book, c1: n[0], v1: n[1], c2: n[2], v2: n[3], src: NOTE_SRC[n[4]], text: n[5], lemma: n[6] || "", plain: n[7] || "", ms: n[8] || 0, author: n[4] === "G" ? files[books.indexOf(q.book)].author : "" });
           });
         });
         NOTEN[ref] = out.length;
-        return out;
+        if (!own || !out.some(function (x) { return x.src.code === "G"; }) || GN.gl) return out;
+        return Promise.all([getJSON("gntsb/_glossary.json").catch(function () { return null; }), getJSON("gntsb/_words.json").catch(function () { return null; })]).then(function (a) { GN.gl = a[0] || {}; GN.words = a[1] || {}; return out; });
       });
     },
     /* Church Fathers on the passage: excerpts in study/<book>.json "f" (scripts/build-fathers.py), [c, v1, v2, author, year, excerpt] */
@@ -3003,13 +3066,22 @@
       if (!all.length) return h + none("No study note covers " + esc(this.o.ref) + ".");
       var srcs = Object.keys(NOTE_SRC).filter(function (k) { return have[k]; });
       if (srcs.length > 1) h += '<div class="chips"><button class="chip' + (on === "all" ? " on" : "") + '" data-jst-nsrc="all">' + (srcs.length > 2 ? "All" : "Both") + '</button>' + srcs.map(function (k) { return '<button class="chip' + (on === k ? " on" : "") + '" data-jst-nsrc="' + k + '">' + esc(NOTE_SRC[k].short) + " (" + have[k] + ")</button>"; }).join("") + "</div>";
-      h += list.map(function (n) { return box({ T: "explain", F: "wording", N: "scripture" }[n.src.code] || "apparatus", "", '<div class="item"><span class="when">' + esc(where(n)) + '</span><div class="jst-note">' + noteHTML(n.text) + "</div></div>"); }).join("");
+      if (have.G && (on === "all" || on === "G")) h += '<div class="chips jst-gctl"><span class="lbl">Greek</span>' + [["tr", "English letters"], ["gk", "Greek letters"], ["both", "Both"]].map(function (m) { return '<button class="chip' + (GK.mode === m[0] ? " on" : "") + '" data-jst-gmode="' + m[0] + '">' + m[1] + "</button>"; }).join("") + '<button class="chip' + (GK.terms ? " on" : "") + '" data-jst-gopt="terms">Explain grammar words</button><button class="chip' + (GK.plain ? " on" : "") + '" data-jst-gopt="plain">Plain English line</button></div>';
+      h += list.map(function (n, i) { return box(n.src.code === "G" ? "apparatus" : { T: "explain", F: "wording", N: "scripture" }[n.src.code] || "apparatus", "", n.src.code === "G" ? gkNote(n, i, st, where) : '<div class="item"><span class="when">' + esc(where(n)) + '</span><div class="jst-note">' + noteHTML(n.text) + "</div></div>"); }).join("");
+      var gauth = {}; list.forEach(function (n) { if (n.src.code === "G" && n.author) gauth[n.book] = n.author; });
+      if (Object.keys(gauth).length) h += '<p class="ctx u-fs13">Greek NT notes: ' + Object.keys(gauth).map(function (b) { return esc(bookLabel(b)) + " by " + esc(gauth[b]); }).join("; ") + (GK.plain && list.some(function (n) { return n.plain; }) ? ". The dashed lines are plain-English summaries written by Claude. They are not in the book." : ".") + "</p>";
       h += '<p class="ctx u-fs13">' + (on === "all" && srcs.length > 1 ? srcs.map(function (k) { return { T: "Olive edge: Tyndale.", B: "Grey edge: Biblica.", N: "Gold edge: NET.", F: "Purple edge: Faithlife." }[k]; }).join(" ") + " " : "") + srcs.map(function (k) { var x = NOTE_SRC[k]; return '<a href="' + x.url + '" target="_blank" rel="noopener">' + esc(x.name) + "</a> (" + x.licence + ")"; }).join(" and ") + ". A verse in a note opens in the reader.</p>";
       return h;
     },
     click: function (e) {
       var sb = e.target.closest("[data-jst-nsrc]");
       if (sb) { e.stopPropagation(); this.st.src = sb.getAttribute("data-jst-nsrc"); this.paint(); return; }
+      var gm = e.target.closest("[data-jst-gmode]");
+      if (gm) { e.stopPropagation(); GK.mode = gm.getAttribute("data-jst-gmode"); this.st.gpop = null; gkSave(); this.paint(); return; }
+      var go2 = e.target.closest("[data-jst-gopt]");
+      if (go2) { e.stopPropagation(); var gopt = go2.getAttribute("data-jst-gopt"); GK[gopt] = !GK[gopt]; this.st.gpop = null; gkSave(); this.paint(); return; }
+      var gx = e.target.closest("[data-jst-gw],[data-jst-gt]");
+      if (gx) { e.stopPropagation(); var gi = gx.closest("[data-jst-gi]"), gkind = gx.hasAttribute("data-jst-gt") ? "t" : "w", gkey = gx.getAttribute(gkind === "t" ? "data-jst-gt" : "data-jst-gw"), gid = gi.getAttribute("data-jst-gi") + "|" + gkind + "|" + gkey; this.st.gpop = this.st.gpop === gid ? null : gid; this.paint(); return; }
       if (e.target.closest("[data-jst-rfirst]")) { e.stopPropagation(); READ_FIRST = !READ_FIRST; try { localStorage.setItem("jst.readfirst", READ_FIRST ? "1" : "0"); } catch (x) {} this.paint(); return; }
       var rbk = e.target.closest("[data-jst-readbook]");
       if (rbk) { e.stopPropagation(); e.preventDefault(); this.emit("book", { id: rbk.getAttribute("data-jst-readbook") }); return; }
