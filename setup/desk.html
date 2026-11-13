@@ -653,7 +653,7 @@ function notesHTML(){
   if(!items.length) return `<p class="empty">${pub?"James has no notes on today's readings yet. Search above, or open another passage.":"Nothing yet today. Notes typed under each reading collect here, so the day reads as one page when you are done."}</p>`;
   /* a button for each note: click one to read it on its own, All to see them together */
   const sel = items.some(i=>i.key===S.noteSel) ? S.noteSel : null;
-  const bar = items.length>1 ? `<div class="chips u-mb10" id="notesel"><button class="chip${sel?"":" on"}" data-note-sel="">All (${items.length})</button>${items.map(i=>`<button class="chip${sel===i.key?" on":""}" data-note-sel="${esc(i.key)}">${esc(/^\d+$/.test(i.ref.replace(/^\d?\s?[A-Za-z]+\s/,""))?"Whole chapter":i.ref.replace(/^\d?\s?[A-Za-z]+\s/,""))}</button>`).join("")}</div>` : "";
+  const bar = items.length>1 ? `<div class="chips u-mb10" id="notesel">${items.map(i=>`<button class="chip${sel===i.key?" on":""}" data-note-sel="${esc(i.key)}">${esc(/^\d+$/.test(i.ref.replace(/^\d?\s?[A-Za-z]+\s/,""))?"Whole chapter":i.ref.replace(/^\d?\s?[A-Za-z]+\s/,""))}</button>`).join("")}</div>` : "";
   return bar + items.filter(i=>!sel||i.key===sel).map(i=>i.html).join("");
 }
 /* What each component is told by this page. */
@@ -867,7 +867,7 @@ function renderPanel(){
     if(PH){PH.destroy(); PH=null; PH_KEY=""}
     $("pbody").innerHTML = `<div class="jst"><div class="ask u-mb10"><input class="jst-in" id="notefind" placeholder="Find a note: a passage (Romans 8, John 3:16) or a word" value="${esc(S.noteQ||"")}"></div><div id="notefindres">${noteFind(S.noteQ)}</div>${S.noteQ?'<div class="lbl u-mt14">Today</div>':""}${notesHTML()}</div>`;
     $("notefind").oninput=e=>{ S.noteQ=e.target.value; $("notefindres").innerHTML=noteFind(S.noteQ) };
-    $("pbody").querySelector(".jst").onclick=e=>{ const sb=e.target.closest("[data-note-sel]"); if(sb){ e.stopPropagation(); S.noteSel=sb.dataset.noteSel||null; renderPanel(); return } const b=e.target.closest("[data-open-note]"); if(b){ e.stopPropagation(); openPassage(b.dataset.openNote) } };
+    $("pbody").querySelector(".jst").onclick=e=>{ const sb=e.target.closest("[data-note-sel]"); if(sb){ e.stopPropagation(); S.noteSel=(sb.dataset.noteSel===S.noteSel)?null:sb.dataset.noteSel; renderPanel(); return } const b=e.target.closest("[data-open-note]"); if(b){ e.stopPropagation(); openPassage(b.dataset.openNote) } };
     applyMeta({kick:"", title:S.view==="public"?"Jayms Notes":"My notes"});
     return;
   }
