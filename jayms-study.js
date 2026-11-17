@@ -923,7 +923,14 @@
   define("Gods", { id: "gods", label: "Gods", name: "Gods of the Bible", icon: ICON.gods }, {
     /* The Dictionary of Deities and Demons tab (wide screens only): the entries that cite the open chapter, each with a link into the book
        in Logos at the entry's page. ddd.json holds headwords, printed pages and cited verses, none of the dictionary's own text. */
-    prepare: function () { var self = this; return getJSON("ddd.json").then(function (j) { self.ddd = j; }).catch(function () { self.ddd = null; }); },
+    prepare: function () { var self = this; return getJSON("ddd.json").then(function (j) { self.ddd = j; }).catch(function () { self.ddd = null; })
+      /* the article text is his desk only (ddd-text.json is never published); the public site gets the Logos link instead */
+      .then(function () { return R.web() ? null : getJSON("ddd-text.json").then(function (j) { self.dtext = j; }).catch(function () { self.dtext = null; }); }); },
+    dddArticle: function (hw) {
+      var a = this.dtext && this.dtext[hw]; if (!a) return "";
+      function f(x) { return esc(x).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\[\[(.+?)\]\]/g, '<a href="#" class="jst-dx" data-jst-dgo="$1">$1</a>').replace(/\u2192([A-Z][A-Za-z\u0100-\u024F\u02BE\u02BF\u2019 ]*)/g, '\u2192<a href="#" class="jst-dx" data-jst-dgo="$1">$1</a>'); }
+      return '<div class="jst-dart">' + a.t.split(/\n\s*\n/).map(function (p) { return "<p>" + f(p.trim()) + "</p>"; }).join("") + (a.b ? '<p class="jst-dbib">' + esc(a.b.replace(/^#+.*$/gm, "").trim()) + "</p>" : "") + "</div>";
+    },
     dddRows: function () {
       var j = this.ddd, q = data.segs(this.o.ref)[0]; if (!j || !j.r || !q) return [];
       var by = {}, out = [], c, v;
@@ -945,13 +952,17 @@
         var q = data.segs(this.o.ref)[0], sort = st.dsort || "v", fv = st.dv || 0;
         var vset = []; rows.forEach(function (r) { r.vs.forEach(function (x) { if (vset.indexOf(x) < 0) vset.push(x); }); }); vset.sort(function (a, b) { return a - b; });
         var list = rows.filter(function (r) { return !fv || r.vs.indexOf(fv) > -1; });
+        var ex = st.dextra && this.ddd.e.filter(function (x) { return x[0] === st.dextra; })[0];
+        if (ex && !list.some(function (r) { return r.hw === ex[0]; })) list.unshift({ hw: ex[0], pg: ex[1], vs: [], hit: false, ch: 0, extra: true });
         list.sort(function (a, b) { return sort === "a" ? a.hw.localeCompare(b.hw) : sort === "p" ? parseInt(a.pg, 10) - parseInt(b.pg, 10) : (b.hit - a.hit) || (a.vs[0] - b.vs[0]) || a.hw.localeCompare(b.hw); });
+        list.sort(function (a, b) { return (b.extra ? 1 : 0) - (a.extra ? 1 : 0); });
         var ctl = '<div class="chips jst-gctl"><span class="lbl">Sort</span>' + [["v", "By verse"], ["a", "A to Z"], ["p", "By page"]].map(function (m) { return '<button class="chip' + (sort === m[0] ? " on" : "") + '" data-jst-dsort="' + m[0] + '">' + m[1] + "</button>"; }).join("") + "</div>";
         var vb = vset.length > 1 ? '<div class="chips u-mb10"><span class="lbl">Verse</span>' + vset.map(function (x) { return '<button class="chip jst-dv' + (fv === x ? " on" : "") + '" data-jst-dv="' + x + '">' + x + "</button>"; }).join("") + "</div>" : "";
         var h = tabs + ctl + vb + list.map(function (r) {
           var vs = r.vs.slice().sort(function (a, b) { return a - b; }).filter(function (x, i, a) { return a.indexOf(x) === i; });
-          return box(r.hit ? "witness" : "apparatus", "", '<div class="item"><span class="tt">' + esc(r.hw) + '</span><span class="sub">pp. ' + esc(r.pg) + " \u00B7 cites " + esc(q.book) + " " + r.ch + ":" + (vs.length > 3 ? vs[0] + "\u2013" + vs[vs.length - 1] : vs.join(", ")) + (r.hit ? "" : " (elsewhere in the chapter)") + "</span>" + outlink(self.dddLink(r.hw), "Open \u201C" + r.hw + "\u201D in Logos") + "</div>"); }).join("");
-        return { kick: "Dictionary of Deities and Demons \u00B7 " + rows.length + " entries", title: "Who is in the room", body: h + '<p class="ctx u-fs13">Dictionary of Deities and Demons in the Bible, 2nd ed. (Brill/Eerdmans 1999). The list of entries that cite this passage; the entries themselves open in your Logos.</p>' };
+          var art = self.dddArticle(r.hw), open = st.dopen === r.hw;
+          return box(r.hit ? "witness" : "apparatus", "", '<div class="item"><span class="tt">' + esc(r.hw) + '</span><span class="sub">pp. ' + esc(r.pg) + " \u00B7 cites " + esc(q.book) + " " + r.ch + ":" + (vs.length > 3 ? vs[0] + "\u2013" + vs[vs.length - 1] : vs.join(", ")) + (r.extra ? "" : r.hit ? "" : " (elsewhere in the chapter)") + "</span>" + (art ? '<button class="chip jst-dread" data-jst-dopen="' + esc(r.hw) + '">' + (open ? "Close" : "Read") + "</button>" : "") + (open ? art : "") + outlink(self.dddLink(r.hw), "Open \u201C" + r.hw + "\u201D in Logos") + "</div>"); }).join("");
+        return { kick: "Dictionary of Deities and Demons \u00B7 " + rows.length + " entries", title: "Who is in the room", body: h + '<p class="ctx u-fs13">Dictionary of Deities and Demons in the Bible, 2nd ed. (Brill/Eerdmans 1999). The list of entries that cite this passage; the entries open here on your desk, or in Logos.</p>' };
       }
       var h = g.length ? g.map(function (x, i) { return box(i ? "apparatus" : "witness", "", '<div class="item"><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(x.summary) + "</span>" + (x.plain ? '<p class="u-mt8">' + md(x.plain) + "</p>" : "") + outlink(entryURL("gods", x.id), "jayms Gods of the Bible: " + esc(x.title)) + "</div>"); }).join("")
         : none("No one from Gods of the Bible is named in " + esc(this.o.ref) + ".");
@@ -961,6 +972,9 @@
       var t = e.target, gt = t.closest("[data-jst-gtab]"), ds = t.closest("[data-jst-dsort]"), dv = t.closest("[data-jst-dv]");
       if (gt) { e.stopPropagation(); this.st.tab = gt.getAttribute("data-jst-gtab"); this.paint(); return; }
       if (ds) { e.stopPropagation(); this.st.dsort = ds.getAttribute("data-jst-dsort"); this.paint(); return; }
+      var dop = t.closest("[data-jst-dopen]"), dgo = t.closest("[data-jst-dgo]");
+      if (dop) { e.stopPropagation(); var hw = dop.getAttribute("data-jst-dopen"); this.st.dopen = this.st.dopen === hw ? null : hw; this.paint(); return; }
+      if (dgo) { e.preventDefault(); e.stopPropagation(); var w = dgo.getAttribute("data-jst-dgo").trim(), hit = (this.ddd ? this.ddd.e : []).filter(function (x) { return x[0].toLowerCase() === w.toLowerCase() || x[0].toLowerCase().replace(/ \(.*$/, "") === w.toLowerCase(); })[0]; if (hit) { this.st.dextra = hit[0]; this.st.dopen = hit[0]; this.paint(); } return; }
       if (dv) { e.stopPropagation(); var n = +dv.getAttribute("data-jst-dv"); this.st.dv = this.st.dv === n ? 0 : n; this.paint(); return; }
     }
   }, {}, function (d) { return d ? (d.gods || []).length : null; });
