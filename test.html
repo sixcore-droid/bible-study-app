@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>TEST: Bible Study App | jayms.com</title><meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://jayms.com/bible-study-app-TEST/"><meta name="theme-color" content="#0d0e11"><script>window.JAYMS_PUBLIC = true; window.JAYMS_TEST = true; window.JAYMS_FOLDER_DB = "jayms-folder-test";</script></head><body><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="jayms-study.css?v=v447">
+<link rel="stylesheet" href="jayms-study.css?v=v448">
 <!-- Study Workstation page (the host). Developer guide: docs/DEVELOPER.md. User guide: help.html (the ? button).
      Sections below are marked /* ===== NAME ===== */: DATA, STATE, DISCUSSION ON X, PLAN RAIL, READER, DOCK + PANEL, EVENTS. -->
 
@@ -201,11 +201,11 @@
   <nav class="dock" id="dock" aria-label="Study tools"></nav>
 </div>
 
-<script src="jayms-ref.js?v=v447"></script>
-<script src="jayms-store.js?v=v447"></script>
-<script src="jayms-folder.js?v=v447"></script>
-<script src="x-discuss.js?v=v447"></script>
-<script src="jayms-study.js?v=v447"></script>
+<script src="jayms-ref.js?v=v448"></script>
+<script src="jayms-store.js?v=v448"></script>
+<script src="jayms-folder.js?v=v448"></script>
+<script src="x-discuss.js?v=v448"></script>
+<script src="jayms-study.js?v=v448"></script>
 <script>
 /* ===== DATA (in the real build each block is a JSON file the runner already serves) ===== */
 
@@ -668,7 +668,7 @@ const HANDLERS = {
   verse:   v => { S.vsel=v; stashPanel("verse"); S.tool="verse"; renderReader(); renderDock(); renderPanel() },
   mark:    id => { S.mark=id; stashPanel("marks"); S.tool="marks"; renderReader(); renderDock(); renderPanel() },
   /* "Read here" on the Shelf: the Book panel, opened on that book (the Shelf is kept, with a Back to it) */
-  book:    d => { S.bookId=d.id; stashPanel("book"); S.tool="book"; renderDock(); renderPanel(); S.bookId=null },
+  book:    d => { S.bookId=d.id; S.bookSec=(d.sec==null?null:d.sec); stashPanel("book"); S.tool="book"; renderDock(); renderPanel(); S.bookId=null; S.bookSec=null },
   planRestart: d => { restartPlan(d.id) },
   passage: d => { const err=d.follow ? followPlan(d.ref) : openPassage(d.ref); if(err) $("gomsg").textContent=err },
   note:    d => { const id=JaymsRef.key(d.ref); initNote(id); NOTES[id].text=(NOTES[id].text?NOTES[id].text+"\n\n":"")+"Claude: "+d.text; if(id===cur().id) markDirty() },
@@ -816,7 +816,7 @@ function panelOptions(id){
                        Object.assign(o, { saveKey:wrapKey(), ask:SAMPLE, material:wrapMaterial, refs:rs.map(x=>x.ref), saved:()=>ST.c("wraps").peek(wrapKey()),
                          title: S.adhoc ? S.adhoc.ref : `${plan().name} - Day ${S.day} - ${rs[0].ref}`, obsidian:{vault:MY.notesVault, folder:MY.studyFolder+"/Wrap-ups"} }); }
   if(id==="xref"||id==="targum") o.version = S.ver;
-  if(id==="book") o.pick = S.bookId||null;
+  if(id==="book") { o.pick = S.bookId||null; o.picksec = S.bookSec==null?null:S.bookSec; }
   if(id==="shelf"||id==="config") Object.assign(o, { owner:S.view!=="public", config:shelfConfig,
                        dddVault:MY.ddd });
   if(id==="review")  Object.assign(o, { cards:()=>ST.c("vocab").all(), state:k=>ST.c("reviews").peek(k), note:()=>{ const r=cur(); return r && NOTES[r.id] ? NOTES[r.id].text : "" },
@@ -871,7 +871,7 @@ function renderPanel(){
     return;
   }
   /* the same panel on the same passage keeps its own state (an open word, a typed question) */
-  const key = [S.tool, r.ref, S.view, S.logos, (S.tool==="xref"||S.tool==="targum")?S.ver:"", S.tool==="word"?S.word:"", S.tool==="verse"?JSON.stringify(S.vsel):"",S.tool==="book"?(S.bookId||""):"", S.tool==="claude"?!!SAMPLE:"", S.tool==="marks"?S.mark+"|"+hgSpots().map(x=>x.id).join(","):""].join("|");
+  const key = [S.tool, r.ref, S.view, S.logos, (S.tool==="xref"||S.tool==="targum")?S.ver:"", S.tool==="word"?S.word:"", S.tool==="verse"?JSON.stringify(S.vsel):"",S.tool==="book"?((S.bookId||"")+"|"+(S.bookSec==null?"":S.bookSec)):"", S.tool==="claude"?!!SAMPLE:"", S.tool==="marks"?S.mark+"|"+hgSpots().map(x=>x.id).join(","):""].join("|");
   if(PH && PH_KEY===key){ PH.refresh(); return }
   if(PH) PH.destroy();
   $("pbody").innerHTML = '<div id="pmount"></div>'; $("pbody").scrollTop = 0;
@@ -1354,7 +1354,7 @@ function spfLoad(){
     const mine=spfKey(); if(!file && !mine) return;
     SPF_FILE=file; const o=window.SPEECHIFY_OPTS=window.SPEECHIFY_OPTS||{}; if(!file) o.key=mine;
     Object.assign(o, { bar:false, selector:"[data-spf-none]" });
-    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v447").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
+    return load(SPF_DESK ? "/speechify/speechify-reader.js" : "speechify-reader.js?v=v448").then(()=>{ SPF=true; $("voicewrap").hidden=false; renderReader() }) }).catch(()=>{}).then(spfSettings);
 }
 /* one voice-and-speed bar, shown in the Voice drop-down under the text or in Settings: it moves to whichever is open */
 function spfBarIn(host){ const b=window.Speechify && Speechify.bar(host); if(!b) return; if(b.parentNode!==host) host.appendChild(b);

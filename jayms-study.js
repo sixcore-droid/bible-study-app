@@ -903,8 +903,25 @@
 
   // ------------------------------------------------------------------ Council
   define("Council", { id: "council", label: "Council", name: "Divine Council Index", icon: ICON.council }, {
+    /* desk only: the chapters of the books in books-reader.json that cite this passage (the server reads the book's own text for references) */
+    prepare: function () { var self = this; self.cites = []; if (R.web()) return null;
+      return getJSON("api/book-cites?ref=" + encodeURIComponent(this.o.ref)).then(function (r) { self.cites = (r && r.books) || []; }).catch(function () { self.cites = []; }); },
+    citeBlock: function () {
+      return (this.cites || []).map(function (b) {
+        return '<div class="lbl u-mt14">' + esc(b.by) + ", " + esc(b.title) + " \u00B7 where it takes up this passage</div>" + b.sections.map(function (x) {
+          var t = x.title.replace(/^PART\s+\d+:[^:]*:\s*/i, ""), m = /^(\d+):\s*(.*)$/.exec(t), nm = m ? "Chapter " + m[1] + ": " + m[2] : t;
+          return '<div class="box apparatus jst-cite"><div class="item"><span class="when">' + x.n + (x.n > 1 ? " mentions" : " mention") + '</span><span class="tt">' + esc(nm) + "</span></div><p class=\"u-m0 u-fs13\">\u201C" + esc(x.snip) +
+            '\u201D</p><button class="chip" data-jst-citebook="' + esc(b.id) + '" data-jst-citesec="' + x.i + '">Read this chapter</button></div>'; }).join("");
+      }).join("");
+    },
+    click: function (e) {
+      var cb = e.target.closest("[data-jst-citebook]");
+      if (cb) { e.stopPropagation(); e.preventDefault(); this.emit("book", { id: cb.getAttribute("data-jst-citebook"), sec: +cb.getAttribute("data-jst-citesec") }); return; }
+      Panel.prototype.click.call(this, e);
+    },
     view: function () {
       var all = L(this, "council"), mains = all.filter(function (e) { return e.main; }), rest = all.filter(function (e) { return !e.main; });
+      if (!mains.length && (this.cites || []).length) return { kick: "Books on this passage", title: "The council in this text", body: none("The Divine Council Index has no entry on " + esc(this.o.ref) + ".") + this.citeBlock() };
       if (!mains.length) return { kick: "Divine Council Index", title: "The council in this text", body: none("The Divine Council Index has no entry on " + esc(this.o.ref) + ".") + outlink(CFG.site + "divine-council-index/", "The whole jayms Divine Council Index") };
       var h = "";
       mains.forEach(function (m) {
@@ -915,7 +932,7 @@
         h += outlink(entryURL("council", m.id), "jayms Divine Council Index: " + esc(m.title));
       });
       if (rest.length) h += '<div class="lbl">Reads with</div>' + rest.map(function (e) { return box("apparatus", "", '<div class="item"><span class="when">' + esc(e.cat) + '</span><span class="tt">' + esc(e.title) + '</span><span class="sub">' + esc(e.summary) + "</span>" + outlink(entryURL("council", e.id), "jayms Divine Council Index: " + esc(e.title)) + "</div>"); }).join("");
-      return { kick: "Divine Council Index \u00B7 " + mains.length + " entr" + (mains.length > 1 ? "ies" : "y") + " for this passage", title: "The council in this text", body: h };
+      return { kick: "Divine Council Index \u00B7 " + mains.length + " entr" + (mains.length > 1 ? "ies" : "y") + " for this passage", title: "The council in this text", body: h + this.citeBlock() };
     }
   }, {}, function (d) { return d ? (d.council || []).filter(function (e) { return e.main; }).length : null; });
 
@@ -2477,7 +2494,7 @@
         });
         if (self.o.pick) {   /* "Read here" from the shelf: that book first */
           var at = self.hits.findIndex(function (x) { return self.bk[x.b].id === self.o.pick || (self.o.pick === "ivp" && self.bk[x.b].kind === "ivp"); });
-          if (at > -1) self.st.k = at; self.o.pick = null;
+          if (at > -1) { self.st.k = at; if (self.o.picksec != null) { self.st.sec = self.st.sec || {}; self.st.sec[self.o.pick] = self.o.picksec; } } self.o.pick = null; self.o.picksec = null;
         }
       });
     },
