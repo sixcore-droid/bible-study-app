@@ -934,9 +934,9 @@
       Object.keys(by).forEach(function (k) { out.push(by[k]); });
       return out;
     },
-    dddLink: function (pg) {
-      var n = parseInt(pg, 10), web = R.web();
-      return web ? "https://ref.ly/logosres/13.0.23" + (n ? "?ref=Page.p+" + n : "") : "logosres:13.0.23" + (n ? ";ref=Page.p_" + n : "");
+    dddLink: function (hw) {
+      var a = encodeURIComponent(String(hw).trim());
+      return R.web() ? "https://ref.ly/logosres/13.0.23?art=" + a : "logosres:13.0.23;art=" + a;
     },
     view: function () {
       var g = L(this, "gods"), st = this.st, wide = global.innerWidth >= 900, rows = this.dddRows(), tab = wide && rows.length && st.tab === "ddd" ? "ddd" : "gods", self = this;
@@ -950,7 +950,7 @@
         var vb = vset.length > 1 ? '<div class="chips u-mb10"><span class="lbl">Verse</span>' + vset.map(function (x) { return '<button class="chip jst-dv' + (fv === x ? " on" : "") + '" data-jst-dv="' + x + '">' + x + "</button>"; }).join("") + "</div>" : "";
         var h = tabs + ctl + vb + list.map(function (r) {
           var vs = r.vs.slice().sort(function (a, b) { return a - b; }).filter(function (x, i, a) { return a.indexOf(x) === i; });
-          return box(r.hit ? "witness" : "apparatus", "", '<div class="item"><span class="tt">' + esc(r.hw) + '</span><span class="sub">pp. ' + esc(r.pg) + " \u00B7 cites " + esc(q.book) + " " + r.ch + ":" + (vs.length > 3 ? vs[0] + "\u2013" + vs[vs.length - 1] : vs.join(", ")) + (r.hit ? "" : " (elsewhere in the chapter)") + "</span>" + outlink(self.dddLink(r.pg), "Open in Logos at p. " + parseInt(r.pg, 10)) + "</div>"); }).join("");
+          return box(r.hit ? "witness" : "apparatus", "", '<div class="item"><span class="tt">' + esc(r.hw) + '</span><span class="sub">pp. ' + esc(r.pg) + " \u00B7 cites " + esc(q.book) + " " + r.ch + ":" + (vs.length > 3 ? vs[0] + "\u2013" + vs[vs.length - 1] : vs.join(", ")) + (r.hit ? "" : " (elsewhere in the chapter)") + "</span>" + outlink(self.dddLink(r.hw), "Open \u201C" + r.hw + "\u201D in Logos") + "</div>"); }).join("");
         return { kick: "Dictionary of Deities and Demons \u00B7 " + rows.length + " entries", title: "Who is in the room", body: h + '<p class="ctx u-fs13">Dictionary of Deities and Demons in the Bible, 2nd ed. (Brill/Eerdmans 1999). The list of entries that cite this passage; the entries themselves open in your Logos.</p>' };
       }
       var h = g.length ? g.map(function (x, i) { return box(i ? "apparatus" : "witness", "", '<div class="item"><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(x.summary) + "</span>" + (x.plain ? '<p class="u-mt8">' + md(x.plain) + "</p>" : "") + outlink(entryURL("gods", x.id), "jayms Gods of the Bible: " + esc(x.title)) + "</div>"); }).join("")
