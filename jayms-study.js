@@ -935,7 +935,7 @@
       return out;
     },
     dddLink: function (hw) {
-      var a = encodeURIComponent(String(hw).trim());
+      var a = encodeURIComponent(String(hw).replace(/\s+/g, "")).replace(/%28/g, "(").replace(/%29/g, ")");
       return R.web() ? "https://ref.ly/logosres/13.0.23?art=" + a : "logosres:13.0.23;art=" + a;
     },
     view: function () {
