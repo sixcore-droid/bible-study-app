@@ -2505,11 +2505,18 @@
       h2 += '<div class="askrow u-gap6 jst-bknav">' + go(prev, "Previous", -1) + '<span class="sub u-flex1 u-ta-c">' + (top ? "Part " : "Section ") + s.n + " of " + b.sections.length + "</span>" + go(next, "Next", 1) + "</div>";
       if (top && b.sections.length > 1) {
         var groups = [], gi = {}; b.sections.forEach(function (x, k) { var base = x.title.replace(/\s*\u00B7\s*part\s+\d+$/i, ""); if (gi[base] === undefined) { gi[base] = groups.length; groups.push({ t: base, ks: [] }); } groups[gi[base]].ks.push(k); });
-        h2 += '<details class="jst-past jst-toc u-mt6"><summary class="lbl">Contents (' + groups.length + ")</summary>" + groups.map(function (g) {
-          var m = /^Chapter\s+(\w+):\s*(.*)$/.exec(g.t), here = g.ks.indexOf(at) > -1, isPart = /^Part\b/i.test(g.t);
-          var label = m ? '<span class="n">' + esc(m[1]) + '</span><span class="t">' + esc(m[2]) + "</span>" : '<span class="t' + (isPart ? " part" : "") + '">' + esc(g.t) + "</span>";
+        var cap = function (t) { return t.replace(/^PART\s+(\w+)/i, function (_, w) { return "Part " + w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(); }); };
+        var curPart = "", rows = groups.map(function (g) {
+          var m1 = /^(PART\s+\w+)(?::\s*(.+?))?:\s*(\d{1,2}|\w+):\s*(.+)$/i.exec(g.t) && /^(PART\s+\w+)(?::\s*(.+?))?:\s*(\d{1,2}):\s*(.+)$/i.exec(g.t),
+              m2 = !m1 && /^Chapter\s+(\w+):\s*(.*)$/.exec(g.t), m3 = !m1 && !m2 && /^(\d{1,2}):\s*(.+)$/.exec(g.t),
+              isPart = !m1 && /^Part\b/i.test(g.t), here = g.ks.indexOf(at) > -1, out = "", num = "", title = g.t;
+          if (m1) { var pl = cap(m1[1]) + (m1[2] ? ": " + m1[2] : ""); if (pl !== curPart) { out += '<div class="jst-tocpart">' + esc(pl) + "</div>"; curPart = pl; } num = m1[3]; title = m1[4]; }
+          else if (m2) { num = m2[1]; title = m2[2]; }
+          else if (m3) { num = m3[1]; title = m3[2]; }
+          else if (isPart) { out += '<div class="jst-tocpart">' + esc(cap(g.t)) + "</div>"; curPart = cap(g.t); return out; }
           var btns = g.ks.length > 1 ? '<span class="p">' + g.ks.map(function (k, i) { return '<button class="chip' + (k === at ? " on" : "") + '" data-jst-bksec="' + k + '" title="part ' + (i + 1) + '">' + (i + 1) + "</button>"; }).join("") + "</span>" : "";
-          return '<div class="jst-tocrow' + (here ? " here" : "") + (isPart ? " isp" : "") + '"><button class="jst-tocgo" data-jst-bksec="' + g.ks[0] + '">' + label + "</button>" + btns + "</div>"; }).join("") + "</details>";
+          return out + '<div class="jst-tocrow' + (here ? " here" : "") + '"><button class="jst-tocgo" data-jst-bksec="' + g.ks[0] + '"><span class="n">' + esc(num) + '</span><span class="t">' + esc(title.charAt(0) + title.slice(1)) + '</span></button><span class="fill"></span>' + btns + "</div>"; });
+        h2 += '<details class="jst-past jst-toc u-mt6"><summary class="lbl">Contents (' + groups.length + ")</summary>" + rows.join("") + "</details>";
       }
       var ob = b.obsidian ? outlink("obsidian://open?vault=" + encodeURIComponent(b.obsidian.vault) + "&file=" + encodeURIComponent(b.obsidian.file), "Open the whole book in Obsidian") : "";
       var speech = this.o.speech && this.o.speech();
