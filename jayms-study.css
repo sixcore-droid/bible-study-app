@@ -1048,3 +1048,13 @@ body:not(.app-atlas) .atlasview,body:not(.app-classes) .classesview,body:not(.ap
 .jst-bkpick{margin-bottom:12px}.jst-bkpick .lbl{margin:8px 0 4px}
 .jst-bkc{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;padding:6px 12px;text-align:left;line-height:1.25;border-radius:8px}
 .jst-bkc b{font-weight:600}.jst-bkc small{font-size:11.5px;opacity:.8}
+
+/* Book contents */
+.jst-toc{margin-top:8px}
+.jst-tocrow{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding:2px 0}
+.jst-tocrow.here{background:rgba(212,169,90,.09)}
+.jst-tocrow.isp{margin-top:10px;border-bottom:1px solid var(--gold)}
+.jst-tocgo{flex:1;min-width:0;display:flex;gap:10px;align-items:baseline;background:none;border:0;color:var(--ink);text-align:left;padding:7px 4px;cursor:pointer;font:inherit;font-size:14px;line-height:1.3}
+.jst-tocgo .n{flex:0 0 4.2em;font:11px/1.3 monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.jst-tocgo .t.part{font:600 12px/1.3 monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.jst-tocrow .p{display:flex;gap:4px;flex:0 0 auto}.jst-tocrow .p .chip{min-width:26px;padding:2px 7px;font-size:12px}

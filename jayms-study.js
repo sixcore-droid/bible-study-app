@@ -2503,7 +2503,14 @@
         h2 += '<div class="jst-bkpick">' + (onp.length ? '<div class="lbl">Commentary on this passage</div><div class="chips">' + onp.join("") + "</div>" : "") + (whole.length ? '<div class="lbl">Whole books to read beside it</div><div class="chips">' + whole.join("") + "</div>" : "") + (secs.replace(/<[^>]+>/g, "").trim().length && this.hits.filter(function (x) { return x.b === cur.b; }).length > 1 ? '<div class="lbl">Sections in ' + esc(nm(b)) + '</div><div class="chips">' + secs + "</div>" : "") + "</div>";
       }
       h2 += '<div class="askrow u-gap6 jst-bknav">' + go(prev, "Previous", -1) + '<span class="sub u-flex1 u-ta-c">' + (top ? "Part " : "Section ") + s.n + " of " + b.sections.length + "</span>" + go(next, "Next", 1) + "</div>";
-      if (top && b.sections.length > 1) h2 += '<details class="jst-past u-mt6"><summary class="lbl">Contents (' + b.sections.length + ')</summary><div class="chips">' + b.sections.map(function (x, k) { return '<button class="chip' + (k === at ? " on" : "") + '" data-jst-bksec="' + k + '">' + esc(x.title) + "</button>"; }).join("") + "</div></details>";
+      if (top && b.sections.length > 1) {
+        var groups = [], gi = {}; b.sections.forEach(function (x, k) { var base = x.title.replace(/\s*\u00B7\s*part\s+\d+$/i, ""); if (gi[base] === undefined) { gi[base] = groups.length; groups.push({ t: base, ks: [] }); } groups[gi[base]].ks.push(k); });
+        h2 += '<details class="jst-past jst-toc u-mt6"><summary class="lbl">Contents (' + groups.length + ")</summary>" + groups.map(function (g) {
+          var m = /^Chapter\s+(\w+):\s*(.*)$/.exec(g.t), here = g.ks.indexOf(at) > -1, isPart = /^Part\b/i.test(g.t);
+          var label = m ? '<span class="n">' + esc(m[1]) + '</span><span class="t">' + esc(m[2]) + "</span>" : '<span class="t' + (isPart ? " part" : "") + '">' + esc(g.t) + "</span>";
+          var btns = g.ks.length > 1 ? '<span class="p">' + g.ks.map(function (k, i) { return '<button class="chip' + (k === at ? " on" : "") + '" data-jst-bksec="' + k + '" title="part ' + (i + 1) + '">' + (i + 1) + "</button>"; }).join("") + "</span>" : "";
+          return '<div class="jst-tocrow' + (here ? " here" : "") + (isPart ? " isp" : "") + '"><button class="jst-tocgo" data-jst-bksec="' + g.ks[0] + '">' + label + "</button>" + btns + "</div>"; }).join("") + "</details>";
+      }
       var ob = b.obsidian ? outlink("obsidian://open?vault=" + encodeURIComponent(b.obsidian.vault) + "&file=" + encodeURIComponent(b.obsidian.file), "Open the whole book in Obsidian") : "";
       var speech = this.o.speech && this.o.speech();
       h2 += '<div class="phdr one u-mt10"><span class="lbl">' + esc(top ? s.title : s.ref) + '<span class="rdbtns"><button class="sz" data-bk-hl title="Highlight this section and copy it">Highlight</button>' +
