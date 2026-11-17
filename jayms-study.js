@@ -2491,14 +2491,23 @@
       var go = function (x, label, dir, k) {
         var tgt = top ? ' data-jst-bksec="' + (at + dir) + '"' : ' data-jst-bkgo="' + esc(x ? x.ref : "") + '"';
         return x ? '<button class="btn"' + tgt + ' title="' + esc((top ? x.title : x.ref + (x.title ? ": " + x.title : ""))) + '">' + (dir < 0 ? "\u2039 " : "") + label + (dir > 0 ? " \u203A" : "") + "</button>" : '<button class="btn" disabled>' + (dir < 0 ? "\u2039 " : "") + label + (dir > 0 ? " \u203A" : "") + "</button>"; };
-      var h2 = '<div class="askrow u-gap6 jst-bknav">' + go(prev, "Previous", -1) + '<span class="sub u-flex1 u-ta-c">' + (top ? "Part " : "Section ") + s.n + " of " + b.sections.length + "</span>" + go(next, "Next", 1) + "</div>";
-      if (n > 1) h2 += '<div class="chips u-mt6"><span class="lbl">On this reading</span>' + this.hits.map(function (x, k) { var bb = this.bk[x.b], y = bb.sections[x.i]; return '<button class="chip' + (k === st.k ? " on" : "") + '" data-jst-bkhit="' + k + '" title="' + esc(bb.title) + '">' + esc(x.whole ? bb.title : bb.kind === "ivp" ? "IVP " + y.ref.split(" ").pop() : y.ref.replace(/^\S+\s/, "")) + "</button>"; }, this).join("") + "</div>";
+      var self2 = this, nm = function (bb) { return bb.title.replace(/\s*\((?:chapters?|ch\.)[^)]*\)/i, ""); };
+      var h2 = '<div class="jst-bknow"><span class="lbl">Now reading</span><span class="tt">' + esc(nm(b)) + '</span><span class="sub">' + esc(b.by) + "</span></div>";
+      if (n > 1) {
+        var seen = {}, onp = [], whole = [], cur = this.hits[st.k];
+        this.hits.forEach(function (x, k) {
+          var bb = self2.bk[x.b]; if (seen[bb.id]) return; seen[bb.id] = 1;
+          var c = '<button class="chip jst-bkc' + (bb.id === b.id ? " on" : "") + '" data-jst-bkhit="' + k + '"><b>' + esc(nm(bb)) + "</b></button>";
+          (x.whole ? whole : onp).push(c); });
+        var secs = !top ? this.hits.map(function (x, k) { return x.b === cur.b ? '<button class="chip' + (k === st.k ? " on" : "") + '" data-jst-bkhit="' + k + '">' + esc(self2.bk[x.b].sections[x.i].ref.replace(/^\S+\s/, "")) + "</button>" : ""; }).join("") : "";
+        h2 += '<div class="jst-bkpick">' + (onp.length ? '<div class="lbl">Commentary on this passage</div><div class="chips">' + onp.join("") + "</div>" : "") + (whole.length ? '<div class="lbl">Whole books to read beside it</div><div class="chips">' + whole.join("") + "</div>" : "") + (secs.replace(/<[^>]+>/g, "").trim().length && this.hits.filter(function (x) { return x.b === cur.b; }).length > 1 ? '<div class="lbl">Sections in ' + esc(nm(b)) + '</div><div class="chips">' + secs + "</div>" : "") + "</div>";
+      }
+      h2 += '<div class="askrow u-gap6 jst-bknav">' + go(prev, "Previous", -1) + '<span class="sub u-flex1 u-ta-c">' + (top ? "Part " : "Section ") + s.n + " of " + b.sections.length + "</span>" + go(next, "Next", 1) + "</div>";
       if (top && b.sections.length > 1) h2 += '<details class="jst-past u-mt6"><summary class="lbl">Contents (' + b.sections.length + ')</summary><div class="chips">' + b.sections.map(function (x, k) { return '<button class="chip' + (k === at ? " on" : "") + '" data-jst-bksec="' + k + '">' + esc(x.title) + "</button>"; }).join("") + "</div></details>";
       var ob = b.obsidian ? outlink("obsidian://open?vault=" + encodeURIComponent(b.obsidian.vault) + "&file=" + encodeURIComponent(b.obsidian.file), "Open the whole book in Obsidian") : "";
       var speech = this.o.speech && this.o.speech();
-      h2 += '<div class="phdr one u-mt10"><span class="lbl">' + esc(b.by) + " \u00B7 " + esc(top ? s.title : s.ref) + '<span class="rdbtns"><button class="sz" data-bk-hl title="Highlight this section and copy it">Highlight</button>' +
+      h2 += '<div class="phdr one u-mt10"><span class="lbl">' + esc(top ? s.title : s.ref) + '<span class="rdbtns"><button class="sz" data-bk-hl title="Highlight this section and copy it">Highlight</button>' +
         (speech ? '<button class="sz spf-btn" data-bk-rd title="Read this section aloud in Speechify"><span class="spf-ico">\u25B6</span> <span class="spf-lab">Read</span></button>' : "") + "</span></span></div>";
-      h2 += '<p class="ctx u-fs13">' + esc(b.title) + "</p>";
       h2 += '<div class="jst-book">' + (b.sections[at].raw ? rawParas(s.pages) + fnList(s.notes) : bookParas(s.pages).map(function (p) { return "<p>" + p + "</p>"; }).join("")) + "</div>" + (ob ? '<p class="u-mt10">' + ob + "</p>" : "");
       return { kick: "Book \u00B7 " + b.by, title: top ? b.title : s.title || s.ref, wide: true, body: h2 };
     },
