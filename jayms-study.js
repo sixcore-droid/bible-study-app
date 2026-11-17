@@ -2445,11 +2445,16 @@
     return out.map(function (p) { return esc(p).replace(/(^|[\s(\u2014-])(\d{1,2})(?=(?!st\b|nd\b|rd\b|th\b)[A-Za-z\u2018\u201c(]|&#39;|&quot;)/g, '$1<sup class="jst-vn">$2</sup>'); });   /* a number run straight into a word is a verse number */
   }
   /* a book already cut into paragraphs (the IVP commentary's entries, Walton's chapters): "3:3. Samuel's dream? text" gets its verse in bold, "## x" is a sub-heading */
+  function fnMarks(h) { return h.replace(/\u27e6(\d+)\u27e7/g, '<sup class="jst-fn"><a href="#jst-fn-$1" data-jst-fnref="$1">$1</a></sup>'); }
+  function fnList(notes) {
+    var ks = Object.keys(notes || {}).sort(function (a, b) { return a - b; });
+    return ks.length ? '<div class="jst-fns"><div class="lbl">Notes</div>' + ks.map(function (k) { return '<p id="jst-fn-' + k + '"><b>' + k + '</b> ' + esc(notes[k]) + "</p>"; }).join("") + "</div>" : "";
+  }
   function rawParas(pages) {
     return pages.map(function (p) {
       if (/^#{2,4} /.test(p)) return '<h4 class="jst-bkh">' + esc(p.replace(/^#+\s*/, "")) + "</h4>";
       var m = /^(\d{1,3}(?::\d{1,3})?(?:[-\u2013]\d{1,3}(?::\d{1,3})?)?)\.\s+([^.]{1,100}\.)\s*(.*)$/.exec(p);
-      return m ? '<p><b class="jst-bkv">' + esc(m[1]) + "</b> <b>" + esc(m[2]) + "</b> " + esc(m[3]) + "</p>" : "<p>" + esc(p) + "</p>";
+      return m ? '<p><b class="jst-bkv">' + esc(m[1]) + "</b> <b>" + esc(m[2]) + "</b> " + fnMarks(esc(m[3])) + "</p>" : "<p>" + fnMarks(esc(p)) + "</p>";
     }).join("");
   }
   define("Book", { id: "book", label: "Book", name: "Read a book beside the Bible", icon: ICON.book, owner: true }, {
@@ -2494,11 +2499,12 @@
       h2 += '<div class="phdr one u-mt10"><span class="lbl">' + esc(b.by) + " \u00B7 " + esc(top ? s.title : s.ref) + '<span class="rdbtns"><button class="sz" data-bk-hl title="Highlight this section and copy it">Highlight</button>' +
         (speech ? '<button class="sz spf-btn" data-bk-rd title="Read this section aloud in Speechify"><span class="spf-ico">\u25B6</span> <span class="spf-lab">Read</span></button>' : "") + "</span></span></div>";
       h2 += '<p class="ctx u-fs13">' + esc(b.title) + "</p>";
-      h2 += '<div class="jst-book">' + (b.sections[at].raw ? rawParas(s.pages) : bookParas(s.pages).map(function (p) { return "<p>" + p + "</p>"; }).join("")) + "</div>" + (ob ? '<p class="u-mt10">' + ob + "</p>" : "");
+      h2 += '<div class="jst-book">' + (b.sections[at].raw ? rawParas(s.pages) + fnList(s.notes) : bookParas(s.pages).map(function (p) { return "<p>" + p + "</p>"; }).join("")) + "</div>" + (ob ? '<p class="u-mt10">' + ob + "</p>" : "");
       return { kick: "Book \u00B7 " + b.by, title: top ? b.title : s.title || s.ref, wide: true, body: h2 };
     },
     click: function (e) {
-      var go = e.target.closest("[data-jst-bkgo]"), hit = e.target.closest("[data-jst-bkhit]"), sc = e.target.closest("[data-jst-bksec]");
+      var go = e.target.closest("[data-jst-bkgo]"), hit = e.target.closest("[data-jst-bkhit]"), sc = e.target.closest("[data-jst-bksec]"), fr = e.target.closest("[data-jst-fnref]");
+      if (fr) { e.preventDefault(); e.stopPropagation(); var fe = this.el.querySelector("#jst-fn-" + fr.getAttribute("data-jst-fnref")); if (fe) { fe.scrollIntoView({ block: "center" }); fe.classList.add("jst-fnhit"); setTimeout(function () { fe.classList.remove("jst-fnhit"); }, 1800); } return; }
       if (sc) { e.stopPropagation(); var hh = this.hits[this.st.k]; this.st.sec[this.bk[hh.b].id] = +sc.getAttribute("data-jst-bksec"); this.paint(); this.el.scrollTop = 0; return; }
       if (go) { e.stopPropagation(); this.emit("passage", { ref: go.getAttribute("data-jst-bkgo"), follow: true }); return; }
       if (hit) { e.stopPropagation(); this.st.k = +hit.getAttribute("data-jst-bkhit"); this.paint(); return; }

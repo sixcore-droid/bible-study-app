@@ -1035,3 +1035,9 @@ body:not(.app-atlas) .atlasview,body:not(.app-classes) .classesview,body:not(.ap
 .jst-dart p{margin:.7em 0}
 .jst-dx{color:var(--gold);border-bottom:1px dotted var(--gold);text-decoration:none}
 .jst-dbib{font-size:12.5px;color:var(--ink);opacity:.8}
+
+/* book footnotes */
+.jst-fn{font-size:.7em;line-height:0;margin-left:1px}.jst-fn a{color:var(--gold);text-decoration:none}
+.jst-fns{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);font-size:13.5px;line-height:1.5}
+.jst-fns p{margin:.4em 0;scroll-margin-top:8px}.jst-fns b{color:var(--gold);margin-right:6px}
+.jst-fnhit{background:rgba(212,169,90,.18)}
