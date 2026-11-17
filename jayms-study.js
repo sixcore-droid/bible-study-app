@@ -921,11 +921,47 @@
 
   // ------------------------------------------------------------------ Gods
   define("Gods", { id: "gods", label: "Gods", name: "Gods of the Bible", icon: ICON.gods }, {
+    /* The Dictionary of Deities and Demons tab (wide screens only): the entries that cite the open chapter, each with a link into the book
+       in Logos at the entry's page. ddd.json holds headwords, printed pages and cited verses, none of the dictionary's own text. */
+    prepare: function () { var self = this; return getJSON("ddd.json").then(function (j) { self.ddd = j; }).catch(function () { self.ddd = null; }); },
+    dddRows: function () {
+      var j = this.ddd, q = data.segs(this.o.ref)[0]; if (!j || !j.r || !q) return [];
+      var by = {}, out = [], c, v;
+      for (c = q.c1; c <= (q.c2 || q.c1); c++) (j.r[q.book + "|" + c] || []).forEach(function (r) {
+        var inr = r.slice(1).filter(function (x) { return c >= q.c1 && c <= (q.c2 || q.c1) && (c > q.c1 || x >= q.v1) && (c < (q.c2 || q.c1) || x <= q.v2); });
+        var o = by[r[0]] || (by[r[0]] = { i: r[0], hw: j.e[r[0]][0], pg: j.e[r[0]][1], vs: [], hit: false, ch: c });
+        o.vs = o.vs.concat(r.slice(1)); if (inr.length) o.hit = true; });
+      Object.keys(by).forEach(function (k) { out.push(by[k]); });
+      return out;
+    },
+    dddLink: function (pg) {
+      var n = parseInt(pg, 10), web = R.web();
+      return web ? "https://ref.ly/logosres/13.0.23" + (n ? "?ref=Page.p+" + n : "") : "logosres:13.0.23" + (n ? ";ref=Page.p_" + n : "");
+    },
     view: function () {
-      var g = L(this, "gods");
+      var g = L(this, "gods"), st = this.st, wide = global.innerWidth >= 900, rows = this.dddRows(), tab = wide && rows.length && st.tab === "ddd" ? "ddd" : "gods", self = this;
+      var tabs = wide && rows.length ? '<div class="chips u-mb10"><button class="chip' + (tab === "gods" ? " on" : "") + '" data-jst-gtab="gods">Gods of the Bible (' + g.length + ')</button><button class="chip' + (tab === "ddd" ? " on" : "") + '" data-jst-gtab="ddd">Deities and Demons (' + rows.length + ")</button></div>" : "";
+      if (tab === "ddd") {
+        var q = data.segs(this.o.ref)[0], sort = st.dsort || "v", fv = st.dv || 0;
+        var vset = []; rows.forEach(function (r) { r.vs.forEach(function (x) { if (vset.indexOf(x) < 0) vset.push(x); }); }); vset.sort(function (a, b) { return a - b; });
+        var list = rows.filter(function (r) { return !fv || r.vs.indexOf(fv) > -1; });
+        list.sort(function (a, b) { return sort === "a" ? a.hw.localeCompare(b.hw) : sort === "p" ? parseInt(a.pg, 10) - parseInt(b.pg, 10) : (b.hit - a.hit) || (a.vs[0] - b.vs[0]) || a.hw.localeCompare(b.hw); });
+        var ctl = '<div class="chips jst-gctl"><span class="lbl">Sort</span>' + [["v", "By verse"], ["a", "A to Z"], ["p", "By page"]].map(function (m) { return '<button class="chip' + (sort === m[0] ? " on" : "") + '" data-jst-dsort="' + m[0] + '">' + m[1] + "</button>"; }).join("") + "</div>";
+        var vb = vset.length > 1 ? '<div class="chips u-mb10"><span class="lbl">Verse</span>' + vset.map(function (x) { return '<button class="chip jst-dv' + (fv === x ? " on" : "") + '" data-jst-dv="' + x + '">' + x + "</button>"; }).join("") + "</div>" : "";
+        var h = tabs + ctl + vb + list.map(function (r) {
+          var vs = r.vs.slice().sort(function (a, b) { return a - b; }).filter(function (x, i, a) { return a.indexOf(x) === i; });
+          return box(r.hit ? "witness" : "apparatus", "", '<div class="item"><span class="tt">' + esc(r.hw) + '</span><span class="sub">pp. ' + esc(r.pg) + " \u00B7 cites " + esc(q.book) + " " + r.ch + ":" + (vs.length > 3 ? vs[0] + "\u2013" + vs[vs.length - 1] : vs.join(", ")) + (r.hit ? "" : " (elsewhere in the chapter)") + "</span>" + outlink(self.dddLink(r.pg), "Open in Logos at p. " + parseInt(r.pg, 10)) + "</div>"); }).join("");
+        return { kick: "Dictionary of Deities and Demons \u00B7 " + rows.length + " entries", title: "Who is in the room", body: h + '<p class="ctx u-fs13">Dictionary of Deities and Demons in the Bible, 2nd ed. (Brill/Eerdmans 1999). The list of entries that cite this passage; the entries themselves open in your Logos.</p>' };
+      }
       var h = g.length ? g.map(function (x, i) { return box(i ? "apparatus" : "witness", "", '<div class="item"><span class="tt">' + esc(x.title) + '</span><span class="sub">' + esc(x.summary) + "</span>" + (x.plain ? '<p class="u-mt8">' + md(x.plain) + "</p>" : "") + outlink(entryURL("gods", x.id), "jayms Gods of the Bible: " + esc(x.title)) + "</div>"); }).join("")
         : none("No one from Gods of the Bible is named in " + esc(this.o.ref) + ".");
-      return { kick: "Gods of the Bible \u00B7 " + g.length + " named here", title: "Who is in the room", body: h + outlink(CFG.site + "gods-of-the-bible/", "The whole jayms Gods of the Bible") };
+      return { kick: "Gods of the Bible \u00B7 " + g.length + " named here", title: "Who is in the room", body: tabs + h + outlink(CFG.site + "gods-of-the-bible/", "The whole jayms Gods of the Bible") };
+    },
+    click: function (e) {
+      var t = e.target, gt = t.closest("[data-jst-gtab]"), ds = t.closest("[data-jst-dsort]"), dv = t.closest("[data-jst-dv]");
+      if (gt) { e.stopPropagation(); this.st.tab = gt.getAttribute("data-jst-gtab"); this.paint(); return; }
+      if (ds) { e.stopPropagation(); this.st.dsort = ds.getAttribute("data-jst-dsort"); this.paint(); return; }
+      if (dv) { e.stopPropagation(); var n = +dv.getAttribute("data-jst-dv"); this.st.dv = this.st.dv === n ? 0 : n; this.paint(); return; }
     }
   }, {}, function (d) { return d ? (d.gods || []).length : null; });
 
