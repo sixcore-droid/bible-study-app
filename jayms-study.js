@@ -902,16 +902,30 @@
   var L = function (self, k) { return (self.d && self.d[k]) || []; };
 
   // ------------------------------------------------------------------ Council
+  /* the site's copy of /api/book-cites: book-cites.json = {books:[{id,by,title,logos}], secs:[[book, section, title, [[bookName,c1,v1,c2,v2,count]...]]]} */
+  function citesFromIndex(ix, ref) {
+    var qs = R.parse(ref), by = {};
+    ((ix && ix.secs) || []).forEach(function (s) {
+      var n = 0; s[3].forEach(function (g) { if (qs.some(function (q) { return q.book === g[0] && (g[1] < q.c2 || (g[1] === q.c2 && g[2] <= q.v2)) && (q.c1 < g[3] || (q.c1 === g[3] && q.v1 <= g[4])); })) n += g[5]; });
+      if (n) (by[s[0]] = by[s[0]] || []).push({ i: s[1], title: s[2], n: n });
+    });
+    return Object.keys(by).map(function (k) { var b = ix.books[k], r = by[k].sort(function (a, z) { return z.n - a.n || a.i - z.i; });
+      return { id: b.id, by: b.by, title: b.title, logos: b.logos, sections: r.slice(0, 3) }; });
+  }
   define("Council", { id: "council", label: "Council", name: "Divine Council Index", icon: ICON.council }, {
     /* desk only: the chapters of the books in books-reader.json that cite this passage (the server reads the book's own text for references) */
-    prepare: function () { var self = this; self.cites = []; if (R.web()) return null;
+    prepare: function () { var self = this; self.cites = [];
+      if (R.web()) {   // the site: the same chapters and counts from book-cites.json (titles, passages, counts: no book text), each with a Read in Logos link
+        return getJSON("book-cites.json").then(function (ix) { self.cites = citesFromIndex(ix, self.o.ref); }).catch(function () { self.cites = []; }); }
       return getJSON("api/book-cites?ref=" + encodeURIComponent(this.o.ref)).then(function (r) { self.cites = (r && r.books) || []; }).catch(function () { self.cites = []; }); },
     citeBlock: function () {
       return (this.cites || []).map(function (b) {
         return '<div class="lbl u-mt14">' + esc(b.by) + ", " + esc(b.title) + " \u00B7 where it takes up this passage</div>" + b.sections.map(function (x) {
           var t = x.title.replace(/^PART\s+\d+:[^:]*:\s*/i, ""), m = /^(\d+):\s*(.*)$/.exec(t), nm = m ? "Chapter " + m[1] + ": " + m[2] : t;
-          return '<div class="box apparatus jst-cite"><div class="item"><span class="when">' + x.n + (x.n > 1 ? " mentions" : " mention") + '</span><span class="tt">' + esc(nm) + "</span></div><p class=\"u-m0 u-fs13\">\u201C" + esc(x.snip) +
-            '\u201D</p><button class="chip" data-jst-citebook="' + esc(b.id) + '" data-jst-citesec="' + x.i + '">Read this chapter</button></div>'; }).join("");
+          var go = R.web() ? (b.logos ? outlink("https://ref.ly/logosres/" + String(b.logos).toLowerCase(), "Read in Logos") : "")
+            : '<button class="chip" data-jst-citebook="' + esc(b.id) + '" data-jst-citesec="' + x.i + '">Read this chapter</button>';
+          return '<div class="box apparatus jst-cite"><div class="item"><span class="when">' + x.n + (x.n > 1 ? " mentions" : " mention") + '</span><span class="tt">' + esc(nm) + "</span></div>" +
+            (x.snip ? "<p class=\"u-m0 u-fs13\">\u201C" + esc(x.snip) + "\u201D</p>" : "") + go + "</div>"; }).join("");
       }).join("");
     },
     click: function (e) {
